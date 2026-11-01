@@ -1,0 +1,77 @@
+b34 — B2a 双端修正: 长句重切(否决) + 表格感知行候选(实弹)
+方法: 设计探针先行(answer_extract_b34_test.go TestB34DesignProbe, SC_B34_PROBE=1 门禁,
+      产品函数域内模拟零镜像偏差) → 实现只 ship 探针存活机制 → 三道门禁 → 活窗逐案归因。
+生成: 2026-09-07 (环境第 N+4 次重置恢复: go1.24.0 + setup-rerank + 数据集重采; eval-dumps 归档第 3 次顶住 /tmp 全失)
+
+== 背景与目标 ==
+b32 canonical B2a=3(句长门槛全拒): libretexts 304r 答案句(score 2.0, lenOk=false) /
+  allmusic 表格单元 "Atlantic" 8r(min 长度拒) / grokipedia 767r 答案句(cover=3 score 14.5 被拒)。
+b32→b33 交接候选①: "B2a 双端修正(长句二次切分+表格感知)"。
+
+== 机制A 长句二次切分 — 设计探针否决, 不 ship ==
+探针实测(b34-design-probe.json, 12k 窗产品 fetch + b34SimResplit 逗号/分号/冒号/破折号
+  切 clause 贪心打包 ≤300r + b32SentenceScore 产品评分镜像):
+  1) libretexts(304r→4 长句): 答案段 "…decorated with guns fixed on a colourful Persian rug…"
+     score=1.00 cover=0 过不了 minCover=2 — 且 b31 已裁决该案="Persia⊂Persian rug"假 D1:
+     不翻恰是正确保护(交付假答案比不交付更差)。
+  2) grokipedia(767r→12 长句): 答案段 "Garfunkel enrolled at Columbia University in 1958,
+     initially pursuing architecture…" score=7.50 cover=3 入池, 但页面级竞争被榜单散文压死:
+     "peaking at number 21 on the Billboard 200…" score=12.75 cover=1(数字/专名奖励密集)。
+     rep-per-sentence + cover 准入收窄后仍败(同页 "Sound of Silence" 段 11.0 cover=3)。
+     → B2a 实为 B1 竞争层残余(bonus 富集散文 vs 答案散文), 非门槛层可解;
+       归入 b35+ "专名行竞争/奖励结构"家族(spartacus 型同族)。
+  3) 洪泛风险: 重切向所有长句页注入 bonus 富集段 swarm, 现任健康 best 会被挤掉
+     (grokipedia 现任best=bio intro ~3.x → 12.75 纯噪声上头), 活窗 REG 风险真实。
+结论: 零增益(两案均不可达)+纯风险 → 否决。探针产物 answer_extract_b34_test.go +
+  b34-design-probe.json 在档防再诉讼(候选被否决≠候选丢失, 记法进方法论 §18)。
+
+== 机制B 表格感知行候选 — 收窄后实弹 ==
+探针同时暴露朴素 run 成行的毒: grokipedia 页头 run "[35][31]·Solo Career Trajectory·
+  Debut and Exploration (1970–1975)" score=5.25 会以 TOC 垃圾上头。
+定稿 v2 = b19RowCandidates(answer_extract.go): 连续 cell-like 短行 run(≥2, <40r 无句末标点)
+  → join " · " 贪心 chunk ≤300r → 行级准入两把尺(既有 lenOk/样板/评分闸之上):
+  ① 数据表锚: run 含 ≥1 纯数字行(唱片年表/统计表年份列形态; 页头/TOC 无独立数字行)
+  ② 行含 ≥1 查询词(反数字刷分, b33 样板句血统: cover=0 引用行/坐标行不入场)
+  探针复验: grokipedia 4 行候选全排除 / libretexts 3 行候选全排除 / allmusic 型
+  "1981·…·Atlantic / JDC Records" 存活(score≈7.0 险胜 prose)。
+已知盲区: CJK 纯表格无独立数字行(评测语料 EN-only, 观察项)。
+
+== 门禁一: go test 全绿 ==
+TestB19RowCandidatesAdmit(allmusic 型翻正链路: 行候选生成+同闸竞争胜出+交付)
+TestB19RowCandidatesReject(TOC 无数字行拒 / cover=0 引用 run 拒 / 终止符断 run 拒)
+TestB19RowCandidatesChunk(长年表 chunk ≤300r, 每 chunk 保留查询词载体)
+既有全量(含 TestB19BoilerplateSkip/b32 门禁零外呼)通过; 一次测试自身断言大小写疏漏修正(机制无错)。
+
+== 门禁二: b32 11 案重放 ×2 轮 ==
+两轮 tally 一致: B1:2 B2:2 B2a:2 B2b:2 C1:1 X-重放会命中:2。
+vs b33 后验(b19-replay-b33.json)逐案对位: 10/11 bestSentence 逐字节一致;
+唯一差异=allmusic(triviaqa/deep r1) B2a→C1: 本轮 Cloudflare 硬墙(product UA 403 +
+browser UA 复抓 403, 731B 质询页=IP/指纹级), Atlantic 行候选翻正假设无法在本环境实弹,
+留档为单测级论证 + 活窗观察。b19-replay-b34.json(+r2) 在档。
+
+== 门禁三: 活窗 b33win→b34win(NQ 98 / TQA 100 同题集, SC_RERANK=1 SC_NO_CACHE=1) ==
+水位: NQ 51.0/77.6/82.7 (b33win 55.1/75.5/79.6: @1 -4.1pp, @10 +2.1, @20 +3.1)
+      TQA 74.0/86.0/88.0 (b33win 72.0/85.0/89.0: @1 +2.0pp, @10 +1.0, @20 -1.0)
+@1 transition: NQ REG 9/FIX 5; TQA REG 8/FIX 10。
+逐案归因(b34-window-attrib.mjs, eval-dumps/window-attrib-b34.txt):
+  32/32 翻转=上游换血, row-fix=0, row-reg=0。
+  NQ REG 9: 6 条同 URL 存活且 gold 证据仍在(rank1 位次波动=排序层 churn), 3 条页面出池;
+  TQA REG 8: 5 条 b33 hit 页面消失, 1 条(Michelle Smith)同 URL 重抓丢 gold(页内容漂移,
+    b32 在档服务波动类别); legs 实证: DDG 腿 TQA 0%→72%、NQ 82.7% 回归(b33win 整腿消失后回归)。
+  TQA FIX 10 含 Phil Collins 案: 翻正来自上游换血(rank1=atlanticrecords.com,
+    title "Phil Collins | Atlantic Records" 自带答案), 非 b19 行候选 — 不给机制记功。
+机制触发面: 3643 refs 注入尾扫描, row 形态尾=0 — 机制在本窗页面种群休眠
+  (allmusic 型表格页未进池), 零杀伤再次确认(与归因 0/32 互证)。
+journal: b34win 两锚入档(journal 20→22 行); eval-dumps 归档 b34win dump+window-attrib-b34+drift。
+
+== 结论与交接 ==
+1. 机制B 表格感知行候选上线: 三道门禁零误伤(10/11 重放逐字节 + 32/32 上游归因 +
+   0/3643 row 尾), 目标案例(allmusic)因拒爬墙+出池未获实弹翻正, 机制有效性=单测级论证。
+2. 机制A 长句重切否决归档: 假答案保护(libretexts) × 竞争层不可达(grokipedia) 双证据。
+3. b32 B2a 桶重新定性: 双端均非门槛层问题 — 短端=表格页稀缺(种群问题), 长端=B1 家族
+   (bonus 结构问题)。B2a 门槛层修复空间收敛为零。
+4. b35+ 候选: ①专名行/bonus 结构(语义层, grokipedia+spartacus 同族) ②表格页可达性
+   (拒爬墙对策决策件, 需用户拍板 UA 策略) ③DDG 腿波动监控(跨窗 0↔87% 摆动, 引擎健康度)
+   ④SC_RERANK_POOL=20 同池重放(b31 挂账) ⑤b19 失败重试(900s 窗)。
+复算锚点: NQ @1 55.1→51.0, TQA 72.0→74.0 (journal 21/22 行);
+  重放 b19-replay-b34.json; 探针 b34-design-probe.json; 归因 eval-dumps/window-attrib-b34.txt。

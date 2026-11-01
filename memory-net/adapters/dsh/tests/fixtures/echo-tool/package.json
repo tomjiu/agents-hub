@@ -1,0 +1,11 @@
+{
+  "name": "mn-e2e-echo-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E2E 专用最小 dsh 工具插件：注册 mn_e2e_echo 工具，为 auto-observe（tools/result 事件桥）提供真实宿主工具。零 import dsh/cordis。",
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

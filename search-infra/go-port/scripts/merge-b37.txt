@@ -1,0 +1,66 @@
+批 37 证据: 融合层 snippet 合并判据 — 查询关键 token 命中数优先(次取长度)
+立项: b36 五级血脉追踪交接候选① (FUSION-LOSS 6/21 案: fuseV3 URL 合并 semantic.go + TF 去重
+      同用 len(snippet) 更长者胜, 证据短句被同页/孪生页长样板覆盖; 修复空间上限 6/74≈8% miss@1)
+改动: b37SnippetBetter/b37TermHits(semantic.go) — 命中数优先, 打平(含双 0)回退长度规则 =
+      与旧行为逐字节一致(健康案零漂移); 两处合并点接线 + fuseOpts.b37KeyTermMerge;
+      生产缺省 ON, SC_B37_MERGE=0 回退开关; fusion journal 增记 b37merge 状态(防静默回退)。
+日期: 2026-09-08;  判定 = eval matchEvidence 逐字镜像(b32AnsIn/b36Evidence)
+
+========================================================================
+一、门禁链 (全过)
+========================================================================
+1. 单测 (semantic_b37_test.go, 常规零外呼):
+   TestB37SnippetMerge 决策表 6 形态(证据胜样板/打平回长度/双0回长度/全等不换/CJK bigram
+   回退词表/旧规则回归锚) + TestB37FuseV3URLMerge(URL 合并双向) +
+   TestB37DedupMerge(TF 去重双向, fixture 复刻 b36 丢失形态: 保留方持证据短句被吸收方
+   长样板覆盖=旧规则丢失, 新规则救援); gofmt/vet/go test 全绿。
+   教训(测试设计): TF 去重在 fuseSemantic 层不在 fuseV3; 保留行由融合分决定 —
+   lex 高的证据行常自成为保留方, b36 真实丢失形态是"高分行持长样板"或"证据行被
+   吸收后文本覆盖"两个方向, fixture 须按方向摆位。
+2. 设计探针 (answer_extract_b37_test.go, SC_B37_PROBE=1 门禁; 同 lanes 新旧规则配对,
+   churn 在配对内抵消; 案集=b36 冻结 21 案 scripts/b36-legprobe-still.json):
+   TALLY NOEV=19 / RESCUED@1=1(BLM) / SAME@2=1(Kipling); LOST=0(门禁);
+   urldiff>0 = 0/21, rank1Flip = 0 — 改动足迹纯 snippet 层, 零排序扰动。
+   BLM 案实弹: 旧 rank1 同 URL 交付 "Fact-checked by Grok 3 months ago..." 长样板(零
+   证据), 新规则换含 "247.3 million acres" 证据文本; slowLegOnly=False(快腿证据,
+   不受早收割影响)。其余 4 条 b36 FUSION-LOSS 案本窗 raw 证据未重现(换血漂移, NOEV)。
+3. 活窗 b34win→b37win (SC_RERANK=1, SC_NO_CACHE=1, NQ 98/TQA 100 同题集对齐 OK):
+   NQ 52.0/71.4/78.6 (b34win 51.0/77.6/82.7; @1 +1.0pp)
+   TQA 70.0/89.0/89.0 (b34win 74.0/86.0/88.0; @1 -4.0pp 恰在波动带缘)
+   本窗换血极重: rank1 换页 60.2%/63.0%, DDG 腿双集消失(NQ 82.7%→10.2% / TQA 72%→0),
+   与 b33/b24 已立档的 DDG 整腿消失→深池换血模式一致(NQ @10 -6.2pp 主归此)。
+4. 窗口翻转逐案归因 (b37-window-attrib.mjs, 判定签名=同URL snippet 变):
+   NQ: b37-fix 1 + 上游 14(出池 6/重排入顶 5/降位 3) — b37-fix 即 BLM 题, 探针救援
+       在生产窗实弹兑现(miss@1→hit@1)。
+   TQA: 上游 17(出池 13/换血 2/降位 2) + b37-reg 1(签名)。
+5. b37-reg 反事实裁决(单案配对探针, scripts/b37-reg-probe.json): "Who won baseball's
+   first World Series of the 80s?" — 同 lanes 下新旧规则双双 SAME@1(gold 均在)。
+   窗口签名撞车根因: Wikipedia 摘要服务把同一段 "1980 World Series" 文本在两窗间从
+   1987 页挪到 1989 页(引擎侧内容漂移), 非 merge 规则所致 → 翻案为上游。
+   裁决纪律升级: "同 URL snippet 变"只是筛查签名(必要非充分), 改动涉入判定必须以
+   配对反事实探针确认(同 lanes 双规则跑同案)。
+
+========================================================================
+二、裁决: KEEP(机制上线, 缺省 ON)
+========================================================================
+- 机制面: 设计目标(证据短句不再被长样板覆盖)配对实证(BLM 探针 RESCUED@1 + 窗口实弹
+  b37-fix), 零排序扰动(0/21 urldiff, 0 rank1Flip), 零确认回退(LOST=0, 窗口唯一
+  b37-reg 签名被反事实探针翻案), 健康案零漂移(打平回退=旧规则逐字节)。
+- 水位面: 双集 @1 净差 NQ +1.0/TQA -4.0 均被上游换血主导(18+15 翻转中改动确认涉入
+  仅 +1), 融合层修复上限本就 ~8% miss@1, 单窗无统计力(同 b35 池深结论)。
+- 修复空间收口: FUSION-LOSS 6 案中可由本改动触及的长 snippet 覆盖类=5 案血脉
+  (dedup 3 + fuse 2); domainCap 误伤 1 案(Gotham)不在此列, 维持观察项。
+
+========================================================================
+三、口径与边界(防再诉讼)
+========================================================================
+- 探针案集冻结于 b34win nogold@20(29 案经 b36 阶段①分流后 21 案), 案集随换血漂移属
+  正常(NOEV 含 churn-cured); 配对对比不受 churn 影响。
+- 窗口为两次独立活窗, 跨窗绝对差不可直接归因改动(本窗换血度 60%+), 一切以逐案归因+
+  反事实配对为准。
+- 判据的已知边界: 查询词命中数不感知答案 token — 若 gold 恰只存在于命中数较少的候选
+  文本, 理论可被覆盖; 配对探针在本批 22 案(21+1)上零实证, 记录在案防再诉讼。
+- SC_B37_MERGE=0 一键回退旧长度规则; fusion journal b37merge 字段供窗后核验。
+- 归档: eval-dumps/{nq,triviaqa}-dump-b37win.jsonl.gz + window-attrib-b37.txt +
+  drift-{ds}-b37.txt + b37-mergeprobe.json.gz; scripts/b37-mergeprobe.json +
+  b37-reg-probe.json(探针原始输出); journal 24→28 行(b34win 复核锚 + b37win 锚)。

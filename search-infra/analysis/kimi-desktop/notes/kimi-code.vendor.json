@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "upstream": {
+    "repositoryUrl": "https://github.com/MoonshotAI/kimi-code.git",
+    "commit": "b6144f94ea6b22455a4e750d1750d220987e7bc2",
+    "commitDate": "2026-08-13T05:47:30.000Z"
+  },
+  "vendored": {
+    "date": "2026-08-13",
+    "excludedPaths": [
+      "apps/kimi-inspect",
+      "apps/vscode"
+    ],
+    "method": "git-archive",
+    "readOnly": true,
+    "sourceRoot": "kimi-code"
+  },
+  "workspace": {
+    "packageManager": "pnpm@10.33.0",
+    "rootPackage": {
+      "name": "@moonshot-ai/monorepo",
+      "version": "0.1.1",
+      "path": ".",
+      "private": true
+    },
+    "packages": [
+      {
+        "name": "@moonshot-ai/acp-adapter",
+        "version": "0.3.8",
+        "path": "packages/acp-adapter",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/acp-server",
+        "version": "0.0.0",
+        "path": "packages/acp-server",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/agent-core",
+        "version": "0.15.7",
+        "path": "packages/agent-core",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/agent-core-v2",
+        "version": "0.3.2",
+        "path": "packages/agent-core-v2",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kaos",
+        "version": "0.1.6",
+        "path": "packages/kaos",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kap-server",
+        "version": "0.2.1",
+        "path": "packages/kap-server",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/klient",
+        "version": "0.1.1",
+        "path": "packages/klient",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kosong",
+        "version": "0.5.5",
+        "path": "packages/kosong",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/migration-legacy",
+        "version": "0.1.16",
+        "path": "packages/migration-legacy",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/minidb",
+        "version": "0.2.0",
+        "path": "packages/minidb",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kimi-code-sdk",
+        "version": "0.17.0",
+        "path": "packages/node-sdk",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kimi-code-oauth",
+        "version": "0.3.0",
+        "path": "packages/oauth",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/pi-tui",
+        "version": "0.84.2",
+        "path": "packages/pi-tui",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/protocol",
+        "version": "0.5.0",
+        "path": "packages/protocol",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kimi-telemetry",
+        "version": "0.1.1",
+        "path": "packages/telemetry",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/transcript",
+        "version": "0.0.1",
+        "path": "packages/transcript",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/tree-sitter-bash",
+        "version": "0.1.0",
+        "path": "packages/tree-sitter-bash",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/kimi-code",
+        "version": "0.36.0",
+        "path": "apps/kimi-code",
+        "private": false
+      },
+      {
+        "name": "@moonshot-ai/vis",
+        "version": "0.1.1",
+        "path": "apps/vis",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/vis-server",
+        "version": "0.1.1",
+        "path": "apps/vis/server",
+        "private": true
+      },
+      {
+        "name": "@moonshot-ai/vis-web",
+        "version": "0.1.1",
+        "path": "apps/vis/web",
+        "private": true
+      }
+    ]
+  },
+  "build": {
+    "status": "built",
+    "releaseArtifactPolicy": "include-built-runtime-artifacts-not-vendored-source",
+    "runtimePackageNames": [
+      "@moonshot-ai/agent-core",
+      "@moonshot-ai/kimi-code-sdk",
+      "@moonshot-ai/kimi-code-oauth",
+      "@moonshot-ai/kimi-telemetry"
+    ],
+    "artifacts": [
+      {
+        "name": "@moonshot-ai/agent-core:index.mjs",
+        "packageName": "@moonshot-ai/agent-core",
+        "path": "node_modules/@moonshot-ai/agent-core/dist/index.mjs",
+        "sha256": "6f84c13550a54a417867593be6fcb6c3e5c12c8a07cea6405ae6afe8de62bf5a",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/agent-core:index.d.mts",
+        "packageName": "@moonshot-ai/agent-core",
+        "path": "node_modules/@moonshot-ai/agent-core/dist/index.d.mts",
+        "sha256": "75b9bb03dcdd2a76475a92d995534dc65472ff4b376c637f10043ae7adca59a1",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kimi-code-sdk:index.mjs",
+        "packageName": "@moonshot-ai/kimi-code-sdk",
+        "path": "node_modules/@moonshot-ai/kimi-code-sdk/dist/index.mjs",
+        "sha256": "17bcd67e53b5af41cf6e1b1fed5937310fd1c11b11bbb554119301692a4ec664",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kimi-code-sdk:index.d.mts",
+        "packageName": "@moonshot-ai/kimi-code-sdk",
+        "path": "node_modules/@moonshot-ai/kimi-code-sdk/dist/index.d.mts",
+        "sha256": "3e49891c19a9377267b5ce26dd1a33ca1eff9c6d9831ea40134c9af797556afc",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kimi-code-oauth:index.mjs",
+        "packageName": "@moonshot-ai/kimi-code-oauth",
+        "path": "node_modules/@moonshot-ai/kimi-code-oauth/dist/index.mjs",
+        "sha256": "cedadc56ea6ea18cf650f0f0b9c72df65bdba0ce378e702b9ac3de6ed1f4aa7b",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kimi-code-oauth:index.d.mts",
+        "packageName": "@moonshot-ai/kimi-code-oauth",
+        "path": "node_modules/@moonshot-ai/kimi-code-oauth/dist/index.d.mts",
+        "sha256": "9c6e7992a04cc83868b1c9dcdcd92a49d5ec36e3d5e9b0069363d71bc8a04059",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kimi-telemetry:index.mjs",
+        "packageName": "@moonshot-ai/kimi-telemetry",
+        "path": "node_modules/@moonshot-ai/kimi-telemetry/dist/index.mjs",
+        "sha256": "283f0eb2222b5774b0ba72a531d87381453f584bee408aae0050b358fdc32189",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kimi-telemetry:index.d.mts",
+        "packageName": "@moonshot-ai/kimi-telemetry",
+        "path": "node_modules/@moonshot-ai/kimi-telemetry/dist/index.d.mts",
+        "sha256": "978e7cbbee0e16a54ef623ec3a87e68d2b7b4c25469d59b837568b97e2ebb63a",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kaos:index.mjs",
+        "packageName": "@moonshot-ai/kaos",
+        "path": "node_modules/@moonshot-ai/kaos/dist/index.mjs",
+        "sha256": "44a04d6bd52eb9ff15dd38d0a2588bd73cb8ac778d1c3be70455542d436925a2",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kaos:index.d.mts",
+        "packageName": "@moonshot-ai/kaos",
+        "path": "node_modules/@moonshot-ai/kaos/dist/index.d.mts",
+        "sha256": "3e10db9a0b46c0103f7a986e767ef65019f0fc4703861e300f38d6c616126552",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kosong:index.mjs",
+        "packageName": "@moonshot-ai/kosong",
+        "path": "node_modules/@moonshot-ai/kosong/dist/index.mjs",
+        "sha256": "a296886cdc8457b93d87c18e793472b6c4b5d9db37652da4ca35f03ab17a0f77",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/kosong:index.d.mts",
+        "packageName": "@moonshot-ai/kosong",
+        "path": "node_modules/@moonshot-ai/kosong/dist/index.d.mts",
+        "sha256": "9339b7990a595106f6b09143adec9477ca15a272e0db31c5e73e48a1b822ad47",
+        "status": "present"
+      },
+      {
+        "name": "@moonshot-ai/protocol:index.mjs",
+        "packageName": "@moonshot-ai/protocol",
+        "path": "node_modules/@moonshot-ai/protocol/dist/index.mjs",
+        "sha256": "544e7e5a5de6d46fd599839a26c83339b4ca2da36cb3ee3b7d626993a37500f9",
+        "status": "present"
+      }
+    ]
+  }
+}

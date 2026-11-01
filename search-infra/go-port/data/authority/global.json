@@ -1,0 +1,21 @@
+{
+  "_meta": "第 0 层全局权威兜底(domain[], 非主题查询时 0.4/0.75 微调)。维护: 域名全小写不带协议; 增删跑 npm test(三层表完整性守门)。",
+  "domains": [
+    "arxiv.org",
+    "nature.com",
+    "science.org",
+    "ieee.org",
+    "acm.org",
+    "springer.com",
+    "sciencedirect.com",
+    "wiley.com",
+    "tandfonline.com",
+    "ncbi.nlm.nih.gov",
+    "semanticscholar.org",
+    "aclanthology.org",
+    "openreview.net",
+    "plos.org",
+    "core.ac.uk",
+    "wikipedia.org"
+  ]
+}

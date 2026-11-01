@@ -1,0 +1,15 @@
+{
+  "analytics": {
+    "enabled": false,
+    "captureURL": "",
+    "captureFallbackURL": "",
+    "apiKey": "",
+    "requestTimeoutMs": 8000,
+    "retryDelaysMs": [
+      0,
+      500,
+      1500
+    ]
+  },
+  "clawhubRegistry": ""
+}

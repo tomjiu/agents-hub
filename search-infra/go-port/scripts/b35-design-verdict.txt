@@ -1,0 +1,45 @@
+批 35 — 候选① 专名行/bonus 结构语义层: 设计探针双重否决 (b35-design-probe.json)
+
+== 背景 ==
+b34 归档把 grokipedia 重新定性为 B1 竞争层残余(bonus 富集散文压答案散文)并将
+spartacus 列为同族(spartacus 型专名行竞争)。b35 候选① = 评分层奖励结构改造。
+候选机制(与 b33 样板跳过/b34 行候选正交):
+  ① bonus 计分封顶: 数字 1.0 最多计 M 个 / 专名 0.25 最多计 K 个 (cover 不动)
+  ② 超长句逃生舱: lenOk=false(>300r) 句在选句循环内 clause 重切取内部最佳 seg
+     (每超长句出 1 候选 — b34 机制A 洪泛风险的收敛版)
+  ③ 对照: cover 权重×2 (降 bonus 相对话语权, 门槛不动)
+
+== 探针设计 ==
+门禁 SC_B35_PROBE=1 (answer_extract_b35_test.go), b32 canonical 全 11 案 × 19 变体:
+  baseline + 封顶 M∈{2,3}×K∈{3,4,6}(±逃生舱) + capPropK4/capDigM2 + coverW2(±逃生舱)
+评分/选择镜像(b35SentenceScoreCapped/b35Pick)与产品循环逐参一致;
+baseline 变体与产品 b19BestSentence 逐字节等价自检(全 10 成功案零 MIRROR-DRIFT)。
+allmusic 403(CF 硬墙, b34 同)— 有效矩阵 10 案。
+
+== 裁决: 双重否决, 不 ship ==
+
+【一】目标案零翻正(机制不可达):
+  - grokipedia(10-): baseline bio intro 8.0 分上头; 全 19 变体 hasAns 恒 False,
+    best 恒 bio intro(封顶后 5.75~7.5 仍最高)。答案段 seg 重切后也够不着
+    (cover 3+封顶 bonus ≈5.0 vs intro 6.0) — 与 b34 探针"竞争层不可达"结论一致。
+  - spartacus(07-): baseline Lloyd George 专名行 6.75 上头; 全 19 变体恒 False。
+    封顶 K 后反而换 "Other posts..." 句上头(capPropK4) — 换汤不换药, 仍无 gold。
+  - congress/pmc/libretexts/santero/commonwealth/sebi/48hrs: 零翻转(机制无感面)。
+
+【二】tibbs 回归锚被双杀(负回归, b33 修复倒退):
+  - tibbs(04-) 答案句 "Born Howard Ellsworth Rollins, Jr., October 17, 1950..." 6.25
+    本身就是 born/died 日期句 — cover≈1, 分数大头=数字+专名 bonus。
+  - 全部数字封顶变体(capM*/capDigM2)把答案句拉下马(→4.75~5.25, 输给
+    "Rollins's life and career..." 4.75+) — 15/19 变体翻转 hasAns True→False。
+  - coverW2 同样双杀(答案句 cover 低, 加权救不了它, 反而抬高对手 cover)。
+  - 唯一保住 tibbs 的 capPropK4(仅封专名)对两个目标案零增益 — 没有安全切口。
+  - 机制层结论: 答案句常为日期句(数字密集)与专名密集句, "数字/专名密集惩罚"
+    在评分层无差别命中答案句本身 — b33 归档"载体句保护: 不砍奖励"预判实锤。
+    词面框架内, bonus 刷分句与 bonus 载体答案句形态不可分。
+
+== 记法 ==
+- 候选被否决 ≠ 候选丢失(§18): 探针代码+JSON 入仓防再诉讼。
+- B1 竞争层"奖励结构"子方向正式关闭; spartacus/grokipedia 维持语义层挂账
+  (CE/改写, 词面无解, 归 B2b 同族)。
+- 逃生舱(每超长句 1 候选, 无 swarm)本身零杀伤但目标案不可达, 不单独 ship。
+- b35 转向: pool=20 同池重放(b31 挂账 D 桶池深量化, 不改产品代码)。

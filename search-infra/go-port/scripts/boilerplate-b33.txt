@@ -1,0 +1,60 @@
+b33 — B1 样板句惩罚 (b19IsBoilerplate): 引文/日期串列表句跳过选句
+背景: b32 候选①。B1 选句竞争的机制 = 数字/专名奖励无上限, 引文/奖项/坐标等列表
+      形态句以奖励 token 刷分, cover=0 也能过闸压过含答案句 (tibbs 案: Jet 引文行
+      10 个日期 token=10.0 vs 答案句 6.25)。
+改动: answer_extract.go — b19BestSentence 循环内, 句长闸后加 b19IsBoilerplate(s) 跳过。
+      判据两类, 全可审计 (与评分同切分 splitRe, 镜像零漂移):
+        1) 数字主导列表: 纯数字 token>=3 且多于含字母内容词(rune>=3)
+           — 纯日期串 / 文献卷期行 / Wikipedia 坐标尾
+        2) 分号链式列表: 分号(含全角；)>=2 — Awards/Sources/credits 块
+      载体句(1-2 数字 + prose)不受影响; 既有测试 48hrs 载体句(1982/48 两数字)为回归锚。
+生成: 2026-09-07
+
+== 门禁一: 单元测试 (零外呼) ==
+go test . 全绿。新增 TestB19BoilerplateSkip:
+  - Jet 引文行(10 数字>1 内容词)=样板; 学术引文行(6>5)=样板; Awards 行(2 分号)=样板
+  - born 答案句(4<8)/单分号 prose/单年份 prose/48hrs 载体句(2 数字)=非样板
+  - 选句回归: jet+awards+born 三句并存, 答案句 6.25 必须胜出(无惩罚时 Jet 10.0 赢)
+
+== 门禁二: 11 案产品链路重放 (SC_B19_REPLAY=1) ==
+canonical(b32 run3) B1:3 B2:2 B2a:3 B2b:2 X-重放会命中:1
+b33 后两轮复验, 健康页桶位移: 仅 tibbs B1→X-重放会命中(best=答案句 born, bestHasAns=true)。
+  - 实弹第二轮发现 tibbs 页胜选句换形: "Awards: ... (1981); ... (1981); ..." — prose 夹
+    年份/专名形态, 数字主导判据抓不到 → 补第二判据(分号>=2)。两判据实弹各抓一形。
+  - spartacus(B1) 不变: 败给 Lloyd George 专名行, 非列表形态, 判据不越界(诚实遗留)。
+  - commonwealth(B1) 不变: 胜者 "2026 Victoria" 是正确答案(数据集 staleness), 不跳是对的。
+  - 其余 8 案健康轮逐字节同桶; pmc/allmusic 两页软 200(textLen 131/47)为 b32 在档阵发噪声。
+
+== 门禁三: 同题集活窗复测 (b30win 基线 vs b33win, NQ 98/TQA 100, SC_RERANK=1) ==
+水位: NQ 55.1/75.5/79.6 (b30 锚 53.1/74.5/77.6, +2.0/+1.0/+2.0pp)
+      TQA 72.0/85.0/89.0 (b30 锚 77.0/89.0/93.0, -5.0/-4.0/-4.0pp)
+上游背景(两窗隔数天, 活窗噪声在档): duckduckgo 整腿消失(87.8/87.0%→0.0%),
+crossref/mwmbl/arxiv 各掉 24-46 题; rank1 换页率 43.9%/49.0%。
+翻转逐案归因(scripts/b33-window-attrib.mjs, b19IsBoilerplate JS 镜像 + 注入尾切分):
+  TQA REG 12: 本改动嫌疑 0 — 10 条 gold 页被上游丢弃出池, 其余 base 证据/降位/标题证据。
+  NQ REG 5 : 上游 4(base 证据或出池) + 1 条 REG-MINE 实为假阳性证据移除(见下)。
+  FIX 7+7  : ≥1 条直接归因本改动 — pisa 案 b30 同 url 注入尾是坐标样板
+             ("Coordinates: 43°43′23″N ... 43.72306; 10.39639", 无 gold), b33 rank1
+             交付含答案句。aurora 案(NQ REG-MINE): b30 gold@1 证据=坐标样板尾里
+             "39.7059" 中的单数字 gold "9" 子串假阳性(b31 在档类别) — 改动移除的
+             是垃圾证据, 生产性回退。
+  坐标样板第三次交叉验证: aurora/pisa/tibbs 三案独立命中同一判据(数字主导)。
+结论: TQA -5pp 与本改动零关联(全上游换血); NQ +2pp 含 1 条本改动净收益,
+      零诚实回退。改动可上。
+
+== 结构画像 (analyze-suppression, b33 窗) ==
+合并 miss@1(严格)=76/198: A 压顶 1(1.3%) / B 词面 34 / C 灰区 1 / D 无gold-池外 40 / E 0
+— 与 b30 新平衡点同带(A≈0, B/D 主导), 样板惩罚未扰动结构。
+
+== 副作用界与遗留 ==
+  - 分号>=2 判据的误伤面: 分号链式 prose 句被跳(选择仍有其余句子兜底); 11 案+全窗
+    归因未见诚实回退。数字主导判据天然覆盖坐标/卷期/日期三类。
+  - spartacus 型(专名行竞争)遗留 B1×2, 对症需语义层/奖励结构改造, 列 b34+。
+  - 本批起常规 test 含 TestB19BoilerplateSkip, 零外呼; harness 门禁照旧 SC_B19_REPLAY=1。
+
+== 复算指引 ==
+  1. go test -run 'TestB19' -v .            # 单元门禁(零外呼)
+  2. SC_B19_REPLAY=1 go test -run TestB19ReplayHarness -v -timeout 20m .   # 11 案实弹
+  3. 窗口复测: eval-dumps/MANIFEST.md 复放指引 + node scripts/b33-window-attrib.mjs
+  门禁: 判据与评分同切分 splitRe; harness 评分镜像 b32SentenceScore(+Boiler 字段);
+        归因工具匹配器与 eval 逐字一致。

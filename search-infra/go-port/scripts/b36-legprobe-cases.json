@@ -1,0 +1,467 @@
+[
+ {
+  "dataset": "nq",
+  "q": "1 the bureau of land management manages over acres of land in the united states",
+  "answers": [
+   "247.3 million"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Bureau_of_Land_Management",
+   "title": "Bureau of Land Management"
+  },
+  "winWallMs": 1481
+ },
+ {
+  "dataset": "nq",
+  "q": "where do the events in the story take place geographically",
+  "answers": [
+   "Persia"
+  ],
+  "winRank1": {
+   "url": "https://brainly.com/question/36840334",
+   "title": "[FREE] Where do the events narrated in the story take place? - brainly.com"
+  },
+  "winWallMs": 2379
+ },
+ {
+  "dataset": "nq",
+  "q": "where is hallmark channel home and family filmed",
+  "answers": [
+   "Los Angeles, California"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Home_%26_Family",
+   "title": "Home & Family"
+  },
+  "winWallMs": 6201
+ },
+ {
+  "dataset": "nq",
+  "q": "who is the current director of the us mint",
+  "answers": [
+   "David J. Ryder",
+   "David Motl"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Director_of_the_United_States_Mint",
+   "title": "Director of the United States Mint"
+  },
+  "winWallMs": 2015
+ },
+ {
+  "dataset": "nq",
+  "q": "what is the process to become a santero",
+  "answers": [
+   "a cleansing ritual",
+   "making Ochá (Saint)"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Initiation_in_Santer%C3%ADa",
+   "title": "Initiation in Santería"
+  },
+  "winWallMs": 3522
+ },
+ {
+  "dataset": "nq",
+  "q": "when does the eclipse end in the us",
+  "answers": [
+   "2:44 p.m. EDT"
+  ],
+  "winRank1": {
+   "url": "https://timeanddate.com/eclipse/in/usa?iso=20240408%2F",
+   "title": "Eclipses in the United States"
+  },
+  "winWallMs": 2056
+ },
+ {
+  "dataset": "nq",
+  "q": "who discovered one of the first taxonomic classification schemes",
+  "answers": [
+   "Swedish botanist Carl Linnaeus"
+  ],
+  "winRank1": {
+   "url": "https://wikipedia.org/wiki/De_Candolle_system",
+   "title": "De Candolle system - Wikipedia"
+  },
+  "winWallMs": 2339
+ },
+ {
+  "dataset": "nq",
+  "q": "who has won the most games in nfl 2017",
+  "answers": [
+   "Dallas Cowboys"
+  ],
+  "winRank1": {
+   "url": "https://sportsdaynow.com/who-has-won-the-most-games-in-nfl-2017",
+   "title": "Who Has Won The Most Games In NFL 2017? - sportsdaynow.com"
+  },
+  "winWallMs": 2761
+ },
+ {
+  "dataset": "nq",
+  "q": "who is the longest serving chief minister in india as on jan 2015",
+  "answers": [
+   "Jyotirindra Basu"
+  ],
+  "winRank1": {
+   "url": "http://en.wikipedia.org/wiki/List_of_longest-serving_Indian_chief_ministers",
+   "title": "List of longest-serving Indian chief ministers"
+  },
+  "winWallMs": 3624
+ },
+ {
+  "dataset": "nq",
+  "q": "whos jack the ripper in gotham by gaslight",
+  "answers": [
+   "Jacob Packer"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Gotham_by_Gaslight",
+   "title": "Gotham by Gaslight"
+  },
+  "winWallMs": 1451
+ },
+ {
+  "dataset": "nq",
+  "q": "what caused the breakup of the democratic republican party",
+  "answers": [
+   "the disputed 1824 presidential election"
+  ],
+  "winRank1": {
+   "url": "https://potus-geeks.livejournal.com/1619139.html",
+   "title": "Political Division: The Breakup of the Democratic-Republican Party"
+  },
+  "winWallMs": 4537
+ },
+ {
+  "dataset": "nq",
+  "q": "who are the stars in dancing with the stars",
+  "answers": [
+   "Jennie Finch Daigle",
+   "Jamie Anderson",
+   "Arike Ogunbowale",
+   "Mirai Nagasu",
+   "Adam Rippon",
+   "Josh Norman",
+   "Tonya Harding",
+   "Kareem Abdul-Jabbar",
+   "Chris Mazdzer",
+   "Johnny Damon"
+  ],
+  "winRank1": {
+   "url": "https://bit.ly/3V8dHlA",
+   "title": "'Dancing with the Stars' 2026 cast revealed – See who's competing in Season 35"
+  },
+  "winWallMs": 2322
+ },
+ {
+  "dataset": "nq",
+  "q": "who is credited with creating the gothic art movement",
+  "answers": [
+   "Abbot Suger"
+  ],
+  "winRank1": {
+   "url": "https://artandpopularculture.com/Art_gothique",
+   "title": "Gothic art"
+  },
+  "winWallMs": 21549
+ },
+ {
+  "dataset": "nq",
+  "q": "who was the 19th c. artist who was both painter and graphic designer",
+  "answers": [
+   "René Georges Hermann-Paul"
+  ],
+  "winRank1": {
+   "url": "https://www.cliffsnotes.com/cliffs-questions/2559205",
+   "title": "Who was the 19th c. artist who was both painter and graphic designer ..."
+  },
+  "winWallMs": 5945
+ },
+ {
+  "dataset": "nq",
+  "q": "when are the next commonwealth games going to be held",
+  "answers": [
+   "2022"
+  ],
+  "winRank1": {
+   "url": "https://heraldscotland.com/sport/25140536.glasgow-commonwealth-games-2026-latest-news-interviews-update",
+   "title": "Glasgow Commonwealth Games 2026: Latest News, Interviews and Update"
+  },
+  "winWallMs": 4872
+ },
+ {
+  "dataset": "nq",
+  "q": "when was the last time the vikings made the superbowl",
+  "answers": [
+   "in the 1970s"
+  ],
+  "winRank1": {
+   "url": "https://sports.yahoo.com/vikings-super-bowl-history-last-193031333.html",
+   "title": "Vikings Super Bowl history: When is the last time Minnesota made it to ..."
+  },
+  "winWallMs": 2322
+ },
+ {
+  "dataset": "nq",
+  "q": "who has become the new chairman of sebi",
+  "answers": [
+   "Ajay Tyagi"
+  ],
+  "winRank1": {
+   "url": "https://newsonair.gov.in/tuhin-kanta-pandey-appointed-as-new-sebi-chairman-for-3-years",
+   "title": "Finance Secretary Tuhin Kanta Pandey appointed as new SEBI ..."
+  },
+  "winWallMs": 21541
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "\"According to Rudyard Kipling what were the \"\"two imposters\"\" to meet and treat the same day?\"",
+  "answers": [
+   "Triumph and Disaster"
+  ],
+  "winRank1": {
+   "url": "https://doi.org/10.1093/owc/9780198723431.003.0068",
+   "title": "That Day"
+  },
+  "winWallMs": 2987
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "In which decade of the 20th century was Anne Bancroft born?",
+  "answers": [
+   "1930s",
+   "1930’s",
+   "Thirties",
+   "1930s literature",
+   "Nineteen-thirties",
+   "1930–1939",
+   "1930-1939",
+   "'30s",
+   "1930's",
+   "%6030s",
+   "1930s (decade)",
+   "The Thirties"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Anne_Bancroft",
+   "title": "Anne Bancroft"
+  },
+  "winWallMs": 4286
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "\"Which boxer famously said,\"\" If I can't beat this bum take my name off the record books?\"\"\"",
+  "answers": [
+   "Rocky Marciano",
+   "Rocco Marchegiano",
+   "The Brockton Blockbuster",
+   "Brockton Bomber",
+   "Marciano, Rocky",
+   "Rocco francis marchegiano",
+   "The Brockton Bomber",
+   "Brockton Blockbuster",
+   "Rocco Francis Marchegiano"
+  ],
+  "winRank1": {
+   "url": "https://quizglobal.com/quizplay/quizplayqanda/Sports%20Athletics%20Trivia%20Quiz",
+   "title": "Play Sports Athletics Trivia Quiz quiz: print these test questions and answers"
+  },
+  "winWallMs": 2566
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "What US sitcom was the first exported to Britain?",
+  "answers": [
+   "Amos 'N' Andy",
+   "Amos n Andy",
+   "Amos And Andy",
+   "Amos and andy",
+   "Amos N Andy",
+   "Amos & Andy",
+   "George %22Kingfish%22 Stevens",
+   "Amos and Andy",
+   "Brazilian Brass Mines",
+   "Amos ‘n’ Andy",
+   "Amos 'n Andy",
+   "Amos N' Andy",
+   "The Amos 'n Andy Show",
+   "Amos 'n Andy Show",
+   "Amos 'n' Andy Show",
+   "Amos 'n' Andy"
+  ],
+  "winRank1": {
+   "url": "https://owiki.org/wiki/British_sitcom",
+   "title": "British sitcom ::: Open WIKI"
+  },
+  "winWallMs": 2649
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Which singer had a big 60s No 1 with Roses Are Red?",
+  "answers": [
+   "Bobby Vinton"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/List_of_country_performers_by_era",
+   "title": "List of country performers by era"
+  },
+  "winWallMs": 4568
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "In what year was the first in-flight movie shown on an internal flight in the USA.",
+  "answers": [
+   "1929",
+   "one thousand, nine hundred and twenty-nine"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/Air_Florida_Flight_90",
+   "title": "Air Florida Flight 90"
+  },
+  "winWallMs": 9794
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "What claimed the life of singer Kathleen Ferrier?",
+  "answers": [
+   "Cancer",
+   "Cancer pathology",
+   "Deaths by cancer",
+   "Anti-cancer",
+   "Cancer (disease)",
+   "Cancerophobia",
+   "Malignant lesion",
+   "Cancer medication",
+   "Malignant tumors",
+   "Cancer signs",
+   "Malignant neoplasm",
+   "Invasive (cancer)",
+   "Malignant Neoplasms",
+   "Malignant growth",
+   "Sporadic cancer",
+   "Malignant cancer",
+   "Tumour virus",
+   "Cancer en cuirasse",
+   "Microtumor",
+   "Malignant neoplasms",
+   "Malignant tumour",
+   "Carcinophobia",
+   "Malignacy",
+   "Cancer patient",
+   "Epithelial cancers",
+   "Solid cancer",
+   "Cancers",
+   "Tumor medication",
+   "Malignant neoplastic disease",
+   "AIDS-related cancer",
+   "Invasive cancer",
+   "Cancer therapy",
+   "Cancerous tumor",
+   "Financial toxicity",
+   "Cancer diagnosis",
+   "Cancer (medicine)",
+   "Malignant tumor",
+   "Cancerous",
+   "Borderline (cancer)",
+   "Signs of cancer",
+   "Malignancies",
+   "Cancer aromatase"
+  ],
+  "winRank1": {
+   "url": "https://doi.org/10.2307/937630",
+   "title": "Kathleen Ferrier: Her Life"
+  },
+  "winWallMs": 5033
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "What was Eddie Murphy's first movie?",
+  "answers": [
+   "48 Hours",
+   "48 time",
+   "forty-eight  time"
+  ],
+  "winRank1": {
+   "url": "https://mythcon.ca/48-hrs-explained-why-eddie-murphys-first-movie-still-matters-2dc",
+   "title": "48 Hrs. Explained: Why Eddie Murphy's First Movie Still Matters"
+  },
+  "winWallMs": 6972
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Which Oscar-nominated film had You Sexy Thing as its theme song?",
+  "answers": [
+   "The Full Monty",
+   "Full Monty",
+   "The Full Monty (film)",
+   "The Full Monty (soundtrack)",
+   "Full monty"
+  ],
+  "winRank1": {
+   "url": "https://musicbrainz.org/recording/4821e190-0ec3-4db2-bd97-9f53ed25db83",
+   "title": "You Sexy Thing — T‐Shirt"
+  },
+  "winWallMs": 9905
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Which US president won the Nobel Peace Prize in 1920?",
+  "answers": [
+   "Woodrow Wilson",
+   "Thomas W. Wilson",
+   "President wilson",
+   "Wilson, Woodrow",
+   "Thomas Woodrow Wilson",
+   "Woodrow wilson",
+   "Presidency of Woodrow Wilson",
+   "President Woodrow Wilson",
+   "President Wilson's",
+   "T Woodrow Wilson",
+   "W. Wilson",
+   "Woodrow Wilson's",
+   "Wildrow Woodson",
+   "President Wilson",
+   "28th President of the United States",
+   "T. Woodrow Wilson"
+  ],
+  "winRank1": {
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPbmFWYnB3RkdQMkkzY0NSU09vSU1pcjJnOWlHRXBBQ0Voc2Zta3V4REJuRTZBUV9rQnBGTWpsdU9mc21JeWNQMlFRb3VMakdGeHFJMndOQUF2Q3Z4NlExUFZnVEZzOExXSFlLdGc5RWhzME9yNGp0WTJMLWlZWWVzMVVtT1VCUWVfMG5UVm55QktORkZxcHoya1JEWG52V0l1cm9FbnJoYUtBME5MLUNRTDVSOERGUUNxVm95S2NQMGRVb05XbnF6aHI3ZFI?oc=5",
+   "title": "These US presidents have won the Nobel Peace Prize. Could Trump be next? - katv.com"
+  },
+  "winWallMs": 3063
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Which female singer was born on exactly the same day as impressionist Rich Little?",
+  "answers": [
+   "Tina Turner",
+   "Anna Bullock",
+   "Tina Turner's",
+   "Tina tuner",
+   "Tina turner",
+   "Tinna turner",
+   "Annie Mae Bullock",
+   "Anna Mae Bullock"
+  ],
+  "winRank1": {
+   "url": "https://ipfs.metablox.co/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Rich_Little.html",
+   "title": "Rich Little"
+  },
+  "winWallMs": 9827
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Who became Israel's head of state in 1993?",
+  "answers": [
+   "Ezer Weizman",
+   "עזר ויצמן",
+   "Ezer Weizmann"
+  ],
+  "winRank1": {
+   "url": "https://en.wikipedia.org/wiki/History_of_Israel_%281948%E2%80%93present%29",
+   "title": "History of Israel (1948–present)"
+  },
+  "winWallMs": 3917
+ }
+]

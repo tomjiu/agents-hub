@@ -1,0 +1,315 @@
+{
+  "document": {
+    "total_words": 2259,
+    "unique_words": 789,
+    "type_token_ratio": 0.349,
+    "sentence_count": 164,
+    "avg_sentence_len": 13.8,
+    "llm_token_estimate": 3050,
+    "char_count": 17366,
+    "negative_constraint_count": 42,
+    "conditional_activation_count": 35,
+    "bullet_line_count": 135,
+    "code_block_count": 21,
+    "bold_statement_count": 9
+  },
+  "per_section": [
+    {
+      "section": "Purpose",
+      "lines": "3-10",
+      "words": 49,
+      "negative": 1,
+      "conditional": 0,
+      "neg_per_10w": 20.4,
+      "bullets": 1
+    },
+    {
+      "section": "1. Non-Negotiable Operating Model",
+      "lines": "11-39",
+      "words": 69,
+      "negative": 2,
+      "conditional": 3,
+      "neg_per_10w": 29.0,
+      "bullets": 2
+    },
+    {
+      "section": "2. Context Is Ephemeral; Repository State Is Durab",
+      "lines": "40-57",
+      "words": 68,
+      "negative": 1,
+      "conditional": 1,
+      "neg_per_10w": 14.7,
+      "bullets": 0
+    },
+    {
+      "section": "Durable-state rule",
+      "lines": "58-77",
+      "words": 70,
+      "negative": 2,
+      "conditional": 1,
+      "neg_per_10w": 28.6,
+      "bullets": 10
+    },
+    {
+      "section": "3. Source of Truth and Documentation Consistency",
+      "lines": "78-105",
+      "words": 107,
+      "negative": 3,
+      "conditional": 4,
+      "neg_per_10w": 28.0,
+      "bullets": 5
+    },
+    {
+      "section": "4. Work Resumption Protocol",
+      "lines": "106-123",
+      "words": 84,
+      "negative": 2,
+      "conditional": 2,
+      "neg_per_10w": 23.8,
+      "bullets": 8
+    },
+    {
+      "section": "5. Classify the Work Before Acting",
+      "lines": "124-151",
+      "words": 51,
+      "negative": 1,
+      "conditional": 0,
+      "neg_per_10w": 19.6,
+      "bullets": 1
+    },
+    {
+      "section": "6. Skills First",
+      "lines": "152-180",
+      "words": 115,
+      "negative": 1,
+      "conditional": 1,
+      "neg_per_10w": 8.7,
+      "bullets": 4
+    },
+    {
+      "section": "Useful external Skill repositories",
+      "lines": "181-196",
+      "words": 117,
+      "negative": 1,
+      "conditional": 0,
+      "neg_per_10w": 8.5,
+      "bullets": 8
+    },
+    {
+      "section": "7. Frontend Work Must Be Product-Level, Not Compon",
+      "lines": "197-226",
+      "words": 151,
+      "negative": 2,
+      "conditional": 3,
+      "neg_per_10w": 13.2,
+      "bullets": 15
+    },
+    {
+      "section": "8. No Shell Implementations",
+      "lines": "227-259",
+      "words": 81,
+      "negative": 2,
+      "conditional": 2,
+      "neg_per_10w": 24.7,
+      "bullets": 0
+    },
+    {
+      "section": "Implementation completeness",
+      "lines": "260-280",
+      "words": 66,
+      "negative": 1,
+      "conditional": 0,
+      "neg_per_10w": 15.2,
+      "bullets": 1
+    },
+    {
+      "section": "9. No Degraded Implementation Without Explicit App",
+      "lines": "281-300",
+      "words": 75,
+      "negative": 2,
+      "conditional": 1,
+      "neg_per_10w": 26.7,
+      "bullets": 12
+    },
+    {
+      "section": "10. One-Phase YOLO Execution",
+      "lines": "301-330",
+      "words": 106,
+      "negative": 2,
+      "conditional": 2,
+      "neg_per_10w": 18.9,
+      "bullets": 6
+    },
+    {
+      "section": "11. Proportional Planning",
+      "lines": "331-353",
+      "words": 39,
+      "negative": 1,
+      "conditional": 0,
+      "neg_per_10w": 25.6,
+      "bullets": 1
+    },
+    {
+      "section": "12. Research Before Reimplementation",
+      "lines": "354-383",
+      "words": 55,
+      "negative": 2,
+      "conditional": 0,
+      "neg_per_10w": 36.4,
+      "bullets": 1
+    },
+    {
+      "section": "13. Rust Rules",
+      "lines": "384-387",
+      "words": 10,
+      "negative": 0,
+      "conditional": 0,
+      "neg_per_10w": 0.0,
+      "bullets": 0
+    },
+    {
+      "section": "unsafe",
+      "lines": "388-413",
+      "words": 103,
+      "negative": 3,
+      "conditional": 0,
+      "neg_per_10w": 29.1,
+      "bullets": 5
+    },
+    {
+      "section": "Rust rewrite",
+      "lines": "414-423",
+      "words": 34,
+      "negative": 0,
+      "conditional": 0,
+      "neg_per_10w": 0.0,
+      "bullets": 1
+    },
+    {
+      "section": "14. Avoid Overengineering",
+      "lines": "424-445",
+      "words": 49,
+      "negative": 2,
+      "conditional": 1,
+      "neg_per_10w": 40.8,
+      "bullets": 8
+    },
+    {
+      "section": "15. Avoid Over-Safety and Over-Commenting",
+      "lines": "446-463",
+      "words": 52,
+      "negative": 2,
+      "conditional": 0,
+      "neg_per_10w": 38.5,
+      "bullets": 6
+    },
+    {
+      "section": "16. Debugging",
+      "lines": "464-482",
+      "words": 34,
+      "negative": 1,
+      "conditional": 1,
+      "neg_per_10w": 29.4,
+      "bullets": 1
+    },
+    {
+      "section": "17. Verification Is Part of Implementation",
+      "lines": "483-525",
+      "words": 114,
+      "negative": 0,
+      "conditional": 2,
+      "neg_per_10w": 0.0,
+      "bullets": 1
+    },
+    {
+      "section": "18. Independent Review",
+      "lines": "526-555",
+      "words": 71,
+      "negative": 0,
+      "conditional": 2,
+      "neg_per_10w": 0.0,
+      "bullets": 17
+    },
+    {
+      "section": "19. Documentation as an Executable Contract",
+      "lines": "556-577",
+      "words": 60,
+      "negative": 1,
+      "conditional": 1,
+      "neg_per_10w": 16.7,
+      "bullets": 8
+    },
+    {
+      "section": "20. Git Safety and Delivery",
+      "lines": "578-605",
+      "words": 47,
+      "negative": 1,
+      "conditional": 1,
+      "neg_per_10w": 21.3,
+      "bullets": 1
+    },
+    {
+      "section": "21. Durable Phase State",
+      "lines": "606-629",
+      "words": 66,
+      "negative": 1,
+      "conditional": 1,
+      "neg_per_10w": 15.2,
+      "bullets": 1
+    },
+    {
+      "section": "22. Completion Gate",
+      "lines": "630-653",
+      "words": 68,
+      "negative": 0,
+      "conditional": 3,
+      "neg_per_10w": 0.0,
+      "bullets": 1
+    },
+    {
+      "section": "23. Final Report",
+      "lines": "654-658",
+      "words": 8,
+      "negative": 0,
+      "conditional": 0,
+      "neg_per_10w": 0.0,
+      "bullets": 0
+    },
+    {
+      "section": "Verification",
+      "lines": "668-672",
+      "words": 4,
+      "negative": 0,
+      "conditional": 0,
+      "neg_per_10w": 0.0,
+      "bullets": 0
+    },
+    {
+      "section": "Git",
+      "lines": "676-680",
+      "words": 5,
+      "negative": 0,
+      "conditional": 0,
+      "neg_per_10w": 0.0,
+      "bullets": 0
+    },
+    {
+      "section": "Status",
+      "lines": "681-688",
+      "words": 18,
+      "negative": 1,
+      "conditional": 0,
+      "neg_per_10w": 55.6,
+      "bullets": 1
+    },
+    {
+      "section": "Final Rule",
+      "lines": "689-707",
+      "words": 108,
+      "negative": 4,
+      "conditional": 3,
+      "neg_per_10w": 37.0,
+      "bullets": 7
+    }
+  ]
+}

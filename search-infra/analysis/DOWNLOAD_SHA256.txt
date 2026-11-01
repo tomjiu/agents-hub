@@ -1,0 +1,10 @@
+# 下载包 sha256 校验(路径相对仓库根, 安装包放 raw-downloads/<target>/ 下, 不进 git)
+# 用途: 环境重置后重新下载时, 校验上游是否换版
+49bc82dd48860fa4e3f7a77e7a15f0bc8988d862c4e91bf48a136e13fd6b2511  raw-downloads/claude-code/Claude-1.44121.0-full.exe
+043c1e62f513054f0a8ad8b8d80106620d0de8acbf77e8dd365e03ac3742d5c9  raw-downloads/claude-code/ClaudeSetup-69aac03faa72b798ca63e9eb96057c1b2ade979e.exe
+849aa32643c9f4787214f73cb701aedb4e2bfe10817a2028ee22f592249ecfc1  raw-downloads/trae-code-cn/TraeCode_CN-Setup-x64.exe
+49283cb8923e236c12dc065884f4a1f1b2e97102b82013388a191ace62ec09b9  raw-downloads/trae-work-cn/TraeWork_CN-Setup-x64.exe
+5f768db7f6542de92c5875f546818cd3032310235f6a3d7e7803a1101d8f2817  raw-downloads/workbuddy/WorkBuddy-win32-x64-user-5.4.2.36857725-d74591c4.exe
+65248de931e367411495efee6b116c6af8c353e554a5462e0493956767eeedb8  raw-downloads/kimi-desktop/kimi_3.2.4.exe
+b618cfa70c8f7c8a1a6e2950565cc441c298b801bb2389c292eb0d3add6bf0c0  raw-downloads/zcode/ZCode-3.10.2-linux-x64.deb
+# 未记录(可随时重新下载): Qoder(latest 滚动版), Antigravity 2.11.0 tar.gz

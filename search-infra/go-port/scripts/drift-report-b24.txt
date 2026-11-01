@@ -1,0 +1,118 @@
+b24 上游漂移双窗 diff 留档 (analyze-upstream-drift.mjs 产物)
+================================================================
+旧窗: {ds}-dump-b22win.jsonl (b22 批次采集, 2026-09-06 08:17-08:24Z, b21/b22 检索链路)
+新窗: {ds}-dump.jsonl       (b24 批次采集, 2026-09-06 ~10:05Z,        b23 检索链路 — 两窗检索排序代码相同, 差异=纯上游)
+口径: snippet 层 gold 判定 (verbatim+tokenAND+STOP, 与 eval-external 逐字一致), topn=20
+
+################ NQ (98 对, 全对齐) ################
+== upstream drift: nq ==
+old: /tmp/eval-rerank/nq-dump-b22win.jsonl (98 题)  new: /tmp/eval-rerank/nq-dump.jsonl (98 题)
+题集对齐(按 q): 98 对 (未对齐 old=0 new=0)
+
+[gold@1] old 13/98=13.3%  ->  new 13/98=13.3%  (Δ0.0pp)
+[gold@10] old 25/98=25.5%  ->  new 26/98=26.5%  (Δ1.0pp)
+[gold@20] old 26/98=26.5%  ->  new 29/98=29.6%  (Δ3.1pp)
+[墙钟] old avg 3427ms  ->  new avg 3770ms
+
+[rank1 换页] 33/98=33.7% 的题 rank1 URL 变了(上游整体换血度)
+[翻转] regress(old gold@1 -> new 无): 0  |  improve(反向): 0
+
+[regress 题 gold 页去向] url 可追踪 0 中: 仍在池 0(降位), 被上游丢弃 0
+
+[引擎出现率/题] (题级 engines 并集, Δ=腿量变化, 掉腿>10pp 标记 *)
+  marginalia     old  32.7%  new   0.0%  (Δ-32 题) *
+  yahoo          old  17.3%  new   0.0%  (Δ-17 题) *
+  crossref       old  71.4%  new  57.1%  (Δ-14 题) *
+  firecrawl      old   5.1%  new   0.0%  (Δ-5 题)
+  commonswiki    old  25.5%  new  21.4%  (Δ-4 题)
+  europepmc      old   5.1%  new   1.0%  (Δ-4 题)
+  anysearch      old   3.1%  new   0.0%  (Δ-3 题)
+  metacpan       old  61.2%  new  58.2%  (Δ-3 题)
+  musicbrainz    old   4.1%  new   1.0%  (Δ-3 题)
+  openvsx        old  20.4%  new  17.3%  (Δ-3 题)
+  sov2ex         old  24.5%  new  21.4%  (Δ-3 题)
+  bing-rss       old  52.0%  new  50.0%  (Δ-2 题)
+  courtlistener  old   3.1%  new   1.0%  (Δ-2 题)
+  wiby           old  12.2%  new  10.2%  (Δ-2 题)
+  wikivoyage     old  42.9%  new  40.8%  (Δ-2 题)
+  artifacthub    old   1.0%  new   0.0%  (Δ-1 题)
+  dockerhub      old   2.0%  new   1.0%  (Δ-1 题)
+  federalregister old   5.1%  new   4.1%  (Δ-1 题)
+  hex            old   3.1%  new   2.0%  (Δ-1 题)
+  rubygems       old   1.0%  new   0.0%  (Δ-1 题)
+  wiktionary     old  18.4%  new  17.3%  (Δ-1 题)
+  arxiv          old  34.7%  new  34.7%  (Δ+0 题)
+  openverse      old   2.0%  new   2.0%  (Δ+0 题)
+  pubchem        old   5.1%  new   5.1%  (Δ+0 题)
+  pubdev         old   1.0%  new   1.0%  (Δ+0 题)
+  doaj           old   0.0%  new   1.0%  (Δ+1 题)
+  flathub        old   3.1%  new   4.1%  (Δ+1 题)
+  itunes         old   1.0%  new   2.0%  (Δ+1 题)
+  snapcraft      old   0.0%  new   1.0%  (Δ+1 题)
+  wikipedia      old  77.6%  new  78.6%  (Δ+1 题)
+  bing-news      old  15.3%  new  18.4%  (Δ+3 题)
+  keenable       old  96.9%  new 100.0%  (Δ+3 题)
+  npm            old   4.1%  new   7.1%  (Δ+3 题)
+  mwmbl          old  66.3%  new  70.4%  (Δ+4 题)
+  steam          old   6.1%  new  11.2%  (Δ+5 题)
+  duckduckgo     old   0.0%  new  58.2%  (Δ+57 题)
+[腿数] old avg 7.24  ->  new avg 6.99
+
+
+################ TQA (100 对, 全对齐) ################
+== upstream drift: triviaqa ==
+old: /tmp/eval-rerank/triviaqa-dump-b22win.jsonl (100 题)  new: /tmp/eval-rerank/triviaqa-dump.jsonl (100 题)
+题集对齐(按 q): 100 对 (未对齐 old=0 new=0)
+
+[gold@1] old 14/100=14.0%  ->  new 15/100=15.0%  (Δ1.0pp)
+[gold@10] old 34/100=34.0%  ->  new 32/100=32.0%  (Δ-2.0pp)
+[gold@20] old 39/100=39.0%  ->  new 35/100=35.0%  (Δ-4.0pp)
+[墙钟] old avg 3647ms  ->  new avg 3591ms
+
+[rank1 换页] 30/100=30.0% 的题 rank1 URL 变了(上游整体换血度)
+[翻转] regress(old gold@1 -> new 无): 1  |  improve(反向): 2
+
+[regress 题 gold 页去向] url 可追踪 1 中: 仍在池 1(降位), 被上游丢弃 0
+  仍在池者新 rank 分布: 2
+
+[引擎出现率/题] (题级 engines 并集, Δ=腿量变化, 掉腿>10pp 标记 *)
+  crossref       old  77.0%  new  57.0%  (Δ-20 题) *
+  yahoo          old  15.0%  new   0.0%  (Δ-15 题) *
+  marginalia     old  12.0%  new   0.0%  (Δ-12 题) *
+  sov2ex         old  41.0%  new  29.0%  (Δ-12 题) *
+  bing-rss       old  66.0%  new  57.0%  (Δ-9 题)
+  firecrawl      old   5.0%  new   0.0%  (Δ-5 题)
+  itunes         old  15.0%  new  10.0%  (Δ-5 题)
+  wiby           old  17.0%  new  12.0%  (Δ-5 题)
+  commonswiki    old  19.0%  new  15.0%  (Δ-4 题)
+  metacpan       old  69.0%  new  65.0%  (Δ-4 题)
+  wikipedia      old  77.0%  new  73.0%  (Δ-4 题)
+  wikivoyage     old  36.0%  new  32.0%  (Δ-4 题)
+  artifacthub    old   6.0%  new   3.0%  (Δ-3 题)
+  hex            old   9.0%  new   6.0%  (Δ-3 题)
+  openvsx        old  22.0%  new  19.0%  (Δ-3 题)
+  dockerhub      old   8.0%  new   6.0%  (Δ-2 题)
+  flathub        old   7.0%  new   5.0%  (Δ-2 题)
+  mwmbl          old  56.0%  new  54.0%  (Δ-2 题)
+  steam          old  15.0%  new  13.0%  (Δ-2 题)
+  europepmc      old   4.0%  new   3.0%  (Δ-1 题)
+  npm            old   6.0%  new   5.0%  (Δ-1 题)
+  bing-news      old  20.0%  new  20.0%  (Δ+0 题)
+  courtlistener  old   1.0%  new   1.0%  (Δ+0 题)
+  keenable       old  99.0%  new  99.0%  (Δ+0 题)
+  openverse      old   2.0%  new   2.0%  (Δ+0 题)
+  pubchem        old   3.0%  new   3.0%  (Δ+0 题)
+  federalregister old   0.0%  new   1.0%  (Δ+1 题)
+  musicbrainz    old   5.0%  new   6.0%  (Δ+1 题)
+  wiktionary     old  12.0%  new  13.0%  (Δ+1 题)
+  arxiv          old  33.0%  new  42.0%  (Δ+9 题)
+  duckduckgo     old   0.0%  new  60.0%  (Δ+60 题)
+[腿数] old avg 7.57  ->  new avg 7.11
+
+[regress 明细 1 题] (q 截 60ch | old gold@r -> new gold@r/OUT | 掉腿)
+  - Which highway was Revisited in a classic 60s album by Bob Dy @1->@2(10外) legs[keenable->musicbrainz,keenable] lost=[] gained=[musicbrainz]
+
+[improve 明细 2 题]
+  + The flag of Libya is a plain rectangle of which color?       ->@1
+  + What did the Lone Ranger's title Kemo Sabe mean in Apache?   ->@1
+

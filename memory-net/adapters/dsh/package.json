@@ -1,0 +1,19 @@
+{
+  "name": "memory-net-dsh-adapter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "memory-net（共享记忆网）接入 dsh（Cordis host）的适配插件。零 import dsh/cordis——dsh 上游升级零改动，契约破坏时防御式降级明示。",
+  "type": "module",
+  "main": "dist/adapters/dsh/src/index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "test": "npm run build && node --test dist/adapters/dsh/tests/*.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,36 @@
+# 反编译产物 / 二进制 / 凭据 全部不入 git
+raw-downloads/
+analysis/*/extracted/
+analysis/*/source/
+
+# 但保留 snippets 和 notes(短片段引用是允许的)
+!analysis/*/snippets/
+!analysis/*/notes/
+
+# node / python 缓存
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+core/dist/
+
+# 工具产物
+*.log
+*.tmp
+*.bak
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 凭据
+.env
+*.pem
+*.key
+secrets.json
+go-port/search-core-go
+
+# rust poc build artifacts
+poc/target/
+go-port/search-core-go
+go-port/searchcore

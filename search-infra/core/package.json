@@ -1,0 +1,34 @@
+{
+  "name": "search-core",
+  "version": "0.8.0",
+  "description": "Client-side search orchestrator (search-core v0.7) — see design/v0-spec.md. Planner -> Engine Router -> Fusion -> Focus Fetch -> Governor. 29 registered providers (32 catalogued) (keyless pool + coding verticals + time-machine + key slots) + domain routing (DOMAIN_TABLE planner lanes). MCP + CLI + REST/SSE exits. FTS5 cache-as-search-corpus.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "bin": {
+    "search-core": "dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./server": "./dist/mcp.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && mkdir -p dist/test/fixtures && cp -r test/fixtures/. dist/test/fixtures/",
+    "test": "npm run build && node --test 'dist/test/*.test.js'",
+    "serve": "node dist/mcp.js",
+    "smoke": "npm run build && node dist/test/smoke.js",
+    "probe:mcp": "npm run build && node scripts/mcp-probe.mjs",
+    "probe:http": "npm run build && node scripts/http-probe.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.0",
+    "cheerio": "^1.1.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.6.0"
+  }
+}

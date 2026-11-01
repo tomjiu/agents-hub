@@ -1,0 +1,349 @@
+{
+ "generatedAt": "2026-09-07T13:25:13Z",
+ "n": 11,
+ "recs": [
+  {
+   "dataset": "nq",
+   "q": "how are leaders of the two parties in congress chosen",
+   "url": "https://congressionalinstitute.org/2020/11/12/party-leaders-in-congress-an-overview",
+   "rank": 2,
+   "sub": "deep",
+   "probeAns": "Senate Republican Conference",
+   "status": 200,
+   "textLen": 12000,
+   "cappedHasAns": true,
+   "fullTextLen": 15449,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 4113,
+   "bestSentence": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+   "bestHasAns": false,
+   "injectedSim": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years. What are party leaders? Congressional leaders are responsible for developing the party’s agenda, promoting party unity, communicating with national press, liaising with the Executive Branch, and defending and increasing the",
+   "injectedHasAns": false,
+   "answerSents": [
+    {
+     "text": "Likewise, the Senate Republican Conference rules stipulate that the following positions are elective:",
+     "runes": 101,
+     "cover": 0,
+     "score": 0.75,
+     "lenOk": true,
+     "coverOk": false
+    },
+    {
+     "text": "The Senate Republican Conference rules provide for a secret ballot as well.",
+     "runes": 75,
+     "cover": 0,
+     "score": 0.75,
+     "lenOk": true,
+     "coverOk": false
+    }
+   ],
+   "bucket": "B2b"
+  },
+  {
+   "dataset": "nq",
+   "q": "today gestalt psychology ideas are part of which branch of psychology",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3482144",
+   "rank": 2,
+   "sub": "nogold",
+   "probeAns": "experimental psychology",
+   "status": 200,
+   "textLen": 12000,
+   "cappedHasAns": true,
+   "fullTextLen": 263610,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 321,
+   "bestSentence": "✉Correspondence concerning this article should be addressed to Johan Wagemans, University of Leuven (KU Leuven), Laboratory of Experimental Psychology, Tiensestraat 102, box 3711, BE-3000 Leuven, Belgium.",
+   "bestHasAns": true,
+   "injectedSim": "1037/a0029333 Abstract In 1912, Max Wertheimer published his paper on phi motion, widely recognized as the start of Gestalt psychology. Because of its continued relevance in modern psychology, this centennial anniversary is an excellent opportunity to take stock of what Gestalt psychology has offered and how it has changed since its inception. We first introduce the key findings and ideas in the B · ✉Correspondence concerning this article should be addressed to Johan Wagemans, University of Leuven (KU Leuven), Laboratory of Experimental Psychology, Tiens",
+   "injectedHasAns": true,
+   "answerSents": [
+    {
+     "text": "1Laboratory of Experimental Psychology, University of Leuven (KU Leuven), Belgium and Institute of Advanced Studies (IEA-Paris), France",
+     "runes": 135,
+     "cover": 1,
+     "score": 4,
+     "lenOk": true,
+     "coverOk": true
+    },
+    {
+     "text": "1Laboratory of Experimental Psychology, University of Leuven (KU Leuven), Belgium and Institute of Advanced Studies (IEA-Paris), France",
+     "runes": 135,
+     "cover": 1,
+     "score": 4,
+     "lenOk": true,
+     "coverOk": true
+    },
+    {
+     "text": "✉Correspondence concerning this article should be addressed to Johan Wagemans, University of Leuven (KU Leuven), Laboratory of Experimental Psychology, Tiensest…",
+     "runes": 204,
+     "cover": 1,
+     "score": 7,
+     "lenOk": true,
+     "coverOk": true
+    }
+   ],
+   "bucket": "X-重放会命中"
+  },
+  {
+   "dataset": "nq",
+   "q": "where do the events in the story take place geographically",
+   "url": "https://human.libretexts.org/Bookshelves/Literature_and_Literacy/Literacy_and_Critical_Thinking/Writing_and_Critical_Thinking_Through_Literature_(Ringo_and_Kashyap)/04%3A_About_Fiction_-_Short_Stories_and_the_Novel/4.08%3A_Setting",
+   "rank": 1,
+   "sub": "nogold",
+   "probeAns": "Persia",
+   "status": 200,
+   "textLen": 7837,
+   "cappedHasAns": true,
+   "fullTextLen": 7837,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 6043,
+   "bestSentence": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+   "bestHasAns": false,
+   "injectedSim": "We can define the \"setting\" of a story as the geographical location or locations in which the events of the narrative takes place, as well as the time in which those events are set. Location can refer to wider geographical entities such as countries or cities as well as to smaller entities such as households or domestic interiors. · You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+   "injectedHasAns": false,
+   "answerSents": [
+    {
+     "text": "But Pavel Petrovich returned to his elegant room, hung with fine dark-grey wallpaper and decorated with guns fixed on a colourful Persian rug, with walnut furni…",
+     "runes": 304,
+     "cover": 1,
+     "score": 2,
+     "lenOk": false,
+     "coverOk": true
+    }
+   ],
+   "bucket": "B2a"
+  },
+  {
+   "dataset": "nq",
+   "q": "what is the process to become a santero",
+   "url": "https://www.orishanet.org/initiate.html",
+   "rank": 2,
+   "sub": "nogold",
+   "probeAns": "a cleansing ritual",
+   "status": 200,
+   "textLen": 9055,
+   "cappedHasAns": true,
+   "fullTextLen": 9055,
+   "fullHasAns": true,
+   "fullHasProbeAns": false,
+   "ansOffset": -1,
+   "bestSentence": "or Full Initiation as a Santera or Santero if that is their path in",
+   "bestHasAns": false,
+   "injectedSim": "First a person will generally receive their Guerreros or warriors and/or their ilekes or their Necklaces. Later, they may receive La Mano de Orula or Hand of Orula. When the person is ready, they may be go through the kariocha or Full Initiation as a Santera or Santero if that is their path in life. Finally, if the person’s sign in their Mano de Orula calls for it they may be fully initiated as a",
+   "injectedHasAns": false,
+   "bucket": "B2"
+  },
+  {
+   "dataset": "nq",
+   "q": "who played tibbs on in the heat of the night",
+   "url": "https://www.encyclopedia.com/education/news-wires-white-papers-and-books/rollins-howard-e-jr-1950-1996",
+   "rank": 3,
+   "sub": "nogold",
+   "probeAns": "Howard Ellsworth Rollins Jr.",
+   "status": 200,
+   "textLen": 12000,
+   "cappedHasAns": true,
+   "fullTextLen": 12867,
+   "fullHasAns": true,
+   "fullHasProbeAns": false,
+   "ansOffset": -1,
+   "bestSentence": "Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 1996 in New York; the youngest of four children born to Howard E.",
+   "bestHasAns": true,
+   "injectedSim": "Sources For much of the television viewing audience, Howard Rollins will best be remembered for his believable portrayal of Detective Virgil Tibbs, in the very popular television series \" In the Heat of the Night. \" Rollins played Tibbs for five seasons until his cocaine and alcohol addiction forced the show ' s producer to replace him. · Jet, June 14, 1993; August 16, 1993; November 29, 1993; May 16, 1994; December 23, 1996. · Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 1996 in New York; the youngest of four c",
+   "injectedHasAns": true,
+   "answerSents": [
+    {
+     "text": "Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 1996 in New York; the youngest of four children born to Howard E.",
+     "runes": 153,
+     "cover": 0,
+     "score": 6.25,
+     "lenOk": true,
+     "coverOk": true
+    }
+   ],
+   "bucket": "X-重放会命中"
+  },
+  {
+   "dataset": "nq",
+   "q": "when are the next commonwealth games going to be held",
+   "url": "https://heraldscotland.com/sport/25140536.glasgow-commonwealth-games-2026-latest-news-interviews-update",
+   "rank": 1,
+   "sub": "nogold",
+   "probeAns": "2022",
+   "status": 200,
+   "textLen": 4608,
+   "cappedHasAns": true,
+   "fullTextLen": 4608,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 4411,
+   "bestSentence": "The 2026 games were originally set to be held in the Australian state of Victoria, but the government unexpectedly withdrew in July 2024 after costs hit £3.13 billion - more than double the £1.4bn budgeted.",
+   "bestHasAns": false,
+   "injectNoop": true,
+   "injectedSim": "When and where the next Commonwealth Games will be held at The next Commonwealth Games will be held in Glasgow from July 23 to August 2. A total of 74 nations and territories are set to compete across four sport venues: Scotstoun Stadium, Tollcross International Swimming Centre, Emirates Arena and the Sir Chris Hoy Velodrome. Events will also be held at the Scottish Event Campus, including the Hyd · The 2026 games were originally set to be held in the Australian state of Victoria, but the government unexpectedly withdrew in July 2024 after costs hit £3.1",
+   "injectedHasAns": false,
+   "answerSents": [
+    {
+     "text": "At the 2022 Commonwealth Games in Birmingham, a total of 72 countries and territories participated.",
+     "runes": 99,
+     "cover": 2,
+     "score": 4.75,
+     "lenOk": true,
+     "coverOk": true
+    }
+   ],
+   "bucket": "B1"
+  },
+  {
+   "dataset": "nq",
+   "q": "who has become the new chairman of sebi",
+   "url": "https://mahamedianews.com/en/india-news/news/tuhin-kanta-pandey-appointed-as-new-sebi-chairman",
+   "rank": 2,
+   "sub": "nogold",
+   "probeAns": "Ajay Tyagi",
+   "status": 200,
+   "textLen": 1970,
+   "cappedHasAns": true,
+   "fullTextLen": 1970,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 1356,
+   "bestSentence": "NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years.",
+   "bestHasAns": false,
+   "injectedSim": "BREAKING NEWS ** Tuhin Kanta Pandey appointed as new SEBI Chairman**  नवीनतम Tuhin Kanta Pandey appointed as new SEBI Chairman NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years. He will succeed Madhabi Puri Buch.\n\nThe Appointments Committee of the Cabinet has approved th",
+   "injectedHasAns": false,
+   "answerSents": [
+    {
+     "text": "Buch succeeded Ajay Tyagi, an IAS officer, who had completed a five-year tenure, including a two-year extension.",
+     "runes": 112,
+     "cover": 0,
+     "score": 0.75,
+     "lenOk": true,
+     "coverOk": false
+    }
+   ],
+   "bucket": "B2b"
+  },
+  {
+   "dataset": "triviaqa",
+   "q": "Who was the next British Prime Minister after Arthur Balfour?",
+   "url": "https://spartacus-educational.com/PRbalfour.htm",
+   "rank": 2,
+   "sub": "deep",
+   "probeAns": "Campbell-Bannerman",
+   "status": 200,
+   "textLen": 3432,
+   "cappedHasAns": true,
+   "fullTextLen": 3432,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 1019,
+   "bestSentence": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+   "bestHasAns": false,
+   "injectedSim": "The Marquess of Salisbury, who was now Prime Minister, appointed him as his Secretary for Scotland. Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892). Balfour replaced his uncle as Prime Minister in 1902. · The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+   "injectedHasAns": false,
+   "answerSents": [
+    {
+     "text": "The topic of Tariff Reform split Balfour's government and when he resigned in 1905, Edward VII invited Henry Campbell-Bannerman to form a government.",
+     "runes": 149,
+     "cover": 1,
+     "score": 4,
+     "lenOk": true,
+     "coverOk": true
+    },
+    {
+     "text": "Campbell-Bannerman accepted and in the 1906 General Election that followed the Liberal Party had a landslide victory.",
+     "runes": 117,
+     "cover": 0,
+     "score": 2.25,
+     "lenOk": true,
+     "coverOk": true
+    }
+   ],
+   "bucket": "B1"
+  },
+  {
+   "dataset": "triviaqa",
+   "q": "What was Eddie Murphy's first movie?",
+   "url": "https://mythcon.ca/48-hrs-explained-why-eddie-murphys-first-movie-still-matters-2dc",
+   "rank": 2,
+   "sub": "nogold",
+   "probeAns": "48 time",
+   "status": 200,
+   "textLen": 5287,
+   "cappedHasAns": true,
+   "fullTextLen": 5287,
+   "fullHasAns": true,
+   "fullHasProbeAns": false,
+   "ansOffset": -1,
+   "bestSentence": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+   "bestHasAns": false,
+   "injectNoop": true,
+   "injectedSim": "Before the multi-million dollar paychecks and the Oscar nominations, Eddie Murphy was just a 21-year-old kid from Brooklyn trying not to get fired from Saturday Night Live. But in 1982, he did something that shifted the entire trajectory of Hollywood. He made a movie. If you’re wondering what was Eddie Murphy’s first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basical · If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop",
+   "injectedHasAns": false,
+   "bucket": "B2"
+  },
+  {
+   "dataset": "triviaqa",
+   "q": "Throughout the 80s and 90s Phil Collins recorded on which record label?",
+   "url": "https://www.allmusic.com/artist/phil-collins-mn0000337119",
+   "rank": 1,
+   "sub": "deep",
+   "probeAns": "Atlantic",
+   "status": 403,
+   "errText": "Please enable cookies.\n\nSorry, you have been blocked\n\nYou are unable to access allmusic.com\n\nWhy have I been blocked?\n\nThis website is using",
+   "textLen": 0,
+   "cappedHasAns": false,
+   "fullTextLen": 0,
+   "fullHasAns": false,
+   "fullHasProbeAns": false,
+   "ansOffset": -1,
+   "bestHasAns": false,
+   "injectedHasAns": false,
+   "bucket": "C1",
+   "uaStatus": 403,
+   "uaTextLen": 731
+  },
+  {
+   "dataset": "triviaqa",
+   "q": "Art Garfunkel trained for which profession although he didn't qualify?",
+   "url": "https://grokipedia.com/page/Art_Garfunkel",
+   "rank": 2,
+   "sub": "deep",
+   "probeAns": "Architect",
+   "status": 200,
+   "textLen": 12000,
+   "cappedHasAns": true,
+   "fullTextLen": 71769,
+   "fullHasAns": true,
+   "fullHasProbeAns": true,
+   "ansOffset": 3695,
+   "bestSentence": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+   "bestHasAns": false,
+   "injectedSim": "Fact-checked by Grok 6 months ago Art Garfunkel Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1] Formed in 1962, the duo attained international breakthrough in the late 1960s with hits such as “The Sound of Silence,” “Mrs. Robinson,” “The Boxer,” an",
+   "injectedHasAns": false,
+   "answerSents": [
+    {
+     "text": "Garfunkel enrolled at Columbia University in 1958, initially pursuing architecture before switching to art history at Columbia College, from which he earned a B…",
+     "runes": 767,
+     "cover": 3,
+     "score": 14.5,
+     "lenOk": false,
+     "coverOk": true
+    }
+   ],
+   "bucket": "B2a"
+  }
+ ],
+ "tally": {
+  "B1": 2,
+  "B2": 2,
+  "B2a": 2,
+  "B2b": 2,
+  "C1": 1,
+  "X-重放会命中": 2
+ }
+}

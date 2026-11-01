@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head><title>Perplexica architecture notes</title><meta charset="utf-8"></head>
+<body>
+<div class="cookie-banner">We use cookies to improve your experience. Accept all cookies to continue browsing this website and for analytics tracking purposes across our network of sites.</div>
+<main>
+<h1>Perplexica architecture</h1>
+<p>Perplexica uses SearXNG as its meta-search backbone. The integration is 67 lines: a single HTTP call to <code>/search?format=json&amp;q=...&amp;engines=a,b</code> where focus modes compile into the engines parameter.</p>
+<p>For academic searches the engines parameter becomes arxiv, scholar and pubmed. For discussions it becomes reddit. There is no fallback provider; SearXNG is a single point of failure in the pipeline.</p>
+<p>Relevance is computed with embedding cosine similarity instead of a reranker model. Snippets below 0.5 similarity are filtered, and cross-source duplicates above 0.75 are merged before the top 20 pass to the answer stage.</p>
+<p>The quality mode uses an LLM picker that selects at most three pages, then a Playwright lazy singleton fetches each page and Readability extracts the text content into 4000-token blocks with 500-token overlap for the per-chunk extractor.</p>
+</main>
+<footer>Generated notes for research purposes.</footer>
+<script>window.tracker = { click: function() {} };</script>
+</body>
+</html>

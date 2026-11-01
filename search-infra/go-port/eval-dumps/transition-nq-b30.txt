@@ -1,0 +1,41 @@
+
+[REG] when did drop it like it's hot release
+  ans=[September 12, 2004]
+  OFF rank1: Drop It Like It's Hot (evalGold@2, junk=0)
+  ON  rank1: Drop It Like It's Hot (evalGold@-, junk=0)  ON gold页@-: -
+[REG] what is the angle of the tower of pisa
+  ans=[about 3.99 degrees; 3.99 degrees]
+  OFF rank1: Leaning Tower of Pisa (evalGold@10, junk=0)
+  ON  rank1: Leaning Tower of Pisa (evalGold@-, junk=0)  ON gold页@-: -
+[REG] what is the ultimate objective of financial management
+  ans=[Profit maximization]
+  OFF rank1: SuiteApp.comhttps://www.netsuite.com › financial-managementFinancial M (evalGold@9, junk=0)
+  ON  rank1: Financial Management Explained: Scope, Objectives, and Importance (evalGold@-, junk=0)  ON gold页@-: -
+[REG] when are the next commonwealth games going to be held
+  ans=[2022]
+  OFF rank1: Commonwealth of Nations (evalGold@4, junk=0)
+  ON  rank1: Glasgow Commonwealth Games 2026: Latest News, Interviews and Update (evalGold@-, junk=0)  ON gold页@-: -
+[REG] who played tibbs on in the heat of the night
+  ans=[Howard Ellsworth Rollins Jr.]
+  OFF rank1: In the Heat of the Night (TV series) (evalGold@6, junk=0)
+  ON  rank1: In the Heat of the Night (film) (evalGold@-, junk=0)  ON gold页@-: -
+[FIX] in the early 1800s california society was dominated by which group
+  ans=[Spanish]
+  OFF rank1: Mattachine Society - Wikipedia (evalGold@13, junk=0)
+  ON  rank1: Dynasties: Californios (evalGold@3, junk=0)  ON gold页@3: Early Days of California and the Westward Movement
+[FIX] what does the air gap do on a dishwasher
+  ans=[backflow prevention]
+  OFF rank1: What is a Dishwasher Air Gap? (evalGold@-, junk=0)
+  ON  rank1: What is a Dishwasher Air Gap? (evalGold@7, junk=0)  ON gold页@7: Air Gap Installation For Dishwasher: Code-Compliant Setup Gu
+[JUNK1] how many co2 molecules are produced in aerobic respiration
+  ans=[6]
+  OFF rank1: Wikipediahttps://en.wikipedia.org › wiki › Cellular_respirationCellula (evalGold@1, junk=0)
+  ON  rank1: [FREE] At the end of aerobic cellular respiration, how many total carb (evalGold@1, junk=1)  ON gold页@1: [FREE] At the end of aerobic cellular respiration, how many 
+[JUNK1] when was the first documented case of tool mark identification
+  ans=[1835]
+  OFF rank1: sciencestream.bloghttps://sciencestream.blog › birth-forensics-case-to (evalGold@2, junk=0)
+  ON  rank1: Analysis Of Tool Marks.pptx - Analysis Of Tool Marks Tanya... (evalGold@1, junk=1)  ON gold页@1: Analysis Of Tool Marks.pptx - Analysis Of Tool Marks Tanya..
+[JUNK1] where did chocolate originate the americas spain asia
+  ans=[Mesoamerica; the Americas]
+  OFF rank1: [FREE] Where did chocolate originate? A. The Americas B. Spain C. Asia (evalGold@1, junk=1)
+  ON  rank1: [FREE] Where did chocolate originate? A. The Americas B. Spain C. Asia (evalGold@1, junk=1)  ON gold页@1: [FREE] Where did chocolate originate? A. The Americas B. Spa

@@ -1,0 +1,5456 @@
+{
+  "schemaVersion": "zcode.model-providers.v1",
+  "providers": [
+    {
+      "id": "moonshot-kimi",
+      "name": "Moonshot AI / Kimi",
+      "endpoints": {
+        "baseURL": "https://api.moonshot.cn",
+        "paths": {
+          "anthropic": "/anthropic/v1/messages",
+          "openai-compatible": "/v1/chat/completions"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "kimi-k3",
+          "name": "kimi-k3",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1048576,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "low"
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "k3",
+          "name": "k3",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1048576,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "low"
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "k3-256k",
+          "name": "k3-256k",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "low"
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "kimi-k2.6",
+          "name": "kimi-k2.6",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "kimi-k2.5",
+          "name": "kimi-k2.5",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "maxOutputTokens": 98304
+        },
+        {
+          "id": "moonshot-v1-8k",
+          "name": "moonshot-v1-8k",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192
+        },
+        {
+          "id": "moonshot-v1-32k",
+          "name": "moonshot-v1-32k",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 32768
+        },
+        {
+          "id": "moonshot-v1-128k",
+          "name": "moonshot-v1-128k",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072
+        },
+        {
+          "id": "moonshot-v1-8k-vision-preview",
+          "name": "moonshot-v1-8k-vision-preview",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192
+        },
+        {
+          "id": "moonshot-v1-32k-vision-preview",
+          "name": "moonshot-v1-32k-vision-preview",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 32768
+        },
+        {
+          "id": "moonshot-v1-128k-vision-preview",
+          "name": "moonshot-v1-128k-vision-preview",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "endpoints": {
+        "baseURL": "https://api.minimaxi.com",
+        "paths": {
+          "anthropic": "/anthropic/v1/messages",
+          "openai-compatible": "/v1/chat/completions"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "MiniMax-M3",
+          "name": "MiniMax-M3",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000
+        },
+        {
+          "id": "MiniMax-M2.7",
+          "name": "MiniMax-M2.7",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800
+        },
+        {
+          "id": "MiniMax-M2.7-highspeed",
+          "name": "MiniMax-M2.7-highspeed",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800
+        },
+        {
+          "id": "MiniMax-M2.5",
+          "name": "MiniMax-M2.5",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800
+        },
+        {
+          "id": "MiniMax-M2.5-highspeed",
+          "name": "MiniMax-M2.5-highspeed",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800
+        },
+        {
+          "id": "MiniMax-M2.1",
+          "name": "MiniMax-M2.1",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800
+        },
+        {
+          "id": "MiniMax-M2.1-highspeed",
+          "name": "MiniMax-M2.1-highspeed",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800
+        },
+        {
+          "id": "MiniMax-M2",
+          "name": "MiniMax-M2",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 204800,
+          "maxOutputTokens": 131072
+        }
+      ]
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "endpoints": {
+        "baseURL": "https://api.deepseek.com",
+        "paths": {
+          "anthropic": "/anthropic/v1/messages",
+          "openai-compatible": "/chat/completions"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "name": "deepseek-v4-flash",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 384000,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ],
+                  "unset": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    },
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    },
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "deepseek-v4-pro",
+          "name": "deepseek-v4-pro",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 384000,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ],
+                  "unset": [
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    },
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "high"
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    },
+                    {
+                      "path": [
+                        "reasoningEffort"
+                      ],
+                      "value": "max"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "qwen-alibaba-model-studio-cn",
+      "name": "Qwen / Alibaba Cloud Model Studio (China)",
+      "endpoints": {
+        "baseURL": "https://dashscope.aliyuncs.com",
+        "paths": {
+          "anthropic": "/apps/anthropic/v1/messages",
+          "openai-compatible": "/compatible-mode/v1/chat/completions"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "qwen3.5-plus",
+          "name": "qwen3.5-plus",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 65536,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "qwen3.5-flash",
+          "name": "qwen3.5-flash",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 65536,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "qwen3-max",
+          "name": "qwen3-max",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 65536
+        },
+        {
+          "id": "qwen-plus",
+          "name": "qwen-plus",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "maxOutputTokens": 32768
+        },
+        {
+          "id": "qwen-flash",
+          "name": "qwen-flash",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "maxOutputTokens": 32768
+        },
+        {
+          "id": "qwen3-vl-plus",
+          "name": "qwen3-vl-plus",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 32768,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "qwen-alibaba-model-studio-intl",
+      "name": "Qwen / Alibaba Cloud Model Studio (International)",
+      "endpoints": {
+        "baseURL": "https://dashscope-intl.aliyuncs.com",
+        "paths": {
+          "openai-compatible": "/compatible-mode/v1/chat/completions"
+        }
+      },
+      "defaultKind": "openai-compatible",
+      "models": [
+        {
+          "id": "qwen3.5-plus",
+          "name": "qwen3.5-plus",
+          "kinds": [
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 65536,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "qwen3.5-flash",
+          "name": "qwen3.5-flash",
+          "kinds": [
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 65536,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "qwen3-max",
+          "name": "qwen3-max",
+          "kinds": [
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 65536
+        },
+        {
+          "id": "qwen-plus",
+          "name": "qwen-plus",
+          "kinds": [
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "maxOutputTokens": 32768
+        },
+        {
+          "id": "qwen-flash",
+          "name": "qwen-flash",
+          "kinds": [
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "maxOutputTokens": 32768
+        },
+        {
+          "id": "qwen3-vl-plus",
+          "name": "qwen3-vl-plus",
+          "kinds": [
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 32768,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "enable_thinking"
+                      ],
+                      "value": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "xiaomi-mimo",
+      "name": "Xiaomi MiMo",
+      "endpoints": {
+        "baseURL": "https://api.xiaomimimo.com",
+        "paths": {
+          "anthropic": "/anthropic/v1/messages",
+          "openai-compatible": "/v1/chat/completions"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "mimo-v2.5-pro",
+          "name": "mimo-v2.5-pro",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "mimo-v2.5",
+          "name": "mimo-v2.5",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "audio",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "mimo-v2-pro",
+          "name": "mimo-v2-pro",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 131072
+        },
+        {
+          "id": "mimo-v2-omni",
+          "name": "mimo-v2-omni",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "audio",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "maxOutputTokens": 131072
+        },
+        {
+          "id": "mimo-v2-flash",
+          "name": "mimo-v2-flash",
+          "kinds": [
+            "anthropic",
+            "openai-compatible"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 262144,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "enabled"
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                },
+                "openai-compatible": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking",
+                        "type"
+                      ],
+                      "value": "disabled"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "maxOutputTokens": 65536
+        }
+      ]
+    },
+    {
+      "id": "zai",
+      "name": "Z.AI",
+      "endpoints": {
+        "baseURL": "https://api.z.ai",
+        "paths": {
+          "anthropic": "/api/anthropic/v1/messages"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "glm-5.3",
+          "name": "GLM-5.3",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 8000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 16000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 32000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1",
+          "name": "glm-5.1",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1-highspeed",
+          "name": "glm-5.1-highspeed",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5",
+          "name": "glm-5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5-turbo",
+          "name": "glm-5-turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5v-turbo",
+          "name": "GLM-5V-Turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7",
+          "name": "glm-4.7",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flashx",
+          "name": "glm-4.7-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flash",
+          "name": "glm-4.7-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6",
+          "name": "glm-4.6",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5-air",
+          "name": "glm-4.5-air",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5",
+          "name": "glm-4.5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v",
+          "name": "glm-4.6v",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flash",
+          "name": "glm-4.6v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flashx",
+          "name": "glm-4.6v-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flashx",
+          "name": "glm-4.1v-thinking-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flash",
+          "name": "glm-4.1v-thinking-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flashx-250414",
+          "name": "glm-4-flashx-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flash-250414",
+          "name": "glm-4-flash-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4v-flash",
+          "name": "glm-4v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 16384,
+          "maxOutputTokens": 1024,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "codegeex-4",
+          "name": "codegeex-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "charglm-4",
+          "name": "charglm-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "emohaa",
+          "name": "emohaa",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        }
+      ]
+    },
+    {
+      "id": "bigmodel",
+      "name": "BigModel / 智谱",
+      "endpoints": {
+        "baseURL": "https://open.bigmodel.cn",
+        "paths": {
+          "anthropic": "/api/anthropic/v1/messages"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "glm-5.3",
+          "name": "GLM-5.3",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 8000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 16000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 32000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1",
+          "name": "glm-5.1",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1-highspeed",
+          "name": "glm-5.1-highspeed",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5",
+          "name": "glm-5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5-turbo",
+          "name": "glm-5-turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5v-turbo",
+          "name": "GLM-5V-Turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7",
+          "name": "glm-4.7",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flashx",
+          "name": "glm-4.7-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flash",
+          "name": "glm-4.7-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6",
+          "name": "glm-4.6",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5-air",
+          "name": "glm-4.5-air",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5",
+          "name": "glm-4.5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v",
+          "name": "glm-4.6v",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flash",
+          "name": "glm-4.6v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flashx",
+          "name": "glm-4.6v-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flashx",
+          "name": "glm-4.1v-thinking-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flash",
+          "name": "glm-4.1v-thinking-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flashx-250414",
+          "name": "glm-4-flashx-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flash-250414",
+          "name": "glm-4-flash-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4v-flash",
+          "name": "glm-4v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 16384,
+          "maxOutputTokens": 1024,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "codegeex-4",
+          "name": "codegeex-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "charglm-4",
+          "name": "charglm-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "emohaa",
+          "name": "emohaa",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        }
+      ]
+    },
+    {
+      "id": "zai-coding-plan",
+      "name": "Z.AI Coding Plan",
+      "endpoints": {
+        "baseURL": "https://api.z.ai",
+        "paths": {
+          "anthropic": "/api/anthropic/v1/messages"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "glm-5.3",
+          "name": "GLM-5.3",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 8000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 16000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 32000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1",
+          "name": "glm-5.1",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1-highspeed",
+          "name": "glm-5.1-highspeed",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5",
+          "name": "glm-5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5-turbo",
+          "name": "glm-5-turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5v-turbo",
+          "name": "GLM-5V-Turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7",
+          "name": "glm-4.7",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flashx",
+          "name": "glm-4.7-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flash",
+          "name": "glm-4.7-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6",
+          "name": "glm-4.6",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5-air",
+          "name": "glm-4.5-air",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5",
+          "name": "glm-4.5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v",
+          "name": "glm-4.6v",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flash",
+          "name": "glm-4.6v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flashx",
+          "name": "glm-4.6v-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flashx",
+          "name": "glm-4.1v-thinking-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flash",
+          "name": "glm-4.1v-thinking-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flashx-250414",
+          "name": "glm-4-flashx-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flash-250414",
+          "name": "glm-4-flash-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4v-flash",
+          "name": "glm-4v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 16384,
+          "maxOutputTokens": 1024,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "codegeex-4",
+          "name": "codegeex-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "charglm-4",
+          "name": "charglm-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "emohaa",
+          "name": "emohaa",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        }
+      ]
+    },
+    {
+      "id": "bigmodel-coding-plan",
+      "name": "BigModel / 智谱 Coding Plan",
+      "endpoints": {
+        "baseURL": "https://open.bigmodel.cn",
+        "paths": {
+          "anthropic": "/api/anthropic/v1/messages"
+        }
+      },
+      "defaultKind": "anthropic",
+      "models": [
+        {
+          "id": "glm-5.3",
+          "name": "GLM-5.3",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "reasoning": {
+            "defaultLevel": "max",
+            "levels": {
+              "low": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "low"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 8000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "high": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "high"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 16000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "max": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "output_config",
+                        "effort"
+                      ],
+                      "value": "max"
+                    },
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 32000,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1",
+          "name": "glm-5.1",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5.1-highspeed",
+          "name": "glm-5.1-highspeed",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5",
+          "name": "glm-5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5-turbo",
+          "name": "glm-5-turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-5v-turbo",
+          "name": "GLM-5V-Turbo",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7",
+          "name": "glm-4.7",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flashx",
+          "name": "glm-4.7-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.7-flash",
+          "name": "glm-4.7-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6",
+          "name": "glm-4.6",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 200000,
+          "maxOutputTokens": 131072,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5-air",
+          "name": "glm-4.5-air",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.5",
+          "name": "glm-4.5",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 98304,
+          "reasoning": {
+            "defaultLevel": "enabled",
+            "levels": {
+              "enabled": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "budgetTokens": 1024,
+                        "type": "enabled"
+                      }
+                    }
+                  ]
+                }
+              },
+              "off": {
+                "anthropic": {
+                  "set": [
+                    {
+                      "path": [
+                        "thinking"
+                      ],
+                      "value": {
+                        "type": "disabled"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v",
+          "name": "glm-4.6v",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flash",
+          "name": "glm-4.6v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.6v-flashx",
+          "name": "glm-4.6v-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flashx",
+          "name": "glm-4.1v-thinking-flashx",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4.1v-thinking-flash",
+          "name": "glm-4.1v-thinking-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 65536,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flashx-250414",
+          "name": "glm-4-flashx-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4-flash-250414",
+          "name": "glm-4-flash-250414",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 16384,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "glm-4v-flash",
+          "name": "glm-4v-flash",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 16384,
+          "maxOutputTokens": 1024,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "codegeex-4",
+          "name": "codegeex-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 131072,
+          "maxOutputTokens": 32768,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "charglm-4",
+          "name": "charglm-4",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        },
+        {
+          "id": "emohaa",
+          "name": "emohaa",
+          "kinds": [
+            "anthropic"
+          ],
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "contextWindow": 8192,
+          "maxOutputTokens": 4096,
+          "defaultKind": "anthropic"
+        }
+      ]
+    }
+  ]
+}

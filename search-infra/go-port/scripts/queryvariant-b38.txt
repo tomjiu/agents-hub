@@ -1,0 +1,98 @@
+批 38 证据: ENGINE-MISS 查询词形/召回层盲变体探针 (v0.10 菜单候选 #2 第一锹, 零产品代码改动)
+窗口: b36 冻结案集 bucket=ENGINE-MISS* 15 条 (scripts/b38-engine-miss-cases.json, 由 b36-legprobe.json 派生)
+方法: 盲变体(只用 query 文本派生, gold 仅判定侧) × plan(variant) 全池逐腿 runLanes(生产同参:
+      MaxResults=10/TopN=20/三层快超时) × b36Evidence 判定(b32AnsIn 逐字镜像, 金样本自检前置);
+      变体五类: orig 基线 / kw 关键词化 / quoted 最长内容 run 加引号 / trim 前导伪影裁剪 / entfirst 专名提前
+日期: 2026-09-08;  运行 518s, SC_B38_PROBE=1 门禁, SC_NO_CACHE=1
+
+========================================================================
+一、总账
+========================================================================
+  RESCUED    6  (见 §二 逐案裁决: 真救回 4 + 陈旧数据集 1 + matcher 假阳性 1)
+  STILL-MISS 9  (60% — 真语料/索引层缺口, 查询词形救不了)
+  ORIG-EV    0  (零 churn 翻案, b36 冻结案集在当前活窗仍复现 ENGINE-MISS)
+  VARIANT-RESCUE(案级, 有重叠): kw=5 / trim=5 / entfirst=1 / quoted=1
+  → 有效变体集中在"去疑问脚手架"族(kw/trim 高度重叠), quoted/entfirst 边缘
+
+========================================================================
+二、RESCUED 逐案人工裁决 (b31 matcher 假阳性类排查)
+========================================================================
+[真救回 1] nq: who is the current director of the us mint (gold David J. Ryder)
+  kw "current director us mint" → keenable@5 usmint.gov/about/directors-office
+  snippet "David J. Ryder Director United States Mint ... is the 39th" verbatim
+  裁决: 真救回 — 官方源, 机制=疑问脚手架("who is the ... of the")压制匹配
+
+[真救回 2] nq: who is credited with creating the gothic art movement (gold Abbot Suger)
+  kw "credited creating gothic art movement" → anysearch@1 vam.ac.uk V&A 博物馆页
+  "Abbot Suger (about 1081 – 1151) is widely credited with popularising Gothic" verbatim
+  (trim 变体另获 quizlet/anysearch@2/firecrawl@1 多源互证)
+  裁决: 真救回 — 权威源 anysearch@1 位次, 机制同上
+
+[真救回 3] triviaqa: "Which boxer famously said..." (gold Rocky Marciano)
+  trim "boxer famously said If I can t beat this bum..." → keenable@1 boxing247.com
+  标题 verbatim "Rocky Marciano VS Jersey Joe Walcott" @1
+  裁决: 真救回 — trim 去引号内碎片后核心实体词面直达; 腿内 rank1
+
+[真救回 4] triviaqa: What was Eddie Murphy's first movie? (gold 48 Hours)
+  quoted "\"Eddie Murphy s first movie\"" → anysearch@4 facebook TCM 粉丝页
+  verbatim(48 Hours) + "This was Eddie's movie debut"; firecrawl@1 "...this was Eddie
+  Murphy's first movie..." 上下文直证
+  裁决: 真救回 — 但注意 kw 变体(wiby@10 tokenAND(48+time))系 "of all time"×"48"
+  跨上下文伪命中, 该案救回功劳记 quoted 不记 kw
+
+[陈旧数据集 5] nq: who has become the new chairman of sebi (gold Ajay Tyagi)
+  kw "become new chairman sebi" → keenable@9 dnaindia "Madhabi Puri Buch replaces Ajay
+  Tyagi as new chairperson" — verbatim 命中但页面语义=继任者新闻, 数据集答案比页面旧
+  裁决: matcher 层救回、答案语义陈旧(b31 已立档该题 staleness 类); 计救回但单列
+
+[假救回 6] nq: In which decade of the 20th century was Anne Bancroft born? (gold 1930s 族)
+  kw/entfirst → wikipedia@9 Joanne Woodward "American actress (born 1930)";
+  trim → anysearch@9 Anne Francis "born on 16 September 1930"
+  裁决: matcher 假阳性 — tokenAND(1930) 在错误人物页面上词面巧合(b31 假阳性类:
+  词面巧合/错实体), 两腿均非 Anne Bancroft 页; 本案不计救回
+  教训: decade/年份型答案的 tokenAND 判定天然弱, 探针 TALLY 必须逐案裁决
+
+========================================================================
+三、STILL-MISS 9 案 (真语料/索引层缺口)
+========================================================================
+  where do the events in the story take place geographically (Persia)
+  what is the process to become a santero (a cleansing ritual)
+  who has won the most games in nfl 2017 (Dallas Cowboys)
+  who is the longest serving chief minister in india as on jan 2015 (Jyotirindra Basu)
+  what caused the breakup of the democratic republican party (the disputed 1824 presidential)
+  who are the stars in dancing with the stars (Jennie Finch Daigle)
+  who was the 19th c. artist who was both painter and graphic designer (René Georges Hermann-Paul)
+  What US sitcom was the first exported to Britain? (Amos 'N' Andy)
+  Which female singer was born on exactly the same day as impressionist... (Tina Turner)
+  → 五类变体全数零证据: 答案页不在无 key 引擎深度≤10 视野内(索引/覆盖/正文层),
+    与查询词形无关 — b36 "ENGINE-MISS 是主体"结论在词形维度的再切分:
+    词形可救 4/15(27%) + 陈旧 1/15 + 语料缺口 10/15(67%)
+
+========================================================================
+四、产品化定界 (候选 #2 裁决输入)
+========================================================================
+- 盲变体 fan-out 的召回上限 = 真救回 4 + 陈旧 1 = 5/15; 折 b34win 口径 miss@1 上限
+  ≈ 5/74 ≈ 6.8%(与 b37 融合层修复上限 ~8% 同量级), 且这是 fan-out 全开的天花板 —
+  实际交付还要过融合/重排层(救回证据在腿内 rank 1-10 散布, wiby@10/keenable@9 等
+  尾部位次需要池深/重排配合)
+- 成本: 每题 ×2-3 引擎调用(kw+trim 两变体已覆盖全部 4 真救回), 延迟翻倍级
+- 载体引擎: keenable(2 案)/anysearch(2 案)/boxing247 经 keenable — 与 b36 健康面
+  "证据载体集中"一致; firecrawl 在 b36 健康面 15/15 全错本批却 3 次携证 — 引擎
+  健康面波动大, fan-out 设计须按题动态不应按静态健康表裁腿
+- 与候选 #1(延迟档位)的汇合点: 深度档预算可吸收 fan-out 成本 — 两候选不是并列
+  关系, 是"深度档内组合"关系(极速档不做 fan-out)
+- 裁决建议: 词形变体不单独 ship(上限 ~5-7% × 成本翻倍 × 尾部位次二次损耗), 挂账
+  为深度档的可选增强(SC_DEEP_FANOUT 之类开关), 待 #1 延迟档位落地后同批评估
+
+========================================================================
+五、口径与边界(防再诉讼)
+========================================================================
+- 盲派生红线: 变体只从 query 文本生成(b38Variants), gold/URL 信息零进入 — oracle 泄漏
+  会把上限虚高成无界; 判定侧 b36Evidence 用 gold 与 b36/b32 完全同源
+- plan(variant) 重路由: 变体几乎全走 web 全池, 与生产"改写后重投"行为一致
+- 活窗: 引擎结果随时点漂移(b36 firecrawl 15/15 错 → 本批携证, 反向亦然), ORIG-EV=0
+  说明冻结案集在本窗仍复现, 但单窗数字不构成稳定估计; 复跑 TALLY 漂移属正常
+- 判定口径=title+snippet 层证据(与 b36 ENGINE-MISS 同尺), body 层 D1 不在本批口径
+- matcher 子串陷阱类(b31 立档)不修改判定(口径红线), 以逐案人工裁决兜底(§二)
+- 归档: b38-queryvariant.json.gz(探针原始输出 15 行) 入 eval-dumps + 本件;
+  案集 scripts/b38-engine-miss-cases.json + 探针 answer_extract_b38_test.go 在仓

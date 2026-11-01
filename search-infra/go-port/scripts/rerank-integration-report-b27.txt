@@ -1,0 +1,79 @@
+# 批 27: cross-encoder 重排产品集成 — SC_RERANK 增强模式定版 (2026-09-06)
+
+## 一、集成架构
+
+- **位置**: fuseSemantic 之后 / b19AnswerPass 之前 (rerankRefs 一行接线) — 打分对象
+  title+snippet 与 b26 离线重放口径逐字一致, 重排后的 top-5 进注入层抓正文。
+- **变体**: lin-λ 增量式 newKey = score*10 + λ·cs (λ 缺省 4) — 保住融合分基底
+  (RRF+词面覆盖+共识+权威分), cross-encoder 只作增量 (b20 方法论, b26 裁决首选)。
+- **开关**: SC_RERANK=1 启用; 缺省关闭 = 零依赖底盘不变 (无 lib/model 时产品行为
+  与 b26 前逐位一致, bench/domain/probe16 全门禁按默认关跑通即证)。
+  SC_RERANK_LIB / SC_RERANK_MODEL / SC_RERANK_VOCAB 三路径就位才可初始化;
+  SC_RERANK_POOL (缺省 10) / SC_RERANK_LAMBDA (缺省 4) 可调。
+- **失败降级**: 初始化失败进程内标记 (sync.Once 不重试); 打分失败 stderr 必打 +
+  原序返回, 查询永不失败。
+- **组件**: rerank.go = 纯 Go BERT tokenizer (bertNormalize/bertPreTokenize/wordPiece,
+  vocab 从 tokenizer.json 的 model.vocab 加载, 30522 条) + onnxruntime_go v1.36.0
+  (cgo) 推理 + rerankOrderBy 纯函数融合 + rerankRefs 主链接线。
+  rerank_e2e_test.go = Go/Python 分数对拍 (SC_RERANK_E2E=1 条件测试)。
+
+## 二、正确性验证
+
+1. **tokenizer golden 对拍 12/12**: scripts/gen-tokenizer-golden.py (Python tokenizers
+   编码 12 组 query-doc 对, 覆盖标点/数字/大小写/CJK/重音/URL/长文 512 截断) →
+   testdata/tokenizer-golden.json → Go encodePair 逐 id 对拍通过。
+   - 排坑①: '^' (U+005E) 是 Unicode Sk 类非 P 类, Go unicode.IsPunct 不认, HF Rust
+     端 is_ascii_punctuation 认 → 需显式补 $+<=>|~^` 全集;
+   - 排坑②: strip_accents 需 NFD 分解后删 Mn (golang.org/x/text/unicode/norm);
+   - 排坑③: HF 的 CJK 两侧加空格是每 char 独立加 (相邻 CJK 间双空格), normalize
+     阶段不合并多空格 — 单测期望需按 HF 行为写。
+2. **推理逐位一致**: 同一 refs.json + 同一 query, Go rerankScores vs Python
+   onnxruntime 1.29.0 — **MAX_DIFF = 0.00e+00** (10 docs batch logits 全等)。
+3. **重排生效实弹**: Stagecoach 题 — 融合 rank1 (Lewis Milestone 人物页, b22/b25/b26
+   三批同款词面假亲和案例) 被打落数组第 4 位, 直接含答案的 CMH/Museum 页提前。
+
+## 三、同窗 A/B 验收 (n=198, 同一二进制 /tmp/sc9-rerank, 仅切 SC_RERANK 0/1)
+
+| 集 | OFF hit@1 | ON hit@1 | Δ | OFF/ON hit@3 | OFF/ON hit@10 |
+|----|-----------|----------|---|--------------|---------------|
+| NQ (98) | 41.8% | 54.1% | **+12.3pp** | 62.2→66.3 | 75.5→74.5 (-1) |
+| TQA (100) | 57.0% | 77.0% | **+20.0pp** | 77.0→88.0 | 89.0→90.0 |
+| 合并 | 49.5% | 66.2% | **+16.7pp** | 69.7→77.3 | 82.3→82.3 |
+
+- 与 b26 离线重放预测 (+17.1pp lin-4 p10) 高度吻合; 双集同向, 完整链路端到端闭环。
+- NQ hit@10 -1 题: 重排将某题证据页挤出 top-10 (flip 税尾部), 代价可接受
+  (hit@1 +12.3pp 换 hit@10 -0.5pp)。
+- 注入层与重排叠加: 重排把直接含答案页提前排 → b19 注入层抓的 top-5 质量同步提升。
+
+## 四、延迟
+
+- 默认关 (门禁口径): bench 均值 1145ms (uniqDom 7.79, 24/24) — 重排关闭零开销。
+- ON: +140ms/题 (batch top-10, 单线程 CPU mutex 串行; b26 实测 139-153ms 一致)。
+- 挂账优化: 并发查询下 mutex 排队 → 多 session/线程池; 与 b19 抓正文窗口并行化。
+
+## 五、部署形态与依赖
+
+- 二进制: cgo (CGO_ENABLED=1), onnxruntime_go v1.36.0; 默认路径无任何新依赖。
+- 增强模式部署件: libonnxruntime.so.1.29.0 (~16MB) + model_quantized.onnx (22MB) +
+  tokenizer.json (0.7MB) ≈ 39MB, 环境变量三路径指到即启用。
+- **排坑④ (lib 版本对齐)**: yalue/onnxruntime_go v1.36.0 头文件 ORT_API_VERSION=29
+  ↔ onnxruntime C 库 1.29.0 — GitHub release 的 1.18/1.20/1.21 均不匹配
+  ("Error setting ORT API base: 2"); pip 包 (onnxruntime==1.29.0) 的 capi/
+  libonnxruntime.so.1.29.0 直接可用。部署时从 pip wheel 抽 .so 或用官方 1.29 release。
+- **排坑⑤ (静默回退)**: 初版失败只写 rerankLastErr 不打 stderr — 实弹时把"回退原序"
+  误判为"重排生效" (journal 无 rerank 事件才暴露); 修复: 失败 stderr 必打。
+
+## 六、门禁 (默认关路径, 全绿)
+
+- gofmt / vet / 单测 (含 tokenizer golden 12 组) ✓
+- bench-gate 24/24 (uniqDom 7.79, 延迟 1145ms) ✓
+- b13-verify 16/16 ✓; domain 77/77 ✓; probe16 72/72 ✓; MCP E2E PASS ✓
+
+## 七、结论与挂账
+
+- 用户最初之问 ("embedding 重排是不是要上重排模型") 的最终交付: **上, 且已上线为
+  可选增强** — 22MB quantized ONNX + 纯 Go tokenizer + lin-4 增量式, 同窗 A/B
+  hit@1 +16.7pp (NQ +12.3 / TQA +20.0), 默认关保零依赖底盘。
+- 挂账: ①并发下 mutex 排队 → session 池; ②重排与 b19 抓正文并行化 (净延迟 ~0);
+  ③λ=4 由 b26 网格选定, 产品期可做在线 A/B 微调; ④NQ hit@10 flip 尾部监控;
+  ⑤lib/model 分发件打包 (39MB) 与版本对齐文档化。

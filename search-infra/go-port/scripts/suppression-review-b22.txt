@@ -1,0 +1,127 @@
+
+######## NQ-open — A 嫌疑压顶 1 条 ########
+
+[A] Q: when did they stop making pull tabs on beer cans
+  cov1=0.29 gold@8 ans=[1990; 1970s]
+  rank1: To beer or not to beer: does tapping beer cans prevent beer loss? A randomised controlled trial
+    snip: Elizaveta Sopina, Irina E. Antonescu, Thomas Hansen · Objective: Preventing or minimising beer loss when opening a can of beer is socially and economi
+  gold页: A timeline for pull tabs
+    snip: However, if you are in the Europe, and you read that the first Sta-tabs were introduced in 1975, well sorry sister, you missed the real date by almost
+
+######## NQ-open — C 灰区 3 条 ########
+
+[C] Q: when was the term social justice first used
+  cov1=0.40 gold@9 ans=[the 1840s; 1840s]
+  rank1: Social justice
+    snip: Social justice is justice in relation to the distribution of wealth, opportunities, and privileges within a society where individuals’ rights are reco
+  gold页: The Origins of Social Justice: Taparelli d’Azeglio
+    snip: The idea has had a history, which has led it through numerous permutations of meaning. Originally, when the idea of “social justice” was first develop
+
+[C] Q: who wrote the song always be humble and kind
+  cov1=0.43 gold@4 ans=[Lori McKenna]
+  rank1: Humble and Kind — Twinkle Twinkle Little Rock Star
+    snip: Lullaby Versions of Tim McGraw (2023-09-29) · 3:42
+  gold页: Tim McGraw – Humble and Kind
+    snip: “Humble and Kind” is inherently a simple song; songwriter Lori McKenna (who won her second consecutive CMA Award for Song of the Year for it) says she
+
+[C] Q: what was guantanamo bay before it was a prison
+  cov1=0.40 gold@4 ans=[Guantanamo Bay Naval Base]
+  rank1: Guantánamo Bay
+    snip: Guantánamo Bay ( Spanish: Bahía de Guantánamo, [ baˈia ðe ɣwãnˈtanamo]) is a bay in Guantánamo Province at the southeastern end of Cuba. It is the lar
+  gold页: Guantanamo Bay: From Naval Base To Controversial Prison
+    snip: Well, buckle up, because we’re about to dive into its fascinating history, from its humble beginnings as a naval base to its current controversial rol
+
+######## TriviaQA — A 嫌疑压顶 5 条 ########
+
+[A] Q: Which of the founders of United Artists had the last name nearest the beginning of the alphabet?
+  cov1=0.22 gold@2 ans=[Chaplin; Chaplin (disambiguation); Chaplin (musical)]
+  rank1: History of the Roman Empire
+    snip: emperors, beginning with Octavian Augustus, the final victor of the republican civil wars. Rome had begun expanding shortly after the founding of the 
+  gold页: United Artists
+    snip: In its original operating period, it was founded on February 5, 1919 by Charlie Chaplin, D. Politics & Economy: Griffith, Mary Pickford and Douglas Fa
+
+[A] Q: In what year was the first in-flight movie shown on an internal flight in the USA.
+  cov1=0.29 gold@4 ans=[1929; one thousand, nine hundred and twenty-nine]
+  rank1: The Flight Physics Concept Inventory: Development of a research-based assessment instrument to enhance learning and teaching
+    snip: Florian Genz · This work frames the first three publications around the development of the Flight Physics Concept Inventory (FliP-CoIn), and elaborate
+  gold页: 81 years since the first inflight movie was shown
+    snip: While movies have been generally available on long flights for decades, the first movies shown in the air were a newsreel and two cartoons. These were
+
+[A] Q: Mickey Braddock in the 50s series Circus Boy found fame with which surname in which pop band?
+  cov1=0.25 gold@3 ans=[Mickey Dolenz (The Monkees)]
+  rank1: Micky Dolenz
+    snip: , Other name: Mickey Braddock Occupations: Musician, actor, singer, TV producer, businessman, Years active: 1956–present Spouses: Samantha Juste, , , 
+  gold页: Micky Dolenz: From child star to The Monkees
+    snip: Yes folks, the young boy in the photo above is Micky Dolenz of the Monkees. From 1956 until 1958, Mickey starred in a television series called Circus 
+
+[A] Q: River Phoenix died during the making of which movie?
+  cov1=0.33 gold@2 ans=[Dark Blood; Dark Blood (film)]
+  rank1: Joaquin Phoenix
+    snip: In 1984, Phoenix starred opposite his brother River in the ABC Afterschool Special entitled Backwards: The Riddle of Dyslexia, for which they shared ·
+  gold页: River Phoenix
+    snip: American actor (1970–1993) · Phoenix died at age 23[3] in the early hours of October 31, 1993,[4][a] from acute multiple drug intoxication including c
+
+[A] Q: Who was the male star of the movie The Man of La Mancha?
+  cov1=0.33 gold@2 ans=[Peter O'Toole; Peter o toole; Peter O' Toole]
+  rank1: Multi-messenger Observations of a Binary Neutron Star Merger
+    snip: LIGO Scientific Collaboration, Virgo Collaboration, Fermi GBM · On 2017 August 17 a binary neutron star coalescence candidate (later designated GW1708
+  gold页: Man of La Mancha * (1972, Peter O’Toole, Sophia Loren, James Coco, Harry Andrews, John Castle, Brian Blessed, Ian Richardson, Julie Gregg, Rosalie Crutchley) – Classic Movie Review 8,766
+    snip: Man of La Mancha * (1972, Peter O’Toole, Sophia Loren, James Coco, Harry Andrews, John Castle, Brian Blessed, Ian Richardson, Julie Gregg, Rosalie Cru
+
+######## TriviaQA — C 灰区 8 条 ########
+
+[C] Q: How long was swimmer Michelle Smith-de Bruin banned for attempting to manipulate a drugs test?
+  cov1=0.45 gold@9 ans=[4 years; four  time; 4 time]
+  rank1: Michelle Smith
+    snip: Michelle Smith de Bruin (born 16 December 1969) is an Irish lawyer and retired Olympic swimmer. She won three gold medals at the 1996 Summer Olympics 
+  gold页: Dancer-Plugin-TimeRequests-0.01
+    snip: log how long each request took to process
+
+[C] Q: Kim Carnes' nine weeks at No 1 with Bette Davis Eyes was interrupted for one week by which song?
+  cov1=0.44 gold@4 ans=[Stars on 45 medley; Stars on 45 (Single); Stars On 45 Medley]
+  rank1: Kim Carnes, Bette Davis Eyes (1981) — Keith Fullerton Whitman
+    snip: Greatest Hits (2003-05-29) · 6:38
+  gold页: Bette Davis Eyes
+    snip: Bette Davis Eyes “Bette Davis Eyes” is a song written and composed by Donna Weiss and Jackie DeShannon in 1974. It was originally recorded by the latt
+
+[C] Q: Who directed the classic 30s western Stagecoach?
+  cov1=0.40 gold@3 ans=[John Ford; John Ford (1895-1973); Sean O'Feeney]
+  rank1: Lewis Milestone
+    snip: 1958, Milestone directed actor Richard Boone, who debuted in Milestone's Kangaroo (1952), in two episodes of the television western Have Gun – Will Tr
+  gold页: Stagecoach | John Ford Western Film Classic [1939]
+    snip: Stagecoach, American westernfilm, released in 1939, that is a classic of the genre, widely considered to be the first “adult” western. One of director
+
+[C] Q: Who had an 80s No 1 hit with Hold On To The Nights?
+  cov1=0.38 gold@3 ans=[Richard Marx; Richard Noel Marx]
+  rank1: Hold On to the Nights
+    snip: “, (1989), Music video “Hold On to the Nights” on YouTube Audio sample file, help, Release “Hold On to the Nights” reached the Billboard Hot 100 numbe
+  gold页: The Number Ones: Richard Marx’s “Hold On To The Nights”
+    snip: Richard Marx was right on top of that adult-contemporary zeitgeist. He made exactly the music that America’s waiting rooms needed. And Richard Marx re
+
+[C] Q: What is Osbert Lancaster best known for producing?
+  cov1=0.40 gold@3 ans=[Cartoons; Cartoonish; American cartoon]
+  rank1: Osbert Lancaster
+    snip: For both of these revelations, we owe Osbert Lancaster a lot. All Done from Memory. London: John Murray. 1953. OCLC 41961553. With an Eye to the Futur
+  gold页: Osbert Lancaster
+    snip: Osbert Lancaster English cartoonist and architectural writer (1908–1986) From Wikipedia, the free encyclopedia Sir Osbert Lancaster CBE (4 August 1908
+
+[C] Q: For which movie did Katharine Hepburn win her second Oscar?
+  cov1=0.43 gold@2 ans=[Guess Who's Coming To Dinner; Guess who's Coming to Dinner; Guess Who's Coming t]
+  rank1: Katharine Hepburn
+    snip: American actress (1907–2003) · Her parents were Thomas Norval Hepburn (1879–1962), a urologist at Hartford Hospital, and Katharine Martha Houghton Hep
+  gold页: Katharine Hepburn Movies: 20 Greatest Films Ranked Worst to Best
+    snip: She returned to theater with “The Philadelphia Story,” and the 1940 film version provided her with a big screen comeback from which she never faltered
+
+[C] Q: In which country was the first permanent bungee jumping site situated?
+  cov1=0.43 gold@4 ans=[New Zealand; N Z; Nouvelle-Zelande]
+  rank1: Vilyuysk - Wikipedia
+    snip: The first permanent settlement on the site of the present town was a Cossack winter settlement founded in 1634[2] as Tyukanskoye or Verkhnevilyuyskoye
+  gold页: BBC World Service - Witness History, Kawarau Bridge: The first bungee jumping site in New Zealand
+    snip: Witness History Kawarau Bridge: The first bungee jumping site in New Zealand On 12 November 1988, the world’s first commercial bungee jumping site was
+
+[C] Q: Which future Hollywood star got her break as Wonder Girl, Wonder Woman's sister Drusilla?
+  cov1=0.46 gold@2 ans=[Debra Winger; Mary Debra Winger; Deborah Winger]
+  rank1: 2022 in film
+    snip: Girl in the World,” Dies at 84 Tinoco, Armando (October 3, 2022). &quot;Joan Hotchkis Dies: &#039;The Odd Couple&#039; &amp; &#039;Legacy&#039; Star W
+  gold页: Lynda Carter | 𝐖𝐨𝐧𝐝𝐞𝐫 𝐖𝐨𝐦𝐚𝐧 (@lyndacartereverything) • Instagram reel
+    snip: hl=en) Yes, that’s Debra Winger as Wonder Girl (Drusilla) on Wonder Woman’s first season (ABC). One of her earliest screen roles, Debra appeared as Di

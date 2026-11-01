@@ -1,0 +1,26 @@
+{
+  "name": "@memory-net-console/server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "memory-net 控制台服务面：零依赖 HTTP API（workspace 发现/只读探查/activate 语义/host 受控写面）+ 静态托管单域部署。",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": {
+    "memory-net-console": "bin/console.js"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/*.test.js"
+  },
+  "dependencies": {
+    "memory-net": "file:../../vendor/memory-net"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "5.9.3"
+  },
+  "license": "MIT"
+}

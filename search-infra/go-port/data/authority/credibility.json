@@ -1,0 +1,22 @@
+{
+  "_meta": "垃圾源两档处置: blocked=硬屏蔽(剔除+计数), downweight=强降权(-1.2 保留+标注)。只匹配注册域名不做关键词猜测(防误伤); 与 config.blockedDomains(SSRF 层)互补。",
+  "blocked": [
+    "csdn.net",
+    "baijiahao.baidu.com",
+    "sohu.com",
+    "zhidao.baidu.com",
+    "wenku.baidu.com",
+    "jingyan.baidu.com",
+    "docin.com",
+    "doc88.com",
+    "book118.com",
+    "360doc.com",
+    "renrendoc.com",
+    "taodocs.com"
+  ],
+  "downweight": [
+    "ehow.com",
+    "answers.com",
+    "wikihow.com"
+  ]
+}

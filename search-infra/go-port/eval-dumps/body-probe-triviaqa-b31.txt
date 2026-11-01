@@ -1,0 +1,126 @@
+
+[ERR/nogold] Q: "According to Rudyard Kipling what were the ""two imposters"" to meet and treat the same d
+  ans=[Triumph and Disaster]
+  r1 HTTP403 138ms 0B 
+    An Empire Day Message
+    
+  r2 HTTP403 845ms 0B 
+    That Day
+    
+  r3 HTTP403 840ms 0B 
+    Rudyard Kipling ‘Wireless’
+    
+
+[D2/nogold] Q: In which decade of the 20th century was Anne Bancroft born?
+  ans=[1930s; 1930’s; Thirties; 1930s literature; Nineteen-thirties; 1930–193]
+  r1 HTTP403 150ms 0B 
+    Anne Bancroft
+    
+  r2 HTTP403 46ms 0B 
+    Anne Bancroft | Biography, Movies, & Facts | Britannica
+    
+  r3 OK 258ms 0B 
+    Anne Bancroft - Biography - IMDb
+    
+
+[D1/deep] Q: Who was the next British Prime Minister after Arthur Balfour?
+  ans=[Campbell-Bannerman; Sir Henry Campbell-Bannerman; Campbell Bannerman; ]
+  r1 HTTP403 160ms 0B 
+    Arthur Balfour
+    
+  r2 OK 146ms 5066B => verbatim ans="Campbell-Bannerman" rel=1/7
+    Arthur Balfour - Spartacus Educational
+    CTX:  of Tariff Reform split Balfour's government and when he resigned in 1905, Edward VII invited Henry Campbell-Bannerman to form a government. Campbell-Bannerman accepted and in the 1906 General Election that followed the Liberal Party had 
+  r3 OK 856ms 13649B 
+    Arthur James Balfour, 1848–1930 [lst Earl of Balfour] Foreign Secretar
+    
+
+[D2/nogold] Q: What US sitcom was the first exported to Britain?
+  ans=[Amos 'N' Andy; Amos n Andy; Amos And Andy; Amos and andy; Amos N Andy;]
+  r1 OK 1183ms 96005B 
+    British sitcom ::: Open WIKI
+    
+  r2 HTTP403 39ms 0B 
+    When Was the First Sitcom Made? [The Surprising 1946 Origin]
+    
+  r3 HTTP403 39ms 0B 
+    British sitcom - Wikiwand
+    
+
+[D2/deep] Q: In which country is the Sky Train Rail bridge?
+  ans=[Canada; Canadá; The Dominion of Canada; Commonwealth of Canada; Domini]
+  r1 OK 239ms 0B 
+    Nine Arch Bridge | Hill Country Sri Lanka
+    
+  r2 HTTP403 27ms 0B 
+    Sky Train: A Journey Through the Clouds in Hunan Province
+    
+  r3 OK 861ms 9290B 
+    Nine Arches Bridge Ella: 2026 Guide to Sri Lanka's Most Famous Train .
+    
+
+[D2/nogold] Q: "Which boxer famously said,"" If I can't beat this bum take my name off the record books?"
+  ans=[Rocky Marciano; Rocco Marchegiano; The Brockton Blockbuster; Brockton ]
+  r1 OK 940ms 1259B 
+    Play Sports Athletics Trivia Quiz quiz: print these test questions and
+    
+
+[D1/nogold] Q: What was Eddie Murphy's first movie?
+  ans=[48 Hours; 48 time; forty-eight  time]
+  r1 OK 651ms 4138B 
+    Eddie Murphy First Movie Role and Early Film Career
+    
+  r2 OK 174ms 5869B => tokenAND ans="48 time" rel=4/4
+    48 Hrs. Explained: Why Eddie Murphy's First Movie Still Matters
+    CTX: MYTHCON Business Entertainment Celebs Health Home › Entertainment › 48 Hrs. Explained: Why Eddie Murphy's First Movie ... 48 Hrs. Explained: Why Eddie Murphy's First Movie Still Matters December 27, 2025 By Sarah Tanner Entertainment 5 min 
+  r3 HTTP403 35ms 0B 
+    What was Eddie Murphy's first movie as an actor? - Far Out Magazine
+    
+
+[ERR/nogold] Q: Which Oscar-nominated film had You Sexy Thing as its theme song?
+  ans=[The Full Monty; Full Monty; The Full Monty (film); The Full Monty (sou]
+  r1 ERR:ETIMEDOUT 256ms 0B 
+    You Sexy Thing — Mikael V. Larsen
+    
+  r2 HTTP403 46ms 0B 
+    You Sexy Thing
+    
+  r3 ERR:ETIMEDOUT 256ms 0B 
+    You Sexy Thing — T-Shirt
+    
+
+[ERR/nogold] Q: Which female singer was born on exactly the same day as impressionist Rich Little?
+  ans=[Tina Turner; Anna Bullock; Tina Turner's; Tina tuner; Tina turner; Tin]
+  r1 HTTP403 32ms 0B 
+    Rich Little
+    
+  r2 HTTP403 11ms 0B 
+    Rich Little - Wikiwand
+    
+  r3 HTTP403 134ms 0B 
+    Rich Little
+    
+
+[D1/deep] Q: Art Garfunkel trained for which profession although he didn't qualify?
+  ans=[Architect; Master Builder (occupation); Master builder (occupation); R]
+  r1 HTTP403 46ms 0B 
+    Art Garfunkel
+    
+  r2 OK 275ms 75700B => verbatim ans="Architect" rel=2/7
+    Art Garfunkel
+    CTX: mid commercial setbacks. [13] Garfunkel enrolled at Columbia University in 1958, initially pursuing architecture before switching to art history at Columbia College, from which he earned a Bachelor of Arts degree in 1965. [14] He
+  r3 HTTP403 32ms 0B 
+    Art Garfunkel - Students | Britannica Kids | Homework Help
+    
+
+[D1/deep] Q: Throughout the 80s and 90s Phil Collins recorded on which record label?
+  ans=[Atlantic; Sea of Atlas; The Pond; Ethiopic Ocean; Across the pond; Nor]
+  r1 OK 266ms 166723B => verbatim ans="Atlantic" rel=0/8
+    Phil Collins — Biography, Discography, Albums & Expert Reviews - AllMu
+    CTX: um Title (A-Z) Album Title (Z-A) Year Credit AllMusic Rating User Rating 1981 Face Value Face Value Atlantic ( 0 ) 1982 Hello, I Must Be Going! Hello, I Must Be Going! Atlantic ( 0 ) 1985 No Jacket Required No Jacket Required At
+  r2 HTTP403 38ms 0B 
+    Phil Collins | Songs, In The Air Tonight, Another Day In Paradise, Ban
+    
+  r3 HTTP403 45ms 0B 
+    Phil Collins discography - Wikipedia
+    

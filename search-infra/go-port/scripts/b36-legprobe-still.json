@@ -1,0 +1,207 @@
+[
+ {
+  "dataset": "nq",
+  "q": "1 the bureau of land management manages over acres of land in the united states",
+  "answers": [
+   "247.3 million"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "where do the events in the story take place geographically",
+  "answers": [
+   "Persia"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who is the current director of the us mint",
+  "answers": [
+   "David J. Ryder",
+   "David Motl"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "what is the process to become a santero",
+  "answers": [
+   "a cleansing ritual",
+   "making Ochá (Saint)"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who discovered one of the first taxonomic classification schemes",
+  "answers": [
+   "Swedish botanist Carl Linnaeus"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who has won the most games in nfl 2017",
+  "answers": [
+   "Dallas Cowboys"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who is the longest serving chief minister in india as on jan 2015",
+  "answers": [
+   "Jyotirindra Basu"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "whos jack the ripper in gotham by gaslight",
+  "answers": [
+   "Jacob Packer"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "what caused the breakup of the democratic republican party",
+  "answers": [
+   "the disputed 1824 presidential election"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who are the stars in dancing with the stars",
+  "answers": [
+   "Jennie Finch Daigle",
+   "Jamie Anderson",
+   "Arike Ogunbowale",
+   "Mirai Nagasu",
+   "Adam Rippon",
+   "Josh Norman",
+   "Tonya Harding",
+   "Kareem Abdul-Jabbar",
+   "Chris Mazdzer",
+   "Johnny Damon"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who is credited with creating the gothic art movement",
+  "answers": [
+   "Abbot Suger"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who was the 19th c. artist who was both painter and graphic designer",
+  "answers": [
+   "René Georges Hermann-Paul"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "when was the last time the vikings made the superbowl",
+  "answers": [
+   "in the 1970s"
+  ]
+ },
+ {
+  "dataset": "nq",
+  "q": "who has become the new chairman of sebi",
+  "answers": [
+   "Ajay Tyagi"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "\"According to Rudyard Kipling what were the \"\"two imposters\"\" to meet and treat the same day?\"",
+  "answers": [
+   "Triumph and Disaster"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "In which decade of the 20th century was Anne Bancroft born?",
+  "answers": [
+   "1930s",
+   "1930’s",
+   "Thirties",
+   "1930s literature",
+   "Nineteen-thirties",
+   "1930–1939",
+   "1930-1939",
+   "'30s",
+   "1930's",
+   "%6030s",
+   "1930s (decade)",
+   "The Thirties"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "\"Which boxer famously said,\"\" If I can't beat this bum take my name off the record books?\"\"\"",
+  "answers": [
+   "Rocky Marciano",
+   "Rocco Marchegiano",
+   "The Brockton Blockbuster",
+   "Brockton Bomber",
+   "Marciano, Rocky",
+   "Rocco francis marchegiano",
+   "The Brockton Bomber",
+   "Brockton Blockbuster",
+   "Rocco Francis Marchegiano"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "What US sitcom was the first exported to Britain?",
+  "answers": [
+   "Amos 'N' Andy",
+   "Amos n Andy",
+   "Amos And Andy",
+   "Amos and andy",
+   "Amos N Andy",
+   "Amos & Andy",
+   "George %22Kingfish%22 Stevens",
+   "Amos and Andy",
+   "Brazilian Brass Mines",
+   "Amos ‘n’ Andy",
+   "Amos 'n Andy",
+   "Amos N' Andy",
+   "The Amos 'n Andy Show",
+   "Amos 'n Andy Show",
+   "Amos 'n' Andy Show",
+   "Amos 'n' Andy"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "What was Eddie Murphy's first movie?",
+  "answers": [
+   "48 Hours",
+   "48 time",
+   "forty-eight  time"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Which Oscar-nominated film had You Sexy Thing as its theme song?",
+  "answers": [
+   "The Full Monty",
+   "Full Monty",
+   "The Full Monty (film)",
+   "The Full Monty (soundtrack)",
+   "Full monty"
+  ]
+ },
+ {
+  "dataset": "triviaqa",
+  "q": "Which female singer was born on exactly the same day as impressionist Rich Little?",
+  "answers": [
+   "Tina Turner",
+   "Anna Bullock",
+   "Tina Turner's",
+   "Tina tuner",
+   "Tina turner",
+   "Tinna turner",
+   "Annie Mae Bullock",
+   "Anna Mae Bullock"
+  ]
+ }
+]

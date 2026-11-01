@@ -1,0 +1,138 @@
+b32 — b19 漏抓归因 (D1 页 × 产品 b19 链路重放)
+方法: scripts/b19-miss-cases-b32.json(11 条 D1, probe×dump 对拍) → answer_extract_b32_test.go
+      以产品默认 UA 精确重放 Fetcher.Run(MaxChars=12000, TTL=900, policyFor(nil,nil))+extractHtml+b19BestSentence,
+      全文(MaxChars=1e6)定位 12k 窗口, browser-UA 复抓量化解锁墙; 判定语义与 eval matchEvidence 逐字一致。
+生成: 2026-09-07T01:06:29.724Z
+
+== 总账 ==
+  B2a          3
+  B1           3
+  B2b          2
+  B2           2
+  X-重放会命中      1
+
+== 逐条 ==
+[B2b] nq/deep rank2 how are leaders of the two parties in congress chosen
+    url=https://congressionalinstitute.org/2020/11/12/party-leaders-in-congress-an-overview
+    probe: OK retried=false matched=verbatim"Senate Republican Conference"
+    dumpSnippet(400ch): Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect 
+    replay: status=200 textLen=12000 fullLen=15449 ansOffset=4113 bestHasAns=false probeAnsInFull=true
+    best: Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect 
+    ansSent: runes=101 cover=0 score=0.75 lenOk=true coverOk=false :: Likewise, the Senate Republican Conference rules stipulate that the following positions ar
+    ansSent: runes=75 cover=0 score=0.75 lenOk=true coverOk=false :: The Senate Republican Conference rules provide for a secret ballot as well.
+[X-重放会命中] nq/nogold rank2 today gestalt psychology ideas are part of which branch 
+    url=https://pmc.ncbi.nlm.nih.gov/articles/PMC3482144
+    probe: OK retried=false matched=verbatim"experimental psychology"
+    dumpSnippet(400ch): 1037/a0029333 Abstract In 1912, Max Wertheimer published his paper on phi motion, widely recognized as the sta
+    replay: status=200 textLen=12000 fullLen=131 ansOffset=-1 bestHasAns=true probeAnsInFull=false
+    best: ✉Correspondence concerning this article should be addressed to Johan Wagemans, University of Leuven (KU Leuven
+    ansSent: runes=135 cover=1 score=4.00 lenOk=true coverOk=true :: 1Laboratory of Experimental Psychology, University of Leuven (KU Leuven), Belgium and Inst
+    ansSent: runes=135 cover=1 score=4.00 lenOk=true coverOk=true :: 1Laboratory of Experimental Psychology, University of Leuven (KU Leuven), Belgium and Inst
+    ansSent: runes=204 cover=1 score=7.00 lenOk=true coverOk=true :: ✉Correspondence concerning this article should be addressed to Johan Wagemans, University 
+[B2a] nq/nogold rank1 where do the events in the story take place geographical
+    url=https://human.libretexts.org/Bookshelves/Literature_and_Literacy/Literacy_and_Critical_Thi
+    probe: OK retried=false matched=verbatim"Persia"
+    dumpSnippet(491ch): We can define the "setting" of a story as the geographical location or locations in which the events of the na
+    replay: status=200 textLen=7837 fullLen=7837 ansOffset=6043 bestHasAns=false probeAnsInFull=true
+    best: You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes p
+    ansSent: runes=304 cover=1 score=2.00 lenOk=false coverOk=true :: But Pavel Petrovich returned to his elegant room, hung with fine dark-grey wallpaper and d
+[B2] nq/nogold rank2 what is the process to become a santero
+    url=https://www.orishanet.org/initiate.html
+    probe: OK retried=false matched=tokenAND"a cleansing ritual"
+    dumpSnippet(400ch): First a person will generally receive their Guerreros or warriors and/or their ilekes or their Necklaces. Late
+    replay: status=200 textLen=9055 fullLen=9055 ansOffset=-1 bestHasAns=false probeAnsInFull=true
+    best: or Full Initiation as a Santera or Santero if that is their path in
+[B1] nq/nogold rank3 who played tibbs on in the heat of the night
+    url=https://www.encyclopedia.com/education/news-wires-white-papers-and-books/rollins-howard-e-
+    probe: OK retried=false matched=tokenAND"Howard Ellsworth Rollins Jr."
+    dumpSnippet(429ch): Sources For much of the television viewing audience, Howard Rollins will best be remembered for his believable
+    replay: status=200 textLen=12000 fullLen=12867 ansOffset=-1 bestHasAns=false probeAnsInFull=true
+    best: Jet, June 14, 1993; August 16, 1993; November 29, 1993; May 16, 1994; December 23, 1996.
+    ansSent: runes=153 cover=0 score=6.25 lenOk=true coverOk=true :: Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 19
+[B1] nq/nogold rank1 when are the next commonwealth games going to be held
+    url=https://heraldscotland.com/sport/25140536.glasgow-commonwealth-games-2026-latest-news-inte
+    probe: OK retried=false matched=verbatim"2022"
+    dumpSnippet(560ch): When and where the next Commonwealth Games will be held at The next Commonwealth Games will be held in Glasgow
+    replay: status=200 textLen=4608 fullLen=4608 ansOffset=4411 bestHasAns=false probeAnsInFull=true
+    best: The 2026 games were originally set to be held in the Australian state of Victoria, but the government unexpect
+    ansSent: runes=99 cover=2 score=4.75 lenOk=true coverOk=true :: At the 2022 Commonwealth Games in Birmingham, a total of 72 countries and territories part
+[B2b] nq/nogold rank2 who has become the new chairman of sebi
+    url=https://mahamedianews.com/en/india-news/news/tuhin-kanta-pandey-appointed-as-new-sebi-chai
+    probe: OK retried=false matched=verbatim"Ajay Tyagi"
+    dumpSnippet(400ch): BREAKING NEWS ** Tuhin Kanta Pandey appointed as new SEBI Chairman**  नवीनतम Tuhin Kanta Pandey appointed as n
+    replay: status=200 textLen=1970 fullLen=1970 ansOffset=1356 bestHasAns=false probeAnsInFull=true
+    best: NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Sec
+    ansSent: runes=112 cover=0 score=0.75 lenOk=true coverOk=false :: Buch succeeded Ajay Tyagi, an IAS officer, who had completed a five-year tenure, including
+[B1] triviaqa/deep rank2 Who was the next British Prime Minister after Arthur Bal
+    url=https://spartacus-educational.com/PRbalfour.htm
+    probe: OK retried=false matched=verbatim"Campbell-Bannerman"
+    dumpSnippet(537ch): The Marquess of Salisbury, who was now Prime Minister, appointed him as his Secretary for Scotland. Other post
+    replay: status=200 textLen=3432 fullLen=3432 ansOffset=1019 bestHasAns=false probeAnsInFull=true
+    best: The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and conseq
+    ansSent: runes=149 cover=1 score=4.00 lenOk=true coverOk=true :: The topic of Tariff Reform split Balfour's government and when he resigned in 1905, Edward
+    ansSent: runes=117 cover=0 score=2.25 lenOk=true coverOk=true :: Campbell-Bannerman accepted and in the 1906 General Election that followed the Liberal Par
+[B2] triviaqa/nogold rank2 What was Eddie Murphy's first movie?
+    url=https://mythcon.ca/48-hrs-explained-why-eddie-murphys-first-movie-still-matters-2dc
+    probe: OK retried=false matched=tokenAND"48 time"
+    dumpSnippet(560ch): Before the multi-million dollar paychecks and the Oscar nominations, Eddie Murphy was just a 21-year-old kid f
+    replay: status=200 textLen=5319 fullLen=5319 ansOffset=-1 bestHasAns=false probeAnsInFull=true
+    best: If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action 
+[B2a] triviaqa/deep rank1 Throughout the 80s and 90s Phil Collins recorded on whic
+    url=https://www.allmusic.com/artist/phil-collins-mn0000337119
+    probe: OK retried=false matched=verbatim"Atlantic"
+    dumpSnippet(339ch): During the '80s, Collins was enormously successful in balancing his continuing solo work with his membership i
+    replay: status=200 textLen=12000 fullLen=147316 ansOffset=5095 bestHasAns=false probeAnsInFull=true
+    best: The song cycle Testify arrived in 2002, and his next studio-recorded solo release was 2010's Going Back, which
+    ansSent: runes=8 cover=0 score=0.00 lenOk=false coverOk=false :: Atlantic
+    ansSent: runes=8 cover=0 score=0.00 lenOk=false coverOk=false :: Atlantic
+    ansSent: runes=8 cover=0 score=0.00 lenOk=false coverOk=false :: Atlantic
+    ansSent: runes=8 cover=0 score=0.00 lenOk=false coverOk=false :: Atlantic
+[B2a] triviaqa/deep rank2 Art Garfunkel trained for which profession although he d
+    url=https://grokipedia.com/page/Art_Garfunkel
+    probe: OK retried=false matched=verbatim"Architect"
+    dumpSnippet(400ch): Fact-checked by Grok 6 months ago Art Garfunkel Arthur Ira Garfunkel (born November 5, 1941) is an American si
+    replay: status=200 textLen=12000 fullLen=71769 ansOffset=3695 bestHasAns=false probeAnsInFull=true
+    best: Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educat
+    ansSent: runes=767 cover=3 score=14.50 lenOk=false coverOk=true :: Garfunkel enrolled at Columbia University in 1958, initially pursuing architecture before 
+
+== 跨轮稳定性(同会话三轮重放, 间隔分钟级) ==
+  run1: B1:1 B2a:5 B2b:4 X-重放会命中:1     (garfunkel=B2a, gestalt=X-命中)
+  run2: B1:1 B2:2 B2a:2 B2b:4 C1:1 X-重放会命中:1  (grokipedia=404[product与browser UA同404])
+  run3(本轮, canonical, 11/11 全 200 全文健康): B1:3 B2:2 B2a:3 B2b:2 X-重放会命中:1
+  判读: 服务端波动真实存在(200↔404↔软200垃圾文本[textLen 131/47])但属阵发, 非主因;
+        b31 探针大量 403 是 eval-UA/首试视角, 产品 UA 健康轮全部通过 — 拒爬墙对 b19 漏抓贡献≈0(本样本)。
+  稳定核(三轮一致 9/11): B1 commonwealth/tibbs/spartacus + B2 santero/48hrs + B2a persia/philcollins(健康时) + B2b congress/sebi
+  波动 3 页: pmc-gestalt(命中→命中→软200) / allmusic-philcollins(B2a→B2a→软200) / grokipedia-garfunkel(B2a→404→B2a)
+
+== b31 人工裁决交叉(真/假 × 机械桶) ==
+  真: spartacus=B1(答案句4.0过闸, 败给 Lloyd George 专名行) / tibbs=B1(答案句6.25过闸, 败给 Jet 引文日期行[纯数字10.0])
+      philcollins=B2a(discography 表格单元行"Atlantic" 8 rune<40) / garfunkel=B2a(Grokipedia 长段 767 rune>300, score 14.5 显著最相关)
+      congress=B2b(答案句 score 0.75 全靠专名奖励, 查询词零重叠) / 48hrs=B2(best句就是答案句"the answer is 48 Hrs."!
+      但 gold 变体"48 Hours"无法认证"48 Hrs." — matcher 变体缺口; 且 base=560ch 注入 no-op 双杀)
+  假: persia=B2a(304>300 侥幸被长度闸拒掉子串陷阱 Persian rug) / gestalt=X(重放注入"Correspondence...Laboratory of
+      Experimental Psychology"机构行 → eval 会按子串假命中 — b31 已裁机构词面巧合)
+      commonwealth=B1(败选句恰是"2026 games...Victoria withdrawn"当前正确答案, 胜者是被数据集淘汰的旧 gold"2022")
+      sebi=B2b(数据集 staleness, 页面在交付现任主席)
+
+== 机制发现(零产品代码改动, 全部实测) ==
+  1. b19 漏抓无单点故障: 真答案 6-7 条分散在 B1×2/B2a×2/B2b×1/B2×1 — 抽取层设计选择的分布式后果
+  2. 12k 窗口(B4)零命中: ansOffset 最大 5095 << 12000 — 窗口尺寸不是当前瓶颈
+  3. clamp 截尾(B3)零直接命中, 但 base≥560 注入 no-op 机制实弹确认(2 例): b23 v2 "基底完整保留+clamp 560"
+     在上游基底 ≥560ch 时为结构无效 — 注入空间被基底吃满; 与 b23 v1 "截基底伤基底"构成张力, 改动需重放定量
+  4. 专名/数字奖励的副面: 奖励救"载体句"的同时同等赋能样板句(引文日期行/专名串) — B1 三例败选句两例是样板形态
+  5. matcher 变体缺口有产品侧镜像: "48 Hrs." vs gold "48 Hours" — 抽取层选对句子交付层仍 miss,
+     b31 digit-variant 结论(评估红线)在产品侧同构成立
+
+== b33+ 候选(按证据强度) ==
+  ① B1 样板句惩罚: 引文/日期串密度检测, winner 为样板形态时取次优 — 直接对症 B1×2(真)+1(假)
+  ② B2a 双端修正: >300 rune 长句内二次切分(garfunkel score 14.5 明显最相关) + 表格感知抽取(philcollins)
+  ③ base≥560 注入预留: 与上游 snippet 生产端协同(需同池重放定量, b23 v1 教训在案)
+  ④ B2b 零重叠答案句: 语义层(CE/改写)候选, 词面框架内无解
+  ⑤ 服务波动性: b19 失败静默设计使阵发 404/软200 = 当次机会损失; 页缓存 900s 内重试可部分对冲(现无重试)
+
+== 复算指引 ==
+  1. node scripts/b19-miss-attribution.mjs          # 重建 cases + 离线不变量自检(零警报=口径自洽)
+  2. SC_B19_REPLAY=1 go test -run TestB19ReplayHarness -v .   # 产品链路重放(发真实请求)
+  3. node scripts/b19-miss-attribution.mjs --join    # 汇总证据件
+  门禁: 判定语义与 eval matchEvidence 逐字一致; 评分镜像 b19BestSentence 内部逻辑(专名0.25/数字1.0计入后过闸);
+        常规 go test 零外呼(SC_B19_REPLAY 门)。

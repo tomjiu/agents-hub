@@ -1,0 +1,25 @@
+
+[REG] Who was the next British Prime Minister after Arthur Balfour?
+  ans=[Campbell-Bannerman; Sir Henry Campbell-Bannerman]
+  OFF rank1: Robert Gascoyne-Cecil, 3rd Marquess of Salisbury (evalGold@5, junk=0)
+  ON  rank1: Arthur Balfour (evalGold@15, junk=0)  ON gold页@15: Arthur Balfour
+[REG] Which Oscar-nominated film had You Sexy Thing as its theme song?
+  ans=[The Full Monty; Full Monty]
+  OFF rank1: You Sexy Thing (evalGold@4, junk=0)
+  ON  rank1: You Sexy Thing — Mikael V. Larsen (evalGold@-, junk=0)  ON gold页@-: -
+[JUNK1] What percentage of the earth's surface is covered by Europe?
+  ans=[8%; eight  %]
+  OFF rank1: Earth (evalGold@2, junk=0)
+  ON  rank1: How much percent does Europe cover of the Earth's total surface? (evalGold@1, junk=1)  ON gold页@1: How much percent does Europe cover of the Earth's total surf
+[JUNK1] Who had an 80s No 1 hit with Hold On To The Nights?
+  ans=[Richard Marx; Richard Noel Marx]
+  OFF rank1: Hold On to the Nights - Wikipedia (evalGold@3, junk=0)
+  ON  rank1: "Hold On to the Nights" by Richard Marx hit number one on the Billboar (evalGold@1, junk=1)  ON gold页@1: "Hold On to the Nights" by Richard Marx hit number one on th
+[JUNK1] Who had a 60s No 1 with Downtown?
+  ans=[Petula Clark; Petula Clarke]
+  OFF rank1: [A Case of Fibromatosis-Like Tumor Which Was Difficult to Differ… (evalGold@3, junk=0)
+  ON  rank1: All Things Music Plus (evalGold@1, junk=1)  ON gold页@1: All Things Music Plus
+[JUNK1] Which future Hollywood star got her break as Wonder Girl, Wonder Woman's sister Drusilla?
+  ans=[Debra Winger; Mary Debra Winger]
+  OFF rank1: 2022 in film (evalGold@5, junk=0)
+  ON  rank1: Lynda Carter | 𝐖𝐨𝐧𝐝𝐞𝐫 𝐖𝐨𝐦𝐚𝐧 (@lyndacartereverything) • Inst (evalGold@1, junk=1)  ON gold页@1: Lynda Carter | 𝐖𝐨𝐧𝐝𝐞𝐫 𝐖𝐨𝐦𝐚𝐧 (@lyndacartereverythi

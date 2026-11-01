@@ -1,0 +1,1115 @@
+{
+ "00-nq/deep#r2": {
+  "bestCur": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+  "bestCurHasAns": false,
+  "longSents": 2,
+  "probeAns": "Senate Republican Conference",
+  "q": "how are leaders of the two parties in congress chosen",
+  "variants": [
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "baseline"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 9,
+    "variant": "coverW2"
+   },
+   {
+    "best": "Prior to the convening of a new Congress, the Democratic and Republican parties in each Chamber meet to elect a slate of leaders who will serve them for the upcoming two years.",
+    "hasAns": false,
+    "score": 9,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "01-nq/nogold#r2": {
+  "bestCur": "",
+  "bestCurHasAns": false,
+  "longSents": 0,
+  "probeAns": "experimental psychology",
+  "q": "today gestalt psychology ideas are part of which branch of psychology",
+  "variants": [
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "baseline"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "coverW2"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "02-nq/nogold#r1": {
+  "bestCur": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+  "bestCurHasAns": false,
+  "longSents": 4,
+  "probeAns": "Persia",
+  "q": "where do the events in the story take place geographically",
+  "variants": [
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "baseline"
+   },
+   {
+    "best": "We can define the \"setting\" of a story as the geographical location or locations in which the events of the narrative takes place, as well as the time in which those events are set.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "We can define the \"setting\" of a story as the geographical location or locations in which the events of the narrative takes place, as well as the time in which those events are set.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4.5,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4.5,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "We can define the \"setting\" of a story as the geographical location or locations in which the events of the narrative takes place, as well as the time in which those events are set.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "We can define the \"setting\" of a story as the geographical location or locations in which the events of the narrative takes place, as well as the time in which those events are set.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4.5,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4.5,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 4,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 8,
+    "variant": "coverW2"
+   },
+   {
+    "best": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+    "hasAns": false,
+    "score": 8,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "03-nq/nogold#r2": {
+  "bestCur": "or Full Initiation as a Santera or Santero if that is their path in",
+  "bestCurHasAns": false,
+  "longSents": 0,
+  "probeAns": "a cleansing ritual",
+  "q": "what is the process to become a santero",
+  "variants": [
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "baseline"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "",
+    "hasAns": false,
+    "score": 0,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 2,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 3,
+    "variant": "coverW2"
+   },
+   {
+    "best": "or Full Initiation as a Santera or Santero if that is their path in",
+    "hasAns": false,
+    "score": 3,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "04-nq/nogold#r3": {
+  "bestCur": "Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 1996 in New York; the youngest of four children born to Howard E.",
+  "bestCurHasAns": true,
+  "longSents": 2,
+  "probeAns": "Howard Ellsworth Rollins Jr.",
+  "q": "who played tibbs on in the heat of the night",
+  "variants": [
+   {
+    "best": "Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 1996 in New York; the youngest of four children born to Howard E.",
+    "hasAns": true,
+    "score": 6.25,
+    "variant": "baseline"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5.25,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5.25,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5.25,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 5.25,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "Born Howard Ellsworth Rollins, Jr., October 17, 1950 in Baltimore, MD, died December 8, 1996 in New York; the youngest of four children born to Howard E.",
+    "hasAns": true,
+    "score": 5,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "Of that experience Rollins told the New York Times in 1981, “Things made sense to me for the first time in my life.” Rollins studied theater at Towson State College and in 1974 moved to New York City to try and get his career off the ground in earnest.",
+    "hasAns": false,
+    "score": 6,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "Rollins’s life and career took a positive turn when he won the part of Detective Virgil Tibbs in the television series “In the Heat of the Night” in 1987.",
+    "hasAns": false,
+    "score": 8.25,
+    "variant": "coverW2"
+   },
+   {
+    "best": "in the very popular television series“In the Heat of the Night.” Rollins played Tibbs for five seasons until his cocaine and alcohol addiction forced the show’s producer to replace him.",
+    "hasAns": false,
+    "score": 9,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "05-nq/nogold#r1": {
+  "bestCur": "The 2026 games were originally set to be held in the Australian state of Victoria, but the government unexpectedly withdrew in July 2024 after costs hit £3.13 billion - more than double the £1.4bn budgeted.",
+  "bestCurHasAns": false,
+  "longSents": 1,
+  "probeAns": "2022",
+  "q": "when are the next commonwealth games going to be held",
+  "variants": [
+   {
+    "best": "The 2026 games were originally set to be held in the Australian state of Victoria, but the government unexpectedly withdrew in July 2024 after costs hit £3.13 billion - more than double the £1.4bn budgeted.",
+    "hasAns": false,
+    "score": 8.75,
+    "variant": "baseline"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 6.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 6.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7.25,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7.25,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 8,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 8,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 8.25,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 8.25,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "The 2026 games were originally set to be held in the Australian state of Victoria, but the government unexpectedly withdrew in July 2024 after costs hit £3.13 billion - more than double the £1.4bn budgeted.",
+    "hasAns": false,
+    "score": 8.75,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 7.25,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 12.25,
+    "variant": "coverW2"
+   },
+   {
+    "best": "The 2026 Commonwealth Games are being held in Glasgow from 23 July to 2 August.",
+    "hasAns": false,
+    "score": 12.25,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "06-nq/nogold#r2": {
+  "bestCur": "NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years.",
+  "bestCurHasAns": false,
+  "longSents": 1,
+  "probeAns": "Ajay Tyagi",
+  "q": "who has become the new chairman of sebi",
+  "variants": [
+   {
+    "best": "NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years.",
+    "hasAns": false,
+    "score": 7.5,
+    "variant": "baseline"
+   },
+   {
+    "best": "The Appointments Committee of the Cabinet has approved the appointment of Tuhin Kanta Pandey as the new Chairman of SEBI.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "The Appointments Committee of the Cabinet has approved the appointment of Tuhin Kanta Pandey as the new Chairman of SEBI.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "The Appointments Committee of the Cabinet has approved the appointment of Tuhin Kanta Pandey as the new Chairman of SEBI.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "The Appointments Committee of the Cabinet has approved the appointment of Tuhin Kanta Pandey as the new Chairman of SEBI.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "The Appointments Committee of the Cabinet has approved the appointment of Tuhin Kanta Pandey as the new Chairman of SEBI.",
+    "hasAns": false,
+    "score": 5.5,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "The Appointments Committee of the Cabinet has approved the appointment of Tuhin Kanta Pandey as the new Chairman of SEBI.",
+    "hasAns": false,
+    "score": 5.5,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "The SEBI chief has the option to draw the salary of a secretary to the Government of India or a consolidated pay of Rs 5,62,500 per month, excluding house and car benefits.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years.",
+    "hasAns": false,
+    "score": 7.5,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years.",
+    "hasAns": false,
+    "score": 11.5,
+    "variant": "coverW2"
+   },
+   {
+    "best": "NEW DELHI [Maha Media]: Finance Secretary Tuhin Kanta Pandey has been appointed as the new Chairman of the Securities and Exchange Board of India (SEBI) for a term of three years.",
+    "hasAns": false,
+    "score": 11.5,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "07-triviaqa/deep#r2": {
+  "bestCur": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+  "bestCurHasAns": false,
+  "longSents": 1,
+  "probeAns": "Campbell-Bannerman",
+  "q": "Who was the next British Prime Minister after Arthur Balfour?",
+  "variants": [
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 6.75,
+    "variant": "baseline"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 5.5,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 5.5,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 4.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 5.5,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 5.5,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "Other posts during the next few years included Chief Secretary of Ireland (1887), First Lord of the Treasury (1892) and leader of the House of Commons (1892).",
+    "hasAns": false,
+    "score": 5,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 6.75,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 9.75,
+    "variant": "coverW2"
+   },
+   {
+    "best": "The following year, David Lloyd George, the new Prime Minister, appointed him as Foreign Secretary, and consequently was responsible for the Balfour Declaration in 1917 which promised Zionists a national home in Palestine.",
+    "hasAns": false,
+    "score": 9.75,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "08-triviaqa/nogold#r2": {
+  "bestCur": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+  "bestCurHasAns": false,
+  "longSents": 0,
+  "probeAns": "48 time",
+  "q": "What was Eddie Murphy's first movie?",
+  "variants": [
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "baseline"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 9.75,
+    "variant": "coverW2"
+   },
+   {
+    "best": "If you're wondering what was Eddie Murphy's first movie, the answer is 48 Hrs., a gritty, foul-mouthed action thriller that basically invented the \"buddy cop\" genre we know today.",
+    "hasAns": false,
+    "score": 9.75,
+    "variant": "coverW2+esc"
+   }
+  ]
+ },
+ "09-triviaqa/deep#r1": {
+  "fetchFail": 403
+ },
+ "10-triviaqa/deep#r2": {
+  "bestCur": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+  "bestCurHasAns": false,
+  "longSents": 16,
+  "probeAns": "Architect",
+  "q": "Art Garfunkel trained for which profession although he didn't qualify?",
+  "variants": [
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 8,
+    "variant": "baseline"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K3"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 5.75,
+    "variant": "capM2K3+esc"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 6,
+    "variant": "capM2K4"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 6,
+    "variant": "capM2K4+esc"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 6.5,
+    "variant": "capM2K6"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 6.5,
+    "variant": "capM2K6+esc"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 6.75,
+    "variant": "capM3K3"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 6.75,
+    "variant": "capM3K3+esc"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 7,
+    "variant": "capM3K4"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 7,
+    "variant": "capM3K4+esc"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 7.5,
+    "variant": "capM3K6"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 7.5,
+    "variant": "capM3K6+esc"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 7,
+    "variant": "capPropK4"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 7,
+    "variant": "capDigM2"
+   },
+   {
+    "best": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+    "hasAns": false,
+    "score": 11,
+    "variant": "coverW2"
+   },
+   {
+    "best": "Following the success of the overdubbed single \"The Sound of Silence, \" which reached number one on the Billboard Hot 100 chart on January 1, 1966, Simon \u0026 Garfunkel released their album The Sounds of Silence on January 17, 1966",
+    "hasAns": false,
+    "score": 14,
+    "variant": "coverW2+esc"
+   }
+  ]
+ }
+}

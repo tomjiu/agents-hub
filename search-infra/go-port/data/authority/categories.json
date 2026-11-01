@@ -1,0 +1,935 @@
+{
+  "_meta": "第 2 层意图分类表(category -> AuthorityEntry[], 查询意图命中时提权, 不改路由)。detectCategory 关键词表在 src/authority.ts(逻辑层)。",
+  "categories": {
+    "news": [
+      {
+        "domain": "europa.eu",
+        "tier": "s"
+      },
+      {
+        "domain": "reuters.com",
+        "tier": "s"
+      },
+      {
+        "domain": "apnews.com",
+        "tier": "s"
+      },
+      {
+        "domain": "bbc.com",
+        "tier": "s"
+      },
+      {
+        "domain": "bbc.co.uk",
+        "tier": "s"
+      },
+      {
+        "domain": "xinhuanet.com",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "people.com.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "cctv.com",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "artificialintelligenceact.eu",
+        "tier": "a"
+      },
+      {
+        "domain": "nytimes.com",
+        "tier": "a"
+      },
+      {
+        "domain": "theguardian.com",
+        "tier": "a"
+      },
+      {
+        "domain": "wsj.com",
+        "tier": "a"
+      },
+      {
+        "domain": "ft.com",
+        "tier": "a"
+      },
+      {
+        "domain": "bloomberg.com",
+        "tier": "a"
+      },
+      {
+        "domain": "economist.com",
+        "tier": "a"
+      },
+      {
+        "domain": "cnn.com",
+        "tier": "a"
+      },
+      {
+        "domain": "npr.org",
+        "tier": "a"
+      },
+      {
+        "domain": "aljazeera.com",
+        "tier": "a"
+      },
+      {
+        "domain": "chinadaily.com.cn",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "thepaper.cn",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "caixin.com",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "yicai.com",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "cls.cn",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "36kr.com",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "ifanr.com",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "ithome.com",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "solidot.org",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "techcrunch.com",
+        "tier": "b"
+      },
+      {
+        "domain": "arstechnica.com",
+        "tier": "b"
+      },
+      {
+        "domain": "theverge.com",
+        "tier": "b"
+      },
+      {
+        "domain": "theregister.com",
+        "tier": "b"
+      },
+      {
+        "domain": "wired.com",
+        "tier": "b"
+      },
+      {
+        "domain": "venturebeat.com",
+        "tier": "b"
+      },
+      {
+        "domain": "stratechery.com",
+        "tier": "b",
+        "kind": "expert"
+      },
+      {
+        "domain": "ben-evans.com",
+        "tier": "b",
+        "kind": "expert"
+      }
+    ],
+    "security": [
+      {
+        "domain": "cve.org",
+        "tier": "s"
+      },
+      {
+        "domain": "cve.mitre.org",
+        "tier": "s"
+      },
+      {
+        "domain": "nvd.nist.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "cisa.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "cert.org",
+        "tier": "s"
+      },
+      {
+        "domain": "kb.cert.org",
+        "tier": "s"
+      },
+      {
+        "domain": "nist.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "owasp.org",
+        "tier": "s"
+      },
+      {
+        "domain": "osv.dev",
+        "tier": "s"
+      },
+      {
+        "domain": "msrc.microsoft.com",
+        "tier": "a"
+      },
+      {
+        "domain": "security.googleblog.com",
+        "tier": "a"
+      },
+      {
+        "domain": "snyk.io",
+        "tier": "a"
+      },
+      {
+        "domain": "rapid7.com",
+        "tier": "a"
+      },
+      {
+        "domain": "crowdstrike.com",
+        "tier": "a"
+      },
+      {
+        "domain": "fortinet.com",
+        "tier": "a"
+      },
+      {
+        "domain": "paloaltonetworks.com",
+        "tier": "a"
+      },
+      {
+        "domain": "cvedetails.com",
+        "tier": "b"
+      },
+      {
+        "domain": "exploit-db.com",
+        "tier": "b"
+      },
+      {
+        "domain": "packetstormsecurity.com",
+        "tier": "b"
+      },
+      {
+        "domain": "sysdig.com",
+        "tier": "b"
+      },
+      {
+        "domain": "lunasec.io",
+        "tier": "b"
+      }
+    ],
+    "legal": [
+      {
+        "domain": "gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "npc.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "court.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "moj.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "gov.uk",
+        "tier": "s"
+      },
+      {
+        "domain": "congress.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "govinfo.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "supremecourt.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "eur-lex.europa.eu",
+        "tier": "s"
+      },
+      {
+        "domain": "legifrance.gouv.fr",
+        "tier": "s"
+      },
+      {
+        "domain": "wipo.int",
+        "tier": "s"
+      },
+      {
+        "domain": "wipolex.wipo.int",
+        "tier": "s"
+      },
+      {
+        "domain": "pkulaw.cn",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "chinalawinfo.com",
+        "tier": "a",
+        "lang": "zh"
+      },
+      {
+        "domain": "law.cornell.edu",
+        "tier": "a"
+      },
+      {
+        "domain": "courtlistener.com",
+        "tier": "a"
+      },
+      {
+        "domain": "canlii.org",
+        "tier": "a"
+      },
+      {
+        "domain": "worldlii.org",
+        "tier": "a"
+      },
+      {
+        "domain": "legislation.gov.uk",
+        "tier": "a"
+      },
+      {
+        "domain": "justia.com",
+        "tier": "b"
+      }
+    ],
+    "finance": [
+      {
+        "domain": "pbc.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "csrc.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "nfra.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "sse.com.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "szse.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "federalreserve.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "sec.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "ecb.europa.eu",
+        "tier": "s"
+      },
+      {
+        "domain": "bis.org",
+        "tier": "s"
+      },
+      {
+        "domain": "imf.org",
+        "tier": "a"
+      },
+      {
+        "domain": "worldbank.org",
+        "tier": "a"
+      },
+      {
+        "domain": "oecd.org",
+        "tier": "a"
+      },
+      {
+        "domain": "fred.stlouisfed.org",
+        "tier": "a"
+      }
+    ],
+    "medical": [
+      {
+        "domain": "who.int",
+        "tier": "s"
+      },
+      {
+        "domain": "cdc.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "nih.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "fda.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "nmpa.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "nhc.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "medlineplus.gov",
+        "tier": "a"
+      },
+      {
+        "domain": "mayoclinic.org",
+        "tier": "a"
+      },
+      {
+        "domain": "nhs.uk",
+        "tier": "a"
+      },
+      {
+        "domain": "nlm.nih.gov",
+        "tier": "a"
+      },
+      {
+        "domain": "cochrane.org",
+        "tier": "a"
+      },
+      {
+        "domain": "nejm.org",
+        "tier": "a"
+      },
+      {
+        "domain": "thelancet.com",
+        "tier": "a"
+      },
+      {
+        "domain": "bmj.com",
+        "tier": "a"
+      },
+      {
+        "domain": "jamanetwork.com",
+        "tier": "a"
+      },
+      {
+        "domain": "clinicaltrials.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "europepmc.org",
+        "tier": "a"
+      }
+    ],
+    "databases": [
+      {
+        "domain": "postgresql.org",
+        "tier": "s"
+      },
+      {
+        "domain": "mysql.com",
+        "tier": "s"
+      },
+      {
+        "domain": "mariadb.org",
+        "tier": "s"
+      },
+      {
+        "domain": "redis.io",
+        "tier": "s"
+      },
+      {
+        "domain": "mongodb.com",
+        "tier": "s"
+      },
+      {
+        "domain": "sqlite.org",
+        "tier": "s"
+      },
+      {
+        "domain": "duckdb.org",
+        "tier": "s"
+      },
+      {
+        "domain": "elastic.co",
+        "tier": "s"
+      },
+      {
+        "domain": "opensearch.org",
+        "tier": "s"
+      },
+      {
+        "domain": "meilisearch.com",
+        "tier": "s"
+      },
+      {
+        "domain": "typesense.org",
+        "tier": "s"
+      },
+      {
+        "domain": "qdrant.tech",
+        "tier": "a"
+      },
+      {
+        "domain": "milvus.io",
+        "tier": "a"
+      },
+      {
+        "domain": "weaviate.io",
+        "tier": "a"
+      },
+      {
+        "domain": "pinecone.io",
+        "tier": "a"
+      }
+    ],
+    "design": [
+      {
+        "domain": "mui.com",
+        "tier": "s"
+      },
+      {
+        "domain": "ant.design",
+        "tier": "s"
+      },
+      {
+        "domain": "element-plus.org",
+        "tier": "s"
+      },
+      {
+        "domain": "vuetifyjs.com",
+        "tier": "s"
+      },
+      {
+        "domain": "quasar.dev",
+        "tier": "s"
+      },
+      {
+        "domain": "chakra-ui.com",
+        "tier": "s"
+      },
+      {
+        "domain": "radix-ui.com",
+        "tier": "s"
+      },
+      {
+        "domain": "headlessui.com",
+        "tier": "s"
+      },
+      {
+        "domain": "ariakit.org",
+        "tier": "s"
+      },
+      {
+        "domain": "mantine.dev",
+        "tier": "s"
+      },
+      {
+        "domain": "material.io",
+        "tier": "s"
+      },
+      {
+        "domain": "m3.material.io",
+        "tier": "s"
+      },
+      {
+        "domain": "carbondesignsystem.com",
+        "tier": "s"
+      },
+      {
+        "domain": "atlassian.design",
+        "tier": "s"
+      },
+      {
+        "domain": "lightningdesignsystem.com",
+        "tier": "s"
+      },
+      {
+        "domain": "primer.style",
+        "tier": "s"
+      },
+      {
+        "domain": "spectrum.adobe.com",
+        "tier": "s"
+      },
+      {
+        "domain": "polaris.shopify.com",
+        "tier": "s"
+      },
+      {
+        "domain": "fluent2.microsoft.design",
+        "tier": "s"
+      },
+      {
+        "domain": "arco.design",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "tdesign.tencent.com",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "semi.design",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "fonts.google.com",
+        "tier": "s"
+      },
+      {
+        "domain": "tailwindcss.com",
+        "tier": "a"
+      },
+      {
+        "domain": "getbootstrap.com",
+        "tier": "a"
+      },
+      {
+        "domain": "bulma.io",
+        "tier": "a"
+      },
+      {
+        "domain": "shadcn.com",
+        "tier": "a"
+      },
+      {
+        "domain": "ui.shadcn.com",
+        "tier": "a"
+      },
+      {
+        "domain": "daisyui.com",
+        "tier": "a"
+      },
+      {
+        "domain": "flowbite.com",
+        "tier": "a"
+      },
+      {
+        "domain": "semantic-ui.com",
+        "tier": "a"
+      },
+      {
+        "domain": "lucide.dev",
+        "tier": "a"
+      },
+      {
+        "domain": "heroicons.com",
+        "tier": "a"
+      },
+      {
+        "domain": "phosphoricons.com",
+        "tier": "a"
+      },
+      {
+        "domain": "feathericons.com",
+        "tier": "a"
+      },
+      {
+        "domain": "fontawesome.com",
+        "tier": "a"
+      },
+      {
+        "domain": "remixicon.com",
+        "tier": "a"
+      },
+      {
+        "domain": "tabler.io",
+        "tier": "a"
+      },
+      {
+        "domain": "iconoir.com",
+        "tier": "a"
+      },
+      {
+        "domain": "iconify.design",
+        "tier": "a"
+      },
+      {
+        "domain": "simpleicons.org",
+        "tier": "a"
+      },
+      {
+        "domain": "fontshare.com",
+        "tier": "a"
+      },
+      {
+        "domain": "nngroup.com",
+        "tier": "a"
+      },
+      {
+        "domain": "webaim.org",
+        "tier": "a"
+      },
+      {
+        "domain": "a11yproject.com",
+        "tier": "a"
+      },
+      {
+        "domain": "css-tricks.com",
+        "tier": "a"
+      },
+      {
+        "domain": "smashingmagazine.com",
+        "tier": "a"
+      },
+      {
+        "domain": "uviewui.com",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "css.gg",
+        "tier": "b"
+      },
+      {
+        "domain": "icomoon.io",
+        "tier": "b"
+      },
+      {
+        "domain": "svgrepo.com",
+        "tier": "b"
+      },
+      {
+        "domain": "worldvectorlogo.com",
+        "tier": "b"
+      },
+      {
+        "domain": "logo.wine",
+        "tier": "b"
+      },
+      {
+        "domain": "seeklogo.com",
+        "tier": "b"
+      },
+      {
+        "domain": "brandfetch.com",
+        "tier": "b"
+      },
+      {
+        "domain": "typography.com",
+        "tier": "b"
+      },
+      {
+        "domain": "lawsofux.com",
+        "tier": "b"
+      },
+      {
+        "domain": "undraw.co",
+        "tier": "b"
+      },
+      {
+        "domain": "storyset.com",
+        "tier": "b"
+      },
+      {
+        "domain": "heropatterns.com",
+        "tier": "b"
+      },
+      {
+        "domain": "haikei.app",
+        "tier": "b"
+      },
+      {
+        "domain": "dribbble.com",
+        "tier": "b"
+      },
+      {
+        "domain": "behance.net",
+        "tier": "b"
+      },
+      {
+        "domain": "awwwards.com",
+        "tier": "b"
+      },
+      {
+        "domain": "mobbin.com",
+        "tier": "b"
+      },
+      {
+        "domain": "coolors.co",
+        "tier": "b"
+      },
+      {
+        "domain": "colorhunt.co",
+        "tier": "b"
+      },
+      {
+        "domain": "huemint.com",
+        "tier": "b"
+      },
+      {
+        "domain": "animate.style",
+        "tier": "b"
+      },
+      {
+        "domain": "easings.net",
+        "tier": "b"
+      },
+      {
+        "domain": "cubic-bezier.com",
+        "tier": "b"
+      }
+    ],
+    "education": [
+      {
+        "domain": "ocw.mit.edu",
+        "tier": "s"
+      },
+      {
+        "domain": "khanacademy.org",
+        "tier": "s"
+      },
+      {
+        "domain": "edx.org",
+        "tier": "a"
+      },
+      {
+        "domain": "coursera.org",
+        "tier": "a"
+      },
+      {
+        "domain": "classcentral.com",
+        "tier": "b"
+      }
+    ],
+    "dictionary": [
+      {
+        "domain": "dictionary.cambridge.org",
+        "tier": "s"
+      },
+      {
+        "domain": "oxfordlearnersdictionaries.com",
+        "tier": "s"
+      },
+      {
+        "domain": "merriam-webster.com",
+        "tier": "a"
+      },
+      {
+        "domain": "collinsdictionary.com",
+        "tier": "a"
+      },
+      {
+        "domain": "dict.youdao.com",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "dict.cn",
+        "tier": "b",
+        "lang": "zh"
+      },
+      {
+        "domain": "wiktionary.org",
+        "tier": "s"
+      }
+    ],
+    "data": [
+      {
+        "domain": "data.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "data.gov.uk",
+        "tier": "s"
+      },
+      {
+        "domain": "data.europa.eu",
+        "tier": "s"
+      },
+      {
+        "domain": "worldbank.org",
+        "tier": "s"
+      },
+      {
+        "domain": "imf.org",
+        "tier": "s"
+      },
+      {
+        "domain": "oecd.org",
+        "tier": "s"
+      },
+      {
+        "domain": "census.gov",
+        "tier": "s"
+      },
+      {
+        "domain": "stats.gov.cn",
+        "tier": "s",
+        "lang": "zh"
+      },
+      {
+        "domain": "ourworldindata.org",
+        "tier": "a"
+      },
+      {
+        "domain": "openstreetmap.org",
+        "tier": "a"
+      },
+      {
+        "domain": "naturalearthdata.com",
+        "tier": "a"
+      },
+      {
+        "domain": "geonames.org",
+        "tier": "a"
+      },
+      {
+        "domain": "kaggle.com",
+        "tier": "b"
+      },
+      {
+        "domain": "data.world",
+        "tier": "b"
+      },
+      {
+        "domain": "statista.com",
+        "tier": "b"
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.tsbuildinfo
+*.log
+adapters/dsh/node_modules/
+adapters/dsh/dist/
