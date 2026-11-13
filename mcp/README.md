@@ -4,6 +4,7 @@
 mcp/
   enabled.yaml           # 清单
   servers/               # 每个子目录 = 一个已启用 MCP
+    zai/                 # DSH: Z.ai MCP descriptor
     keenable/
     tavily-hikari/
     playwright/
@@ -13,6 +14,7 @@ mcp/
     node_repl/
   local/                 # 本地 MCP 源码
     firefox-devtools-mcp/
+    zai-bridge/          # Z.ai Go MCP source + offline tests
   README.md
 ```
 

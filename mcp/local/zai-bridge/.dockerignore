@@ -1,0 +1,17 @@
+.tmp/
+_ref/
+Z.ai/
+*.exe
+_send_out.txt
+_send_err.txt
+_mcp_*.jsonl
+_s*.jsonl
+_r1.jsonl
+_*.mjs
+captcha/node_modules/
+captcha/captcha-happy.mjs
+.gotmp*/
+accounts.json
+config.json
+data/
+dist/

@@ -1,0 +1,6 @@
+services:
+  zai-bridge:
+    environment:
+      ZAI_ACCOUNTS_FILE: /etc/zai/accounts.json
+    volumes:
+      - ./accounts.json:/etc/zai/accounts.json:ro

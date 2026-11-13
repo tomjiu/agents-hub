@@ -1,0 +1,39 @@
+services:
+  zai-bridge:
+    build: .
+    image: zai-bridge:latest
+    container_name: zai-bridge
+    restart: unless-stopped
+    # MCP 走 stdio，通常由宿主 AI 客户端直接 spawn；
+    # 这里保留以便手动 docker exec 调试
+    stdin_open: true
+    tty: false
+    environment:
+      # 单账户：填这里；多账户：留空，改用下面的 accounts.json
+      ZAI_TOKEN: ${ZAI_TOKEN:-}
+      # 每个账户的并发上限（免费户为 1，开会员后调高）
+      ZAI_MAX_CONCURRENCY: ${ZAI_MAX_CONCURRENCY:-1}
+      ZAI_COOKIE: ${ZAI_COOKIE:-}
+      ZAI_MODEL: ${ZAI_MODEL:-glm-5.3}
+      CAPTCHA_STALL_MS: "10000"
+      ZAI_CAPTCHA_WORKERS: "2"
+      ZAI_CAPTCHA_ROUNDS: "3"
+    volumes:
+      # 验证码 CDN 缓存：跨重启复用，避免每次冷启动重新下载 ~1MB
+      - captcha-cache:/home/bridge/.zcode-captcha-cdn-cache
+      # 文件交换目录：upload_file / download_file 用的就是这里
+      # 宿主的 ./data 即容器内的 /data，两边文件直接可见
+      - ./data:/data
+    # 低占用上限
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  captcha-cache:

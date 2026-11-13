@@ -1,0 +1,10 @@
+.tmp/
+zai-bridge.exe
+bridge-new.exe
+captcha/node_modules/
+captcha/captcha-happy.mjs
+.gotmp*/
+accounts.json
+config.json
+data/
+dist/

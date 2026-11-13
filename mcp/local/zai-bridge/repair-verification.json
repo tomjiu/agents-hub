@@ -1,0 +1,43 @@
+{
+  "version": "0.3.1",
+  "scope": "zai only; no Qwen work",
+  "productRequests": 0,
+  "realCaptchaExecutions": 0,
+  "subagentsMax": 2,
+  "goVet": "passed",
+  "testRounds": 5,
+  "uniqueTestsIncludingSubtests": 87,
+  "topLevelTests": 61,
+  "passedEvents": 435,
+  "failedEvents": 0,
+  "offlineBinaryChecks": [
+    {
+      "mode": "single",
+      "version": "0.3.1",
+      "tools": 19,
+      "exit": 0,
+      "ping": true
+    },
+    {
+      "mode": "accounts",
+      "version": "0.3.1",
+      "tools": 20,
+      "exit": 0,
+      "ping": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "zai-bridge.exe",
+      "bytes": 6710272,
+      "sha256": "6cc0dc8deb20f573fea5ed14ed60bbbc1e35c50ff6df03f345fca9c1e5616a3e"
+    },
+    {
+      "path": "dist/0.3.1/zai-bridge-linux-amd64",
+      "bytes": 6537400,
+      "sha256": "86b45add21e2c3a6d388570070e228a364379c6072295756e089003187476dcd"
+    }
+  ],
+  "race": "Not verified: Windows runtime fails even zero-test startup with 0xc0000139",
+  "docker": "daemon not running; old images not updated"
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "zai": {
+      "command": "/absolute/path/to/zai-bridge",
+      "cwd": "/absolute/path/to/zai-bridge-source",
+      "env": {
+        "ZAI_ACCOUNTS_FILE": "/absolute/path/to/private/accounts.json",
+        "ZAI_NODE": "/absolute/path/to/node",
+        "CAPTCHA_STALL_MS": "10000",
+        "NODE_OPTIONS": "--max-old-space-size=256"
+      }
+    }
+  }
+}

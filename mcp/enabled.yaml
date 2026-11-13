@@ -59,6 +59,14 @@ servers:
     command: [python, -X, utf8, E:\Code\ai\brp-mvp\adapter\brp_mcp_adapter.py]
     env: [BRP_WS_ADDR]
     notes: BRP real Firefox control; requires extension + bridge
+  - id: zai
+    path: servers/zai
+    local: local/zai-bridge
+    clients: [dsh]
+    type: stdio
+    version: 0.3.1
+    notes: DSH globally configured; credentials stay in private accounts.json; no default live tests
+
 not_enabled_see:
   - ../sources/mcp-ecosystem/
   - ../catalog/mcp.draft.toml

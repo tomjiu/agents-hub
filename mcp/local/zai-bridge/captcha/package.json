@@ -1,0 +1,16 @@
+{
+  "name": "zai-bridge-captcha",
+  "private": true,
+  "type": "module",
+  "description": "Aliyun captcha solver sidecar (happy-dom, no browser)",
+  "dependencies": {
+    "happy-dom": "^20.11.6",
+    "undici": "^8.10.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "scripts": {
+    "build": "esbuild captcha-happy.ts --format=esm --platform=node --target=node20 --packages=external --outfile=captcha-happy.mjs --log-level=warning"
+  }
+}

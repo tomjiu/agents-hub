@@ -1,0 +1,21 @@
+{
+  "default": "work",
+  "accounts": [
+    {
+      "name": "work",
+      "token": "eyJhbGciOi...第一个账户的 token",
+      "max_concurrency": 1
+    },
+    {
+      "name": "personal",
+      "token": "eyJhbGciOi...第二个账户的 token",
+      "model": "glm-5.3",
+      "max_concurrency": 1
+    },
+    {
+      "name": "vip",
+      "token": "eyJhbGciOi...开了会员的账户",
+      "max_concurrency": 3
+    }
+  ]
+}
