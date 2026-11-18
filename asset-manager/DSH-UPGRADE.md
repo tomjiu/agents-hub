@@ -38,12 +38,12 @@ DSH同版本文件修改、记忆/搜索代码或编译产物变更都会令旧�
 1. 先查询channels，不动运行版；明确选择固定候选版本，保留运行版及用户配置备份。
 2. 在全新隔离目录安装候选DSH，禁止默认覆盖和安装hooks。不把真实凭据复制到测试目录。
 3. 按 [真实宿主指南](DSH-HOST-ACCEPTANCE.md) 设置HUB_DSH_INSTALLATION并跑probe-dsh-host.mjs。它构建当前记忆适配包并验证整个Skill/MCP/记忆闭环，不自动更新源码或用户配置。
-4. 成功报告写到.asset-state/evidence/dsh-compatibility/<version>-<host-hash>-<asset-hash>-functional.json，失败不生成成功记录。首次测试的记录不会自动成为正式兼容声明。
+4. 成功报告写到.asset-state/evidence/dsh-compatibility/<version>-<host-hash>-<asset-hash>-parallel.json，失败不生成成功记录。首次测试的记录不会自动成为正式兼容声明。
 5. 人工复核测试范围，把经过审阅且无私密数据的报告纳入兼容记录，再跑check-dsh确认。发布记录的改动必须走Git审阅。
 6. 只有用户另外明确要求部署升级时，才设计具体运行实例切换及回滚。本次不修改用户live profile。
 
 ## 重点接口
 
-记忆插件直接依赖tools.register/output/execute、systemPrompt.section、tools/result事件与effect销毁，这些都可能随DSH变化；结构类型不会发现事件形状或执行语义变更。搜索服务器依赖标准MCP，风险更多集中在DSH bridge、stdio进程和构建/环境约定。两者必须测试结果回流，不只看“启动没有报错”。兼容门槛现在还要求实际search查询、refs与缓存命中证据；旧tool_search-only证据不能通过。
+记忆插件直接依赖tools.register/output/execute、systemPrompt.section、tools/result事件与effect销毁，这些都可能随DSH变化；结构类型不会发现事件形状或执行语义变更。搜索服务器依赖标准MCP，风险更多集中在DSH bridge、stdio进程和构建/环境约定。两者必须测试结果回流，不只看“启动没有报错”。兼容门槛还要求实际search查询、refs与缓存命中，以及同批发现/查询通过；旧tool_search-only或串行证据不能批准当前版本。
 
 有新版本或新资产指纹时，门槛只报告未验证，不自动禁用或干扰用户当前运行会话。旧导入provenance不会为消除警告而重写。

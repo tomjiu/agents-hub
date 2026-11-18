@@ -23,6 +23,7 @@ const TOOL_ARGS = JSON.stringify({ kind: 'inference', text: WRITE_TEXT, confiden
 const MCP_NAME = process.env.MN_E2E_MCP_TOOL
 const SKILL_NAME = process.env.MN_E2E_SKILL
 const SEARCH_NAME = process.env.MN_E2E_SEARCH_TOOL
+const PARALLEL_DISCOVERY = process.env.MN_E2E_PARALLEL_DISCOVERY === '1'
 const SEARCH_ARGS = JSON.stringify({ query: 'aurora glacier', engines: ['searxng'], top_n: 3 })
 const searchCall = { id: 'call_search_1', type: 'function', function: { name: SEARCH_NAME, arguments: SEARCH_ARGS } }
 const SKILL_BODY = process.env.MN_E2E_SKILL_FILE ? readFileSync(process.env.MN_E2E_SKILL_FILE, 'utf8').split('---').slice(2).join('---').trim() : null
@@ -35,7 +36,7 @@ function strings(value) {
   return []
 }
 const extraCalls = [
-  ...(MCP_NAME && !SEARCH_NAME ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
+  ...(MCP_NAME && (!SEARCH_NAME || PARALLEL_DISCOVERY) ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
   ...(SEARCH_NAME ? [searchCall] : []),
   ...(SKILL_NAME ? [{ id: 'call_skill_1', type: 'function', function: { name: 'skill', arguments: JSON.stringify({ name: SKILL_NAME }) } }] : []),
 ]
@@ -70,6 +71,7 @@ const server = createServer((req, res) => {
       has_search_tool: SEARCH_NAME ? toolNames.includes(SEARCH_NAME) : false,
       has_search_result: hasSearchResult,
       has_search_cache: hasSearchCache,
+      has_static_discovery: messageStrings.some((text) => /"disclosure"[ ]*:[ ]*"static"/.test(text)),
       search_result_diagnostics: SEARCH_NAME ? messages.filter((m) => m.role === 'tool' && (m.tool_call_id === 'call_search_1' || m.tool_call_id === 'call_search_cached')).map((m) => m.content) : undefined,
       has_skill_tool: SKILL_NAME ? toolNames.includes('skill') : false,
       has_loaded_skill: SKILL_BODY ? strings(messages).some((text) => text.replaceAll(String.fromCharCode(13), '').includes(SKILL_BODY.replaceAll(String.fromCharCode(13), ''))) : false,

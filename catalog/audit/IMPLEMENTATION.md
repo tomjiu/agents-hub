@@ -16,8 +16,8 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 95 PASS，1 SKIP（总96） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
-| Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
+| Asset Manager | 96 PASS，1 SKIP（总97） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
@@ -111,6 +111,13 @@
 提交6fefdfd的独立干净clone已按文档仅安装固定依赖并构建，77项根测试通过、1项跳过；两版DSH兼容指纹与原目录一致，生成包实际加载记忆/搜索/Skill通过，Console提交产物真实点击通过，Git tracked工作区干净，fsck与2,418目标字节核对通过。见 [干净副本验收](fresh-checkout-verification.json) 与 [交付矩阵](DELIVERY.md)。
 
 下列仍为未认证或待授权事项，不因核心DSH链路通过而自动启用、升级或称为完成。
+
+## 后续搜索竞态修复
+
+- 用户要求继续修复后，首先真实复现DSH rc.1同批tool_search/search导致unknown tool且来源0请求。
+- 自有Search-core增加显式static预注册模式；自有DSH配置使用此模式，启动时提供全部8工具，发现查询不再改变wire工具列表。默认dynamic模式保留渐进披露；不修改DSH官方bridge。
+- 原路径重新验证rc.1/rc.4直接接入及生成运行包的同批发现、实际搜索、缓存回流和记忆/Skill链路，通过。4项SDK内存transport测试验证静态零列表变更、真实并行查询、动态默认兼容及非法模式。
+- Search-core现296项通过，根97项中96通过、1权限项跳过；旧配置需明确重新生成，其他动态MCP刷新与公网搜索不在本修复保证范围。
 
 ## 未认证与后续事项
 

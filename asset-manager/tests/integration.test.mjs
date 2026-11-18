@@ -101,3 +101,13 @@ test('duplicate client skill names reject the whole generated view',async t=>{
  await fs.writeFile(path.join(root,'experts/core.toml'),stringify({name:'core',skills:['demo','other']}));
  await assert.rejects(createView(root,'generic','core'),/Multiple assets/);assert.deepEqual(await fs.readdir(path.join(root,'.asset-state/views')),[]);
 });
+
+test('DSH search adapter uses stable disclosure without changing generic client behavior',async t=>{
+ const root=await fixture(t);
+ await fs.mkdir(path.join(root,'mcp/servers/search-core'),{recursive:true});await fs.writeFile(path.join(root,'mcp/servers/search-core/server.mjs'),'// fixture');
+ await fs.writeFile(path.join(root,'catalog/assets/mcp.search-core.toml'),stringify({id:'mcp.search-core',kind:'mcp',path:'mcp/servers/search-core',registry_id:'search-core',source:{kind:'local'},version:{sha256:(await tree(path.join(root,'mcp/servers/search-core'))).sha256}}));
+ await fs.writeFile(path.join(root,'experts/core.toml'),stringify({name:'core',skills:['demo'],mcp:['mcp.search-core']}));
+ await fs.writeFile(path.join(root,'mcp/registry.toml'),stringify({servers:[{id:'search-core',transport:'stdio',command:'node',args:['mcp/servers/search-core/server.mjs'],status:'build-required'}]}));
+ const dsh=await createView(root,'dsh','core');const patch=YAML.parse(await fs.readFile(path.join(dsh.destination,'dsh-mcp.patch.yml'),'utf8'));assert.equal(patch[0].insert[0].config.env.SC_MCP_DISCLOSURE,'static');
+ const generic=await createView(root,'generic','core');const cfg=JSON.parse(await fs.readFile(path.join(generic.destination,'mcp.json'),'utf8'));assert.equal(cfg.mcpServers['search-core'].env,undefined);
+});

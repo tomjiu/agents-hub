@@ -71,7 +71,7 @@ node asset-manager/cli.mjs dsh-bundle <installed-dsh-directory> --memory
 node asset-manager/cli.mjs inspect-dsh-bundle <generated-bundle-directory>
 ~~~
 
-生成新的独立包，含Skill副本、搜索MCP原生patch和记忆插件运行副本；必须先通过版本指纹验收。不会改DSH profile或复制真实记忆库，用户审查后才明确启动。记忆数据默认落包内私有state，不能自动清理。详见 [运行包指南](asset-manager/DSH-BUNDLE.md)。
+生成新的独立包，含Skill副本、搜索MCP原生patch和记忆插件运行副本；必须先通过版本指纹验收。当前DSH搜索配置使用static预注册，已修复自有Search-core同批发现/查询导致unknown tool的竞态；旧包需重新生成、明确采用，运行中实例不会自动更新。不会改DSH profile或复制真实记忆库，用户审查后才明确启动。记忆数据默认落包内私有state，不能自动清理。详见 [运行包指南](asset-manager/DSH-BUNDLE.md)。
 
 ## 显式项目 Skill 部署
 

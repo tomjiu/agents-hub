@@ -24,7 +24,7 @@ node asset-manager/probe-dsh-host.mjs
 7. 增加断言：search工具查询本地SearXNG兼容来源，refs返回模型；重复查询命中缓存且只请求来源一次，SC_DATA_DIR在隔离目录。已部署asset-management Skill的完整正文（去除frontmatter，规范化CRLF）原样进入后续模型请求；不是只检查摘要或标题。
 8. 回收已部署Skill，停止模拟模型并清理测试profile、workspace及视图。遥测DISABLED；不启动Web应用，也不调用公网搜索或真实账户API。
 
-详见 [搜索功能验收](SEARCH-ACCEPTANCE.md)。tool_search列表刷新与search不在同批并行（已发现DSH重注册竞态）；功能探针执行查询，不能据此声称竞态已修复。
+详见 [搜索功能验收](SEARCH-ACCEPTANCE.md)。当前DSH Search-core配置采用static预注册，避免调用中工具列表刷新。默认实际验证同批tool_search和search；HUB_DSH_PARALLEL_DISCOVERY=0仅供串行诊断，不能生成可批准的兼容记录；未改DSH官方bridge，也不证明其他动态MCP不存在竞态。
 
 ## 证据与限制
 

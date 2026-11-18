@@ -19,7 +19,7 @@ export async function clientMcpConfig(root,view,client,servers){
     const rel='launch/'+id+'.json';await createJson(path.join(view,rel),spec);
     const launcher=await confined(root,'asset-manager/mcp-launcher.mjs');
     config[id]={type:'local',command:[process.execPath,launcher,path.join(view,rel)],enabled:true};
-   }else if(client==='dsh')config[id]={transport:'stdio',serverName:id,command:s.command,args:s.args,cwd:s.cwd||root,failOnStartupError:true};
+   }else if(client==='dsh')config[id]={transport:'stdio',serverName:id,command:s.command,args:s.args,cwd:s.cwd||root,failOnStartupError:true,...id==='search-core'?{env:{SC_MCP_DISCLOSURE:'static'}}:{}};
    else config[id]={command:s.command,args:s.args,cwd:s.cwd||root,...s.required_env?.length?{env_vars:s.required_env}:{}};
   }
  }

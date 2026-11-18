@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2387,
+  "unchanged": 2385,
   "missing": [],
   "changed": [
     {
@@ -75,7 +75,7 @@
       "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
-      "current_sha256": "2835d7dd9f479739895cfe73ee1c3d792fad27b62ac8d4a48249ec54f4286c5f"
+      "current_sha256": "6c2441c560f0342fe08c972e172e3a037d4df0b110b5be5b42478c0114f055d1"
     },
     {
       "original": "memory-net/console/apps/console/dist/index.html",
@@ -112,6 +112,18 @@
       "target": "mcp/servers/search-core/typescript/package.json",
       "baseline_sha256": "33ec7579a8520708e4c04c7d23371a31c5ac45289feeb433ac631b96b839d064",
       "current_sha256": "8f56ec646bdafce62b1116a591e7446c7b4b280a4040342d6ba8d4f20aa1a995"
+    },
+    {
+      "original": "search-infra/core/README.md",
+      "target": "mcp/servers/search-core/typescript/README.md",
+      "baseline_sha256": "fc22904fd6960ebff5d0671e6cf7b59d0ffa74e59ff0237ce2eb358dd3cd0a7e",
+      "current_sha256": "995336172ad11d7d4782a65b6880bf5f729635e2e46cf5a7e681d26eeb097e82"
+    },
+    {
+      "original": "search-infra/core/src/mcp.ts",
+      "target": "mcp/servers/search-core/typescript/src/mcp.ts",
+      "baseline_sha256": "36928dab471ad1ddf035e819858f7559a6b3f06eff96fe546e894fcfac7c4902",
+      "current_sha256": "03f330c0355c224ac229471efb68b43a242cceeb69b7e22932a11fe6d5e88519"
     },
     {
       "original": "search-infra/core/src/test/breaker2.test.ts",

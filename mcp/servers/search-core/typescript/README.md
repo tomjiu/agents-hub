@@ -38,6 +38,12 @@ MCP 接入(pi/dsh/Claude/Codex 均为标准 MCP client):
 
 HTTP/SSE 探针: `node scripts/http-probe.mjs`;MCP 渐进披露探针: `node scripts/mcp-probe.mjs`。
 
+## DSH并发工具发现兼容模式
+
+默认SC_MCP_DISCLOSURE=dynamic保留3个常驻工具与渐进注册；DSH由agents-hub生成配置时显式使用static，启动前登记全部8个真实工具。tool_search继续检索能力，但不发送list_changed，避免同批发现/查询时DSH重注册导致unknown tool。非法值拒绝启动。
+
+static模式多携带5个初始schema；未改变实际research/search等执行或授权语义，不修补DSH官方bridge。旧配置和运行包需要显式重新生成，当前实例不会自动改变。详见 [搜索验收说明](../../../../asset-manager/SEARCH-ACCEPTANCE.md)。
+
 ## 配置
 
 `~/.search-core/config.json` 或环境变量(优先):

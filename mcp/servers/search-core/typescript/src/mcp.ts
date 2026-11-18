@@ -8,6 +8,7 @@
  *   Direct(常驻):  search / fetch / tool_search
  *   Deferred(发现后激活): research / x_search / search_providers / cache_stats
  * 工具描述里写死委派约束(WorkBuddy[07] 思想): query 一句话意图、复杂研究走 research。
+ * SC_MCP_DISCLOSURE=static: DSH适配预注册8工具,发现不改wire列表;默认dynamic保持渐进披露。
  * 运行: npx search-core serve  (stdio JSON-RPC)
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -29,8 +30,17 @@ interface DeferredTool {
   activatedAt?: number;
 }
 
-export async function serveMcp(): Promise<void> {
-  const core = new SearchCore();
+export type McpDisclosure = "dynamic" | "static";
+
+/** Stable wire registration for hosts that replace tools on list_changed. */
+export function disclosureMode(value: string | undefined): McpDisclosure {
+  if (value === undefined || value === "dynamic") return "dynamic";
+  if (value === "static") return "static";
+  throw new Error("SC_MCP_DISCLOSURE must be dynamic or static");
+}
+
+export function createSearchMcpServer(core: SearchCore, disclosure: McpDisclosure = "dynamic"): McpServer {
+  if (disclosure !== "dynamic" && disclosure !== "static") throw new Error("Invalid MCP disclosure mode");
   const server = new McpServer({ name: "search-core", version: VERSION });
   const deferred: DeferredTool[] = [];
 
@@ -230,10 +240,20 @@ Do NOT fetch a full page when a focused read suffices.`,
     },
   });
 
+  // Register before connect: discovery must not churn active tools in static mode.
+  if (disclosure === "static") {
+    for (const tool of deferred) {
+      server.tool(tool.name, tool.description, tool.schema, tool.handler);
+      tool.registered = true;
+    }
+  }
+
   // ---------- Direct: tool_search(渐进披露入口) ----------
   server.tool(
     "tool_search",
-    `Discover and activate deferred tools (progressive disclosure — keeps the base tool list small so schemas don't bloat your context).
+    disclosure === "static"
+      ? "Find available search capabilities. All tools are already callable; discovery does not change the tool list."
+      : `Discover and activate deferred tools (progressive disclosure — keeps the base tool list small so schemas don't bloat your context).
 Scores deferred tools by lexical match on name+description (name hits weight 2x). Matched tools are ACTIVATED and become callable immediately.`,
     {
       query: z.string().min(1).describe("What capability do you need, e.g. \"deep research loop\", \"twitter\", \"engine health\""),
@@ -270,7 +290,10 @@ Scores deferred tools by lexical match on name+description (name hits weight 2x)
           description: s.t.description,
         })),
         newly_activated: activated,
-        hint: activated.length > 0
+        disclosure,
+        hint: disclosure === "static"
+          ? "Matched tools are already callable; the host tool list remains stable."
+          : activated.length > 0
           ? `Tools [${activated.join(", ")}] are now callable (tool list updated).`
           : "No new tools matched; matched tools above are already active.",
       };
@@ -278,8 +301,20 @@ Scores deferred tools by lexical match on name+description (name hits weight 2x)
     },
   );
 
-  await server.connect(new StdioServerTransport());
-  // stdio 模式下进程保持常驻;stdin 关闭时 SDK 会自行结束
+  return server;
+}
+
+export async function serveMcp(): Promise<void> {
+  const disclosure = disclosureMode(process.env.SC_MCP_DISCLOSURE);
+  const core = new SearchCore();
+  try {
+    const server = createSearchMcpServer(core, disclosure);
+    server.server.onclose = () => core.cache.close();
+    await server.connect(new StdioServerTransport());
+  } catch (error) {
+    core.cache.close();
+    throw error;
+  }
 }
 
 /** 直接执行 `node dist/mcp.js` 时自启动(package.json 的 bin 指向 cli,这里给 MCP 场景) */

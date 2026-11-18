@@ -14,7 +14,11 @@ fixture只在本地提供JSON，不将生产引擎地址改成本地，也不关
 
 ## 已发现的限制
 
-在DSH rc.1测试中，模型并行调用tool_search（会通知工具列表更新）和search时出现search unknown tool；单独查询可通过。上游DSH bridge重注册期间的调用竞态尚未修改或证明修复。生产建议：需要发现扩展工具时先等待tool_search完成，再调用其他MCP工具，不在同批并行发现和执行。
+旧DSH配置的动态渐进模式中，同批tool_search触发注册表刷新会让search报unknown tool（修复前真实复现，provider收到0请求）。当前自有DSH适配配置显式传SC_MCP_DISCLOSURE=static：启动时登记全部8个真实工具，tool_search仍检索能力，但不再变更wire工具列表。这消除了Search-core自身触发的重注册竞态，不修改DSH官方bridge。
+
+默认无环境变量仍是dynamic，其他客户端不受改变；非法模式报错，不静默回落。static模式代价是首轮8个工具schema而非3个，未承诺所有外部MCP刷新都并发安全。
+
+真实宿主探针默认进行并发回归（HUB_DSH_PARALLEL_DISCOVERY=0只能诊断，不能批准），模拟模型同批调用发现与查询，断言static发现结果、查询refs和缓存回流，无unknown tool；rc.1/rc.4及生成包均复验。已有旧profile或旧包必须重新生成/显式采用新配置，当前运行中的用户DSH不被自动更改。
 
 ## 范围
 

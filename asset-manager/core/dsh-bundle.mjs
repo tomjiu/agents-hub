@@ -22,7 +22,7 @@ export async function createDshBundle(root,installation,{expert='research',memor
  try{
   await snapshot(path.join(view.destination,'skills'),path.join(bundle,'skills'));
   const patch=YAML.parse(await fs.readFile(path.join(view.destination,'dsh-mcp.patch.yml'),'utf8'));
-  for(const operation of patch)for(const node of operation.insert||[])if(node.name==='@deepseek-ai/dsh-mcp-client'&&node.config.serverName==='search-core')node.config.env={SC_DATA_DIR:path.join(bundle,'state/search-core')};
+  for(const operation of patch)for(const node of operation.insert||[])if(node.name==='@deepseek-ai/dsh-mcp-client'&&node.config.serverName==='search-core')node.config.env={...node.config.env,SC_DATA_DIR:path.join(bundle,'state/search-core')};
   patch.unshift({id:'skill-filesystem',config:{includeDefaultRoots:true,customSkillDirs:[path.join(bundle,'skills')],watch:false}});
   if(memory){
    const asset=catalog.get('memory-net');if(!asset||asset.kind!=='plugins')throw new Error('memory-net is not registered');
