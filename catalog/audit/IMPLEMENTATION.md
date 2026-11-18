@@ -100,7 +100,13 @@
 - Firefox对照Mozilla npm 0.9.5 commit b0f4495336b36b875cee29480150e660088c3e1a：131相同、20修改、12本地独有，故保留源码。详情见firefox-upstream-comparison.json。
 - 厂商包许可与宿主依赖未经完整验收，默认未启用；Trae市场和WorkBuddy安装包发现标RESTRICTED。
 
-## 尚未完成的硬门槛
+## 当前交付核查
+
+提交6fefdfd的独立干净clone已按文档仅安装固定依赖并构建，77项根测试通过、1项跳过；两版DSH兼容指纹与原目录一致，生成包实际加载记忆/搜索/Skill通过，Console提交产物真实点击通过，Git tracked工作区干净，fsck与2,418目标字节核对通过。见 [干净副本验收](fresh-checkout-verification.json) 与 [交付矩阵](DELIVERY.md)。
+
+下列仍为未认证或待授权事项，不因核心DSH链路通过而自动启用、升级或称为完成。
+
+## 未认证与后续事项
 
 1. DSH 0.2.2-rc.1与next 0.2.2-rc.4真实独立宿主记忆/搜索/Skill闭环已通过；用户live profile切换须另获明确授权。Codex/OpenCode真实加载不再是本次目标门槛。
 2. Profile组合、Skill部署、MCP配置保护和DSH独立运行包已实现；rc.1/rc.4实际采用生成包已验证。现有用户profile合并与真实凭据映射仍须按授权另验，不能自动替换。

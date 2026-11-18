@@ -23,7 +23,7 @@ node asset-manager/cli.mjs check-dsh <installed-dsh-package-directory>
 
 view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置片段。换成 dsh、codex 或 opencode 可生成对应视图；不会覆盖用户配置，也不会启动远端服务或自动加载插件。
 
-**本次运行时验收只要求DSH可用，不要求Codex/OpenCode全部跑通；后两者适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH 0.2.2-rc.1与next 0.2.2-rc.4独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 全量迁移和已完成验证见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
+**本次运行时验收只要求DSH可用，不要求Codex/OpenCode全部跑通；后两者适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH 0.2.2-rc.1与next 0.2.2-rc.4独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 交付边界及新clone复验见 [交付矩阵](catalog/audit/DELIVERY.md) 与 [干净副本证据](catalog/audit/fresh-checkout-verification.json)；阶段历史见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
 
 ## 目录职责
 
@@ -52,6 +52,17 @@ npm run build:dsh
 ~~~
 
 build:dsh只构建，不下载依赖、升级DSH或启用资产。构建产物变化后，按 [宿主验收指南](asset-manager/DSH-HOST-ACCEPTANCE.md) 复验，不能沿用失效的指纹记录。
+
+### Console可选验证
+
+Console有独立workspace锁；需要使用或复跑其UI探针时，先在仓库根执行：
+
+~~~sh
+npm ci --ignore-scripts --no-audit --no-fund --prefix plugins/memory-net/console
+node asset-manager/probe-console-ui.mjs
+~~~
+
+探针默认使用已安装Edge，可通过HUB_BROWSER_EXECUTABLE指定本机Chromium浏览器；不开用户浏览器上下文，不读真实记忆库。干净clone中的固定Console app/server/vendor产物已实测可运行；浏览器未安装时不要把UI验证记为通过。
 
 ## DSH记忆与搜索运行包
 

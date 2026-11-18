@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "status": "PASS_WITH_DECLARED_LIMITS",
+  "source_commit": "6fefdfd08fead84dc0bf9bb828fb0877dce95080",
+  "method": "Independent local git clone --no-hardlinks, committed source only; npm ci --ignore-scripts in root and named subpackages, then build:dsh. No copies of original node_modules or dist.",
+  "environment": {
+    "os": "Windows",
+    "node": "26.13.1",
+    "dsh_versions": [
+      "0.2.2-rc.1",
+      "0.2.2-rc.4"
+    ]
+  },
+  "checks": [
+    {
+      "name": "Root regression suite in clean clone",
+      "status": "PASS",
+      "passed": 77,
+      "skipped": 1,
+      "total": 78,
+      "skip_reason": "Windows file-symlink privilege unavailable; directory junction rejection separately passed"
+    },
+    {
+      "name": "Fresh fixed dependency installation",
+      "status": "PASS",
+      "packages": [
+        "root",
+        "plugins/memory-net",
+        "plugins/memory-net/adapters/dsh",
+        "mcp/servers/search-core/typescript",
+        "plugins/memory-net/console"
+      ],
+      "install_scripts": false
+    },
+    {
+      "name": "build:dsh",
+      "status": "PASS",
+      "downloaded_dependencies": false
+    },
+    {
+      "name": "Catalog validation",
+      "status": "PASS",
+      "assets": 136
+    },
+    {
+      "name": "Recorded original migration targets in Git index and clone",
+      "status": "PASS",
+      "files": 2418,
+      "missing": 0,
+      "byte_mismatch": 0,
+      "banned_filename_matches": 0,
+      "scope": "Original targets verified against current committed blob bytes, not all original hashes unchanged and not exhaustive secret audit"
+    },
+    {
+      "name": "git fsck --no-dangling",
+      "status": "PASS"
+    },
+    {
+      "name": "Tracked working tree after installation/tests/build",
+      "status": "PASS",
+      "clean": true
+    },
+    {
+      "name": "Exact compatibility fingerprint",
+      "status": "PASS",
+      "versions": [
+        "0.2.2-rc.1",
+        "0.2.2-rc.4"
+      ],
+      "host_hashes": [
+        "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "0c890927431283236f5476f94aa8328fe60f395d5360e5a96295a6b28769a281"
+      ],
+      "assets_sha256": "99e13419d878dc5e0bc7a4fabcd2de51923b3766cc8fb8b9909499f64dd7f8fb"
+    },
+    {
+      "name": "Generated DSH bundle, actual isolated headless on both versions",
+      "status": "PASS",
+      "assertions": [
+        "Skill full body returns to model",
+        "Memory tools and prompt injection",
+        "SQLite persistence and auto-observe/self-filter",
+        "Functional MCP search refs return to model",
+        "Repeated query cache hit, one provider request",
+        "SC_DATA_DIR uses private test/bundle directory"
+      ],
+      "paid_model": false,
+      "source": "Local SearXNG-compatible deterministic fixture"
+    },
+    {
+      "name": "Console from committed runtime artifacts, actual Edge clicks and render inspection",
+      "status": "PASS",
+      "assertions": [
+        "Invalid token rejection",
+        "Workspace title regression",
+        "Authenticated data loading",
+        "Progress/trail writes",
+        "Keyboard activation",
+        "Stats/search",
+        "Reload and SQLite persistence"
+      ],
+      "page_errors": 0
+    }
+  ],
+  "user_environment": {
+    "running_dsh_modified": false,
+    "real_accounts_used": false,
+    "project_rules_modified": false
+  },
+  "limits": [
+    "Public-source search availability and paid model authentication not tested",
+    "DSH tool-list refresh + parallel search race documented, not fixed",
+    "Other clients no longer required; existing adapters not certified",
+    "Vendor runtime/license review and 60 unknown upstream identities remain explicit",
+    "Four restrictive Office Skill licenses block deployment; original retention rights unresolved",
+    "Search Go native build, Firefox real interaction, semantic rule conflict detection not certified",
+    "Fresh clone local source, not remote network clone or cross-platform coverage"
+  ]
+}

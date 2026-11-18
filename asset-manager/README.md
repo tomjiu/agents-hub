@@ -47,7 +47,7 @@ check-dsh <installation> 对照真实宿主验收与当前记忆/搜索资产指
 
 ## 未完成的验收
 
-按用户要求，不再把真实Codex/OpenCode加载列为本次门槛。用户DSH live profile升级须另获明确授权；MCP完整插件视图、市场发现与安装包提取、自动安全解包和语义规范冲突检测尚未完成。已有恢复包的隔离恢复通过；任意远端来源的自动恢复尚未完成。详见 catalog/audit/IMPLEMENTATION.md。
+按用户要求，不再把真实Codex/OpenCode加载列为本次门槛。DSH记忆/搜索运行包已在干净clone与两版真实headless验证；用户live profile升级/合并与真实凭据仍须另获明确授权。受限市场发现/安装包提取、自动安全解包和语义规范冲突检测未完成。已有恢复包的隔离恢复通过；任意远端来源的自动恢复未完成。详见 [交付矩阵](../catalog/audit/DELIVERY.md) 和 [实施状态](../catalog/audit/IMPLEMENTATION.md)。
 
 ## 来源与许可审计
 
