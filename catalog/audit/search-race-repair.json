@@ -136,7 +136,66 @@
         "host_sha256": "0c890927431283236f5476f94aa8328fe60f395d5360e5a96295a6b28769a281",
         "assets_sha256": "50a3bc4b938a265743d7eee06e4d8c2a5d515b307f6eacae09f47f21a81a5db9"
       }
-    ]
+    ],
+    "independent_checkout": {
+      "commit": "750b9fbd68476497b8e93a7667e324264ccc68fe",
+      "build_dsh": true,
+      "root_tests": {
+        "passed": 96,
+        "skipped": 1,
+        "total": 97
+      },
+      "migration_targets": {
+        "files": 2418,
+        "missing": 0,
+        "mismatch": 0
+      },
+      "tracked_clean": true,
+      "host_bundles": [
+        {
+          "host_version": "0.2.2-rc.1",
+          "parallel_discovery": true,
+          "search": {
+            "queried": true,
+            "refs_returned": true,
+            "cache_hit": true,
+            "provider_requests": 1,
+            "cache_isolated": true,
+            "source": "Local SearXNG-compatible fixture; not public web"
+          },
+          "memory": {
+            "persisted": true,
+            "prompt_injection": true,
+            "auto_observe": true,
+            "self_filter": true
+          },
+          "status": "PASS",
+          "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+          "assets_sha256": "50a3bc4b938a265743d7eee06e4d8c2a5d515b307f6eacae09f47f21a81a5db9"
+        },
+        {
+          "host_version": "0.2.2-rc.4",
+          "parallel_discovery": true,
+          "search": {
+            "queried": true,
+            "refs_returned": true,
+            "cache_hit": true,
+            "provider_requests": 1,
+            "cache_isolated": true,
+            "source": "Local SearXNG-compatible fixture; not public web"
+          },
+          "memory": {
+            "persisted": true,
+            "prompt_injection": true,
+            "auto_observe": true,
+            "self_filter": true
+          },
+          "status": "PASS",
+          "host_sha256": "0c890927431283236f5476f94aa8328fe60f395d5360e5a96295a6b28769a281",
+          "assets_sha256": "50a3bc4b938a265743d7eee06e4d8c2a5d515b307f6eacae09f47f21a81a5db9"
+        }
+      ]
+    }
   },
   "deployment": "Regenerate and explicitly adopt DSH patch/bundle after review; current running instance is unchanged",
   "limits": [
