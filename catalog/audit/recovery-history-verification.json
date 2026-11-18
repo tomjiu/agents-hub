@@ -46,5 +46,20 @@
     "No automatic unreferenced stages/client config/DSH runtime recovery",
     "Strong signatures and authenticated reviewer identity not provided",
     "Forced process kill may require lock and intent-record inspection"
-  ]
+  ],
+  "independent_checkout": {
+    "code_commit": "8ff63aace0e3a72eea24af1779939a4a39a7df49",
+    "root_tests": {
+      "total": 114,
+      "passed": 113,
+      "skipped": 1
+    },
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0
+    },
+    "tracked_clean": true,
+    "actual_cli_restore_and_successive_rollback": true
+  }
 }
