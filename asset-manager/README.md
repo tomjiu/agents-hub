@@ -21,6 +21,10 @@ plan-deploy / deploy / inspect-deployment / uninstall 为显式批准的项目Sk
 
 plan-mcp / inspect-mcp / apply-mcp / rollback-mcp 支持独立候选、保留原字节的配置合并和显式应用。已有服务、审核后本地变更、启动器/源码变化拒绝；失败状态保留产物给人工核查。详见 [MCP配置指南](MCP-CONFIG.md)。生成配置的真实MCP握手与一次本地调用通过，实际Codex/OpenCode会话与live DSH插件仍待验。
 
+## DSH独立运行包
+
+dsh-bundle / inspect-dsh-bundle基于已验证DSH版本生成独立Skill/MCP/记忆运行包，不安装或改现有profile。记忆编译副本与配置校验，数据默认存私有包内state。可在独立headless中明确加载，详见 [运行包指南](DSH-BUNDLE.md)。
+
 ## 持久化与恢复边界
 
 catalog/locks 是导入基线；.asset-state/active.json 是实际选择真相源。export-locks 向全新目录导出选择。新版本的源目录及哈希记录必须一起备份，当前支持已有恢复包的校验恢复；尚未实现从任意远端来源自动恢复全部资产。

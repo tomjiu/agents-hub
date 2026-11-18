@@ -40,6 +40,15 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 不建立 agents/、skill-packs/ 或通用 projects/。WorkBuddy 内部插件属于原始厂商集合，不自动认定为 DSH 插件；专家候选仍未审核。
 
+## DSH记忆与搜索运行包
+
+~~~sh
+node asset-manager/cli.mjs dsh-bundle <installed-dsh-directory> --memory
+node asset-manager/cli.mjs inspect-dsh-bundle <generated-bundle-directory>
+~~~
+
+生成新的独立包，含Skill副本、搜索MCP原生patch和记忆插件运行副本；必须先通过版本指纹验收。不会改DSH profile或复制真实记忆库，用户审查后才明确启动。记忆数据默认落包内私有state，不能自动清理。详见 [运行包指南](asset-manager/DSH-BUNDLE.md)。
+
 ## 显式项目 Skill 部署
 
 在仓库根执行，目标必须是已存在的消费项目；本轮只安装 Skill，不自动安装 MCP 或插件，也不修改已有项目规范/配置。

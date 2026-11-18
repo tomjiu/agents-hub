@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "scope": "Generated bundle actual isolated DSH headless with local scripted model. Not user live profile or credentials.",
+  "results": [
+    {
+      "status": "PASS",
+      "host_version": "0.2.2-rc.1",
+      "bundle_test": true,
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "mcp": {
+        "tool": "mcp__search-core__tool_search",
+        "registered": true,
+        "result_returned_to_model": true,
+        "source": "Generated DSH MCP patch + real Search-core stdio server"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    },
+    {
+      "status": "PASS",
+      "host_version": "0.2.2-rc.4",
+      "bundle_test": true,
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "mcp": {
+        "tool": "mcp__search-core__tool_search",
+        "registered": true,
+        "result_returned_to_model": true,
+        "source": "Generated DSH MCP patch + real Search-core stdio server"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    }
+  ],
+  "known_limitations": [
+    "Search runtime still depends on built repository content/dependencies",
+    "Persistent bundle state contains private memory; no automatic removal",
+    "Memory wrapper gate is not atomic authorization of all profile entries",
+    "Only tested host versions and fingerprints are supported"
+  ]
+}

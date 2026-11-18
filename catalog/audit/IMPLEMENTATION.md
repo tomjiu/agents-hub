@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 65 PASS，1 SKIP（总66） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 69 PASS，1 SKIP（总70） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -70,6 +70,13 @@
 - check-dsh-upstream沿用公网DNS安全校验；本机DNS映射被安全拒绝，未绕过。公开npm view人工核对得到channels，记录不充当审批。
 - 兼容记录见catalog/runtime/dsh-compatibility.json；现有导入基线保持不变。
 
+## DSH独立运行包阶段
+
+- dsh-bundle / inspect-dsh-bundle组合所选Expert的Skill、搜索MCP和显式--memory记忆运行副本，要求版本兼容门槛通过。新包不覆盖旧包或用户profile，记忆默认使用包内私有state。
+- 记忆编译运行树复制、完整摘要和文件URL包装器避免profile node_modules手工安装；包启动核对目标DSH与运行内容，改变时拒绝。搜索仍引用受审查仓库构建与依赖，不伪装成完全可搬迁安装包。
+- 真正生成包在DSH rc.1/rc.4独立headless验证Skill全文加载、搜索结果回流和记忆注入/落盘。实测发现包装器异步入口返回HostApi对象导致Cordis Invalid effect；修正为挂载后不返回对象并拒绝空激活，保留原断言重新通过。
+- 单测覆盖运行包内容修改、编译副本修改、意外用户文件、状态目录链接以及新宿主拒绝；运行包state不能自动清理。详见asset-manager/DSH-BUNDLE.md。
+
 ## 重要修复
 
 - Search-core原测试Windows下SQLite未关闭即rm造成EPERM：调整清理顺序，不跳过业务断言。
@@ -80,7 +87,7 @@
 ## 尚未完成的硬门槛
 
 1. DSH 0.2.2-rc.1与next 0.2.2-rc.4真实独立宿主记忆/搜索/Skill闭环已通过；用户live profile切换须另获明确授权。Codex/OpenCode真实加载不再是本次目标门槛。
-2. Profile组合、Skill部署与MCP配置候选合并/显式应用/回滚已实现；真实宿主采用配置、依赖/插件安装与凭据映射仍未完整验证。
+2. Profile组合、Skill部署、MCP配置保护和DSH独立运行包已实现；rc.1/rc.4实际采用生成包已验证。现有用户profile合并与真实凭据映射仍须按授权另验，不能自动替换。
 3. Search-core Go的CGO工具链和真实MCP协议验证。
 4. Console核心真实点击及落盘闭环已通过；完整交互矩阵与Firefox真实浏览器服务仍待验。
 5. 所有Skill旧机器路径清理、上游与许可精确映射、第三方同源重复审核。
