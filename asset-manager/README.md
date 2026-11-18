@@ -25,6 +25,10 @@ plan-mcp / inspect-mcp / apply-mcp / rollback-mcp 支持独立候选、保留原
 
 dsh-bundle / inspect-dsh-bundle基于已验证DSH版本生成独立Skill/MCP/记忆运行包，不安装或改现有profile。记忆编译副本与配置校验，数据默认存私有包内state。可在独立headless中明确加载，详见 [运行包指南](DSH-BUNDLE.md)。
 
+## 下载与规范候选失败保护
+
+下载检测完整性、中断/取消和体积上限，校验后发布独立原始文件；记录失败只回收本次目录。规范候选检查源变化、独占输出锁并新文件发布来源及正文，保留其他写入。详见 [失败保护说明](FAILURE-PROTECTION.md)，不假装实现自动市场解包或语义冲突判定。
+
 ## 持久化与恢复边界
 
 catalog/locks 是导入基线；.asset-state/active.json 是实际选择真相源。export-locks 向全新目录导出选择。新版本的源目录及哈希记录必须一起备份，当前支持已有恢复包的校验恢复；尚未实现从任意远端来源自动恢复全部资产。

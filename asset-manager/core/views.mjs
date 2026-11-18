@@ -45,16 +45,7 @@ export async function createView(root,client,expert,{allowRestricted=false,selec
   await createJson(path.join(view,'view.json'),report);return report;
  }catch(e){await fs.rm(view,{recursive:true,force:true});throw e;}
 }
-export async function composeRules(root,projectFile,output,{fragments=[]}={}) {
- const base=await fs.readFile(path.join(root,'agents-md/base/AGENTS.md'),'utf8'),project=await fs.readFile(projectFile,'utf8');
- if(/待填写|\[待确认\]/.test(project))throw new Error('Project template is incomplete');
- if(await exists(output)||await exists(output+'.sources.json'))throw new Error('Output exists: generate a new candidate and review diff');
- const pieces=[base],sources=[{path:'agents-md/base/AGENTS.md',sha256:sha256(base)}];
- for(const name of fragments){if(!/^[a-z0-9-]+$/.test(name))throw new Error('Invalid fragment');const rel='agents-md/fragments/'+name+'.md',text=await fs.readFile(await confined(root,rel),'utf8');pieces.push(text);sources.push({path:rel,sha256:sha256(text)});}
- pieces.push(project);sources.push({path:path.basename(projectFile),sha256:sha256(project)});
- await fs.mkdir(path.dirname(output),{recursive:true});await fs.writeFile(output,pieces.map(x=>x.trim()).join('\n\n')+'\n',{flag:'wx'});
- await createJson(output+'.sources.json',{schema:1,sources,output_sha256:sha256(await fs.readFile(output)),review_required:true,semantic_conflicts_checked:false});return {output,sources,review_required:true};
-}
+export {composeRules} from './rules.mjs';
 
 export async function createProfileView(root,client,options={}) {
  const catalog=await loadCatalog(root),{profile,selected}=await resolveProfile(root,client,catalog);
