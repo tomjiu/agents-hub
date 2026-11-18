@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 96 PASS，1 SKIP（总97） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 113 PASS，1 SKIP（总114） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -118,6 +118,13 @@
 - 自有Search-core增加显式static预注册模式；自有DSH配置使用此模式，启动时提供全部8工具，发现查询不再改变wire工具列表。默认dynamic模式保留渐进披露；不修改DSH官方bridge。
 - 原路径重新验证rc.1/rc.4直接接入及生成运行包的同批发现、实际搜索、缓存回流和记忆/Skill链路，通过。4项SDK内存transport测试验证静态零列表变更、真实并行查询、动态默认兼容及非法模式。
 - Search-core现296项通过，根97项中96通过、1权限项跳过；旧配置需明确重新生成，其他动态MCP刷新与公网搜索不在本修复保证范围。
+
+## 后续恢复包完善
+
+- 实测旧恢复包仅保存active版本，连续启用后缺previous快照；先建立失败回归再修复。schema2导出当前与全部history引用内容，保留完整回滚栈；schema1仍可恢复内容但拒绝历史选择恢复。
+- inspect-recovery和restore-selection新入口：内容恢复永不自动选择；明确approve/审核人/理由且目标active.json不存在时，核对闭包、内容、review、许可和checkout后独占发布选择，旧状态与其他写入不覆盖，不启动服务。
+- 16项恢复专项测试及1项历史导出回归通过，覆盖连续回滚、重启用/基线、schema1、篡改、锁/链接、许可、复制/临时写入/并发失败；真实CLI全链路通过。详见asset-manager/RECOVERY.md。
+- 不打包DSH安装、node_modules、实际记忆库、搜索缓存或用户配置，普通崩溃自动恢复向导仍未实现；原始导入锁和provenance保持不变。
 
 ## 未认证与后续事项
 

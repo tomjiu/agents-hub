@@ -120,6 +120,18 @@ node asset-manager/cli.mjs rollback <asset-id>
 
 来源支持与边界：GitHub commit / npm 版本查询已实现；固定 HTTPS 地址可按 SRI 校验下载原始产物。CDN 市场发现、WorkBuddy 安装包提取标为受限，尚不提供自动解包与执行。
 
+## 历史完整恢复
+
+~~~sh
+node asset-manager/cli.mjs export-recovery <new-backup-directory>
+# 在目标新checkout中的CLI执行：
+node asset-manager/cli.mjs inspect-recovery <backup-directory>
+node asset-manager/cli.mjs restore-recovery <backup-directory>
+node asset-manager/cli.mjs restore-selection <backup-directory> --approve --reviewer <name> --note <evidence>
+~~~
+
+新版恢复包保存当前和全部历史引用版本，内容恢复不启用；最后一步仅在用户批准且目标active.json不存在时发布选择及回滚历史。已有选择、修改或审核/许可不符拒绝；不启动服务。schema1保留内容恢复兼容但不能恢复完整选择。详见 [恢复指南](asset-manager/RECOVERY.md)。记忆库、DSH安装与客户端配置需要另行备份。
+
 ## AGENTS.md 拼接
 
 ~~~sh

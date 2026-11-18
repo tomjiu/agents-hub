@@ -37,7 +37,7 @@ catalog/locks 是导入基线；.asset-state/active.json 是实际选择真相�
 
 中断时可能留下 operation.lock；先核对其 PID/时间和状态，再人工恢复，不自动删除可能属于活跃任务的锁。当前未实现自动恢复向导。
 
-export-recovery <new-directory> 可打包启用快照；restore-recovery <bundle> 校验并恢复缺失内容，拒绝覆盖现有版本，不自动启用。已通过隔离恢复用例。
+export-recovery生成schema2包，保存当前选择及全部回滚历史引用版本；inspect-recovery检查，restore-recovery只恢复缺失内容。restore-selection需明确批准、审核人/理由、完整审核和不存在active.json才发布选择/历史，不启动服务；schema1只支持内容恢复。详见 [恢复指南](RECOVERY.md)。
 
 版本元数据状态与验证/批准报告分开保留；检查到更新、下载、静态验证和启用是独立步骤。activate 不重启服务或替换客户端配置。
 

@@ -99,10 +99,19 @@ test('recovery preserves snapshot bytes and never silently activates or overwrit
  const target=path.join(dir,'clean-hub');await fs.cp(root,target,{recursive:true,filter:p=>!p.includes('.asset-state')});
  const restored=await restoreRecovery(target,bundle);assert.equal(restored.restored,1);assert.equal(restored.activated,false);assert.equal((await inspect(target,'demo')).active,null);
  await assert.rejects(restoreRecovery(target,bundle),/exists/);await activate(target,'demo',s.version);assert.equal((await inspect(target,'demo')).active.version,s.version);
- await fs.writeFile(path.join(bundle,'demo/content/SKILL.md'),'tamper');const another=path.join(dir,'another-hub');await fs.cp(root,another,{recursive:true,filter:p=>!p.includes('.asset-state')});
+ await fs.writeFile(path.join(bundle,'demo',s.version,'content/SKILL.md'),'tamper');const another=path.join(dir,'another-hub');await fs.cp(root,another,{recursive:true,filter:p=>!p.includes('.asset-state')});
  await assert.rejects(restoreRecovery(another,bundle),/integrity/);assert.equal((await inspect(another,'demo')).active,null);
 });
 test('malformed frontmatter cannot pass validation with field-like body text',async t=>{
  const {root,incoming}=await setup(t);await fs.writeFile(path.join(incoming,'SKILL.md'),'---\ninvalid: [\n---\nname: demo\ndescription: body only\n');const s=await stage(root,'demo',incoming);
  assert.equal((await validateVersion(root,'demo',s.version)).status,'FAILED');
+});
+
+test('recovery includes historical versions needed for successive rollbacks',async t=>{
+ const {root,incoming,dir,base}=await setup(t);
+ const a=await stage(root,'demo',incoming);await review(root,a.version);await activate(root,'demo',a.version);
+ await fs.writeFile(path.join(incoming,'SKILL.md'),base+'second version');const b=await stage(root,'demo',incoming);await review(root,b.version);await activate(root,'demo',b.version);
+ const bundle=path.join(dir,'history-recovery');const exported=await exportRecovery(root,bundle);assert.equal(exported.versions,2,'Export must include both current and previous snapshots');
+ const target=path.join(dir,'history-clean');await fs.cp(root,target,{recursive:true,filter:p=>!p.includes('.asset-state')});
+ const restored=await restoreRecovery(target,bundle);assert.equal(restored.restored,2);assert.equal(restored.activated,false);
 });

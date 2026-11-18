@@ -10,7 +10,7 @@ import {checkDshCompatibility,checkDshUpstream} from './core/dsh-compatibility.m
 import {inspect,stage,validateVersion,approve,activate,rollback,exportLocks} from './core/lifecycle.mjs';
 import {checkUpstream,downloadArtifact} from './providers/upstream.mjs';
 import {createView,createProfileView,composeRules} from './core/views.mjs';
-import {exportRecovery,restoreRecovery} from './core/recovery.mjs';
+import {exportRecovery,restoreRecovery,inspectRecovery,restoreRecoverySelection} from './core/recovery.mjs';
 import {prepareMcpInstall,applyMcpInstall,rollbackMcpInstall,inspectMcpInstall} from './core/mcp-install.mjs';
 import {planDeployment,deployProfile,inspectDeployment,uninstallDeployment} from './core/deployment.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -44,6 +44,8 @@ async function run(){
  if(command==='rollback')return rollback(root,id,{expectedRevision:value===undefined?undefined:Number(value)});
  if(command==='export-locks')return exportLocks(root,path.resolve(id));
  if(command==='export-recovery')return exportRecovery(root,path.resolve(id));
+ if(command==='inspect-recovery')return inspectRecovery(root,path.resolve(id));
+ if(command==='restore-selection'){const args=[value,...rest],get=name=>{const i=args.indexOf('--'+name);return i<0?undefined:args[i+1];};return restoreRecoverySelection(root,path.resolve(id),{approved:args.includes('--approve'),reviewer:get('reviewer'),note:get('note')});}
  if(command==='restore-recovery')return restoreRecovery(root,path.resolve(id));
  if(command==='expert')return resolveExpert(root,id,await loadCatalog(root));
  if(command==='validate'){
@@ -53,7 +55,7 @@ async function run(){
   for(const client of ['codex','opencode','dsh'])try{await resolveProfile(root,client,assets);}catch(e){errors.push(e.message);}
   if(errors.length)throw new Error(JSON.stringify({errors,warnings}));return {status:'PASS',assets:assets.size,warnings,scope:'Catalog IDs, paths, policies, expert and profile references; not runtime acceptance.'};
  }
- if(command==='help'||!command)return {commands:['audit-provenance','dsh-bundle <installation> --memory [--expert NAME]','inspect-dsh-bundle <bundle>','check-dsh-upstream','check-dsh <installation-directory>','plan-mcp <client> <project> [--expert NAME]','inspect-mcp <change-id>','apply-mcp <change-id> --approve','rollback-mcp <change-id> --approve','plan-deploy <client> <existing-project>','deploy <client> <existing-project> --approve','inspect-deployment <project> <deployment-id>','uninstall <project> <deployment-id> --approve','profile-view <dsh|codex|opencode>','export-recovery <new-directory>','restore-recovery <bundle-directory>','check <id>','download <id> <pinned-url> --integrity SRI','view <client> <expert>','compose <project.md> <new-output> [--fragments ui-acceptance]','list','inspect <id>','expert <name>','validate','stage <id> <incoming-directory> [--sha256 HASH] [--version VERSION]','validate-version <id> <version>','approve <id> <version> --reviewer NAME --note TEXT [--resolve-local-changes]','activate <id> <version> [--revision N]','rollback <id> [revision]','export-locks <new-directory>'],updates:'Never overwrites assets. Static validation is not approval. Runtime configurations are not changed automatically.'};
+ if(command==='help'||!command)return {commands:['audit-provenance','dsh-bundle <installation> --memory [--expert NAME]','inspect-dsh-bundle <bundle>','check-dsh-upstream','check-dsh <installation-directory>','plan-mcp <client> <project> [--expert NAME]','inspect-mcp <change-id>','apply-mcp <change-id> --approve','rollback-mcp <change-id> --approve','plan-deploy <client> <existing-project>','deploy <client> <existing-project> --approve','inspect-deployment <project> <deployment-id>','uninstall <project> <deployment-id> --approve','profile-view <dsh|codex|opencode>','export-recovery <new-directory>','restore-recovery <bundle-directory>','inspect-recovery <bundle-directory>','restore-selection <bundle> --approve --reviewer NAME --note TEXT','check <id>','download <id> <pinned-url> --integrity SRI','view <client> <expert>','compose <project.md> <new-output> [--fragments ui-acceptance]','list','inspect <id>','expert <name>','validate','stage <id> <incoming-directory> [--sha256 HASH] [--version VERSION]','validate-version <id> <version>','approve <id> <version> --reviewer NAME --note TEXT [--resolve-local-changes]','activate <id> <version> [--revision N]','rollback <id> [revision]','export-locks <new-directory>'],updates:'Never overwrites assets. Static validation is not approval. Runtime configurations are not changed automatically.'};
  throw new Error('Unknown command '+command);
 }
 try{console.log(JSON.stringify(await run(),null,2));}catch(e){console.error(e.message);process.exitCode=1;}
