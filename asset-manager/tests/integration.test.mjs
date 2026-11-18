@@ -4,7 +4,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {stringify,parse} from 'smol-toml';
-import {createView,composeRules} from '../core/views.mjs';
+import {createView,createProfileView,composeRules} from '../core/views.mjs';
+import {loadCatalog,resolveProfile} from '../core/catalog.mjs';
 import {publicUrl,limitedBody,checkUpstream} from '../providers/upstream.mjs';
 import {tree} from '../core/files.mjs';
 async function fixture(t) {
@@ -52,4 +53,48 @@ test('download cap catches advertised and streamed excess',async()=>{
  await assert.rejects(limitedBody(new Response('abc',{headers:{'content-length':'1000'}}),5),/too large/);
  await assert.rejects(limitedBody(new Response('abcdef'),3),/too large/);
  assert.equal((await limitedBody(new Response('abc'),3)).toString(),'abc');
+});
+
+test('profiles compose expert and explicit assets without enabling user configuration',async t=>{
+ const root=await fixture(t);
+ for(const client of ['dsh','codex','opencode']) {
+  const profile={schema:1,client,experts:['core'],skills:['demo'],mcp:[],plugins:[],enabled:false,deploy:'explicit',overwrite_user_config:false};
+  await fs.writeFile(path.join(root,'catalog/profiles',client+'.toml'),stringify(profile));
+  const selection=await resolveProfile(root,client,await loadCatalog(root));assert.deepEqual(selection.selected.skills,['demo']);
+  const view=await createProfileView(root,client);assert.equal(view.skills.length,1);assert.equal(view.profile_enabled,false);assert.equal(view.user_config_modified,false);
+  const stored=JSON.parse(await fs.readFile(path.join(view.destination,'view.json'),'utf8'));assert.equal(stored.profile_enabled,false);assert.equal(stored.explicit_selection,true);
+  const record=JSON.parse(await fs.readFile(path.join(view.destination,'profile-selection.json'),'utf8'));assert.equal(record.client,client);assert.deepEqual(record.selected.skills,['demo']);
+ }
+});
+test('profile validation rejects unsafe policy malformed lists and unknown assets before creating views',async t=>{
+ const root=await fixture(t),file=path.join(root,'catalog/profiles/dsh.toml');
+ const base={schema:1,client:'dsh',experts:['core'],skills:[],mcp:[],plugins:[],enabled:false,deploy:'explicit',overwrite_user_config:false};
+ for(const change of [{overwrite_user_config:true},{schema:2},{client:'codex'},{enabled:'false'},{experts:'core'},{skills:['missing']},{mcp:['demo']},{plugins:['demo']}]) {
+  await fs.writeFile(file,stringify({...base,...change}));await assert.rejects(createProfileView(root,'dsh'));
+ }
+ await assert.rejects(fs.access(path.join(root,'.asset-state/views')));
+});
+
+test('nonempty MCP views preserve stdio arguments and expose unsupported plugins honestly',async t=>{
+ const root=await fixture(t);
+ await fs.mkdir(path.join(root,'mcp/servers/demo'),{recursive:true});
+ await fs.writeFile(path.join(root,'mcp/servers/demo/server.mjs'),'export const fixture = true;');
+ const hash=(await tree(path.join(root,'mcp/servers/demo'))).sha256;
+ await fs.writeFile(path.join(root,'catalog/assets/mcp.demo.toml'),stringify({id:'mcp.demo',kind:'mcp',path:'mcp/servers/demo',registry_id:'demo',source:{kind:'local',url:'https://example.test/demo'},version:{sha256:hash,local:'1',upstream:'1'}}));
+ await fs.writeFile(path.join(root,'catalog/assets/plugin.demo.toml'),stringify({id:'plugin.demo',kind:'plugins',path:'skills/demo',source:{kind:'local',url:'https://example.test/plugin'},version:{sha256:(await tree(path.join(root,'skills/demo'))).sha256,local:'1',upstream:'1'}}));
+ await fs.writeFile(path.join(root,'mcp/registry.toml'),stringify({schema:1,servers:[{id:'demo',transport:'stdio',command:'node',args:['mcp/servers/demo/server.mjs','--safe'],cwd:'.',status:'build-required',env_names:['FIXTURE_ENV']}]}));
+ await fs.writeFile(path.join(root,'experts/core.toml'),stringify({name:'core',skills:['demo'],mcp:['mcp.demo'],plugins:['plugin.demo']}));
+ for(const client of ['codex','opencode','dsh','generic']) {
+  const report=await createView(root,client,'core');assert.deepEqual(report.mcp_ids,['demo']);assert.equal(report.unsupported.length,1);assert.equal(report.unsupported[0].id,'plugin.demo');
+  const expected=path.join(root,'mcp/servers/demo/server.mjs');
+  if(client==='codex'){const doc=parse(await fs.readFile(path.join(report.destination,'config.toml'),'utf8'));assert.equal(doc.mcp_servers.demo.args[0],expected);assert.equal(doc.mcp_servers.demo.args[1],'--safe');}
+  else if(client==='opencode'){const doc=JSON.parse(await fs.readFile(path.join(report.destination,'opencode.json'),'utf8'));assert.deepEqual(doc.mcp.demo.command,['node',expected,'--safe']);}
+  else {const doc=JSON.parse(await fs.readFile(path.join(report.destination,'mcp.json'),'utf8'));assert.equal(doc.mcpServers.demo.args[0],expected);assert.deepEqual(doc.mcpServers.demo.required_env,['FIXTURE_ENV']);}
+ }
+});
+test('duplicate client skill names reject the whole generated view',async t=>{
+ const root=await fixture(t),hash=(await tree(path.join(root,'skills/demo'))).sha256;
+ await fs.writeFile(path.join(root,'catalog/assets/other.toml'),stringify({id:'other',kind:'skills',path:'skills/demo',source:{kind:'local',url:'https://example.test/other'},version:{sha256:hash,local:'1',upstream:'1'}}));
+ await fs.writeFile(path.join(root,'experts/core.toml'),stringify({name:'core',skills:['demo','other']}));
+ await assert.rejects(createView(root,'generic','core'),/Multiple assets/);assert.deepEqual(await fs.readdir(path.join(root,'.asset-state/views')),[]);
 });

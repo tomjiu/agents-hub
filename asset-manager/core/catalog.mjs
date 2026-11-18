@@ -17,7 +17,7 @@ export async function loadCatalog(root) {
   return assets;
 }
 export async function policy(root,asset) {
-  const doc=await readToml(path.join(root,'catalog/updates',asset.kind+'.toml'));
+  const doc=await readToml(await confined(root,'catalog/updates/'+asset.kind+'.toml'));
   const p={...doc.defaults,...doc.protection,...asset.policy};
   if(typeof p.check!=='boolean'||typeof p.download!=='boolean')throw new Error('Invalid update policy '+asset.id);
   if(p.overwrite!==false||p.auto_merge!==false||p.preserve_local_changes!==true||p.require_validation!==true||p.require_approval!==true||p.apply!==false)throw new Error('Unsafe update policy '+asset.id);
@@ -38,4 +38,16 @@ export async function resolveExpert(root,name,catalog,seen=new Set()) {
   for(const k of ['skills','mcp','plugins'])result[k]=[...new Set(result[k])];
   for(const id of expert.conflicts||[]) if(Object.values(result).flat().includes(id))throw new Error('Expert conflict: '+id);
   return result;
+}
+
+export async function resolveProfile(root,client,catalog) {
+  if(!['codex','opencode','dsh'].includes(client))throw new Error('Unknown profile client');
+  const profile=await readToml(await confined(root,'catalog/profiles/'+client+'.toml'));
+  if(profile.schema!==1||profile.client!==client||profile.overwrite_user_config!==false||profile.deploy!=='explicit'||typeof profile.enabled!=='boolean')throw new Error('Invalid or unsafe profile '+client);
+  const selected={skills:[],mcp:[],plugins:[]};
+  for(const key of ['experts','skills','mcp','plugins'])if(profile[key]!==undefined&&(!Array.isArray(profile[key])||profile[key].some(x=>typeof x!=='string')))throw new Error('Invalid profile list '+key);
+  for(const name of profile.experts||[]){const recipe=await resolveExpert(root,name,catalog);for(const k of ['skills','mcp','plugins'])selected[k].push(...recipe[k]);}
+  for(const k of ['skills','mcp','plugins'])for(const id of profile[k]||[]){if(catalog.get(id)?.kind!==k)throw new Error('Profile invalid '+k+' reference '+id);selected[k].push(id);}
+  for(const k of ['skills','mcp','plugins'])selected[k]=[...new Set(selected[k])];
+  return {client,profile,selected};
 }

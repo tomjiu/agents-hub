@@ -16,17 +16,27 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 20/20 PASS | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 24/24 PASS | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 20/20 PASS | 接口契约与事件接线；不是live profile安装 |
-| Memory-net Console | 构建成功，21/21服务测试PASS | vendor dist与服务端路径；UI点击验收尚未完成 |
+| Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
 | Zai-bridge Go | go test ./... PASS | 本地及隔离测试，没有动真实Z.ai账户 |
 | Firefox | 491/491单元测试PASS，构建成功 | 本地实现保留；平台fixture已修复；真实交互待验 |
-| DSH Skill filesystem provider | 实装0.2.2-rc.1在隔离ctx中读取6个core Skill成功（加入 asset-management 前） | 真实provider list/get；未更改运行中DSH配置 |
+| DSH Skill filesystem provider | 实装0.2.2-rc.1从当前dsh Profile在隔离ctx读取7个Skill成功，0警告 | 真实provider list/get；未更改运行中DSH配置，测试视图结束后回收 |
 | Search-core MCP | initialize + tools/list PASS | 真实服务器子进程和标准MCP客户端；不调用外部搜索 |
 | npm来源查询 | 安全拒绝 | 本机DNS返回受禁止地址，未绕过公网限制、未应用更新 |
 | Search-core Go | 未通过构建 | ONNX依赖在CGO_ENABLED=0时被排除，当前无C编译器 |
+
+## Profile 与 UI 阶段
+
+- 基础提交 2f8519e 已推送功能分支，GitHub 草稿 PR #2：https://github.com/tomjiu/agents-hub/pull/2；main 未合并。
+- profile-view 从三个客户端 Profile 展开 Expert 和显式引用，拒绝不安全配置与不存在/错误类型资产；读取禁用 Profile 只生成候选，不改变启用状态。
+- Console真实点击测试发现自动选择工作区后标题仍显示“选择工作区”：新增前置回归断言复现失败，再在选择/空列表时同步标题并重新跑真实交互。
+- 本地证据存于 .asset-state/evidence/console-click.json 和 console-click.png；测试使用随机令牌、临时记忆库、实际Edge及HTTP服务，结束后浏览器/服务/数据回收。公开记录不包含临时令牌。
+- 原Console旧哈希构建文件仍保留，新的HTML引用新哈希；不因重建误删迁移清单中的原始产物。
+- 非空MCP视图与重名Skill拒绝新增回归测试；未支持的宿主插件明确报告，不假装已安装。
+- asset-manager/verify-staged.mjs 移除意外NUL字符，改用显式字符构造；现在可作为普通文本审阅。
 
 ## 重要修复
 
@@ -38,9 +48,9 @@
 ## 尚未完成的硬门槛
 
 1. Codex/OpenCode实际发现调用、DSH live profile插件安装和跨宿主适配验证。
-2. 从Profile完整合成部署、一键加载、客户端现有配置安全合并。
+2. Profile组合与视图生成已实现；一键实际安装、MCP/插件全面适配和客户端现有配置安全合并仍未完成。
 3. Search-core Go的CGO工具链和真实MCP协议验证。
-4. Console/Firefox真实点击及前后端闭环。
+4. Console核心真实点击及落盘闭环已通过；完整交互矩阵与Firefox真实浏览器服务仍待验。
 5. 所有Skill旧机器路径清理、上游与许可精确映射、第三方同源重复审核。
 6. 市场发现、审核解包与下载中断端到端测试；目前只下载原始字节。
 7. 自动规则冲突检查、四项目规范完整候选和运行配置一致性验证。

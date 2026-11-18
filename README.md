@@ -15,6 +15,8 @@ npm run validate
 node asset-manager/cli.mjs list
 node asset-manager/cli.mjs expert core
 node asset-manager/cli.mjs view generic core
+# 或按仓库客户端 Profile 展开专家和资产选择：
+node asset-manager/cli.mjs profile-view dsh
 ~~~
 
 view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置片段。换成 dsh、codex 或 opencode 可生成对应视图；不会覆盖用户配置，也不会启动远端服务或自动加载插件。

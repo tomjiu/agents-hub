@@ -170,12 +170,15 @@ async function renderSidebar(): Promise<void> {
     workspaces = res.workspaces
     list.innerHTML = ''
     if (workspaces.length === 0) {
+      currentWs = null
+      updateTitle()
       list.append(h('div', 'ws-empty', '未发现 workspace。CONSOLE_HOME 根目录下需有含 memory.db 的子目录。'))
       return
     }
     if (!currentWs || !workspaces.some((w) => w.id === currentWs)) {
       currentWs = workspaces[0]?.id ?? null
     }
+    updateTitle()
     for (const w of workspaces) {
       const item = h('button', 'ws-item' + (w.id === currentWs ? ' ws-active' : ''))
       const name = h('div', 'ws-name', w.id)

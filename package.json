@@ -12,6 +12,9 @@
     "validate": "node asset-manager/cli.mjs validate",
     "catalog:build": "node asset-manager/catalog-build.mjs"
   },
+  "devDependencies": {
+    "playwright-core": "1.58.2"
+  },
   "dependencies": {
     "smol-toml": "1.9.1",
     "yaml": "2.9.1"

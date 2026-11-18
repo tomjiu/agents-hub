@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2393,
+  "unchanged": 2391,
   "missing": [],
   "changed": [
     {
@@ -52,6 +52,18 @@
       "target": "plugins/memory-net/adapters/dsh/tests/adapter.test.ts",
       "baseline_sha256": "ab81bf887a970cde7a6d84113b6331546c6371b16b181eefb93cede0cade8782",
       "current_sha256": "c1f027cec9ade8907bd8d083ee9e5cd35a1c760cdbe9ddf6c76176aa7f23511b"
+    },
+    {
+      "original": "memory-net/console/apps/console/dist/index.html",
+      "target": "plugins/memory-net/console/apps/console/dist/index.html",
+      "baseline_sha256": "fc962e0a8f3371cbac1aa358d0d655ccaacc8dbf3cf02858fed20d34ba48b410",
+      "current_sha256": "f39a5117822fd89aa4c94572449afbc245bd72223a7073dee64de55cc643a6e0"
+    },
+    {
+      "original": "memory-net/console/apps/console/src/main.ts",
+      "target": "plugins/memory-net/console/apps/console/src/main.ts",
+      "baseline_sha256": "ceef8bf095f543a443a3b619304756700b2df1b42a2da4430a8710cd800d998f",
+      "current_sha256": "2e6e653af534e0a4018f54c33bbe8dd9b28308cad6c0857f85238c747fe6f641"
     },
     {
       "original": "memory-net/package.json",

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "browser": "Installed Edge, isolated headless context",
+  "steps": [
+    "Invalid token rejected by actual UI/API",
+    "Authenticated workspace and stored nodes loaded",
+    "Real click wrote progress and refreshed frontend",
+    "Trail click persisted and rendered",
+    "Keyboard submit reached real activation service",
+    "Reload preserved progress through backend storage"
+  ],
+  "page_errors": [],
+  "scope": "Actual UI clicks/keyboard -> HTTP service -> SQLite -> refreshed UI; not exhaustive UI accessibility or all-platform coverage."
+}

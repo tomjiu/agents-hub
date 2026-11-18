@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "profile": "dsh",
+  "skills": [
+    "asset-management",
+    "executing-plans",
+    "repository-skills",
+    "source-index",
+    "systematic-debugging",
+    "verification-before-completion",
+    "writing-plans"
+  ],
+  "warnings": [],
+  "user_config_modified": false,
+  "scope": "Installed DSH filesystem provider list/get using isolated host context; not live profile or plugin installation."
+}

@@ -2,11 +2,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {loadCatalog,policy,resolveExpert,readToml} from './core/catalog.mjs';
+import {loadCatalog,policy,resolveExpert,resolveProfile,readToml} from './core/catalog.mjs';
 import {tree} from './core/files.mjs';
 import {inspect,stage,validateVersion,approve,activate,rollback,exportLocks} from './core/lifecycle.mjs';
 import {checkUpstream,downloadArtifact} from './providers/upstream.mjs';
-import {createView,composeRules} from './core/views.mjs';
+import {createView,createProfileView,composeRules} from './core/views.mjs';
 import {exportRecovery,restoreRecovery} from './core/recovery.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const [command,id,value,...rest]=process.argv.slice(2);
@@ -16,6 +16,7 @@ async function run(){
  if(command==='inspect')return inspect(root,id);
  if(command==='check')return checkUpstream(root,id);
  if(command==='download')return downloadArtifact(root,id,{url:value,integrity:option('integrity')});
+ if(command==='profile-view')return createProfileView(root,id,{allowRestricted:[value,...rest].includes('--reviewed-vendor')});
  if(command==='view')return createView(root,id,value,{allowRestricted:rest.includes('--reviewed-vendor')});
  if(command==='compose')return composeRules(root,path.resolve(id),path.resolve(value),{fragments:option('fragments')?.split(',')||[]});
  if(command==='stage')return stage(root,id,path.resolve(value),{expectedSha256:option('sha256'),upstreamVersion:option('version')});
@@ -31,10 +32,10 @@ async function run(){
   const assets=await loadCatalog(root),errors=[],warnings=[];
   for(const a of assets.values()) {await policy(root,a);const t=await tree(path.join(root,a.path));if(t.sha256!==a.version.sha256)warnings.push('Local edits since catalog baseline: '+a.id);}
   for(const f of await fs.readdir(path.join(root,'experts')))if(f.endsWith('.toml'))try{await resolveExpert(root,f.slice(0,-5),assets);}catch(e){errors.push(e.message);}
-  for(const client of ['codex','opencode','dsh']){const p=await readToml(path.join(root,'catalog/profiles',client+'.toml'));for(const name of p.experts||[])try{await resolveExpert(root,name,assets);}catch(e){errors.push(e.message);}}
+  for(const client of ['codex','opencode','dsh'])try{await resolveProfile(root,client,assets);}catch(e){errors.push(e.message);}
   if(errors.length)throw new Error(JSON.stringify({errors,warnings}));return {status:'PASS',assets:assets.size,warnings,scope:'Catalog IDs, paths, policies, expert and profile references; not runtime acceptance.'};
  }
- if(command==='help'||!command)return {commands:['export-recovery <new-directory>','restore-recovery <bundle-directory>','check <id>','download <id> <pinned-url> --integrity SRI','view <client> <expert>','compose <project.md> <new-output> [--fragments ui-acceptance]','list','inspect <id>','expert <name>','validate','stage <id> <incoming-directory> [--sha256 HASH] [--version VERSION]','validate-version <id> <version>','approve <id> <version> --reviewer NAME --note TEXT [--resolve-local-changes]','activate <id> <version> [--revision N]','rollback <id> [revision]','export-locks <new-directory>'],updates:'Never overwrites assets. Static validation is not approval. Runtime configurations are not changed automatically.'};
+ if(command==='help'||!command)return {commands:['profile-view <dsh|codex|opencode>','export-recovery <new-directory>','restore-recovery <bundle-directory>','check <id>','download <id> <pinned-url> --integrity SRI','view <client> <expert>','compose <project.md> <new-output> [--fragments ui-acceptance]','list','inspect <id>','expert <name>','validate','stage <id> <incoming-directory> [--sha256 HASH] [--version VERSION]','validate-version <id> <version>','approve <id> <version> --reviewer NAME --note TEXT [--resolve-local-changes]','activate <id> <version> [--revision N]','rollback <id> [revision]','export-locks <new-directory>'],updates:'Never overwrites assets. Static validation is not approval. Runtime configurations are not changed automatically.'};
  throw new Error('Unknown command '+command);
 }
 try{console.log(JSON.stringify(await run(),null,2));}catch(e){console.error(e.message);process.exitCode=1;}

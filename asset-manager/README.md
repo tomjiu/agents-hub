@@ -10,7 +10,8 @@
 - 不可覆盖快照、SHA256 清单、基线/本地/新版本三方差异。
 - 静态结构验证、需要审查的执行文件提示；并非完整安全扫描或许可证判定。
 - 人工批准记录、完整性绑定、过期版本检查、原子启用指针、连续回滚；全局操作锁避免并发写状态。
-- 独立客户端 Skill 视图、配置片段与完整 AGENTS 候选，不覆盖用户配置。
+- 独立客户端 Skill 视图、配置片段与完整 AGENTS 候选，不覆盖用户配置。profile-view <dsh|codex|opencode> 读取对应 Profile，展开 Expert 与显式 Skill/MCP/Plugin 列表，检查类型与存在性并持久化选择记录。
+- probe-console-ui.mjs 使用已安装 Edge 或 HUB_BROWSER_EXECUTABLE，在隔离数据上真实点击认证、进度写入、轨迹、激活与统计，并刷新读回 SQLite；不是全 UI/全平台覆盖。
 
 ## 持久化与恢复边界
 
@@ -31,5 +32,7 @@ export-recovery <new-directory> 可打包启用快照；restore-recovery <bundle
 ## 模块
 
 core/files：路径边界、快照、哈希与差异。core/catalog：清单、保护策略与 Expert 解析。core/lifecycle：版本状态操作。core/views：部署副本与规则候选。providers/upstream：来源查询与校验下载。tests：隔离的失败、回滚和集成用例。
+
+probe-dsh-skills.mjs 通过 HUB_DSH_SKILL_PROVIDER 指定已安装的 DSH 文件系统提供者，只使用隔离上下文验证当前 Profile 的发现与读取；不修改宿主。
 
 migration.mjs 和 catalog-build.mjs 是本次迁移工具，不是日常更新命令；迁移记录已有时不会重新建立导入基线。
