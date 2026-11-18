@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 69 PASS，1 SKIP（总70） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 75 PASS，1 SKIP（总76） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -76,6 +76,14 @@
 - 记忆编译运行树复制、完整摘要和文件URL包装器避免profile node_modules手工安装；包启动核对目标DSH与运行内容，改变时拒绝。搜索仍引用受审查仓库构建与依赖，不伪装成完全可搬迁安装包。
 - 真正生成包在DSH rc.1/rc.4独立headless验证Skill全文加载、搜索结果回流和记忆注入/落盘。实测发现包装器异步入口返回HostApi对象导致Cordis Invalid effect；修正为挂载后不返回对象并拒绝空激活，保留原断言重新通过。
 - 单测覆盖运行包内容修改、编译副本修改、意外用户文件、状态目录链接以及新宿主拒绝；运行包state不能自动清理。详见asset-manager/DSH-BUNDLE.md。
+
+## 来源治理与许可阶段
+
+- 61项当前元数据曾将本仓迁移基线充当上游commit，已拆为import.baseline_commit；60项上游身份保持unverified。Firefox填写已保存比对证据的真实Mozilla提交，不虚构其他来源版本。
+- 13项独立Skill本地LICENSE.txt逐项阅读登记：9项声明Apache-2.0，DOCX/PDF/PPTX/XLSX四项声明明确限制。四项默认阻止视图/部署和新版本激活，人工vendor标志不能绕过；原件、许可证、历史锁与逐文件基线保留，历史分发授权问题未自动解决。
+- 新增audit-provenance只读审计：136项，60上游未核实，4明确许可限制，71厂商运行/许可复核；同类型完整内容未发现相同组，不代表没有部分重复。
+- export-locks现在区分本地导入commit与已审批启用版本的上游commit/版本，并拒绝启用内容篡改。初始四类locks不覆写。
+- 许可门槛加入DSH指纹后，rc.1/rc.4真实记忆/搜索/Skill宿主重新验收通过；兼容记录按新资产指纹追加而不覆盖旧证据。
 
 ## 重要修复
 

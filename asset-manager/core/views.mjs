@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import YAML from 'yaml';
 import {loadCatalog,readToml,resolveExpert,resolveProfile} from './catalog.mjs';
 import {effectivePath} from './lifecycle.mjs';
+import {assertDeployableLicense} from './license-review.mjs';
 import {clientMcpConfig,encodeClientConfig} from './mcp-config.mjs';
 import {confined,exists,snapshot,tree,createJson,sha256} from './files.mjs';
 export async function createView(root,client,expert,{allowRestricted=false,selection,profileMeta}={}) {
@@ -14,7 +15,7 @@ export async function createView(root,client,expert,{allowRestricted=false,selec
  try {
   const skills=path.join(view,'skills');await fs.mkdir(skills);const used=new Set(),records=[];
   for(const id of selected.skills){const a=catalog.get(id);if(a.runtime_review_required&&!allowRestricted)throw new Error('Restricted vendor asset needs explicit license/runtime review: '+id);
-   const source=await effectivePath(root,a),text=await fs.readFile(path.join(source,'SKILL.md'),'utf8');
+   const source=await effectivePath(root,a);await assertDeployableLicense(a,source);const text=await fs.readFile(path.join(source,'SKILL.md'),'utf8');
    const front=/^---\r?\n([\s\S]*?)\r?\n---/.exec(text);if(!front)throw new Error('Invalid Skill frontmatter '+id);const fm=YAML.parse(front[1]);
    if(typeof fm.description!=='string'||!fm.description.trim())throw new Error('Invalid skill description '+id);
    const name=fm.name;if(typeof name!=='string'||!/^[a-z0-9][a-z0-9-]{0,63}$/.test(name))throw new Error('Client-incompatible skill name '+id);

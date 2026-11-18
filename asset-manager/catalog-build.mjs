@@ -11,7 +11,7 @@ async function skills(dir){let out=[];for(const e of await fs.readdir(dir,{withF
 const slug=x=>x.toLowerCase().replace(/[^a-z0-9._-]+/g,'-');
 const baseline='4f1911081477b49a6610e52537bea1057f216530';
 const assets=[];
-async function add(id,kind,rel,source,extra={}){const snap=await tree(path.join(root,rel));assets.push({id,kind,path:rel,source,version:{upstream:source.version||'unknown',commit:source.commit||'',local:'imported-2026-11-18',sha256:snap.sha256,local_modified:'unknown',enabled:false},...extra});}
+async function add(id,kind,rel,source,extra={}){const snap=await tree(path.join(root,rel));const imported=source.commit===baseline;if(imported)source={...source,commit:'',upstream_identity_status:'unverified',location_role:'maintenance-or-service-location-not-proof-of-origin'};assets.push({id,kind,path:rel,...imported?{import:{baseline_commit:baseline,provenance:'catalog/audit/migration-2026-11.json',commit_role:'local-import-baseline-not-upstream'}}:{},source,version:{upstream:source.version||'unknown',commit:source.commit||'',local:'imported-2026-11-18',sha256:snap.sha256,local_modified:'unknown',enabled:false},...extra});}
 for(const p of await skills(path.join(root,'skills/individual'))) {
   const rel=path.relative(root,path.dirname(p)).replaceAll(path.sep,'/'),id=path.basename(path.dirname(p));
   await add(id,'skills',rel,{kind:'local',url:'https://github.com/tomjiu/agents-hub',commit:baseline,license:'review-required',provenance:'catalog/audit/migration-2026-11.json'});

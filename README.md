@@ -106,6 +106,8 @@ node asset-manager/cli.mjs compose <filled-project.md> <new-AGENTS-candidate.md>
 
 ## 安全与来源
 
+原本的61项commit误标已区分为本仓导入基线和上游提交；60项上游身份仍未核实，不虚构版本。DOCX/PDF/PPTX/XLSX原LICENSE.txt声明限制，当前默认阻止部署和激活，保留原件用于审核；已有仓库存留的授权问题仍需用户另行核查。详见 [来源治理说明](catalog/PROVENANCE.md)。
+
 - 原有文件按 SHA256 清单迁移，研究证据和许可证不因整理被删除；原始路径映射见 [迁移记录](catalog/audit/migration-2026-11.json)。Git 历史保留重命名来源。
 - 厂商集合默认不启用；存在于公开仓库不代表许可允许任意再分发或能跨宿主运行。
 - catalog/audit/legacy 是历史记录，不是运行配置；其中旧机器路径和旧安装流程不可作为当前指令执行。

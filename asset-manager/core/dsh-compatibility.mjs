@@ -21,7 +21,7 @@ export async function dshFingerprint(root,installation){
  for(const name of seams)host.push(await fingerprintPackage(require,name));
  const assets={node_runtime:process.versions.node};
  for(const rel of ['plugins/memory-net/src','plugins/memory-net/adapters/dsh/src','plugins/memory-net/adapters/dsh/dist','mcp/servers/search-core/typescript/src','mcp/servers/search-core/typescript/dist'])assets[rel]=(await tree(await confined(root,rel))).sha256;
- for(const rel of ['plugins/memory-net/adapters/dsh/package.json','plugins/memory-net/adapters/dsh/package-lock.json','mcp/registry.toml','asset-manager/core/views.mjs','asset-manager/core/mcp-config.mjs','plugins/memory-net/adapters/dsh/dist/adapters/dsh/src/index.js','mcp/servers/search-core/typescript/package.json','mcp/servers/search-core/typescript/package-lock.json','mcp/servers/search-core/typescript/dist/mcp.js'])assets[rel]=sha256(await fs.readFile(await confined(root,rel)));
+ for(const rel of ['plugins/memory-net/adapters/dsh/package.json','plugins/memory-net/adapters/dsh/package-lock.json','mcp/registry.toml','asset-manager/core/views.mjs','asset-manager/core/license-review.mjs','asset-manager/core/mcp-config.mjs','plugins/memory-net/adapters/dsh/dist/adapters/dsh/src/index.js','mcp/servers/search-core/typescript/package.json','mcp/servers/search-core/typescript/package-lock.json','mcp/servers/search-core/typescript/dist/mcp.js'])assets[rel]=sha256(await fs.readFile(await confined(root,rel)));
  return {schema:1,version:meta.version,host,host_sha256:sha256(JSON.stringify(host)),assets,assets_sha256:sha256(JSON.stringify(assets))};
 }
 export function classifyDshCompatibility(fingerprint,acceptances){

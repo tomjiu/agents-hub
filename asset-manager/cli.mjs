@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadCatalog,policy,resolveExpert,resolveProfile,readToml} from './core/catalog.mjs';
 import {tree} from './core/files.mjs';
+import {auditProvenance} from './core/provenance.mjs';
 import {createDshBundle,verifyDshBundle} from './core/dsh-bundle.mjs';
 import {checkDshCompatibility,checkDshUpstream} from './core/dsh-compatibility.mjs';
 import {inspect,stage,validateVersion,approve,activate,rollback,exportLocks} from './core/lifecycle.mjs';
@@ -16,6 +17,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const [command,id,value,...rest]=process.argv.slice(2);
 const option=(name)=>{const i=rest.indexOf('--'+name);return i<0?undefined:rest[i+1];};
 async function run(){
+ if(command==='audit-provenance')return auditProvenance(root);
  if(command==='dsh-bundle'){const args=[value,...rest],index=args.indexOf('--expert');if(index>=0&&!args[index+1])throw new Error('--expert requires a recipe name');return createDshBundle(root,id,{expert:index>=0?args[index+1]:'research',memory:args.includes('--memory')});}
  if(command==='inspect-dsh-bundle')return verifyDshBundle(id);
  if(command==='check-dsh-upstream')return checkDshUpstream(root);
@@ -51,7 +53,7 @@ async function run(){
   for(const client of ['codex','opencode','dsh'])try{await resolveProfile(root,client,assets);}catch(e){errors.push(e.message);}
   if(errors.length)throw new Error(JSON.stringify({errors,warnings}));return {status:'PASS',assets:assets.size,warnings,scope:'Catalog IDs, paths, policies, expert and profile references; not runtime acceptance.'};
  }
- if(command==='help'||!command)return {commands:['dsh-bundle <installation> --memory [--expert NAME]','inspect-dsh-bundle <bundle>','check-dsh-upstream','check-dsh <installation-directory>','plan-mcp <client> <project> [--expert NAME]','inspect-mcp <change-id>','apply-mcp <change-id> --approve','rollback-mcp <change-id> --approve','plan-deploy <client> <existing-project>','deploy <client> <existing-project> --approve','inspect-deployment <project> <deployment-id>','uninstall <project> <deployment-id> --approve','profile-view <dsh|codex|opencode>','export-recovery <new-directory>','restore-recovery <bundle-directory>','check <id>','download <id> <pinned-url> --integrity SRI','view <client> <expert>','compose <project.md> <new-output> [--fragments ui-acceptance]','list','inspect <id>','expert <name>','validate','stage <id> <incoming-directory> [--sha256 HASH] [--version VERSION]','validate-version <id> <version>','approve <id> <version> --reviewer NAME --note TEXT [--resolve-local-changes]','activate <id> <version> [--revision N]','rollback <id> [revision]','export-locks <new-directory>'],updates:'Never overwrites assets. Static validation is not approval. Runtime configurations are not changed automatically.'};
+ if(command==='help'||!command)return {commands:['audit-provenance','dsh-bundle <installation> --memory [--expert NAME]','inspect-dsh-bundle <bundle>','check-dsh-upstream','check-dsh <installation-directory>','plan-mcp <client> <project> [--expert NAME]','inspect-mcp <change-id>','apply-mcp <change-id> --approve','rollback-mcp <change-id> --approve','plan-deploy <client> <existing-project>','deploy <client> <existing-project> --approve','inspect-deployment <project> <deployment-id>','uninstall <project> <deployment-id> --approve','profile-view <dsh|codex|opencode>','export-recovery <new-directory>','restore-recovery <bundle-directory>','check <id>','download <id> <pinned-url> --integrity SRI','view <client> <expert>','compose <project.md> <new-output> [--fragments ui-acceptance]','list','inspect <id>','expert <name>','validate','stage <id> <incoming-directory> [--sha256 HASH] [--version VERSION]','validate-version <id> <version>','approve <id> <version> --reviewer NAME --note TEXT [--resolve-local-changes]','activate <id> <version> [--revision N]','rollback <id> [revision]','export-locks <new-directory>'],updates:'Never overwrites assets. Static validation is not approval. Runtime configurations are not changed automatically.'};
  throw new Error('Unknown command '+command);
 }
 try{console.log(JSON.stringify(await run(),null,2));}catch(e){console.error(e.message);process.exitCode=1;}

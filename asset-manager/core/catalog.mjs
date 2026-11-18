@@ -10,6 +10,8 @@ export async function loadCatalog(root) {
   for(const file of (await fs.readdir(dir)).filter(x=>x.endsWith('.toml')).sort()) {
     const a=await readToml(await confined(root,'catalog/assets/'+file));assetId(a.id);
     if(!a.version||!/^([0-9a-f]{64})$/.test(a.version.sha256)||!a.source||typeof a.source.kind!=='string')throw new Error('Invalid asset manifest '+a.id);
+    if(a.import?.baseline_commit&&(a.source.commit===a.import.baseline_commit||a.version.commit===a.import.baseline_commit))throw new Error('Import baseline misrepresented as upstream commit '+a.id);
+    if(a.source.license_evidence)await confined(root,a.source.license_evidence);
     if(assets.has(a.id))throw new Error('Duplicate asset '+a.id);
     if(!kinds.includes(a.kind))throw new Error('Unknown asset kind '+a.kind);
     await confined(root,a.path); assets.set(a.id,a);

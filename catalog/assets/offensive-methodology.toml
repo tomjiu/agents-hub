@@ -2,16 +2,23 @@ id = "offensive-methodology"
 kind = "skills"
 path = "skills/individual/security/offensive-methodology"
 
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
 [source]
+upstream_identity_status = "unverified"
+location_role = "maintenance-or-service-location-not-proof-of-origin"
 kind = "local"
 url = "https://github.com/tomjiu/agents-hub"
-commit = "4f1911081477b49a6610e52537bea1057f216530"
+commit = ""
 license = "review-required"
 provenance = "catalog/audit/migration-2026-11.json"
 
 [version]
 upstream = "unknown"
-commit = "4f1911081477b49a6610e52537bea1057f216530"
+commit = ""
 local = "imported-2026-11-18"
 sha256 = "61d777ee304504e79c705f5136743c2d340d56e2f7ab02f200bc316329d400ff"
 local_modified = "unknown"

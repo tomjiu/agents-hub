@@ -49,6 +49,10 @@ check-dsh <installation> 对照真实宿主验收与当前记忆/搜索资产指
 
 按用户要求，不再把真实Codex/OpenCode加载列为本次门槛。用户DSH live profile升级须另获明确授权；MCP完整插件视图、市场发现与安装包提取、自动安全解包和语义规范冲突检测尚未完成。已有恢复包的隔离恢复通过；任意远端来源的自动恢复尚未完成。详见 catalog/audit/IMPLEMENTATION.md。
 
+## 来源与许可审计
+
+audit-provenance输出只读的来源身份、导入基线、当前哈希、许可文件证据和完整重复候选。声明限制的技能不能通过vendor审核标志部署；原始资产仍保留。详见 [来源治理说明](../catalog/PROVENANCE.md)。
+
 ## 模块
 
 core/files：路径边界、快照、哈希与差异。core/catalog：清单、保护策略与 Expert 解析。core/lifecycle：版本状态操作。core/views：部署副本与规则候选。providers/upstream：来源查询与校验下载。tests：隔离的失败、回滚和集成用例。

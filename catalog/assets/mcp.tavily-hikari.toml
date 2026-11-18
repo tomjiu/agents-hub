@@ -3,16 +3,23 @@ kind = "mcp"
 path = "catalog/audit/legacy/mcp/servers/tavily-hikari"
 registry_id = "tavily-hikari"
 
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
 [source]
+upstream_identity_status = "unverified"
+location_role = "maintenance-or-service-location-not-proof-of-origin"
 kind = "http"
 url = "https://tavily.ivanli.cc/mcp"
 version = "unknown"
 license = "review-required"
-commit = "4f1911081477b49a6610e52537bea1057f216530"
+commit = ""
 
 [version]
 upstream = "unknown"
-commit = "4f1911081477b49a6610e52537bea1057f216530"
+commit = ""
 local = "imported-2026-11-18"
 sha256 = "be81242d7172cb6ca134ddd8d2e24f8a3c524b7a480b5ac857773e86a90e500b"
 local_modified = "unknown"

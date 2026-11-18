@@ -11,4 +11,6 @@
 
 ID：独立 Skill 保留原名字；集合 Skill 使用 trae.<name> 或 workbuddy.<内部层级>；MCP 使用 mcp.<server>，避免与 Skill 重名；插件为 memory-net；模板为 agents-md.*。
 
+来源身份、导入基线和上游提交必须分开，详见 [来源治理说明](PROVENANCE.md)。audit-provenance只读核对当前元数据；原始locks/provenance不重写以掩盖差异。
+
 许可按已有声明登记，不通过猜测补齐。review-required 表示仍需核实；vendor-restricted 默认不部署。不得据这些字段断言再分发获得法律许可。

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
+import {assertDeployableLicense} from './license-review.mjs';
 import {loadCatalog,policy,writeToml} from './catalog.mjs';
 import {confined,tree,snapshot,createJson,atomicWrite,compareTrees,assetId} from './files.mjs';
 const statePath=root=>path.join(root,'.asset-state');
@@ -74,6 +75,7 @@ export async function activate(root,id,version,{expectedRevision}={}) {
    const dir=await versionDir(root,id,version),m=JSON.parse(await fs.readFile(path.join(dir,'version.json'),'utf8'));
    const approval=JSON.parse(await fs.readFile(path.join(dir,'approval.json'),'utf8')),v=JSON.parse(await fs.readFile(path.join(dir,'latest-validation.json'),'utf8'));
    if(m.kind!==a.kind||m.id!==id||m.version!==version||approval.id!==id||approval.version!==version||v.id!==id||v.version!==version||v.sha256!==m.sha256||approval.sha256!==m.sha256||v.status!=='VALIDATED'||(await tree(path.join(dir,'content'))).sha256!==m.sha256)throw new Error('Integrity or approval invalid');
+   await assertDeployableLicense(a,path.join(dir,'content'));
    const current=await tree(await confined(root,a.path));if(current.sha256!==m.checkout_sha256)throw new Error('Local checkout changed since review');
    const state=await readState(root);if(expectedRevision!==undefined&&state.revision!==expectedRevision)throw new Error('Stale activation revision');
    const previous=state.active[id]||null;state.history.push({id,previous,next:{version,sha256:m.sha256},time:new Date().toISOString()});state.active[id]={version,sha256:m.sha256,kind:a.kind};state.revision++;
@@ -94,7 +96,9 @@ export async function effectivePath(root,a) {const s=await readState(root);const
 export async function exportLocks(root,dest) {
  const state=await readState(root),catalog=await loadCatalog(root);await fs.mkdir(dest,{recursive:false});
  for(const kind of ['skills','mcp','plugins','agents-md']) {
- const rows=[...catalog.values()].filter(a=>a.kind===kind).map(a=>({id:a.id,source_url:a.source.url||'',upstream_version:a.version.upstream,path:a.path,sha256:state.active[a.id]?.sha256||a.version.sha256,local_version:state.active[a.id]?.version||a.version.local,enabled:!!state.active[a.id]}));
+ const rows=[];
+ for(const a of [...catalog.values()].filter(a=>a.kind===kind)){const active=state.active[a.id];let version;if(active){const dir=await versionDir(root,a.id,active.version);version=JSON.parse(await fs.readFile(await confined(dir,'version.json'),'utf8'));if(version.id!==a.id||version.version!==active.version||version.sha256!==active.sha256||(await tree(path.join(dir,'content'))).sha256!==active.sha256)throw new Error('Active lock identity mismatch');}
+ rows.push({id:a.id,source_url:a.source.url||'',upstream_version:version?.upstreamVersion||a.version.upstream||'unknown',upstream_commit:version?.upstreamCommit??a.source.commit??'',import_baseline_commit:a.import?.baseline_commit||'',path:a.path,sha256:active?.sha256||a.version.sha256,local_version:active?.version||a.version.local,enabled:!!active});}
  await fs.writeFile(path.join(dest,kind+'.lock.toml'),writeToml({schema:1,revision:state.revision,assets:rows}),{flag:'wx'});
  }
  return {revision:state.revision,destination:dest};
