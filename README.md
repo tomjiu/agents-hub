@@ -40,6 +40,19 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 不建立 agents/、skill-packs/ 或通用 projects/。WorkBuddy 内部插件属于原始厂商集合，不自动认定为 DSH 插件；专家候选仍未审核。
 
+## DSH构建前置
+
+初次clone需安装三个子包的固定构建依赖，根npm ci不替代它们：
+
+~~~sh
+npm ci --ignore-scripts --no-audit --no-fund --prefix plugins/memory-net
+npm ci --ignore-scripts --no-audit --no-fund --prefix plugins/memory-net/adapters/dsh
+npm ci --ignore-scripts --no-audit --no-fund --prefix mcp/servers/search-core/typescript
+npm run build:dsh
+~~~
+
+build:dsh只构建，不下载依赖、升级DSH或启用资产。构建产物变化后，按 [宿主验收指南](asset-manager/DSH-HOST-ACCEPTANCE.md) 复验，不能沿用失效的指纹记录。
+
 ## DSH记忆与搜索运行包
 
 ~~~sh

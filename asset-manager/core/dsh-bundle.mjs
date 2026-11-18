@@ -22,6 +22,7 @@ export async function createDshBundle(root,installation,{expert='research',memor
  try{
   await snapshot(path.join(view.destination,'skills'),path.join(bundle,'skills'));
   const patch=YAML.parse(await fs.readFile(path.join(view.destination,'dsh-mcp.patch.yml'),'utf8'));
+  for(const operation of patch)for(const node of operation.insert||[])if(node.name==='@deepseek-ai/dsh-mcp-client'&&node.config.serverName==='search-core')node.config.env={SC_DATA_DIR:path.join(bundle,'state/search-core')};
   patch.unshift({id:'skill-filesystem',config:{includeDefaultRoots:true,customSkillDirs:[path.join(bundle,'skills')],watch:false}});
   if(memory){
    const asset=catalog.get('memory-net');if(!asset||asset.kind!=='plugins')throw new Error('memory-net is not registered');
@@ -59,6 +60,7 @@ export async function verifyDshBundle(bundle,{requireRunningHost=false}={}){
  for(const [rel,hash] of Object.entries(manifest.artifacts))if(sha256(await fs.readFile(await confined(bundle,rel)))!==hash)throw new Error('DSH bundle artifact changed: '+rel);
  for(const [rel,hash] of Object.entries(manifest.directories))if(await deployedDigest(await confined(bundle,rel))!==hash)throw new Error('DSH bundle runtime changed: '+rel);
  if(manifest.memory)await confined(bundle,'state/memory-net',{mustExist:false});
+ await confined(bundle,'state/search-core',{mustExist:false});
  const runtime=JSON.parse(await fs.readFile(await confined(bundle,'mcp-runtime.json'),'utf8'));
  for(const asset of runtime.assets){const source=await confined(root,path.relative(root,asset.source).split(path.sep).join('/'));if((await tree(source)).sha256!==asset.source_sha256)throw new Error('MCP source changed since bundle creation');for(const file of asset.entry_files){const entry=await confined(root,path.relative(root,file.path).split(path.sep).join('/'));if(sha256(await fs.readFile(entry))!==file.sha256)throw new Error('MCP entry changed since bundle creation');}}
  return {status:'VERIFIED',bundle,host_version:manifest.host_version,memory:manifest.memory,skills:manifest.skills.map(s=>s.name),mcp:manifest.mcp,auto_loaded:false,profile_modified:false};

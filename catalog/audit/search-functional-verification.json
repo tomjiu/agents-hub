@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "scope": "Real DSH and real Search-core with isolated local provider. Not public web-source availability.",
+  "host_results": [
+    {
+      "status": "PASS",
+      "host_version": "0.2.2-rc.1",
+      "bundle_test": false,
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    },
+    {
+      "status": "PASS",
+      "host_version": "0.2.2-rc.4",
+      "bundle_test": false,
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    },
+    {
+      "status": "PASS",
+      "host_version": "0.2.2-rc.1",
+      "bundle_test": true,
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    },
+    {
+      "status": "PASS",
+      "host_version": "0.2.2-rc.4",
+      "bundle_test": true,
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    }
+  ],
+  "mcp_protocol": {
+    "status": "PASS",
+    "protocol": "Real MCP initialize, search query, cached repeat and failed provider",
+    "tools": [
+      "search",
+      "fetch",
+      "tool_search"
+    ],
+    "provider_requests": [
+      {
+        "query": "aurora glacier",
+        "format": "json"
+      },
+      {
+        "query": "fixture invalid",
+        "format": "json"
+      }
+    ],
+    "cache_isolated": true,
+    "scope": "Local SearXNG-compatible HTTP fixture with real search pipeline; no public-source availability or paid-account claims."
+  },
+  "known_issue": {
+    "status": "UNRESOLVED_UPSTREAM_RACE",
+    "observed": "DSH rc.1: parallel tool_search resync and search may return unknown tool",
+    "guidance": "Finish discovery before dispatching other MCP tools",
+    "upstream_modified": false
+  }
+}

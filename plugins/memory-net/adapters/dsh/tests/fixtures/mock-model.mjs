@@ -22,14 +22,21 @@ const TOOL_ARGS = JSON.stringify({ kind: 'inference', text: WRITE_TEXT, confiden
 // Optional actual-MCP host check; the original two-tool fixture remains the default.
 const MCP_NAME = process.env.MN_E2E_MCP_TOOL
 const SKILL_NAME = process.env.MN_E2E_SKILL
+const SEARCH_NAME = process.env.MN_E2E_SEARCH_TOOL
+const SEARCH_ARGS = JSON.stringify({ query: 'aurora glacier', engines: ['searxng'], top_n: 3 })
+const searchCall = { id: 'call_search_1', type: 'function', function: { name: SEARCH_NAME, arguments: SEARCH_ARGS } }
 const SKILL_BODY = process.env.MN_E2E_SKILL_FILE ? readFileSync(process.env.MN_E2E_SKILL_FILE, 'utf8').split('---').slice(2).join('---').trim() : null
 function strings(value) {
-  if (typeof value === 'string') return [value]
+  if (typeof value === 'string') {
+    try { const parsed = JSON.parse(value); if (parsed && typeof parsed === 'object') return [value, ...strings(parsed)] } catch {}
+    return [value]
+  }
   if (value && typeof value === 'object') return Object.values(value).flatMap(strings)
   return []
 }
 const extraCalls = [
-  ...(MCP_NAME ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
+  ...(MCP_NAME && !SEARCH_NAME ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
+  ...(SEARCH_NAME ? [searchCall] : []),
   ...(SKILL_NAME ? [{ id: 'call_skill_1', type: 'function', function: { name: 'skill', arguments: JSON.stringify({ name: SKILL_NAME }) } }] : []),
 ]
 
@@ -47,6 +54,10 @@ const server = createServer((req, res) => {
     const toolNames = (j.tools ?? []).map((t) => t?.function?.name ?? t?.name).filter(Boolean)
     const last = messages[messages.length - 1] ?? {}
     const afterTool = SKILL_NAME ? messages.some((m) => m.role === 'tool') : last.role === 'tool'
+    const messageStrings = strings(messages)
+    const hasSearchResult = messageStrings.some((text) => text.includes('DSH-SEARCH-FIXTURE'))
+    const hasSearchCache = messageStrings.some((text) => text.includes('DSH-SEARCH-FIXTURE') && /"from_cache"[ ]*:[ ]*true/.test(text))
+    const repeatSearch = !!SEARCH_NAME && afterTool && hasSearchResult && !hasSearchCache
     const diag = {
       ts: Date.now(),
       round: afterTool ? 'after_tool' : 'first',
@@ -56,6 +67,10 @@ const server = createServer((req, res) => {
       has_memory_net_recall: toolNames.includes('memory_net_recall'),
       has_mn_e2e_echo: toolNames.includes('mn_e2e_echo'),
       has_mcp_tool: MCP_NAME ? toolNames.includes(MCP_NAME) : false,
+      has_search_tool: SEARCH_NAME ? toolNames.includes(SEARCH_NAME) : false,
+      has_search_result: hasSearchResult,
+      has_search_cache: hasSearchCache,
+      search_result_diagnostics: SEARCH_NAME ? messages.filter((m) => m.role === 'tool' && (m.tool_call_id === 'call_search_1' || m.tool_call_id === 'call_search_cached')).map((m) => m.content) : undefined,
       has_skill_tool: SKILL_NAME ? toolNames.includes('skill') : false,
       has_loaded_skill: SKILL_BODY ? strings(messages).some((text) => text.replaceAll(String.fromCharCode(13), '').includes(SKILL_BODY.replaceAll(String.fromCharCode(13), ''))) : false,
       has_mcp_result: messages.some((m) => m.role === 'tool' && JSON.stringify(m.content).includes('newly_activated')),
@@ -89,6 +104,10 @@ const server = createServer((req, res) => {
           ...extraCalls.map((call, i) => ({ index: i + 2, ...call })),
         ] })
         finish({}, 'tool_calls')
+      } else if (repeatSearch) {
+        finish({ role: 'assistant', content: '' })
+        finish({ tool_calls: [{ index: 0, ...searchCall, id: 'call_search_cached' }] })
+        finish({}, 'tool_calls')
       } else {
         const toolResult = typeof last.content === 'string' ? last.content : JSON.stringify(last.content ?? '')
         finish({ role: 'assistant', content: '' })
@@ -110,6 +129,8 @@ const server = createServer((req, res) => {
             ...extraCalls,
           ],
         }
+      } else if (repeatSearch) {
+        message = { role: 'assistant', content: null, tool_calls: [{ ...searchCall, id: 'call_search_cached' }] }
       } else {
         const toolResult = typeof last.content === 'string' ? last.content : JSON.stringify(last.content ?? '')
         message = { role: 'assistant', content: `MN-E2E-OK 工具结果回显: ${String(toolResult).slice(0, 300)}` }
@@ -120,7 +141,7 @@ const server = createServer((req, res) => {
         object: 'chat.completion',
         created: Math.floor(Date.now() / 1000),
         model: 'mock-flash',
-        choices: [{ index: 0, message, finish_reason: afterTool ? 'stop' : 'tool_calls' }],
+        choices: [{ index: 0, message, finish_reason: afterTool && !repeatSearch ? 'stop' : 'tool_calls' }],
       }))
     }
   })

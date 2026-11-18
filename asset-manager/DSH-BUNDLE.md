@@ -18,7 +18,7 @@ node asset-manager/cli.mjs inspect-dsh-bundle <generated-bundle-directory>
 - 原生bundle.patch.yml：配置已有skill-filesystem的customSkillDirs、每个MCP一个官方桥实例，明确加入记忆实例。
 - 记忆适配包完整编译树的运行副本（不是新的维护源），ESM标记及文件URL加载包装器。不修改DSH profile node_modules，不下载或安装插件。
 - bundle.json记载目标DSH安装路径、宿主/资产验收哈希、配置和复制树哈希。
-- 记忆默认使用包内state/memory-net/main，不导入、覆盖现有用户记忆数据库。状态变化不导致运行副本校验失效；状态目录链接不允许。
+- 搜索MCP显式SC_DATA_DIR指向包内state/search-core，不写全局搜索缓存；记忆默认使用包内state/memory-net/main，不导入、覆盖现有用户记忆数据库。状态变化不导致运行副本校验失效；状态目录链接不允许。
 
 搜索MCP目前引用已经审核和构建的仓库源码/入口，其运行依赖仍在仓库内，不是可以搬离仓库的自包含安装包。运行包绝对路径不可移动；搬迁、守卫实现或内容变化应重新生成。
 

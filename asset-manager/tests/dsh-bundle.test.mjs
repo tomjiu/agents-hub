@@ -21,7 +21,7 @@ async function fixture(t){
  await fs.writeFile(path.join(root,'mcp/registry.toml'),stringify({schema:1,servers:[]}));await fs.writeFile(path.join(root,'skills/demo/SKILL.md'),['---','name: demo','description: Fixture','---','fixture'].join(String.fromCharCode(10)));
  const version={sha256:(await tree(path.join(root,'skills/demo'))).sha256};await fs.writeFile(path.join(root,'catalog/assets/demo.toml'),stringify({id:'demo',kind:'skills',path:'skills/demo',source:{kind:'local'},version}));await fs.writeFile(path.join(root,'catalog/assets/memory-net.toml'),stringify({id:'memory-net',kind:'plugins',path:'plugins/memory-net',source:{kind:'local'},version:{sha256:(await tree(path.join(root,'plugins/memory-net'))).sha256}}));
  await fs.writeFile(path.join(root,'experts/research.toml'),stringify({name:'research',skills:['demo'],mcp:[],plugins:[]}));const fingerprint=await dshFingerprint(root,host);
- const report={status:'PASS',host_version:fingerprint.version,fingerprint,skill:{full_content_seen_by_model:true},mcp:{result_returned_to_model:true},memory:{persisted:true,prompt_injection:true,auto_observe:true,self_filter:true}};
+ const report={status:'PASS',search:{queried:true,refs_returned:true,cache_hit:true,cache_isolated:true},host_version:fingerprint.version,fingerprint,skill:{full_content_seen_by_model:true},mcp:{result_returned_to_model:true},memory:{persisted:true,prompt_injection:true,auto_observe:true,self_filter:true}};
  await fs.writeFile(path.join(root,'catalog/runtime/dsh-compatibility.json'),JSON.stringify({schema:1,acceptances:[report]}));return {root,host,work};
 }
 test('bundle copies selected skills and compiled memory without changing profile',async t=>{
@@ -47,4 +47,16 @@ test('bundle targets one installation and cannot verify as a different running h
  await assert.rejects(verifyDshBundle(bundle.bundle,{requireRunningHost:true}),/Running DSH does not match/);
  const manifestFile=path.join(bundle.bundle,'bundle.json'),manifest=JSON.parse(await fs.readFile(manifestFile,'utf8'));manifest.artifacts['../outside']='a'.repeat(64);await fs.writeFile(manifestFile,JSON.stringify(manifest));
  await assert.rejects(verifyDshBundle(bundle.bundle),/Invalid bundle content ownership/);
+});
+
+test('search bundle passes an explicit private SC_DATA_DIR to DSH MCP config',async t=>{
+ const {root,host}=await fixture(t);
+ await fs.mkdir(path.join(root,'mcp/servers/search-core/typescript'),{recursive:true});
+ const hash=(await tree(path.join(root,'mcp/servers/search-core/typescript'))).sha256;
+ await fs.writeFile(path.join(root,'catalog/assets/mcp.search-core.toml'),stringify({id:'mcp.search-core',kind:'mcp',path:'mcp/servers/search-core/typescript',registry_id:'search-core',source:{kind:'local'},version:{sha256:hash}}));
+ await fs.writeFile(path.join(root,'experts/research.toml'),stringify({name:'research',skills:['demo'],mcp:['mcp.search-core'],plugins:[]}));
+ await fs.writeFile(path.join(root,'mcp/registry.toml'),stringify({schema:1,servers:[{id:'search-core',transport:'stdio',command:'node',args:['mcp/servers/search-core/typescript/dist/mcp.js'],cwd:'.',status:'build-required'}]}));
+ const fingerprint=await dshFingerprint(root,host);const evidence={status:'PASS',host_version:fingerprint.version,fingerprint,skill:{full_content_seen_by_model:true},mcp:{result_returned_to_model:true},search:{queried:true,refs_returned:true,cache_hit:true,cache_isolated:true},memory:{persisted:true,prompt_injection:true,auto_observe:true,self_filter:true}};
+ await fs.writeFile(path.join(root,'catalog/runtime/dsh-compatibility.json'),JSON.stringify({schema:1,acceptances:[evidence]}));
+ const bundle=await createDshBundle(root,host,{memory:true});const patch=YAML.parse(await fs.readFile(bundle.patch,'utf8'));const mcp=patch.flatMap(op=>op.insert||[]).find(op=>op.config?.serverName==='search-core');assert.equal(mcp.config.env.SC_DATA_DIR,path.join(bundle.bundle,'state/search-core'));assert.equal((await verifyDshBundle(bundle.bundle)).status,'VERIFIED');
 });

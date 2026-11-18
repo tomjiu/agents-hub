@@ -75,7 +75,7 @@
       "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
-      "current_sha256": "663dc963cf09cdea144aafcd09eb784bda3678b8b43f5f601d8d42e009899ea6"
+      "current_sha256": "2835d7dd9f479739895cfe73ee1c3d792fad27b62ac8d4a48249ec54f4286c5f"
     },
     {
       "original": "memory-net/console/apps/console/dist/index.html",

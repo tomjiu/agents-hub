@@ -44,6 +44,6 @@ APPLYING、ROLLING_BACK和FAILED状态意味着必须inspect-mcp并人工核查�
 
 ## 已执行验证
 
-[协议探针](probe-mcp-config.mjs)通过真实CLI计划/应用/回滚三个配置，用标准MCP SDK启动真实Search-core服务器：initialize、tools/list及不访问公网的tool_search调用通过。DSH额外验证实装Config。探针只用隔离项目与SC_HOME，结束回收自建项目、视图及状态。
+[协议探针](probe-mcp-config.mjs)通过真实CLI计划/应用/回滚三个配置，用标准MCP SDK启动真实Search-core服务器：initialize、tools/list及不访问公网的tool_search调用通过。DSH额外验证实装Config。探针只用隔离项目与SC_DATA_DIR，结束回收自建项目、视图及状态。
 
 **这不是实际Codex/OpenCode会话加载，也不是live DSH插件启动。** 配置入口和实际宿主完整调用是两个不同验收层级。

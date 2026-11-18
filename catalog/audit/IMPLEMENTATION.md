@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 75 PASS，1 SKIP（总76） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 77 PASS，1 SKIP（总78） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -24,7 +24,7 @@
 | Zai-bridge Go | go test ./... PASS | 本地及隔离测试，没有动真实Z.ai账户 |
 | Firefox | 491/491单元测试PASS，构建成功 | 本地实现保留；平台fixture已修复；真实交互待验 |
 | DSH Skill filesystem provider | 实装0.2.2-rc.1从当前dsh Profile在隔离ctx读取7个Skill成功，0警告 | 真实provider list/get；未更改运行中DSH配置，测试视图结束后回收 |
-| Search-core MCP | initialize + tools/list PASS | 真实服务器子进程和标准MCP客户端；不调用外部搜索 |
+| Search-core MCP | initialize、tools/list、search与缓存/失败路径PASS | 真实服务+本地HTTP来源；两版DSH查询及缓存结果回到模型；不证明公网来源全部可用 |
 | npm来源查询 | 安全拒绝 | 本机DNS返回受禁止地址，未绕过公网限制、未应用更新 |
 | Search-core Go | 未通过构建 | ONNX依赖在CGO_ENABLED=0时被排除，当前无C编译器 |
 
@@ -84,6 +84,14 @@
 - 新增audit-provenance只读审计：136项，60上游未核实，4明确许可限制，71厂商运行/许可复核；同类型完整内容未发现相同组，不代表没有部分重复。
 - export-locks现在区分本地导入commit与已审批启用版本的上游commit/版本，并拒绝启用内容篡改。初始四类locks不覆写。
 - 许可门槛加入DSH指纹后，rc.1/rc.4真实记忆/搜索/Skill宿主重新验收通过；兼容记录按新资产指纹追加而不覆盖旧证据。
+
+## 搜索功能与隔离阶段
+
+- 纠正探针SC_HOME误用：实际Search-core读取SC_DATA_DIR；host/MCP探针缓存与配置明确指向隔离目录。运行包搜索缓存也显式写包内state/search-core，不接管全局搜索配置。
+- 用本地SearXNG-compatible HTTP来源，标准MCP客户端实测query→refs、重复命中缓存、无重复来源请求、伪200 HTML失败的空refs/degraded透明返回。
+- DSH rc.1/rc.4直接和生成包实际发起search查询、refs返回模型及重复缓存，记忆/Skill原有断言通过；不声称公网引擎全部可用。
+- 实测发现同批并行tool_search列表刷新与search可能unknown tool，未修改DSH官方实现。使用先完成发现再执行的顺序，明确保留竞态限制。
+- 新增build:dsh入口，检查依赖后只构建三个子包，不自动安装或启用；clone前置已列明。
 
 ## 重要修复
 

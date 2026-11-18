@@ -16,13 +16,15 @@ node asset-manager/probe-dsh-host.mjs
 ## 完整链路
 
 1. 在临时目录建立独立DSH_HOME与headless派生profile；只在其node_modules添加适配包/echo fixture链接。不触碰运行中的DSH或用户profile。
-2. 核心与适配包各构建一次，预置仅测试用的约束、进度与workspace。
+2. build:dsh预先构建核心、适配包和搜索；探针再次构建核心与适配包，预置仅测试用的约束、进度与workspace。
 3. 按仓库dsh Profile实际部署7个Skill到临时项目.dsh/skills；从research Expert生成原生MCP patch。
 4. 复用既有mock-model fixture，在127.0.0.1空闲端口启动脚本化OpenAI-compatible服务，模型请求只去本地。子进程环境仅复制必要OS路径变量；HOME/USERPROFILE/DSH_HOME指测试目录，凭据仅固定虚假测试key。
 5. 真正运行安装包CLI，不是伪造ctx。模拟模型请求echo、memory_net_write、生成配置对应的Search-core MCP工具和skill工具；宿主完成工具执行后将结果返回模型。
 6. 复用既有verify-e2e断言：工具注册、约束/进度注入、工具后推断重新组装、最终结果回显、SQLite推断落盘、echo自动观测及记忆工具自指过滤。
-7. 增加断言：真实MCP结果中的newly_activated返回模型，已部署asset-management Skill的完整正文（去除frontmatter，规范化CRLF）原样进入后续模型请求；不是只检查摘要或标题。
+7. 增加断言：search工具查询本地SearXNG兼容来源，refs返回模型；重复查询命中缓存且只请求来源一次，SC_DATA_DIR在隔离目录。已部署asset-management Skill的完整正文（去除frontmatter，规范化CRLF）原样进入后续模型请求；不是只检查摘要或标题。
 8. 回收已部署Skill，停止模拟模型并清理测试profile、workspace及视图。遥测DISABLED；不启动Web应用，也不调用公网搜索或真实账户API。
+
+详见 [搜索功能验收](SEARCH-ACCEPTANCE.md)。tool_search列表刷新与search不在同批并行（已发现DSH重注册竞态）；功能探针执行查询，不能据此声称竞态已修复。
 
 ## 证据与限制
 

@@ -12,6 +12,7 @@ const {Client}=await import(pathToFileURL(path.join(dep,'client/index.js')).href
 const {StdioClientTransport}=await import(pathToFileURL(path.join(dep,'client/stdio.js')).href);
 const work=await fs.mkdtemp(path.join(os.tmpdir(),'hub-mcp-actual-'));
 const reports=[],owned=[];
+const isolatedEnv={HOME:work,USERPROFILE:work};for(const key of ['PATH','Path','SystemRoot','WINDIR','TEMP','TMP','COMSPEC','PATHEXT'])if(process.env[key])isolatedEnv[key]=process.env[key];
 const cli=(...args)=>JSON.parse(execFileSync(process.execPath,[path.join(root,'asset-manager/cli.mjs'),...args],{cwd:root,maxBuffer:4*1024*1024}).toString());
 try{
  for(const kind of ['opencode','codex','dsh']){
@@ -27,7 +28,7 @@ try{
   if(kind==='dsh'){const cfg=YAML.parse(text)[0].insert[0].config;({command,args,cwd}=cfg);assert.equal(cfg.transport,'stdio');assert.equal(cfg.serverName,'search-core');
    if(process.env.HUB_DSH_MCP_CLIENT){const {Config}=await import(pathToFileURL(path.resolve(process.env.HUB_DSH_MCP_CLIENT)).href);const checked=Config(cfg);assert.equal(checked.transport,'stdio');assert.equal(checked.serverName,'search-core');}
   }
-  const client=new Client({name:'agents-hub-config-probe',version:'2.0.0'});const transport=new StdioClientTransport({command,args,cwd,stderr:'pipe',env:{...process.env,SC_HOME:path.join(work,'cache-'+kind)}});
+  const client=new Client({name:'agents-hub-config-probe',version:'2.0.0'});const transport=new StdioClientTransport({command,args,cwd,stderr:'pipe',env:{...isolatedEnv,SC_DATA_DIR:path.join(work,'cache-'+kind)}});
   try{
    await client.connect(transport);const tools=await client.listTools();assert.ok(tools.tools.some(t=>t.name==='tool_search'));
    const call=await client.callTool({name:'tool_search',arguments:{query:'engine health',limit:1}});assert.notEqual(call.isError,true);assert.ok(call.content.some(c=>c.type==='text'&&c.text.includes('matches')));
