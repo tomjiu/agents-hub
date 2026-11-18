@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "skills": [
+    "asset-management",
+    "executing-plans",
+    "repository-skills",
+    "source-index",
+    "systematic-debugging",
+    "verification-before-completion",
+    "writing-plans"
+  ],
+  "discovered_through": ".dsh/skills project default root, no custom path",
+  "user_config_modified": false,
+  "checks": [
+    "Read-only preview",
+    "Approved installation",
+    "Native DSH list/get",
+    "Local-edit uninstall rejection",
+    "Quarantined uninstall",
+    "Native discovery empty after uninstall",
+    "Existing project rules preserved"
+  ],
+  "scope": "Installed DSH filesystem provider in isolated context; not running user profile or plugin installation."
+}

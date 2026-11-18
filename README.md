@@ -38,6 +38,23 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 不建立 agents/、skill-packs/ 或通用 projects/。WorkBuddy 内部插件属于原始厂商集合，不自动认定为 DSH 插件；专家候选仍未审核。
 
+## 显式项目 Skill 部署
+
+在仓库根执行，目标必须是已存在的消费项目；本轮只安装 Skill，不自动安装 MCP 或插件，也不修改已有项目规范/配置。
+
+~~~sh
+node asset-manager/cli.mjs plan-deploy dsh <existing-project>
+node asset-manager/cli.mjs deploy dsh <existing-project> --approve
+node asset-manager/cli.mjs inspect-deployment <existing-project> <deployment-id>
+node asset-manager/cli.mjs uninstall <existing-project> <deployment-id> --approve
+~~~
+
+plan-deploy 只预览；deploy 必须显式批准并指定项目。按 Profile 展开的 Skill 安装到 DSH 的 .dsh/skills、Codex 的 .agents/skills 或 OpenCode 的 .opencode/skills。**实际默认目录发现已在 DSH 安装包中验证；Codex/OpenCode 目前只验证目录部署，尚未进行实际客户端验收。**
+
+已有同名 Skill 则停止，不覆盖或采用其所有权。部署回执在项目 .agents-hub/deployments；卸载先校验全部内容，任意用户修改、新增目录/文件、链接都会阻止整组回收。通过后移入 .agents-hub/quarantine 保留字节，不永久删除。中断/未确认的部署留待人工恢复，不自动清理。
+
+目标 Profile 含 MCP 或插件时，当前安装器拒绝部分安装；请先生成并审查 Profile 视图，待对应客户端适配完成后再启用。详细约束见 [部署指南](asset-manager/DEPLOYMENT.md)。
+
 ## 更新与回滚
 
 ~~~sh

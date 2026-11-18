@@ -5,7 +5,7 @@
 - updates/{skills,mcp,plugins,agents-md}.toml：四类独立策略。默认检查/下载允许，自动应用禁止；不得覆盖或自动合并。
 - locks/*.lock.toml：初始版本和哈希。运行时启用指针单独保存，export-locks 导出新的选择记录。
 - provenance/<id>.json：本次导入时逐文件基线，用于本地修改三方比较。不可随本地改动更新以掩盖差异。
-- profiles/*.toml：客户端选择意图；enabled=false 表示不自动安装。profile-view <client> 展开 Profile 的 Expert 与显式资产引用，生成独立视图和选择记录；不覆盖用户配置。实际客户端安装仍需显式部署与验证。
+- profiles/*.toml：客户端选择意图；enabled=false 表示不自动安装。profile-view <client> 展开 Profile 的 Expert 与显式资产引用，生成独立视图和选择记录；不覆盖用户配置。deploy <client> <project> --approve 支持显式项目Skill部署，保持Profile默认不自动安装；MCP/插件安装及真实Codex/OpenCode加载仍待验证。
 - audit：迁移映射、上游差异和实施验证记录。
 - audit/legacy：不参与自动加载的历史说明、注册表和路径，不作为当前执行指令。
 

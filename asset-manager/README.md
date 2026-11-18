@@ -13,6 +13,10 @@
 - 独立客户端 Skill 视图、配置片段与完整 AGENTS 候选，不覆盖用户配置。profile-view <dsh|codex|opencode> 读取对应 Profile，展开 Expert 与显式 Skill/MCP/Plugin 列表，检查类型与存在性并持久化选择记录。
 - probe-console-ui.mjs 使用已安装 Edge 或 HUB_BROWSER_EXECUTABLE，在隔离数据上真实点击认证、进度写入、轨迹、激活与统计，并刷新读回 SQLite；不是全 UI/全平台覆盖。
 
+## 项目级部署
+
+plan-deploy / deploy / inspect-deployment / uninstall 为显式批准的项目Skill安装与撤销。已有名称或本地修改不覆盖，卸载完整校验后移入保留区；本轮只处理Skill，MCP/插件选择拒绝部分安装。详见 [部署指南](DEPLOYMENT.md)。
+
 ## 持久化与恢复边界
 
 catalog/locks 是导入基线；.asset-state/active.json 是实际选择真相源。export-locks 向全新目录导出选择。新版本的源目录及哈希记录必须一起备份，当前支持已有恢复包的校验恢复；尚未实现从任意远端来源自动恢复全部资产。

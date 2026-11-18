@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 24/24 PASS | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 41/41 PASS | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 20/20 PASS | 接口契约与事件接线；不是live profile安装 |
@@ -38,6 +38,13 @@
 - 非空MCP视图与重名Skill拒绝新增回归测试；未支持的宿主插件明确报告，不假装已安装。
 - asset-manager/verify-staged.mjs 移除意外NUL字符，改用显式字符构造；现在可作为普通文本审阅。
 
+## 显式项目部署阶段
+
+- 新增 plan-deploy / deploy / inspect-deployment / uninstall。只处理Profile选择的Skill；显式项目与批准参数必需，MCP/插件选择拒绝部分安装。通过真实CLI子进程与隔离项目验证预览、安装、查看及撤销。
+- 目标已有同名Skill阻止整组安装；部署完整摘要包含点文件、缓存名及空目录，用户修改阻止整组撤销。正常撤销移入项目quarantine，不永久删除字节。失败/未确认内容与中断锁保留给人工核查；并发部署、多Skill中单项冲突或修改、REMOVING状态拒绝续删均有回归测试。
+- 隔离消费者项目实测：批准安装7个Skill，实装DSH默认.dsh/skills发现和全文读取通过，修改后撤销被拒绝，恢复后quarantine回收成功，默认发现变空；现有AGENTS.md未修改。证据见 dsh-project-deployment-verification.json。
+- 这不是live DSH插件安装或真实Codex/OpenCode会话验收。probe-dsh-deployment.mjs的测试项目与状态均已回收，当前用户项目不变。
+
 ## 重要修复
 
 - Search-core原测试Windows下SQLite未关闭即rm造成EPERM：调整清理顺序，不跳过业务断言。
@@ -48,7 +55,7 @@
 ## 尚未完成的硬门槛
 
 1. Codex/OpenCode实际发现调用、DSH live profile插件安装和跨宿主适配验证。
-2. Profile组合与视图生成已实现；一键实际安装、MCP/插件全面适配和客户端现有配置安全合并仍未完成。
+2. Profile组合、视图与显式项目Skill部署/撤销已实现，DSH默认项目发现已验证；MCP/插件实际安装与客户端配置安全合并仍未完成。
 3. Search-core Go的CGO工具链和真实MCP协议验证。
 4. Console核心真实点击及落盘闭环已通过；完整交互矩阵与Firefox真实浏览器服务仍待验。
 5. 所有Skill旧机器路径清理、上游与许可精确映射、第三方同源重复审核。
