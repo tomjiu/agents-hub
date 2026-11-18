@@ -1,0 +1,72 @@
+# ENABLED MCPs — folder E:\Code\skills\mcp\servers\<id>\
+# Each subfolder = one enabled server (一目了然)
+# Runtime: Codex ~/.codex/config.toml + OpenCode opencode.json (synced)
+
+version: 1
+updated: 2026-07-18
+root: E:\Code\skills\mcp
+
+servers:
+  - id: keenable
+    path: servers/keenable
+    clients: [codex, opencode]
+    type: remote
+    url: https://api.keenable.ai/mcp
+
+  - id: tavily-hikari
+    path: servers/tavily-hikari
+    clients: [codex, opencode]
+    type: remote
+    url: https://tavily.ivanli.cc/mcp
+    env: [TAVILY_HIKARI_TOKEN]
+
+  - id: playwright
+    path: servers/playwright
+    clients: [codex, opencode]
+    type: stdio
+    command: [cmd, /c, npx, -y, "@playwright/mcp@latest"]
+
+  - id: firefox-devtools
+    path: servers/firefox-devtools
+    clients: [codex, opencode]
+    type: stdio
+    command: [npx, -y, "@mozilla/firefox-devtools-mcp@latest", "--connectExisting", "--marionettePort", "2828"]
+    local: local/firefox-devtools-mcp
+
+  - id: zen-browser
+    path: servers/zen-browser
+    clients: [opencode]
+    type: stdio
+    command: [npx, -y, "zen-mcp@latest"]
+
+  - id: codex
+    path: servers/codex
+    clients: [opencode]
+    type: stdio
+    command: [codex-mcp-server]
+
+  - id: node_repl
+    path: servers/node_repl
+    clients: [codex, opencode]
+    type: stdio
+    notes: path set in client config (Codex runtime)
+
+
+  - id: brp
+    path: servers/brp
+    clients: [codex, opencode]
+    type: stdio
+    command: [python, -X, utf8, E:\Code\ai\brp-mvp\adapter\brp_mcp_adapter.py]
+    env: [BRP_WS_ADDR]
+    notes: BRP real Firefox control; requires extension + bridge
+  - id: zai
+    path: servers/zai
+    local: local/zai-bridge
+    clients: [dsh]
+    type: stdio
+    version: 0.3.1
+    notes: DSH globally configured; credentials stay in private accounts.json; no default live tests
+
+not_enabled_see:
+  - ../sources/mcp-ecosystem/
+  - ../catalog/mcp.draft.toml

@@ -1,0 +1,241 @@
+{
+  "sha256": "5fed6453cb19394718545924e60ea52bf88e3bb1ccdbb8e1110964f64d3499e7",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 19857,
+      "sha256": "4811b9ce9ad9324baa8e2fef3b064af2ecd482e40610ccf760265a709b0dab01"
+    },
+    {
+      "path": "aesthetics/dark-mode.md",
+      "bytes": 1894,
+      "sha256": "0b3a3f50d6066c9dd60b0e775eef9dfe05a3ec71ce8c981f0f32ce5c89b2bcd9"
+    },
+    {
+      "path": "aesthetics/index.md",
+      "bytes": 35255,
+      "sha256": "95ce596dd5e8336d77ff4326af02ff6315a0ad49ad27437f5105a6e10861dc01"
+    },
+    {
+      "path": "aesthetics/navigation-footer.md",
+      "bytes": 2348,
+      "sha256": "7185f837e06b59a9915afa19eb1114cec81c2e1b0362d8bebce7a62014a51095"
+    },
+    {
+      "path": "aesthetics/screen-craft.md",
+      "bytes": 9544,
+      "sha256": "405a33c184042391a4f2303b9d21ef7d01e628c07759d180be621aa5e5e0b602"
+    },
+    {
+      "path": "aesthetics/self-check.md",
+      "bytes": 25862,
+      "sha256": "2fe67d7288fb41c4114f65387be6642ecd4df3449008a74b4667ef3c82129933"
+    },
+    {
+      "path": "examples/templates/component-dispatch-rules.md",
+      "bytes": 9446,
+      "sha256": "102c177f38335335767fca49db7a3283b251b14cebe55ff2c851e5c6cc015d2f"
+    },
+    {
+      "path": "examples/templates/figma-token-gen.md",
+      "bytes": 52133,
+      "sha256": "93713a21668e5e3c37e59348daa60f53d8a17220b9570203b3a46106e8aa3a2c"
+    },
+    {
+      "path": "examples/templates/incremental.md",
+      "bytes": 5893,
+      "sha256": "75c3f7098d3d223b60d03588bcf7aceee371c7ca28ad9f748e6a23eeac163e05"
+    },
+    {
+      "path": "examples/templates/phase-2-analysts.md",
+      "bytes": 7100,
+      "sha256": "2cf4d3f80913aa5088e3e9816287805337fc138f8c3f0ebfcd79c7b3cf6bc384"
+    },
+    {
+      "path": "examples/templates/phase-2-structured-spec.md",
+      "bytes": 9180,
+      "sha256": "67c0eb6e4cce0bc12f057ec6b0b7cf0648cc37575bdef5a7b75ee017cb038b59"
+    },
+    {
+      "path": "examples/templates/phase-2.5-intent-synthesis.md",
+      "bytes": 31983,
+      "sha256": "8ef01d391e2df9bfd6ad851973d51ca94cb0df642100b0ec41709a3759a342ee"
+    },
+    {
+      "path": "examples/templates/phase-3-4-component.md",
+      "bytes": 9375,
+      "sha256": "3fbc85ee38eac92d60b65a64a07eaf2f85ec2d17ee73d5bbe0b26c23c6468b6d"
+    },
+    {
+      "path": "examples/templates/phase-4-ui-kit.md",
+      "bytes": 40675,
+      "sha256": "93ef23ac477dad56d541e065c4c6dda7c4ebf87c74ba8e14b365e1e55e5a3ae9"
+    },
+    {
+      "path": "examples/templates/phase-5-docs.md",
+      "bytes": 13030,
+      "sha256": "dd5ba094d43a1989f58ee55898efb8cce8489ed7bbc75488d572057315502a34"
+    },
+    {
+      "path": "examples/templates/scratch-token-gen.md",
+      "bytes": 15003,
+      "sha256": "aad4b7b4d50a43cb81db501e1272544646000cf32a8ceacf190927735b4b752f"
+    },
+    {
+      "path": "examples/templates/specimen-reference.html",
+      "bytes": 6326,
+      "sha256": "5de9bb920b87cfed3747de97cc424aea01fa20391bce174d98d9d4da7a0cfe06"
+    },
+    {
+      "path": "file-specs/css-json.md",
+      "bytes": 10063,
+      "sha256": "02c89aabd4595a9de20ecff3a433150b87415f1d80e5bee6cfcc01d704b8ce1f"
+    },
+    {
+      "path": "file-specs/css-tokens.md",
+      "bytes": 35056,
+      "sha256": "02dfda7e3d5154ee515b81f650c781c50c180bee1f6d9483a5b3bb97101299cb"
+    },
+    {
+      "path": "file-specs/design-library-output.md",
+      "bytes": 10638,
+      "sha256": "fa2ec35521b5f44f127497f3e1174b217155d3e9e9a9108475351bc877f3ad42"
+    },
+    {
+      "path": "file-specs/design-spec-bundle.md",
+      "bytes": 6174,
+      "sha256": "94a59f45de1245af85aee7dd70c4b4f61a423475eef7c53c21af271a51e1f1ea"
+    },
+    {
+      "path": "file-specs/documentation.md",
+      "bytes": 12933,
+      "sha256": "4b0da91759d15b2e595f2795d8cde385dd2c701053530f30ea7d4fc4bdac0d43"
+    },
+    {
+      "path": "file-specs/preview-pages.md",
+      "bytes": 29094,
+      "sha256": "3399f139bdab67dac2f4f4ab0732360185c6f41d8333e87792396f3f26a64a23"
+    },
+    {
+      "path": "file-specs/ui-kit.md",
+      "bytes": 29764,
+      "sha256": "f7df6106641c631399ad40be50b0ba3ced986671a1f9c85658e8eb47278527c9"
+    },
+    {
+      "path": "operation-policies/agent-orchestration.md",
+      "bytes": 21001,
+      "sha256": "b7f83f2015b78ca64aaf33986dcd6cfd780187a48052033231163595b0550066"
+    },
+    {
+      "path": "operation-policies/bundle-exploration.md",
+      "bytes": 9377,
+      "sha256": "77cf8731c9613ed9c17361c896cee6989b9e230cfe661f132ac8d6f85fee56cc"
+    },
+    {
+      "path": "operation-policies/decision-rules.md",
+      "bytes": 11068,
+      "sha256": "c31bb435d097616eb9ba2a552e3ce9db5fc19b19e89869348caf36b8c225a0f2"
+    },
+    {
+      "path": "operation-policies/quality-gates.md",
+      "bytes": 10861,
+      "sha256": "07bfa841dc1c42c3d7ad369789d3cd1678db19ac5445cc9a6f54817e111740de"
+    },
+    {
+      "path": "operation-policies/user-output-policy.md",
+      "bytes": 8086,
+      "sha256": "6bd555de6e3a3054c8b631b1d931165eaae484e2b52e42c7422c818032a8824f"
+    },
+    {
+      "path": "scripts/check-design-library-phase.mjs",
+      "bytes": 89212,
+      "sha256": "ce15de5ae02f7afc908fb93223025450bbc7125380b98a04c1b2eab1d7b85f60"
+    },
+    {
+      "path": "scripts/copy-bundle-assets.mjs",
+      "bytes": 12965,
+      "sha256": "57baa978bd86d9f282e688785e7ca03e66f9c7035f2a360f1b9aa3cdf4b45928"
+    },
+    {
+      "path": "scripts/css-to-json.mjs",
+      "bytes": 55802,
+      "sha256": "613af2c660a58028a9e0d6a00dc6fc8cf3a8f662cd4e39ea6602a62e3fe4b1ad"
+    },
+    {
+      "path": "scripts/css-utils.mjs",
+      "bytes": 769,
+      "sha256": "46096dc1c5f0241f26979d0e93d0cafdc0f9bd6faca00f4f12e171b9a91676a3"
+    },
+    {
+      "path": "scripts/extract-components-css.mjs",
+      "bytes": 10884,
+      "sha256": "83add044b2975053931fdc5eb57f49fdeccb3ec98ebd84c8774f6c9acb623ccf"
+    },
+    {
+      "path": "scripts/generate-uikit-plan.mjs",
+      "bytes": 28876,
+      "sha256": "7925f68a640bbefdcc26b7500d25110b3cddb55e5120191dd46892999fce055e"
+    },
+    {
+      "path": "scripts/jsonl-utils.mjs",
+      "bytes": 7697,
+      "sha256": "b7cb556be9b5eb8c80ccb6c09e5758a5ed53339d22d558c12adb34662a2d7028"
+    },
+    {
+      "path": "scripts/validate-design-library-output.mjs",
+      "bytes": 3286,
+      "sha256": "0f4c9d2fc4e54a452eafac7a366230422aadd54cbafecc4400e137c38e95c6da"
+    },
+    {
+      "path": "scripts/validate-intent.mjs",
+      "bytes": 7740,
+      "sha256": "c79f90c4cd3f8640f9c76fedacd90820404d1e853f82d19a544a855639202fee"
+    },
+    {
+      "path": "scripts/validate-token-input.mjs",
+      "bytes": 4209,
+      "sha256": "436b4b710a5155714e7a0f62d4b68529e0646aab9e6797f42bf6953b1d3261f5"
+    },
+    {
+      "path": "scripts/validate-uikit-plan.mjs",
+      "bytes": 14364,
+      "sha256": "99e380b531e2734c5f90eaae72c706f25080a1cef07c7ad0256412e5920e39f2"
+    },
+    {
+      "path": "skill-release-manifest.json",
+      "bytes": 209,
+      "sha256": "3d898fb65d8dd483bf12b865982a7e96f26bde3371211a774c9609c8b1ab862c"
+    },
+    {
+      "path": "workflows/create-from-scratch.md",
+      "bytes": 23465,
+      "sha256": "ccb499179398e91feb592e0363526e162fb0cc214bab6687384be2ec9e02508b"
+    },
+    {
+      "path": "workflows/create-from-structured-spec.md",
+      "bytes": 18195,
+      "sha256": "d1b441af537d05f2e8e0b84facd7fff0509e34fff3bcfac625bdbb9e03539a08"
+    },
+    {
+      "path": "workflows/create-library.md",
+      "bytes": 55077,
+      "sha256": "236c613b62e2f57d2f4fe52fa99164d41021428500d3c7e6df4622c7bec6950a"
+    },
+    {
+      "path": "workflows/expand-components.md",
+      "bytes": 9305,
+      "sha256": "ba79763b68825a0eec1dab5239968610dd42c05d1706e54bf20311a3df0856c0"
+    },
+    {
+      "path": "workflows/generate-additional-kit.md",
+      "bytes": 5164,
+      "sha256": "d312d81494afb9e465476a6109efe3d9270bc9b72742f93f448a10c00c717c7b"
+    },
+    {
+      "path": "workflows/refine-library.md",
+      "bytes": 10046,
+      "sha256": "633415836c0c19bb0a3cd6414a6eb08930f60e2e8843b9ec5c5f6aa8c7feb595"
+    }
+  ],
+  "bytes": 846284
+}

@@ -1,0 +1,22 @@
+id = "trae.trae-product-knowledge"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/TRAE-product-knowledge"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-product-knowledge/0.0.2/package.zip"
+version = "0.0.2"
+build = "default::prod_20260609::TRAE-product-knowledge"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "111b69febfad93ff0b0597f0852e376532b410e4ca38b1edf45e9e7bcef56222"
+local_modified = "unknown"
+enabled = false

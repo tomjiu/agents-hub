@@ -1,0 +1,86 @@
+{
+  "sha256": "b3ad546d253ddb85f6bafe17fda6f26cef6973c40bac298f9167d22271b2e8d6",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 9683,
+      "sha256": "c5ca3c79b59f273f22b74a9e1261694b4f0620e638cbba43b00b9c3eb4259fad"
+    },
+    {
+      "path": "doc/create.md",
+      "bytes": 1052,
+      "sha256": "20a3e76e3ca701e523a07b997c7afba6a151db32bc2cbc8bc5a0d1bc94f39db5"
+    },
+    {
+      "path": "doc/edit.md",
+      "bytes": 4007,
+      "sha256": "959a2fc23049b85d717b6bddff2ddd345b1a7cf2960e4631d8549599217a6890"
+    },
+    {
+      "path": "import_file.py",
+      "bytes": 5270,
+      "sha256": "32d1c3c3871cb21e9764f35d7626361697212fb2166de82335949f5ead8fcffb"
+    },
+    {
+      "path": "manage.md",
+      "bytes": 2466,
+      "sha256": "b15846f8c8fc9ca1832f1d95160f1694429df3e86d121a0357061312b210dffb"
+    },
+    {
+      "path": "references/auth.md",
+      "bytes": 5874,
+      "sha256": "860b6a9a62bda4f311e938e4cac32db8d04b9c13544339189500bee694c5cc04"
+    },
+    {
+      "path": "references/diagram_references.md",
+      "bytes": 2371,
+      "sha256": "ee67b5c57b348b3c751e8b9edc561b86a7d8b1075bfb69c91921bd0cf9cde536"
+    },
+    {
+      "path": "references/space_references.md",
+      "bytes": 6679,
+      "sha256": "affa82356962490b7baf8094f1c91daa1aaf7049e60dce512e423b0cff657e87"
+    },
+    {
+      "path": "sheet/create.md",
+      "bytes": 967,
+      "sha256": "27aa5578bb62e4d268127a97db4b5e730c842b7a0ac019270076298ecce425ea"
+    },
+    {
+      "path": "sheet/edit.md",
+      "bytes": 4297,
+      "sha256": "7e9c0257a79c0d8e756d7f10b351d3430ca8bfac45196f609e0f6ce0d338bb0b"
+    },
+    {
+      "path": "slide/create.md",
+      "bytes": 201,
+      "sha256": "db3676aef265127b72785ff67ce0596687989b18cd18191daf554f94be2c323b"
+    },
+    {
+      "path": "slide/edit.md",
+      "bytes": 7100,
+      "sha256": "e10251c074e74b6f908fe45768b8720b5565cc3b906addd50b6fec3816ff0eed"
+    },
+    {
+      "path": "smartcanvas/mdx_references.md",
+      "bytes": 24179,
+      "sha256": "df1953969b802d55b34b4d954a75b41441fee396f7dbf6777f070050529db438"
+    },
+    {
+      "path": "smartcanvas.md",
+      "bytes": 1241,
+      "sha256": "8d7fbc325d8349acccbf31d638593a7e0dd1fb076a74a0d302974cc5fc00d1c9"
+    },
+    {
+      "path": "smartsheet.md",
+      "bytes": 1559,
+      "sha256": "06e918b6cf094418226673463390be2fcdc4c5ad088cdeda08ac8190e582ab41"
+    },
+    {
+      "path": "tencentdocs.py",
+      "bytes": 19734,
+      "sha256": "3a7ab03b42f20a63d7c128ec7f10321f383dddc7849874b6170ad8538a17ac6c"
+    }
+  ],
+  "bytes": 96680
+}

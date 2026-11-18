@@ -1,0 +1,13 @@
+schema = 1
+kind = "plugins"
+
+[[assets]]
+id = "memory-net"
+path = "plugins/memory-net"
+source_url = "https://github.com/tomjiu/memory-net"
+upstream_version = "1.0.0"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "33e0076b1440b7e7608bcb1c81fc1f7d1bb49af10aab6138364388e5f1b827a3"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false

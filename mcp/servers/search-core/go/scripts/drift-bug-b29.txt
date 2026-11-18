@@ -1,0 +1,54 @@
+批 29 证据: analyze-upstream-drift.mjs goldAt 大小写 bug (b24 引入) — 复现/根因/影响面/修正
+=====================================================================================
+
+【发现路径】
+批 29 立项做"垃圾 gold 过滤"前例行对拍: 同一份 b29 新窗 dump 上, dump 内联 hitRank
+(eval 口径, hay 先 toLowerCase) vs drift 工具 goldAt 重算, NQ 50/98 行分歧、TQA 69/100 行
+分歧, 方向全部是"内联找到、goldAt 找不到"。逻辑上同字段同匹配器不可能分歧 → goldAt 实现
+偏离了匹配器调用契约。
+
+【根因】
+matchEvidence(hay, answers) 内部只对 answers 做 toLowerCase, hay 侧小写是调用方契约:
+  - eval-external.mjs:89        hays = refs.map(r => `${title}\n${snippet}`.toLowerCase())  ✓
+  - eval-external-dump.mjs:84   同上                                                       ✓
+  - analyze-suppression.mjs:65  matchEvidence(`${t}\n${s}`.toLowerCase(), ...)             ✓
+  - analyze-rerank-replay.mjs:97 同上                                                      ✓
+  - analyze-upstream-drift.mjs:45 (b24) matchEvidence(`${t}\n${s}`, ...) 直接传原串        ✗
+后果: 大小写敏感匹配 — 专名型答案(China / Debra Winger / New Zealand / Richard Marx…)
+在 title+snippet 里以大写形态出现时全部漏判; 只有纯小写/数字型答案(1990 等)能命中。
+b24 提交信息声称"snippet 层 gold 判定与 eval 逐字一致"实为不等价 — 跨工具拷贝"看着一样"
+不等于"跑起来一样", 必须金样本锁(b29 修法)。
+
+【量化】
+b22win 文件(journal 首行)上: b22 归因工具(小写正确) NQ miss=63 → hit@1≈35%;
+drift 工具(坏) gold@1=13.3% — 同一文件差 2.7 倍。b29 新窗修正后(对照):
+  NQ:  坏口径 gold@1/@10/@20 = 12.2% / 29.6% / 32.7%  →  修好 = 38.8% / 77.6% / 82.7%
+  TQA: 坏口径 = 15.0% / 31.0% / 37.0%                →  修好 = 57.0% / 91.0% / 94.0%
+修正后 goldAt(20) 与 dump 内联 hitRank 对拍: NQ 98/98, TQA 100/100, 0 分歧。
+
+【b24 结论影响面复审】
+不受影响(URL/引擎口径, 不过匹配器):
+  - rank1 换页率 33.7%/30.0% (URL 对比)
+  - 引擎腿出现率/腿数均值/墙钟 (engines 字段)
+  - 锚窗 journal 机制本身(--journal-only 单窗入档为 b29 补齐)
+受影响(降级):
+  - "检索层头部零漂移 (gold@1 Δ0.0/+1.0)" — 坏匹配器下两窗同残, Δ 值不可信;
+    旧窗文件已随 /tmp 清失, 无法重算 → 结论降级为"头部漂移不可复核", 不再作为
+    "融合层头部对腿换血免疫"的实证引用(该命题回到待验证状态);
+  - "深池比头部敏感 (TQA gold@20 Δ-4.0)" — 同源坏数, 一并降级;
+  - "b23 -7pp 不能归因本窗检索层" — 依据之一失效, 案件回到"不可考"状态(锚窗从此有档,
+    未来同案可机器归因)。
+保留(定性): 腿结构小时级剧变(marginalia/yahoo 掉光+DDG 补位)是 engines 口径, 仍成立。
+
+【journal 修正】
+upstream-anchor-journal.jsonl 追加 4 行 kind=correction(指向首 4 行窗口, 声明其 hit* 字段
+受 bug 影响且原窗文件已失不可重算) — append-only, 不改写历史行。b29 新窗以修好口径入档:
+  NQ  gold@1=38.8 gold@10=77.6 gold@20=82.7 (n=98, mtime 2026-09-06T20:44:09Z)
+  TQA gold@1=57.0 gold@10=91.0 gold@20=94.0 (n=100, mtime 2026-09-06T20:51:14Z)
+
+【修法(b29 落地)】
+1. goldAt 补 .toLowerCase()(与 eval 四处调用方契约对齐);
+2. 常驻自检 selfcheck(): 金样本覆盖 ①专名大小写(Debra Winger@rank2, rank1 无证据)
+   ②tokenAND 数字 ③rank 字段乱序数组序 — 每次运行先断言, FAIL 即 exit(2) 拒绝出数;
+3. --journal-only 单窗入档模式(旧窗丢失时锚窗链条不断; 修正行 kind=correction 永准入档);
+4. 对拍脚本 /home/z/my-project/scripts/b29-reconcile.mjs 留档可复跑。

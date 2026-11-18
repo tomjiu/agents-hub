@@ -1,0 +1,22 @@
+id = "trae.html-report"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/html-report"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::html-report/0.0.3/package.zip"
+version = "0.0.3"
+build = "solo_work::default::prod_20260609::html-report"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.3"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "10017f684735b207c0a467fa714034bc9968a22a5ce58648db30e9233f49e5f9"
+local_modified = "unknown"
+enabled = false

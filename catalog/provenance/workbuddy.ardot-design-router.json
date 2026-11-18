@@ -1,0 +1,16 @@
+{
+  "sha256": "7545d61143cca2b927357f7e009510ce98a3935667850e7c97d743147e24c14d",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 532,
+      "sha256": "a49ef2aef5d41cc772b44de19c2d87e8628d0b6323f74d28e2125694f2d63c50"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 3938,
+      "sha256": "9692dfe4c37eee6bbcd48dab610153051b9f19d66c5d972f7ca8c9a0340d891a"
+    }
+  ],
+  "bytes": 4470
+}

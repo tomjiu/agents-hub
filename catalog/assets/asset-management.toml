@@ -1,0 +1,16 @@
+id = "asset-management"
+kind = "skills"
+path = "skills/asset-management"
+
+[source]
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+license = "review-required"
+
+[version]
+upstream = "self-maintained"
+commit = ""
+local = "2.0.0"
+sha256 = "7b79b0f7219cb3938db6d5b6bd892ac288e6273bba2fd563d86889fadd4a650f"
+local_modified = false
+enabled = false

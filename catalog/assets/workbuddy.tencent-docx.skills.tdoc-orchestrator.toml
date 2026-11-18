@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.skills.tdoc-orchestrator"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/tdoc-orchestrator"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "96f901efebced8f0c608cd80b8128dea99282240698f636e6becfca7cca24b19"
+local_modified = "unknown"
+enabled = false

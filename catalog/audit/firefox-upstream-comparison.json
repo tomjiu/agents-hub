@@ -1,0 +1,660 @@
+{
+  "upstream": "https://github.com/mozilla/firefox-devtools-mcp",
+  "commit": "b0f4495336b36b875cee29480150e660088c3e1a",
+  "npm_version": "0.9.5",
+  "comparison": "Bytewise SHA256 per local source file; local-only files preserved; no runtime compatibility claim.",
+  "files": [
+    {
+      "path": ".codecov.yml",
+      "status": "identical"
+    },
+    {
+      "path": ".env.example",
+      "status": "identical"
+    },
+    {
+      "path": ".eslintrc.json",
+      "status": "identical"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "status": "identical"
+    },
+    {
+      "path": ".github/workflows/pr-check.yml",
+      "status": "identical"
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "status": "identical"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "status": "identical"
+    },
+    {
+      "path": ".gitignore",
+      "status": "identical"
+    },
+    {
+      "path": ".prettierignore",
+      "status": "identical"
+    },
+    {
+      "path": ".prettierrc.json",
+      "status": "identical"
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "identical"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "status": "identical"
+    },
+    {
+      "path": "CLAUDE.md",
+      "status": "identical"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "status": "identical"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "status": "identical"
+    },
+    {
+      "path": "docker-compose.yml",
+      "status": "identical"
+    },
+    {
+      "path": "Dockerfile",
+      "status": "identical"
+    },
+    {
+      "path": "docs/ci-and-release.md",
+      "status": "identical"
+    },
+    {
+      "path": "docs/firefox-client.md",
+      "status": "identical"
+    },
+    {
+      "path": "docs/testing.md",
+      "status": "identical"
+    },
+    {
+      "path": "LICENSE-APACHE",
+      "status": "identical"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "status": "identical"
+    },
+    {
+      "path": "package-lock.json",
+      "status": "changed"
+    },
+    {
+      "path": "package.json",
+      "status": "changed"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/.claude-plugin/plugin.json",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/.mcp.json",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/agents/e2e-tester.md",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/agents/web-scraper.md",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/commands/debug.md",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/commands/navigate.md",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/commands/screenshot.md",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/README.md",
+      "status": "identical"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/skills/browser-automation/SKILL.md",
+      "status": "identical"
+    },
+    {
+      "path": "README.md",
+      "status": "changed"
+    },
+    {
+      "path": "scripts/demo-server.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/generate-moz-package.mjs",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/publish-moz-package.mjs",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/run-integration-tests-windows.mjs",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/setup-mcp-config.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-bidi-devtools.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-closed-window.js",
+      "status": "local-only"
+    },
+    {
+      "path": "scripts/test-console.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-dialog.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-firefox-temp.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-input-tools.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-lifecycle-hooks.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-mozlog.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-navigation.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-privileged-context.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/test-screenshot.js",
+      "status": "identical"
+    },
+    {
+      "path": "scripts/_helpers/page-loader.js",
+      "status": "identical"
+    },
+    {
+      "path": "SECURITY.md",
+      "status": "identical"
+    },
+    {
+      "path": "src/cli.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/config/constants.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/core.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/firefox/dom.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/events/console.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/events/debugging.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "src/firefox/events/index.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/firefox/events/network.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/index.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/firefox/pages.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/pref-utils.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/profile.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/formatter.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/index.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/attributeCollector.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/elementCollector.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/selectorGenerator.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/snapshot.injected.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/treeWalker.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/manager.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/resolver.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/snapshot/types.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/firefox/types.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/index.moz.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/index.public.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/index.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/tools/console.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/debugging.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "src/tools/firefox-management.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/tools/firefox-prefs.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/index.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/tools/input.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/network.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/pages.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/privileged-context.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/tools/profiler.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "src/tools/screenshot.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/script.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/tools/snapshot.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/utilities.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/tools/webextension.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/types/common.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/types/selenium-webdriver-firefox.d.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/utils/errors.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/utils/js-validation.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "src/utils/logger.ts",
+      "status": "changed"
+    },
+    {
+      "path": "src/utils/remote-value.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "src/utils/response-helpers.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/utils/uid-helpers.ts",
+      "status": "identical"
+    },
+    {
+      "path": "src/utils/version.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "Taskfile.yaml",
+      "status": "identical"
+    },
+    {
+      "path": "tests/cli/prefs-parsing.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/config/constants.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/connect-existing.test.ts",
+      "status": "changed"
+    },
+    {
+      "path": "tests/firefox/core-prefs.test.ts",
+      "status": "changed"
+    },
+    {
+      "path": "tests/firefox/core.test.ts",
+      "status": "changed"
+    },
+    {
+      "path": "tests/firefox/events/debugging.test.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "tests/firefox/events/network.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/pages.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/pref-utils.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/profile.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/snapshot/injected/elementCollector.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/snapshot/injected/snapshot.injected.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/snapshot/injected/treeWalker.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/snapshot/resolver.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/firefox/types.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/console.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/e2e-app.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/form.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/network.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/selector.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/simple.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/test-extension/manifest.json",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/test-extension/popup.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/fixtures/visibility.html",
+      "status": "identical"
+    },
+    {
+      "path": "tests/helpers/firefox.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/console.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/e2e-scenario.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/form.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/moz-extension.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/network.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/snapshot.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/integration/tabs.integration.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/setup.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/smoke.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/snapshot/formatter-advanced.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/snapshot/formatter.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/console.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/firefox-management.test.ts",
+      "status": "changed"
+    },
+    {
+      "path": "tests/tools/firefox-prefs.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/index.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/input.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/network.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/pages.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/privileged-context-state.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/privileged-context.test.ts",
+      "status": "changed"
+    },
+    {
+      "path": "tests/tools/profiler.test.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "tests/tools/screenshot.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/script.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/snapshot.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/tools/utilities.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/utils/errors.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/utils/js-validation.test.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "tests/utils/logger.test.ts",
+      "status": "changed"
+    },
+    {
+      "path": "tests/utils/remote-value.test.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "tests/utils/response-helpers-extended.test.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tests/utils/version.test.ts",
+      "status": "local-only"
+    },
+    {
+      "path": "tsconfig.json",
+      "status": "identical"
+    },
+    {
+      "path": "tsup.config.moz.ts",
+      "status": "identical"
+    },
+    {
+      "path": "tsup.config.ts",
+      "status": "identical"
+    },
+    {
+      "path": "vitest.config.ts",
+      "status": "identical"
+    }
+  ]
+}

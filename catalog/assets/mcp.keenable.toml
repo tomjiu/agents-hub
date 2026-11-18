@@ -1,0 +1,19 @@
+id = "mcp.keenable"
+kind = "mcp"
+path = "catalog/audit/legacy/mcp/servers/keenable"
+registry_id = "keenable"
+
+[source]
+kind = "http"
+url = "https://api.keenable.ai/mcp"
+version = "unknown"
+license = "review-required"
+commit = "4f1911081477b49a6610e52537bea1057f216530"
+
+[version]
+upstream = "unknown"
+commit = "4f1911081477b49a6610e52537bea1057f216530"
+local = "imported-2026-11-18"
+sha256 = "09a968f7b576cb397449fee34a3e5f8e550dcc5f117cacc41c73a92c0282d997"
+local_modified = "unknown"
+enabled = false

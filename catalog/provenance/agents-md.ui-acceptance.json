@@ -1,0 +1,11 @@
+{
+  "sha256": "42e452dc8f7ffe3f7f04617760a6fecf52c354a45d4622f09a590e3aa6263ebc",
+  "files": [
+    {
+      "path": "ui-acceptance.md",
+      "bytes": 1782,
+      "sha256": "7ac54c7c8d4d147ca7e4db9dfa4493121f5b02d0a1b0e4bbb37c84dda730a4c5"
+    }
+  ],
+  "bytes": 1782
+}

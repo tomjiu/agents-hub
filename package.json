@@ -1,0 +1,19 @@
+{
+  "name": "agents-hub",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "hub": "node asset-manager/cli.mjs",
+    "test": "node --test asset-manager/tests/*.test.mjs",
+    "validate": "node asset-manager/cli.mjs validate",
+    "catalog:build": "node asset-manager/catalog-build.mjs"
+  },
+  "dependencies": {
+    "smol-toml": "1.9.1",
+    "yaml": "2.9.1"
+  }
+}

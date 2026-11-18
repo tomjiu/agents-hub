@@ -1,0 +1,76 @@
+{
+  "sha256": "60b69304da6b4681465f54a5b00e5cbabfa390c9152ccd6f7f5bd27b3c67be8d",
+  "files": [
+    {
+      "path": "FORMS.md",
+      "bytes": 12148,
+      "sha256": "5415f531c0137e821dc44369f0f7354a8bc29abb26d2a5ccdfe5bef355f32124"
+    },
+    {
+      "path": "REFERENCE.md",
+      "bytes": 23660,
+      "sha256": "e9404d86de1596c0588e69581bd9eb10390bb73e5e4b26846ea76fb946fe119a"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 24136,
+      "sha256": "d7054dade8a097a1553237826e0bd77e80b8c18ab10fae3d9914c8b3430a8d7b"
+    },
+    {
+      "path": "scripts/check_bounding_boxes.py",
+      "bytes": 3221,
+      "sha256": "9dfe860dc26c16a1f7ce7269adbfe539e13349392d43a91d9ec7018aaf842a83"
+    },
+    {
+      "path": "scripts/check_fillable_fields.py",
+      "bytes": 380,
+      "sha256": "e7d9d1ba830354a1682fc61dcf1881fa4238d48bf1435f4afccadd24e86e72ff"
+    },
+    {
+      "path": "scripts/convert_pdf_to_images.py",
+      "bytes": 1158,
+      "sha256": "c692fc5de0632f87b21e2fa926a75870e505c08e0e3f6e6fd64ad18bb944b619"
+    },
+    {
+      "path": "scripts/create_validation_image.py",
+      "bytes": 1650,
+      "sha256": "ea8e9604108820d148b35aab20c9812108f6eab7770913d586f1c0d82445bb5a"
+    },
+    {
+      "path": "scripts/extract_form_field_info.py",
+      "bytes": 6285,
+      "sha256": "456334d6089b35c541b17d27a9a3d622a06613bb0fed4352c0700aad88de1167"
+    },
+    {
+      "path": "scripts/extract_form_structure.py",
+      "bytes": 4509,
+      "sha256": "58ecf2bf9be955ea224ee1c760a3741c983fae095b84b8b6d9ec4dd75fc4c3de"
+    },
+    {
+      "path": "scripts/extract_pages.py",
+      "bytes": 2584,
+      "sha256": "93c3bae79398469e06ebf859df0f623c2ab3e72127dcc87d22389e9ad43110f6"
+    },
+    {
+      "path": "scripts/fill_fillable_fields.py",
+      "bytes": 4995,
+      "sha256": "d8f5e185329a44df57d0cca6edff10a157891a4609b034460ad703fd3bec9c0f"
+    },
+    {
+      "path": "scripts/fill_pdf_form_with_annotations.py",
+      "bytes": 10370,
+      "sha256": "cfe500537319f1b116e0d3e55432de430457d737d220e8408ad6d8e83a9cd1aa"
+    },
+    {
+      "path": "scripts/search_extracted.py",
+      "bytes": 14379,
+      "sha256": "6b904789fdd71e8c50c919923e95427577abcf0783dcbea4405f602497f919f7"
+    },
+    {
+      "path": "scripts/search_extracted.sh",
+      "bytes": 138,
+      "sha256": "1cce81c34d2cc6244d61dd51ca32a7e90ed9c55e0fa58364af4ba2af74e01ca1"
+    }
+  ],
+  "bytes": 109613
+}

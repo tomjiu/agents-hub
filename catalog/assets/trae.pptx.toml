@@ -1,0 +1,22 @@
+id = "trae.pptx"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/pptx"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::minimax_m3::prod_20260203::pptx/0.0.3/package.zip"
+version = "0.0.3"
+build = "solo_work::minimax_m3::prod_20260203::pptx"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.3"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "c266816e10234cb1a0165ac87c4db424faa5b060aeca27ddfc0cea9b15b8b9f1"
+local_modified = "unknown"
+enabled = false

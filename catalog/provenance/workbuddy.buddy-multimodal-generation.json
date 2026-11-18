@@ -1,0 +1,21 @@
+{
+  "sha256": "538ffab26829f126344c4e3185510f72c7356b4022fe6157549a35fc0943f95a",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 572,
+      "sha256": "88616704696f0f5de11865d5fe6269a25dee697b67fc40cbee2482b9cdac64f1"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 21217,
+      "sha256": "ce5754fdab6f10552c70a7ab4d6e1efad523b37fe38f8c0dc949be5c6c84a931"
+    },
+    {
+      "path": "scripts/buddy-cloud.py",
+      "bytes": 30319,
+      "sha256": "88e01e3fa5443e4188ff93202bef240f53aad90f318b46cad82fed1cd6e0bf12"
+    }
+  ],
+  "bytes": 52108
+}

@@ -1,0 +1,21 @@
+{
+  "sha256": "2ae15688792dc44a422bad67bf3bfd02646989d9fa0fd1f1840ea50718010afe",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 8022,
+      "sha256": "5272f7823edf69ad55c91a350baaf37e18a78527255dc21554f3167fbc093fae"
+    },
+    {
+      "path": "references/comparison-analysis.md",
+      "bytes": 15690,
+      "sha256": "d5cfa7cbbfb676d7000612a9c7340558a40a7f5f3afa3fb38accc64b7fbbd814"
+    },
+    {
+      "path": "references/research-report.md",
+      "bytes": 12549,
+      "sha256": "9523be7f6bf017d07e98192f24de98314ac9ab655bbd8dff90eb3e71e039722f"
+    }
+  ],
+  "bytes": 36261
+}

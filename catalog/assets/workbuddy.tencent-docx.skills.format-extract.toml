@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.skills.format-extract"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/format-extract"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "0b4e5b076d3c406e39ab1e2917fd3234dd330aef0ee8f58d624911081b9b28cf"
+local_modified = "unknown"
+enabled = false

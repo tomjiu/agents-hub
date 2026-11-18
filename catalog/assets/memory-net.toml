@@ -1,0 +1,21 @@
+id = "memory-net"
+kind = "plugins"
+path = "plugins/memory-net"
+host = "dsh"
+adapter = "adapters/dsh"
+console_vendor_pin = "e3dda9d56fac3598452ed0902898d693c4a6e5f2"
+
+[source]
+kind = "local"
+url = "https://github.com/tomjiu/memory-net"
+version = "1.0.0"
+license = "MIT"
+commit = "4f1911081477b49a6610e52537bea1057f216530"
+
+[version]
+upstream = "1.0.0"
+commit = "4f1911081477b49a6610e52537bea1057f216530"
+local = "imported-2026-11-18"
+sha256 = "33e0076b1440b7e7608bcb1c81fc1f7d1bb49af10aab6138364388e5f1b827a3"
+local_modified = "unknown"
+enabled = false

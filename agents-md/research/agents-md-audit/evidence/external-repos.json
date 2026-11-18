@@ -1,0 +1,51 @@
+[
+  {
+    "repo": "vercel-labs/open-agents",
+    "api": "https://api.github.com/repos/vercel-labs/open-agents",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  },
+  {
+    "repo": "divyanshu-iitian/agent-website-design-skills",
+    "api": "https://api.github.com/repos/divyanshu-iitian/agent-website-design-skills",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  },
+  {
+    "repo": "thekorn/agent-skills",
+    "api": "https://api.github.com/repos/thekorn/agent-skills",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  },
+  {
+    "repo": "PracticalSwan/agent-skills",
+    "api": "https://api.github.com/repos/PracticalSwan/agent-skills",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  },
+  {
+    "repo": "mblode/agent-skills",
+    "api": "https://api.github.com/repos/mblode/agent-skills",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  },
+  {
+    "repo": "overseek944/frontend-ui-ux-skill",
+    "api": "https://api.github.com/repos/overseek944/frontend-ui-ux-skill",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  },
+  {
+    "repo": "MengTo/Skills",
+    "api": "https://api.github.com/repos/MengTo/Skills",
+    "exists": false,
+    "http_status": 403,
+    "note": "404=仓库不存在/已删除/私有"
+  }
+]

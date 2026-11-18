@@ -1,0 +1,22 @@
+id = "trae.doc-writing-guide"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/doc-writing-guide"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::doc-writing-guide/0.0.1/package.zip"
+version = "0.0.1"
+build = "solo_work::default::prod_20260609::doc-writing-guide"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "ced25179a44ca2b58e5324ab095804096979b268e649425b97e4f0d6ec1597e6"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,36 @@
+{
+  "sha256": "1170bd87e009c6fd1676baa8324285ac6343bc1d9959d324e2e602c68e63877d",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 512,
+      "sha256": "8b8d6e5a371cb7c38000fe1b75a09e4c3107fe4736960aa4888a72609422534a"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 2911,
+      "sha256": "0bf67f4855133137e6f2546b9318c7af80770704252c6f8efd5263ff964b78fa"
+    },
+    {
+      "path": "references/guidelines-landing-page.md",
+      "bytes": 22852,
+      "sha256": "5990cd9a2c57ca4d49dd0a304b9cdccde064830f0a733d40012496000690cb5b"
+    },
+    {
+      "path": "references/guidelines-mobile-app.md",
+      "bytes": 6594,
+      "sha256": "70bb5c6195bec27a91c7192f340ee8b71a1988ffb5fa22bd4c92fa45bb9d359a"
+    },
+    {
+      "path": "references/guidelines-table.md",
+      "bytes": 1048,
+      "sha256": "bfb5854b619cd0d7a9bfc41f2bfc3f3a3b6b81876f266b17114e2779993ab016"
+    },
+    {
+      "path": "references/guidelines-web-app.md",
+      "bytes": 4971,
+      "sha256": "35c9e127958d4455b9cb0b59ea87ea2ce0b71aee4f0194ddd95110c66d1e6b1c"
+    }
+  ],
+  "bytes": 38888
+}

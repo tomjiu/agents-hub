@@ -1,0 +1,71 @@
+{
+  "sha256": "0bcf55f9d219728b44b53fa62c5bde7e4dc96e3ea0b026f01c0a137eb9c6eb96",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 507,
+      "sha256": "4b7d5906606c1ecc513b3651f18d8d57314e49d768e273af35135d178b3e1d1e"
+    },
+    {
+      "path": "LICENSE.txt",
+      "bytes": 10952,
+      "sha256": "721f0a648da3be2e52cfd4dbe4b7a965c60c63fe5be63c38c7bc46089e7535ae"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 13764,
+      "sha256": "14b02ef951b9da8bf58788ff1a70e65cd1d28bbe8d7b9e25b7e917cd5482be89"
+    },
+    {
+      "path": "references/agent-md-spec.md",
+      "bytes": 5200,
+      "sha256": "a0f89c6c2d8e542bb4502994cef6ba3131028a985a3917d4200cc6652420841c"
+    },
+    {
+      "path": "references/avatar-spec.md",
+      "bytes": 6512,
+      "sha256": "bcf875587b105d5e3b11e7c84cf1d62e487b812b2055582075b59adf2b380a4a"
+    },
+    {
+      "path": "references/plugin-json-spec.md",
+      "bytes": 5410,
+      "sha256": "f0c184581a3f64f173431f9f77206b1734f90fb25a09292b9a43e4818d925421"
+    },
+    {
+      "path": "references/team-spec.md",
+      "bytes": 4725,
+      "sha256": "03eab08ccb7b7e78e01262c06b1e355713ad1dcab9721199aa16e654a51a2215"
+    },
+    {
+      "path": "scripts/batch_create.py",
+      "bytes": 5247,
+      "sha256": "a768f3e4dde6b4d6d41fd2ea593a2f35c622788cc75f3b7256b9f96f9b690e1b"
+    },
+    {
+      "path": "scripts/init_expert.py",
+      "bytes": 14634,
+      "sha256": "e1178ac4f2198b6b27185c21754eba814cd8d79f2506b564c7f7a2ec345b58ff"
+    },
+    {
+      "path": "scripts/package_expert.py",
+      "bytes": 3752,
+      "sha256": "22dcefa33b3819d76ff90cc91988a7fe22b60f5d77c8c661acd34ad7e87002a6"
+    },
+    {
+      "path": "scripts/register_expert.py",
+      "bytes": 9412,
+      "sha256": "d2a48f12e6b065a6378c2153d8c9a155e736ec0e3303e7378f5c93c67e944cc0"
+    },
+    {
+      "path": "scripts/test_package_expert.py",
+      "bytes": 3522,
+      "sha256": "738676185185265b7c08bcdf1953c9722f6bbd128ab1fa23a1cc80d336300a68"
+    },
+    {
+      "path": "scripts/validate_expert.py",
+      "bytes": 14727,
+      "sha256": "a80040435f8b676965247a5a35687c2ed39389d4cd0f4398d02d89aa82644399"
+    }
+  ],
+  "bytes": 98364
+}

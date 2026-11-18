@@ -1,0 +1,257 @@
+{
+  "file": "/home/z/my-project/agents-audit/source/AGENTS-EN.md",
+  "size_bytes": 17482,
+  "line_count": 707,
+  "sha256": "c2576fe6d2b8c70e57ec7bf60840399e417bf6184c08588c616ca02e5bc0f222",
+  "md5": "6f28012fed4d7d1c1154c89fdcb04df7",
+  "bom": false,
+  "crlf": 0,
+  "lone_cr": 0,
+  "utf8_decodable": true,
+  "invisible_characters": "NONE",
+  "cyrillic_greek_homoglyphs": "NONE",
+  "ansi_escape_sequences": "NONE",
+  "long_base64_runs": "NONE",
+  "long_hex_runs": "NONE",
+  "urls": "NONE",
+  "markdown_links": "NONE",
+  "link_text_target_mismatch": "NONE",
+  "injection_keyword_hits": "NONE",
+  "per_section_entropy": [
+    {
+      "section": "# AGENTS.md",
+      "lines": "1-2",
+      "chars": 12,
+      "entropy": 3.0
+    },
+    {
+      "section": "## Purpose",
+      "lines": "3-10",
+      "chars": 349,
+      "entropy": 4.151
+    },
+    {
+      "section": "## 1. Non-Negotiable Operating Model",
+      "lines": "11-39",
+      "chars": 580,
+      "entropy": 4.409
+    },
+    {
+      "section": "## 2. Context Is Ephemeral; Repository State Is Durable",
+      "lines": "40-57",
+      "chars": 528,
+      "entropy": 4.84
+    },
+    {
+      "section": "### Durable-state rule",
+      "lines": "58-77",
+      "chars": 532,
+      "entropy": 4.079
+    },
+    {
+      "section": "## 3. Source of Truth and Documentation Consistency",
+      "lines": "78-105",
+      "chars": 898,
+      "entropy": 4.201
+    },
+    {
+      "section": "## 4. Work Resumption Protocol",
+      "lines": "106-123",
+      "chars": 626,
+      "entropy": 4.237
+    },
+    {
+      "section": "## 5. Classify the Work Before Acting",
+      "lines": "124-151",
+      "chars": 411,
+      "entropy": 5.103
+    },
+    {
+      "section": "## 6. Skills First",
+      "lines": "152-180",
+      "chars": 853,
+      "entropy": 4.296
+    },
+    {
+      "section": "### Useful external Skill repositories",
+      "lines": "181-196",
+      "chars": 1037,
+      "entropy": 4.259
+    },
+    {
+      "section": "## 7. Frontend Work Must Be Product-Level, Not Component-Lev",
+      "lines": "197-226",
+      "chars": 1211,
+      "entropy": 4.319
+    },
+    {
+      "section": "## 8. No Shell Implementations",
+      "lines": "227-259",
+      "chars": 533,
+      "entropy": 4.362
+    },
+    {
+      "section": "### Implementation completeness",
+      "lines": "260-280",
+      "chars": 477,
+      "entropy": 4.164
+    },
+    {
+      "section": "## 9. No Degraded Implementation Without Explicit Approval",
+      "lines": "281-300",
+      "chars": 616,
+      "entropy": 4.341
+    },
+    {
+      "section": "## 10. One-Phase YOLO Execution",
+      "lines": "301-330",
+      "chars": 809,
+      "entropy": 4.277
+    },
+    {
+      "section": "## 11. Proportional Planning",
+      "lines": "331-353",
+      "chars": 314,
+      "entropy": 4.336
+    },
+    {
+      "section": "## 12. Research Before Reimplementation",
+      "lines": "354-383",
+      "chars": 531,
+      "entropy": 4.458
+    },
+    {
+      "section": "## 13. Rust Rules",
+      "lines": "384-387",
+      "chars": 90,
+      "entropy": 3.921
+    },
+    {
+      "section": "### unsafe",
+      "lines": "388-413",
+      "chars": 755,
+      "entropy": 4.184
+    },
+    {
+      "section": "### Rust rewrite",
+      "lines": "414-423",
+      "chars": 301,
+      "entropy": 4.108
+    },
+    {
+      "section": "## 14. Avoid Overengineering",
+      "lines": "424-445",
+      "chars": 436,
+      "entropy": 4.182
+    },
+    {
+      "section": "## 15. Avoid Over-Safety and Over-Commenting",
+      "lines": "446-463",
+      "chars": 438,
+      "entropy": 4.3
+    },
+    {
+      "section": "## 16. Debugging",
+      "lines": "464-482",
+      "chars": 278,
+      "entropy": 4.39
+    },
+    {
+      "section": "## 17. Verification Is Part of Implementation",
+      "lines": "483-525",
+      "chars": 918,
+      "entropy": 4.383
+    },
+    {
+      "section": "## 18. Independent Review",
+      "lines": "526-555",
+      "chars": 660,
+      "entropy": 4.276
+    },
+    {
+      "section": "## 19. Documentation as an Executable Contract",
+      "lines": "556-577",
+      "chars": 511,
+      "entropy": 4.216
+    },
+    {
+      "section": "## 20. Git Safety and Delivery",
+      "lines": "578-605",
+      "chars": 397,
+      "entropy": 4.358
+    },
+    {
+      "section": "## 21. Durable Phase State",
+      "lines": "606-629",
+      "chars": 495,
+      "entropy": 4.52
+    },
+    {
+      "section": "## 22. Completion Gate",
+      "lines": "630-653",
+      "chars": 617,
+      "entropy": 4.316
+    },
+    {
+      "section": "## 23. Final Report",
+      "lines": "654-658",
+      "chars": 72,
+      "entropy": 4.06
+    },
+    {
+      "section": "## Result",
+      "lines": "659-661",
+      "chars": 14,
+      "entropy": 2.585
+    },
+    {
+      "section": "## Changes",
+      "lines": "662-664",
+      "chars": 17,
+      "entropy": 2.807
+    },
+    {
+      "section": "## Skills",
+      "lines": "665-667",
+      "chars": 16,
+      "entropy": 2.252
+    },
+    {
+      "section": "## Verification",
+      "lines": "668-672",
+      "chars": 57,
+      "entropy": 4.22
+    },
+    {
+      "section": "## Review",
+      "lines": "673-675",
+      "chars": 14,
+      "entropy": 2.252
+    },
+    {
+      "section": "## Git",
+      "lines": "676-680",
+      "chars": 54,
+      "entropy": 4.39
+    },
+    {
+      "section": "## Status",
+      "lines": "681-688",
+      "chars": 168,
+      "entropy": 4.697
+    },
+    {
+      "section": "# Final Rule",
+      "lines": "689-707",
+      "chars": 703,
+      "entropy": 4.231
+    }
+  ],
+  "non_ascii_codepoints": {
+    "U+2192 '→' RIGHTWARDS ARROW": 47,
+    "U+2014 '—' EM DASH": 7,
+    "U+201C '“' LEFT DOUBLE QUOTATION MARK": 2,
+    "U+201D '”' RIGHT DOUBLE QUOTATION MARK": 2
+  },
+  "control_characters": "NONE"
+}

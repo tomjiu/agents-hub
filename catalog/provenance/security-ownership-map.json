@@ -1,0 +1,46 @@
+{
+  "sha256": "d7d746d49adb3fd54b1e7ddf4e783cf332bd6fe5f34411d97d046158b2ebd8f4",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 10977,
+      "sha256": "44e03f7e263eb3ad256440c1eeab5e49168baff5a78ecef9a5447261cf3a91bc"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 8942,
+      "sha256": "f855af8ef91e173adf931c82b0fe21931d5e32b661eeb3d95fed18df46c0ef6e"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 257,
+      "sha256": "07422e5fa4aad415598f242c7d049b1406eaefbbadbeefeba4bb5aece3414140"
+    },
+    {
+      "path": "references/neo4j-import.md",
+      "bytes": 2488,
+      "sha256": "497c4d601d96d10bdb178c81b375f80f17855e705349a74dfc22dd5600b6b2d9"
+    },
+    {
+      "path": "scripts/build_ownership_map.py",
+      "bytes": 35286,
+      "sha256": "d34be76b879699131aad9a996bad4f6c791fa0b5659d473100a80f70f5eb627c"
+    },
+    {
+      "path": "scripts/community_maintainers.py",
+      "bytes": 18666,
+      "sha256": "25c1349f54d069f11a52d05341adc0ce0634957b5b48be8cb5235f823dfa1ad3"
+    },
+    {
+      "path": "scripts/query_ownership.py",
+      "bytes": 18474,
+      "sha256": "5a94b9db2b09b77f514d861764ea2b21e74b2caec86f888a82ec9b5c846712a1"
+    },
+    {
+      "path": "scripts/run_ownership_map.py",
+      "bytes": 6090,
+      "sha256": "58182cdf3484b86543e545e84654352c729a99d77eb367aecb80edb9d7738bfe"
+    }
+  ],
+  "bytes": 101180
+}

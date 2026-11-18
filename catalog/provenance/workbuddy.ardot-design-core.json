@@ -1,0 +1,76 @@
+{
+  "sha256": "afc5d8964a6fe03a30d17fe1536ddd1fa462d1cfa4d057e58342f5c715358eda",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 522,
+      "sha256": "c385a2d6f37f7cdada72447802f7389cedb061866e97425abebe18914493c5d3"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 16896,
+      "sha256": "85065095f3f1eb6ba71fd3072dc64c3531ba75538f57c6366b5ac9b0b34e1d20"
+    },
+    {
+      "path": "func-rule/component-instance/SKILL.md",
+      "bytes": 12821,
+      "sha256": "06e1fce6c742580ff475316830c41fe868f5284297fdf11eae72c4239cb0e19f"
+    },
+    {
+      "path": "func-rule/design-variables/SKILL.md",
+      "bytes": 7028,
+      "sha256": "d837190e33ae85a20b41ad2265f1853479a54f9f2c5fe6c682a435fc1be2258a"
+    },
+    {
+      "path": "func-rule/shared-styles/SKILL.md",
+      "bytes": 1590,
+      "sha256": "25b9f7d918602c10a6fedef7de98cba3ef3d9ea37fcfab772714c6ddb2e55a10"
+    },
+    {
+      "path": "references/ardot-schema.md",
+      "bytes": 8696,
+      "sha256": "179284e3577b4965fd153132a3aac829c81c102540c49ae91b895b9fb7e0d39c"
+    },
+    {
+      "path": "rules/design-rules.md",
+      "bytes": 24224,
+      "sha256": "7efceaf033bcc06f63570aa3b846b9220fa1fdfa1339cd6526cfac55724b0d9c"
+    },
+    {
+      "path": "rules/effects-guide.md",
+      "bytes": 7259,
+      "sha256": "011b057601d0cdad44e1baffa44772b2b08c4c5199c389e2db395dfa3601e884"
+    },
+    {
+      "path": "rules/style-guide.md",
+      "bytes": 12386,
+      "sha256": "9a5343b53ed93f457b52584e7dae88a381cda6b63e8854e848ab4cfc2be71863"
+    },
+    {
+      "path": "scenes-en.json",
+      "bytes": 23323,
+      "sha256": "843e1caee6e66bc2bcbca650e35c673eebf26e7bd32c1bb478c649ab9b34ffc2"
+    },
+    {
+      "path": "scenes.json",
+      "bytes": 19383,
+      "sha256": "48969d784ebb9d720e5d172d8e2a86bc033e9e2e3ccafaf5ef95d448149a4eeb"
+    },
+    {
+      "path": "tool-usage/apply-variables.md",
+      "bytes": 2323,
+      "sha256": "b2e5d44bcbd1bae1a918b52c3d1743bf147369b6ad8e4d1caa8f8148e98912c6"
+    },
+    {
+      "path": "tool-usage/batch-edit.md",
+      "bytes": 18784,
+      "sha256": "23d4af3dd86f4f35be371807ad0cb44f793fb280fd086f2523b005c832b61991"
+    },
+    {
+      "path": "workflows/ardot-workflow.md",
+      "bytes": 8594,
+      "sha256": "de6eccbfba05bccebd08b010bef75cdd1ab9cfc1c362e4626698ab39e0c82636"
+    }
+  ],
+  "bytes": 163829
+}

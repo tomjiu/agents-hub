@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.experts.business-copy-expert"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/business-copy-expert"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "dae52d541b7b0bf0c79b8e181c9862f1a8faf4d961a10a60ec4547848bef0730"
+local_modified = "unknown"
+enabled = false

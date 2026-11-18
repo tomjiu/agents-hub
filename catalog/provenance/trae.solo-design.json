@@ -1,0 +1,546 @@
+{
+  "sha256": "cc8014c42c4d0559af5e93913803c0d3bb2f3a3019f6b9323b5b974e9b2d1b5f",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 14363,
+      "sha256": "5a8d8bc73e3158d6eba1b10094163686a4196095a0db421394bbabfa02fa9eb5"
+    },
+    {
+      "path": "delivery-quality/delivery-evidence-contract.md",
+      "bytes": 3707,
+      "sha256": "04335b792e04228d76dbd69f24d41518439ed627fe2eabd6b31b56cda3b864c6"
+    },
+    {
+      "path": "delivery-quality/design-artifact-validation.md",
+      "bytes": 24952,
+      "sha256": "4046c905cfa05e39a0a67b16f0a909e77c5f929074e20102a71d23fc43ef07f5"
+    },
+    {
+      "path": "delivery-quality/lane-severity-matrix.md",
+      "bytes": 1576,
+      "sha256": "9b4a086536ff0e4e2f74971e24dc707f0f9708d09e00dc3ec3a1837558cffb00"
+    },
+    {
+      "path": "delivery-quality/long-requirement-intake-rules.md",
+      "bytes": 11940,
+      "sha256": "de769c3b0332b186f6d545eab87b22d42b9201c5753b7b8b38409b78e8984a3e"
+    },
+    {
+      "path": "delivery-quality/page-density-guidelines.md",
+      "bytes": 12051,
+      "sha256": "9852f891927de9e4192aa88a660b108cc79c6e2fe5b8012f10040cb10d446b9d"
+    },
+    {
+      "path": "delivery-quality/page-rendering-quality-gate.md",
+      "bytes": 35845,
+      "sha256": "8c8040b3bf72aead08c44a3af9e09a24d943807c4ed64a3a8a4f435e7e36319d"
+    },
+    {
+      "path": "delivery-quality/reference-material-ingestion-rules.md",
+      "bytes": 48221,
+      "sha256": "32de2692718e04ebb3da490f96da54fff831e45cec01467ca837b0a41c548901"
+    },
+    {
+      "path": "delivery-quality/user-facing-language-guidelines.md",
+      "bytes": 12171,
+      "sha256": "d3d84ccf0d36268d70cee32ed957b55651c7e9a8be8692674f999fb0bb8b2ee8"
+    },
+    {
+      "path": "delivery-quality/visual-blocker-rules.md",
+      "bytes": 12127,
+      "sha256": "ecd614ec6d3ae6ec7d0876408bb1a22a66ee1f8f16005f9a2fc197ea90d0c1c4"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/INTENT_WORKFLOW.md",
+      "bytes": 716,
+      "sha256": "a632bfc7fc3a3c633cf49a86d1dcd9b82e8b2a3d01f6a5ca58e44d7050dedcdf"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/append-graphic-assets.md",
+      "bytes": 358,
+      "sha256": "9a8b1824605af7ca36b5e9ce939363958b481f5e67417d229610eb2c394ae830"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/graphic-asset-dispatch-contract.md",
+      "bytes": 391,
+      "sha256": "7334fadc7be8ebf24adc6024dc6185d82e3f4697443008e2e649dec9006e6b41"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/graphic-asset-planning.md",
+      "bytes": 370,
+      "sha256": "89ca57ea165ffdfda877e3a3b6347b523d1b8bba8008a72e4d1ff03b3e6487ad"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/graphic-text-controllability-gate.md",
+      "bytes": 1662,
+      "sha256": "e644896ec25d57f0d71140a1ba8ef5e137273aad8b7003f66833eab3f29b6cae"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/orchestration-summary-fields.md",
+      "bytes": 647,
+      "sha256": "c7c7c1c0e526bd061114511fc309b1154f9ac40860facf556bec1bfff18b63e1"
+    },
+    {
+      "path": "intent-workflows/intent-graphic-asset-generation/start-graphic-asset-project.md",
+      "bytes": 10765,
+      "sha256": "16bb7455cdc95bccdc4fc85c97f5c77a71f4ae9afd25e43bca9939f55acc001f"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/INTENT_WORKFLOW.md",
+      "bytes": 2527,
+      "sha256": "5b489429beef1359a55ea14106c750577d0d191ed22626c7f103edf5b56edb67"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/creative-direction-guidelines.md",
+      "bytes": 12437,
+      "sha256": "6f667b2fb8b88c27f846c1869839b248aacc902b706a290dcfc83d01daf61518"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/dispatch-contract.md",
+      "bytes": 2515,
+      "sha256": "9ab0daccedabc6226d9d462c9d437a6a744eb652309562069d4e6d11fcb92463"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/free-exploration-page-runtime.md",
+      "bytes": 7770,
+      "sha256": "376934d898bcd170d9e0ac6b578e24a9b3c94aa6e9de327868850b012d395ecf"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/orchestration-summary-fields.md",
+      "bytes": 789,
+      "sha256": "7cf6a5fb08982a7bcfa607f550f34ca90aa0ecb2c8e255907971b89f6f7a1604"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/start-free-exploration-project.md",
+      "bytes": 22879,
+      "sha256": "2fa8d9461b0a4fa4854d044356de9a258818e51c97f97e935486d35e0921fedf"
+    },
+    {
+      "path": "intent-workflows/intent-page-free-exploration/visual-style-discovery.md",
+      "bytes": 473,
+      "sha256": "eabbdb9f27edbb9216ecaecd53c1bc141d377ac80359db411e95ffd9c79ae6a5"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/INTENT_WORKFLOW.md",
+      "bytes": 2283,
+      "sha256": "46d0f451682e7d629ee6e3335a99fc26879f65ca57ab5bbf320ef2c75464e275"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/component-conformance-rules.md",
+      "bytes": 388,
+      "sha256": "68ec640334b9b75ec7e8e8f75e6f82a2461384d16ef79399fb000e36e1b95373"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/design-library-ingestion.md",
+      "bytes": 29798,
+      "sha256": "2ac2553bedbddddeea8b09ca792393008a6b1b84ad5af38fd1c99832ebb94126"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/design-token-fidelity-rules.md",
+      "bytes": 373,
+      "sha256": "487b7c508ba78a32f1640e3ad7c403d7c02e287389026603e59b988ec74ea924"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/dispatch-contract.md",
+      "bytes": 429,
+      "sha256": "4b7f6d68822c5c24f6092ed88b77e38557e983de477d571ce0783ac6a9d44481"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/icon-source-priority-rules.md",
+      "bytes": 317,
+      "sha256": "2209502fa122f6064d1c0134c19409191e7cc1c130782a530ca2dcd813977c6b"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/library-bound-page-runtime.md",
+      "bytes": 753,
+      "sha256": "8ccf843e39e4de5d3e30e82b7d9694f71f2dbba10a8c59d7126b1671b6f72146"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/orchestration-summary-fields.md",
+      "bytes": 412,
+      "sha256": "7e64f9bbe9ebe0dee9b133a3969b21618c7e08c89e0ef639c8ae33f75977a7b3"
+    },
+    {
+      "path": "intent-workflows/intent-page-library-bound/start-library-bound-project.md",
+      "bytes": 4335,
+      "sha256": "0ff89335e51fdfdaac82044bc76f60b0cb1609e008b2c62fa36fc839fb58525c"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/INTENT_WORKFLOW.md",
+      "bytes": 3939,
+      "sha256": "9a6032eb0131d630f58836afb8f244e7a1f63202c8c8d586d3f9acda858ee4ca"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/dispatch-contract.md",
+      "bytes": 5260,
+      "sha256": "0614ae5bb37d0186a6aec7d63dcaec948de1e92e2a791be2add03898253b08eb"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/orchestration-summary-fields.md",
+      "bytes": 3153,
+      "sha256": "ce704ea4623ec1b5f2a3e63123a5881d875d390793066c15771a0e4959a3effb"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/restore-1to1-page-runtime.md",
+      "bytes": 6595,
+      "sha256": "4d5d3119fd418f1d0d9d313aaceb509f52d00f6dcd738634cdf229e53902396e"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/restore-dispatch-packet-format.md",
+      "bytes": 2204,
+      "sha256": "1b4d79ee5378f1a6a5b76c3089ed855d46c73a0a52646593c2e99962df183002"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/restore-evidence-contract.md",
+      "bytes": 1556,
+      "sha256": "e0a96d2dd5dd8bdb147f96ea409dc52506413c952286dd03ef19910a3d503ada"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/restore-visual-checkpoints.md",
+      "bytes": 1836,
+      "sha256": "8d9bd3ba861f824d14364be9e88fbfc6601a8eaff4729e3263e06af0523b8a88"
+    },
+    {
+      "path": "intent-workflows/intent-page-restore-1to1/start-restore-1to1-project.md",
+      "bytes": 29601,
+      "sha256": "97956c466672ed2f675c5126d6710bef1a27fb90f7a83465f4cdfb6d25a56a92"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/00-requirement-and-style-intake.md",
+      "bytes": 33419,
+      "sha256": "fdb897f519305aef0c715f064016ca38b2902bdca19f4e689ed70907911ae22b"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/01-graphic-asset-preparation.md",
+      "bytes": 11479,
+      "sha256": "525943cd35f687d339b016e6539e9428966245b0263f060bd4205387f0190932"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/02-page-composition.md",
+      "bytes": 16301,
+      "sha256": "0dcb4bdf8181a1ad50b52c71395e0fc6a68d618250cbb83b075dae827858c98c"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/03-interaction-validation-delivery.md",
+      "bytes": 12803,
+      "sha256": "316df89957e1be4e494ab4ca2c6fc92b9d1b55273a64389cd6cd7b05d2df4271"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+      "bytes": 3377,
+      "sha256": "98fa549a682f55834b1c5c405138cfdf5906da34d717a93eb678c7d797bf2e90"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md",
+      "bytes": 459,
+      "sha256": "fe0e4c832ca97fe4e080fda9614509a724f8894f43117c7e9443b0b75a9ef631"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+      "bytes": 356,
+      "sha256": "6048cf516dce473094b32deeab7bf550c1eb4c284fb4fd6f1d9c018300d3edec"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/graphic-layout-dispatch-contract.md",
+      "bytes": 1903,
+      "sha256": "0d7a243e7c0d60c2acc939cacc63758e029a41a85682d81526f3ace2bfff4d7e"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/graphic-layout-page-runtime.md",
+      "bytes": 1923,
+      "sha256": "746f25f91e8b8a86530ee226b3c02c08b03a32abae8b8ecd425dea6b54c3f18e"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/interaction-wiring-plan.md",
+      "bytes": 16857,
+      "sha256": "8666dc2ba314a6e2733b9a4b4e23b27d0037f2b9a08a8d90605e9f31d95e5644"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/orchestration-summary-fields.md",
+      "bytes": 852,
+      "sha256": "766aee8ea8d9767e43d959a5963870e84f0a6622a72f802f05df4782ad8429aa"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/page-composition-tree.md",
+      "bytes": 370,
+      "sha256": "29967c08ee5a1a4481590c052ac497c230abdfb24c3d1ff8a81e2636b8f416f1"
+    },
+    {
+      "path": "intent-workflows/intent-project-complex-build/start-complex-project-build.md",
+      "bytes": 6556,
+      "sha256": "be0d75bb1678654b94575286decda59669a879417da52beda4fbd34f454105cc"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+      "bytes": 2987,
+      "sha256": "7004785cc069399ff1185214f4b2bc097499fba2c2e9b9522d4d64bab1b8f41a"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/comparison-page-contract.md",
+      "bytes": 1466,
+      "sha256": "2d7b102d7a0f8e15ba6100ad5e8437375c47e6e89178053b910ca30bafaeed30"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/customize-project-theme.md",
+      "bytes": 12187,
+      "sha256": "f10d74cff268c3caa0c825987361aa4b3e41aed4945471fc0b694db079feb96a"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/edit-existing-project.md",
+      "bytes": 38120,
+      "sha256": "d8f1817d1466ba4637f0e36344140e84c2f296eb8f7d34c6c6d8ecff36020ad2"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md",
+      "bytes": 332,
+      "sha256": "cc56c803524cdd2be781d45f19e89c02aea36adc73a273aa4a15f50c24751802"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+      "bytes": 355,
+      "sha256": "18153dd3d60957c41332e2257962a8da8837d3f2f334f8f3d98c55089fb74f80"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/generate-project-variants.md",
+      "bytes": 21035,
+      "sha256": "c9ff746103c8f5c4ef2745c710d12dbd7b525713d3b7261fbc927ade7efd4474"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/main-agent-repair-workflow.md",
+      "bytes": 23225,
+      "sha256": "256cb68beab1cd72534ce1a393396dda3974b6b1cc103bed93bb246203a4724d"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/mutation-quick-path-rules.md",
+      "bytes": 405,
+      "sha256": "c6beede3adafb36b16faf039adfb22ef6ecc537529d9344675879242d3515235"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/orchestration-summary-fields.md",
+      "bytes": 470,
+      "sha256": "81d8cecb8a92ec2a416309acb78e3e717bc1f20fa5ebcdd036486647883ee0bf"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/redesign-dispatch-contract.md",
+      "bytes": 262,
+      "sha256": "7c2309696983e82bc0ff9472fd5b742948bf5b6b62d8d2c37009c14360129121"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/redesign-page-runtime.md",
+      "bytes": 298,
+      "sha256": "3912dba2fee3f1511ecf42632ca9452ef4406d5754325b97a7b6550e1942dc68"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/redesign-project-ui.md",
+      "bytes": 14399,
+      "sha256": "1a1a387268193f5a94219fe24e763cbf31ffeda4963e074e0ad73a9f452fdc45"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/theme-customization-dispatch-contract.md",
+      "bytes": 280,
+      "sha256": "2fe52161c2c3f328172b731a8e4e51b0cd687e8e2066c40298407587aed18e58"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/variant-dispatch-contract.md",
+      "bytes": 298,
+      "sha256": "e1a299570552ee68b392c632cf5233c1679acabee9d206e4061a9438db94a4f6"
+    },
+    {
+      "path": "intent-workflows/intent-project-mutation/variant-page-runtime.md",
+      "bytes": 258,
+      "sha256": "7af1e7ec9b79a0e0f49239c4a3a580c001e62b726c9bb2860204f27ee0c8d66a"
+    },
+    {
+      "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+      "bytes": 7514,
+      "sha256": "a708d4d5d8c4ed2f57fe1409c517348d1acc33809770750912c3669683e4beee"
+    },
+    {
+      "path": "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+      "bytes": 4576,
+      "sha256": "6b67cf060c3602437e1238836dba5c4454bd3461aabcca01cefb1c1157200fab"
+    },
+    {
+      "path": "shared-runtime/agent-dispatch-runtime/sub-agent-runtime-boundaries.md",
+      "bytes": 30907,
+      "sha256": "ea001d85bb6e556d89442a0fac90ef03d92abc1c88b8b2ab2fe8f8ab4cdbfba7"
+    },
+    {
+      "path": "shared-runtime/agent-dispatch-runtime/tool-usage-discipline.md",
+      "bytes": 1136,
+      "sha256": "5797a112d14ba7dc37f7ade489266d9b8b6bcd9f71c83eecc8c85b869f681653"
+    },
+    {
+      "path": "shared-runtime/blocked-legacy-entrypoints/blocked-legacy-page-template.md",
+      "bytes": 589,
+      "sha256": "918c8e2d092961e00d67b649a3eb5405f6abb4d81dc017cc120c8bc21b36824b"
+    },
+    {
+      "path": "shared-runtime/design-artifact-formats/design-project-file-format.md",
+      "bytes": 22040,
+      "sha256": "d746025fc92b8c04dfc49b09af99f90e15ed45233bf0153b2b128cd5820ee623"
+    },
+    {
+      "path": "shared-runtime/design-artifact-formats/graphic-asset-design-file-format.md",
+      "bytes": 3052,
+      "sha256": "fe14415530be403a64da2b21c0c16f73ce575cf8307895c9ae90344b93994034"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+      "bytes": 34769,
+      "sha256": "07dc6175085fcdc2dceeb7b01520c7d43931b3d8d9a19b2f21be9e8f82fcedf2"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+      "bytes": 58933,
+      "sha256": "f9367a6ecec9452c14d626c47e07b14dc2619f0dde11b36e6aacb5812cd7e221"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/bump-skill-release-version.mjs",
+      "bytes": 6380,
+      "sha256": "f3833d26db52dfc416d9fa0c4234537022ca2f2d3229fa274f8c8814fb586af4"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/check-html-patch-discipline.mjs",
+      "bytes": 4423,
+      "sha256": "30e04c614b75b149999aed33d2f10f8ff91182466ebefa71b7995245bc147e93"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/check-intent-workflow-boundaries.mjs",
+      "bytes": 4404,
+      "sha256": "52d858808aaee016d89944aa6a533f753390837babf4b86da29c8ee41702a051"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/check-interaction-domids.mjs",
+      "bytes": 5591,
+      "sha256": "faee78d2c517cf81477c596e5c65cbd2bce886d0301d6b6437faaa30687f45dc"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/check-skill-runtime-read-scope.mjs",
+      "bytes": 14397,
+      "sha256": "9adb095f4d17c638b47c05beabb341e987af18dfc0244995a09327d7621d1207"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/check-solo-design-contract-regressions.mjs",
+      "bytes": 79332,
+      "sha256": "8aae04afd6323c10ae326e4a82f9a014a9313bb68182b55e0ee1db2cb1c1bfea"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+      "bytes": 16319,
+      "sha256": "d18b3b1a2a379876c27f13b731a674af3d56a1985bc71bb9c7a64c0dc4d6aa49"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/record-validation-repair-entry.mjs",
+      "bytes": 24750,
+      "sha256": "dd7dfdb03a8ba985e55872f4300c5ed3f5d6202bdebcf2dc11d808781f450eb0"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/repair-mobile-navigation-flow.mjs",
+      "bytes": 9274,
+      "sha256": "08aed6413274e2c53b39ac6a391cff64736f1b2ef392a56fb036252d2774b59d"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/validate-design-file-format.mjs",
+      "bytes": 27526,
+      "sha256": "21381bc318a937247bd7930afb288f2e8796820775d0f19d0a0220549220fdf2"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+      "bytes": 197775,
+      "sha256": "f999412b37718e9823973460701f9530724a27ead0c36e5fd9a6a179b62a960d"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+      "bytes": 38462,
+      "sha256": "4e0de586441fa86acc9609a48fdb4af4b1721c566dc9a2cd98261e0973450a46"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/validate-graphic-asset-design.mjs",
+      "bytes": 16987,
+      "sha256": "70eea80c435fe41d030c477a143d1e4fd90e95fd5545e4693ce7c2e4d0933e36"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/validate-lane-runtime-contract.mjs",
+      "bytes": 25758,
+      "sha256": "3d68e9b10bb434897d31ddd2ab8a7704345d20556134e836ba78b1a25ed485ee"
+    },
+    {
+      "path": "shared-runtime/deterministic-tooling/validate-restore-contract.mjs",
+      "bytes": 25198,
+      "sha256": "8a65155c1735dc36a0ea8ad33c5c11989dbc44828974841eb607b16006242e70"
+    },
+    {
+      "path": "shared-runtime/html-rendering-primitives/mobile-html-rendering-primitives.md",
+      "bytes": 28714,
+      "sha256": "2e16082cc8fc542826b91f47704aa91fa6a9a940633879d8c03bc0a9e7fd2a33"
+    },
+    {
+      "path": "shared-runtime/html-rendering-primitives/shared-html-rendering-primitives.md",
+      "bytes": 26873,
+      "sha256": "6ccb6e67009e67e71b5dca2231e0b5f188476ea33ddee96fab0d5a4a807b32dd"
+    },
+    {
+      "path": "shared-runtime/html-rendering-primitives/web-html-rendering-primitives.md",
+      "bytes": 15103,
+      "sha256": "2d5e5f7f013f21cde51e1338204444be5ee2385ba04691b7cd99ab834dcca5ba"
+    },
+    {
+      "path": "shared-runtime/orchestration-summary-contract/generalized-flow-control-fields.md",
+      "bytes": 3353,
+      "sha256": "79b2f0ab6afca5a1c30292bb7e5d3301fec6c0160aed5c8615f1ba7afcc75eab"
+    },
+    {
+      "path": "shared-runtime/orchestration-summary-contract/orchestration-summary-contract.md",
+      "bytes": 8122,
+      "sha256": "78f2554127bc5b14b48bbe4055d3dd2e0258621bb86f9f77abe29d19c56f8cb3"
+    },
+    {
+      "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+      "bytes": 6248,
+      "sha256": "a34456dd974bb04622a771d4c0603f01f4c5643699b02bfdc6e74d39a7e84344"
+    },
+    {
+      "path": "shared-runtime/runtime-boundaries/shared-kernel-ownership-boundaries.md",
+      "bytes": 1227,
+      "sha256": "d46566a3be1170659d59156a38c1f8d98935b503dc42b713c2fc5dfa486f83ac"
+    },
+    {
+      "path": "skill-release-manifest.json",
+      "bytes": 198,
+      "sha256": "32b155a40daaa391f80290c1970b32f528cf27e81085853be0511c4322762c2d"
+    },
+    {
+      "path": "visual-experience/dark-mode-guidelines.md",
+      "bytes": 1894,
+      "sha256": "0b3a3f50d6066c9dd60b0e775eef9dfe05a3ec71ce8c981f0f32ce5c89b2bcd9"
+    },
+    {
+      "path": "visual-experience/navigation-footer-guidelines.md",
+      "bytes": 2348,
+      "sha256": "7185f837e06b59a9915afa19eb1114cec81c2e1b0362d8bebce7a62014a51095"
+    },
+    {
+      "path": "visual-experience/visual-checkpoint-protocol.md",
+      "bytes": 2878,
+      "sha256": "09165076d75a97f6dd722042c27bfe4724a52471a4b847275b6165e110eb1aa5"
+    },
+    {
+      "path": "visual-experience/visual-experience-guidelines.md",
+      "bytes": 35678,
+      "sha256": "b43c439da473158b40d1aadbc282708a4bfb8a415e29717c0a388b9a98bb8484"
+    },
+    {
+      "path": "visual-experience/visual-self-check.md",
+      "bytes": 31285,
+      "sha256": "6ef1978995dd4e044df930f4d8b000ab44c2175d924e52e58eb3014fc8901167"
+    },
+    {
+      "path": "visual-experience/visual-showcase-patterns.md",
+      "bytes": 10842,
+      "sha256": "52582bbd71634da2481ecad158345b639190eba097fca9ff07cf8e4494d2a5d6"
+    }
+  ],
+  "bytes": 1392371
+}

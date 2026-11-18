@@ -1,0 +1,36 @@
+{
+  "sha256": "c1a752df5ca2de0508aef56a997121fa0a835ab2dc4c576c0997627980e3e8cf",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 11546,
+      "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 4008,
+      "sha256": "8bc27790f6e6dfc2bfa6692326d4518baacf6a31dcc646d963c729adad2f7e34"
+    },
+    {
+      "path": "examples/console_logging.py",
+      "bytes": 1061,
+      "sha256": "f06fbca7cdfa44ecf5bae40813b30fc758ec3280af1aab5586aa2dd384db7ad6"
+    },
+    {
+      "path": "examples/element_discovery.py",
+      "bytes": 1502,
+      "sha256": "7e99c7caf1593a75a8b2e36847128c41962fefc604f7947426581c2b9fc2361b"
+    },
+    {
+      "path": "examples/static_html_automation.py",
+      "bytes": 985,
+      "sha256": "6633d0b7c3b3bef31e6baa9cef6fac57490767ee481702fe11c281d8d013b769"
+    },
+    {
+      "path": "scripts/with_server.py",
+      "bytes": 3798,
+      "sha256": "529b5f10f6ecf2e6234747be6d6601be7ef9011ee29a3eee0879e7823f608238"
+    }
+  ],
+  "bytes": 22900
+}

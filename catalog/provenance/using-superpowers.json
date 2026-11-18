@@ -1,0 +1,31 @@
+{
+  "sha256": "7521169d61e315f9cf0f1952e61a0ffd345bee1b4729c68d97029b111707f442",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 5541,
+      "sha256": "f85a019a5fce0adb17eb66496f301b3909f6ef93fddbe51b6b316eecee23b735"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 45,
+      "sha256": "3bf863a8856d04a6a1c4f23b3aae6cbf5388544129662c55cc733c2d9c23bbbf"
+    },
+    {
+      "path": "references/codex-tools.md",
+      "bytes": 4170,
+      "sha256": "fedba70f07991344d80ea7a3b829db58bb289622b2608f426e878e9930e5be17"
+    },
+    {
+      "path": "references/copilot-tools.md",
+      "bytes": 2245,
+      "sha256": "cd1153c5416c889a21253227a1a7ebd0f8e2f6b0f6171707dd590fa9890686fd"
+    },
+    {
+      "path": "references/gemini-tools.md",
+      "bytes": 1527,
+      "sha256": "4655cf1ec46ac965366b5648ac46d181ffafeebb1adcf08516c063ba6efc3e3c"
+    }
+  ],
+  "bytes": 13528
+}

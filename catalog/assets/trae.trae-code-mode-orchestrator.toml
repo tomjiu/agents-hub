@@ -1,0 +1,22 @@
+id = "trae.trae-code-mode-orchestrator"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/TRAE-code-mode-orchestrator"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-code-mode-orchestrator/0.0.2/package.zip"
+version = "0.0.2"
+build = "default::prod_20260609::TRAE-code-mode-orchestrator"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "685c9ec06b8e1767a1a2492176bd6c7264fdc2c542b2603fdf650087db9ee169"
+local_modified = "unknown"
+enabled = false

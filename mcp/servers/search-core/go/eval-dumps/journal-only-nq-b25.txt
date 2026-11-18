@@ -1,0 +1,5 @@
+== journal-only: nq ==
+win: nq-dump.jsonl mtime=2026-09-06T20:44:09Z n=98
+gold@1=38.8% gold@10=77.6% gold@20=82.7% 墙钟=3033ms
+legs: keenable=99% duckduckgo=86.7% wikipedia=74.5% mwmbl=71.4% metacpan=50% commonswiki=15.3% wikivoyage=30.6% crossref=66.3% federalregister=3.1% arxiv=58.2% bing-news=15.3% courtlistener=2% yahoo=23.5% sov2ex=12.2% bing-rss=39.8% wiktionary=13.3% pubchem=5.1% wiby=5.1% steam=4.1% musicbrainz=2% flathub=1% europepmc=2% openvsx=5.1% pubdev=1% openverse=2% dockerhub=1% doaj=1% hex=1% npm=1%
+

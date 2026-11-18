@@ -1,0 +1,21 @@
+id = "workbuddy.expert-manager"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/expert-manager"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "0bcf55f9d219728b44b53fa62c5bde7e4dc96e3ea0b026f01c0a137eb9c6eb96"
+local_modified = "unknown"
+enabled = false

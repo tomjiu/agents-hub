@@ -1,0 +1,16 @@
+{
+  "sha256": "990ba922e877c88e04e6b6746e5af20b07149fda18855a74a69c05483bf2db18",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 10351,
+      "sha256": "eb3d7b5485466acbd81f2b496f595ab637d2792e268206b27d99e793bdb67549"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 4482,
+      "sha256": "70044bbc8e4c21d23b8c8b864956aa1515c1c6cb2f9df14148dbb8c4af6187e5"
+    }
+  ],
+  "bytes": 14833
+}

@@ -1,0 +1,86 @@
+{
+  "sha256": "ada0a837d68e0ca5d5474d4ffdfa7bc2c6f53ae2ac569bc7899e33781c5d3077",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 5293,
+      "sha256": "19677edd28ca0a2adc9e6b2e7a5ebff5e77622e4345d4dcd5d3273a929957910"
+    },
+    {
+      "path": "scripts/build_tokens.py",
+      "bytes": 4035,
+      "sha256": "3fbe718bccaca928f27fccf48b73daba5c12e9e789b36a2507364ada62024bcd"
+    },
+    {
+      "path": "tokens/compiled/academic-paper.json",
+      "bytes": 7514,
+      "sha256": "811ac4c0a6a80e72aa566ed59b90995b63bb8dac5c954b9a28423f71db37cfdf"
+    },
+    {
+      "path": "tokens/compiled/business-report.json",
+      "bytes": 8894,
+      "sha256": "51e42ba7a40af3ccbf36ebc05fae280f272e7f9b6be3fbc5056b1c05289093da"
+    },
+    {
+      "path": "tokens/compiled/general.json",
+      "bytes": 5678,
+      "sha256": "6ccfaa701c0737ff4379d304ffefd832136025d2b0218c6c98d17dfb77be8cee"
+    },
+    {
+      "path": "tokens/compiled/government-doc.json",
+      "bytes": 6089,
+      "sha256": "5e1a8838b8e49e2bfcb2af9b6718c49e32742592faff3529a33a8548f33088dd"
+    },
+    {
+      "path": "tokens/compiled/index.json",
+      "bytes": 318,
+      "sha256": "f2dde5f8a72b7fb43734080fe423a685b2fa6515045cab540d34180d8089f6ca"
+    },
+    {
+      "path": "tokens/compiled/marketing-doc.json",
+      "bytes": 7215,
+      "sha256": "bd08997df7a1d318a5ecdc7dda36fc0ad088a277b2e7743b034d8cbaff66936d"
+    },
+    {
+      "path": "tokens/rules/gb-t-7713-academic.md",
+      "bytes": 3652,
+      "sha256": "c2fe469ab23671d6083b7bf0486deecac02d4246e8bab8a527c2de0cdcb6d067"
+    },
+    {
+      "path": "tokens/rules/gb-t-7714-citation.md",
+      "bytes": 4793,
+      "sha256": "1c53895beed7abd874fc731e2de0144824a123c9302ae6706b2c551d97af934d"
+    },
+    {
+      "path": "tokens/rules/gb-t-9704-government.md",
+      "bytes": 3103,
+      "sha256": "6b76cd4cef6da89266db68a0b0646ee5692be5643b86b28a5fa5f58bf4cccd4d"
+    },
+    {
+      "path": "tokens/themes/academic-paper.json",
+      "bytes": 4111,
+      "sha256": "b377ccb375b9faf76f21d077e2ec665397c0e72dcb4f53bc4f55e6bd6ff78183"
+    },
+    {
+      "path": "tokens/themes/business-modern.json",
+      "bytes": 4599,
+      "sha256": "82f793da70685f46e8e8d04c0ce08db048db38d3a382254db7ef25ff0a8dc55b"
+    },
+    {
+      "path": "tokens/themes/creative-marketing.json",
+      "bytes": 3637,
+      "sha256": "420af2cf671f9d7caa6e160879ec4f3e2ab442985eff1e80d167279643369dab"
+    },
+    {
+      "path": "tokens/themes/formal-government.json",
+      "bytes": 3219,
+      "sha256": "d59234e705ff30fa6f0a1e09ab9c7d8180c159ec5b3b79edbfdc9770d1b85450"
+    },
+    {
+      "path": "tokens/themes/modern-minimal.json",
+      "bytes": 2755,
+      "sha256": "474e763449137f4f15c2c600c52b453f1dec7c6e0eb5105888c092ee94a4572e"
+    }
+  ],
+  "bytes": 74905
+}

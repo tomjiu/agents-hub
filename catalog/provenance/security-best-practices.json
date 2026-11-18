@@ -1,0 +1,71 @@
+{
+  "sha256": "651a567054b14fff0fa1907731748df43929bfdeaa8e15dfd7091a8d75040e92",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 10977,
+      "sha256": "44e03f7e263eb3ad256440c1eeab5e49168baff5a78ecef9a5447261cf3a91bc"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 8698,
+      "sha256": "7a889544c0ae67982a918a4b28569cc93f7426ae39306a0cb786603445714162"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 241,
+      "sha256": "53417b99f51611f1df76d35955cdce41250bdac358fb290d4a0fb266febd623c"
+    },
+    {
+      "path": "references/golang-general-backend-security.md",
+      "bytes": 39484,
+      "sha256": "04710995935d0b97e2564db82b44fa9fe6adcc66965d06f109af24d26ce8a620"
+    },
+    {
+      "path": "references/javascript-express-web-server-security.md",
+      "bytes": 50515,
+      "sha256": "631d3578c77404a6632b12e946b929a989ec64b4472fe661f27f7510195efa8d"
+    },
+    {
+      "path": "references/javascript-general-web-frontend-security.md",
+      "bytes": 39385,
+      "sha256": "cd4feb15b7827f5262b8d2dbbfb34133e57397149b0599f60b79d7b5ea6dbdaf"
+    },
+    {
+      "path": "references/javascript-jquery-web-frontend-security.md",
+      "bytes": 34259,
+      "sha256": "da893da293539976037fe4d0efae8cf280457ef1e63c6eb314e43186f0858f00"
+    },
+    {
+      "path": "references/javascript-typescript-nextjs-web-server-security.md",
+      "bytes": 44567,
+      "sha256": "c493ca01bd3a3a9521d2e0f725bfa4338adcecfaf3d23a1e5cfd1b1f63ae64fe"
+    },
+    {
+      "path": "references/javascript-typescript-react-web-frontend-security.md",
+      "bytes": 42676,
+      "sha256": "dad5a8d16b2b7a06baa6e6fa1c378ea4c34b20ee1bcbde38d36d9d66dc0dab02"
+    },
+    {
+      "path": "references/javascript-typescript-vue-web-frontend-security.md",
+      "bytes": 32236,
+      "sha256": "919a4e4a3fbf0a1185f26f34c524e246097022d16b09ab2d190cbd4ecb3a9bb4"
+    },
+    {
+      "path": "references/python-django-web-server-security.md",
+      "bytes": 39543,
+      "sha256": "1e6842447e9e3fed08f14640e9655765d877672e2f88a81c14ee91b62bb726c5"
+    },
+    {
+      "path": "references/python-fastapi-web-server-security.md",
+      "bytes": 45962,
+      "sha256": "948afa0afe5f6e6e222bb81094efb3072667758b4c81153149b67e3802950d9c"
+    },
+    {
+      "path": "references/python-flask-web-server-security.md",
+      "bytes": 32452,
+      "sha256": "53a9fa1d72bd6af40e6102df68929421eecc80e6f6a7f4da6390fb6bc05feb25"
+    }
+  ],
+  "bytes": 420995
+}

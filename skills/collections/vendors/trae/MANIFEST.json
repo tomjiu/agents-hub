@@ -1,0 +1,182 @@
+{
+  "source": "Trae (Work / Code) cloud skill CDN",
+  "extracted_from": "TraeWork_CN ai_agent.dll strings (see mmqz/search-tool-rnd)",
+  "cdn_template": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/{channel}/trae_agent::{scene}::{build}::{skill}/{version}/package.zip",
+  "builds_seen": [
+    "prod_20260609",
+    "prod_20260203_windows",
+    "prod_20260403_windows",
+    "prod_20260722",
+    "prod_20260810"
+  ],
+  "scenes_seen": [
+    "default",
+    "solo_work",
+    "solo_design"
+  ],
+  "retrieved": "2026-09-05",
+  "count": 23,
+  "skills": [
+    {
+      "name": "TRAE-browseruse",
+      "version": "0.0.6",
+      "channel": "1001",
+      "path": "default::prod_20260609::TRAE-browseruse",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-browseruse/0.0.6/package.zip"
+    },
+    {
+      "name": "TRAE-browseruse-external",
+      "version": "0.0.6",
+      "channel": "1001",
+      "path": "default::prod_20260609::TRAE-browseruse-external",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-browseruse-external/0.0.6/package.zip"
+    },
+    {
+      "name": "TRAE-code-mode-orchestrator",
+      "version": "0.0.2",
+      "channel": "1001",
+      "path": "default::prod_20260609::TRAE-code-mode-orchestrator",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-code-mode-orchestrator/0.0.2/package.zip"
+    },
+    {
+      "name": "TRAE-computer-use",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "default::prod_20260609::TRAE-computer-use",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-computer-use/0.0.1/package.zip"
+    },
+    {
+      "name": "TRAE-computer-use-ptc",
+      "version": "0.0.11",
+      "channel": "1001",
+      "path": "default::prod_20260609_kimi_windows::TRAE-computer-use-ptc",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609_kimi_windows::TRAE-computer-use-ptc/0.0.11/package.zip"
+    },
+    {
+      "name": "TRAE-doctor",
+      "version": "0.0.4",
+      "channel": "1",
+      "path": "default::prod_20260609::TRAE-doctor",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1/trae_agent::default::prod_20260609::TRAE-doctor/0.0.4/package.zip"
+    },
+    {
+      "name": "TRAE-product-knowledge",
+      "version": "0.0.2",
+      "channel": "1001",
+      "path": "default::prod_20260609::TRAE-product-knowledge",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-product-knowledge/0.0.2/package.zip"
+    },
+    {
+      "name": "design-library-creator",
+      "version": "0.0.2",
+      "channel": "1001",
+      "path": "solo_design::default::prod_20260722::design-library-creator",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260722::design-library-creator/0.0.2/package.zip"
+    },
+    {
+      "name": "digital-avatar-creator",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "default::prod_20260609::digital-avatar-creator",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::digital-avatar-creator/0.0.1/package.zip"
+    },
+    {
+      "name": "doc-writing-guide",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260609::doc-writing-guide",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::doc-writing-guide/0.0.1/package.zip"
+    },
+    {
+      "name": "docx",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260203_windows::docx",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::docx/0.0.1/package.zip"
+    },
+    {
+      "name": "dynamic-ui",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "default::prod_20260609::dynamic-ui",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::dynamic-ui/0.0.1/package.zip"
+    },
+    {
+      "name": "feedback",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "default::prod_20260609::feedback",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::feedback/0.0.1/package.zip"
+    },
+    {
+      "name": "html-deck",
+      "version": "0.0.8",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260609::html-deck",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::html-deck/0.0.8/package.zip"
+    },
+    {
+      "name": "html-report",
+      "version": "0.0.3",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260609::html-report",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::html-report/0.0.3/package.zip"
+    },
+    {
+      "name": "pdf",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260203_windows::pdf",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::pdf/0.0.1/package.zip"
+    },
+    {
+      "name": "pptx",
+      "version": "0.0.3",
+      "channel": "1001",
+      "path": "solo_work::minimax_m3::prod_20260203::pptx",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::minimax_m3::prod_20260203::pptx/0.0.3/package.zip"
+    },
+    {
+      "name": "research-guide",
+      "version": "0.0.4",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260609::research-guide",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::research-guide/0.0.4/package.zip"
+    },
+    {
+      "name": "skill-creator",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "default::prod_20260609::skill-creator",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::skill-creator/0.0.1/package.zip"
+    },
+    {
+      "name": "solo-design",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_design::default::prod_20260810::solo-design",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-design/0.0.1/package.zip"
+    },
+    {
+      "name": "solo-graphic-generation",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_design::default::prod_20260810::solo-graphic-generation",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-graphic-generation/0.0.1/package.zip"
+    },
+    {
+      "name": "solo-image-edit",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_design::default::prod_20260810::solo-image-edit",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-image-edit/0.0.1/package.zip"
+    },
+    {
+      "name": "xlsx",
+      "version": "0.0.1",
+      "channel": "1001",
+      "path": "solo_work::default::prod_20260203_windows::xlsx",
+      "url": "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::xlsx/0.0.1/package.zip"
+    }
+  ]
+}

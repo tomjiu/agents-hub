@@ -1,0 +1,21 @@
+id = "workbuddy.wb-finance-skill"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/wb-finance-skill"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "76de226b5ec3629851cd73dc99af2ef5e2a4028d80d04b469c1f570935787128"
+local_modified = "unknown"
+enabled = false

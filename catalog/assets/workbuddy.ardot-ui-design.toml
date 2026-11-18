@@ -1,0 +1,21 @@
+id = "workbuddy.ardot-ui-design"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-ui-design"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "1170bd87e009c6fd1676baa8324285ac6343bc1d9959d324e2e602c68e63877d"
+local_modified = "unknown"
+enabled = false

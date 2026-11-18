@@ -1,0 +1,821 @@
+{
+  "sha256": "3694fe3d40f3d5efe7a3f666acc5dab19fee4fd4888c9c01c3fd5288e7891db4",
+  "files": [
+    {
+      "path": ".codecov.yml",
+      "bytes": 1065,
+      "sha256": "8cd6288a48169b190ab39287e6cb9cca1c3b760571b3182aa79ddae67b34645b"
+    },
+    {
+      "path": ".env.example",
+      "bytes": 594,
+      "sha256": "45dc39aa3d9f08f7633b46d87b9e394a2deb322e9479e196f12dbfa1cf6c9b87"
+    },
+    {
+      "path": ".eslintrc.json",
+      "bytes": 1884,
+      "sha256": "421e6c64d529904c2889a1d732fde418a753f4566cfe3eb460164e99f82af18a"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 1488,
+      "sha256": "2d8ce77399cf2ef9aa095fad59b6ad8b7dd870508c9d123c4c8d6da414775dd0"
+    },
+    {
+      "path": ".github/workflows/pr-check.yml",
+      "bytes": 809,
+      "sha256": "7a83c8adbdd73879dc919a55c7d75060e49b42e83f74f6d91a0ee633612783ce"
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "bytes": 921,
+      "sha256": "03a4a252a6d9bbadecea6385b5f1145d3c4e408c18220dbfca2353e0c9c868c8"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "bytes": 949,
+      "sha256": "08b07828cf7c8a5ded5383c572ce31ed88208d654d9a6fe5577fd34eaaa48ef8"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 2692,
+      "sha256": "47de2fc3bbc0fc905b4494896dff9a6a39deedc48495062335b57a61550b5b50"
+    },
+    {
+      "path": ".prettierignore",
+      "bytes": 104,
+      "sha256": "08c743c9a82ef5928b4b42c44bed181143e44914060d15cf006bf0bddbb15491"
+    },
+    {
+      "path": ".prettierrc.json",
+      "bytes": 240,
+      "sha256": "97544c652de26d47f061dcb3c3dce8fec3df1617ccafcd11d81cb6b33441a34b"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 427,
+      "sha256": "a9d0b1cf6cf58ad12e75e996d00492135a283de32a68262c0c6d67c218a7ba8e"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 13645,
+      "sha256": "8eaa4c221f10413d2d81630d7bb7129a3a5faa9b7d306248f7c97d5fe1d8e93a"
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 12,
+      "sha256": "d631d88045f74623d568adfb4783b72e3d1b732330d749bc6c72e6648d4581d3"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "bytes": 503,
+      "sha256": "abe14ce46e8939469a0acf06833d249427026cb2f05c65ed7e5732ea337bb235"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 1608,
+      "sha256": "abfffc304740aab64f1002aa7a8a1d9782a0317239d687b9ba5b61d2d89b3bae"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 1359,
+      "sha256": "49df78c19c4fcad746a80c424c429894891bb1baa7be07567be4ef153d11a85c"
+    },
+    {
+      "path": "LICENSE-APACHE",
+      "bytes": 10004,
+      "sha256": "49d916a2f893b66647bac55d91e5c942d7f8b194d825d94c9b77427a54b99593"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "bytes": 1164,
+      "sha256": "5ef63fff2178d9891fcd763590e44ebc0dc6cecc41cff176398156cb150c6789"
+    },
+    {
+      "path": "README.md",
+      "bytes": 11559,
+      "sha256": "6b650edca5aea03ab152b5be8d3e9da7fbef8104b2f429a2f852f45ffb2e0d76"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 4510,
+      "sha256": "000f3123306c793590dfd64d8b3305688f261ba6ae38ada3c0fd01ed4e980642"
+    },
+    {
+      "path": "Taskfile.yaml",
+      "bytes": 3954,
+      "sha256": "72f5567e4215be86b15c2dbd93fda9e122424584c4ffce5425b7a15e90d56c84"
+    },
+    {
+      "path": "docker-compose.yml",
+      "bytes": 1057,
+      "sha256": "f6d86e7de8550cc94e51fdacca1a7f7c64938d3b0a6ebb3987cb2e96304b5c5c"
+    },
+    {
+      "path": "docs/ci-and-release.md",
+      "bytes": 2576,
+      "sha256": "ca063ef9424c6998e1d0e04dfa6777b26422fc665e787c00f3bf0daf68a9eac1"
+    },
+    {
+      "path": "docs/firefox-client.md",
+      "bytes": 2568,
+      "sha256": "bfcb74882d275346186e695bf8b02c946a7fe63286eb3329360f5fdcc7a729f0"
+    },
+    {
+      "path": "docs/testing.md",
+      "bytes": 2022,
+      "sha256": "011fded2c9c8c43eaf4fb636f2dbc884b1a2f29026b62eb51368592c51733fea"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 274515,
+      "sha256": "3b626b36b7c715960e491177e112da26ddaff56e39acf6768a5ea9120e50573d"
+    },
+    {
+      "path": "package.json",
+      "bytes": 3924,
+      "sha256": "251ca8d0acfaad8ef6ba958dc9fe1836cb10ef6758ddcc80770f76627dca2459"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/.claude-plugin/plugin.json",
+      "bytes": 405,
+      "sha256": "fefa2a6086eff6b30955ea01d7eaa1918c583e218e08e856c7f92accbc4e1a93"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/.mcp.json",
+      "bytes": 142,
+      "sha256": "906dedc6f7d0c6d480088e9ad3c4f04dfedd658a4d651032616ec70e6b638c08"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/README.md",
+      "bytes": 1962,
+      "sha256": "8308ff5d92ed20cc5b2adbe562a313a3fbecc7acb6323bbf2db314f6e41cfd63"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/agents/e2e-tester.md",
+      "bytes": 1329,
+      "sha256": "3f9019d558f3fa4fc10d273f01cae5e64e6dded9f8ecb6bdef3663af0db5e889"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/agents/web-scraper.md",
+      "bytes": 1394,
+      "sha256": "6ce5057647c452d7a88019922a63a9795947dedcc13885311b8894df52b19205"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/commands/debug.md",
+      "bytes": 782,
+      "sha256": "ccca5738def76a668205a1d35091e1c358eb81dddf17022a67a592dd16cdedc6"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/commands/navigate.md",
+      "bytes": 667,
+      "sha256": "f55cacd1865190b0b51afda1b65989bb90f730e8cd7f58e979035a87c7f58e46"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/commands/screenshot.md",
+      "bytes": 604,
+      "sha256": "0d3fc6b99054a6f5e665b36bb745c7a7beaac61a4b7ab9be48a1d2b1981a697a"
+    },
+    {
+      "path": "plugins/claude/firefox-devtools/skills/browser-automation/SKILL.md",
+      "bytes": 2102,
+      "sha256": "9006a99502e1f23e397522c7a6f321bd4a447c1fe6a4395621fb87f78698c897"
+    },
+    {
+      "path": "scripts/_helpers/page-loader.js",
+      "bytes": 3579,
+      "sha256": "1875bce487e499cccc37c822870a3847f30bf9fb3c649110545db2118aa00cef"
+    },
+    {
+      "path": "scripts/demo-server.js",
+      "bytes": 10230,
+      "sha256": "254a48d4c8e17a6e91991a7bf569883a9a16c02e0c236a0f6f69d84531fce00a"
+    },
+    {
+      "path": "scripts/generate-moz-package.mjs",
+      "bytes": 1119,
+      "sha256": "bdcff14a26f6ca624b3581c6df019f0b9b80318c00236b9456dc7e875e70fc73"
+    },
+    {
+      "path": "scripts/publish-moz-package.mjs",
+      "bytes": 1688,
+      "sha256": "22fcb6af0c28da24bf9370062cb049bec911e18165e92af4620181ab90455eb9"
+    },
+    {
+      "path": "scripts/run-integration-tests-windows.mjs",
+      "bytes": 6732,
+      "sha256": "6b98f176e484246c41585ff3813e17b3ad92a1d268a3029d56303abd127daa1b"
+    },
+    {
+      "path": "scripts/setup-mcp-config.js",
+      "bytes": 9747,
+      "sha256": "87905cf30d791dd742dfc927ff9ea5108f385e7b6b47a2635418d8e8d2a95c41"
+    },
+    {
+      "path": "scripts/test-bidi-devtools.js",
+      "bytes": 14788,
+      "sha256": "b6df924309b533c0ad32e7e2cb6ccdfe903dbb602ef47dbc3aa6fa752931908b"
+    },
+    {
+      "path": "scripts/test-closed-window.js",
+      "bytes": 6559,
+      "sha256": "1de15d9fbcb881c88b908b164f00abe063400c30bca332eacb032a486e8e7378"
+    },
+    {
+      "path": "scripts/test-console.js",
+      "bytes": 5274,
+      "sha256": "755dbda733f339f4a9ffe8280bb7151ffb6e48f764522ceece195c8528b9b2dd"
+    },
+    {
+      "path": "scripts/test-dialog.js",
+      "bytes": 3869,
+      "sha256": "3b8ef9cdcf3574018230d94b8515752584974f6221d81e363fbd340fabcf6e43"
+    },
+    {
+      "path": "scripts/test-firefox-temp.js",
+      "bytes": 442,
+      "sha256": "0c5bc575794ea564ecb0a157e9b1fa11fc1159536794d1fcdcb002e8ccaa50c7"
+    },
+    {
+      "path": "scripts/test-input-tools.js",
+      "bytes": 8666,
+      "sha256": "78621ba9aeb9ae7b3bd9d50a4b3dc557611a46409ce155f0c9934d7325096a5e"
+    },
+    {
+      "path": "scripts/test-lifecycle-hooks.js",
+      "bytes": 4859,
+      "sha256": "6cfd4b02152cc638576f2852774a01c9623ee56e80c75f95c4b819954b89129a"
+    },
+    {
+      "path": "scripts/test-mozlog.js",
+      "bytes": 3767,
+      "sha256": "a1f02a71ad6b4e019ecb387253a416f794d864f9469fb234b0f5a8fd93c6477a"
+    },
+    {
+      "path": "scripts/test-navigation.js",
+      "bytes": 1702,
+      "sha256": "25a4e00b63cbe9c5077fff8aa0829be4707e4005568e599089f09e2002882506"
+    },
+    {
+      "path": "scripts/test-privileged-context.js",
+      "bytes": 3638,
+      "sha256": "fa036df40343b67af2ea555d08a6e574ebd667091a5e8420691acad3157cb55c"
+    },
+    {
+      "path": "scripts/test-screenshot.js",
+      "bytes": 7654,
+      "sha256": "b3db1a2126be65961a62fdc5549b56ce203fc8cf53c408832f93b636c75ca072"
+    },
+    {
+      "path": "src/cli.ts",
+      "bytes": 6174,
+      "sha256": "0cac15202b87eb7f4dba7695af38cadefde55ba3a8926aef0bdd56d9dd42df24"
+    },
+    {
+      "path": "src/config/constants.ts",
+      "bytes": 160,
+      "sha256": "ac88bcf5c26ecc96b31e55ccfbfd1eafbd828bda866d011a24d14d7ffe6ecaa5"
+    },
+    {
+      "path": "src/firefox/core.ts",
+      "bytes": 18416,
+      "sha256": "5256e7a6eead195e63cf973b71b92f59fe57d7a4129464719d0708543e9fc862"
+    },
+    {
+      "path": "src/firefox/dom.ts",
+      "bytes": 11779,
+      "sha256": "4034e918ca6e6d839d2f6fd1ae295d8bd4ea080c0c708199951e6f7e9b676494"
+    },
+    {
+      "path": "src/firefox/events/console.ts",
+      "bytes": 4158,
+      "sha256": "ad1604fb9493bdc422814422332a720f5c3da179bb961422097dd4fb487aee2f"
+    },
+    {
+      "path": "src/firefox/events/debugging.ts",
+      "bytes": 4596,
+      "sha256": "3dfbff2663a8b4216ef3e13dd179c3c20ecb7b3f05bc5c67ef0f45815de4bd09"
+    },
+    {
+      "path": "src/firefox/events/index.ts",
+      "bytes": 278,
+      "sha256": "29f8d2aeacca3ff679b04517ca8b6cc42cc4088d49b9e5551da1dcdb9df6f527"
+    },
+    {
+      "path": "src/firefox/events/network.ts",
+      "bytes": 10171,
+      "sha256": "b5929b8b147a116667bc9c43f389571f0a7e1be629c33b460d46e90f33cf385e"
+    },
+    {
+      "path": "src/firefox/index.ts",
+      "bytes": 16974,
+      "sha256": "6b5a0894721b594a8a86d5601b12840f6948f1d9998a11de48c1789b61f8d4d8"
+    },
+    {
+      "path": "src/firefox/pages.ts",
+      "bytes": 6058,
+      "sha256": "3abb583a207fecd5eead25f8c4dfdda8e873e85f58c539e182b56870e547b204"
+    },
+    {
+      "path": "src/firefox/pref-utils.ts",
+      "bytes": 830,
+      "sha256": "74571c97fe09d3f4926996d8d584900a035c3a4ebb5527483b85ccce6f7d4b9b"
+    },
+    {
+      "path": "src/firefox/profile.ts",
+      "bytes": 3063,
+      "sha256": "574d9538392fe7118cfefc0ddb5c2301a397e0a023c228888c310edd36a2297b"
+    },
+    {
+      "path": "src/firefox/snapshot/formatter.ts",
+      "bytes": 4159,
+      "sha256": "9fead45082b5fbd9886a912fe8fd57fe96375e2cb4db757c75d90ace383cc176"
+    },
+    {
+      "path": "src/firefox/snapshot/index.ts",
+      "bytes": 304,
+      "sha256": "e8c37f00ca1cf91db68b95b8416a9563bbdc52d5de56ced7b7fbd35ef685ac72"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/attributeCollector.ts",
+      "bytes": 4426,
+      "sha256": "2c02c9785db018c58eaf4578a93d40bad869bb4b78ec22db63f8b5d5d300ab78"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/elementCollector.ts",
+      "bytes": 4540,
+      "sha256": "0d7d1c77b4485f4e157702fc3a599eba0ea0075bd7212fd67469beda094186cd"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/selectorGenerator.ts",
+      "bytes": 4731,
+      "sha256": "c704890ff930ebe5d9cb483f45ea8ec7fbf9197d540a6ba0ed629c5f5dab958a"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/snapshot.injected.ts",
+      "bytes": 2076,
+      "sha256": "fdb4de6185e68432bf80ff79a89e7793b0d9a9f3850e566e2e4cf310d5f07292"
+    },
+    {
+      "path": "src/firefox/snapshot/injected/treeWalker.ts",
+      "bytes": 5706,
+      "sha256": "44ce4baedc6d9d200ed1739fd5fd24e6e19f9ae671699188a6a662e8f544de1e"
+    },
+    {
+      "path": "src/firefox/snapshot/manager.ts",
+      "bytes": 6487,
+      "sha256": "1164dd4c7f33f5b1c697e40f8522ab60927603798d27c7c34bff881836cd4461"
+    },
+    {
+      "path": "src/firefox/snapshot/resolver.ts",
+      "bytes": 4679,
+      "sha256": "50a6a2c7388e3cc770a591af37ba19ef1d487db60a370dc6cf1829b29eee4baf"
+    },
+    {
+      "path": "src/firefox/snapshot/types.ts",
+      "bytes": 1996,
+      "sha256": "5508be1adb73b0ffa00718411e46f8238edb81a3194a2c030dab729a067725dd"
+    },
+    {
+      "path": "src/firefox/types.ts",
+      "bytes": 2635,
+      "sha256": "39e5c71b5f8d87b8b5173a836d9b2dec4a68f8e72b8a838d4e66c15ace847db4"
+    },
+    {
+      "path": "src/index.moz.ts",
+      "bytes": 889,
+      "sha256": "16bbcadb4558f05e32653f3fc7a7bc44e82e0254fdff30c193feda64ac2a5a2d"
+    },
+    {
+      "path": "src/index.public.ts",
+      "bytes": 946,
+      "sha256": "f5b1f46d841a31f10dd966a2fcdb348a7c97d0c3465de846079b626e8f26dc2d"
+    },
+    {
+      "path": "src/index.ts",
+      "bytes": 14828,
+      "sha256": "10a28938a805eb4219f19bb7fd322aa8a5776c0e12188fd35bb92aa9d6c5e45a"
+    },
+    {
+      "path": "src/tools/console.ts",
+      "bytes": 6457,
+      "sha256": "856811a6f15cc13945fe51db388506692cde606681c25c40f2d22d5a41c4ac57"
+    },
+    {
+      "path": "src/tools/debugging.ts",
+      "bytes": 7117,
+      "sha256": "cb0e310a40dba83646e50abcb1fd97978cfa71c3e3eb89ccd9baf6a401a932b5"
+    },
+    {
+      "path": "src/tools/firefox-management.ts",
+      "bytes": 12823,
+      "sha256": "89eb7ed38351260845e9f86e201e1f974a7e17b386ecbe0300ffd7204d9f5c34"
+    },
+    {
+      "path": "src/tools/firefox-prefs.ts",
+      "bytes": 8451,
+      "sha256": "e28b03d57c68b7a075d8677df847cecafae7a606deafe90a4da6ea956253ed9f"
+    },
+    {
+      "path": "src/tools/index.ts",
+      "bytes": 3242,
+      "sha256": "e0c2c5578e8c5c5387bb33e2b40bcbe46b28f0a1371d9dd1dc01b1ca49dbc0cf"
+    },
+    {
+      "path": "src/tools/input.ts",
+      "bytes": 8917,
+      "sha256": "adc3630db14f795f2bac78d0bf832859925f43e00ad39643e20f0c18f8d33889"
+    },
+    {
+      "path": "src/tools/network.ts",
+      "bytes": 10508,
+      "sha256": "8f517cc9409d7f05150fb3e840acbbf935802734226ac06b257fd02424a3237a"
+    },
+    {
+      "path": "src/tools/pages.ts",
+      "bytes": 6787,
+      "sha256": "e2606e5d9453bceec10e85c3a193a7f7df453a580bebc1bea6f4762e0116cf76"
+    },
+    {
+      "path": "src/tools/privileged-context.ts",
+      "bytes": 5760,
+      "sha256": "f96391f43d44070e498a7c457b1c6555b4dd7b3590509230182614b8bbcb98fd"
+    },
+    {
+      "path": "src/tools/profiler.ts",
+      "bytes": 6106,
+      "sha256": "1449c3acc71183f68abe27ce1af8dd6d5753b6fbadcb6204b69a9739c0ab1ba6"
+    },
+    {
+      "path": "src/tools/screenshot.ts",
+      "bytes": 3423,
+      "sha256": "db5b6b41f1a80deb5dd7b8aca27aaeffbe2e50984337eb23c30afa01cc4e3343"
+    },
+    {
+      "path": "src/tools/script.ts",
+      "bytes": 4755,
+      "sha256": "0b4b14dfc5f561af96bc7d2b7aa683273c856c9f083a9984cde7a416d676e0f1"
+    },
+    {
+      "path": "src/tools/snapshot.ts",
+      "bytes": 5614,
+      "sha256": "80367c6ff28a0884ef54785728700d21ff912470f75c327d02bd5f7fceb990e1"
+    },
+    {
+      "path": "src/tools/utilities.ts",
+      "bytes": 4525,
+      "sha256": "2915d8f8d828cee97f1d8ba0c20e8c0d1ddb847516e3c4e127aa820c66b49a44"
+    },
+    {
+      "path": "src/tools/webextension.ts",
+      "bytes": 12070,
+      "sha256": "dd88dbe8aa685c2c43faaf40020501169f3219bced17af6694e88e38e0442c33"
+    },
+    {
+      "path": "src/types/common.ts",
+      "bytes": 365,
+      "sha256": "5e4ef851b1053f6f4b17c3a1920246cc715ed40da109b9deb6b7c697cd318631"
+    },
+    {
+      "path": "src/types/selenium-webdriver-firefox.d.ts",
+      "bytes": 459,
+      "sha256": "3966f32388d980c40507a3d1243336bd98c8e0162020f99a6b972abf07193f7e"
+    },
+    {
+      "path": "src/utils/errors.ts",
+      "bytes": 1806,
+      "sha256": "d657af746e7bf93221c4890d8caf15ce4a855bb6f8a236c9707809e936c137a9"
+    },
+    {
+      "path": "src/utils/js-validation.ts",
+      "bytes": 1299,
+      "sha256": "dea4f2bed756f4555f2ea80180312109c4adaf5a0a168b0254e7ad2ee13ea71c"
+    },
+    {
+      "path": "src/utils/logger.ts",
+      "bytes": 2122,
+      "sha256": "87593c38e367b15e096f96d1ffceccc678538ded906e76caf19e9732804f49dc"
+    },
+    {
+      "path": "src/utils/remote-value.ts",
+      "bytes": 1782,
+      "sha256": "12ba6ab1c4cc3ad73dece92c20b965841fe79355a8f5b0dfe661639c46758631"
+    },
+    {
+      "path": "src/utils/response-helpers.ts",
+      "bytes": 3194,
+      "sha256": "96228b9f34202097e57250e22712c305041c03c49caa03b353452825f29dc5d9"
+    },
+    {
+      "path": "src/utils/uid-helpers.ts",
+      "bytes": 483,
+      "sha256": "30535d1694431894263d969b2392cf5f3ede725634856edd6324f75eae7f3293"
+    },
+    {
+      "path": "src/utils/version.ts",
+      "bytes": 665,
+      "sha256": "4f3820b7c2ea38c20f6f91b4b6bc35f6ed5c77d92c7f8364c0ecc8dac66e3328"
+    },
+    {
+      "path": "tests/cli/prefs-parsing.test.ts",
+      "bytes": 3669,
+      "sha256": "64151ae20d96b8a9742ab3052c303ac25f2a0bad7042d0d1b91fe90ea77d0597"
+    },
+    {
+      "path": "tests/config/constants.test.ts",
+      "bytes": 1414,
+      "sha256": "b7795b3dc9f061c8a34ec1fa3014fbed23706f02ccbd589ddefd1c417f6e8b80"
+    },
+    {
+      "path": "tests/firefox/connect-existing.test.ts",
+      "bytes": 1504,
+      "sha256": "4a7068e2b3eeab250ea6d15080d00b2c86d86b741e85ae881574da1be1a55173"
+    },
+    {
+      "path": "tests/firefox/core-prefs.test.ts",
+      "bytes": 5041,
+      "sha256": "ef80796412331b896de13223ffe3e00fe25d8a4d4e25fae49b08ce73b9d98f5d"
+    },
+    {
+      "path": "tests/firefox/core.test.ts",
+      "bytes": 15558,
+      "sha256": "190a89c73ec1753857f73a4cdfdbd5a389f9c8d9f12311d5e67433a816cf4f84"
+    },
+    {
+      "path": "tests/firefox/events/debugging.test.ts",
+      "bytes": 4852,
+      "sha256": "f072eb5aa50629e65fb9515c76d8faa31347a5e22d3a6ddd5587702c8132a6de"
+    },
+    {
+      "path": "tests/firefox/events/network.test.ts",
+      "bytes": 12003,
+      "sha256": "d4898a58ae9eab712b9ca653784044d2dfb413eef3fbe4526e1b61439f8b6753"
+    },
+    {
+      "path": "tests/firefox/pages.test.ts",
+      "bytes": 5664,
+      "sha256": "ac1d644d24b195601f230d9ff0b730a1288556249c25a6e841b8129fe31777c3"
+    },
+    {
+      "path": "tests/firefox/pref-utils.test.ts",
+      "bytes": 1445,
+      "sha256": "aa86aeee886057436b375a15b2ba0be9eed2226984805152c213e694950aef6d"
+    },
+    {
+      "path": "tests/firefox/profile.test.ts",
+      "bytes": 4228,
+      "sha256": "faff666c0140f808f083f255b3e5edf11b8601741fcb7bd8b24666afcbcdb6ec"
+    },
+    {
+      "path": "tests/firefox/snapshot/injected/elementCollector.test.ts",
+      "bytes": 6967,
+      "sha256": "ab6bd301c0e1a7a4c1bc55615911c557102ba429c781a5e3000f2486979f4dfe"
+    },
+    {
+      "path": "tests/firefox/snapshot/injected/snapshot.injected.test.ts",
+      "bytes": 4064,
+      "sha256": "5774cda4cf8c03be89459aa2436e35d704c22047854d3673baec04b7942ec960"
+    },
+    {
+      "path": "tests/firefox/snapshot/injected/treeWalker.test.ts",
+      "bytes": 8253,
+      "sha256": "a347392584d5bd95cf667113bf90ea1081f6af30704e83b7d8105b3a7eecd1b7"
+    },
+    {
+      "path": "tests/firefox/snapshot/resolver.test.ts",
+      "bytes": 9187,
+      "sha256": "a66c4c725d885645dcec4fb2f5d4caac4d759133c96455f465a5d78af91d190c"
+    },
+    {
+      "path": "tests/firefox/types.test.ts",
+      "bytes": 879,
+      "sha256": "f73206417c52c20890effa7b8295656b2500891a3a9061d5fbd84e9f61cbb133"
+    },
+    {
+      "path": "tests/fixtures/console.html",
+      "bytes": 1482,
+      "sha256": "4581e2b097814d77073db81b9f87c95c5083cd799edb10f39dc14898cfec53ed"
+    },
+    {
+      "path": "tests/fixtures/e2e-app.html",
+      "bytes": 11576,
+      "sha256": "85e90e71de763d10f5bdc53d34c35d21089c5c08919ba1d053f58609d6dcfd6b"
+    },
+    {
+      "path": "tests/fixtures/form.html",
+      "bytes": 1625,
+      "sha256": "053786f7a8eb1f00042aa77b66100773cdee2073539ddc865c4c6d8bf7aec107"
+    },
+    {
+      "path": "tests/fixtures/network.html",
+      "bytes": 2475,
+      "sha256": "b36e2ff86239b9b1964e6629c6f6f13df71f11b2e472e75c5857d306afa4e56c"
+    },
+    {
+      "path": "tests/fixtures/selector.html",
+      "bytes": 404,
+      "sha256": "78893d80c9b2c9e5ca0c9373da78c79eb12cb26ead272d1e779f7373eeb5175e"
+    },
+    {
+      "path": "tests/fixtures/simple.html",
+      "bytes": 933,
+      "sha256": "e0f4959103696399f926994cd74aaf20e7bab29c5b1fefd3e56a8386177a4ec8"
+    },
+    {
+      "path": "tests/fixtures/test-extension/manifest.json",
+      "bytes": 228,
+      "sha256": "63d2d4602e9b3e7a9c05c894396a5457c533dbdddde6f16f707d2e33ae2c0919"
+    },
+    {
+      "path": "tests/fixtures/test-extension/popup.html",
+      "bytes": 201,
+      "sha256": "e2e22cdb75c623f7cae12b6e4e782b2dfc2798caa6630176bf347b58ea0e5dd5"
+    },
+    {
+      "path": "tests/fixtures/visibility.html",
+      "bytes": 1207,
+      "sha256": "3e545f372ee1e3088486f87d14bb611ab8ccfe36c4211905f3eb315128b8bc5b"
+    },
+    {
+      "path": "tests/helpers/firefox.ts",
+      "bytes": 3317,
+      "sha256": "5d24a0b1a6907945c352f9df88c269b7c5dfc32919c40d6b00c4d18003102073"
+    },
+    {
+      "path": "tests/integration/console.integration.test.ts",
+      "bytes": 6401,
+      "sha256": "9a9eb79c9905ce78495faf8a6c85ea474b90520f71049d71685901341d9a8fc4"
+    },
+    {
+      "path": "tests/integration/e2e-scenario.integration.test.ts",
+      "bytes": 23434,
+      "sha256": "1765abe4607ff8944d8e59d5c6286eb3758c9bce2cbbd695717ef342b2af9600"
+    },
+    {
+      "path": "tests/integration/form.integration.test.ts",
+      "bytes": 1451,
+      "sha256": "961edff347c4d211d2c8dcd39def508eaef3abee7b03f8a47eb53b12f972a747"
+    },
+    {
+      "path": "tests/integration/moz-extension.integration.test.ts",
+      "bytes": 6263,
+      "sha256": "6128dfb575c4b27ef4870e4e8829414d19c434185185649e34c35b72f9e73c46"
+    },
+    {
+      "path": "tests/integration/network.integration.test.ts",
+      "bytes": 5585,
+      "sha256": "49379804b6655137673a708751e44ee9732b4b8bb24d646145709d8e1cfece85"
+    },
+    {
+      "path": "tests/integration/snapshot.integration.test.ts",
+      "bytes": 8683,
+      "sha256": "0e79d0c55d764dad9358592f123401295e144965efc4186ef40c2b04a8e59d55"
+    },
+    {
+      "path": "tests/integration/tabs.integration.test.ts",
+      "bytes": 5307,
+      "sha256": "d29e008f154fd1b6dfcdc8114b7746ed920d43a90c61bfaae033ba9517de1d16"
+    },
+    {
+      "path": "tests/setup.ts",
+      "bytes": 2363,
+      "sha256": "1e89de83cd0a73d3f28282d032aa499c857b85e94f45812dc2a8c736fc572b3e"
+    },
+    {
+      "path": "tests/smoke.test.ts",
+      "bytes": 5952,
+      "sha256": "a33f16ba8500bf9acb92744e44a67e65f9accae4f122f7519324259c709e1742"
+    },
+    {
+      "path": "tests/snapshot/formatter-advanced.test.ts",
+      "bytes": 11415,
+      "sha256": "66b5794d09a9fc77349b275e1abe2e374ac4c4b8c31d141886c0f5f24dd4915a"
+    },
+    {
+      "path": "tests/snapshot/formatter.test.ts",
+      "bytes": 5517,
+      "sha256": "1adf01ebeb0d662f2b5fc2a8208d8416f25ec722393084ae6cd5d63be196a9de"
+    },
+    {
+      "path": "tests/tools/console.test.ts",
+      "bytes": 2302,
+      "sha256": "2b7706cefe1900aa6c79b328c69b30ba914613ea96c677d5a54b56a1091292a3"
+    },
+    {
+      "path": "tests/tools/firefox-management.test.ts",
+      "bytes": 9123,
+      "sha256": "a281fa79c5e1f4a098684978dbf12728328d7c5f3d34eb85fa332a040e3cd605"
+    },
+    {
+      "path": "tests/tools/firefox-prefs.test.ts",
+      "bytes": 13120,
+      "sha256": "8902943e0dfc7dd595df8f387d5df069e4cd2841d602d6d754522b44d3bf8e29"
+    },
+    {
+      "path": "tests/tools/index.test.ts",
+      "bytes": 8345,
+      "sha256": "00f32ee155b381ac6c2e3be4c787faebf743332b462a7fcec48e45b60cff96bf"
+    },
+    {
+      "path": "tests/tools/input.test.ts",
+      "bytes": 3780,
+      "sha256": "96e0ccd5daa2ec0d79ae884a4e5454262dd0146e6c1d7b1534240e88a8ee144c"
+    },
+    {
+      "path": "tests/tools/network.test.ts",
+      "bytes": 2337,
+      "sha256": "e15394a7c1c19b64e1456e1a84baf4537c8de15b76679a4997dad68436056eb6"
+    },
+    {
+      "path": "tests/tools/pages.test.ts",
+      "bytes": 2502,
+      "sha256": "3b641181c4a71330b8c4db9ac51f8ccbe68d5e5808da37df57c3de4aba9c35ba"
+    },
+    {
+      "path": "tests/tools/privileged-context-state.test.ts",
+      "bytes": 3214,
+      "sha256": "b0e192286196c28e0828aef6afc49fe2898984cee604fd6cce4f5b3f4e3c2b17"
+    },
+    {
+      "path": "tests/tools/privileged-context.test.ts",
+      "bytes": 3021,
+      "sha256": "e857c98dfe99235cf3ddb165321a85da0d55cb8a29bd1836b7f6861c5034ed20"
+    },
+    {
+      "path": "tests/tools/profiler.test.ts",
+      "bytes": 8103,
+      "sha256": "b1d9d786a7da78d1ac0514793b4c3c0a6410be03442922e0fe2f838ecda4fc46"
+    },
+    {
+      "path": "tests/tools/screenshot.test.ts",
+      "bytes": 6121,
+      "sha256": "8bc9a12f468b27e38aa0fe4d4ef23bd3e5f1bf24ed74b1370a3ba9e95e107d36"
+    },
+    {
+      "path": "tests/tools/script.test.ts",
+      "bytes": 1462,
+      "sha256": "8902b9a3eed7cf849507460ef37c9e6d580410970ca402dced57402901a37047"
+    },
+    {
+      "path": "tests/tools/snapshot.test.ts",
+      "bytes": 2730,
+      "sha256": "f659d7470188e87d0189104b4e871beed0135c46ff3eca8b92caaaf09f3a4781"
+    },
+    {
+      "path": "tests/tools/utilities.test.ts",
+      "bytes": 2383,
+      "sha256": "72e40d1158df0754b706c84e1198f0d1da34727cf3e45c2a6071221bd180e356"
+    },
+    {
+      "path": "tests/utils/errors.test.ts",
+      "bytes": 3300,
+      "sha256": "a4a14835e3189e55a5de6c4b9dbfd8e7cc242dd3f17daeac50af3fa03247c1eb"
+    },
+    {
+      "path": "tests/utils/js-validation.test.ts",
+      "bytes": 1142,
+      "sha256": "675ee1a1c70411a42b8ffbcf1bdf5b7ac50a17285bd6e79745b9d0486e80fe89"
+    },
+    {
+      "path": "tests/utils/logger.test.ts",
+      "bytes": 5879,
+      "sha256": "171c34b032bc315284377635de4a1e179cdbbe3f25e581cac4de5ea46747fc5f"
+    },
+    {
+      "path": "tests/utils/remote-value.test.ts",
+      "bytes": 4459,
+      "sha256": "5495ff3167fca7d0dcb94e9e6f3638c5a8393cc2275e7bb80509dfcf06841fc6"
+    },
+    {
+      "path": "tests/utils/response-helpers-extended.test.ts",
+      "bytes": 6401,
+      "sha256": "b123a0b11bce7cffff252c24cdc6ea040be080689952973187a7f5f73fb92ee6"
+    },
+    {
+      "path": "tests/utils/version.test.ts",
+      "bytes": 1408,
+      "sha256": "08a6c76aadbccbe4aebe7e9959c5115a106a1244041a387fc5a438ffca76eb41"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 1159,
+      "sha256": "ad06b0252d63772c52b0a375050143215346ad8291b5dc4e368c1270dbd1a346"
+    },
+    {
+      "path": "tsup.config.moz.ts",
+      "bytes": 959,
+      "sha256": "49b0b32de1e4d22e52f6dce9e31558bf514f9a97454727937a79991a5aee0baa"
+    },
+    {
+      "path": "tsup.config.ts",
+      "bytes": 927,
+      "sha256": "bb7c7118e3a094ce3f67599bffbce19529ca0e1674a9afa9dd6f4d81e7218710"
+    },
+    {
+      "path": "vitest.config.ts",
+      "bytes": 1278,
+      "sha256": "d67504ff5803b09966c89017901afd1e88b622e2bb4a68959804b3a4c7ecaba6"
+    }
+  ],
+  "bytes": 995644
+}

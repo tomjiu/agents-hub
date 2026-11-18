@@ -1,0 +1,105 @@
+
+==== nq ====
+[REG] how many votes to approve supreme court justice
+   b30 gold url=benbyerslaw.com/how-many-votes-required-to-confirm-supreme rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=1
+   tail: ""
+   b33 现状: url已出池
+[FIX] what is the name of season 6 of american horror stor  b33 rank1 url=en.wikipedia.org/wiki/American_Horror_Story%3A_Roa tailBoiler=false | b30该url不在池/非rank1
+[REG-MINE] what theater number was the aurora shooting in
+   b30 gold url=en.wikipedia.org/wiki/2012_Aurora_theater_shooting rank1
+   证据归属: tail=Y base=n tailBoiler=Y segs=2
+   tail: "Coordinates: 39°42′21″N 104°49′14″W﻿ / ﻿39.7059°N 104.8206°W﻿ / 39.7059; -104.8206"
+   b33 现状: 仍在池无gold
+[FIX] when was the term social justice first used  b33 rank1 url=isi.org/the-origins-of-social-justice tailBoiler=false | b30同url有gold@14
+[FIX] anastomosis between the epididymis and the vas defer  b33 rank1 url=sciencedirect.com/science/article/pii/S00150282164 tailBoiler=false | b30同url有gold@2
+[FIX] what is the angle of the tower of pisa  b33 rank1 url=en.wikipedia.org/wiki/Leaning_Tower_of_Pisa tailBoiler=false | b30同url无gold
+[REG] when did the song the joker come out
+   b30 gold url=mythcon.ca/who-sings-the-song-the-joker-why-steve-millers- rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=2
+   tail: "He mentions being a \"Space Cowboy\" (from the 1969 song of the same name), a \"Gangster of Love\" (from 1968), an"
+   b33 现状: 仍在池 hit@2
+[FIX] who plays rachel on jessie punch dumped love  b33 rank1 url=jessie.fandom.com/wiki/Rachel_Kapowski tailBoiler=false | b30同url有gold@3
+[REG] who votes in the speaker of the house
+   b30 gold url=en.wikipedia.org/wiki/Speaker_of_the_United_States_House_o rank1
+   证据归属: tail=n base=Y tailBoiler=Y segs=2
+   tail: "FormationMarch 4, 1789; 237 years ago (1789-03-04)"
+   b33 现状: url已出池
+[FIX] who won last year's ncaa women's basketball  b33 rank1 url=espn.com/womens-college-basketball/story/_/id/4840 tailBoiler=false | b30同url有gold@2
+[REG] what is the maximum data rate for the 802.11a standa
+   b30 gold url=en.wikipedia.org/wiki/IEEE_802.11a-1999 rank1
+   证据归属: tail=Y base=n tailBoiler=n segs=2
+   tail: "The 802.11a standard uses the same core protocol as the original standard, operates in 5 GHz band, and uses a "
+   b33 现状: url已出池
+[FIX] where did the potter's wheel first develop  b33 rank1 url=en.wikipedia.org/wiki/Stone_vessels_in_ancient_Egy tailBoiler=false | b30同url有gold@3
+-- nq: REG 5 (本改动嫌疑 1) | FIX 7
+
+==== triviaqa ====
+[FIX] How long was swimmer Michelle Smith-de Bruin banned   b33 rank1 url=owiki.org/wiki/Michelle_Smith tailBoiler=false | b30同url无gold
+[FIX] In Hanna and Barbera's TV cartoons base on The Addam  b33 rank1 url=en-academic.com/dic.nsf/enwiki/484876 tailBoiler=false | b30该url不在池/非rank1
+[REG] What was Walter Matthau's first movie?
+   b30 gold url=ultimatemovierankings.com/walter-matthau-movies rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=2
+   tail: "7.  Walter Matthau and Jack Lemmon acted together in 9 movies: Buddy Buddy (1981), The Fortune Cookie (1966), "
+   b33 现状: url已出池
+[REG] Where did Jonathan Edwards set his 1995 triple jump 
+   b30 gold url=worldathletics.org/heritage/news/jonathan-edwards-world-re rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=1
+   tail: ""
+   b33 现状: 仍在池 hit@6
+[FIX] Which highway was Revisited in a classic 60s album b  b33 rank1 url=en.wikipedia.org/wiki/Highway_61_Revisited?ns=0 tailBoiler=false | b30同url有gold@2
+[REG] Which was the first European city this century to op
+   b30 gold url=en.wikipedia.org/wiki/History_of_the_London_Underground rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=2
+   tail: "Harry Pitts (27 June 1861 – 30 April 1897)[31][32] was the first person to be killed by a terrorist attack on "
+   b33 现状: 仍在池无gold
+[REG] Who had an 80s No 1 hit with Hold On To The Nights?
+   b30 gold url=facebook.com/61580612572155/videos/1663024814776466 rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=1
+   tail: ""
+   b33 现状: url已出池
+[FIX] What is Osbert Lancaster best known for producing?  b33 rank1 url=theguardian.com/books/2008/oct/11/osbert-lancaster tailBoiler=false | b30同url有gold@6
+[REG] Which journalist first told the world about the My L
+   b30 gold url=hiddenhistoryfacts.com/article/my-lai-massacre-cover-up rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=2
+   tail: "The My Lai massacre occurred on March 16, 1968, and was covered up for 18 months."
+   b33 现状: url已出池
+[REG] Who first hosted Family Feud?
+   b30 gold url=familyfeud.com/about rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=1
+   tail: ""
+   b33 现状: url已出池
+[REG] Who was the director of the CIA from 1976-81?
+   b30 gold url=bush41library.gov/firm-yes-cia rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=1
+   tail: ""
+   b33 现状: url已出池
+[REG] Mickey Braddock in the 50s series Circus Boy found f
+   b30 gold url=boyactors.org.uk/actor.php?ref=1950 rank1
+   证据归属: tail=n base=n tailBoiler=n segs=1
+   tail: ""
+   b33 现状: url已出池
+[FIX] What is the largest city in Ohio?  b33 rank1 url=bellmoving.com/blog/largest-cities-in-ohio tailBoiler=false | b30同url有gold@11
+[FIX] Where was the American venue of the Live Aid concert  b33 rank1 url=pupjunkies.com/where-was-live-aid-held-the-twin-co tailBoiler=false | b30同url有gold@3
+[REG] Who became Israel's head of state in 1993?
+   b30 gold url=en.wikipedia.org/wiki/1993_in_Israel rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=2
+   tail: "20 August – The first agreement in the Oslo Accords is signed, between by Foreign Minister Shimon Peres for Is"
+   b33 现状: url已出池
+[FIX] In which country was the first permanent bungee jump  b33 rank1 url=bbc.co.uk/programmes/w3ct5ydm tailBoiler=false | b30该url不在池/非rank1
+[REG] River Phoenix died during the making of which movie?
+   b30 gold url=hollywoodreporter.com//news/berlin-festival-river-phoenixs rank1
+   证据归属: tail=Y base=n tailBoiler=n segs=2
+   tail: "BERLIN — Dark Blood, the decades-in-the-making film featuring the last on-screen performance of late actor Riv"
+   b33 现状: url已出池
+[REG] What did the Lone Ranger's title Kemo Sabe mean in A
+   b30 gold url=answersuniverse.com/what-does-the-lone-rangers-title-kemo- rank1
+   证据归属: tail=n base=Y tailBoiler=n segs=1
+   tail: ""
+   b33 现状: url已出池
+[REG] What was the name of the brothel in The Best Little 
+   b30 gold url=en.wikipedia.org/wiki/Chicken_Ranch_(Texas) rank1
+   证据归属: tail=n base=Y tailBoiler=Y segs=2
+   tail: "Coordinates: 29°54′48″N 96°50′05″W﻿ / ﻿29.91339°N 96.83475°W﻿ / 29.91339; -96.83475"
+   b33 现状: 仍在池 hit@2
+-- triviaqa: REG 12 (本改动嫌疑 0) | FIX 7

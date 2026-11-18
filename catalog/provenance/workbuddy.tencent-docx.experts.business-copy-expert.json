@@ -1,0 +1,66 @@
+{
+  "sha256": "dae52d541b7b0bf0c79b8e181c9862f1a8faf4d961a10a60ec4547848bef0730",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 4490,
+      "sha256": "ceedcbc5df8c5cb7f35be2f2b994a7ab2901ead75173835894017c9c3d35e148"
+    },
+    {
+      "path": "references/anti-patterns.md",
+      "bytes": 2501,
+      "sha256": "806d6dc8347ca3c41f0fc8448415a79ffce36af033f4f67587b277d6a4ca41e7"
+    },
+    {
+      "path": "references/brand-copy.md",
+      "bytes": 3097,
+      "sha256": "52c7929420761649869b0a768da772350844796ed1000a351c026a311fa441b1"
+    },
+    {
+      "path": "references/copy-diagnosis.md",
+      "bytes": 2244,
+      "sha256": "e6130f4e0b286f6b72132d29459dc89b39dea8c8c624c7707215555082be3467"
+    },
+    {
+      "path": "references/email-marketing.md",
+      "bytes": 2597,
+      "sha256": "09e497b34f17d4736523fe6aed60757575d5a5cfa0077ce51aaf397443e79685"
+    },
+    {
+      "path": "references/examples/brand-functional.md",
+      "bytes": 1690,
+      "sha256": "29f43a9e66fb444176c60a1b4d967bb0ce4ebfdf3194a8e7f765022ba0d45c29"
+    },
+    {
+      "path": "references/examples/email-cold.md",
+      "bytes": 2315,
+      "sha256": "2402f4a695b6c5ab0893db3f34cccf06cbfac0ea4b5cb545949a0ade69c5b8b0"
+    },
+    {
+      "path": "references/examples/index.md",
+      "bytes": 1592,
+      "sha256": "bbb2df6b3ade537cd2a6ae07e1792507adeda61f300d26ba580ac5757d92137a"
+    },
+    {
+      "path": "references/examples/product-premium.md",
+      "bytes": 1995,
+      "sha256": "95870868c8f0607a254ca7cde17608b4b1ccd84c41fc646eea3ed99b4664fd4d"
+    },
+    {
+      "path": "references/examples/social-xiaohongshu.md",
+      "bytes": 2416,
+      "sha256": "d3820bcc5683ac73a5316e2e39bc4a51f69ff07e1c5014b6deee76609b76a48d"
+    },
+    {
+      "path": "references/product-copy.md",
+      "bytes": 2633,
+      "sha256": "7b0c693e993cc16a4a51d7cfbf531711b64a5c10fcf09e8fce8f5e9bc22774ba"
+    },
+    {
+      "path": "references/social-media.md",
+      "bytes": 2984,
+      "sha256": "a106192f75e57015bcc26e4a3ad03f00607f0cc14ff61372a6ec71008bfca7a4"
+    }
+  ],
+  "bytes": 30554
+}

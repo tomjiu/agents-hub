@@ -1,0 +1,21 @@
+{
+  "sha256": "ced25179a44ca2b58e5324ab095804096979b268e649425b97e4f0d6ec1597e6",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 22749,
+      "sha256": "9fda02c3c2a21b1fe715561dbd5f8a83b85dbff581ad7c3d83c94d011598c872"
+    },
+    {
+      "path": "references/interact-prd-document.md",
+      "bytes": 25758,
+      "sha256": "bee59d8e9c44af44ff9d4ffe61e9099ad8b39815e69585ca8da908939e455d3d"
+    },
+    {
+      "path": "references/prd-document.md",
+      "bytes": 19451,
+      "sha256": "5204c4f35507b81397d147ff8d71b16dceed1cf902bc905a7abb75a8584591bd"
+    }
+  ],
+  "bytes": 67958
+}

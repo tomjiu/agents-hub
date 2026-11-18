@@ -1,0 +1,122 @@
+{
+  "name": "@kimi/daimon",
+  "private": true,
+  "version": "0.5.64",
+  "type": "module",
+  "files": [
+    "assets/",
+    "dist/",
+    "kimi-code.vendor.json"
+  ],
+  "bin": {
+    "kimi-daimon": "./dist/bin/kimi-daimon"
+  },
+  "engines": {
+    "node": ">=24.15.0 <24.16.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./core": {
+      "types": "./dist/src/core/index.d.ts",
+      "default": "./dist/src/core/index.js"
+    },
+    "./runner": {
+      "types": "./dist/src/runner/index.d.ts",
+      "default": "./dist/src/runner/index.js"
+    }
+  },
+  "scripts": {
+    "feature-catalog:generate": "node ./scripts/generate-feature-catalog.mjs",
+    "feature-catalog:check": "node ./scripts/generate-feature-catalog.mjs --check",
+    "python-runtime:agent-gw:check": "node ./scripts/update-agent-gw-runtime.mjs --check",
+    "python-runtime:agent-gw:update": "node ./scripts/update-agent-gw-runtime.mjs --update",
+    "audit:unused-exports": "node ./scripts/audit-unused-exports.mjs",
+    "audit:kimi-code-build-artifacts": "node --experimental-transform-types --test tests/runner/kimi-code-release-build-artifacts.validation.ts",
+    "audit:kimi-code-validation-entrypoint": "node --experimental-transform-types --test tests/runner/kimi-code-validation-entrypoint.test.ts",
+    "audit:kimi-code-dependencies": "node --experimental-transform-types --test tests/core/kimi-code-package-dependencies.test.ts",
+    "audit:kimi-code-adapter": "node --experimental-transform-types --test tests/core/kimi-code-adapter.test.ts tests/core/kimi-code-kernel-interface.test.ts",
+    "audit:kimi-code-kernel-interface": "node --experimental-transform-types --test tests/core/kimi-code-kernel-interface.test.ts",
+    "audit:kimi-code-records-replay": "node --experimental-transform-types --test tests/core/kimi-code-records-replay.test.ts",
+    "audit:kimi-code-tool-registry": "node --experimental-transform-types --test tests/core/kimi-code-tool-registry.test.ts",
+    "audit:kimi-code-workdir": "node --experimental-transform-types --test tests/core/kimi-code-workdir.test.ts",
+    "audit:kimi-code-metadata": "node --experimental-transform-types --test tests/core/kernel-metadata.test.ts tests/core/conversation-sessions-v2-store.test.ts tests/core/kimi-code-adapter.test.ts",
+    "audit:kimi-code-private-config": "node --experimental-transform-types --test tests/core/kimi-code-private-config.test.ts",
+    "audit:kimi-code-request-headers": "node --experimental-transform-types --test tests/core/kimi-code-request-headers.test.ts",
+    "audit:kimi-code-wire-cleanup": "node --experimental-transform-types --test tests/runner/kimi-code-wire-cleanup-audit.test.ts",
+    "audit:product-surface-residue": "node --experimental-transform-types --test tests/runner/product-surface-residue-guard.test.ts",
+    "clean": "rm -rf dist",
+    "audit:exports": "node --experimental-transform-types tests/package-exports-audit.ts",
+    "audit:python-runtime-package": "node ./scripts/audit-python-runtime-package.mjs",
+    "build:bin-perms": "node ./scripts/ensure-bin-permissions.mjs",
+    "build:bin-syntax": "sh -n dist/bin/kimi-daimon",
+    "build:copy-assets": "node ./scripts/copy-static-assets.mjs",
+    "build:copy-prompts": "node ./scripts/copy-static-assets.mjs",
+    "build:emit": "tsc -p tsconfig.build.json",
+    "build": "npm run check && npm run clean && npm run build:emit && node ./scripts/generate-bin-wrapper.mjs && npm run build:bin-syntax && npm run build:bin-perms && npm run build:copy-assets && npm run audit:exports && npm run audit:python-runtime-package",
+    "check": "npm run feature-catalog:check && npm run typecheck",
+    "dev": "node --experimental-transform-types src/runner/cli.ts",
+    "dev:runner": "node --experimental-transform-types src/runner/cli.ts",
+    "validation:control-server": "node --experimental-transform-types --test tests/server/control/control-server-smoke.validation.ts",
+    "validation:blueprint-canvas-core": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types --test tests/runner/blueprint-canvas-core.validation.ts",
+    "validation:kimi-data-tools-v2": "node --experimental-transform-types --test tests/runner/kimi-data-tools-v2.validation.ts",
+    "validation:kimi-code-direct-core-smoke": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --direct-core-smoke-only",
+    "validation:kimi-code-missing-request-headers": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --missing-request-headers-only",
+    "validation:kimi-code-adapter-session": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-session-create-close-only",
+    "validation:kimi-code-adapter-session-resume": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-session-resume-only",
+    "validation:kimi-code-conversation-idle-eviction": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-session-idle-eviction-only",
+    "validation:kimi-code-adapter-final-result": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-live-projection-only",
+    "validation:kimi-code-adapter-live-projection": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-live-projection-only",
+    "validation:kimi-code-conversation-suite": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --conversation-suite-only",
+    "validation:kimi-code-conversation-send": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --conversation-send-only",
+    "validation:kimi-code-system-prompt-capture": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types --import ./tests/runner/kimi-code-dist-loader.mjs tests/runner/kimi-code-system-prompt-capture.validation.ts",
+    "validation:kimi-code-conversation-title": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --conversation-title-only",
+    "validation:kimi-code-conversation-get-messages": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --conversation-get-messages-only",
+    "validation:kimi-code-conversation-cancel": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --conversation-cancel-only",
+    "validation:kimi-code-conversation-steer": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --conversation-steer-only",
+    "validation:kimi-code-goals": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --goal-suite-only",
+    "validation:kimi-code-vault-memory-transcripts": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --vault-memory-transcripts-only",
+    "validation:kimi-code-adapter-tool-projection": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-tool-projection-only",
+    "validation:kimi-code-adapter-media-textification": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-media-textification-only",
+    "validation:kimi-code-tools-suite": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --tools-suite-only",
+    "validation:kimi-code-adapter-daimon-tool": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-daimon-tool-only",
+    "validation:kimi-code-adapter-question": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-question-only",
+    "validation:kimi-code-adapter-duplicate-tools": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-duplicate-tools-only",
+    "validation:kimi-code-adapter-approval": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-approval-only",
+    "validation:kimi-code-managed-python-bash": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-managed-python-bash-only",
+    "validation:kimi-code-background-runs": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --background-runs-only",
+    "validation:kimi-code-adapter-records-replay": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --adapter-records-replay-only",
+    "validation:kimi-code-diagnostics-release-suite": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --diagnostics-release-suite-only",
+    "validation:kimi-code-wire-repair-local": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --local-wire-repair-suite-only",
+    "validation:kimi-code-kernel": "node ../../scripts/build-daimon-release.mjs --kimi-code-build-only && node --experimental-transform-types tests/runner/kimi-code-direct-core-smoke.validation.ts --all && npm run audit:product-surface-residue",
+    "validation:runtime-facing": "node --experimental-transform-types --test tests/core/blueprint-automation-condition-evaluator.test.ts tests/core/blueprint-automation-resources.test.ts tests/core/blueprint-automation-runner.test.ts",
+    "validation:release-smoke": "node ./scripts/validate-release-smoke.mjs && npm run audit:product-surface-residue",
+    "release:build": "node ../../scripts/build-daimon-release.mjs",
+    "smoke:release-build": "node --experimental-transform-types tests/runner/release-build-smoke.validation.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --experimental-transform-types --no-concurrent-recompilation --test --test-concurrency=4 $(find tests -type f -name '*.test.ts' | sort)",
+    "test:scripts": "node --test ../../scripts/test/build-daimon-bundle-node-runtime.test.mjs && bash ../../scripts/test/onboard-daimon-banner.test.sh && bash ../../scripts/test/start-daimon-failfast.test.sh && bash ../../scripts/test/start-onboard-split.test.sh && node --test ../../scripts/test/source-child.test.mjs && node --test ../../scripts/test/kimi-code-dist-loader.test.mjs"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.10.1",
+    "@types/proper-lockfile": "^4.1.4",
+    "@types/react": "19.2.5",
+    "esbuild": "^0.28.1",
+    "javascript-obfuscator": "^5.4.3",
+    "terser": "^5.48.0"
+  },
+  "dependencies": {
+    "@moonshot-ai/agent-core": "0.15.7",
+    "better-sqlite3": "^12.8.0",
+    "yazl": "3.3.1"
+  },
+  "overrides": {
+    "nunjucks": {
+      "chokidar": "4.0.3"
+    }
+  },
+  "bundleDependencies": true
+}

@@ -1,0 +1,22 @@
+id = "trae.trae-doctor"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/TRAE-doctor"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1/trae_agent::default::prod_20260609::TRAE-doctor/0.0.4/package.zip"
+version = "0.0.4"
+build = "default::prod_20260609::TRAE-doctor"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.4"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "15f12b63da9235a39d028d29445ef1e2392d381bb5afbf6b2f43a263358ff333"
+local_modified = "unknown"
+enabled = false

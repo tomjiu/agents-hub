@@ -1,0 +1,50 @@
+批 35 — pool=20 同池重放(b31 挂账应答): 池深效应量化 + 上游换血主导单窗对拍
+======================================================================
+
+== 实验设计 ==
+b31 归档挂账: "deep 子类: 严格 gold 在 11-20 的案例与 D1 部分并存 — pool 扩容
+(SC_RERANK_POOL) 与 b19 抽取增强是两个不同修复面"。本实验量化 pool 扩容面:
+  - b34win(topn=20 + pool=10 缺省): CE 只作用于交付前 10 位, 融合层 11-20 尾序
+    原样接尾(CE 不可达区)
+  - pool20 窗(topn=20 + SC_RERANK_POOL=20): 全部 20 条进 CE 打分, gold@11-20
+    有机会被提拔进 top-10
+  - 同题集确定性抽样(NQ 98/TQA 100, 与 b34win 逐字对齐), SC_NO_CACHE=1,
+    分段前台 4+4; 对拍工具 b35-pool-compare.mjs(入仓)
+
+== 水位(单窗对拍, 上游换血主导 — 不可归因全部差值) ==
+  NQ: b34win 51.0/77.6/82.7 → pool20 53.1/74.5/76.5 (@1 +2.1 / @10 -3.1 / @20 -6.2)
+  TQA: b34win 74.0/86.0/88.0 → pool20 73.0/91.0/91.0 (@1 -1.0 / @10 +5.0 / @20 +3.0)
+  rank1 垃圾率: NQ 8→5, TQA 2→2 (无恶化)
+  延迟: NQ 窗 +650ms/题(CE 打分 20 条 vs 10 条); TQA 窗 -1301ms(上游腿波动淹没,
+        单窗延迟无信号; CE 增量真实成本约 +300-650ms/题, 产品 6.7s 基线占 ~5-9%)
+
+== 逐案归因(b35-pool-compare.mjs) ==
+POOL-GAIN(真池深效应: b34win 11-20 位同 URL 被 CE 提进 top-10):
+  - NQ 1 条: "when was the term social justice first used" isi.org @12→@1
+  - TQA 1 条: "Sky Train Rail bridge" wikivoyage @13→@2
+  - TQA 1 条混合: "Eddie Murphy's first movie" grokipedia/Eddie_Murphy_filmography
+    b34win miss@20 但同 URL 在 11-20 位(页面在池、snippet 无 gold) → pool20 @5
+    (URL 池内提拔 × snippet 内容漂移叠加, 不记纯池深功)
+REG(b34win hit@10 → pool20 miss@10): NQ 7 + TQA 3 = 10 条,
+  全部 urlStillInPool20=false — gold URL 整页出池(上游换血), 零条 CE 挤出。
+  (与 b30 结论互证: pool 内重排不出池 — pool=20 下 20 条全在 CE 池内, gold 只会
+  在池内换位不会消失; 回退全部来自上游)
+UPSTREAM: NQ 4 + TQA 6 (miss→hit 6 条=上游新页带 gold 进池, 上游正贡献)
+
+== 裁决 ==
+1. 池深效应真实存在但很小: 干净案例 2/198 ≈ +1.0pp @10 理论上限(还有 1 条混合)。
+   机制方向被证实(CE 确实能提拔融合层尾部 gold, isi.org/wikivoyage 两案干净翻正)。
+2. 单窗对拍无统计力: 上游换血 ±5-6pp(@20 波动)淹没 +1pp 信号 — 任何 pool=20 vs
+   pool=10 的水位差都不可直接归因, 必须逐案(本工具已实现)。
+3. 不 ship pool=20 缺省: 收益(@10 +1pp 级) < 成本(CE 延迟翻倍 +300-650ms/题)。
+   SC_RERANK_POOL 环境变量保留为可选调优项, 缺省维持 10。
+4. D 桶主体不受 pool 扩容影响: b31 D 桶真召回缺失 ~57% — gold 不在上游 20 条里,
+   pool=100 也无用。**池深扩容只修复"gold 在 11-20 且 CE 喜欢它"的排序错位,
+   这类案例在 miss 空间占比 ~1-2%。** b36+ 若攻 D 桶, 方向在召回/正文层(b31 探针
+   D1 剩余 + 上游腿质量), 不在排序层参数。
+5. journal 追加 pool20 实验窗锚行 ×2(标注非 canonical, 水位不可直接对拍)。
+
+== 产物 ==
+- scripts/b35-pool-compare.mjs (对拍工具, 入仓)
+- /tmp/eval-rerank/{nq,triviaqa}-dump-pool20.jsonl → eval-dumps/*.jsonl.gz 归档
+- journal 22→24 行

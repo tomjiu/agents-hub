@@ -1,0 +1,61 @@
+{
+  "sha256": "74cd8ddd839ef982a44a785860eb333fed880c1385c7ca379ce9a3d6e50dd41f",
+  "files": [
+    {
+      "path": "CREATION-LOG.md",
+      "bytes": 4387,
+      "sha256": "615a003b199f429bdb9e94d1dc161582c83b822f8466c402900af0c0c69ea421"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 10180,
+      "sha256": "530855dfa2b10d5b9f92ac170fe41c5f8fbc4918957a564855b50a896ca625a2"
+    },
+    {
+      "path": "condition-based-waiting-example.ts",
+      "bytes": 5212,
+      "sha256": "0602407671f97439acc9e3cc2fe27ad42a22eb0dbca62f56d610fb223daadb0f"
+    },
+    {
+      "path": "condition-based-waiting.md",
+      "bytes": 3631,
+      "sha256": "02aa854bd9e761f275e1450d7136ba60f1a4d103fe94b552fdce822dd3c99506"
+    },
+    {
+      "path": "defense-in-depth.md",
+      "bytes": 3772,
+      "sha256": "9407efcbd028a5ec45edfdf6692b988716c0a7b34d1fb5e05d60146171d8041e"
+    },
+    {
+      "path": "find-polluter.sh",
+      "bytes": 1591,
+      "sha256": "0bb69ae18d810d49ad3f48802b98b394339ea637bb91f569dafb0b283039a89e"
+    },
+    {
+      "path": "root-cause-tracing.md",
+      "bytes": 5496,
+      "sha256": "21721f70f351cec1196fec7086cbdac8789124fe15b3b0b2d6095b52b7a4cc93"
+    },
+    {
+      "path": "test-academic.md",
+      "bytes": 667,
+      "sha256": "51e07c1c56052a6c46cde8e7d42d6612598ea076f128086fd85911f4d2d3e8dd"
+    },
+    {
+      "path": "test-pressure-1.md",
+      "bytes": 1958,
+      "sha256": "fbf04219c44460e76d96642d7dc16960a2390936e0a6937d0b133e013fa55afb"
+    },
+    {
+      "path": "test-pressure-2.md",
+      "bytes": 2351,
+      "sha256": "fc6b2594bed3f2a15ece75d0a211b55cb9a4668d85b9873f2bab5ee54ed31cbf"
+    },
+    {
+      "path": "test-pressure-3.md",
+      "bytes": 2761,
+      "sha256": "69ed6a5a59dac92d58d284519991a46b90978bc40a229776dac0ffa3a6123bfe"
+    }
+  ],
+  "bytes": 42006
+}

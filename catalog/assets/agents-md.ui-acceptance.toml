@@ -1,0 +1,17 @@
+id = "agents-md.ui-acceptance"
+kind = "agents-md"
+path = "agents-md/fragments"
+
+[source]
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+version = "0.1.0-draft"
+license = "review-required"
+
+[version]
+upstream = "0.1.0-draft"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "42e452dc8f7ffe3f7f04617760a6fecf52c354a45d4622f09a590e3aa6263ebc"
+local_modified = "unknown"
+enabled = false

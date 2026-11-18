@@ -1,0 +1,22 @@
+id = "trae.pdf"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/pdf"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::pdf/0.0.1/package.zip"
+version = "0.0.1"
+build = "solo_work::default::prod_20260203_windows::pdf"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "60b69304da6b4681465f54a5b00e5cbabfa390c9152ccd6f7f5bd27b3c67be8d"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,85 @@
+{
+    "schemaVersion":  1,
+    "name":  "daimon-bundle",
+    "version":  "0.5.64",
+    "kernelCommit":  "b35a7c73",
+    "platform":  "win32-x64",
+    "createdAt":  "2026-08-31T03:55:15.448Z",
+    "entrypoints":  {
+                        "directStart":  "bin/daimon.cmd",
+                        "cli":  "bin/kimi-daimon.cmd"
+                    },
+    "releaseManifest":  "release/manifest.json",
+    "includesReleaseDaimonTarball":  false,
+    "includesWebBridge":  false,
+    "webBridge":  {
+                      "setupMode":  "skip"
+                  },
+    "javascript":  {
+                       "minified":  true,
+                       "obfuscationMode":  "javascript-obfuscator-strong",
+                       "scope":  "app/daimon/dist/{src,_internal}/**/*.js",
+                       "firstPartyLayout":  "opaque-first-party-chunks"
+                   },
+    "dependencyBundling":  {
+                               "tool":  "esbuild",
+                               "entryCount":  4,
+                               "chunkCount":  166,
+                               "externalPackages":  [
+                                                        "@moonshot-ai/agent-core",
+                                                        "better-sqlite3",
+                                                        "yazl"
+                                                    ],
+                               "prunedNodeModules":  2,
+                               "keptTopLevelNodeModules":  364,
+                               "removedSourceMapFiles":  2670,
+                               "removedTypeScriptFiles":  4763,
+                               "nodePty":  {
+                                               "present":  true,
+                                               "targetPlatform":  "win32-x64",
+                                               "removedBuildEntries":  5,
+                                               "removedDebugFiles":  5,
+                                               "removedPlatformDirectories":  3,
+                                               "repairedExecutableFiles":  0
+                                           },
+                               "firstPartyLayout":  "opaque-first-party-chunks",
+                               "removedFirstPartyJavaScriptFiles":  0,
+                               "stableEntryCount":  4
+                           },
+    "typescriptDeclarations":  {
+                                   "included":  false,
+                                   "removedFiles":  0
+                               },
+    "runtimes":  {
+                     "node":  {
+                                  "version":  "v24.15.0",
+                                  "bundled":  false,
+                                  "launchArgument":  "--node \u003cpath\u003e",
+                                  "env":  "DAIMON_BUNDLE_NODE_BIN"
+                              },
+                     "python":  {
+                                    "target":  "3.12",
+                                    "releaseTag":  "20260825",
+                                    "asset":  "cpython-3.12.14+20260825-x86_64-pc-windows-msvc-install_only.tar.gz",
+                                    "sha256":  "15d25c455ea25d6b24d7e58eabdf744fd0db3cfb977934ae08fd2237acd8ccc1",
+                                    "path":  "runtime/python/cpython-3.12",
+                                    "dependencyMode":  "online_uv_sync"
+                                },
+                     "uv":  {
+                                "path":  "runtime/uv/uv.exe"
+                            },
+                     "git":  {
+                                 "bundled":  true,
+                                 "version":  "2.54.0.windows.1",
+                                 "path":  "runtime/git",
+                                 "shellPath":  "runtime/git/bin/bash.exe",
+                                 "gitPath":  "runtime/git/cmd/git.exe",
+                                 "env":  "KIMI_SHELL_PATH"
+                             }
+                 },
+    "pythonRuntime":  {
+                          "mode":  "online_uv_sync",
+                          "wheelhouseFiles":  0,
+                          "backgroundSyncLaunchArgument":  "--background-python-sync"
+                      }
+}

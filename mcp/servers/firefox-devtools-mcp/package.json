@@ -1,0 +1,117 @@
+{
+  "name": "@mozilla/firefox-devtools-mcp",
+  "version": "0.9.5",
+  "description": "Model Context Protocol (MCP) server for Firefox DevTools automation",
+  "author": "Mozilla",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "firefox-devtools-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.moz.ts",
+    "build": "tsup",
+    "build:moz": "node scripts/generate-moz-package.mjs && tsup --config tsup.config.moz.ts",
+    "build:all": "npm run build && npm run build:moz",
+    "publish:moz": "node scripts/publish-moz-package.mjs",
+    "start": "node dist/index.js",
+    "setup": "node scripts/setup-mcp-config.js",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "check": "npm run lint:fix && npm run typecheck",
+    "check:all": "npm run check && npm run test:run && npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "inspector:dev": "NODE_ENV=development npx @modelcontextprotocol/inspector npx tsx src/index.moz.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:unit": "vitest run --exclude 'tests/integration/**'",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
+    "test:tools": "node scripts/test-bidi-devtools.js",
+    "test:console": "node scripts/test-console.js",
+    "test:dialog": "node scripts/test-dialog.js",
+    "test:firefox-temp": "node scripts/test-firefox-temp.js",
+    "test:input": "node scripts/test-input-tools.js",
+    "test:lifecycle": "node scripts/test-lifecycle-hooks.js",
+    "test:mozlog": "node scripts/test-mozlog.js",
+    "test:navigation": "node scripts/test-navigation.js",
+    "test:privileged": "node scripts/test-privileged-context.js",
+    "test:screenshot": "node scripts/test-screenshot.js",
+    "test:integration:win": "node scripts/run-integration-tests-windows.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "firefox",
+    "firefox-devtools",
+    "browser-automation",
+    "webdriver-bidi",
+    "selenium",
+    "devtools",
+    "browser-testing",
+    "web-automation",
+    "claude",
+    "claude-ai",
+    "ai-agent",
+    "llm"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "geckodriver": "6.0.2",
+    "selenium-webdriver": "4.36.0",
+    "ws": "8.21.0",
+    "yargs": "17.7.2"
+  },
+  "devDependencies": {
+    "@types/jsdom": "28.0.0",
+    "@types/node": "24.1.0",
+    "@types/selenium-webdriver": "4.35.1",
+    "@types/ws": "8.18.1",
+    "@types/yargs": "17.0.32",
+    "@typescript-eslint/eslint-plugin": "8.58.0",
+    "@typescript-eslint/parser": "8.58.0",
+    "@vitest/coverage-v8": "4.1.8",
+    "@vitest/ui": "4.1.8",
+    "dotenv": "17.2.1",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-prettier": "5.4.0",
+    "jsdom": "28.1.0",
+    "prettier": "3.5.3",
+    "tsup": "8.5.0",
+    "tsx": "4.21.0",
+    "typescript": "5.3.3",
+    "vitest": "4.1.8"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "scripts",
+    "plugins"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla/firefox-devtools-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mozilla/firefox-devtools-mcp/issues"
+  },
+  "homepage": "https://github.com/mozilla/firefox-devtools-mcp#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

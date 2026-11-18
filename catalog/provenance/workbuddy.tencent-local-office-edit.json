@@ -1,0 +1,41 @@
+{
+  "sha256": "7c994fb7792e8cb3b7f2c791329c5d13fd8c32722f609d716c4b8f5f455dcc4b",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 562,
+      "sha256": "c8f91eb2771d4f683065b69c79ce662878ad87a592a65d50872f17613f5cb831"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 13609,
+      "sha256": "787615017dfad0826898c385622f8448572846aca7d6b8b60b70726e631f72e5"
+    },
+    {
+      "path": "doc/table.md",
+      "bytes": 2954,
+      "sha256": "8b933c8b936d274764ef9dbc7d434c57a86253da4c4ddd73990bf06ac93d9bc3"
+    },
+    {
+      "path": "doc.md",
+      "bytes": 7382,
+      "sha256": "4c6929506069c43c9750413bdd73520d9648219a4892230b7fd72daf14bcc8ea"
+    },
+    {
+      "path": "edsdk.py",
+      "bytes": 9978,
+      "sha256": "0640ca7f59d6a50177d5ba15707bb0953060375ea54e2ad4f989e7772a5063ac"
+    },
+    {
+      "path": "sheet.md",
+      "bytes": 13268,
+      "sha256": "c64e4669f40eaf8f687ab84095fe6cd1a27af34bb784e98fcc2330aec310d787"
+    },
+    {
+      "path": "slide.md",
+      "bytes": 7993,
+      "sha256": "850df5bc490a60c3a898c5ec6eccfeefcdf4d9a91cbb4406f269eab1a5270936"
+    }
+  ],
+  "bytes": 55746
+}

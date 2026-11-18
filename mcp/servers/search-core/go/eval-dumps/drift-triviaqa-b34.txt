@@ -1,0 +1,5 @@
+== journal-only: triviaqa ==
+win: triviaqa-dump-b34win.jsonl mtime=2026-09-07T13:55:49Z n=100
+gold@1=74% gold@10=86% gold@20=88% 墙钟=6717ms
+legs: crossref=21% itunes=19% flathub=6% openvsx=23% artifacthub=8% bing-rss=65% keenable=91% duckduckgo=72% wikivoyage=32% wikipedia=65% mwmbl=44% arxiv=28% metacpan=59% sov2ex=16% firecrawl=5% pubchem=2% bing-news=20% wiby=7% steam=12% wiktionary=12% commonswiki=20% europepmc=3% dockerhub=7% npm=7% openverse=2% hex=8% federalregister=3% musicbrainz=3%
+

@@ -1,0 +1,19 @@
+{
+  "name": "memory-net-console",
+  "version": "0.1.0",
+  "private": true,
+  "description": "memory-net 云端控制台：经 Cloudflare Tunnel 远程浏览/操作家中主机的共享记忆网。独立仓库，与 memory-net 解耦（git 钉扎依赖）。",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "workspaces": [
+    "packages/server",
+    "apps/console"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "license": "MIT"
+}

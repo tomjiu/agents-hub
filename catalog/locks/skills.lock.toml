@@ -1,0 +1,1344 @@
+schema = 1
+kind = "skills"
+
+[[assets]]
+id = "asset-management"
+path = "skills/asset-management"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "self-maintained"
+upstream_commit = ""
+sha256 = "7b79b0f7219cb3938db6d5b6bd892ac288e6273bba2fd563d86889fadd4a650f"
+local_version = "2.0.0"
+local_modified = false
+enabled = false
+
+[[assets]]
+id = "doc-coauthoring"
+path = "skills/individual/document/doc-coauthoring"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "9365e2cf7f0a5e768da9fd7c03381bb99227bac049d44dc1f5b8af72a8c17248"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "docx"
+path = "skills/individual/document/docx"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "7e01c423a1624ebd5ef859d1751e9d1d663860cafbae9b6fcd2c76bb0a8b33fe"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "frontend-design"
+path = "skills/individual/document/frontend-design"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "990ba922e877c88e04e6b6746e5af20b07149fda18855a74a69c05483bf2db18"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "pdf"
+path = "skills/individual/document/pdf"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "2d3a567c865df728a3497d91f83558cb8bb396ba8b9e6928975fea48ef5ed5eb"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "pptx"
+path = "skills/individual/document/pptx"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "9763da7ce589be42e16e7b301d9b84ed869621fe8b870bc88ef98716f352f18b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "theme-factory"
+path = "skills/individual/document/theme-factory"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "5bff7a6a1cbfa5c70c6734cfb1907f9d0cddb54a3ed04137f2de0aa3114ebb98"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "webapp-testing"
+path = "skills/individual/document/webapp-testing"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "c1a752df5ca2de0508aef56a997121fa0a835ab2dc4c576c0997627980e3e8cf"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "xlsx"
+path = "skills/individual/document/xlsx"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "d13d1208f4ef14a62afba493679358f608645dd585fae86f81a6380013889055"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "automation-workflow"
+path = "skills/individual/engineering/automation-workflow"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "a2fe95acb3afa4e6ac1f0888a965aea6476529d393a56a84ebf51c0263f23b12"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "debugging-and-error-recovery"
+path = "skills/individual/engineering/debugging-and-error-recovery"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "221336e6fdcea3e221532c6e0c4dee1de31274e66b016404a217dcc256aeca62"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "executing-plans"
+path = "skills/individual/engineering/executing-plans"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "66364aad66bcc3f054b807c3784ce39c32f4e5762f03a80a7f3069d1ce059de6"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "finishing-a-development-branch"
+path = "skills/individual/engineering/finishing-a-development-branch"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "23cd3e2719bf9c3685dc92a700655f37f5ab395ef8f4c43e6d6d8ccb2c30e7ff"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "go-performance"
+path = "skills/individual/engineering/go-performance"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "1b6ab791dd3d4c3f695dc03049f1fc075a51451d15b63e1a5a0d6bf30986a5c8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "godot-dev"
+path = "skills/individual/engineering/godot-dev"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "e329072361aef5180399fddeef52576a86864bdf3969c1fa64fd5c74abef0b9a"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp-builder"
+path = "skills/individual/engineering/mcp-builder"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "73db45851b16a242edd6c8da92bbdaae67cd5405619d2bf48fb70d7ec27621c0"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "performance-optimization"
+path = "skills/individual/engineering/performance-optimization"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "7d5b285b1ae34d0baff45882972da11500402774b171696b53b9a667b5b0c1f8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "playwright"
+path = "skills/individual/engineering/playwright"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "77d950bcdd49102a8148f4c274b6e408318f245cfe180a04717c811b8094178c"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "receiving-code-review"
+path = "skills/individual/engineering/receiving-code-review"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "50155eb4dfd846f5589c162a0d98c9a056a2d16e1b958ac9d98c94dcccf5d1ef"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "requesting-code-review"
+path = "skills/individual/engineering/requesting-code-review"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "89424832c7cb031b7dc169c8bf1bfffa449fd08af4efaaf16aba5a087e9f4f79"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "rust-performance"
+path = "skills/individual/engineering/rust-performance"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "bcf4a4a428d71c9145f7fe52feda5161721efef4fc7b448543b97ba61c7b255b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "skill-creator"
+path = "skills/individual/engineering/skill-creator"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "44351cb9b5d44254f1ca4cff196c09988b29f55626db677a6607eb2049ec5ea4"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "source-driven-development"
+path = "skills/individual/engineering/source-driven-development"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "24757097b12e6ecb7105d9bed04cd51922c543d1e2c63574807dadaa7e214101"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "systematic-debugging"
+path = "skills/individual/engineering/systematic-debugging"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "74cd8ddd839ef982a44a785860eb333fed880c1385c7ca379ce9a3d6e50dd41f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "test-driven-development"
+path = "skills/individual/engineering/test-driven-development"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "439aec7f387a5fb4c85bca71f19d1c1585a559c85e79aeed279e0ad79e5f28df"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "ts-performance"
+path = "skills/individual/engineering/ts-performance"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "b6eb6dbdae03ff16182239f3d749daace1c2c9cec91ea38a85e4706feb6aca4c"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "using-git-worktrees"
+path = "skills/individual/engineering/using-git-worktrees"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "a25f71bf8b30d53b6774edd0e3302861496e8b3e0cdf07c81814f941b6f8db70"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "using-superpowers"
+path = "skills/individual/engineering/using-superpowers"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "7521169d61e315f9cf0f1952e61a0ffd345bee1b4729c68d97029b111707f442"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "verification-before-completion"
+path = "skills/individual/engineering/verification-before-completion"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "9823d888436051b9deaaa601310ef66911067d36d7522816f7d7606ccffcb044"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "writing-plans"
+path = "skills/individual/engineering/writing-plans"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "21e72c6ba92a92052333f3a244ae49b9671d8559900bddf78e08bcf7a8292808"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "dfir-workflow"
+path = "skills/individual/research/dfir-workflow"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "86f0d0daeec7f71046e6fe0898521d9a283da51021278a79ab8c8837bb69e73f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "exa-search"
+path = "skills/individual/research/exa-search"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "bbe446166e20f025bb0c98a248bb2b17450dbd25d9698ab0d633e820aaaff177"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "firmware-analysis"
+path = "skills/individual/research/firmware-analysis"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "1c23f0e1d70850d4b4289114e7f0818ec722815352de2ea5803faef403f383ab"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "keenable-cli"
+path = "skills/individual/research/keenable-cli"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "5375022b74a1e1e9381cd105c1eb0ec0fc3dee013db15c90f5339e5c144455e2"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "repository-skills"
+path = "skills/individual/research/repository-skills"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "89da5a2cc1a34063816f8cfb7ba4e9891a9a5f2a4fe6b473d36e992da362be1a"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "reverse-engineering-workflow"
+path = "skills/individual/research/reverse-engineering-workflow"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "f695586599d517192316e7644140ed42e3ae03bbeeb674c09aa3c6f66b141542"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "search-core"
+path = "skills/individual/research/search-core"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "306b8fee01a3ed64b15af9f514e71d6aa0044a6496822fa7751d46b4b17657b1"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "source-index"
+path = "skills/individual/research/source-index"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "d3d8bb4dd1e04c58e69f93fa709331dfcf8449f0129c34d44c6658ecd82b8bd1"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "tavily-hikari-best-practices"
+path = "skills/individual/research/tavily-hikari-best-practices"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "9f3a8615326a3a5263d8f2a40e494476169dbf38736af16f1e6cb07b0e8ef200"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "tavily-hikari-cli"
+path = "skills/individual/research/tavily-hikari-cli"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "82785c3086eef77694e7afb7e1eeee324e9479096084628249cc02b70d06f94f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "tavily-hikari-extract"
+path = "skills/individual/research/tavily-hikari-extract"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "360bd340ca9f8850ff5e4d78f6edd2ce6692072005e6f3add7b7cd514ee5ef64"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "tavily-hikari-research"
+path = "skills/individual/research/tavily-hikari-research"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "e1c98b96118b8c8b0e08c1c068fc0ca373e973b0b318bc9185a87bb00466c94c"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "tavily-hikari-search"
+path = "skills/individual/research/tavily-hikari-search"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "bef224d7a7e93b1eb081ca73ccca2d4a52278695a002fe544248f2b64b4b71be"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "web-search-hikari"
+path = "skills/individual/research/web-search-hikari"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "21650bf789645ff28fa99bc1791c5d3809333033b8fa59167994f9c2e58e27c8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "authorized-analysis-scope"
+path = "skills/individual/security/authorized-analysis-scope"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "18d49f1888e012a9683f11a3abeabef90a525bfe5233b5f198f8bd5471ec745e"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "offensive-methodology"
+path = "skills/individual/security/offensive-methodology"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "61d777ee304504e79c705f5136743c2d340d56e2f7ab02f200bc316329d400ff"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "security-and-hardening"
+path = "skills/individual/security/security-and-hardening"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "2ba512487db7ab87709d5157c515c97fe59da4104d0508bda1de054f3fa1d63e"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "security-best-practices"
+path = "skills/individual/security/security-best-practices"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "651a567054b14fff0fa1907731748df43929bfdeaa8e15dfd7091a8d75040e92"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "security-ownership-map"
+path = "skills/individual/security/security-ownership-map"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "d7d746d49adb3fd54b1e7ddf4e783cf332bd6fe5f34411d97d046158b2ebd8f4"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "security-threat-model"
+path = "skills/individual/security/security-threat-model"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "b3fff791d4d0adf7663aecf1f477c7266f3c4e779144f332b461f0abe983feb3"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "security-workflow"
+path = "skills/individual/security/security-workflow"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "ad0a1550ad942f07a4cf17ca16c644b2226ad5911681a77946016d857a51460b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.design-library-creator"
+path = "skills/collections/vendors/trae/skills/design-library-creator"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260722::design-library-creator/0.0.2/package.zip"
+upstream_version = "0.0.2"
+upstream_commit = ""
+sha256 = "5fed6453cb19394718545924e60ea52bf88e3bb1ccdbb8e1110964f64d3499e7"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.digital-avatar-creator"
+path = "skills/collections/vendors/trae/skills/digital-avatar-creator"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::digital-avatar-creator/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "422f02ab8c224664a5cb78c8652c3db30a4af87b28132c3de63124edc1fde2a9"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.doc-writing-guide"
+path = "skills/collections/vendors/trae/skills/doc-writing-guide"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::doc-writing-guide/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "ced25179a44ca2b58e5324ab095804096979b268e649425b97e4f0d6ec1597e6"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.docx"
+path = "skills/collections/vendors/trae/skills/docx"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::docx/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "feeac8471f4113a22141542ffcb4da4d032a0408dc871e46b378b764f77710e8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.dynamic-ui"
+path = "skills/collections/vendors/trae/skills/dynamic-ui"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::dynamic-ui/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "b51c882abe2cb22f0a567086a02f2534d40a1a23ada34058d2f632fde1cc3b36"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.feedback"
+path = "skills/collections/vendors/trae/skills/feedback"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::feedback/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "a1ecda2c84cff5d384bb4c8e22f39bdc21088b490c459e75d62f375adbf8c1dd"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.html-deck"
+path = "skills/collections/vendors/trae/skills/html-deck"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::html-deck/0.0.8/package.zip"
+upstream_version = "0.0.8"
+upstream_commit = ""
+sha256 = "d12fffd044d64bc8c93dd956830ee8c9540e7ce7979667376147fdda6c77c05e"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.html-report"
+path = "skills/collections/vendors/trae/skills/html-report"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::html-report/0.0.3/package.zip"
+upstream_version = "0.0.3"
+upstream_commit = ""
+sha256 = "10017f684735b207c0a467fa714034bc9968a22a5ce58648db30e9233f49e5f9"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.pdf"
+path = "skills/collections/vendors/trae/skills/pdf"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::pdf/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "60b69304da6b4681465f54a5b00e5cbabfa390c9152ccd6f7f5bd27b3c67be8d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.pptx"
+path = "skills/collections/vendors/trae/skills/pptx"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::minimax_m3::prod_20260203::pptx/0.0.3/package.zip"
+upstream_version = "0.0.3"
+upstream_commit = ""
+sha256 = "c266816e10234cb1a0165ac87c4db424faa5b060aeca27ddfc0cea9b15b8b9f1"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.research-guide"
+path = "skills/collections/vendors/trae/skills/research-guide"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::research-guide/0.0.4/package.zip"
+upstream_version = "0.0.4"
+upstream_commit = ""
+sha256 = "2ae15688792dc44a422bad67bf3bfd02646989d9fa0fd1f1840ea50718010afe"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.skill-creator"
+path = "skills/collections/vendors/trae/skills/skill-creator"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::skill-creator/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "9594981090d08f87949989fe5b8a0e6033dd6377c37a6ce7fdf0c14976928b1b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.solo-design"
+path = "skills/collections/vendors/trae/skills/solo-design"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-design/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "cc8014c42c4d0559af5e93913803c0d3bb2f3a3019f6b9323b5b974e9b2d1b5f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.solo-graphic-generation"
+path = "skills/collections/vendors/trae/skills/solo-graphic-generation"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-graphic-generation/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "57f0d3af7b3cabb3aae7d2ca1baa458d1a796c30cc4c9f76ed12413b37e4f3f9"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.solo-image-edit"
+path = "skills/collections/vendors/trae/skills/solo-image-edit"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-image-edit/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "f9293ad4b289e0c9d1d8478bacb159b7392e9b4731214fca404f359ca4536e46"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-browseruse"
+path = "skills/collections/vendors/trae/skills/TRAE-browseruse"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-browseruse/0.0.6/package.zip"
+upstream_version = "0.0.6"
+upstream_commit = ""
+sha256 = "5d85be96a9c9eab8d52583ba9160f961cddf5d5b9b943b48cd00e7e8d5d7e4e6"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-browseruse-external"
+path = "skills/collections/vendors/trae/skills/TRAE-browseruse-external"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-browseruse-external/0.0.6/package.zip"
+upstream_version = "0.0.6"
+upstream_commit = ""
+sha256 = "331b2f3c7a855c2549c6f03aefee5ac55818d2aa0c5d9689c3fa9e7a2f12a75c"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-code-mode-orchestrator"
+path = "skills/collections/vendors/trae/skills/TRAE-code-mode-orchestrator"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-code-mode-orchestrator/0.0.2/package.zip"
+upstream_version = "0.0.2"
+upstream_commit = ""
+sha256 = "685c9ec06b8e1767a1a2492176bd6c7264fdc2c542b2603fdf650087db9ee169"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-computer-use"
+path = "skills/collections/vendors/trae/skills/TRAE-computer-use"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-computer-use/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "624d92388f67a58981e2b8df8fca7714456923855b6d10a35b032fc394272e8a"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-computer-use-ptc"
+path = "skills/collections/vendors/trae/skills/TRAE-computer-use-ptc"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609_kimi_windows::TRAE-computer-use-ptc/0.0.11/package.zip"
+upstream_version = "0.0.11"
+upstream_commit = ""
+sha256 = "d7b905f8bc0ad8a4ccabdfa4351ea058afdca5d2aba61fe28dd839416c90f5ab"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-doctor"
+path = "skills/collections/vendors/trae/skills/TRAE-doctor"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1/trae_agent::default::prod_20260609::TRAE-doctor/0.0.4/package.zip"
+upstream_version = "0.0.4"
+upstream_commit = ""
+sha256 = "15f12b63da9235a39d028d29445ef1e2392d381bb5afbf6b2f43a263358ff333"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.trae-product-knowledge"
+path = "skills/collections/vendors/trae/skills/TRAE-product-knowledge"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-product-knowledge/0.0.2/package.zip"
+upstream_version = "0.0.2"
+upstream_commit = ""
+sha256 = "111b69febfad93ff0b0597f0852e376532b410e4ca38b1edf45e9e7bcef56222"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "trae.xlsx"
+path = "skills/collections/vendors/trae/skills/xlsx"
+source_url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::xlsx/0.0.1/package.zip"
+upstream_version = "0.0.1"
+upstream_commit = ""
+sha256 = "2e46caf862b16c60313f35e406cb79af7dbd13749133c1ba483ee3bc1f91f77f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.sheetagent.skills.excel-generation"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-generation"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "7ee07c636002f1da8edb3b4733cea5d13309cf43cddb1665a2fd154b12606985"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.sheetagent.skills.excel-handler"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-handler"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "097415cf58ec111cf85bd54cce8825815c01aa14a721ade66fa7f40e6b876aa7"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docs-plugin.skills.tencent-docs"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docs-plugin/skills/tencent-docs"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "0ef9e6848bc4962b47225c9d560454d2944fcd22784cb75b2565295d5062bc5b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docs-plugin.skills.tencent-saas-docs"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docs-plugin/skills/tencent-saas-docs"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "b3ad546d253ddb85f6bafe17fda6f26cef6973c40bac298f9167d22271b2e8d6"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.academic-paper-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/academic-paper-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "2d6df82192b5e0923308c49feeea89864db6550573f7b5034ba4edd3a832001b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.business-copy-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/business-copy-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "dae52d541b7b0bf0c79b8e181c9862f1a8faf4d961a10a60ec4547848bef0730"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.general-writer"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/general-writer"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "1242e7c652fa8571d5252aa65ce558fdc96c57c82b870a10515b372635a0bb1f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.legal-contract-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/legal-contract-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "c2203450fae4fd493e9e69b65cf143ea6086fe099f1b858c347b2234fca2905a"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.poetry-prose-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/poetry-prose-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "721edd5f0ceca4b2f8322dedb37a6e557e3b8544280a3627f2c7b4eac1682fd0"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.science-writing-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/science-writing-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "505e7063dbe31eacd2a0f495bb3c55048af0a7eead2cb620116a6e8b90b06cf6"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.stock-research-report-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/stock-research-report-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "a3610db0a260e0b9d2b959e9e8dbc6f093a833cb8ce5a29273fd1765ab127e13"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.tech-blog-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/tech-blog-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "d180d90038040b9786760ddce2d0848db5a3b513d5f5d8ac17ee120b7c1c8de0"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.experts.work-report-expert"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/work-report-expert"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "37cfa805e91741d72a9fa975c38220f209a26cb8ee56a64134c3106324bacc9b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "1cda176dbf3ef2f5bac8ae7b520d9045fafee1b3361401785bd684a00fd72897"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.brief-compose"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/brief-compose"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "2d28074c20353f0a5edd42ee060eb2364197844bff6d22ec5933b9abd0873a3a"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.design-token"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/design-token"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "ada0a837d68e0ca5d5474d4ffdfa7bc2c6f53ae2ac569bc7899e33781c5d3077"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.doc-typeset"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/doc-typeset"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "2238131759b52974821e17509c1201c8c5b53a9b7a558ff47e5afb163fc3dc80"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.format-extract"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/format-extract"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "0b4e5b076d3c406e39ab1e2917fd3234dd330aef0ee8f58d624911081b9b28cf"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.generate-fillable-contract-html"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/generate-fillable-contract-html"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "8155227bba121888407c9b6d4d6387e5fe9e92aae3103a6e6edb873de3206a50"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.html-review"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-review"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "aeb7eabe43174b26104bf07efbdd1e836fa1dcfcb0eafc602e887a117da7e4d8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.html-to-docx"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-to-docx"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "274d6b70a34f8d8a55297fb48bd0a505c1fc19c149700e6cd346bacff4ca7be9"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docx.skills.tdoc-orchestrator"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/tdoc-orchestrator"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "96f901efebced8f0c608cd80b8128dea99282240698f636e6becfca7cca24b19"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-pptx.skills.tencent-pptx"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-pptx/skills/tencent-pptx"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "672a9d8490033942e1e6106ccee6c7d967e4215f17cf40f9c42f25bfd9bf241d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.weixinpay.skills.weixinpay-feedback"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-feedback"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "fcbd17badcbb63b07ecfbb2569827470c9cc646f614442e57b3573b7a4b4a4a8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.weixinpay.skills.weixinpay-pay"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-pay"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "12221d12f2567006f2748eea50298e1399d18acb378f563670ec30450a996afc"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.weixinpay.skills.weixinpay-register"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-register"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "070ce061cbc742ba9e3f1762fed550f448dde714af2479815daec95fb44cac85"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.component-instance"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/component-instance"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "8778d6ea72ec85c557043b92d20c4b8b0195b0fa3d49938fc1a35f5ffd0d6735"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.design-variables"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/design-variables"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "b87e3ae509600b2f8773910683c6ce5dbbe06e2f9bcb1ba4ec28a55a448eed67"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.shared-styles"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/shared-styles"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "dad83240c2ca8b62a281b5bd0b247cf4704d911d774b97ad97f24e979139e2d3"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.ardot-design-core"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "afc5d8964a6fe03a30d17fe1536ddd1fa462d1cfa4d057e58342f5c715358eda"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.ardot-design-router"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-router"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "7545d61143cca2b927357f7e009510ce98a3935667850e7c97d743147e24c14d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.ardot-design-to-code"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-to-code"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "85c0937ce6814c40a868c6b8ab1f5c985655a4846a64049295c338a9fe64b710"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.ardot-poster"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-poster"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "eaf50818a844c450727c451a7e4098a456d2aed3a03cfd150bd0d7d48970401d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.ardot-slides"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-slides"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "b72129525d6c7f3e8e58e3528ad28c79137cab47e3d521680efe8ab8fcf56e40"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.ardot-ui-design"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-ui-design"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "1170bd87e009c6fd1676baa8324285ac6343bc1d9959d324e2e602c68e63877d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.buddy-multimodal-generation"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/buddy-multimodal-generation"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "538ffab26829f126344c4e3185510f72c7356b4022fe6157549a35fc0943f95a"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.expert-manager"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/expert-manager"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "0bcf55f9d219728b44b53fa62c5bde7e4dc96e3ea0b026f01c0a137eb9c6eb96"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.geo-map-compliance-guard"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/geo-map-compliance-guard"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "9275aeef3c5652fb8b387be7e96fec6107a2615dea5dc805278b0bea6ab4cfd8"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.library"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/library"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "b6fcc402667150b8e17e3542109e9f7e8c83177ef6fcbce54773a0ea63274a49"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.livestream-poster"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/livestream-poster"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "857a616bdb9d9d58629d243e783b06a4976220123c97aaa3672734d9e23bc284"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.marketplace-skill-installer"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/marketplace-skill-installer"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "9368890bdb9a3ca0a7c99d1ed2ca2cb9ae3a690bf5ffe0f3d5c1051b7d0c7364"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.recommend-connectors"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-connectors"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "325f043632b3702dd2338f586d63ba7430dfd01ac929a0d10a941d83bb15e9c9"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.recommend-experts"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-experts"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "259c4d9f367b85c62c0e8b7e1eae319f64b0265919d5e2023d03904cce16e21f"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.sites"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/sites"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "160889958ab24025867c2b1cb299fad86d4188db592b120bb6baa37bc83b8113"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.skill-creator"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/skill-creator"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "9299284dd38694b806ca1ef34adf56d79e523662b2c236a23c808db021c2fd26"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-docs-routing"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-docs-routing"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "9a8c8486c012c9951d32dc29b37f8389c242f922fcf0319abb3c31a279140c22"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.tencent-local-office-edit"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-local-office-edit"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "7c994fb7792e8cb3b7f2c791329c5d13fd8c32722f609d716c4b8f5f455dcc4b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "workbuddy.wb-finance-skill"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/wb-finance-skill"
+source_url = ""
+upstream_version = "5.4.2"
+upstream_commit = ""
+sha256 = "76de226b5ec3629851cd73dc99af2ef5e2a4028d80d04b469c1f570935787128"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false

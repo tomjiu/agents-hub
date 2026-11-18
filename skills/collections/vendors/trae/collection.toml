@@ -1,0 +1,9 @@
+id = "trae"
+kind = "collection"
+source = "trae-cdn"
+manifest = "MANIFEST.json"
+license = "vendor-restricted"
+default_enabled = false
+discovery = "restricted"
+assets = [ "trae.design-library-creator", "trae.digital-avatar-creator", "trae.doc-writing-guide", "trae.docx", "trae.dynamic-ui", "trae.feedback", "trae.html-deck", "trae.html-report", "trae.pdf", "trae.pptx", "trae.research-guide", "trae.skill-creator", "trae.solo-design", "trae.solo-graphic-generation", "trae.solo-image-edit", "trae.trae-browseruse", "trae.trae-browseruse-external", "trae.trae-code-mode-orchestrator", "trae.trae-computer-use", "trae.trae-computer-use-ptc", "trae.trae-doctor", "trae.trae-product-knowledge", "trae.xlsx" ]
+

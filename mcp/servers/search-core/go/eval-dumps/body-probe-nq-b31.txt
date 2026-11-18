@@ -1,0 +1,312 @@
+
+[D1/deep] Q: how are leaders of the two parties in congress chosen
+  ans=[Senate Republican Conference; Senate Democratic Caucus]
+  r1 HTTP403 70ms 0B 
+    [FREE] How are the leaders of the two parties in Congress chosen? A. M
+    
+  r2 OK 580ms 16474B => verbatim ans="Senate Republican Conference" rel=0/4
+    Party Leaders in Congress: An Overview
+    CTX: goals: Keep control of the seats they already have and win seats they don’t yet have. Likewise, the Senate Republican Conference rules stipulate that the following positions are elective: Floor Leader Assistant Floor Leader (also called the
+  r3 HTTP403 40ms 0B 
+    How Are Each Congressional Party's Leaders Chosen?
+    
+
+[D2/nogold] Q: 1 the bureau of land management manages over acres of land in the united states
+  ans=[247.3 million]
+  r1 HTTP403 147ms 0B 
+    Bureau of Land Management
+    
+  r2 HTTP403 136ms 0B 
+    Public lands in the United States
+    
+  r3 OK 2406ms 29667B 
+    Approach of the Bureau of Land Management | National Ecosystem Service
+    
+
+[D1/nogold] Q: today gestalt psychology ideas are part of which branch of psychology
+  ans=[Berlin School of experimental psychology; experimental psychology]
+  r1 HTTP403 28ms 0B 
+    Gestalt psychology ideas are part of which branch of psychology?
+    
+  r2 OK 678ms 272641B => verbatim ans="experimental psychology" rel=1/6
+    A century of Gestalt psychology in visual perception: I. Perceptual gr
+    CTX: I. Perceptual Grouping and Figure-Ground Organization Johan Wagemans Johan Wagemans 1 Laboratory of Experimental Psychology, University of Leuven (KU Leuven), Belgium and Institute of Advanced Studies (IEA-Paris), France Find articles by Jo
+  r3 HTTP403 88ms 0B 
+    Gestalt Psychology
+    
+
+[D2/nogold] Q: what information is displayed in clear text from the ftp header
+  ans=[all transmissions]
+  r1 HTTP403 13ms 0B 
+    [FREE] What information is displayed in clear text from the FTP header
+    
+  r2 HTTP404 795ms 0B 
+    C Under the Gui Tab on the Left, Click the Pr Hp Packet Available to .
+    
+  r3 OK 860ms 0B 
+    PDF Packet Tracer - Communicating in a Cyber World
+    
+
+[D2/nogold] Q: when did drop it like it's hot release
+  ans=[September 12, 2004]
+  r1 HTTP403 130ms 0B 
+    Drop It Like It's Hot
+    
+  r2 OK 177ms 8041B 
+    Drop It Like It's Hot Release Date: How 2004 Changed Hip-Hop Forever
+    
+  r3 HTTP403 47ms 0B 
+    When did Snoop Dogg release "Drop It Like It's Hot"? - Genius
+    
+
+[ERR/deep] Q: when was the term social justice first used
+  ans=[the 1840s; 1840s]
+  r1 HTTP403 61ms 0B 
+    The term social justice was first used in the year: - Prepp
+    
+  r2 HTTP403 133ms 0B 
+    Social justice warrior - Wikipedia
+    
+  r3 HTTP403 44ms 0B 
+    Social justice
+    
+
+[D1/nogold] Q: where do the events in the story take place geographically
+  ans=[Persia]
+  r1 OK 957ms 20363B => verbatim ans="Persia" rel=0/5
+    4.8: Setting - Humanities LibreTexts
+    CTX: o his elegant room, hung with fine dark-grey wallpaper and decorated with guns fixed on a colourful Persian rug, with walnut furniture upholstered in dark-green velveteen, a Renaissance-style bookcase in old dark oak, bronze s
+  r2 OK 1058ms 3422B 
+    Where and when does the story take place - Sorumatik
+    
+  r3 HTTP403 46ms 0B 
+    World of  A Song of Ice and Fire
+    
+
+[D2/nogold] Q: where is hallmark channel home and family filmed
+  ans=[Los Angeles, California]
+  r1 HTTP403 49ms 0B 
+    Home & Family
+    
+  r2 OK 186ms 9596B 
+    Whatever Happened to the Home and Family Show Hallmark Channel Fans Lo
+    
+  r3 OK 1029ms 13160B 
+    home and family tv show
+    
+
+[ERR/nogold] Q: who is the current director of the us mint
+  ans=[David J. Ryder; David Motl]
+  r1 HTTP403 44ms 0B 
+    Director of the United States Mint
+    
+  r2 HTTP403 48ms 0B 
+    Paul Hollis Confirmed as 41st Director of the United States Mint
+    
+  r3 HTTP403 35ms 0B 
+    Paul Hollis
+    
+
+[D2/nogold] Q: what is the angle of the tower of pisa
+  ans=[about 3.99 degrees; 3.99 degrees; at about 3.99 degrees]
+  r1 HTTP403 45ms 0B 
+    Leaning Tower of Pisa
+    
+  r2 OK 898ms 51B 
+    Lean Angle of the Tower of Pisa Explained
+    
+  r3 HTTP403 31ms 0B 
+    Leaning Tower of Pisa: Visitor's Guide 2026 | VisitPisa.com
+    
+
+[D1/nogold] Q: what is the process to become a santero
+  ans=[a cleansing ritual; making Ochá (Saint)]
+  r1 HTTP403 49ms 0B 
+    Initiation in Santería - Wikipedia
+    
+  r2 OK 968ms 9180B => tokenAND ans="a cleansing ritual" rel=0/3
+    Initiation in Santeria - OrishaNet
+    CTX:  the person to move forward in their lives, often in specific ways and impart the ach&eacute; or spiritual power of the Orishas into your life. There are a number of levels of initiation, and the knowledge you gain deepens as well as the co
+  r3 OK 3340ms 19700B 
+    What is the Kari Osha? Become a Saint ritual of the Yoruba Religion
+    
+
+[D2/nogold] Q: when does the eclipse end in the us
+  ans=[2:44 p.m. EDT]
+  r1 HTTP403 44ms 0B 
+    Solar eclipse of August 21, 2017
+    
+  r2 OK 2413ms 8568B 
+    When Does Eclipse Season End: Complete Guide - InnerHunches
+    
+  r3 HTTP403 31ms 0B 
+    Eclipses in the United States - timeanddate.com
+    
+
+[ERR/deep] Q: when was the first documented case of tool mark identification
+  ans=[1835]
+  r1 HTTP403 38ms 0B 
+    Analysis Of Tool Marks.pptx - Analysis Of Tool Marks Tanya...
+    
+  r2 HTTP403 35ms 0B 
+    Forensic Firearm Identification: History, Types, and Tool Mark Analysi
+    
+  r3 HTTP403 34ms 0B 
+    The Birth of Forensics: A Case of Tool Mark Identification
+    
+
+[D2/nogold] Q: who discovered one of the first taxonomic classification schemes
+  ans=[Swedish botanist Carl Linnaeus]
+  r1 HTTP403 202ms 0B 
+    De Candolle system - Wikipedia
+    
+  r2 OK 241ms 131B 
+    There shall be order. The legacy of Linnaeus in the age of molecular b
+    
+  r3 OK 986ms 9405B 
+    First taxonomic classification of Gaia DR3 asteroid reflectance spectr
+    
+
+[D2/nogold] Q: who has won the most games in nfl 2017
+  ans=[Dallas Cowboys]
+  r1 OK 1038ms 10647B 
+    Who Has Won The Most Games In NFL 2017? - sportsdaynow.com
+    
+  r2 HTTP403 35ms 0B 
+    Who Has Won The Most Games In Nfl 2017 - topsportsjerseys.com
+    
+  r3 OK 1295ms 6079B 
+    Which NFL Team Has Won The Most Regular Season Games Since 2017 | Stat
+    
+
+[D2/nogold] Q: who is the longest serving chief minister in india as on jan 2015
+  ans=[Jyotirindra Basu]
+  r1 HTTP403 124ms 0B 
+    List of longest-serving Indian chief ministers
+    
+  r2 HTTP403 49ms 0B 
+    Chief minister (India)
+    
+  r3 OK 871ms 10467B 
+    List of longest-serving Indian chief ministers
+    
+
+[ERR/nogold] Q: whos jack the ripper in gotham by gaslight
+  ans=[Jacob Packer]
+  r1 HTTP403 47ms 0B 
+    Gotham by Gaslight
+    
+  r2 HTTP403 44ms 0B 
+    Scott Patterson
+    
+  r3 HTTP403 49ms 0B 
+    List of DC Comics characters: R
+    
+
+[D2/nogold] Q: what caused the breakup of the democratic republican party
+  ans=[the disputed 1824 presidential election]
+  r1 OK 2296ms 11942B 
+    Political Division: The Breakup of the Democratic-Republican Party
+    
+  r2 OK 113ms 11438B 
+    Election of 1824 | Encyclopedia.com
+    
+  r3 HTTP403 46ms 0B 
+    Sixth Party System
+    
+
+[D2/nogold] Q: what is the ultimate objective of financial management
+  ans=[Profit maximization]
+  r1 OK 154ms 29926B 
+    Financial Management Explained: Scope, Objectives, and Importance
+    
+  r2 HTTP403 44ms 0B 
+    Financial management
+    
+  r3 OK 525ms 209B 
+    The Business Objective and Financial Management
+    
+
+[ERR/nogold] Q: who are the stars in dancing with the stars
+  ans=[Jennie Finch Daigle; Jamie Anderson; Arike Ogunbowale; Mirai Nagasu; A]
+  r1 HTTP403 318ms 0B 
+    'Dancing with the Stars' 2026 cast revealed – See who's competing in S
+    
+  r2 HTTP403 44ms 0B 
+    Dancing with the Stars
+    
+  r3 HTTP403 77ms 0B 
+    Meet the Dancing with the Stars Season 35 Cast and Their Pro Partners
+    
+
+[D2/nogold] Q: who is credited with creating the gothic art movement
+  ans=[Abbot Suger]
+  r1 OK 771ms 78B 
+    Gothic art
+    
+  r2 HTTP403 53ms 0B 
+    Gothic art
+    
+  r3 HTTP403 121ms 0B 
+    Gothic art
+    
+
+[D2/nogold] Q: who was the 19th c. artist who was both painter and graphic designer
+  ans=[René Georges Hermann-Paul]
+  r1 OK 539ms 1502B 
+    Who was the 19th c. artist who was both painter and graphic designer .
+    
+  r2 HTTP403 42ms 0B 
+    Who was the 19th c. artist who was both painter and graphic designer .
+    
+  r3 HTTP403 40ms 0B 
+    Art History Unit 11 Study Guide: Key Concepts and Terms
+    
+
+[D1/nogold] Q: when are the next commonwealth games going to be held
+  ans=[2022]
+  r1 OK 2887ms 7310B => verbatim ans="2022" rel=2/5
+    Glasgow Commonwealth Games 2026: Latest News, Interviews and Update
+    CTX: , Newfoundland, New Zealand, Scotland, South Africa, and Wales. (Image: Aaron Chown/PA Wire) At the 2022 Commonwealth Games in Birmingham, a total of 72 countries and territories participated. Commonwealth Games 2026 Sport S
+  r2 HTTP403 1289ms 0B 
+    Where is the next Commonwealth Games? Here's who Glasgow will hand the
+    
+  r3 HTTP429 44ms 0B 
+    2026 Commonwealth Games
+    
+
+[D2/deep] Q: when was the last time the vikings made the superbowl
+  ans=[in the 1970s]
+  r1 OK 443ms 8614B 
+    Vikings Super Bowl history: When is the last time Minnesota made it to
+    
+  r2 OK 565ms 3245B 
+    How Many Times Have the Vikings Gone to the Super Bowl?
+    
+  r3 OK 768ms 4209B 
+    The Last Time the Minnesota Vikings Were in a Super Bowl…
+    
+
+[D1/nogold] Q: who has become the new chairman of sebi
+  ans=[Ajay Tyagi]
+  r1 OK 866ms 14417B 
+    Tuhin Kanta Pandey Takes Charge as SEBI Chairman
+    
+  r2 OK 11675ms 47407B => verbatim ans="Ajay Tyagi" rel=0/4
+    Tuhin Kanta Pandey appointed as new SEBI Chairman
+    CTX: e-year term, making history as the first woman to lead the capital markets watchdog. Buch succeeded Ajay Tyagi, an IAS officer, who had completed a five-year tenure, including a two-year extension. Tyagi had earlier held crucial r
+  r3 OK 208ms 23107B 
+    Sebi new chairman Tuhin Kanta Pandey takes charge, says goal to make .
+    
+
+[D1/nogold] Q: who played tibbs on in the heat of the night
+  ans=[Howard Ellsworth Rollins Jr.]
+  r1 HTTP403 49ms 0B 
+    In the Heat of the Night (film)
+    
+  r2 OK 186ms 4065B 
+    In the Heat of the Night (1967) | Classics Authority
+    
+  r3 OK 24ms 13962B => tokenAND ans="Howard Ellsworth Rollins Jr." rel=0/4
+    Rollins, Howard E. Jr. 1950-1996 | Encyclopedia.com
+    CTX: nal References Articles Daily College & Higher Education Pathways News wires white papers and books Rollins, Howard E. Jr. 1950–1996 Rollins, Howard E. Jr. 1950–1996 gale views updated Howard E. Rollins, Jr. 1950 &#x2013; 1996 Actor Began C

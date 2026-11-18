@@ -1,0 +1,21 @@
+id = "workbuddy.skill-creator"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/skill-creator"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "9299284dd38694b806ca1ef34adf56d79e523662b2c236a23c808db021c2fd26"
+local_modified = "unknown"
+enabled = false

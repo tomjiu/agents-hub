@@ -1,0 +1,5 @@
+name = "reverse-engineering"
+extends = [ "core" ]
+skills = [ "reverse-engineering-workflow", "firmware-analysis", "dfir-workflow", "authorized-analysis-scope" ]
+mcp = []
+plugins = []

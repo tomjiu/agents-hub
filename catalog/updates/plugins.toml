@@ -1,0 +1,14 @@
+schema = 1
+kind = "plugins"
+
+[defaults]
+check = true
+download = true
+apply = false
+
+[protection]
+overwrite = false
+auto_merge = false
+preserve_local_changes = true
+require_validation = true
+require_approval = true

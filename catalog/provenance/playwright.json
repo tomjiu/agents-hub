@@ -1,0 +1,51 @@
+{
+  "sha256": "77d950bcdd49102a8148f4c274b6e408318f245cfe180a04717c811b8094178c",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 11552,
+      "sha256": "9a7110fc2d2f964038e5dc49128f908f29f47a574c961cba16085914e879cbda"
+    },
+    {
+      "path": "NOTICE.txt",
+      "bytes": 417,
+      "sha256": "a43ad22fc7381a9901c88798479a0617b8397581c67847401d1971f8738d3e03"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 3918,
+      "sha256": "c52cc95125b720cdc3c9829b0294c2752d4ae9b85a5282aa153da8bba929af87"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 319,
+      "sha256": "dfc22e6c764f025e5e520fe2e1781e119f6262f406feddafe84ff8aaf9a4ff21"
+    },
+    {
+      "path": "assets/playwright-small.svg",
+      "bytes": 831,
+      "sha256": "5ecfaf38d817a6abbc453114191cc9afb3f0799a557dae1c2c1a1445c8a7b386"
+    },
+    {
+      "path": "assets/playwright.png",
+      "bytes": 1730,
+      "sha256": "521669f088c838196c6c852ccc9abdd7234d8f37fc9a8a7a9af7db2d50193381"
+    },
+    {
+      "path": "references/cli.md",
+      "bytes": 1979,
+      "sha256": "da94ffe5a7c368e233eac1cdfa2d5207cb85a2a0571607af0e43402c6e12cd45"
+    },
+    {
+      "path": "references/workflows.md",
+      "bytes": 1959,
+      "sha256": "621d2b8542a91d1d5cd65a5a7774ea250683e4c217e00e9c90d301eb6367d86e"
+    },
+    {
+      "path": "scripts/playwright_cli.sh",
+      "bytes": 551,
+      "sha256": "3fce0ea2b9875179f701d9f4c03425545c441b2769cd6c6df964cc7d1d1dbfa8"
+    }
+  ],
+  "bytes": 23256
+}

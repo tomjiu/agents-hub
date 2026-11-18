@@ -1,0 +1,61 @@
+{
+  "sha256": "d180d90038040b9786760ddce2d0848db5a3b513d5f5d8ac17ee120b7c1c8de0",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 4504,
+      "sha256": "5987d572cdc34d20e15b40c64530f6d915bc551c9766042a5be5383311725cb8"
+    },
+    {
+      "path": "references/anti-patterns.md",
+      "bytes": 2852,
+      "sha256": "046e7ff5346bc520b44f15aaccc8f4e9cb3f38c722499aa1356c5748de82832a"
+    },
+    {
+      "path": "references/arch-design.md",
+      "bytes": 2862,
+      "sha256": "f6d1b24040cd8d0fa92f63e3ac1e64899195ae79c300e84d38396820b345b866"
+    },
+    {
+      "path": "references/article-diagnosis.md",
+      "bytes": 2431,
+      "sha256": "fb595769b9468c39c7fa0d93d874fa6b46c245c27bf4e8cc645692483d169ca1"
+    },
+    {
+      "path": "references/examples/article-comparison.md",
+      "bytes": 3434,
+      "sha256": "0323c7fec87874dea87cd3a031d8e33774fe42211d702483590ecb739d34ca9d"
+    },
+    {
+      "path": "references/examples/article-deep-dive.md",
+      "bytes": 4401,
+      "sha256": "e04d5a04825eca780200b71c189642a21aab0f1be3a0ed0997cf04d872377cfc"
+    },
+    {
+      "path": "references/examples/article-experience.md",
+      "bytes": 3913,
+      "sha256": "45184c0167c3da2c5eee592ad06e6887cfaf4d1e805ed32a383e2ecc7aba3b3a"
+    },
+    {
+      "path": "references/examples/index.md",
+      "bytes": 1077,
+      "sha256": "7c69bc0f108297e1a6c93dda7b3032ccac934b5f532470ba5af8a02b898684b1"
+    },
+    {
+      "path": "references/project-docs.md",
+      "bytes": 2263,
+      "sha256": "ede4982f844544da7ceb07d0d68afa256d9903d0c08afefad6e7d1df93bdf8a1"
+    },
+    {
+      "path": "references/tech-article.md",
+      "bytes": 4188,
+      "sha256": "329b509433ef088f57a7cdb22bc9e7ed80150eb91fad7be6ad9e780a4b362dd5"
+    },
+    {
+      "path": "references/tech-tutorial.md",
+      "bytes": 3198,
+      "sha256": "1c1f33b48176ca457de1899a2492d8963247a601a49a9973898dab89f42abade"
+    }
+  ],
+  "bytes": 35123
+}

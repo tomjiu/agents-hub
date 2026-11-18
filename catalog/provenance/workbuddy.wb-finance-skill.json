@@ -1,0 +1,326 @@
+{
+  "sha256": "76de226b5ec3629851cd73dc99af2ef5e2a4028d80d04b469c1f570935787128",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 517,
+      "sha256": "956b2196539575db6cd0463b7a3b52ff22e4cd783ff59bc14c7b153816ec881f"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 26346,
+      "sha256": "a0441f732c75c1e6db49a21e3a0f840e261172cdb2721c64d8c7bc04bb59c41e"
+    },
+    {
+      "path": "references/abnormal-detection.md",
+      "bytes": 3180,
+      "sha256": "6dcd3620fae78c0da28d26b65406dd3b5c96c499178c5bbe7150068fb0554b62"
+    },
+    {
+      "path": "references/announcement-impact.md",
+      "bytes": 2454,
+      "sha256": "79144ffae894f9cf2fb4bcb55ea409cd7eaf0afb426a11fff0cdf1a215b78b3c"
+    },
+    {
+      "path": "references/breakout-patterns.md",
+      "bytes": 3789,
+      "sha256": "f5eb235669966b64fa202ec0d1aff5837b758a2e15b265e2b8ad84a37297a824"
+    },
+    {
+      "path": "references/business-model.md",
+      "bytes": 2294,
+      "sha256": "eaabf5cae44d16aae9ef404a076fbb2763f0b598d6cdd282aaac7e5d269667b9"
+    },
+    {
+      "path": "references/crisis-event.md",
+      "bytes": 4012,
+      "sha256": "2d1ddf68411a662e55d55cbe1231e862abc0d74d822f1bedf354c0490a3f2c93"
+    },
+    {
+      "path": "references/crypto-derivatives.md",
+      "bytes": 3570,
+      "sha256": "12a71bba9fbf370c09e78424109c5d24940db66a977374553cd5dbed2bfa4262"
+    },
+    {
+      "path": "references/daily-briefing.md",
+      "bytes": 7480,
+      "sha256": "9094bd83093742b45a35eeba5f050d09e119ce73f91f81281befad9a2025e17e"
+    },
+    {
+      "path": "references/dividend-buyback.md",
+      "bytes": 3288,
+      "sha256": "18964a5f19e6afbc0151e179b1905ef70d73ed97ac5fe85fdef1c778c5f1f928"
+    },
+    {
+      "path": "references/earnings-preview.md",
+      "bytes": 2324,
+      "sha256": "52e742dcba5a088a9d482cdf3364fa22c634ff80278ef2a4c6ccff0f728d6366"
+    },
+    {
+      "path": "references/earnings-review.md",
+      "bytes": 2845,
+      "sha256": "2bbc827e0f1131553f9aa9478bef61eb6222e5af98105d0cef701e7365a7ff5c"
+    },
+    {
+      "path": "references/event-catalyst.md",
+      "bytes": 2408,
+      "sha256": "164dc1ea606a68054d6284b59a1a912d1f057dcb9b252c4b8226dc24b9df13ca"
+    },
+    {
+      "path": "references/fixed-income.md",
+      "bytes": 3592,
+      "sha256": "b8ef772adbd5772c2dab84cb77ac28e8717ced00ed4a966f4dd492693d7e21f3"
+    },
+    {
+      "path": "references/forex-commodity.md",
+      "bytes": 3447,
+      "sha256": "1e017d9b93cf66d5ffbb16ace11b68559770eff6e092d7560b0f42f4a1e812f0"
+    },
+    {
+      "path": "references/fund-flow.md",
+      "bytes": 2000,
+      "sha256": "af694a3de3baf6738ce32f1042f699474db78c5de1c6c85ed9ad050c44c45939"
+    },
+    {
+      "path": "references/going-global.md",
+      "bytes": 3665,
+      "sha256": "ba1c247dc3bd75d767cf63c5825b723093a8b810c2eb19315bae9eafc731944c"
+    },
+    {
+      "path": "references/html-report-style.md",
+      "bytes": 6251,
+      "sha256": "a2eb9fa77d1c5b2a4236243a872638e7f1ee7f9b3627338000780fd9e5e015d7"
+    },
+    {
+      "path": "references/ib-deal-prep.md",
+      "bytes": 5502,
+      "sha256": "2ba85008db2a0d82289490b9815c7d9edd55e8ee331f50efaa1502196d30366d"
+    },
+    {
+      "path": "references/ib-models.md",
+      "bytes": 5517,
+      "sha256": "55d68188f2b9077de898649f3c5621ec998212335b7e8fbb06749263b2bc8766"
+    },
+    {
+      "path": "references/industry-chain.md",
+      "bytes": 2507,
+      "sha256": "b9972a734be7d37af6ebf33ac8a55e92210b2c6c99e815949b0c3ed56218dbcd"
+    },
+    {
+      "path": "references/institutional-holding.md",
+      "bytes": 2097,
+      "sha256": "8151986f96f01b7b0c51a1b477bfc7e52a7ac1e259ede6a5329f173761153c46"
+    },
+    {
+      "path": "references/leader-game.md",
+      "bytes": 2363,
+      "sha256": "e644b76c2fa50879ba9f2d6a59bfc711f74e585b7351fe5ce5dec785374b84b0"
+    },
+    {
+      "path": "references/macro-transmission.md",
+      "bytes": 2318,
+      "sha256": "3eac041e5621ac1667bf3990cbb569485efc3ebca805012a55c96819f5e76112"
+    },
+    {
+      "path": "references/management-assessment.md",
+      "bytes": 2052,
+      "sha256": "0e18022665374d8f3bcd931ccb6d097db50c133b3676bc070e9df87c7cf739d1"
+    },
+    {
+      "path": "references/market-mainline.md",
+      "bytes": 2292,
+      "sha256": "996f9d2f8f1fac34447a72ba6cfe502a00c9ba8e795278e448ceb6ca137f7c0a"
+    },
+    {
+      "path": "references/market-state.md",
+      "bytes": 2470,
+      "sha256": "84a84b3fdaee36be92813ffcc741e2804924765c19d8ea4c6708fe36fed55a75"
+    },
+    {
+      "path": "references/moat-quality.md",
+      "bytes": 2438,
+      "sha256": "4321c9d70416886319cf621a342ab2089b7df3cf6feb5cc88ca6a5ecf849f8e7"
+    },
+    {
+      "path": "references/monitor-alert.md",
+      "bytes": 5440,
+      "sha256": "685c34c2c6911153a7e981888b743790b343163a43b60c26c0114caf586f3943"
+    },
+    {
+      "path": "references/options-strategies.md",
+      "bytes": 3098,
+      "sha256": "cc77a2258be7ab2c663f2b62ee7a6c71df0f87e88ae1c9233aa8b82a37e931d0"
+    },
+    {
+      "path": "references/peer-comparison.md",
+      "bytes": 4572,
+      "sha256": "c23defe76aba269c9684088ed7323677a0f53b5a326407a82b22c1687fc522d9"
+    },
+    {
+      "path": "references/policy-impact.md",
+      "bytes": 2226,
+      "sha256": "f94bae028a9fad28a24cc26451124ab158cbeedf810fcd0c085a45528ba813f2"
+    },
+    {
+      "path": "references/portfolio-checkup.md",
+      "bytes": 2541,
+      "sha256": "207c823d84f66cf699235e47c995f66e1e98863aa683f36a01dd1d09748f61ae"
+    },
+    {
+      "path": "references/portfolio-optimization.md",
+      "bytes": 2896,
+      "sha256": "600b969ce0a337c3a34a29409ec287095c44290084e37d4208afb5d536d0384f"
+    },
+    {
+      "path": "references/position-sizing.md",
+      "bytes": 2153,
+      "sha256": "dfc48bd8af9f6128916648463c9394701f38bbcb4f2b49a15462aa2a8efe36c8"
+    },
+    {
+      "path": "references/price-action-tools.md",
+      "bytes": 7953,
+      "sha256": "40d0379ec24b3614a405b2369faf1786b20a27fdbd2b8518c8f8e59623f4b42c"
+    },
+    {
+      "path": "references/quality-growth.md",
+      "bytes": 2835,
+      "sha256": "f778360e2f48dcf0697af974d9f1c4fddcde6950f4023c554d271e2c8a0aeb57"
+    },
+    {
+      "path": "references/quant-factor-research.md",
+      "bytes": 3894,
+      "sha256": "47ca13d18136ff186949412f292a04eb92b257af8990324341e2c0d7cb454fdd"
+    },
+    {
+      "path": "references/risk-stress.md",
+      "bytes": 2813,
+      "sha256": "285a2f334324a75fd9f61f87d98a388531149a51d77d694711a76cc41c50aaf4"
+    },
+    {
+      "path": "references/sector-comparison.md",
+      "bytes": 2122,
+      "sha256": "ac8651ecbd606d6f24e6e2d415a74d36546ef75b112b6c3f900576134a07b3b7"
+    },
+    {
+      "path": "references/stock-deep-research.md",
+      "bytes": 4033,
+      "sha256": "f8c96db568ccf4c824a9d0812c56fde11e606e5c268e7647aef5ccf8ee1f28ba"
+    },
+    {
+      "path": "references/stock-first-look.md",
+      "bytes": 3385,
+      "sha256": "85da32f97143e7220f59c3fb01c88ae967b95352c4811d9e3a7185e4c5621f43"
+    },
+    {
+      "path": "references/stop-discipline.md",
+      "bytes": 3384,
+      "sha256": "a420cc3357eee62942b1a17eae30ba1fa665e1a0ff2d7d0f9c1ad47106a04a52"
+    },
+    {
+      "path": "references/systematic-strategies.md",
+      "bytes": 5926,
+      "sha256": "9b3f15fe4e42c52a0b28779c8c99caa84c12a424ef3d12a7da4a7c17c77d6abd"
+    },
+    {
+      "path": "references/tdx-mcp-quick-reference.md",
+      "bytes": 13084,
+      "sha256": "78b771904c9b73e1867fa245220fe8e898abebe0befd74ae20b78f9db44c2070"
+    },
+    {
+      "path": "references/theme-lifecycle.md",
+      "bytes": 2320,
+      "sha256": "c5cce52e6017cd249fc85cdaa4cfad23bd43b77d4b59181098d7576a1efc375a"
+    },
+    {
+      "path": "references/trade-plan.md",
+      "bytes": 3266,
+      "sha256": "add0ab8ff30fb2b605bf2597e9eebee2bdec084da85b5fdb8390b1feadaf54bc"
+    },
+    {
+      "path": "references/valuation-pricing.md",
+      "bytes": 3797,
+      "sha256": "bc81192a58c4d215f105541f2aa54b70085a872bdc9f9a61923a3e03df730f0e"
+    },
+    {
+      "path": "scripts/ib/extract_ib_numbers.py",
+      "bytes": 10610,
+      "sha256": "e69be723feb24e863d052f1024ea96d99e34d27030915680f6f48bde89251736"
+    },
+    {
+      "path": "scripts/ib/validate_dcf.py",
+      "bytes": 11915,
+      "sha256": "3609d50005dc2f08a87180de64f080b40a754690380a67e238334ac90f4d8ced"
+    },
+    {
+      "path": "scripts/price-action/basic_indicators.py",
+      "bytes": 9914,
+      "sha256": "ba2fb63a0972026e9f43d1959fe0f5bc32539c9492e7e71329073633428171ba"
+    },
+    {
+      "path": "scripts/price-action/candlestick_patterns.py",
+      "bytes": 20352,
+      "sha256": "ddbdf4119b434bf5724978e61169c5d5fd0ecda6229be32d3233fe19cfcf85ab"
+    },
+    {
+      "path": "scripts/price-action/chan_theory.py",
+      "bytes": 6959,
+      "sha256": "b493f62e85931ea27a4a8fb388b99c6315455830acbf33e24347e80a5d07c275"
+    },
+    {
+      "path": "scripts/price-action/elliott_wave.py",
+      "bytes": 15767,
+      "sha256": "e823e14f1f8ac7101605142014c15d62b85fe7f4b5b1f7891b51bb238e010633"
+    },
+    {
+      "path": "scripts/price-action/harmonic_patterns.py",
+      "bytes": 16402,
+      "sha256": "3d15e09fa8bd71b48386270d3268c9c4dc14871dca128dc69aae23b13404fda0"
+    },
+    {
+      "path": "scripts/price-action/ichimoku.py",
+      "bytes": 6479,
+      "sha256": "b1beb98be86ece50050a10f5fe3558b579ad2491b8a2ef4cc753edb24a9670a5"
+    },
+    {
+      "path": "scripts/price-action/smart_money.py",
+      "bytes": 6431,
+      "sha256": "dbeb86b3b2ec546ac939bd950f1c00cfb53b2171d0af4ddf68ab235d85dd02ff"
+    },
+    {
+      "path": "scripts/quant/factor_fundamental.py",
+      "bytes": 4458,
+      "sha256": "0424a381ed20637921d1b4d62465368a1e1316a15483c62b92d68a070c5400cb"
+    },
+    {
+      "path": "scripts/quant/factor_multi.py",
+      "bytes": 7410,
+      "sha256": "1f5738df804232cf94dfe011fe1e4fc861bbd5756d1fc546b3dd00d0c5508492"
+    },
+    {
+      "path": "scripts/quant/minute_data.py",
+      "bytes": 4546,
+      "sha256": "72a6cfc4a1af5a85a396b2a8aabf5646bfaf1a017ea28417dd07f23e6ec133a9"
+    },
+    {
+      "path": "scripts/quant/pair_trading.py",
+      "bytes": 5003,
+      "sha256": "031d96aabd7a026b5a2d8c45047398c909932efaa59ea9c21bb97cffa52ea825"
+    },
+    {
+      "path": "scripts/quant/seasonality.py",
+      "bytes": 5088,
+      "sha256": "71f4584aa60cd1dc0901faad5f4b71cbe069cd9d2e8828426263fc0d44c18237"
+    },
+    {
+      "path": "scripts/quant/volatility.py",
+      "bytes": 5303,
+      "sha256": "fa8b2f2f211021f6f62e545e3fee00c7481ff84955659c7c730548b8a69b3cf8"
+    },
+    {
+      "path": "scripts/run_signal.py",
+      "bytes": 7668,
+      "sha256": "a77990f9e9fe1d093c1f15a9a466044181f3e192c8ea7566fa4da64feddc6dc8"
+    }
+  ],
+  "bytes": 339061
+}

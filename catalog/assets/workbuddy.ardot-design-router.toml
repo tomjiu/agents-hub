@@ -1,0 +1,21 @@
+id = "workbuddy.ardot-design-router"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-router"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "7545d61143cca2b927357f7e009510ce98a3935667850e7c97d743147e24c14d"
+local_modified = "unknown"
+enabled = false

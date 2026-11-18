@@ -1,0 +1,111 @@
+{
+  "sha256": "2238131759b52974821e17509c1201c8c5b53a9b7a558ff47e5afb163fc3dc80",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 17748,
+      "sha256": "8e8b7c4270bdfd08feb0573d8e6745ee4c2d9572f02a41131912292415e8e425"
+    },
+    {
+      "path": "components/callout.html",
+      "bytes": 2160,
+      "sha256": "aaf08d9e8330e4b4ad84bd4935b252fa21253257110ed9ffa1754be3de97b3d2"
+    },
+    {
+      "path": "components/data-card.html",
+      "bytes": 3598,
+      "sha256": "1a11eb8771b16c2d3d811ab9bba5d2a7a747806693371f37244a93170e287f57"
+    },
+    {
+      "path": "components/divider.html",
+      "bytes": 1652,
+      "sha256": "f31b566dcac9873292b862286bc37bd5990ee814fcef43366889a701fe5456cf"
+    },
+    {
+      "path": "components/section-marker.html",
+      "bytes": 2374,
+      "sha256": "a5a902d436e3ff626b687a102d0071aec8b4e5f612745c471bf541647de6e302"
+    },
+    {
+      "path": "prompts/academic-paper.md",
+      "bytes": 3062,
+      "sha256": "2f2ef47b00484cb5f2e996bb52a5ab4c54e0a76db41d60d240ba8988d2b2afc4"
+    },
+    {
+      "path": "prompts/annual-report.md",
+      "bytes": 3645,
+      "sha256": "50143c2f86a463eb65c88ba1a0678499482ca24cd05bb5b835e449f5d3a148cb"
+    },
+    {
+      "path": "prompts/base.md",
+      "bytes": 9179,
+      "sha256": "50ad2485b61c5046876884eba0bf733ef935450f65335fc54092ba616d92c6e2"
+    },
+    {
+      "path": "prompts/business-report.md",
+      "bytes": 6163,
+      "sha256": "69df66eb9cb375b0bc417917cbd2eb37320eae4fc77deefcbeb39b1d4fdc28fa"
+    },
+    {
+      "path": "prompts/government-doc.md",
+      "bytes": 2724,
+      "sha256": "67128412fe49de504cc5cd8c3eb22cc38f249ffa6232ec505a82120ad714f0e2"
+    },
+    {
+      "path": "prompts/legal-contract.md",
+      "bytes": 2668,
+      "sha256": "2f4ca1d6b07ca98bb3af70b2255ef9fe0a0436a92c0bd6bea17b79182fe43d96"
+    },
+    {
+      "path": "prompts/meeting-minutes.md",
+      "bytes": 2366,
+      "sha256": "49b0a06f898d1409d8e2074ebefb047f22b02bc4701b0fc27fcccd5ce5539824"
+    },
+    {
+      "path": "prompts/stock-research.md",
+      "bytes": 7086,
+      "sha256": "3b092664aa99e4b0d4584dae2c38bfe542244b930b5104046d9aff30e9cc3996"
+    },
+    {
+      "path": "templates/academic-paper.html",
+      "bytes": 7025,
+      "sha256": "9b7c15702ae75c55774c535828e0873ce77d5ba3726652a9c8c72f6a5630f37d"
+    },
+    {
+      "path": "templates/annual-report.html",
+      "bytes": 7073,
+      "sha256": "341553ab4d40f6460c73dc2d8b7cab338a8c2562b3dbf2cff67cce6fa57c99f0"
+    },
+    {
+      "path": "templates/base.html",
+      "bytes": 4208,
+      "sha256": "c975336b8bc04848862edc2e3f0994a7108db6c7e15f0388d8bb343554508b1f"
+    },
+    {
+      "path": "templates/business-report.html",
+      "bytes": 6920,
+      "sha256": "dcb117717175ed7c1229433ca751231ef1386e54546336750589e88b6ea74835"
+    },
+    {
+      "path": "templates/government-doc.html",
+      "bytes": 4341,
+      "sha256": "a3a408c817b58b754f052002c78bda5e9d10eaeb4711e0d606461f85c73df609"
+    },
+    {
+      "path": "templates/legal-contract.html",
+      "bytes": 4963,
+      "sha256": "b96104cf343e738a5b76962980a0f6dfaea18028752239d6e53ed12973d3d820"
+    },
+    {
+      "path": "templates/meeting-minutes.html",
+      "bytes": 5175,
+      "sha256": "a35ec3a251e58e2b2196928dc1c87ac08bfa0bffdf4881cd835e0eded8c9ccea"
+    },
+    {
+      "path": "templates/stock-research.html",
+      "bytes": 16438,
+      "sha256": "b20f75818bc9e38820f56ee82e3df04a28640887accf7053b62ccecad6725463"
+    }
+  ],
+  "bytes": 120568
+}

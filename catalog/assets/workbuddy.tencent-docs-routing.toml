@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docs-routing"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-docs-routing"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "9a8c8486c012c9951d32dc29b37f8389c242f922fcf0319abb3c31a279140c22"
+local_modified = "unknown"
+enabled = false

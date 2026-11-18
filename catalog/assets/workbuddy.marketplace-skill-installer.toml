@@ -1,0 +1,21 @@
+id = "workbuddy.marketplace-skill-installer"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/marketplace-skill-installer"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "9368890bdb9a3ca0a7c99d1ed2ca2cb9ae3a690bf5ffe0f3d5c1051b7d0c7364"
+local_modified = "unknown"
+enabled = false

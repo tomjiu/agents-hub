@@ -1,0 +1,31 @@
+{
+  "sha256": "c2203450fae4fd493e9e69b65cf143ea6086fe099f1b858c347b2234fca2905a",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 8755,
+      "sha256": "0552cd90f767925afe7700e41739a5f3f45c6ca79103a6c48db1a5e022c54595"
+    },
+    {
+      "path": "assets/README.md",
+      "bytes": 406,
+      "sha256": "00d6408ae919fecc8553727d4d77550f190cb1d5888402a39e6bfaec5207095d"
+    },
+    {
+      "path": "references/anti-patterns.md",
+      "bytes": 5146,
+      "sha256": "79f834094a6c85596dca055982df07bbd314c747f593efc623936899f05a7879"
+    },
+    {
+      "path": "references/terms-library.md",
+      "bytes": 4870,
+      "sha256": "aab9bd0c8f9c58e1bf02dd7b973676e8632cbb216dc8a491a4bc115dbf3eb3df"
+    },
+    {
+      "path": "scripts/README.md",
+      "bytes": 509,
+      "sha256": "8e1bb13349c8c89d8b5ce494d6b489bc6dfee66fc9e1befe2e91be04283f0cc6"
+    }
+  ],
+  "bytes": 19686
+}

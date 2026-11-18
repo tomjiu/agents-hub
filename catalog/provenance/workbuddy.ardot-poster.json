@@ -1,0 +1,21 @@
+{
+  "sha256": "eaf50818a844c450727c451a7e4098a456d2aed3a03cfd150bd0d7d48970401d",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 497,
+      "sha256": "02634256dd54867a71fa5f8d49ebe89a3a7da13d39bd6fd87cd21878322874c2"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 2593,
+      "sha256": "289bba15ae53e8aa68bf3ba6ed360b6ae8157c935a1553f6e0b5631f179b7e17"
+    },
+    {
+      "path": "references/guidelines-poster.md",
+      "bytes": 21350,
+      "sha256": "8b28ca326f6894ddfa7805e923aa95c5b91eb73194ad8da6060485b9b304767a"
+    }
+  ],
+  "bytes": 24440
+}

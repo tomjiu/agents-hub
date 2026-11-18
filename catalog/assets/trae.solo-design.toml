@@ -1,0 +1,22 @@
+id = "trae.solo-design"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/solo-design"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-design/0.0.1/package.zip"
+version = "0.0.1"
+build = "solo_design::default::prod_20260810::solo-design"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "cc8014c42c4d0559af5e93913803c0d3bb2f3a3019f6b9323b5b974e9b2d1b5f"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,71 @@
+{
+  "sha256": "7ee07c636002f1da8edb3b4733cea5d13309cf43cddb1665a2fd154b12606985",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 10814,
+      "sha256": "512ff51924ffb1c93bd70adf80f33508dab416cf39bbd021440e2b4ddc952c8a"
+    },
+    {
+      "path": "references/design_patterns/calendar.md",
+      "bytes": 1551,
+      "sha256": "2b5326623bbc6aca2d2cf5f8fb500da0192b031ac002128c109b05b83198f027"
+    },
+    {
+      "path": "references/design_patterns/dashboard.md",
+      "bytes": 1803,
+      "sha256": "305c8dd2b63dd72ee2e7c729a88eff8b76e79ae4e215e64c6de505e74479c849"
+    },
+    {
+      "path": "references/design_patterns/form_print.md",
+      "bytes": 1578,
+      "sha256": "15d0a561ffa3082096688f412f77df75f0617c8662cfe84b9d43fafd0e4061fe"
+    },
+    {
+      "path": "references/design_patterns/model.md",
+      "bytes": 1703,
+      "sha256": "b0647588ace80c2525fda43109214f957a6d50cf28f2ee9eb27a272bcdb8af02"
+    },
+    {
+      "path": "references/design_patterns/plan.md",
+      "bytes": 1612,
+      "sha256": "16b269b1ef802a5c7e2cb085fb1841610d3c926eb4d4d8e1837c383c9796772f"
+    },
+    {
+      "path": "references/design_patterns/progress.md",
+      "bytes": 1526,
+      "sha256": "f8d5998b87be8c704779d47dbec435f11f59b44305b082d6ee0b558bfce270f6"
+    },
+    {
+      "path": "references/design_patterns/stats.md",
+      "bytes": 1887,
+      "sha256": "15514ab44a2af4549900d25cf72376a2e88c601ebe47e775333eaecac5cfe9ef"
+    },
+    {
+      "path": "references/schema_principle.md",
+      "bytes": 27008,
+      "sha256": "bede9a3bebba4fadbf3409a6dfe6278228c57cf5c139709538eb6c01138662c7"
+    },
+    {
+      "path": "scripts/extract.py",
+      "bytes": 18524,
+      "sha256": "4ade77b907295f361cdbdeac94f560299be43dbb6ddcb1d693996b7d9aaf1cc8"
+    },
+    {
+      "path": "scripts/office/soffice.py",
+      "bytes": 5484,
+      "sha256": "f4ebbe4b638904d099eac915ada405b1031d1d7c5a80ecd5d733580d4eee1359"
+    },
+    {
+      "path": "scripts/recalc.py",
+      "bytes": 5966,
+      "sha256": "edb8727e3599a4ce9d9fec49b4ba9696ce5427fc981efb1e0ab74bb046d8a269"
+    },
+    {
+      "path": "scripts/requirements.txt",
+      "bytes": 887,
+      "sha256": "597a90cee96f346dbdfc6d0ab4eae91a015802c94a32c3460abd2e6409a32603"
+    }
+  ],
+  "bytes": 80343
+}

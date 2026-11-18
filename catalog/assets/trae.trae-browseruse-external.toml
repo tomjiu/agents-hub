@@ -1,0 +1,22 @@
+id = "trae.trae-browseruse-external"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/TRAE-browseruse-external"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-browseruse-external/0.0.6/package.zip"
+version = "0.0.6"
+build = "default::prod_20260609::TRAE-browseruse-external"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.6"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "331b2f3c7a855c2549c6f03aefee5ac55818d2aa0c5d9689c3fa9e7a2f12a75c"
+local_modified = "unknown"
+enabled = false

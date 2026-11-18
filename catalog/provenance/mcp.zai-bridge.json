@@ -1,0 +1,386 @@
+{
+  "sha256": "3e7521148ffb540e39a68cd38c39fd22dbd70dbc6b6ad851142773ab4893662d",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "bytes": 187,
+      "sha256": "67a62eade93f27329a842507d8d524bf9f2596df31e66a9d05bd1257e73a28da"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 131,
+      "sha256": "ab635eea90cf60170a64e2d25dfc97195f1016533e96da04cc0e7573e9613bd2"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 3816,
+      "sha256": "33b48650b9bca64b7bbc28e70f4a93b9999554206a46eafd09abe7327bf83a49"
+    },
+    {
+      "path": "COPY-NOTES.md",
+      "bytes": 1057,
+      "sha256": "1548722373523ac328cf4182bd270eeb055be46fc3d73f0c125d6e15064fe49a"
+    },
+    {
+      "path": "DSH-MCP.md",
+      "bytes": 1629,
+      "sha256": "fd09e2df0c757d516daf4d06b08d536ad9223582ec130d8f69352e4d96fa0c41"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 1930,
+      "sha256": "ed555c8d34afea46083d6dc79e9bbb66ac606a55b38747a73e857bea96d42bb0"
+    },
+    {
+      "path": "Makefile",
+      "bytes": 1596,
+      "sha256": "1a463a3924c278cae8b24be418ec9f1405ea2e075f0ba133782bea8e1f9660d7"
+    },
+    {
+      "path": "README.md",
+      "bytes": 11330,
+      "sha256": "36a22ab74bb89afbdd40941f2f8bdb1c4c9b013f2704caae4689117ccbc91ca9"
+    },
+    {
+      "path": "REPAIR-NOTES.md",
+      "bytes": 4960,
+      "sha256": "b6feaa9c340e687a6a3b5c538e0314b4eab0401b35d2cc0770f16c7c286f8eea"
+    },
+    {
+      "path": "THIRD-PARTY-NOTICES.md",
+      "bytes": 1309,
+      "sha256": "b3e00835448fbcf409b56280dc7b39c1363892c0b63916037e7c673950c274f9"
+    },
+    {
+      "path": "accounts.example.json",
+      "bytes": 424,
+      "sha256": "275e819a79f3a8571eb45980d86cebf689bc3712552a116f4adaf68bf642eed6"
+    },
+    {
+      "path": "captcha/LICENSE.upstream",
+      "bytes": 21189,
+      "sha256": "b5255b2694ec63a4af0be546ce94316a287053c89b2e12d7f02ccfadf3d24e40"
+    },
+    {
+      "path": "captcha/captcha-happy.mjs",
+      "bytes": 83984,
+      "sha256": "198a3f3ee485206fd6e7aa5ca49f74aeb0f06ac350b728c67e7c50fd5171b545"
+    },
+    {
+      "path": "captcha/captcha-happy.ts",
+      "bytes": 118382,
+      "sha256": "9a541558c057778e1d727a01141b9bcd23525610e7afc065c04a2dddb47a39e3"
+    },
+    {
+      "path": "captcha/package-lock.json",
+      "bytes": 18742,
+      "sha256": "b4ca3eeec6923847bc2ecad534a6d28baa5c4abccca9b96437b585fcf984b179"
+    },
+    {
+      "path": "captcha/package.json",
+      "bytes": 452,
+      "sha256": "d84007dbf6fb176ee99adccab6e96e8fe0b01da1e7ce508e61e462fb5cfc4312"
+    },
+    {
+      "path": "captcha/solver.mjs",
+      "bytes": 3308,
+      "sha256": "f8166a1533a45ab390a9140c2b3d1b95e22eafc6fbe5e64a3475b6c0e0ffec5c"
+    },
+    {
+      "path": "cmd/zai-bridge/main.go",
+      "bytes": 5135,
+      "sha256": "15e91fcf33ebef1caafe07dc11cebaaf1b8aa5494376f56d458917012bcb69f5"
+    },
+    {
+      "path": "docker-compose.accounts.yml",
+      "bytes": 152,
+      "sha256": "4d76f490dd1d4e563233539060cda17c215672393350ddd4918b784f345cf964"
+    },
+    {
+      "path": "docker-compose.yml",
+      "bytes": 1252,
+      "sha256": "f6251d66bbdeabb95d475dc0325cf0716b32258b581a4b208c11ca6096168a04"
+    },
+    {
+      "path": "go.mod",
+      "bytes": 83,
+      "sha256": "d9034b0719e47871200bc9e7bbb9ee7ab80211bb00a9d181e05578c079941a43"
+    },
+    {
+      "path": "go.sum",
+      "bytes": 163,
+      "sha256": "0bc3ed6c0782aa9090e414e133f44c5f4cb8bc2ff942b89fc3298c52eee332fd"
+    },
+    {
+      "path": "internal/config/accounts.go",
+      "bytes": 4579,
+      "sha256": "bd39da327458e99091f9875b46ee989a6eff0508a29a8eb1eb3070f38169d5f9"
+    },
+    {
+      "path": "internal/config/config.go",
+      "bytes": 9996,
+      "sha256": "e438f7772418e975847d85a561bd0950d478e84b3f55ee0d90d025ec1fcedb10"
+    },
+    {
+      "path": "internal/config/config_test.go",
+      "bytes": 3341,
+      "sha256": "4a4a12f4e3c14b1d34926b70d978769b37ed34882dd693d51ee5441122bc3b8d"
+    },
+    {
+      "path": "internal/config/identity.go",
+      "bytes": 513,
+      "sha256": "380cdd5b53618211c8ab39136d575ab8d0aa60b0e676b647b6ce45c7e48482d8"
+    },
+    {
+      "path": "internal/config/identity_test.go",
+      "bytes": 559,
+      "sha256": "755559edd904cdfa35191577169ece8c39ee0ab0a6efc5e9614731d7bf9a8687"
+    },
+    {
+      "path": "internal/mcp/accounts.go",
+      "bytes": 3174,
+      "sha256": "2ba6dff39cdf9820d53d36ddb313ba252c7f269d56a0d9b61be86bf447d95418"
+    },
+    {
+      "path": "internal/mcp/arguments.go",
+      "bytes": 1613,
+      "sha256": "cdd38dad1d0c968df9e3b523383c1dd2707c279f70d83bf755c51d444bea938c"
+    },
+    {
+      "path": "internal/mcp/chatfile_tools.go",
+      "bytes": 7126,
+      "sha256": "6c81bccea8db013b17facd5f4eadaa65c7d101917b525b2c142dd29fc168ad9e"
+    },
+    {
+      "path": "internal/mcp/compat.go",
+      "bytes": 2505,
+      "sha256": "b74a4620668a9d5e6131f749480681980c4e55bdae2a9106f19dba14ea534b2a"
+    },
+    {
+      "path": "internal/mcp/extra_tools.go",
+      "bytes": 9930,
+      "sha256": "e210a8f287a0bcdf5f36e87cb287396e55f16c7366b8d715ae68faff1dca3826"
+    },
+    {
+      "path": "internal/mcp/extra_tools_test.go",
+      "bytes": 600,
+      "sha256": "fe8da28f3b054bf69b6a5aed2bc1b6b2a902d813fcadde7d3b30e0b1ae00e501"
+    },
+    {
+      "path": "internal/mcp/format.go",
+      "bytes": 4263,
+      "sha256": "aec039413059ea8f0504417110b9a0385a65ca4ba70a756529a516ccbbf0c970"
+    },
+    {
+      "path": "internal/mcp/local_file.go",
+      "bytes": 839,
+      "sha256": "89e999c91bafa914b12b86386793ef0c94e79d43b68202aa337e2f6b55d82ab5"
+    },
+    {
+      "path": "internal/mcp/manage_tools.go",
+      "bytes": 6412,
+      "sha256": "f865a7e0d9bb88000c5d93f0614e7193459383a8161db3bebc40c7e61ce9d837"
+    },
+    {
+      "path": "internal/mcp/protocol.go",
+      "bytes": 8384,
+      "sha256": "3517ee912ada5759eb49d4777b6def57871df357b7be1f66fdfe10beaf5f4040"
+    },
+    {
+      "path": "internal/mcp/protocol_test.go",
+      "bytes": 6215,
+      "sha256": "2f102788bb4392e5228b9af32a67f1424356a3e70956a3bd9862811300e5040c"
+    },
+    {
+      "path": "internal/mcp/submission_cancel_test.go",
+      "bytes": 838,
+      "sha256": "9e86deb1ffc743ac2e30a92c40775463e5ce54af381d3e8e7ac85b484b841743"
+    },
+    {
+      "path": "internal/mcp/submission_result.go",
+      "bytes": 232,
+      "sha256": "f3aef4791a0c718d22758575ada8405318ee3859c6770d38597581ed0214713f"
+    },
+    {
+      "path": "internal/mcp/tools.go",
+      "bytes": 15932,
+      "sha256": "65d69693959ce200b419a78fb518492e0f2e93113a8c29f877566911c4e49190"
+    },
+    {
+      "path": "internal/mcp/tools_test.go",
+      "bytes": 12131,
+      "sha256": "5a8d7f83bea0f427f2702d988569cb582d4bb916f2a893c63666240d74b7f5a1"
+    },
+    {
+      "path": "internal/mcp/write_tools.go",
+      "bytes": 6992,
+      "sha256": "73aae8164468acb61820e23438cf57ee418e22285dab037937c9b76ba81aed16"
+    },
+    {
+      "path": "internal/zai/additional_test.go",
+      "bytes": 2013,
+      "sha256": "1fc32bff63cfc3682ffe9ddf00a759d4a03ec86e6699d67bb0a47d9f88ba543d"
+    },
+    {
+      "path": "internal/zai/captcha_pool.go",
+      "bytes": 10953,
+      "sha256": "b373e2607de9003cc34ccee7a61ef84e9e1de49ece97c4354ee3d684ee0480be"
+    },
+    {
+      "path": "internal/zai/captcha_pool_test.go",
+      "bytes": 9123,
+      "sha256": "e4df2f93390d112b7dc20cfd4eb24cb7c06fdce67bc3dd44984b857bac2bd3b3"
+    },
+    {
+      "path": "internal/zai/chatfiles.go",
+      "bytes": 5492,
+      "sha256": "dc9da32398d9cfce80e5a6a4e2661d298706cd7bb6cc6e875ab0646f0501900f"
+    },
+    {
+      "path": "internal/zai/chatfiles_test.go",
+      "bytes": 4149,
+      "sha256": "8852d901e3a1a33df21ef1cc7d60ded3ab4c19ccee96b81de01f2a1000232f54"
+    },
+    {
+      "path": "internal/zai/client.go",
+      "bytes": 16833,
+      "sha256": "7cd2a22ee5e995655bb0b372e3f8423f31e2c163a38b9dd3060474802a41d206"
+    },
+    {
+      "path": "internal/zai/core_test.go",
+      "bytes": 6207,
+      "sha256": "32a3ea1168f90d0ecc52bae808e79309ebf61b2df2f8c744cb7b2d6eeba8be1c"
+    },
+    {
+      "path": "internal/zai/dispatch.go",
+      "bytes": 598,
+      "sha256": "4c2ec780bb1accd91f01b4a076ea95c016387330e2f11ebeb9151c0a168bfd5e"
+    },
+    {
+      "path": "internal/zai/draft.go",
+      "bytes": 375,
+      "sha256": "85ace263f7df827d8636c7b7e6667736dc6a6488d000fcc06f9bb027a65c7a1e"
+    },
+    {
+      "path": "internal/zai/errors.go",
+      "bytes": 108,
+      "sha256": "372d988699e0a0fe696e683e56c8bee8aa1596add989341981d872ea71b37388"
+    },
+    {
+      "path": "internal/zai/lifecycle.go",
+      "bytes": 6282,
+      "sha256": "cb92e6a87f171d1945ebecd6fcb96f46d1cd2d2513103959a4ffd0de1110a587"
+    },
+    {
+      "path": "internal/zai/limiter_multi_test.go",
+      "bytes": 957,
+      "sha256": "b73496f6e4aff042cd9227d351e07d8050e1ad6a06e879a72268c30501bd0231"
+    },
+    {
+      "path": "internal/zai/quota.go",
+      "bytes": 4590,
+      "sha256": "ed72c78fe6cd62b73e470320b439e21489368d93a42cd36bb2d7c8a17091c48f"
+    },
+    {
+      "path": "internal/zai/quota_item.go",
+      "bytes": 470,
+      "sha256": "ed095e4dbee30ee9d282cc2f43fd07bf61a2ecd298e7ab2c366f8449eed194a9"
+    },
+    {
+      "path": "internal/zai/quota_validate.go",
+      "bytes": 354,
+      "sha256": "dafe74acb311f2743b487e97e8c023345ca967c5a01c9486cb9eb40f11a0b821"
+    },
+    {
+      "path": "internal/zai/retry_after.go",
+      "bytes": 533,
+      "sha256": "a3310bff19787c216ca75b7a5147e5ce291f4b8f05e2131ca665a464f116277f"
+    },
+    {
+      "path": "internal/zai/run_state.go",
+      "bytes": 249,
+      "sha256": "a104f0ad9d97617b7f005ae91660f50b12644c6e64dec6055f2b1e1ce946ac39"
+    },
+    {
+      "path": "internal/zai/send.go",
+      "bytes": 15935,
+      "sha256": "6b9fc1e113ba272e0af2197b4c80945bc6abd4d3e04143ce1178d71939e976b9"
+    },
+    {
+      "path": "internal/zai/send_body.go",
+      "bytes": 1528,
+      "sha256": "b6dbda1ef47fee88f1e59c425bf35c5f30889c5c6a769f6ec211cb5d01ebaafc"
+    },
+    {
+      "path": "internal/zai/sign.go",
+      "bytes": 5974,
+      "sha256": "860e7470e3ebb0aa8f9e9d845d65f56a2c63d01e40c68706bef359c6b8b8fb75"
+    },
+    {
+      "path": "internal/zai/sign_test.go",
+      "bytes": 1094,
+      "sha256": "43bb16c561d7614d757098e6b590cee78a803ab3eab03245e479c2c099a96c33"
+    },
+    {
+      "path": "internal/zai/storage.go",
+      "bytes": 13934,
+      "sha256": "86d85305033a1cc0888fcd933c2c236a04d692fdb5df729e5f0f4a2f3c5f3bf2"
+    },
+    {
+      "path": "internal/zai/storage_stream_test.go",
+      "bytes": 10010,
+      "sha256": "7f8f04483f3c14c14ac880cad57ac1e8cd78d90d1a596245411c46117126542c"
+    },
+    {
+      "path": "internal/zai/storage_test.go",
+      "bytes": 841,
+      "sha256": "47dc2c21a3f19a13e1c497ea41ad2969352665a56f9c98b09b12dd0c03798a88"
+    },
+    {
+      "path": "internal/zai/submission_test.go",
+      "bytes": 6322,
+      "sha256": "55b858f036f3b8f41fc578458079cf445b2666952930e0c5bf43b9c6ff864542"
+    },
+    {
+      "path": "internal/zai/testing_client.go",
+      "bytes": 281,
+      "sha256": "85bfa7b480ea9e32132fc4a3ce5143fd2811cd9d0aeb057f957ec0a10832cdc1"
+    },
+    {
+      "path": "internal/zai/throttle.go",
+      "bytes": 3535,
+      "sha256": "656dabf51c669ff0ca84015a1373ed07b3ff0169cc42f13fc23fc17061c19008"
+    },
+    {
+      "path": "internal/zai/throttle_test.go",
+      "bytes": 3065,
+      "sha256": "143065f563a0d23fc54206c5cc49d9abf45b531280b119d44b6c23b126099f3f"
+    },
+    {
+      "path": "internal/zai/types.go",
+      "bytes": 5306,
+      "sha256": "592d0451df31047d0e8c6381d5050124bb1ff33a014536c2646b9cc5908a7abd"
+    },
+    {
+      "path": "internal/zai/uncertain_transport_test.go",
+      "bytes": 1196,
+      "sha256": "65f8eb491622f185ebee63e81b5c2d15e5965418ba301d76d080bce54b774247"
+    },
+    {
+      "path": "internal/zai/usage.go",
+      "bytes": 3240,
+      "sha256": "1f10e216ff7a6765272a8d2e7d10a823417a95a8c8b14639408c1adc3e6f25c5"
+    },
+    {
+      "path": "repair-verification.json",
+      "bytes": 1040,
+      "sha256": "7e086197b63c79761f45b1e3456accabd86982846071cf1720fab9c21e263c1a"
+    },
+    {
+      "path": "scripts/smoke.mjs",
+      "bytes": 7201,
+      "sha256": "1868591cad61c6788b215e1ca4c0aeab8276ce1cb99036f3b7f9a2ef34daf8e9"
+    }
+  ],
+  "bytes": 537173
+}
