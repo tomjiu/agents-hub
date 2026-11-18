@@ -37,7 +37,7 @@ node asset-manager/cli.mjs uninstall <existing-project> <deployment-id> --approv
 
 ## 未实现范围
 
-MCP注册与DSH插件自动安装、对现有客户端配置的合并、覆盖更新已有Skill、多用户签名审批、进程崩溃后的自动恢复向导，以及quarantine的自动清理/一键重新安装，均未实现。本轮宁可拒绝，不输出假“安装成功”。
+MCP配置另有 [候选合并与显式应用](MCP-CONFIG.md)，并不安装依赖或保证实际宿主加载。DSH插件自动安装、覆盖更新已有Skill、多用户签名审批、进程崩溃后的自动恢复向导，以及quarantine的自动清理/一键重新安装，均未实现。本轮宁可拒绝，不输出假“安装成功”。
 
 ## 可复跑的验证
 

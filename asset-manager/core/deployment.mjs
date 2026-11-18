@@ -17,7 +17,7 @@ async function projectRoot(root,project){
  if(resolved===source||resolved.startsWith(source+path.sep))throw new Error('Deploy to a consumer project, not the maintenance repository');
  return resolved;
 }
-async function withProjectLock(project,fn){
+export async function withProjectLock(project,fn){
  const state=await confined(project,'.agents-hub',{mustExist:false});await fs.mkdir(state,{recursive:true});
  const lock=await confined(project,'.agents-hub/operation.lock',{mustExist:false});let handle;
  try{handle=await fs.open(lock,'wx');}catch(e){if(e.code==='EEXIST')throw new Error('Project deployment lock exists; inspect owner before recovery');throw e;}

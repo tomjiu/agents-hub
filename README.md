@@ -55,6 +55,17 @@ plan-deploy 只预览；deploy 必须显式批准并指定项目。按 Profile �
 
 目标 Profile 含 MCP 或插件时，当前安装器拒绝部分安装；请先生成并审查 Profile 视图，待对应客户端适配完成后再启用。详细约束见 [部署指南](asset-manager/DEPLOYMENT.md)。
 
+## 显式 MCP 配置接入
+
+~~~sh
+node asset-manager/cli.mjs plan-mcp opencode <project> --expert research
+node asset-manager/cli.mjs inspect-mcp <change-id>
+node asset-manager/cli.mjs apply-mcp <change-id> --approve
+node asset-manager/cli.mjs rollback-mcp <change-id> --approve
+~~~
+
+先生成独立候选，保留原配置和已有服务；重名、本地修改或审核内容变化就拒绝应用/回滚。DSH输出Cordis patch，不改运行中实例；OpenCode用无shell启动器固定cwd；Codex追加TOML。详情和限制见 [MCP配置指南](asset-manager/MCP-CONFIG.md)。原配置及候选可能含用户密钥，必须留在私有运行状态，不公开上传。
+
 ## 更新与回滚
 
 ~~~sh

@@ -2,9 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
-import {parse,stringify} from 'smol-toml';
 import {loadCatalog,readToml,resolveExpert,resolveProfile} from './catalog.mjs';
 import {effectivePath} from './lifecycle.mjs';
+import {clientMcpConfig,encodeClientConfig} from './mcp-config.mjs';
 import {confined,exists,snapshot,tree,createJson,sha256} from './files.mjs';
 export async function createView(root,client,expert,{allowRestricted=false,selection,profileMeta}={}) {
  if(!['codex','opencode','dsh','generic'].includes(client))throw new Error('Unknown client');
@@ -21,22 +21,26 @@ export async function createView(root,client,expert,{allowRestricted=false,selec
    if(used.has(name))throw new Error('Multiple assets have client skill name '+name+'; select one implementation');used.add(name);
    const t=await snapshot(source,path.join(skills,name));records.push({id,name,sha256:t.sha256});
   }
-  const registry=await readToml(path.join(root,'mcp/registry.toml'));const mcp={},unsupported=[];
+  const registry=await readToml(path.join(root,'mcp/registry.toml'));const mcp={},unsupported=[],runtime=[];
   for(const id of selected.mcp) {
    const a=catalog.get(id),s=registry.servers.find(s=>s.id===a.registry_id);if(!s)throw new Error('Missing MCP registration '+id);
    if(['unlocked-upstream','external-install-required','review-required','upstream-diff-pending'].includes(s.status))throw new Error('MCP not deployable before review: '+id);
+   if(!['stdio','http'].includes(s.transport))throw new Error('Unknown MCP transport '+id);
+   if(s.clients&&(!Array.isArray(s.clients)||!s.clients.includes(client))&&client!=='generic')throw new Error('MCP client not registered: '+id+' for '+client);
+   if(Object.hasOwn(mcp,s.id))throw new Error('Duplicate MCP runtime ID '+s.id);
    let entry;
    if(s.transport==='http')entry={url:s.url};
-   else {if(client==='opencode'&&s.cwd&&s.cwd!=='.')throw new Error('OpenCode local MCP cwd adapter not yet verified: '+id);if(!s.command||!Array.isArray(s.args))throw new Error('Incomplete MCP command '+id);const args=[];for(const arg of s.args){if(typeof arg!=='string')throw new Error('Invalid MCP arg');if(arg.startsWith('mcp/')){const prefix=a.path+'/';const source=await effectivePath(root,a);const full=arg.startsWith(prefix)?await confined(source,arg.slice(prefix.length)):await confined(root,arg);args.push(full);}else args.push(arg);}entry={command:s.command,args};if(s.cwd&&s.cwd!=='.')entry.cwd=s.cwd===a.path?await effectivePath(root,a):await confined(root,s.cwd);}
+   else {if(!s.command||!Array.isArray(s.args))throw new Error('Incomplete MCP command '+id);const args=[];for(const arg of s.args){if(typeof arg!=='string')throw new Error('Invalid MCP arg');if(arg.startsWith('mcp/')){const prefix=a.path+'/';const source=await effectivePath(root,a);const full=arg.startsWith(prefix)?await confined(source,arg.slice(prefix.length)):await confined(root,arg);args.push(full);}else args.push(arg);}entry={command:s.command,args};if(s.cwd&&s.cwd!=='.')entry.cwd=s.cwd===a.path?await effectivePath(root,a):await confined(root,s.cwd);}
    if(s.env_names?.length)entry.required_env=s.env_names;
    mcp[s.id]=entry;
+   const source=await effectivePath(root,a);runtime.push({id,source,source_sha256:(await tree(source)).sha256,entry_files:await Promise.all((entry.args||[]).filter(arg=>path.isAbsolute(arg)).map(async file=>({path:file,sha256:sha256(await fs.readFile(file))})))});
   }
   for(const id of selected.plugins) {if(client!=='dsh')unsupported.push({id,reason:'Host-specific plugin; no adapter for '+client});else unsupported.push({id,reason:'DSH plugin requires explicit package build/profile configuration; view does not auto-install or patch host.'});}
-  if(client==='opencode')await createJson(path.join(view,'opencode.json'),{skills:{paths:[skills]},mcp:Object.fromEntries(Object.entries(mcp).map(([id,e])=>[id,e.url?{type:'remote',url:e.url,enabled:true}:{type:'local',command:[e.command,...e.args],enabled:true}]))});
-  else if(client==='codex')await fs.writeFile(path.join(view,'config.toml'),stringify({mcp_servers:Object.fromEntries(Object.entries(mcp).map(([id,e])=>[id,e.url?{url:e.url}:{command:e.command,args:e.args,...e.cwd?{cwd:e.cwd}:{}}]))}),{flag:'wx'});
-  else await createJson(path.join(view,'mcp.json'),{mcpServers:mcp});
+  if(['opencode','codex','dsh'].includes(client)){const cfg=await clientMcpConfig(root,view,client,mcp);if(client==='opencode')await createJson(path.join(view,'opencode.json'),{skills:{paths:[skills]},mcp:cfg});else await fs.writeFile(path.join(view,client==='dsh'?'dsh-mcp.patch.yml':'config.toml'),encodeClientConfig(client,cfg),{flag:'wx'});}
+  if(client==='generic'||client==='dsh')await createJson(path.join(view,'mcp.json'),{mcpServers:mcp});
   if(client==='dsh')await fs.writeFile(path.join(view,'dsh-skills.yml'),YAML.stringify({'@deepseek-ai/dsh-skill-filesystem':{includeDefaultRoots:true,customSkillDirs:[skills]}}),{flag:'wx'});
   const report={schema:1,client,expert,skills:records,mcp_ids:Object.keys(mcp),plugins:selected.plugins,unsupported,destination:view,user_config_modified:false,deployment_copy:true,maintenance_source:'Repository catalog + reviewed version store',...profileMeta};
+  await createJson(path.join(view,'mcp-runtime.json'),{schema:1,assets:runtime});
   await createJson(path.join(view,'view.json'),report);return report;
  }catch(e){await fs.rm(view,{recursive:true,force:true});throw e;}
 }

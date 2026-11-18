@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 41/41 PASS | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 59 PASS，1 SKIP（总60） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 20/20 PASS | 接口契约与事件接线；不是live profile安装 |
@@ -45,6 +45,15 @@
 - 隔离消费者项目实测：批准安装7个Skill，实装DSH默认.dsh/skills发现和全文读取通过，修改后撤销被拒绝，恢复后quarantine回收成功，默认发现变空；现有AGENTS.md未修改。证据见 dsh-project-deployment-verification.json。
 - 这不是live DSH插件安装或真实Codex/OpenCode会话验收。probe-dsh-deployment.mjs的测试项目与状态均已回收，当前用户项目不变。
 
+## MCP 配置阶段
+
+- plan-mcp / inspect-mcp / apply-mcp / rollback-mcp 从Profile或显式Expert选择服务；独立候选保留原配置字节，审核后配置/启动器/源码/入口变化拒绝应用，当前配置本地修改拒绝回滚。
+- Codex追加完整TOML表；OpenCode保留JSON无关字段，已有JSONC不自动处理，cwd由无shell启动器固定；DSH生成逐服务Cordis patch，不改运行中实例。鉴权/环境映射未验证时明确拒绝。
+- 使用共享消费项目锁与全局状态锁；应用/回滚journal记录中间状态，失败保留配置和恢复产物，不自动删除可能属于用户的内容。
+- 真实CLI生成、应用、查看及回滚三个配置后，用标准MCP客户端启动实际Search-core：initialize、tools/list及一次本地tool_search通过；DSH额外通过实装0.2.2-rc.1 Config。见 mcp-config-verification.json。
+- 全套60项：59通过、1项文件符号链接测试因Windows权限跳过；目录junction拒绝已单独通过。这是协议调用与schema验证，不是实际Codex/OpenCode会话或live DSH插件启用。
+- 独立只读审查子任务未返回结果，未将其计为通过；Lead复核差异并执行测试。
+
 ## 重要修复
 
 - Search-core原测试Windows下SQLite未关闭即rm造成EPERM：调整清理顺序，不跳过业务断言。
@@ -55,7 +64,7 @@
 ## 尚未完成的硬门槛
 
 1. Codex/OpenCode实际发现调用、DSH live profile插件安装和跨宿主适配验证。
-2. Profile组合、视图与显式项目Skill部署/撤销已实现，DSH默认项目发现已验证；MCP/插件实际安装与客户端配置安全合并仍未完成。
+2. Profile组合、Skill部署与MCP配置候选合并/显式应用/回滚已实现；真实宿主采用配置、依赖/插件安装与凭据映射仍未完整验证。
 3. Search-core Go的CGO工具链和真实MCP协议验证。
 4. Console核心真实点击及落盘闭环已通过；完整交互矩阵与Firefox真实浏览器服务仍待验。
 5. 所有Skill旧机器路径清理、上游与许可精确映射、第三方同源重复审核。
