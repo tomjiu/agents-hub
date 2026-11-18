@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2391,
+  "unchanged": 2387,
   "missing": [],
   "changed": [
     {
@@ -48,10 +48,34 @@
       "current_sha256": "73f779c67cb338fa04d3e9f08d527c95f97097c28b2f579e80891bbd15158aae"
     },
     {
+      "original": "memory-net/adapters/dsh/README.md",
+      "target": "plugins/memory-net/adapters/dsh/README.md",
+      "baseline_sha256": "ae43ac2b731b8b259ca0ce5815dd99b86b88167ed955fcedae16d6e8768713ea",
+      "current_sha256": "e84873160de21e9034c0c5f54fe4762ad58d3fa0530a7bc74db18419c11c4daa"
+    },
+    {
+      "original": "memory-net/adapters/dsh/src/contract.ts",
+      "target": "plugins/memory-net/adapters/dsh/src/contract.ts",
+      "baseline_sha256": "466907394133f86415314ab126ccf6e300adb89a9601889ad707348858413d6a",
+      "current_sha256": "61ec530a949eb60d97238caead730537e8b8cc307b8de3549539376732557205"
+    },
+    {
+      "original": "memory-net/adapters/dsh/src/index.ts",
+      "target": "plugins/memory-net/adapters/dsh/src/index.ts",
+      "baseline_sha256": "5f0a3e69ab75006378feb7763c96ef0af1d1c2d9cbdc2322b725ac8bcd52490c",
+      "current_sha256": "6d1dbf5fe81d0e9e9754314f383068184ad2dffc26846562bf8436533b1ec40c"
+    },
+    {
       "original": "memory-net/adapters/dsh/tests/adapter.test.ts",
       "target": "plugins/memory-net/adapters/dsh/tests/adapter.test.ts",
       "baseline_sha256": "ab81bf887a970cde7a6d84113b6331546c6371b16b181eefb93cede0cade8782",
-      "current_sha256": "c1f027cec9ade8907bd8d083ee9e5cd35a1c760cdbe9ddf6c76176aa7f23511b"
+      "current_sha256": "6217944860721ecbd050731cb087db7fad55f3cb35f9263ec02b63ac9f7ef6d9"
+    },
+    {
+      "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
+      "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
+      "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
+      "current_sha256": "31bfd2456ebb87f138ed7dcdb271f248c62d564e1f482425e83ff13d9cc4bdd6"
     },
     {
       "original": "memory-net/console/apps/console/dist/index.html",

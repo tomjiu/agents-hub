@@ -12,13 +12,26 @@
 //   stream / round
 // 用法：node mock-model.mjs <port> <diagnostics.jsonl>
 import { createServer } from 'node:http'
-import { appendFileSync } from 'node:fs'
+import { appendFileSync, readFileSync } from 'node:fs'
 
 const port = Number(process.argv[2] ?? 8401)
 const diagPath = process.argv[3] ?? 'requests.jsonl'
 const WRITE_TEXT = 'E2E 模型经 memory_net_write 写入的推断节点'
 const ECHO_ARGS = JSON.stringify({ say: 'hello auto-observe' })
 const TOOL_ARGS = JSON.stringify({ kind: 'inference', text: WRITE_TEXT, confidence: 0.7 })
+// Optional actual-MCP host check; the original two-tool fixture remains the default.
+const MCP_NAME = process.env.MN_E2E_MCP_TOOL
+const SKILL_NAME = process.env.MN_E2E_SKILL
+const SKILL_BODY = process.env.MN_E2E_SKILL_FILE ? readFileSync(process.env.MN_E2E_SKILL_FILE, 'utf8').split('---').slice(2).join('---').trim() : null
+function strings(value) {
+  if (typeof value === 'string') return [value]
+  if (value && typeof value === 'object') return Object.values(value).flatMap(strings)
+  return []
+}
+const extraCalls = [
+  ...(MCP_NAME ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
+  ...(SKILL_NAME ? [{ id: 'call_skill_1', type: 'function', function: { name: 'skill', arguments: JSON.stringify({ name: SKILL_NAME }) } }] : []),
+]
 
 const server = createServer((req, res) => {
   if (req.method !== 'POST' || !(req.url ?? '').includes('/chat/completions')) {
@@ -33,7 +46,7 @@ const server = createServer((req, res) => {
     const messages = Array.isArray(j.messages) ? j.messages : []
     const toolNames = (j.tools ?? []).map((t) => t?.function?.name ?? t?.name).filter(Boolean)
     const last = messages[messages.length - 1] ?? {}
-    const afterTool = last.role === 'tool'
+    const afterTool = SKILL_NAME ? messages.some((m) => m.role === 'tool') : last.role === 'tool'
     const diag = {
       ts: Date.now(),
       round: afterTool ? 'after_tool' : 'first',
@@ -42,6 +55,10 @@ const server = createServer((req, res) => {
       has_memory_net_write: toolNames.includes('memory_net_write'),
       has_memory_net_recall: toolNames.includes('memory_net_recall'),
       has_mn_e2e_echo: toolNames.includes('mn_e2e_echo'),
+      has_mcp_tool: MCP_NAME ? toolNames.includes(MCP_NAME) : false,
+      has_skill_tool: SKILL_NAME ? toolNames.includes('skill') : false,
+      has_loaded_skill: SKILL_BODY ? strings(messages).some((text) => text.replaceAll(String.fromCharCode(13), '').includes(SKILL_BODY.replaceAll(String.fromCharCode(13), ''))) : false,
+      has_mcp_result: messages.some((m) => m.role === 'tool' && JSON.stringify(m.content).includes('newly_activated')),
       has_constraint_section: body.includes('force push'),
       has_progress_section: body.includes('登录页'),
       has_inference_section: body.includes(WRITE_TEXT),
@@ -69,6 +86,7 @@ const server = createServer((req, res) => {
         finish({ tool_calls: [
           { index: 0, id: 'call_echo_1', type: 'function', function: { name: 'mn_e2e_echo', arguments: ECHO_ARGS } },
           { index: 1, id: 'call_mn_1', type: 'function', function: { name: 'memory_net_write', arguments: TOOL_ARGS } },
+          ...extraCalls.map((call, i) => ({ index: i + 2, ...call })),
         ] })
         finish({}, 'tool_calls')
       } else {
@@ -89,6 +107,7 @@ const server = createServer((req, res) => {
           tool_calls: [
             { id: 'call_echo_1', type: 'function', function: { name: 'mn_e2e_echo', arguments: ECHO_ARGS } },
             { id: 'call_mn_1', type: 'function', function: { name: 'memory_net_write', arguments: TOOL_ARGS } },
+            ...extraCalls,
           ],
         }
       } else {

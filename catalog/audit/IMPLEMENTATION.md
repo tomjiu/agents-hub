@@ -19,7 +19,7 @@
 | Asset Manager | 59 PASS，1 SKIP（总60） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
-| Memory-net DSH Adapter | 20/20 PASS | 接口契约与事件接线；不是live profile安装 |
+| Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
 | Zai-bridge Go | go test ./... PASS | 本地及隔离测试，没有动真实Z.ai账户 |
 | Firefox | 491/491单元测试PASS，构建成功 | 本地实现保留；平台fixture已修复；真实交互待验 |
@@ -54,6 +54,14 @@
 - 全套60项：59通过、1项文件符号链接测试因Windows权限跳过；目录junction拒绝已单独通过。这是协议调用与schema验证，不是实际Codex/OpenCode会话或live DSH插件启用。
 - 独立只读审查子任务未返回结果，未将其计为通过；Lead复核差异并执行测试。
 
+## 真实 DSH 宿主阶段
+
+- 实装DSH 0.2.2-rc.1独立headless派生profile实测，使用本地脚本化模拟模型和隔离DSH_HOME，不调用付费模型或修改运行中GUI。
+- 当前Profile部署的Skill由真正skill工具读取完整正文（去除frontmatter，规范化CRLF后全文比对）；生成MCP patch加载Search-core并将本地tool_search结果返回模型；Memory-net插件写入和工具结果回流、注入与SQLite落盘同时通过。见 dsh-host-verification.json。
+- 复用已有mock-model和verify-e2e，不删原断言；模拟模型可选MCP/Skill分支不改变旧冒烟默认行为。
+- 增加ctx.effect销毁绑定及事件订阅this绑定，关闭全部记忆workspace并防止陈旧工具/事件重新打开；适配包21项测试通过。
+- 这证明实际独立DSH宿主接入，不证明真实用户profile安装、所有版本或付费provider鉴权。复跑见 asset-manager/DSH-HOST-ACCEPTANCE.md。
+
 ## 重要修复
 
 - Search-core原测试Windows下SQLite未关闭即rm造成EPERM：调整清理顺序，不跳过业务断言。
@@ -63,7 +71,7 @@
 
 ## 尚未完成的硬门槛
 
-1. Codex/OpenCode实际发现调用、DSH live profile插件安装和跨宿主适配验证。
+1. 独立真实DSH宿主Skill/MCP/Memory-net闭环已通过；Codex/OpenCode实际发现调用、用户live profile安装和跨版本适配仍待验证。
 2. Profile组合、Skill部署与MCP配置候选合并/显式应用/回滚已实现；真实宿主采用配置、依赖/插件安装与凭据映射仍未完整验证。
 3. Search-core Go的CGO工具链和真实MCP协议验证。
 4. Console核心真实点击及落盘闭环已通过；完整交互矩阵与Firefox真实浏览器服务仍待验。

@@ -4,6 +4,12 @@
 已对 **真实 dsh 0.1.2-rc.1** 端到端验证（见文末冒烟）：插件加载 / 工具注册 / systemPrompt
 区段注入 / 模型工具调用 / SQLite 落盘 / 宿主工具结果自动观测（auto-observe）全链路闭环。
 
+## 当前宿主验收
+
+在agents-hub中新增 [跨平台真实宿主探针](../../../../asset-manager/DSH-HOST-ACCEPTANCE.md)，实装DSH 0.2.2-rc.1独立headless验证通过：Memory-net工具与持久化、生成MCP bridge及部署Skill实际调用同时闭环。本地脚本化模拟模型、不动用户live profile、不下载或修改DSH。
+
+ctx.effect可用时销毁自动关闭全部workspace；陈旧工具/事件不得重新打开。原0.1.2-rc.1记录是历史证据，不是全部新版本免验收保证。
+
 ## 设计红线（为什么 dsh 上游更新不用改这里）
 
 1. **零 import dsh/cordis**：本包源码不 `import` 任何 dsh/cordis 模块——宿主以运行时形态传入

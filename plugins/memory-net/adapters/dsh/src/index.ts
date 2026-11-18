@@ -62,7 +62,9 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
 
   /** workspace 名 → 实例缓存（同目录复用；close 由返回的 api.close 全量清理）。 */
   const nets = new Map<string, MemoryNet>()
+  let closed = false
   const netOf = (dir: string): MemoryNet => {
+    if (closed) throw new Error('memory-net adapter is closed')
     const hit = nets.get(dir)
     if (hit) return hit
     const net = MemoryNet.open(dir, { agentId: cfg.agent_id, role: 'host' })
@@ -71,6 +73,7 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
   }
   /** 全量关闭：HostApi.close 的实际实现（默认 + 非默认 workspace 实例一个不漏）。 */
   const closeAllNets = (): void => {
+    closed = true
     for (const n of nets.values()) n.close()
     nets.clear()
   }
@@ -201,7 +204,7 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
       warn(ctx, 'auto_observe 已启用但 ctx.on 缺失（cordis 事件总线不可达）——自动观测关闭，其余接缝不受影响')
     } else {
       try {
-        installAutoObserve({ on: bus }, cfg, netOf, { warn: (m) => warn(ctx, m) })
+        installAutoObserve({ on: bus.bind(ctx) }, cfg, netOf, { warn: (m) => warn(ctx, m) })
       } catch (e) {
         warn(ctx, `auto_observe 订阅失败（自动观测关闭，其余接缝不受影响）: ${String((e as Error)?.message ?? e)}`)
       }
@@ -231,6 +234,12 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
     warn(ctx, `memory-net section 注册失败（其余接缝不受影响）: ${String((e as Error)?.message ?? e)}`)
   }
 
+  if (typeof ctx.effect === 'function') {
+    ctx.effect(() => () => {
+      closeAllNets()
+      appliedCtxs.delete(ctx)
+    }, 'memory-net databases')
+  }
   if (typeof ctx === 'object' && ctx !== null) appliedCtxs.set(ctx, api)
   return api
 }

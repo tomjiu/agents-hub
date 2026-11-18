@@ -96,6 +96,8 @@ export interface DshCtx {
   /** 可选：cordis 事件总线订阅面（混合在 ctx 上的方法，非服务属性——无需 inject 声明）。
    *  仅用于 auto-observe（'tools/result' 事件）；缺失时自动观测关闭，其余接缝不受影响。 */
   on?: (event: string, listener: (...args: unknown[]) => void) => void
+  /** 可选：Cordis effect 作用域销毁时调用返回的 disposer；关闭本插件数据库。 */
+  effect?: (setup: () => () => void, label?: string) => unknown
   /** 可选：结构化日志/告警面（缺失时回退 stderr）。 */
   logger?: {
     warn: (msg: string) => void

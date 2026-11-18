@@ -528,3 +528,33 @@ test('P3-14b: resolveConfig enabled 布尔防御——"false"/0 关掉，"true"/
   // auto_observe 五项同一哲学：字符串形态同样可关
   assert.equal(resolveConfig({ auto_observe: { enabled: 'false' } }).auto_observe.enabled, false)
 })
+
+test('宿主effect销毁关闭全部workspace，陈旧工具与事件不得重新打开数据库', () => {
+  const root = makeRoot()
+  const { ctx, tools, emit, warns } = mockCtx({ withBus: true })
+  const disposers: Array<() => void> = []
+  ctx.effect = (setup) => { disposers.push(setup()) }
+  const config = { workspaces_root: join(root, 'ws'), default_workspace: 'main' }
+  let api: ReturnType<typeof apply> = null
+  try {
+    api = apply(ctx, config)
+    assert.ok(api)
+    const recall = tools.find((tool) => tool.name === 'memory_net_recall')!
+    recall.execute({ workspace: 'side' })
+    assert.equal(disposers.length, 1)
+    disposers[0]!()
+    assert.throws(() => recall.execute({}), /adapter is closed/)
+    assert.throws(() => recall.execute({ workspace: 'new-after-close' }), /adapter is closed/)
+    emit('tools/result', { name: 'test-after-close', callId: 'stale' }, { value: 'do not reopen' })
+    assert.ok(warns.some((warning) => warning.includes('adapter is closed')))
+    assert.equal(existsSync(join(root, 'ws', 'new-after-close')), false)
+    // Disposal clears the successful-apply cache, permitting a fresh plugin generation.
+    api = apply(ctx, config)
+    assert.ok(api)
+    assert.equal(disposers.length, 2)
+    disposers[1]!()
+  } finally {
+    api?.close()
+    cleanup(root)
+  }
+})
