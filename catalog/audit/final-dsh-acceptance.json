@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "status": "COMPLETE_DSH_FOCUSED_REFACTOR_WITH_DECLARED_LIMITS",
+  "verified_code_commit": "f4c5b06653fa89b7c68d41490fa8d63c0e8e2d2a",
+  "branch": "refactor/asset-runtime-center",
+  "pull_request": "https://github.com/tomjiu/agents-hub/pull/2",
+  "main_merged": false,
+  "root_tests": {
+    "total": 96,
+    "passed": 95,
+    "skipped": 1,
+    "skip_reason": "Windows file symlink privilege absent; directory junction protection separately passed"
+  },
+  "independent_checkout": {
+    "build_dsh": true,
+    "catalog_assets": 136,
+    "migration_targets": 2418,
+    "missing": 0,
+    "current_bytes_match_git": true,
+    "fsck": true,
+    "tracked_clean": true
+  },
+  "host_results": [
+    {
+      "version": "0.2.2-rc.1",
+      "status": "PASS",
+      "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+      "assets_sha256": "62abb69f57609a3343e9eb46e649aaeadca5fe675e293ac5c437f7a9e1160839",
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      }
+    },
+    {
+      "version": "0.2.2-rc.4",
+      "status": "PASS",
+      "host_sha256": "0c890927431283236f5476f94aa8328fe60f395d5360e5a96295a6b28769a281",
+      "assets_sha256": "62abb69f57609a3343e9eb46e649aaeadca5fe675e293ac5c437f7a9e1160839",
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      }
+    }
+  ],
+  "console": "Verified in initial independently installed clone at 6fefdfd; Console source and runtime artifacts unchanged since.",
+  "live_user_profile_modified": false,
+  "production_accounts_used": false,
+  "limits": [
+    "Only recorded DSH host/asset fingerprints on Windows Node 26.13.1 tested",
+    "Public search-source availability and paid model authentication not certified",
+    "Concurrent DSH tool_search list resync and search race unresolved; wait for discovery completion",
+    "60 upstream identities unverified, 71 vendor Skills need review",
+    "4 Office license declarations block deployment; original retention/distribution authorization unresolved",
+    "Go native build, Firefox real host, full UI matrix not certified; TS MCP is verified DSH search",
+    "Automatic market extraction, all-source recovery and semantic conflict resolution not implemented"
+  ],
+  "completion_meaning": "DSH-focused asset-center refactor, safe lifecycle, version checks and authorized GitHub branch update achieved; not all assets/all clients/live user installation."
+}

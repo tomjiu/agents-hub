@@ -23,7 +23,7 @@ node asset-manager/cli.mjs check-dsh <installed-dsh-package-directory>
 
 view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置片段。换成 dsh、codex 或 opencode 可生成对应视图；不会覆盖用户配置，也不会启动远端服务或自动加载插件。
 
-**本次运行时验收只要求DSH可用，不要求Codex/OpenCode全部跑通；后两者适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH 0.2.2-rc.1与next 0.2.2-rc.4独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 交付边界及新clone复验见 [交付矩阵](catalog/audit/DELIVERY.md) 与 [干净副本证据](catalog/audit/fresh-checkout-verification.json)；阶段历史见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
+**当前DSH-focused重构已交付，验收只要求DSH可用；Codex/OpenCode适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH 0.2.2-rc.1与next 0.2.2-rc.4独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 交付边界及新clone复验见 [交付矩阵](catalog/audit/DELIVERY.md) 与 [干净副本证据](catalog/audit/fresh-checkout-verification.json)；阶段历史见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
 
 ## 目录职责
 

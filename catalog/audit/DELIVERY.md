@@ -1,10 +1,10 @@
 # DSH-focused v2 交付与验收矩阵
 
-## 本轮结论
+## 最终结论（当前DSH-focused目标）
 
-**管理基础和已验证DSH核心链路可以复现；未验证资产仍不自动启用。** 当前不是任意资产、任意客户端或任意新版DSH的全功能保证。这个结论基于提交 6fefdfd08fead84dc0bf9bb828fb0877dce95080 的独立干净Git副本，不借用原目录node_modules或构建产物。
+**当前DSH-focused重构和远端分支更新已完成；未验证资产仍不自动启用。** 最终代码 f4c5b06653fa89b7c68d41490fa8d63c0e8e2d2a 经独立副本复验：95测试通过、1权限项跳过，构建、迁移和两版DSH运行包通过。该副本初次从提交6fefdfd安装固定依赖，不借用原目录node_modules或产物。不是任意资产、任意客户端或任意新版DSH的全功能保证。
 
-[干净副本证据](fresh-checkout-verification.json)记录固定安装、构建、根测试、完整迁移目标核对、两版真实DSH和Console实际点击。[详细阶段记录](IMPLEMENTATION.md)保留此前实现与失败修复历史。
+[最终验收](final-dsh-acceptance.json)与[初次干净副本证据](fresh-checkout-verification.json)记录固定安装、构建、根测试、完整迁移目标核对、两版真实DSH和Console实际点击。[详细阶段记录](IMPLEMENTATION.md)保留此前实现与失败修复历史。
 
 ## 本次已交付
 
@@ -38,4 +38,4 @@
 2. npm test和validate；check-dsh对安装包与当前产物指纹检查。不同Node版本、宿主或构建变化先按 [升级指南](../../asset-manager/DSH-UPGRADE.md) 复验。
 3. dsh-bundle --memory创建全新私有运行包，inspect-dsh-bundle后明确启动独立headless；[运行包指南](../../asset-manager/DSH-BUNDLE.md)详列路径、状态与保留边界。
 4. 默认不会读或接管现有记忆库。没有用户授权，不改正在运行的profile；state有用户数据时不能当垃圾清理。
-5. 当前功能分支通过草稿PR评审；远端分支已更新不等于main已合并或生产实例已升级。
+5. 成果保存于功能分支与草稿PR，供用户审阅；未声称第三方审查已通过。远端更新不等于main合并或生产实例升级。
