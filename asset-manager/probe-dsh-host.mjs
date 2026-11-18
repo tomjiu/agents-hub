@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 import YAML from 'yaml';
 import {createView} from './core/views.mjs';
 import {deployProfile,uninstallDeployment} from './core/deployment.mjs';
+import {dshFingerprint,saveDshAcceptance} from './core/dsh-compatibility.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const installation=process.env.HUB_DSH_INSTALLATION;
 if(!installation)throw new Error('Set HUB_DSH_INSTALLATION to installed @deepseek-ai/dsh directory; no downloads or live profile changes.');
@@ -24,6 +25,7 @@ async function run(args,cwd=work,budget=60000){
 let mock,view,deployment;let mockLog='';
 try{
  await run([path.join(mn,'scripts/build.mjs')],mn);await run([path.join(adapter,'scripts/build.mjs')],adapter);
+ const fingerprint=await dshFingerprint(root,installation);
  await run([path.join(mn,'bin/mn.js'),'init',ws]);await run([path.join(mn,'bin/mn.js'),'add',ws,'constraint','--key','no-force-push','--text','永不 force push main','--payload','{"mode":"forbid"}']);await run([path.join(mn,'bin/mn.js'),'progress',ws,'--task','e2e','--status','doing','--summary','登录页 60%','--agent','alice']);
  await run([dsh,'--profile','hub-e2e','--from-default-profile','headless','--dump-config']);
  const modules=path.join(home,'profiles/hub-e2e/node_modules');await fs.mkdir(modules,{recursive:true});await fs.symlink(adapter,path.join(modules,'memory-net-dsh-adapter'),'junction');await fs.symlink(path.join(fixtures,'echo-tool'),path.join(modules,'mn-e2e-echo-tool'),'junction');
@@ -39,7 +41,8 @@ try{
  const stdout=path.join(work,'dsh.out');await fs.writeFile(stdout,result.stdout);const verified=await run([path.join(fixtures,'verify-e2e.mjs'),diag,path.join(ws,'memory.db'),stdout]);
  const diagnostics=(await fs.readFile(diag,'utf8')).trim().split(String.fromCharCode(10)).map(line=>JSON.parse(line));assert.ok(diagnostics.some(row=>row.has_mcp_tool));assert.ok(diagnostics.some(row=>row.round==='after_tool'&&row.has_mcp_result),'Real MCP result must return to model, not a fabricated success');assert.ok(diagnostics.some(row=>row.has_skill_tool));assert.ok(diagnostics.some(row=>row.has_loaded_skill),'Deployed Skill full text must return through real host invocation');
  await uninstallDeployment(root,work,deployment.id,{approved:true});
- const report={status:'PASS',skill:{name:'asset-management',deployed:true,invoked:true,full_content_seen_by_model:true},mcp:{tool:'mcp__search-core__tool_search',registered:true,result_returned_to_model:true,source:'Generated DSH MCP patch + real Search-core stdio server'},host_version:JSON.parse(await fs.readFile(path.join(installation,'package.json'),'utf8')).version,scope:'Actual isolated DSH headless profile, local scripted OpenAI-compatible model, real plugin/tool execution and SQLite; not live user profile or paid model.',checks:verified.stdout.trim().split(String.fromCharCode(10)),user_profile_modified:false,telemetry:'DISABLED'};
- await fs.writeFile(path.join(evidence,'dsh-host.json'),JSON.stringify(report,null,2)+String.fromCharCode(10));console.log(JSON.stringify(report,null,2));
+ const after=await dshFingerprint(root,installation);assert.equal(after.host_sha256,fingerprint.host_sha256);assert.equal(after.assets_sha256,fingerprint.assets_sha256);
+ const report={status:'PASS',fingerprint,memory:{persisted:true,prompt_injection:true,auto_observe:true,self_filter:true},skill:{name:'asset-management',deployed:true,invoked:true,full_content_seen_by_model:true},mcp:{tool:'mcp__search-core__tool_search',registered:true,result_returned_to_model:true,source:'Generated DSH MCP patch + real Search-core stdio server'},host_version:JSON.parse(await fs.readFile(path.join(installation,'package.json'),'utf8')).version,scope:'Actual isolated DSH headless profile, local scripted OpenAI-compatible model, real plugin/tool execution and SQLite; not live user profile or paid model.',checks:verified.stdout.trim().split(String.fromCharCode(10)),user_profile_modified:false,telemetry:'DISABLED'};
+ await fs.writeFile(path.join(evidence,'dsh-host.json'),JSON.stringify(report,null,2)+String.fromCharCode(10));const acceptance_file=await saveDshAcceptance(root,report);console.log(JSON.stringify({status:report.status,host_version:report.host_version,skill:report.skill,mcp:report.mcp,memory:report.memory,acceptance_file},null,2));
 }catch(e){await fs.writeFile(path.join(evidence,'dsh-host-failure.txt'),String(e)+String.fromCharCode(10)+mockLog);throw e;}
 finally{if(mock&&mock.exitCode===null){const exited=new Promise(resolve=>mock.once('exit',resolve));mock.kill();await exited;}if(view)await fs.rm(view.destination,{recursive:true,force:true});await fs.rm(work,{recursive:true,force:true});}

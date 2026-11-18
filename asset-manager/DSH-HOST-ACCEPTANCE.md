@@ -11,7 +11,7 @@ $env:HUB_DSH_INSTALLATION = '<installed @deepseek-ai/dsh directory>'
 node asset-manager/probe-dsh-host.mjs
 ~~~
 
-其他平台设置同名环境变量后运行。此处HUB_DSH_INSTALLATION指包目录，不是个人配置目录。实测宿主版本为0.2.2-rc.1；其他版本必须重新验收，不能由结构类型或单元测试推断兼容。
+其他平台设置同名环境变量后运行。此处HUB_DSH_INSTALLATION指包目录，不是个人配置目录。实测宿主版本为0.2.2-rc.1与next 0.2.2-rc.4；其他版本必须重新验收，不能由结构类型或单元测试推断兼容。
 
 ## 完整链路
 
@@ -30,6 +30,6 @@ node asset-manager/probe-dsh-host.mjs
 
 - 模拟模型是脚本化应答，不证明模型智能、付费provider鉴权或公网可用性。
 - 这是实际独立DSH宿主测试，**不是把插件部署到当前运行中用户GUI**，也不是承诺所有宿主版本兼容。
-- Codex/OpenCode实际加载仍需独立验收。Console UI和Firefox服务是不同链路，不由此替代。
+- 本次只要求DSH；Codex/OpenCode实际加载不在验收范围。Console UI和Firefox服务是不同链路，不由此替代。
 - 普通结束的回收已验证；进程被强制杀死、机器断电的孤儿进程/临时目录恢复不属本探针完整保证。
 - 适配包增加可选ctx.effect数据库销毁绑定：全部workspace关闭，陈旧工具/事件不得重新打开；相应契约回归已通过。其他插件服务/工具注销依赖宿主作用域机制。

@@ -17,11 +17,13 @@ node asset-manager/cli.mjs expert core
 node asset-manager/cli.mjs view generic core
 # 或按仓库客户端 Profile 展开专家和资产选择：
 node asset-manager/cli.mjs profile-view dsh
+# 对安装包与当前记忆/搜索资产做指纹兼容检查：
+node asset-manager/cli.mjs check-dsh <installed-dsh-package-directory>
 ~~~
 
 view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置片段。换成 dsh、codex 或 opencode 可生成对应视图；不会覆盖用户配置，也不会启动远端服务或自动加载插件。
 
-**当前是 v2 基础重构，不是全部客户端一键启用已经验收。** 全量迁移和已完成验证见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
+**本次运行时验收只要求DSH可用，不要求Codex/OpenCode全部跑通；后两者适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH 0.2.2-rc.1与next 0.2.2-rc.4独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 全量迁移和已完成验证见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
 
 ## 目录职责
 

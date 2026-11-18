@@ -37,9 +37,13 @@ export-recovery <new-directory> 可打包启用快照；restore-recovery <bundle
 
 probe-dsh-host.mjs复用已有mock-model和verify-e2e，用安装包实际启动独立headless profile，闭环验证已部署Skill、生成MCP和Memory-net插件。无真实账户/付费模型，不改用户运行实例。详见 [宿主验收指南](DSH-HOST-ACCEPTANCE.md)。
 
+## DSH版本兼容
+
+check-dsh <installation> 对照真实宿主验收与当前记忆/搜索资产指纹；不匹配则非零退出。check-dsh-upstream只发现latest/next，不下载或应用。已独立验证0.2.2-rc.1与0.2.2-rc.4；详见 [升级指南](DSH-UPGRADE.md)。
+
 ## 未完成的验收
 
-真实 Codex/OpenCode 加载、DSH live profile 安装、MCP 完整插件视图、市场发现与安装包提取、自动安全解包和语义规范冲突检测尚未完成。已有恢复包的隔离恢复通过；任意远端来源的自动恢复尚未完成。详见 catalog/audit/IMPLEMENTATION.md。
+按用户要求，不再把真实Codex/OpenCode加载列为本次门槛。用户DSH live profile升级须另获明确授权；MCP完整插件视图、市场发现与安装包提取、自动安全解包和语义规范冲突检测尚未完成。已有恢复包的隔离恢复通过；任意远端来源的自动恢复尚未完成。详见 catalog/audit/IMPLEMENTATION.md。
 
 ## 模块
 

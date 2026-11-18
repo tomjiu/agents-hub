@@ -6,22 +6,21 @@
 
 ## 当前宿主验收
 
-在agents-hub中新增 [跨平台真实宿主探针](../../../../asset-manager/DSH-HOST-ACCEPTANCE.md)，实装DSH 0.2.2-rc.1独立headless验证通过：Memory-net工具与持久化、生成MCP bridge及部署Skill实际调用同时闭环。本地脚本化模拟模型、不动用户live profile、不下载或修改DSH。
+在agents-hub中新增 [跨平台真实宿主探针](../../../../asset-manager/DSH-HOST-ACCEPTANCE.md)，实装DSH 0.2.2-rc.1与隔离next 0.2.2-rc.4独立headless验证通过：Memory-net工具与持久化、生成MCP bridge及部署Skill实际调用同时闭环。本地脚本化模拟模型、不动用户live profile、不下载或修改DSH。
 
 ctx.effect可用时销毁自动关闭全部workspace；陈旧工具/事件不得重新打开。原0.1.2-rc.1记录是历史证据，不是全部新版本免验收保证。
 
-## 设计红线（为什么 dsh 上游更新不用改这里）
+## 设计红线与升级验收（接口变化必须重新验证）
 
 1. **零 import dsh/cordis**：本包源码不 `import` 任何 dsh/cordis 模块——宿主以运行时形态传入
    `ctx`，本包只依赖 `src/contract.ts` 里**自己声明的最小结构契约**（structural typing）。
-   dsh 内部重构（改文件布局/内部类型）不影响本包编译与运行。
+   这降低编译期耦合，但不保证运行契约兼容；服务、事件、工具输出接口变化必须重新跑真实宿主验证。
 2. **严禁 fork / patch / 替换 dsh**：dsh 是 vendor、版本锁定、跟随官方上游更新。适配包只挂
-   官方插件点（provide / tools.register / systemPrompt.section / 事件订阅 ctx.on），升级 dsh =
-   换 vendor 版本，适配包零改动（若官方插件点契约变化，本包在 `apply` 时**防御式探测并降级明示**，不崩宿主）。
+   官方插件点（provide / tools.register / systemPrompt.section / 事件订阅 ctx.on）。升级前独立测试新版本，不能预设适配包零改动。防御式探测只能捕获已覆盖的缺失能力，签名和事件语义漂移仍需真实调用及落盘验证。
 3. **写纪律由桥面强制**：模型（LLM）在本包内永远拿不到 observation 写路径——
    工具 `memory_net_write` 只暴露 inference/tip；`observe()` 只存在于 host 半区 API
    （`ctx.provide('memory-net')` 的 `observe`）与 auto-observe 桥（宿主事件监听，模型不可控）。
-   dsh 升级无论怎么改，这条硬边界都由本包代码保证，不依赖 dsh 行为。
+   本包维持写入白名单；仍需宿主隔离与真实验证，不能对任意新版DSH做安全保证。
 
 ## 与真实 dsh 契约的对齐点（2026-09-10 实勘 0.1.2-rc.1 定案）
 

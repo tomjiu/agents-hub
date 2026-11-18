@@ -51,7 +51,7 @@
       "original": "memory-net/adapters/dsh/README.md",
       "target": "plugins/memory-net/adapters/dsh/README.md",
       "baseline_sha256": "ae43ac2b731b8b259ca0ce5815dd99b86b88167ed955fcedae16d6e8768713ea",
-      "current_sha256": "e84873160de21e9034c0c5f54fe4762ad58d3fa0530a7bc74db18419c11c4daa"
+      "current_sha256": "c0de1e7109573baba7daa3c2c019eb0cb62e49bd22575d1e6d1334d923fb3883"
     },
     {
       "original": "memory-net/adapters/dsh/src/contract.ts",
@@ -75,7 +75,7 @@
       "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
-      "current_sha256": "31bfd2456ebb87f138ed7dcdb271f248c62d564e1f482425e83ff13d9cc4bdd6"
+      "current_sha256": "663dc963cf09cdea144aafcd09eb784bda3678b8b43f5f601d8d42e009899ea6"
     },
     {
       "original": "memory-net/console/apps/console/dist/index.html",

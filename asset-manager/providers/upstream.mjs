@@ -27,7 +27,7 @@ async function secureGet(raw,limit,timeout) {
   });req.on('error',reject);
  });
 }
-async function requestJson(url) {return JSON.parse((await secureGet(url,2*1024*1024,20000)).toString('utf8'));}
+export async function requestJson(url) {return JSON.parse((await secureGet(url,2*1024*1024,20000)).toString('utf8'));}
 export async function limitedBody(response,limit) {
  const len=Number(response.headers.get('content-length'));if(Number.isFinite(len)&&len>limit)throw new Error('Download too large');
  const chunks=[];let total=0;try{for await(const chunk of response.body){total+=chunk.length;if(total>limit)throw new Error('Download too large');chunks.push(chunk);}return Buffer.concat(chunks);}catch(e){await response.body?.cancel().catch(()=>{});throw e;}

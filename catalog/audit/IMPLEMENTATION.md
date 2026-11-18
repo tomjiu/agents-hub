@@ -1,6 +1,6 @@
 # v2 基础重构实施状态
 
-状态：进行中；不是“全部客户端开箱即用已完成”。区分文件迁移、离线验证与实际宿主集成。
+状态：进行中。用户已将验收收窄为DSH可用，不再要求Codex/OpenCode全部跑通；不创建子代理。优先记忆插件、搜索MCP的DSH版本兼容。区分文件迁移、离线验证与真实宿主集成。
 
 ## 已完成
 
@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 59 PASS，1 SKIP（总60） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 65 PASS，1 SKIP（总66） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 292/292 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -62,6 +62,14 @@
 - 增加ctx.effect销毁绑定及事件订阅this绑定，关闭全部记忆workspace并防止陈旧工具/事件重新打开；适配包21项测试通过。
 - 这证明实际独立DSH宿主接入，不证明真实用户profile安装、所有版本或付费provider鉴权。复跑见 asset-manager/DSH-HOST-ACCEPTANCE.md。
 
+## DSH-only 与升级兼容阶段
+
+- 用户明确只要求DSH，保留其他客户端适配但停止全客户端验收；用户禁止创建子代理后只由Lead工作。此前两个子任务没有结果，不计为审查。
+- npm latest为0.2.2-rc.1，next为0.2.2-rc.4；候选rc.4独立固定版本安装于忽略的测试目录，不替换运行版。两版真实headless均验证Memory-net写入/注入/落盘/自动观测、自研Search-core MCP工具结果回流和Skill全文加载。
+- check-dsh按宿主核心接口与profile文件、当前记忆/搜索源码和编译树及Node版本的精确指纹核对。新版本、同版本文件变化或资产变化均要求重新验收；不自动升级、启用或禁用运行会话。
+- check-dsh-upstream沿用公网DNS安全校验；本机DNS映射被安全拒绝，未绕过。公开npm view人工核对得到channels，记录不充当审批。
+- 兼容记录见catalog/runtime/dsh-compatibility.json；现有导入基线保持不变。
+
 ## 重要修复
 
 - Search-core原测试Windows下SQLite未关闭即rm造成EPERM：调整清理顺序，不跳过业务断言。
@@ -71,7 +79,7 @@
 
 ## 尚未完成的硬门槛
 
-1. 独立真实DSH宿主Skill/MCP/Memory-net闭环已通过；Codex/OpenCode实际发现调用、用户live profile安装和跨版本适配仍待验证。
+1. DSH 0.2.2-rc.1与next 0.2.2-rc.4真实独立宿主记忆/搜索/Skill闭环已通过；用户live profile切换须另获明确授权。Codex/OpenCode真实加载不再是本次目标门槛。
 2. Profile组合、Skill部署与MCP配置候选合并/显式应用/回滚已实现；真实宿主采用配置、依赖/插件安装与凭据映射仍未完整验证。
 3. Search-core Go的CGO工具链和真实MCP协议验证。
 4. Console核心真实点击及落盘闭环已通过；完整交互矩阵与Firefox真实浏览器服务仍待验。
@@ -83,4 +91,4 @@
 
 没有启动替代DSH GUI，没有修改真实账户、用户MCP/插件配置或四项目当前规范。旧文件进入审计和研究目录，不参与自动加载；运行状态位于忽略的.asset-state。
 
-完整目标未达成前，不把基础提交称为最终开箱即用版本。
+按最新DSH-only范围继续完成验收；不因停止Codex/OpenCode测试而删除其已有适配。不把当前进度称为已完成所有来源及全部资产运行验证。
