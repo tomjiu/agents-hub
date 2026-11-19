@@ -1102,5 +1102,78 @@
     "Unreferenced implicit tools, accounts and professional-task effects not exhaustively validated",
     "No UI changes or live user profile changes",
     "No semantic non-conflict guarantee for arbitrary instruction combinations"
-  ]
+  ],
+  "independent_checkout": {
+    "code_commit": "9ef53f76cb3ec80b4507fd5f00ca888a8ffca592",
+    "root_tests": {
+      "total": 132,
+      "passed": 131,
+      "skipped": 1
+    },
+    "exact_id_lookups": 137,
+    "task_queries_passed": 4,
+    "skill_provider_full_body_equality": 48,
+    "skill_provider_warnings": 0,
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "host_bundles": [
+      {
+        "version": "0.2.2-rc.1",
+        "status": "PASS",
+        "assets_sha256": "61a715c189c04966f3b0ede4d382c2f85a917c2a8b2b284b64cf15bf31e9400f",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "provider_requests": 1,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "status": "PASS",
+        "assets_sha256": "61a715c189c04966f3b0ede4d382c2f85a917c2a8b2b284b64cf15bf31e9400f",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "provider_requests": 1,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ]
+  }
 }
