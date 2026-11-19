@@ -75,5 +75,73 @@
     "Live DSH and user profile untouched",
     "No configured GitHub checks observed; local tests not remote CI"
   ],
-  "merge_authorization": "User explicitly requested review and merge existing PR to main"
+  "merge_authorization": "User explicitly requested review and merge existing PR to main",
+  "independent_checkout": {
+    "commit": "64cf27b1f14ae44d6e19fd1992c1197b655aceaa",
+    "root_tests": {
+      "total": 118,
+      "passed": 117,
+      "skipped": 1
+    },
+    "catalog_assets": 137,
+    "migration_targets": 2418,
+    "missing": 0,
+    "mismatch": 0,
+    "tracked_clean": true,
+    "git_fsck": true,
+    "bundles": [
+      {
+        "version": "0.2.2-rc.5",
+        "status": "PASS",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "50a3bc4b938a265743d7eee06e4d8c2a5d515b307f6eacae09f47f21a81a5db9",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "provider_requests": 1,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.1",
+        "status": "PASS",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "50a3bc4b938a265743d7eee06e4d8c2a5d515b307f6eacae09f47f21a81a5db9",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "provider_requests": 1,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ]
+  }
 }
