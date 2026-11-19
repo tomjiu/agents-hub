@@ -1,0 +1,48 @@
+# Draft MCP snippets — COPY into ~/.codex/config.toml when ready.
+# All intended disabled-by-default. Do not enable without runtime deps.
+
+# --- Context7 (library docs) ---
+# [mcp_servers.context7]
+# url = "https://mcp.context7.com/mcp"
+# # optional API key header if you have one
+# enabled = false
+
+# --- Chrome DevTools MCP (browser diagnostics) ---
+# [mcp_servers.chrome-devtools]
+# type = "stdio"
+# command = "npx"
+# args = ["-y", "chrome-devtools-mcp@latest"]
+# enabled = false
+
+# --- Ghidra MCP (bethington) — needs Ghidra + plugin/server setup ---
+# Source: E:\Code\skills\sources\mcp-ecosystem\ghidra-mcp-bethington
+# [mcp_servers.ghidra]
+# type = "stdio"
+# command = "..."   # fill after reading pack README
+# enabled = false
+
+# --- Ghidra headless MCP ---
+# Source: E:\Code\skills\sources\mcp-ecosystem\ghidra-headless-mcp
+# [mcp_servers.ghidra_headless]
+# type = "stdio"
+# command = "..."
+# enabled = false
+
+# --- Frida MCP (dynamic instrumentation; authorized targets only) ---
+# Source: E:\Code\skills\sources\mcp-ecosystem\frida-mcp-dnakov
+# Alt Android-focused: E:\Code\skills\sources\mcp-ecosystem\frida-mcp-kahlo
+# [mcp_servers.frida]
+# type = "stdio"
+# command = "..."   # see pack README (often python -m / uvx)
+# enabled = false
+
+# --- radare2 r2mcp (optional; install r2 + r2pm -r r2mcp) ---
+# Docs example: r2pm install r2mcp; then stdio via r2pm -r r2mcp
+# [mcp_servers.r2mcp]
+# type = "stdio"
+# command = "r2pm"
+# args = ["-r", "r2mcp"]
+# enabled = false
+
+# Already enabled elsewhere (do not duplicate):
+# tavily_hikari, keenable, playwright, firefox-devtools

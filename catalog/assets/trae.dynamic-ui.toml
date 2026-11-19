@@ -1,0 +1,22 @@
+id = "trae.dynamic-ui"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/dynamic-ui"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::dynamic-ui/0.0.1/package.zip"
+version = "0.0.1"
+build = "default::prod_20260609::dynamic-ui"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "b51c882abe2cb22f0a567086a02f2534d40a1a23ada34058d2f632fde1cc3b36"
+local_modified = "unknown"
+enabled = false

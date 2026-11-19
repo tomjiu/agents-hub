@@ -1,0 +1,22 @@
+id = "trae.trae-computer-use"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/TRAE-computer-use"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-computer-use/0.0.1/package.zip"
+version = "0.0.1"
+build = "default::prod_20260609::TRAE-computer-use"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "624d92388f67a58981e2b8df8fca7714456923855b6d10a35b032fc394272e8a"
+local_modified = "unknown"
+enabled = false

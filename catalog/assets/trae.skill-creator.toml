@@ -1,0 +1,22 @@
+id = "trae.skill-creator"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/skill-creator"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::skill-creator/0.0.1/package.zip"
+version = "0.0.1"
+build = "default::prod_20260609::skill-creator"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "9594981090d08f87949989fe5b8a0e6033dd6377c37a6ce7fdf0c14976928b1b"
+local_modified = "unknown"
+enabled = false

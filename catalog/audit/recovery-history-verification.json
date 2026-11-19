@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "status": "PASS_WITH_DECLARED_LIMITS",
+  "defect": {
+    "previous_schema": 1,
+    "exported_only": "current active snapshots",
+    "reproduced": "Two activations exported 1 version instead of 2; history could not be fully restored"
+  },
+  "repair": {
+    "export_schema": 2,
+    "includes": "all current/history version references",
+    "schema1_contents_compatible": true,
+    "default_restore_activates": false,
+    "explicit_restore_selection": {
+      "approval": true,
+      "reviewer_and_note": true,
+      "empty_runtime_without_active_file": true,
+      "starts_services": false
+    }
+  },
+  "tests": {
+    "root": {
+      "total": 114,
+      "passed": 113,
+      "skipped": 1
+    },
+    "recovery_specialized": 16,
+    "lifecycle_history_regression": 1,
+    "checks": [
+      "three successive rollbacks to baseline",
+      "rollback then new activation and baseline selection",
+      "schema1 current contents restore only",
+      "missing/tampered history closure",
+      "restored review or checkout edits rejected",
+      "new restrictive license blocks selection",
+      "existing target content/state and locks preserved",
+      "copy, pending write and exclusive publish failures",
+      "actual CLI full restore/select/rollback chain",
+      "record kind/revision/null pointer shape validation",
+      "late source tampering after preflight caught by destination hash"
+    ]
+  },
+  "scope": "Isolated fixture assets and actual CLI subprocess; not user DSH or restoration of runtime databases",
+  "limits": [
+    "No memory or search database backup",
+    "No automatic unreferenced stages/client config/DSH runtime recovery",
+    "Strong signatures and authenticated reviewer identity not provided",
+    "Forced process kill may require lock and intent-record inspection"
+  ],
+  "independent_checkout": {
+    "code_commit": "8ff63aace0e3a72eea24af1779939a4a39a7df49",
+    "root_tests": {
+      "total": 114,
+      "passed": 113,
+      "skipped": 1
+    },
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0
+    },
+    "tracked_clean": true,
+    "actual_cli_restore_and_successive_rollback": true
+  }
+}

@@ -1,0 +1,21 @@
+id = "workbuddy.ardot-slides"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-slides"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "b72129525d6c7f3e8e58e3528ad28c79137cab47e3d521680efe8ab8fcf56e40"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,2 @@
+# Asset hashes cover original bytes; preserve newline bytes on checkout.
+* -text

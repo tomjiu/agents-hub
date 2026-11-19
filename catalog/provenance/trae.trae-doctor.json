@@ -1,0 +1,16 @@
+{
+  "sha256": "15f12b63da9235a39d028d29445ef1e2392d381bb5afbf6b2f43a263358ff333",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 3361,
+      "sha256": "574d70a27380c0fbd054709a2542dc935bd3a4868f2114a5adb591bcbb321322"
+    },
+    {
+      "path": "references/disk.md",
+      "bytes": 7086,
+      "sha256": "44f4a0c02a03fb1851a6624377cf3349d5712fb0c4120182739d98618687c9d7"
+    }
+  ],
+  "bytes": 10447
+}

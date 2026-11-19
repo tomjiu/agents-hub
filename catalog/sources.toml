@@ -1,0 +1,1089 @@
+schema = 1
+
+[[entries]]
+id = "source-0"
+name = "MCP Registry"
+url = "https://registry.modelcontextprotocol.io"
+tags = [ "mcp", "registry", "official" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-1"
+name = "MCP Registry GitHub"
+url = "https://github.com/modelcontextprotocol/registry"
+tags = [ "mcp", "registry", "github" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-2"
+name = "MCP Servers"
+url = "https://github.com/modelcontextprotocol/servers"
+tags = [ "mcp", "servers", "reference" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-3"
+name = "MCP Specification"
+url = "https://github.com/modelcontextprotocol/specification"
+tags = [ "mcp", "spec" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-4"
+name = "MCP Docs"
+url = "https://modelcontextprotocol.io"
+tags = [ "mcp", "docs" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-5"
+name = "Agent Skills Spec"
+url = "https://agentskills.io"
+tags = [ "skills", "standard" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-6"
+name = "Agent Skills Spec GitHub"
+url = "https://github.com/agentskills/agentskills"
+tags = [ "skills", "standard", "github" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-7"
+name = "Anthropic Skills"
+url = "https://github.com/anthropics/skills"
+tags = [ "skills", "anthropic" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-8"
+name = "OpenAI Skills (legacy catalog)"
+url = "https://github.com/openai/skills"
+tags = [ "skills", "openai", "legacy" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-9"
+name = "OpenAI Plugins"
+url = "https://github.com/openai/plugins"
+tags = [ "skills", "plugins", "openai" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-10"
+name = "OpenAI Codex docs"
+url = "https://developers.openai.com/codex"
+tags = [ "codex", "docs" ]
+category = "official"
+available_locally = false
+
+[[entries]]
+id = "source-11"
+name = "Keenable"
+url = "https://keenable.ai"
+tags = [ "search", "keenable", "mcp" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-12"
+name = "Keenable MCP"
+url = "https://api.keenable.ai/mcp"
+tags = [ "search", "keenable", "mcp" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-13"
+name = "Keenable docs"
+url = "https://docs.keenable.ai"
+tags = [ "search", "keenable", "docs" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-14"
+name = "Tavily Hikari (pool proxy MCP+HTTP+CLI)"
+url = "https://github.com/IvanLi-CN/tavily-hikari"
+tags = [ "search", "tavily", "mcp", "hikari" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-15"
+name = "Tavily Hikari origin (this deploy)"
+url = "https://tavily.ivanli.cc"
+tags = [ "search", "tavily", "endpoint" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-16"
+name = "Tavily official"
+url = "https://tavily.com"
+tags = [ "search", "tavily", "official" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-17"
+name = "Exa"
+url = "https://exa.ai"
+tags = [ "search", "exa" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-18"
+name = "Exa API docs"
+url = "https://docs.exa.ai"
+tags = [ "search", "exa", "docs" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-19"
+name = "Firecrawl"
+url = "https://www.firecrawl.dev"
+tags = [ "search", "crawl" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-20"
+name = "Brave Search API"
+url = "https://brave.com/search/api"
+tags = [ "search", "brave" ]
+category = "search"
+available_locally = false
+
+[[entries]]
+id = "source-21"
+name = "Glama MCP"
+url = "https://glama.ai/mcp"
+tags = [ "mcp", "marketplace" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-22"
+name = "Smithery"
+url = "https://smithery.ai"
+tags = [ "mcp", "marketplace" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-23"
+name = "MCP.so"
+url = "https://mcp.so"
+tags = [ "mcp", "marketplace" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-24"
+name = "PulseMCP"
+url = "https://www.pulsemcp.com"
+tags = [ "mcp", "marketplace" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-25"
+name = "MCP.run"
+url = "https://www.mcp.run"
+tags = [ "mcp", "marketplace" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-26"
+name = "MCP Atlas"
+url = "https://www.mcp-atlas.com"
+tags = [ "mcp", "marketplace" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-27"
+name = "ModelScope MCP"
+url = "https://modelscope.cn/mcp"
+tags = [ "mcp", "modelscope", "cn" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-28"
+name = "ModelScope Skills"
+url = "https://modelscope.cn/skills"
+tags = [ "skills", "modelscope", "cn" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-29"
+name = "SkillHub"
+url = "https://skillhub.cn"
+tags = [ "skills", "marketplace", "cn" ]
+category = "registry"
+available_locally = false
+
+[[entries]]
+id = "source-30"
+name = "awesome-mcp-servers (punkpeye)"
+url = "https://github.com/punkpeye/awesome-mcp-servers"
+tags = [ "mcp", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-31"
+name = "awesome-mcp-servers (appcypher)"
+url = "https://github.com/appcypher/awesome-mcp-servers"
+tags = [ "mcp", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-32"
+name = "awesome-mcp-servers (TensorBlock)"
+url = "https://github.com/TensorBlock/awesome-mcp-servers"
+tags = [ "mcp", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-33"
+name = "awesome-agent-skills (VoltAgent)"
+url = "https://github.com/VoltAgent/awesome-agent-skills"
+tags = [ "skills", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-34"
+name = "awesome-claude-skills (ComposioHQ)"
+url = "https://github.com/ComposioHQ/awesome-claude-skills"
+tags = [ "skills", "claude", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-35"
+name = "awesome-codex-skills"
+url = "https://github.com/composio-community/awesome-codex-skills"
+tags = [ "skills", "codex", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-36"
+name = "awesome-copilot (GitHub)"
+url = "https://github.com/github/awesome-copilot"
+tags = [ "skills", "copilot", "awesome" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-37"
+name = "agentic-awesome-skills"
+url = "https://github.com/sickn33/agentic-awesome-skills"
+tags = [ "skills", "awesome", "catalog" ]
+category = "awesome"
+available_locally = false
+
+[[entries]]
+id = "source-38"
+name = "GitHub MCP server"
+url = "https://github.com/github/github-mcp-server"
+tags = [ "mcp", "github" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-39"
+name = "Playwright MCP"
+url = "https://github.com/microsoft/playwright-mcp"
+tags = [ "mcp", "browser", "microsoft" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-40"
+name = "Firefox DevTools MCP"
+url = "https://github.com/mozilla/firefox-devtools-mcp"
+tags = [ "mcp", "browser", "firefox" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-41"
+name = "Cloudflare MCP / Agents docs"
+url = "https://developers.cloudflare.com"
+tags = [ "mcp", "cloudflare", "docs" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-42"
+name = "Docker MCP examples"
+url = "https://github.com/docker"
+tags = [ "mcp", "docker" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-43"
+name = "Sentry MCP"
+url = "https://mcp.sentry.dev"
+tags = [ "mcp", "sentry" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-44"
+name = "Context7 MCP"
+url = "https://github.com/upstash/context7"
+tags = [ "mcp", "docs", "context7" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-45"
+name = "Grep by Vercel MCP"
+url = "https://mcp.grep.app"
+tags = [ "mcp", "code-search" ]
+category = "vendor_mcp"
+available_locally = false
+
+[[entries]]
+id = "source-46"
+name = "Superpowers"
+url = "https://github.com/obra/superpowers"
+tags = [ "skills", "methodology" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-47"
+name = "Addy Osmani agent-skills"
+url = "https://github.com/addyosmani/agent-skills"
+tags = [ "skills", "engineering" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-48"
+name = "vercel-labs/agent-skills"
+url = "https://github.com/vercel-labs/agent-skills"
+tags = [ "skills", "vercel" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-49"
+name = "vercel-labs/skills CLI"
+url = "https://github.com/vercel-labs/skills"
+tags = [ "skills", "installer" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-50"
+name = "ModelScope skills"
+url = "https://github.com/modelscope/modelscope-skills"
+tags = [ "skills", "modelscope" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-51"
+name = "planning-with-files"
+url = "https://github.com/OthmanAdi/planning-with-files"
+tags = [ "skills", "planning" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-52"
+name = "reverse-skills (P4nda0s)"
+url = "https://github.com/P4nda0s/reverse-skills"
+tags = [ "skills", "reverse" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-53"
+name = "ghidra-rpc (Cellebrite Labs)"
+url = "https://github.com/cellebrite-labs/ghidra-rpc"
+tags = [ "skills", "ghidra", "reverse" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-54"
+name = "android-reverse-engineering-skill (Codex)"
+url = "https://github.com/CreditTone/android-reverse-engineering-skill"
+tags = [ "skills", "android", "reverse" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-55"
+name = "betab0t reverse skills"
+url = "https://github.com/betab0t/skills"
+tags = [ "skills", "reverse" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-56"
+name = "Claude-Red (offensive methodology)"
+url = "https://github.com/SnailSploit/Claude-Red"
+tags = [ "skills", "security", "authorized-only" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-57"
+name = "scientific-agent-skills"
+url = "https://github.com/K-Dense-AI/scientific-agent-skills"
+tags = [ "skills", "science" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-58"
+name = "Trae cloud skills (extracted)"
+url = "https://github.com/tomjiu/agent-skills-mcp/tree/main/cloud-vendors/trae"
+tags = [ "skills", "trae", "bytedance", "extracted", "closed-source" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-59"
+name = "WorkBuddy builtin skills (extracted)"
+url = "https://github.com/tomjiu/agent-skills-mcp/tree/main/cloud-vendors/workbuddy"
+tags = [ "skills", "workbuddy", "tencent", "extracted", "closed-source" ]
+category = "skills"
+available_locally = false
+
+[[entries]]
+id = "source-60"
+name = "OpenCode"
+url = "https://github.com/anomalyco/opencode"
+tags = [ "agent", "opencode" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-61"
+name = "OpenCode docs"
+url = "https://opencode.ai/docs"
+tags = [ "agent", "opencode", "docs" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-62"
+name = "Continue"
+url = "https://github.com/continuedev/continue"
+tags = [ "agent", "continue" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-63"
+name = "Cline"
+url = "https://github.com/cline/cline"
+tags = [ "agent", "cline" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-64"
+name = "Aider"
+url = "https://github.com/Aider-AI/aider"
+tags = [ "agent", "aider" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-65"
+name = "Cursor docs"
+url = "https://docs.cursor.com"
+tags = [ "agent", "cursor", "docs" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-66"
+name = "Windsurf"
+url = "https://codeium.com/windsurf"
+tags = [ "agent", "windsurf" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-67"
+name = "Gemini CLI"
+url = "https://github.com/google-gemini/gemini-cli"
+tags = [ "agent", "gemini" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-68"
+name = "Claude Code marketplace / plugins docs"
+url = "https://docs.anthropic.com"
+tags = [ "agent", "claude", "docs" ]
+category = "agent_ecosystem"
+available_locally = false
+
+[[entries]]
+id = "source-69"
+name = "ghidra-mcp (bethington) — local mirror"
+url = "https://github.com/bethington/ghidra-mcp"
+tags = [ "re", "ghidra", "mcp", "precloned" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-70"
+name = "ghidra-headless-mcp (mrphrazer) — local mirror"
+url = "https://github.com/mrphrazer/ghidra-headless-mcp"
+tags = [ "re", "ghidra", "mcp", "headless", "precloned" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-71"
+name = "frida-mcp (dnakov)"
+url = "https://github.com/dnakov/frida-mcp"
+tags = [ "re", "frida", "mcp", "precloned" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-72"
+name = "kahlo-mcp Frida Android"
+url = "https://github.com/FuzzySecurity/kahlo-mcp"
+tags = [ "re", "frida", "android", "mcp", "precloned" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-73"
+name = "Awesome RE"
+url = "https://github.com/tylerha97/awesome-reversing"
+tags = [ "re", "awesome" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-74"
+name = "Awesome Malware Analysis"
+url = "https://github.com/rshipp/awesome-malware-analysis"
+tags = [ "malware", "awesome" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-75"
+name = "Awesome Pentest"
+url = "https://github.com/enaqx/awesome-pentest"
+tags = [ "pentest", "awesome" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-76"
+name = "Awesome CTF"
+url = "https://github.com/apsdehal/awesome-ctf"
+tags = [ "ctf", "awesome" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-77"
+name = "Awesome Frida"
+url = "https://github.com/dweinstein/awesome-frida"
+tags = [ "frida", "awesome" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-78"
+name = "Ghidra"
+url = "https://github.com/NationalSecurityAgency/ghidra"
+tags = [ "ghidra", "re", "official" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-79"
+name = "Awesome Mobile Security"
+url = "https://github.com/vaib25vicky/awesome-mobile-security"
+tags = [ "mobile", "security", "awesome" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-80"
+name = "radare2"
+url = "https://github.com/radareorg/radare2"
+tags = [ "re", "radare2" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-81"
+name = "Cutter"
+url = "https://github.com/rizinorg/cutter"
+tags = [ "re", "gui" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-82"
+name = "Binary Ninja (docs/community)"
+url = "https://github.com/Vector35/binaryninja-api"
+tags = [ "re", "binary-ninja" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-83"
+name = "Capstone"
+url = "https://github.com/capstone-engine/capstone"
+tags = [ "re", "disassembly" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-84"
+name = "Keystone"
+url = "https://github.com/keystone-engine/keystone"
+tags = [ "re", "assembler" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-85"
+name = "Rizin"
+url = "https://github.com/rizinorg/rizin"
+tags = [ "re", "rizin" ]
+category = "reverse_engineering"
+available_locally = false
+
+[[entries]]
+id = "source-86"
+name = "OWASP"
+url = "https://github.com/OWASP"
+tags = [ "security", "owasp", "org" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-87"
+name = "Metasploit"
+url = "https://github.com/rapid7/metasploit-framework"
+tags = [ "pentest", "metasploit" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-88"
+name = "Nuclei"
+url = "https://github.com/projectdiscovery/nuclei"
+tags = [ "vuln-scan", "projectdiscovery" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-89"
+name = "ProjectDiscovery org"
+url = "https://github.com/projectdiscovery"
+tags = [ "security", "org" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-90"
+name = "SQLMap"
+url = "https://github.com/sqlmapproject/sqlmap"
+tags = [ "sqli" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-91"
+name = "Impacket"
+url = "https://github.com/fortra/impacket"
+tags = [ "ad", "windows", "security" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-92"
+name = "BloodHound"
+url = "https://github.com/SpecterOps/BloodHound"
+tags = [ "ad", "bloodhound" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-93"
+name = "pwntools"
+url = "https://github.com/Gallopsled/pwntools"
+tags = [ "pwn", "ctf" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-94"
+name = "angr"
+url = "https://github.com/angr/angr"
+tags = [ "symbolic-execution", "re" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-95"
+name = "Triton"
+url = "https://github.com/JonathanSalwan/Triton"
+tags = [ "symbolic-execution" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-96"
+name = "Unicorn"
+url = "https://github.com/unicorn-engine/unicorn"
+tags = [ "emulation" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-97"
+name = "Qiling"
+url = "https://github.com/qilingframework/qiling"
+tags = [ "emulation", "re" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-98"
+name = "Semgrep"
+url = "https://github.com/semgrep/semgrep"
+tags = [ "sast" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-99"
+name = "Trivy"
+url = "https://github.com/aquasecurity/trivy"
+tags = [ "container", "vuln" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-100"
+name = "OSSEC / Wazuh"
+url = "https://github.com/wazuh/wazuh"
+tags = [ "siem", "dfir" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-101"
+name = "Mitre ATT&CK"
+url = "https://github.com/mitre-attack/attack-stix-data"
+tags = [ "attck", "threat" ]
+category = "security"
+available_locally = false
+
+[[entries]]
+id = "source-102"
+name = "Binwalk"
+url = "https://github.com/ReFirmLabs/binwalk"
+tags = [ "firmware" ]
+category = "firmware"
+available_locally = false
+
+[[entries]]
+id = "source-103"
+name = "FirmAE"
+url = "https://github.com/pr0v3rbs/FirmAE"
+tags = [ "firmware", "emulation" ]
+category = "firmware"
+available_locally = false
+
+[[entries]]
+id = "source-104"
+name = "Firmadyne"
+url = "https://github.com/firmadyne/firmadyne"
+tags = [ "firmware" ]
+category = "firmware"
+available_locally = false
+
+[[entries]]
+id = "source-105"
+name = "Firmware Analysis Toolkit"
+url = "https://github.com/attify/firmware-analysis-toolkit"
+tags = [ "firmware" ]
+category = "firmware"
+available_locally = false
+
+[[entries]]
+id = "source-106"
+name = "EMBA"
+url = "https://github.com/e-m-b-a/emba"
+tags = [ "firmware", "audit" ]
+category = "firmware"
+available_locally = false
+
+[[entries]]
+id = "source-107"
+name = "JADX"
+url = "https://github.com/skylot/jadx"
+tags = [ "android", "decompile" ]
+category = "android"
+available_locally = false
+
+[[entries]]
+id = "source-108"
+name = "apktool"
+url = "https://github.com/iBotPeaches/Apktool"
+tags = [ "android", "reverse" ]
+category = "android"
+available_locally = false
+
+[[entries]]
+id = "source-109"
+name = "Frida"
+url = "https://github.com/frida/frida"
+tags = [ "dynamic", "instrumentation" ]
+category = "android"
+available_locally = false
+
+[[entries]]
+id = "source-110"
+name = "Objection"
+url = "https://github.com/sensepost/objection"
+tags = [ "android", "ios", "frida" ]
+category = "android"
+available_locally = false
+
+[[entries]]
+id = "source-111"
+name = "MobSF"
+url = "https://github.com/MobSF/Mobile-Security-Framework-MobSF"
+tags = [ "android", "mobile", "security" ]
+category = "android"
+available_locally = false
+
+[[entries]]
+id = "source-112"
+name = "androguard"
+url = "https://github.com/androguard/androguard"
+tags = [ "android", "static" ]
+category = "android"
+available_locally = false
+
+[[entries]]
+id = "source-113"
+name = "Volatility3"
+url = "https://github.com/volatilityfoundation/volatility3"
+tags = [ "memory", "dfir" ]
+category = "dfir"
+available_locally = false
+
+[[entries]]
+id = "source-114"
+name = "Velociraptor"
+url = "https://github.com/Velocidex/velociraptor"
+tags = [ "dfir", "edr" ]
+category = "dfir"
+available_locally = false
+
+[[entries]]
+id = "source-115"
+name = "Timesketch"
+url = "https://github.com/google/timesketch"
+tags = [ "dfir", "timeline" ]
+category = "dfir"
+available_locally = false
+
+[[entries]]
+id = "source-116"
+name = "Autopsy"
+url = "https://github.com/sleuthkit/autopsy"
+tags = [ "dfir", "forensics" ]
+category = "dfir"
+available_locally = false
+
+[[entries]]
+id = "source-117"
+name = "The Sleuth Kit"
+url = "https://github.com/sleuthkit/sleuthkit"
+tags = [ "dfir" ]
+category = "dfir"
+available_locally = false
+
+[[entries]]
+id = "source-118"
+name = "Plaso"
+url = "https://github.com/log2timeline/plaso"
+tags = [ "dfir", "timeline" ]
+category = "dfir"
+available_locally = false
+
+[[entries]]
+id = "source-119"
+name = "Go"
+url = "https://github.com/golang/go"
+tags = [ "go", "official" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-120"
+name = "Go performance guide"
+url = "https://go.dev/doc/diagnostics"
+tags = [ "go", "performance", "docs" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-121"
+name = "Rust"
+url = "https://github.com/rust-lang/rust"
+tags = [ "rust", "official" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-122"
+name = "Rust performance book"
+url = "https://nnethercote.github.io/perf-book/"
+tags = [ "rust", "performance", "docs" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-123"
+name = "TypeScript"
+url = "https://github.com/microsoft/TypeScript"
+tags = [ "typescript", "official" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-124"
+name = "Node.js diagnostics"
+url = "https://nodejs.org/en/learn/diagnostics"
+tags = [ "nodejs", "performance", "docs" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-125"
+name = "Godot Engine"
+url = "https://github.com/godotengine/godot"
+tags = [ "godot", "game", "official" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-126"
+name = "Godot docs"
+url = "https://docs.godotengine.org"
+tags = [ "godot", "docs" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-127"
+name = "haxqer/godot-skill (Codex-oriented)"
+url = "https://github.com/haxqer/godot-skill"
+tags = [ "godot", "skills", "precloned" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-128"
+name = "GodotPrompter"
+url = "https://github.com/jame581/GodotPrompter"
+tags = [ "godot", "skills", "precloned" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-129"
+name = "fernforestgames/agent-skill-godot"
+url = "https://github.com/fernforestgames/agent-skill-godot"
+tags = [ "godot", "skills", "precloned" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-130"
+name = "Chrome DevTools MCP"
+url = "https://github.com/ChromeDevTools/chrome-devtools-mcp"
+tags = [ "mcp", "browser", "chrome", "precloned" ]
+category = "languages_perf"
+available_locally = false
+
+[[entries]]
+id = "source-131"
+name = "Reddit r/modelcontextprotocol"
+url = "https://reddit.com/r/modelcontextprotocol"
+tags = [ "community", "mcp" ]
+category = "community"
+available_locally = false
+
+[[entries]]
+id = "source-132"
+name = "Reddit r/netsec"
+url = "https://reddit.com/r/netsec"
+tags = [ "community", "security" ]
+category = "community"
+available_locally = false
+
+[[entries]]
+id = "source-133"
+name = "Reddit r/ReverseEngineering"
+url = "https://reddit.com/r/ReverseEngineering"
+tags = [ "community", "re" ]
+category = "community"
+available_locally = false
+
+[[entries]]
+id = "source-134"
+name = "Reddit r/LocalLLaMA"
+url = "https://reddit.com/r/LocalLLaMA"
+tags = [ "community", "llm" ]
+category = "community"
+available_locally = false
+
+[[entries]]
+id = "source-135"
+name = "MCP Discord / community links"
+url = "https://modelcontextprotocol.io/community"
+tags = [ "community", "mcp" ]
+category = "community"
+available_locally = false

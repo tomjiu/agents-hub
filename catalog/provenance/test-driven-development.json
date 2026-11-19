@@ -1,0 +1,16 @@
+{
+  "sha256": "439aec7f387a5fb4c85bca71f19d1c1585a559c85e79aeed279e0ad79e5f28df",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 10238,
+      "sha256": "4f090e919b7310192864f1d046910c53fa7ca353f5cc2b8d07717c7a897f0183"
+    },
+    {
+      "path": "testing-anti-patterns.md",
+      "bytes": 8550,
+      "sha256": "ef9f3cfa57f1f2219f06d3025f28c4ba0985063e1c33213f326e2a25bd3e5ddd"
+    }
+  ],
+  "bytes": 18788
+}

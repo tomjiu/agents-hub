@@ -1,0 +1,31 @@
+{
+  "sha256": "b3fff791d4d0adf7663aecf1f477c7266f3c4e779144f332b461f0abe983feb3",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 10977,
+      "sha256": "44e03f7e263eb3ad256440c1eeab5e49168baff5a78ecef9a5447261cf3a91bc"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 5642,
+      "sha256": "7718bb4d7d9855cdf2e90e920e0cbc489cb24ea55e2f9734fd041c53f1e04f68"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "bytes": 258,
+      "sha256": "4ecdcfa33596d702b1cea1a3c2c5416cf78fba92e978ec37125bc2cd324b8904"
+    },
+    {
+      "path": "references/prompt-template.md",
+      "bytes": 12897,
+      "sha256": "eb19acd6f50a26780fc2d8bb96d040bedf165253a5ff724c83076ccb9bf0ddcc"
+    },
+    {
+      "path": "references/security-controls-and-assets.md",
+      "bytes": 1712,
+      "sha256": "7edce42cefb303056801ecfb4d5319b1df089c6e84d05c320857f4ff22cd1668"
+    }
+  ],
+  "bytes": 31486
+}

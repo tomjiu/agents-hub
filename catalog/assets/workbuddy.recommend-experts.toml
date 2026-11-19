@@ -1,0 +1,21 @@
+id = "workbuddy.recommend-experts"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-experts"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "259c4d9f367b85c62c0e8b7e1eae319f64b0265919d5e2023d03904cce16e21f"
+local_modified = "unknown"
+enabled = false

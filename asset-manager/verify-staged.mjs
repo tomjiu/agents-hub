@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const git=process.env.GIT_EXECUTABLE||'git';
+const run=args=>execFileSync(git,args,{cwd:root,maxBuffer:128*1024*1024});
+const nul=String.fromCharCode(0),tab=String.fromCharCode(9);
+const plan=JSON.parse(await fs.readFile(path.join(root,'catalog/audit/migration-2026-11.json'),'utf8'));
+const staged=new Map(run(['ls-files','--stage','-z']).toString().split(nul).filter(Boolean).map(line=>{const [meta,p]=line.split(tab);const [mode,oid,stage]=meta.split(' ');return [p,{mode,oid,stage}];}));
+const missing=[],mismatch=[];
+for(const f of plan.files){const entry=staged.get(f.target);if(!entry){missing.push(f.target);continue;}const bytes=await fs.readFile(path.join(root,f.target));const oid=crypto.createHash('sha1').update(Buffer.from('blob '+bytes.length+nul)).update(bytes).digest('hex');if(entry.oid!==oid||entry.stage!=='0')mismatch.push(f.target);}
+const banned=[...staged.keys()].filter(p=>p.includes('node_modules/')||p.startsWith('.asset-state/')||['accounts.json','credentials.json','.env'].includes(path.basename(p)));
+console.log(JSON.stringify({files:plan.files.length,staged:staged.size,missing,mismatch,banned,scope:'Recorded targets are staged with exact working bytes, verified by Git blob IDs; this is not a complete secret audit.'},null,2));
+if(missing.length||mismatch.length||banned.length)process.exitCode=1;

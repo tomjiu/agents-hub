@@ -1,0 +1,26 @@
+{
+  "sha256": "57f0d3af7b3cabb3aae7d2ca1baa458d1a796c30cc4c9f76ed12413b37e4f3f9",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 10560,
+      "sha256": "5edeeb14375851edc46c6e4b1444fcf4efa63567f8ae64c959c00dcf4c9ed884"
+    },
+    {
+      "path": "references/graphic-asset-design-file-format.md",
+      "bytes": 3023,
+      "sha256": "418990650971002f69c265a5f1bbbe25dae225efcb492a7f8bf7bcf01149ff07"
+    },
+    {
+      "path": "scripts/validate-graphic-asset-design.mjs",
+      "bytes": 16987,
+      "sha256": "70eea80c435fe41d030c477a143d1e4fd90e95fd5545e4693ce7c2e4d0933e36"
+    },
+    {
+      "path": "skill-release-manifest.json",
+      "bytes": 212,
+      "sha256": "f85ad7a93384c65659280ce94f4bb75475cd25ba426c616065a313c8c3b037f8"
+    }
+  ],
+  "bytes": 30782
+}

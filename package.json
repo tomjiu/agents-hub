@@ -1,0 +1,23 @@
+{
+  "name": "agents-hub",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "hub": "node asset-manager/cli.mjs",
+    "build:dsh": "node asset-manager/build-dsh.mjs",
+    "test": "node --test asset-manager/tests/*.test.mjs",
+    "validate": "node asset-manager/cli.mjs validate",
+    "catalog:build": "node asset-manager/catalog-build.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.58.2"
+  },
+  "dependencies": {
+    "smol-toml": "1.9.1",
+    "yaml": "2.9.1"
+  }
+}

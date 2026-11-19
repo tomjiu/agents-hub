@@ -1,0 +1,42 @@
+{
+  "name": "memory-net",
+  "version": "1.0.0",
+  "description": "同目标多 Agent 分工的共享记忆网：按 workspace 物理隔离、observation/inference 硬隔离、预算化激活。不做通用 chatbot RAG。",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "main": "dist/src/store.js",
+  "exports": {
+    ".": "./dist/src/store.js",
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "bin": {
+    "mn": "bin/mn.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "docs",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "demo": "bash scripts/demo.sh"
+  },
+  "keywords": [
+    "multi-agent",
+    "shared-memory",
+    "workspace",
+    "sqlite",
+    "observation",
+    "inference"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "5.9.3"
+  }
+}

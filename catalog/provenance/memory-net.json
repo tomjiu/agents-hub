@@ -1,0 +1,486 @@
+{
+  "sha256": "33e0076b1440b7e7608bcb1c81fc1f7d1bb49af10aab6138364388e5f1b827a3",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 755,
+      "sha256": "6de820013fa0c1cefe199872795a2762f0b5d4f5d4733cd3a6e5d575a149b867"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 327,
+      "sha256": "07ab7da7966930e5dfb7c4667a43d54b7d908e5b1c3e20ff0daf55a756896902"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1082,
+      "sha256": "fde81b61fc7b69f5bae15cfe3e3fad776736af5c2e895dd6fdbef76cb77d63da"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5664,
+      "sha256": "b38cace33e3e5e6fddccaada6dc0d2b33d27264df87864cf99fc71e8ca20ce8f"
+    },
+    {
+      "path": "adapters/dsh/README.md",
+      "bytes": 8313,
+      "sha256": "ae43ac2b731b8b259ca0ce5815dd99b86b88167ed955fcedae16d6e8768713ea"
+    },
+    {
+      "path": "adapters/dsh/package-lock.json",
+      "bytes": 1559,
+      "sha256": "4eacb61d495f6c6f05838e435eb142030980f60e66f3a93c28eeb352806c4d81"
+    },
+    {
+      "path": "adapters/dsh/package.json",
+      "bytes": 618,
+      "sha256": "d9b4cf8e3dca4e33d32125171f1b4f884b73cec668b910cb4bc4c1620321b464"
+    },
+    {
+      "path": "adapters/dsh/scripts/build.sh",
+      "bytes": 455,
+      "sha256": "ca74d9bf86ce4f2d0ce332158d152b713d7d4793178d3e521035db6a1e7d8bb0"
+    },
+    {
+      "path": "adapters/dsh/scripts/smoke-dsh-e2e.sh",
+      "bytes": 4662,
+      "sha256": "c8f6536d4d2f4b292a55405fb9249c26cf67e0d2204c6ad5bcf1b6338eb1df26"
+    },
+    {
+      "path": "adapters/dsh/src/bridge.ts",
+      "bytes": 9613,
+      "sha256": "266f387927f03fd60549f7afbca00cb696a372c2d475a2066b463b0d151cbd29"
+    },
+    {
+      "path": "adapters/dsh/src/config.ts",
+      "bytes": 4571,
+      "sha256": "fc580091e83d71c768da001606ed80d9e7244744e5194569208f0c0ee540c4b6"
+    },
+    {
+      "path": "adapters/dsh/src/contract.ts",
+      "bytes": 5689,
+      "sha256": "466907394133f86415314ab126ccf6e300adb89a9601889ad707348858413d6a"
+    },
+    {
+      "path": "adapters/dsh/src/index.ts",
+      "bytes": 11466,
+      "sha256": "5f0a3e69ab75006378feb7763c96ef0af1d1c2d9cbdc2322b725ac8bcd52490c"
+    },
+    {
+      "path": "adapters/dsh/tests/adapter.test.ts",
+      "bytes": 26336,
+      "sha256": "ab81bf887a970cde7a6d84113b6331546c6371b16b181eefb93cede0cade8782"
+    },
+    {
+      "path": "adapters/dsh/tests/fixtures/echo-tool/index.js",
+      "bytes": 1592,
+      "sha256": "40a436681aeb53f9eabea2a5cf6bd55f4a8ca30cd9ed1e407e7673eb450c0b6c"
+    },
+    {
+      "path": "adapters/dsh/tests/fixtures/echo-tool/package.json",
+      "bytes": 350,
+      "sha256": "c74332a1a69266cef1f4707788817fc132b06e9acac3242c1c4c54f8db234f71"
+    },
+    {
+      "path": "adapters/dsh/tests/fixtures/mock-model.mjs",
+      "bytes": 4992,
+      "sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53"
+    },
+    {
+      "path": "adapters/dsh/tests/fixtures/verify-e2e.mjs",
+      "bytes": 5137,
+      "sha256": "7cad015c3ec61219d503102d14837cf3131ec18a4dc5d701e0fe012410d8289c"
+    },
+    {
+      "path": "adapters/dsh/tsconfig.json",
+      "bytes": 391,
+      "sha256": "6da688ff4259ff29ef0609026e0b5a2c3b25cd4363885834de3f689b13650189"
+    },
+    {
+      "path": "bin/mn.js",
+      "bytes": 288,
+      "sha256": "1d6f22df031d5f6821fa546d526b68cfc9a549e29c19fc53846069b30bb90f40"
+    },
+    {
+      "path": "console/.github/workflows/ci.yml",
+      "bytes": 596,
+      "sha256": "5e2f3e1a3d00185060743f9262af250c51340407e1b6257f6e2885c9d9c3f8f6"
+    },
+    {
+      "path": "console/.gitignore",
+      "bytes": 76,
+      "sha256": "a798068ca061aa7a4395ccc105b97ff70d28273bd8b9a28a6ddbccf3d5d8e6e7"
+    },
+    {
+      "path": "console/LICENSE",
+      "bytes": 1082,
+      "sha256": "fde81b61fc7b69f5bae15cfe3e3fad776736af5c2e895dd6fdbef76cb77d63da"
+    },
+    {
+      "path": "console/README.md",
+      "bytes": 6949,
+      "sha256": "28828dc3c27268822707e4c17dd2746462b56cba8b29243fadfe27f3451e0df6"
+    },
+    {
+      "path": "console/apps/console/dist/assets/index-B93L_7Mg.css",
+      "bytes": 10042,
+      "sha256": "ebf2d832fb0e5f5bd4afc3acb0ec836532f42b10fccd99b5ee766d96a5b5cb55"
+    },
+    {
+      "path": "console/apps/console/dist/assets/index-DXPJkHUU.js",
+      "bytes": 16949,
+      "sha256": "dc17687a7c31e1db766f1aabbbdd61a9ff7e7ec7e88fbcd2ffd3f8bf498e7ab3"
+    },
+    {
+      "path": "console/apps/console/dist/index.html",
+      "bytes": 488,
+      "sha256": "fc962e0a8f3371cbac1aa358d0d655ccaacc8dbf3cf02858fed20d34ba48b410"
+    },
+    {
+      "path": "console/apps/console/index.html",
+      "bytes": 389,
+      "sha256": "e3f61051a2a695863763ac3cc0631a06dab93b3ff71aeb4462f323b99ae46622"
+    },
+    {
+      "path": "console/apps/console/package.json",
+      "bytes": 506,
+      "sha256": "06bd5aeaf52fdec62b57145321813abd32336ddabea97a63cc8dd51b7f724156"
+    },
+    {
+      "path": "console/apps/console/src/api.ts",
+      "bytes": 6911,
+      "sha256": "c660ec23b7aa8bb1e3fdb070670fa61ef7f1beb9b2a4392872d086ed08bbf085"
+    },
+    {
+      "path": "console/apps/console/src/main.ts",
+      "bytes": 24717,
+      "sha256": "ceef8bf095f543a443a3b619304756700b2df1b42a2da4430a8710cd800d998f"
+    },
+    {
+      "path": "console/apps/console/src/styles.css",
+      "bytes": 12557,
+      "sha256": "b50236110c5f9584b4e04337750fb0ac594c37749e4ee7fdb18101f435f39aaf"
+    },
+    {
+      "path": "console/apps/console/tsconfig.json",
+      "bytes": 433,
+      "sha256": "00f42c4c87d44091d37773f6ac59377702bff69f5c2e9be42113de9c50c582c0"
+    },
+    {
+      "path": "console/apps/console/vite.config.ts",
+      "bytes": 335,
+      "sha256": "6db6e3da831acede2d733ceffbbee32798e7543a54e00f6ea264b0a8a3a5c316"
+    },
+    {
+      "path": "console/package-lock.json",
+      "bytes": 35472,
+      "sha256": "71a566e84a9fbd835ca2d329dd46cbbda38583c7b697138c7cdf9cc5cd7ca171"
+    },
+    {
+      "path": "console/package.json",
+      "bytes": 558,
+      "sha256": "a7a65f4ae262ae93d34444c1bcf9e0c3916a1bc59450b81908c4adbe24a247bb"
+    },
+    {
+      "path": "console/packages/server/bin/console.js",
+      "bytes": 52,
+      "sha256": "0ad2f32ab511b4381a81de4a261ff82537a4eef624de40eff8eccafdd073adf0"
+    },
+    {
+      "path": "console/packages/server/dist/src/auth.js",
+      "bytes": 892,
+      "sha256": "644a6c41c418b0e90e3aeb2a1333f1003eb8de873a77f02f6984e6a43c1ea8cf"
+    },
+    {
+      "path": "console/packages/server/dist/src/catalog.js",
+      "bytes": 15463,
+      "sha256": "a304238c35945a633e3b2176602666635741e992b7c1523da6df292127b4668f"
+    },
+    {
+      "path": "console/packages/server/dist/src/index.js",
+      "bytes": 2940,
+      "sha256": "01cd96a004062ede0059d97d533a6e72b363c4ed30985b59c724aa5f545a2cb5"
+    },
+    {
+      "path": "console/packages/server/dist/src/server.js",
+      "bytes": 21159,
+      "sha256": "5d34e396b57f82386715ff334130b3faad2054473092538f9d33ed0662d29839"
+    },
+    {
+      "path": "console/packages/server/dist/src/static.js",
+      "bytes": 4008,
+      "sha256": "c6b2be76922aaf0548d985e3fd72e91aa7be037f14ab19178fb742b6f56cb4f3"
+    },
+    {
+      "path": "console/packages/server/dist/tests/server.test.js",
+      "bytes": 29009,
+      "sha256": "bff2d5132009522ec18fd713da812403fa5d59ce605cd6c37285ba5b6c4349ec"
+    },
+    {
+      "path": "console/packages/server/package.json",
+      "bytes": 732,
+      "sha256": "afd774ed87922b89d69e2a6b33fc016b14986a835bbd15b5e47df1310646669e"
+    },
+    {
+      "path": "console/packages/server/src/auth.ts",
+      "bytes": 995,
+      "sha256": "58099367d231e13d53678c0e2db1799d7110ec2023165536f3b785fcf55be706"
+    },
+    {
+      "path": "console/packages/server/src/catalog.ts",
+      "bytes": 17010,
+      "sha256": "783b55c84e12c0323a8ad412b8ae84a40e1aa356479dfdb637e4cc16c350d474"
+    },
+    {
+      "path": "console/packages/server/src/index.ts",
+      "bytes": 2937,
+      "sha256": "3b8853a7f383a76fa001dc317890a7385dfb7ffeebe7ff4c054e3f700ef717ee"
+    },
+    {
+      "path": "console/packages/server/src/server.ts",
+      "bytes": 20994,
+      "sha256": "10146391cde06c9c91950f186de36b72a08f104a3ac05e1e4a2549aca54aa98c"
+    },
+    {
+      "path": "console/packages/server/src/static.ts",
+      "bytes": 3929,
+      "sha256": "b531abf99b2003f9f06c1b01dd0d2e34a52745c7c8eb106e832a13001eb6c586"
+    },
+    {
+      "path": "console/packages/server/tests/server.test.ts",
+      "bytes": 27722,
+      "sha256": "726ac2287649b8d0da282389ddad0325ab5c43f501095c43fe4d442a343065af"
+    },
+    {
+      "path": "console/packages/server/tsconfig.json",
+      "bytes": 541,
+      "sha256": "7ccdb3e35fca10057603eb5cff2da0de09c2b4de30549a3648f36aa0e7fc0e3f"
+    },
+    {
+      "path": "console/scripts/ensure-e2e.sh",
+      "bytes": 985,
+      "sha256": "cf4767b29cb351ab86803c5def1975979b1c6126c374a899aa40ae82cd0bf501"
+    },
+    {
+      "path": "console/scripts/fetch-vendor.sh",
+      "bytes": 2258,
+      "sha256": "a3f02bcbbdcb3f78d6cebbad62522b1c2e8cd325e75eb37ecf731c592690d44f"
+    },
+    {
+      "path": "console/scripts/verify-vendor.sh",
+      "bytes": 2686,
+      "sha256": "1bb368c6dea3b05a71ae65104570db0c0c88b976529252188612a0400b9b0fb0"
+    },
+    {
+      "path": "console/vendor/memory-net/.vendor-hashes",
+      "bytes": 1030,
+      "sha256": "4135911717d72c905cfdc7ce97bd7fdabb42bd74d368b148d55a1f6ab7c3a171"
+    },
+    {
+      "path": "console/vendor/memory-net/.vendor-lock",
+      "bytes": 106,
+      "sha256": "2eed7705c1bd1b141ddfccfa9efcc714414d2c10b837b06f059289d441e53a26"
+    },
+    {
+      "path": "console/vendor/memory-net/LICENSE",
+      "bytes": 1082,
+      "sha256": "fde81b61fc7b69f5bae15cfe3e3fad776736af5c2e895dd6fdbef76cb77d63da"
+    },
+    {
+      "path": "console/vendor/memory-net/README.md",
+      "bytes": 5664,
+      "sha256": "b38cace33e3e5e6fddccaada6dc0d2b33d27264df87864cf99fc71e8ca20ce8f"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/activate.d.ts",
+      "bytes": 2509,
+      "sha256": "e495e7c1fb296c133df2cea59d1b0f33e33b3a7eb52b3638bfbb7c24252a9fa9"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/activate.js",
+      "bytes": 4687,
+      "sha256": "2ea673547c606807f2a9cae81bf4680417bd0a7c9700d1c96c5fe505b36b1e24"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/cli.d.ts",
+      "bytes": 66,
+      "sha256": "a4ad4192875ffd1081132ea09dd89f542883be58df84833b452fb651bb103052"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/cli.js",
+      "bytes": 18075,
+      "sha256": "6e5cbd9a9c75f2de2220a4cdca91b2dd3afd3302ffc76cb8da987edb736f7b86"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/db.d.ts",
+      "bytes": 776,
+      "sha256": "265193cfb24c10df3d34df303dc847b219d97ebcf75c59ba70e9a0a618e0852b"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/db.js",
+      "bytes": 4429,
+      "sha256": "0cf6fac5fbce5ecb08334536e6fdd35f124ac5ecdd258c92f1a34523f5220650"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/errors.d.ts",
+      "bytes": 942,
+      "sha256": "2bec0d675e4c8cb5605e2d583a68427f2246727fbcf782153cc973ddff65b31d"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/errors.js",
+      "bytes": 1385,
+      "sha256": "439fa413683a51610d5457b1a96499933a9b6c39f99fa87a051b0a967f65786c"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/store.d.ts",
+      "bytes": 5537,
+      "sha256": "c76cfb97fc15495deb38719beed2f4865062ffa7b143d82cfb0686ed8adb1c4f"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/store.js",
+      "bytes": 28139,
+      "sha256": "0e0f582b8763c63723e29ff9fcfa88bb578a8c74dc8244b0a738125bbe4ec239"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/types.d.ts",
+      "bytes": 4772,
+      "sha256": "0c420345753c47910be53caaf20ca48e162bb5374116e8dfd390efb85499d5c6"
+    },
+    {
+      "path": "console/vendor/memory-net/dist/src/types.js",
+      "bytes": 288,
+      "sha256": "c87b62033ab4a8d8371a13acc6f47885befd5380e36e525a8c13aa69562fc0c4"
+    },
+    {
+      "path": "console/vendor/memory-net/package.json",
+      "bytes": 965,
+      "sha256": "19ffc699bcfb74a96e3401c099dfbfd9697f4c6d0f9c0df2aa598bbd9ac98afb"
+    },
+    {
+      "path": "console/worklog.md",
+      "bytes": 14035,
+      "sha256": "808e47c55c1cdbfbe25c5cf402993eb468d3bf6996453845a69d6f371a582cc7"
+    },
+    {
+      "path": "docs/architecture.md",
+      "bytes": 7237,
+      "sha256": "05727965d6fce5837fb77fa20a15514ef2f529373bd21d2e91993d6a50adbec6"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 1611,
+      "sha256": "4b51209e048ec86d4b155dd4b9e5feaafa790fe299be2058fdd782045c9235c4"
+    },
+    {
+      "path": "package.json",
+      "bytes": 965,
+      "sha256": "19ffc699bcfb74a96e3401c099dfbfd9697f4c6d0f9c0df2aa598bbd9ac98afb"
+    },
+    {
+      "path": "scripts/build.sh",
+      "bytes": 655,
+      "sha256": "23d736fb6efb43b31851a9f29b0095a24a6d731bad6d8d57896cab6d515f906e"
+    },
+    {
+      "path": "scripts/demo.sh",
+      "bytes": 1445,
+      "sha256": "47173397e7ab4e7af30762c3520b1dfd9f482913b9d8380d59e4e57e4f739b45"
+    },
+    {
+      "path": "src/activate.ts",
+      "bytes": 5576,
+      "sha256": "d07b77d848603589571ba711663e8bb3284efe69e96642cddaf672366d547872"
+    },
+    {
+      "path": "src/cli.ts",
+      "bytes": 15363,
+      "sha256": "81852c4704072313c49ca74ad1aa114f813e0505310ba49e93865fb95692bafb"
+    },
+    {
+      "path": "src/db.ts",
+      "bytes": 4594,
+      "sha256": "48cd98a2bbd471c0143d1913fc6bc7fe88a8ca9340eb262847c7315a1a6be6a7"
+    },
+    {
+      "path": "src/errors.ts",
+      "bytes": 1447,
+      "sha256": "d5714587cfac58b5e162bf9a907ad821a801201c6f7024ccfc9bb05578b15d1b"
+    },
+    {
+      "path": "src/store.ts",
+      "bytes": 29785,
+      "sha256": "eef3f8cd702168f5633d26c0c928ec26bcd7d63b317e05c8935fd5e5c8e6a0d4"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 5113,
+      "sha256": "0f9adb39328387e5a1dba4110184a97abe7ad1e2230286b2ccef3f4a4516cf1b"
+    },
+    {
+      "path": "tests/01-shared-progress.test.ts",
+      "bytes": 2659,
+      "sha256": "f9fb615544cd61078d052165a95e3dce8c8f7ebd2db256640a4e3d85d053fb5c"
+    },
+    {
+      "path": "tests/02-isolation.test.ts",
+      "bytes": 1995,
+      "sha256": "26f11d6234740862e38a4464aa655c2192ef5944021c1b1085e4c88013dfab53"
+    },
+    {
+      "path": "tests/03-write-discipline.test.ts",
+      "bytes": 2522,
+      "sha256": "badd6c9ec474aace14c720617f22d104eff3054774d25748199e62967521cd1d"
+    },
+    {
+      "path": "tests/04-observe-contradict.test.ts",
+      "bytes": 3820,
+      "sha256": "451854681d6c350f25368aa4a7b3957c004faa8da767eadbb60b071369d52508"
+    },
+    {
+      "path": "tests/05-trail-replay.test.ts",
+      "bytes": 1528,
+      "sha256": "b6f3b0259a19afe04b3cdf3e225a4ec66aaaf7da3d8e1b3911b7326c98355ebf"
+    },
+    {
+      "path": "tests/06-budget.test.ts",
+      "bytes": 3689,
+      "sha256": "17634d8a4619a944f0cdfe8b967f4c739e6f1130e61b67fd1c1d2e09ead79976"
+    },
+    {
+      "path": "tests/07-advanced.test.ts",
+      "bytes": 5485,
+      "sha256": "5871ab8ce898130695e4029db41d4a2f97cdaed4d04ad4606761d7e4ea1e01ed"
+    },
+    {
+      "path": "tests/08-cli-smoke.test.ts",
+      "bytes": 4652,
+      "sha256": "63c3b4ae3dbeeaee73c5e8bbf4dbe3a3f329d0820d246b2517181df3820f70f4"
+    },
+    {
+      "path": "tests/09-session12-fixes.test.ts",
+      "bytes": 8455,
+      "sha256": "0fb291529b76084b09bf16b7f288721b03dcbaa41795373b5b96104e2b12a7f8"
+    },
+    {
+      "path": "tests/10-session15-index.test.ts",
+      "bytes": 1617,
+      "sha256": "339e665e04a3875c3832b41e9f8d63f86176dab01d3979fc7b780977f98673bc"
+    },
+    {
+      "path": "tests/helpers.ts",
+      "bytes": 384,
+      "sha256": "1c8be9a205fe72cec06280dadd64ab883d038d1c62dc2c2ce6234565e88bb7e5"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 436,
+      "sha256": "196d2090bc35acef07090644c61e2f9383d8cb06cee04535e023ac5ce8d12786"
+    },
+    {
+      "path": "worklog.md",
+      "bytes": 18399,
+      "sha256": "438219fdcbfdf5744156cbc66fb77f124efb8726bccafa41330be99b8593a59d"
+    }
+  ],
+  "bytes": 590151
+}

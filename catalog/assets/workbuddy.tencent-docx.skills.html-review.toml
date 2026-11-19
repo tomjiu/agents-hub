@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.skills.html-review"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-review"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "aeb7eabe43174b26104bf07efbdd1e836fa1dcfcb0eafc602e887a117da7e4d8"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,16 @@
+{
+  "sha256": "89424832c7cb031b7dc169c8bf1bfffa449fd08af4efaaf16aba5a087e9f4f79",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 3040,
+      "sha256": "fb1c965693e9b71799462b4bf445f65c82806c32aff1cd041acacb552a7da9ca"
+    },
+    {
+      "path": "code-reviewer.md",
+      "bytes": 3531,
+      "sha256": "7736646295a45cb0ea1b607842c1ebebf28ee36ae6facc5e1c373adf745e40af"
+    }
+  ],
+  "bytes": 6571
+}

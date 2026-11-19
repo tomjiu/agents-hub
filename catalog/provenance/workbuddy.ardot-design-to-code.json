@@ -1,0 +1,36 @@
+{
+  "sha256": "85c0937ce6814c40a868c6b8ab1f5c985655a4846a64049295c338a9fe64b710",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 537,
+      "sha256": "c003b6eb08ebc9923c3d2cb091fd988f94906fec57f3dc02f89909046ac9e311"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 2662,
+      "sha256": "231525b4ef7b7073fe2c69c2c933cc362035ee4d322d01111d024067ee0c1aac"
+    },
+    {
+      "path": "references/guidelines-code.md",
+      "bytes": 8706,
+      "sha256": "684a674f6ce3eded37598cc10f50d1ac03a2c9c10c30b22e13eaf06a249af534"
+    },
+    {
+      "path": "references/guidelines-tailwind.md",
+      "bytes": 10642,
+      "sha256": "7f178272be6c8acd9e1fa0f527c51766f8bd6d11cbfca80164a4a80004aecbe1"
+    },
+    {
+      "path": "workflows/design-to-code-workflow.md",
+      "bytes": 21784,
+      "sha256": "80e5afcee012e979dcacfb2633b26745ee52f0787100c718d3be4b66a3647be4"
+    },
+    {
+      "path": "workflows/extract-style-guide-from-web.md",
+      "bytes": 20751,
+      "sha256": "06b9958e3aabfc980b4f15add4cc6384d7b778982c4f4ee9aa39fb481529cac0"
+    }
+  ],
+  "bytes": 65082
+}

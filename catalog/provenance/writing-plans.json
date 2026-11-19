@@ -1,0 +1,16 @@
+{
+  "sha256": "21e72c6ba92a92052333f3a244ae49b9671d8559900bddf78e08bcf7a8292808",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 6198,
+      "sha256": "6f76fc9d4817a070c5deea6bfac91ff8dec32d0698d39cbc749d4ea37daa8658"
+    },
+    {
+      "path": "plan-document-reviewer-prompt.md",
+      "bytes": 1763,
+      "sha256": "f934889f4f40f85782e703042edb28217169853df3eaf285586a5ab4e5ea5403"
+    }
+  ],
+  "bytes": 7961
+}

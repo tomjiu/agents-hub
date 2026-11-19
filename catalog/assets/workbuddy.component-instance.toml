@@ -1,0 +1,21 @@
+id = "workbuddy.component-instance"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/component-instance"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "8778d6ea72ec85c557043b92d20c4b8b0195b0fa3d49938fc1a35f5ffd0d6735"
+local_modified = "unknown"
+enabled = false

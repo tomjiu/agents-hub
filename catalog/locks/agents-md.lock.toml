@@ -1,0 +1,35 @@
+schema = 1
+kind = "agents-md"
+
+[[assets]]
+id = "agents-md.base"
+path = "agents-md/base"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "0.3.0-draft"
+upstream_commit = ""
+sha256 = "1ab9e3269e9c16678230be96d66883720c9532ed3d844809bdc55f6724e03a6d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "agents-md.project"
+path = "agents-md/templates"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "0.1.0-draft"
+upstream_commit = ""
+sha256 = "76a2180ff56d83911b8edadbf5618acb190a4ffc7a8dedb8fe99c4a8b18cd623"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "agents-md.ui-acceptance"
+path = "agents-md/fragments"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "0.1.0-draft"
+upstream_commit = ""
+sha256 = "42e452dc8f7ffe3f7f04617760a6fecf52c354a45d4622f09a590e3aa6263ebc"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false

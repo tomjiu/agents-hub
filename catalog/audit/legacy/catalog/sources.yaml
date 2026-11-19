@@ -1,0 +1,475 @@
+# Local AI source catalog (URLs first, names second)
+# Strategy for agents:
+#   1) official  2) registry/marketplace  3) awesome lists  4) domain tools  5) skills hubs
+# Load this file via skill: source-index (on-demand). Do not dump all URLs into every turn.
+
+version: 1
+updated: 2026-07-18
+policy:
+  prefer_official_over_forks: true
+  prefer_canonical_org_repos: true
+  search_order:
+    - official
+    - search
+    - registry
+    - awesome
+    - vendor_mcp
+    - reverse_engineering
+    - security
+    - firmware
+    - android
+    - dfir
+    - skills
+    - agent_ecosystem
+    - community
+  notes:
+    - "Skills can be many; only fixed-start skills load every session."
+    - "Use source-index skill to pick the right URL before cloning/installing."
+    - "Expand this file over time; keep dead links pruned."
+
+official:
+  - name: MCP Registry
+    url: https://registry.modelcontextprotocol.io
+    tags: [mcp, registry, official]
+  - name: MCP Registry GitHub
+    url: https://github.com/modelcontextprotocol/registry
+    tags: [mcp, registry, github]
+  - name: MCP Servers
+    url: https://github.com/modelcontextprotocol/servers
+    tags: [mcp, servers, reference]
+  - name: MCP Specification
+    url: https://github.com/modelcontextprotocol/specification
+    tags: [mcp, spec]
+  - name: MCP Docs
+    url: https://modelcontextprotocol.io
+    tags: [mcp, docs]
+  - name: Agent Skills Spec
+    url: https://agentskills.io
+    tags: [skills, standard]
+  - name: Agent Skills Spec GitHub
+    url: https://github.com/agentskills/agentskills
+    tags: [skills, standard, github]
+  - name: Anthropic Skills
+    url: https://github.com/anthropics/skills
+    tags: [skills, anthropic]
+  - name: OpenAI Skills (legacy catalog)
+    url: https://github.com/openai/skills
+    tags: [skills, openai, legacy]
+  - name: OpenAI Plugins
+    url: https://github.com/openai/plugins
+    tags: [skills, plugins, openai]
+  - name: OpenAI Codex docs
+    url: https://developers.openai.com/codex
+    tags: [codex, docs]
+
+search:
+  - name: Keenable
+    url: https://keenable.ai
+    tags: [search, keenable, mcp]
+  - name: Keenable MCP
+    url: https://api.keenable.ai/mcp
+    tags: [search, keenable, mcp]
+  - name: Keenable docs
+    url: https://docs.keenable.ai
+    tags: [search, keenable, docs]
+  - name: Tavily Hikari (pool proxy MCP+HTTP+CLI)
+    url: https://github.com/IvanLi-CN/tavily-hikari
+    tags: [search, tavily, mcp, hikari]
+  - name: Tavily Hikari origin (this deploy)
+    url: https://tavily.ivanli.cc
+    tags: [search, tavily, endpoint]
+  - name: Tavily official
+    url: https://tavily.com
+    tags: [search, tavily, official]
+  - name: Exa
+    url: https://exa.ai
+    tags: [search, exa]
+  - name: Exa API docs
+    url: https://docs.exa.ai
+    tags: [search, exa, docs]
+  - name: Firecrawl
+    url: https://www.firecrawl.dev
+    tags: [search, crawl]
+  - name: Brave Search API
+    url: https://brave.com/search/api
+    tags: [search, brave]
+
+registry:
+  - name: Glama MCP
+    url: https://glama.ai/mcp
+    tags: [mcp, marketplace]
+  - name: Smithery
+    url: https://smithery.ai
+    tags: [mcp, marketplace]
+  - name: MCP.so
+    url: https://mcp.so
+    tags: [mcp, marketplace]
+  - name: PulseMCP
+    url: https://www.pulsemcp.com
+    tags: [mcp, marketplace]
+  - name: MCP.run
+    url: https://www.mcp.run
+    tags: [mcp, marketplace]
+  - name: MCP Atlas
+    url: https://www.mcp-atlas.com
+    tags: [mcp, marketplace]
+  - name: ModelScope MCP
+    url: https://modelscope.cn/mcp
+    tags: [mcp, modelscope, cn]
+  - name: ModelScope Skills
+    url: https://modelscope.cn/skills
+    tags: [skills, modelscope, cn]
+  - name: SkillHub
+    url: https://skillhub.cn
+    tags: [skills, marketplace, cn]
+
+awesome:
+  - name: awesome-mcp-servers (punkpeye)
+    url: https://github.com/punkpeye/awesome-mcp-servers
+    tags: [mcp, awesome]
+  - name: awesome-mcp-servers (appcypher)
+    url: https://github.com/appcypher/awesome-mcp-servers
+    tags: [mcp, awesome]
+  - name: awesome-mcp-servers (TensorBlock)
+    url: https://github.com/TensorBlock/awesome-mcp-servers
+    tags: [mcp, awesome]
+  - name: awesome-agent-skills (VoltAgent)
+    url: https://github.com/VoltAgent/awesome-agent-skills
+    tags: [skills, awesome]
+  - name: awesome-claude-skills (ComposioHQ)
+    url: https://github.com/ComposioHQ/awesome-claude-skills
+    tags: [skills, claude, awesome]
+  - name: awesome-codex-skills
+    url: https://github.com/composio-community/awesome-codex-skills
+    tags: [skills, codex, awesome]
+  - name: awesome-copilot (GitHub)
+    url: https://github.com/github/awesome-copilot
+    tags: [skills, copilot, awesome]
+  - name: agentic-awesome-skills
+    url: https://github.com/sickn33/agentic-awesome-skills
+    tags: [skills, awesome, catalog]
+
+vendor_mcp:
+  - name: GitHub MCP server
+    url: https://github.com/github/github-mcp-server
+    tags: [mcp, github]
+  - name: Playwright MCP
+    url: https://github.com/microsoft/playwright-mcp
+    tags: [mcp, browser, microsoft]
+  - name: Firefox DevTools MCP
+    url: https://github.com/mozilla/firefox-devtools-mcp
+    tags: [mcp, browser, firefox]
+  - name: Cloudflare MCP / Agents docs
+    url: https://developers.cloudflare.com
+    tags: [mcp, cloudflare, docs]
+  - name: Docker MCP examples
+    url: https://github.com/docker
+    tags: [mcp, docker]
+  - name: Sentry MCP
+    url: https://mcp.sentry.dev
+    tags: [mcp, sentry]
+  - name: Context7 MCP
+    url: https://github.com/upstash/context7
+    tags: [mcp, docs, context7]
+  - name: Grep by Vercel MCP
+    url: https://mcp.grep.app
+    tags: [mcp, code-search]
+
+skills:
+  - name: Superpowers
+    url: https://github.com/obra/superpowers
+    tags: [skills, methodology]
+  - name: Addy Osmani agent-skills
+    url: https://github.com/addyosmani/agent-skills
+    tags: [skills, engineering]
+  - name: vercel-labs/agent-skills
+    url: https://github.com/vercel-labs/agent-skills
+    tags: [skills, vercel]
+  - name: vercel-labs/skills CLI
+    url: https://github.com/vercel-labs/skills
+    tags: [skills, installer]
+  - name: ModelScope skills
+    url: https://github.com/modelscope/modelscope-skills
+    tags: [skills, modelscope]
+  - name: planning-with-files
+    url: https://github.com/OthmanAdi/planning-with-files
+    tags: [skills, planning]
+  - name: reverse-skills (P4nda0s)
+    url: https://github.com/P4nda0s/reverse-skills
+    tags: [skills, reverse]
+  - name: ghidra-rpc (Cellebrite Labs)
+    url: https://github.com/cellebrite-labs/ghidra-rpc
+    tags: [skills, ghidra, reverse]
+  - name: android-reverse-engineering-skill (Codex)
+    url: https://github.com/CreditTone/android-reverse-engineering-skill
+    tags: [skills, android, reverse]
+  - name: betab0t reverse skills
+    url: https://github.com/betab0t/skills
+    tags: [skills, reverse]
+  - name: Claude-Red (offensive methodology)
+    url: https://github.com/SnailSploit/Claude-Red
+    tags: [skills, security, authorized-only]
+  - name: scientific-agent-skills
+    url: https://github.com/K-Dense-AI/scientific-agent-skills
+    tags: [skills, science]
+
+  # ===== 闭源软件云技能打包（cloud-vendors/，逆向提取） =====
+  - name: Trae cloud skills (extracted)
+    url: https://github.com/tomjiu/agent-skills-mcp/tree/main/cloud-vendors/trae
+    tags: [skills, trae, bytedance, extracted, closed-source]
+  - name: WorkBuddy builtin skills (extracted)
+    url: https://github.com/tomjiu/agent-skills-mcp/tree/main/cloud-vendors/workbuddy
+    tags: [skills, workbuddy, tencent, extracted, closed-source]
+
+agent_ecosystem:
+  - name: OpenCode
+    url: https://github.com/anomalyco/opencode
+    tags: [agent, opencode]
+  - name: OpenCode docs
+    url: https://opencode.ai/docs
+    tags: [agent, opencode, docs]
+  - name: Continue
+    url: https://github.com/continuedev/continue
+    tags: [agent, continue]
+  - name: Cline
+    url: https://github.com/cline/cline
+    tags: [agent, cline]
+  - name: Aider
+    url: https://github.com/Aider-AI/aider
+    tags: [agent, aider]
+  - name: Cursor docs
+    url: https://docs.cursor.com
+    tags: [agent, cursor, docs]
+  - name: Windsurf
+    url: https://codeium.com/windsurf
+    tags: [agent, windsurf]
+  - name: Gemini CLI
+    url: https://github.com/google-gemini/gemini-cli
+    tags: [agent, gemini]
+  - name: Claude Code marketplace / plugins docs
+    url: https://docs.anthropic.com
+    tags: [agent, claude, docs]
+
+reverse_engineering:
+  - name: ghidra-mcp (bethington) — local mirror
+    url: https://github.com/bethington/ghidra-mcp
+    local: E:\Code\skills\sources\mcp-ecosystem\ghidra-mcp-bethington
+    tags: [re, ghidra, mcp, precloned]
+  - name: ghidra-headless-mcp (mrphrazer) — local mirror
+    url: https://github.com/mrphrazer/ghidra-headless-mcp
+    local: E:\Code\skills\sources\mcp-ecosystem\ghidra-headless-mcp
+    tags: [re, ghidra, mcp, headless, precloned]
+  - name: frida-mcp (dnakov)
+    url: https://github.com/dnakov/frida-mcp
+    local: E:\\Code\\skills\\sources\\mcp-ecosystem\\frida-mcp-dnakov
+    tags: [re, frida, mcp, precloned]
+  - name: kahlo-mcp Frida Android
+    url: https://github.com/FuzzySecurity/kahlo-mcp
+    local: E:\\Code\\skills\\sources\\mcp-ecosystem\\frida-mcp-kahlo
+    tags: [re, frida, android, mcp, precloned]
+  - name: Awesome RE
+    url: https://github.com/tylerha97/awesome-reversing
+    tags: [re, awesome]
+  - name: Awesome Malware Analysis
+    url: https://github.com/rshipp/awesome-malware-analysis
+    tags: [malware, awesome]
+  - name: Awesome Pentest
+    url: https://github.com/enaqx/awesome-pentest
+    tags: [pentest, awesome]
+  - name: Awesome CTF
+    url: https://github.com/apsdehal/awesome-ctf
+    tags: [ctf, awesome]
+  - name: Awesome Frida
+    url: https://github.com/dweinstein/awesome-frida
+    tags: [frida, awesome]
+  - name: Ghidra
+    url: https://github.com/NationalSecurityAgency/ghidra
+    tags: [ghidra, re, official]
+  - name: Awesome Mobile Security
+    url: https://github.com/vaib25vicky/awesome-mobile-security
+    tags: [mobile, security, awesome]
+  - name: radare2
+    url: https://github.com/radareorg/radare2
+    tags: [re, radare2]
+  - name: Cutter
+    url: https://github.com/rizinorg/cutter
+    tags: [re, gui]
+  - name: Binary Ninja (docs/community)
+    url: https://github.com/Vector35/binaryninja-api
+    tags: [re, binary-ninja]
+  - name: Capstone
+    url: https://github.com/capstone-engine/capstone
+    tags: [re, disassembly]
+  - name: Keystone
+    url: https://github.com/keystone-engine/keystone
+    tags: [re, assembler]
+  - name: Rizin
+    url: https://github.com/rizinorg/rizin
+    tags: [re, rizin]
+
+security:
+  - name: OWASP
+    url: https://github.com/OWASP
+    tags: [security, owasp, org]
+  - name: Metasploit
+    url: https://github.com/rapid7/metasploit-framework
+    tags: [pentest, metasploit]
+  - name: Nuclei
+    url: https://github.com/projectdiscovery/nuclei
+    tags: [vuln-scan, projectdiscovery]
+  - name: ProjectDiscovery org
+    url: https://github.com/projectdiscovery
+    tags: [security, org]
+  - name: SQLMap
+    url: https://github.com/sqlmapproject/sqlmap
+    tags: [sqli]
+  - name: Impacket
+    url: https://github.com/fortra/impacket
+    tags: [ad, windows, security]
+  - name: BloodHound
+    url: https://github.com/SpecterOps/BloodHound
+    tags: [ad, bloodhound]
+  - name: pwntools
+    url: https://github.com/Gallopsled/pwntools
+    tags: [pwn, ctf]
+  - name: angr
+    url: https://github.com/angr/angr
+    tags: [symbolic-execution, re]
+  - name: Triton
+    url: https://github.com/JonathanSalwan/Triton
+    tags: [symbolic-execution]
+  - name: Unicorn
+    url: https://github.com/unicorn-engine/unicorn
+    tags: [emulation]
+  - name: Qiling
+    url: https://github.com/qilingframework/qiling
+    tags: [emulation, re]
+  - name: Semgrep
+    url: https://github.com/semgrep/semgrep
+    tags: [sast]
+  - name: Trivy
+    url: https://github.com/aquasecurity/trivy
+    tags: [container, vuln]
+  - name: OSSEC / Wazuh
+    url: https://github.com/wazuh/wazuh
+    tags: [siem, dfir]
+  - name: Mitre ATT&CK
+    url: https://github.com/mitre-attack/attack-stix-data
+    tags: [attck, threat]
+
+firmware:
+  - name: Binwalk
+    url: https://github.com/ReFirmLabs/binwalk
+    tags: [firmware]
+  - name: FirmAE
+    url: https://github.com/pr0v3rbs/FirmAE
+    tags: [firmware, emulation]
+  - name: Firmadyne
+    url: https://github.com/firmadyne/firmadyne
+    tags: [firmware]
+  - name: Firmware Analysis Toolkit
+    url: https://github.com/attify/firmware-analysis-toolkit
+    tags: [firmware]
+  - name: EMBA
+    url: https://github.com/e-m-b-a/emba
+    tags: [firmware, audit]
+
+android:
+  - name: JADX
+    url: https://github.com/skylot/jadx
+    tags: [android, decompile]
+  - name: apktool
+    url: https://github.com/iBotPeaches/Apktool
+    tags: [android, reverse]
+  - name: Frida
+    url: https://github.com/frida/frida
+    tags: [dynamic, instrumentation]
+  - name: Objection
+    url: https://github.com/sensepost/objection
+    tags: [android, ios, frida]
+  - name: MobSF
+    url: https://github.com/MobSF/Mobile-Security-Framework-MobSF
+    tags: [android, mobile, security]
+  - name: androguard
+    url: https://github.com/androguard/androguard
+    tags: [android, static]
+
+dfir:
+  - name: Volatility3
+    url: https://github.com/volatilityfoundation/volatility3
+    tags: [memory, dfir]
+  - name: Velociraptor
+    url: https://github.com/Velocidex/velociraptor
+    tags: [dfir, edr]
+  - name: Timesketch
+    url: https://github.com/google/timesketch
+    tags: [dfir, timeline]
+  - name: Autopsy
+    url: https://github.com/sleuthkit/autopsy
+    tags: [dfir, forensics]
+  - name: The Sleuth Kit
+    url: https://github.com/sleuthkit/sleuthkit
+    tags: [dfir]
+  - name: Plaso
+    url: https://github.com/log2timeline/plaso
+    tags: [dfir, timeline]
+
+languages_perf:
+  - name: Go
+    url: https://github.com/golang/go
+    tags: [go, official]
+  - name: Go performance guide
+    url: https://go.dev/doc/diagnostics
+    tags: [go, performance, docs]
+  - name: Rust
+    url: https://github.com/rust-lang/rust
+    tags: [rust, official]
+  - name: Rust performance book
+    url: https://nnethercote.github.io/perf-book/
+    tags: [rust, performance, docs]
+  - name: TypeScript
+    url: https://github.com/microsoft/TypeScript
+    tags: [typescript, official]
+  - name: Node.js diagnostics
+    url: https://nodejs.org/en/learn/diagnostics
+    tags: [nodejs, performance, docs]
+  - name: Godot Engine
+    url: https://github.com/godotengine/godot
+    tags: [godot, game, official]
+  - name: Godot docs
+    url: https://docs.godotengine.org
+    tags: [godot, docs]
+
+
+  - name: haxqer/godot-skill (Codex-oriented)
+    url: https://github.com/haxqer/godot-skill
+    local: E:\Code\skills\sources\packs\godot-skill-haxqer
+    tags: [godot, skills, precloned]
+  - name: GodotPrompter
+    url: https://github.com/jame581/GodotPrompter
+    local: E:\Code\skills\sources\packs\godot-prompter
+    tags: [godot, skills, precloned]
+  - name: fernforestgames/agent-skill-godot
+    url: https://github.com/fernforestgames/agent-skill-godot
+    local: E:\Code\skills\sources\packs\agent-skill-godot
+    tags: [godot, skills, precloned]
+  - name: Chrome DevTools MCP
+    url: https://github.com/ChromeDevTools/chrome-devtools-mcp
+    local: E:\Code\skills\sources\mcp-ecosystem\chrome-devtools-mcp
+    tags: [mcp, browser, chrome, precloned]
+community:
+  - name: Reddit r/modelcontextprotocol
+    url: https://reddit.com/r/modelcontextprotocol
+    tags: [community, mcp]
+  - name: Reddit r/netsec
+    url: https://reddit.com/r/netsec
+    tags: [community, security]
+  - name: Reddit r/ReverseEngineering
+    url: https://reddit.com/r/ReverseEngineering
+    tags: [community, re]
+  - name: Reddit r/LocalLLaMA
+    url: https://reddit.com/r/LocalLLaMA
+    tags: [community, llm]
+  - name: MCP Discord / community links
+    url: https://modelcontextprotocol.io/community
+    tags: [community, mcp]

@@ -1,0 +1,17 @@
+id = "agents-md.base"
+kind = "agents-md"
+path = "agents-md/base"
+
+[source]
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+version = "0.3.0-draft"
+license = "review-required"
+
+[version]
+upstream = "0.3.0-draft"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "1ab9e3269e9c16678230be96d66883720c9532ed3d844809bdc55f6724e03a6d"
+local_modified = "unknown"
+enabled = false

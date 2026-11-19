@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-local-office-edit"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-local-office-edit"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "7c994fb7792e8cb3b7f2c791329c5d13fd8c32722f609d716c4b8f5f455dcc4b"
+local_modified = "unknown"
+enabled = false

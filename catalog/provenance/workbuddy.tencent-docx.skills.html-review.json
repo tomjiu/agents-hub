@@ -1,0 +1,46 @@
+{
+  "sha256": "aeb7eabe43174b26104bf07efbdd1e836fa1dcfcb0eafc602e887a117da7e4d8",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 6178,
+      "sha256": "7eba67dbde710e82bf8be49fc0092ce18b5f7b0a2d6768cee40c348edcd4665b"
+    },
+    {
+      "path": "references/decoration-usage.md",
+      "bytes": 3580,
+      "sha256": "6355b1c9b58625588e993c012ca73c489f60cc8d03dacc5db31030b1d76db12e"
+    },
+    {
+      "path": "references/design-token-compliance.md",
+      "bytes": 2626,
+      "sha256": "c876ebd06b942f4b387dd2542eec3e7696a9a6cd44eef816fe755d95234cd875"
+    },
+    {
+      "path": "references/genre-fit.md",
+      "bytes": 4066,
+      "sha256": "f02aeb70d4fc756a1100e0c58794bdc34a809446523fd13a148ce05aee0adf49"
+    },
+    {
+      "path": "references/security-check.md",
+      "bytes": 4401,
+      "sha256": "ca6a0b70081320dfc394b7b0e236ba42cadaa238050e16d240e2aa7d5482048f"
+    },
+    {
+      "path": "references/structural-integrity.md",
+      "bytes": 5158,
+      "sha256": "ca8c385b269c6718143a987747b291b1b463e0ca614de71366aa4f9a98ac5ecd"
+    },
+    {
+      "path": "references/typographic-quality.md",
+      "bytes": 4371,
+      "sha256": "60150157825d8d11b9aeb66274a14081f96b82d9600dbf58dfb07611baf01b97"
+    },
+    {
+      "path": "scripts/review_html.py",
+      "bytes": 32693,
+      "sha256": "d75a5369891a5dd045b7a35a6accefd6addc89228286c5136d843e72ab2b9ddd"
+    }
+  ],
+  "bytes": 63073
+}

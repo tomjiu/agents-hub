@@ -1,0 +1,25 @@
+id = "test-driven-development"
+kind = "skills"
+path = "skills/individual/engineering/test-driven-development"
+
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
+[source]
+upstream_identity_status = "unverified"
+location_role = "maintenance-or-service-location-not-proof-of-origin"
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+commit = ""
+license = "review-required"
+provenance = "catalog/audit/migration-2026-11.json"
+
+[version]
+upstream = "unknown"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "439aec7f387a5fb4c85bca71f19d1c1585a559c85e79aeed279e0ad79e5f28df"
+local_modified = "unknown"
+enabled = false

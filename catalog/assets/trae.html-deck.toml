@@ -1,0 +1,22 @@
+id = "trae.html-deck"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/html-deck"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::html-deck/0.0.8/package.zip"
+version = "0.0.8"
+build = "solo_work::default::prod_20260609::html-deck"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.8"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "d12fffd044d64bc8c93dd956830ee8c9540e7ce7979667376147fdda6c77c05e"
+local_modified = "unknown"
+enabled = false

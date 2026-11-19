@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-pptx.skills.tencent-pptx"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-pptx/skills/tencent-pptx"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "672a9d8490033942e1e6106ccee6c7d967e4215f17cf40f9c42f25bfd9bf241d"
+local_modified = "unknown"
+enabled = false

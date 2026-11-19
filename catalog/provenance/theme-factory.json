@@ -1,0 +1,71 @@
+{
+  "sha256": "5bff7a6a1cbfa5c70c6734cfb1907f9d0cddb54a3ed04137f2de0aa3114ebb98",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 11546,
+      "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 3183,
+      "sha256": "7c765e6626bf61eca30224ceeb0da51ac003c7c2f1c1743ace9b3baa305ea632"
+    },
+    {
+      "path": "theme-showcase.pdf",
+      "bytes": 124310,
+      "sha256": "3e126eca9fe99088051f7cb984c97cedb31c7d9e09ce0ba5d61bd01e70a0d253"
+    },
+    {
+      "path": "themes/arctic-frost.md",
+      "bytes": 563,
+      "sha256": "4ca393c5a61d4400f4e3f2ab79bb52a547568b04b60ac1227e254947b4842b41"
+    },
+    {
+      "path": "themes/botanical-garden.md",
+      "bytes": 538,
+      "sha256": "b5bc2b394e6e9543267ba34445b6202157acbd3a68adaea94891695d52f44950"
+    },
+    {
+      "path": "themes/desert-rose.md",
+      "bytes": 515,
+      "sha256": "6f0a7b6e4c792c98a6b2fa3d16683e5147d81c44b426bd93f059358ca94725fd"
+    },
+    {
+      "path": "themes/forest-canopy.md",
+      "bytes": 525,
+      "sha256": "b05f11b64e22b6291b8b5841db1d06a68a6b3910865f1aadd5f72f6a9de1f841"
+    },
+    {
+      "path": "themes/golden-hour.md",
+      "bytes": 547,
+      "sha256": "182c7db9217ae7f8e4cd2608c80a41a10538f1d904b4e78c45238efff59ae32a"
+    },
+    {
+      "path": "themes/midnight-galaxy.md",
+      "bytes": 532,
+      "sha256": "8c133bbb26924bd47d432f7300176610bc3337737483ee5b6d70b10c5482a1ef"
+    },
+    {
+      "path": "themes/modern-minimalist.md",
+      "bytes": 568,
+      "sha256": "839f95ff8dfc5699e93ba463839aa24ef057dc49a94b8ef369adec05bf4021fc"
+    },
+    {
+      "path": "themes/ocean-depths.md",
+      "bytes": 574,
+      "sha256": "062fcb48d08ab8a2fb8c75e8e49d69eb1b7869d80de6d2b6aaa1089b33f28934"
+    },
+    {
+      "path": "themes/sunset-boulevard.md",
+      "bytes": 577,
+      "sha256": "5c5d442403b0736615824fa8375b745f906265262dc0e80c4167a9528fc0ddbc"
+    },
+    {
+      "path": "themes/tech-innovation.md",
+      "bytes": 566,
+      "sha256": "953b7bde08a782266b511a70bf55d4365897bc30835e4c214a46bb6734b4b8dd"
+    }
+  ],
+  "bytes": 144544
+}

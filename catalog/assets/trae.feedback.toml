@@ -1,0 +1,22 @@
+id = "trae.feedback"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/feedback"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::feedback/0.0.1/package.zip"
+version = "0.0.1"
+build = "default::prod_20260609::feedback"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "a1ecda2c84cff5d384bb4c8e22f39bdc21088b490c459e75d62f375adbf8c1dd"
+local_modified = "unknown"
+enabled = false

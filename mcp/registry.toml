@@ -1,0 +1,109 @@
+schema = 1
+
+[[servers]]
+id = "keenable"
+transport = "http"
+enabled = false
+clients = [ "codex", "opencode" ]
+env_names = []
+status = "review-required"
+notes = ""
+url = "https://api.keenable.ai/mcp"
+
+[[servers]]
+id = "tavily-hikari"
+transport = "http"
+enabled = false
+clients = [ "codex", "opencode" ]
+env_names = [ "TAVILY_HIKARI_TOKEN" ]
+status = "review-required"
+notes = ""
+url = "https://tavily.ivanli.cc/mcp"
+
+[[servers]]
+id = "playwright"
+transport = "stdio"
+enabled = false
+clients = [ "codex", "opencode" ]
+env_names = []
+status = "unlocked-upstream"
+notes = ""
+command = "cmd"
+args = [ "/c", "npx", "-y", "@playwright/mcp@latest" ]
+
+[[servers]]
+id = "firefox-devtools"
+transport = "stdio"
+enabled = false
+clients = [ "codex", "opencode" ]
+env_names = []
+status = "local-modified-build-required"
+notes = "Compared with Mozilla 0.9.5 commit b0f4495336b36b875cee29480150e660088c3e1a: 20 changed and 12 local-only files; preserve local implementation. See catalog/audit/firefox-upstream-comparison.json."
+command = "node"
+args = [ "mcp/servers/firefox-devtools-mcp/dist/index.js", "--connectExisting", "--marionettePort", "2828" ]
+local_candidate = "mcp/servers/firefox-devtools-mcp"
+
+[[servers]]
+id = "zen-browser"
+transport = "stdio"
+enabled = false
+clients = [ "opencode" ]
+env_names = []
+status = "unlocked-upstream"
+notes = ""
+command = "npx"
+args = [ "-y", "zen-mcp@latest" ]
+
+[[servers]]
+id = "codex"
+transport = "stdio"
+enabled = false
+clients = [ "opencode" ]
+env_names = []
+status = "review-required"
+notes = ""
+command = "codex-mcp-server"
+args = []
+
+[[servers]]
+id = "node-repl"
+transport = "stdio"
+enabled = false
+clients = [ "codex", "opencode" ]
+env_names = []
+status = "review-required"
+notes = "path set in client config (Codex runtime)"
+
+[[servers]]
+id = "brp"
+transport = "stdio"
+enabled = false
+clients = [ "codex", "opencode" ]
+env_names = [ "BRP_WS_ADDR" ]
+status = "external-install-required"
+notes = "BRP adapter is not bundled; configure an explicit local executable path after installing extension and bridge."
+command = "python"
+
+[[servers]]
+id = "zai-bridge"
+transport = "stdio"
+enabled = false
+clients = [ "dsh" ]
+env_names = [ "ZAI_TOKEN", "ZAI_ACCOUNTS_FILE" ]
+status = "build-required"
+notes = "DSH globally configured; credentials stay in private accounts.json; no default live tests"
+command = "go"
+args = [ "run", "./cmd/zai-bridge" ]
+cwd = "mcp/servers/zai-bridge"
+
+[[servers]]
+id = "search-core"
+transport = "stdio"
+enabled = false
+clients = [ "dsh", "codex", "opencode" ]
+command = "node"
+args = [ "mcp/servers/search-core/typescript/dist/mcp.js" ]
+cwd = "."
+env_names = []
+status = "build-required"
+implementations = [ "typescript", "go" ]

@@ -1,0 +1,131 @@
+{
+  "sha256": "672a9d8490033942e1e6106ccee6c7d967e4215f17cf40f9c42f25bfd9bf241d",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 2700,
+      "sha256": "fba4814ab464decb5f3ff9cc4fc20e321ba365283596897d5c701d2ecd377cff"
+    },
+    {
+      "path": "references/component-animation.md",
+      "bytes": 3355,
+      "sha256": "6e4867720ce80320ae64bd2e1ca082f461aeb9afc0a541b19133416d7324d3f7"
+    },
+    {
+      "path": "references/component-box.md",
+      "bytes": 3735,
+      "sha256": "2bb6a08d49d1e45a4314dd52ccd41c456c428e0becac23706576068938d4e4ec"
+    },
+    {
+      "path": "references/component-chart.md",
+      "bytes": 10988,
+      "sha256": "40693ec55fb0c2bbb7090a49614b582afb9e0d7fb9b6e2b5ef619eb96883d893"
+    },
+    {
+      "path": "references/component-codeblock.md",
+      "bytes": 1690,
+      "sha256": "37446e653c9497f683b0ac844d44c23fc2d9ed26722f32c267b645ec67ed6e0f"
+    },
+    {
+      "path": "references/component-diagram.md",
+      "bytes": 2868,
+      "sha256": "89e811efa58b1a9e28860b1ee456d45853bb817573662259d2867e3fa2307a1a"
+    },
+    {
+      "path": "references/component-faicon.md",
+      "bytes": 3025,
+      "sha256": "6578615ff06298e386914f3280975ea1d3ee46d8a277f935af2d6a9b8d955b56"
+    },
+    {
+      "path": "references/component-hyperlink.md",
+      "bytes": 2333,
+      "sha256": "500cd7681d24c59e5194ad32f15a1a994021d18d57ea93cb65bc91ab8788ce0e"
+    },
+    {
+      "path": "references/component-image.md",
+      "bytes": 5861,
+      "sha256": "0fb52489297182498352251ee20c3be32a6845a836c7dd119b56b7e78564edcb"
+    },
+    {
+      "path": "references/component-math.md",
+      "bytes": 2216,
+      "sha256": "552afc7f9bc9379b63d1781d18295b6364ba77924c0bc9b73a3f90a06de08fe8"
+    },
+    {
+      "path": "references/component-qrcode.md",
+      "bytes": 1180,
+      "sha256": "7fb2f88edf4888081694397a3d6f68b61a268167686fcd313f46fa6d1fcb5ce1"
+    },
+    {
+      "path": "references/component-slide.md",
+      "bytes": 3926,
+      "sha256": "71e750e34c95ff62fa87cffcd5748f78e96c61bb1fe36c00639619c64be2bf3b"
+    },
+    {
+      "path": "references/component-svg.md",
+      "bytes": 1331,
+      "sha256": "1f5d75b087b56c2d3b02d28f845fac00887de7c3111009774264cb03d1a6f47b"
+    },
+    {
+      "path": "references/component-table.md",
+      "bytes": 3365,
+      "sha256": "f855002d7be6d5a06f61a96b2d269a1d946181de1458014b68371d94d37f66ea"
+    },
+    {
+      "path": "references/component-text.md",
+      "bytes": 3188,
+      "sha256": "36b5c3bbef7c8ea2e4fddeb7260328c86d8cc5c2b8d76a865baa42b695af2566"
+    },
+    {
+      "path": "references/create-from-material.md",
+      "bytes": 1857,
+      "sha256": "b7e9f1529ec52eb1c5dc712c15052cf68ea129825fb248b0ddc77133f1993e6b"
+    },
+    {
+      "path": "references/create-from-scratch.md",
+      "bytes": 10283,
+      "sha256": "a0e1bf477c3c891d79c623f973f711ab6eed2f3392a68e9c776e82a46bc7b625"
+    },
+    {
+      "path": "references/design-principle.md",
+      "bytes": 16209,
+      "sha256": "c5eee64d5de98e78f3d02277b08a3ea5aeb0f07872eea6af92fc4f3c4f010921"
+    },
+    {
+      "path": "references/designs/design-principle.academic.md",
+      "bytes": 9258,
+      "sha256": "47d8a00d9afb0f890172330c172c0d406b937a14d3f07228df2d879fb385a20c"
+    },
+    {
+      "path": "references/designs/design-principle.consulting.md",
+      "bytes": 16213,
+      "sha256": "eac53637724445b27e97b07186b11eb7edb1e30201edf73dc166650af4a3c397"
+    },
+    {
+      "path": "references/designs/design-principle.redgold.md",
+      "bytes": 10281,
+      "sha256": "ce98d63509b420e47c794f9354a2c884a6c2dc50460aae11b1857032b2a3419b"
+    },
+    {
+      "path": "references/human-alignment.md",
+      "bytes": 9785,
+      "sha256": "32f0bd25e1045a94b19463d156d28664dfa4133e5ded07449e3c7c2ae7e33cb7"
+    },
+    {
+      "path": "references/story-principle.md",
+      "bytes": 13206,
+      "sha256": "3ba1b66b977abd1847795828bfd9495e40bfd1aede4a94bc210f42fe82dd9006"
+    },
+    {
+      "path": "scripts/doc_image_extractor.py",
+      "bytes": 16788,
+      "sha256": "b43b7a17beb29a197b2cf75b1ec1f537dc9942413845d51dfc7fdaf5c4e42c38"
+    },
+    {
+      "path": "scripts/pptx2image.py",
+      "bytes": 9707,
+      "sha256": "213e2bc94a74e21f5808fff148f11a1eedeefe64d928983bc47cdc7cf0647c03"
+    }
+  ],
+  "bytes": 165348
+}

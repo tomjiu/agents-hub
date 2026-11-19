@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+import crypto from 'node:crypto';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {chromium} from 'playwright-core';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const modules=path.join(root,'plugins/memory-net/console');
+const {MemoryNet}=await import(pathToFileURL(path.join(modules,'vendor/memory-net/dist/src/store.js')).href);
+const {Catalog}=await import(pathToFileURL(path.join(modules,'packages/server/dist/src/catalog.js')).href);
+const {createConsoleServer}=await import(pathToFileURL(path.join(modules,'packages/server/dist/src/server.js')).href);
+const home=await fs.mkdtemp(path.join(os.tmpdir(),'hub-console-click-'));
+const workspace=path.join(home,'review-test');const token=crypto.randomBytes(24).toString('hex');
+let handle,browser;const steps=[];
+const evidence=path.join(root,'.asset-state/evidence');await fs.mkdir(evidence,{recursive:true});
+try {
+ const seed=MemoryNet.open(workspace,{agentId:'ui-fixture',role:'host',workspaceId:'review-test'});
+ seed.add('constraint',{key:'test-boundary',text:'仅测试隔离工作区，不删除用户数据',payload:{mode:'forbid'}});
+ seed.add('observation',{key:'probe',text:'UI migration fixture',source:'tool'});seed.close();
+ handle=createConsoleServer({host:'127.0.0.1',port:0,token,catalog:new Catalog(home),staticDir:path.join(modules,'apps/console/dist'),ssePollMs:100});
+ await new Promise((resolve,reject)=>{handle.server.once('error',reject);handle.server.listen(0,'127.0.0.1',resolve);});
+ const {port}=handle.server.address();const url='http://127.0.0.1:'+port;
+ browser=await chromium.launch({executablePath:process.env.HUB_BROWSER_EXECUTABLE||'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:1280,height:800}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(url);await page.getByRole('button',{name:'Token',exact:true}).click();
+ await page.getByPlaceholder('粘贴 token…').fill('wrong-test-token');await page.getByRole('button',{name:'保存并连接',exact:true}).click();
+ await page.locator('#conn-status').filter({hasText:'需要 Token'}).waitFor();steps.push('Invalid token rejected by actual UI/API');
+ await page.getByRole('button',{name:'Token',exact:true}).click();await page.getByPlaceholder('粘贴 token…').fill(token);await page.getByRole('button',{name:'保存并连接',exact:true}).click();
+ await page.locator('.ws-item').filter({hasText:'review-test'}).waitFor();assert.equal(await page.locator('#topbar .ws-title').textContent(),'review-test');await page.locator('.node-text').filter({hasText:'UI migration fixture'}).waitFor();steps.push('Authenticated workspace and stored nodes loaded');
+ await page.getByRole('button',{name:'+ 记录',exact:true}).click();await page.getByPlaceholder('task_id（如 build-login）').fill('ui-click-task');await page.getByPlaceholder('摘要（如：回调修复 80%，待联调）').fill('UI点击写入闭环成功');
+ await page.getByRole('button',{name:'写入进度',exact:true}).click();await page.locator('.node-text').filter({hasText:'UI点击写入闭环成功'}).waitFor();steps.push('Real click wrote progress and refreshed frontend');
+ await page.getByRole('button',{name:'+ 记录',exact:true}).click();await page.getByPlaceholder('run_id（如 r1）').fill('ui-click-run');await page.getByPlaceholder('做了什么（如：远程复核日志，确认无异常）').fill('真实点击追加轨迹');await page.getByRole('button',{name:'追加轨迹',exact:true}).click();
+ await page.getByRole('button',{name:'轨迹',exact:true}).click();await page.locator('.trail-action').filter({hasText:'真实点击追加轨迹'}).waitFor();steps.push('Trail click persisted and rendered');
+ await page.getByRole('button',{name:'激活',exact:true}).first().click();await page.getByPlaceholder('激活查询词（如：登录 OAuth 进度）').fill('UI点击');await page.getByPlaceholder('激活查询词（如：登录 OAuth 进度）').press('Enter');await page.locator('.activate-result .act-head').waitFor();steps.push('Keyboard submit reached real activation service');
+ await page.getByRole('button',{name:'统计',exact:true}).click();await page.locator('.stat-cards').waitFor();assert.ok((await page.locator('.stat-value').allTextContents()).some(x=>Number(x)>=3));
+ await page.getByRole('button',{name:'节点',exact:true}).click();await page.getByPlaceholder('搜索 text / key / agent / task…').fill('UI点击写入');await page.locator('.node-card').filter({hasText:'UI点击写入闭环成功'}).waitFor();
+ await page.reload();await page.locator('.node-text').filter({hasText:'UI点击写入闭环成功'}).waitFor();steps.push('Reload preserved progress through backend storage');
+ const stored=MemoryNet.open(workspace,{agentId:'ui-verifier',role:'host',workspaceId:'review-test'});
+ try{const pkg=stored.exportPkg();assert.ok(JSON.stringify(pkg).includes('UI点击写入闭环成功'));assert.ok(JSON.stringify(pkg).includes('真实点击追加轨迹'));}finally{stored.close();}
+ await page.screenshot({path:path.join(evidence,'console-click.png'),fullPage:true});assert.deepEqual(errors,[]);
+ const report={status:'PASS',browser:'Installed Edge, isolated headless context',steps,page_errors:errors,scope:'Actual UI clicks/keyboard -> HTTP service -> SQLite -> refreshed UI; not exhaustive UI accessibility or all-platform coverage.'};
+ await fs.writeFile(path.join(evidence,'console-click.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+} finally {if(browser)await browser.close();if(handle)handle.close();await fs.rm(home,{recursive:true,force:true});}

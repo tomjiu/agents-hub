@@ -1,0 +1,291 @@
+{
+  "sha256": "b51c882abe2cb22f0a567086a02f2534d40a1a23ada34058d2f632fde1cc3b36",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 26451,
+      "sha256": "42480ce44c0cb605f355451d9fc5c9d707f423f31653ede69d3bc818cec451fc"
+    },
+    {
+      "path": "scenes/architecture-and-flow.md",
+      "bytes": 13678,
+      "sha256": "0c3090d090ec4bfe62fa5481b050ce7f75cd9a7bd3fc20ccdbd3069f38da2a78"
+    },
+    {
+      "path": "scenes/comparison-and-decision.md",
+      "bytes": 7872,
+      "sha256": "a4e01a5314dab19949aa2ac4a11763f7019f62a30fb0d04401764486cb148cab"
+    },
+    {
+      "path": "scenes/data-visualization.md",
+      "bytes": 16881,
+      "sha256": "a942481be70cc5eb2c2d0b1fc31df071adc3b7dcec38c1859750b5fa65890055"
+    },
+    {
+      "path": "scenes/mechanism-explanation.md",
+      "bytes": 7898,
+      "sha256": "cb543887f62bda94bb3ae3a80a5ad105da1e398a928ca67135f89b3f3bf8619b"
+    },
+    {
+      "path": "scenes/micro-interaction.md",
+      "bytes": 6986,
+      "sha256": "f0de6e1f6c2bd26cc5188ba03a853eeea14e1055a33bcc5c22d2e76b6ecc7049"
+    },
+    {
+      "path": "templates/README.md",
+      "bytes": 4751,
+      "sha256": "766cfd2569710b71a5195f0cb9ef756f236c50a5c2d44e9f7a304807867b4b8e"
+    },
+    {
+      "path": "templates/architecture-elements/fixture.json",
+      "bytes": 1281,
+      "sha256": "475a5babdde7516b02d4756cc4874629c00ffec385bc39cd5952d86b3b4c267e"
+    },
+    {
+      "path": "templates/architecture-elements/template.md",
+      "bytes": 7363,
+      "sha256": "2f7753bba3a1b8f7e7cfe32ba5689301ab5a3a7ca40c5f26c4a87648aa69ac87"
+    },
+    {
+      "path": "templates/architecture-elements/widget-code.html",
+      "bytes": 12336,
+      "sha256": "d5ff80bf81fdd82616226f40a4da4515cef4b7f8910e3b5380e8335e18b8cbcd"
+    },
+    {
+      "path": "templates/bar-chart-multiple/fixture.json",
+      "bytes": 681,
+      "sha256": "a4abe44005ad7135b0e0dbce4ac11226163cfa66abe55d79b0ef7870c29f9b3f"
+    },
+    {
+      "path": "templates/bar-chart-multiple/template.md",
+      "bytes": 5937,
+      "sha256": "9519db9f8c89fa08f96d26724467fb84c583deed4c57c19ba7ec33c36e8974e2"
+    },
+    {
+      "path": "templates/bar-chart-multiple/widget-code.html",
+      "bytes": 18544,
+      "sha256": "dedbe10b70563787f62b7eabf7a891e163e257643ab85744e9a1a11b48953481"
+    },
+    {
+      "path": "templates/bar-stacked-legend/fixture.json",
+      "bytes": 693,
+      "sha256": "9e4fec06003f90332a25e644e42516b5ae3bd07494904b0efc9178c3acd9b651"
+    },
+    {
+      "path": "templates/bar-stacked-legend/template.md",
+      "bytes": 6398,
+      "sha256": "8956df9b7bd5a9c720bcece3039e27167b7d2b6bab8300573ff305c96b479c64"
+    },
+    {
+      "path": "templates/bar-stacked-legend/widget-code.html",
+      "bytes": 20902,
+      "sha256": "d5174c8a6eebbf2d5548ad39b3f0f1d4c2b332c36df0780413e0aabedd8185b3"
+    },
+    {
+      "path": "templates/comparison-cards/fixture.json",
+      "bytes": 1561,
+      "sha256": "a9f0de3978035ccd63fd2196c49dbaf7d977c0f4bcd14d32a57cec7f0bf891cc"
+    },
+    {
+      "path": "templates/comparison-cards/template.md",
+      "bytes": 4888,
+      "sha256": "359316d17c07fac3374ecddeaf24ca95c3a12ac048f44da149907ae40967ad0a"
+    },
+    {
+      "path": "templates/comparison-cards/widget-code.html",
+      "bytes": 10786,
+      "sha256": "25c0cbeec0c6c52a087abe43f38ae8dffb751a18549c7089768ac93aaeb9efcf"
+    },
+    {
+      "path": "templates/funnel-bar-chart/fixture.json",
+      "bytes": 701,
+      "sha256": "a833f7ba7ec1e57d6a7874928db7eebc5c9fc1ec357f2460d1fcbd38fde11d9f"
+    },
+    {
+      "path": "templates/funnel-bar-chart/template.md",
+      "bytes": 7656,
+      "sha256": "be582731a82b23d803e8aa2c49855951de4da75b4e2f01cf3659e3bf1f284495"
+    },
+    {
+      "path": "templates/funnel-bar-chart/widget-code.html",
+      "bytes": 20722,
+      "sha256": "6c4cbb9d808f65d969ac18e4db0c1af5bb83d99cf93332f83b863a1a06c73aa9"
+    },
+    {
+      "path": "templates/gantt-chart/fixture.json",
+      "bytes": 1903,
+      "sha256": "7f55752aed92497a7a3fa994d6afe70ca7fa19e26c4d8b7ce90549a28bc4b6f5"
+    },
+    {
+      "path": "templates/gantt-chart/template.md",
+      "bytes": 7107,
+      "sha256": "8435337e1023e112babe829a4434dfc37abf912ffcf6bdd8a8eba0a0ca2a9093"
+    },
+    {
+      "path": "templates/gantt-chart/widget-code.html",
+      "bytes": 29592,
+      "sha256": "1aca26f3d90ad25d94822d91dec100963109a303b0d41f4d77bd9a3b44b3af72"
+    },
+    {
+      "path": "templates/heatmap-chart/fixture.json",
+      "bytes": 24479,
+      "sha256": "adb1a2a00b2f50bb7e18bf653c95e75f6cf79c0a1fd21924707b29370631bb73"
+    },
+    {
+      "path": "templates/heatmap-chart/template.md",
+      "bytes": 8181,
+      "sha256": "5d51b630a1515d2e1262c69926fdcaacb6f27aca3389a47daece633081db1bf6"
+    },
+    {
+      "path": "templates/heatmap-chart/widget-code.html",
+      "bytes": 51655,
+      "sha256": "26302745b3df004af642e7c589335ccfa3dd810486cf6be94653dab9e85fd987"
+    },
+    {
+      "path": "templates/line-trend/fixture.json",
+      "bytes": 482,
+      "sha256": "2d50f45d37bef11bbb991af299f04ef9fbc9f7e6edf7797ec032bb9aeef491c0"
+    },
+    {
+      "path": "templates/line-trend/template.md",
+      "bytes": 5725,
+      "sha256": "56dfbf8ad855638c8be0141530fc21765c3fc85b07b248f7d14ee5d68d3b0819"
+    },
+    {
+      "path": "templates/line-trend/widget-code.html",
+      "bytes": 16722,
+      "sha256": "2dde810769212243b361abb9ac305e5d6d9f3691824fff49b925a07e21448865"
+    },
+    {
+      "path": "templates/manifest.json",
+      "bytes": 3014,
+      "sha256": "6c57cb64107998ddbc97e9b3981c4771c03a795f7a28624e578e515bed5b2074"
+    },
+    {
+      "path": "templates/pie-chart-label-list/fixture.json",
+      "bytes": 1043,
+      "sha256": "daf7ee44863f60149a37aa6ce2dc9cfea8b191b6816b70d51c2eefe457c5bed1"
+    },
+    {
+      "path": "templates/pie-chart-label-list/template.md",
+      "bytes": 6026,
+      "sha256": "41b4b65d86322d959f6f720f98d206ed94259d9a798090bb4834f73a6d3222ee"
+    },
+    {
+      "path": "templates/pie-chart-label-list/widget-code.html",
+      "bytes": 17614,
+      "sha256": "b43b2bbb632ed71deb8fc1ecd9298a4fd808a84e9ce239cd73cac387def5966f"
+    },
+    {
+      "path": "templates/pie-donut-text/fixture.json",
+      "bytes": 1074,
+      "sha256": "e0d36881b0aa2ec3e994611542dcf370ddc4d63d6f5fcda727f1c464c94ffe3f"
+    },
+    {
+      "path": "templates/pie-donut-text/template.md",
+      "bytes": 5983,
+      "sha256": "1485450c69e3518d1d7783558de7541ad724752d22d0e82117a65f37fca3bbba"
+    },
+    {
+      "path": "templates/pie-donut-text/widget-code.html",
+      "bytes": 18100,
+      "sha256": "9b87db937b5ceb76dd78c7eb65509e4aa18b9ab5d02ee942f50af9d6459fc517"
+    },
+    {
+      "path": "templates/radar-chart-legend/fixture.json",
+      "bytes": 689,
+      "sha256": "4e404b672c50bf9e98ffe376e25d1f0a18a24e2fe3266d82b312147b6c85b5bc"
+    },
+    {
+      "path": "templates/radar-chart-legend/template.md",
+      "bytes": 6911,
+      "sha256": "d17f9e78866a6ad9815801fdc32d6eaaf418f971b3d135ca0fee6c66f7be6856"
+    },
+    {
+      "path": "templates/radar-chart-legend/widget-code.html",
+      "bytes": 19466,
+      "sha256": "022c0b178092d1d59d3331900cb5e4d8ace8817733f029029c45f08b97b18c99"
+    },
+    {
+      "path": "templates/radar-chart-lines-only/fixture.json",
+      "bytes": 695,
+      "sha256": "3ec80d9f3b9842120dd43f946315e316dd1af0eebed5adc25342104735580d57"
+    },
+    {
+      "path": "templates/radar-chart-lines-only/template.md",
+      "bytes": 7592,
+      "sha256": "39d09d5d0f523be10e8b557ea8e7967a0eca182344c35d8207fac061f71a7c08"
+    },
+    {
+      "path": "templates/radar-chart-lines-only/widget-code.html",
+      "bytes": 18341,
+      "sha256": "1c67026e7bde43323a3cbc774100f7d651ff5528807c488b8b3152bb02ba0a13"
+    },
+    {
+      "path": "templates/sankey-chart/fixture.json",
+      "bytes": 6856,
+      "sha256": "ddedef19780f3022d3031071dffb7690011dc71a32bb2a9066d798880beae5b1"
+    },
+    {
+      "path": "templates/sankey-chart/template.md",
+      "bytes": 10284,
+      "sha256": "b7347bc535db93cbbb3a8f0013506c8fc0dc89291123ac793bf344efec109e11"
+    },
+    {
+      "path": "templates/sankey-chart/widget-code.html",
+      "bytes": 19588,
+      "sha256": "fa60eb048655cfa0c6783bdd179cbacf9d3e0ccdd02145f930e921231c3ff831"
+    },
+    {
+      "path": "templates/scatter-chart/fixture.json",
+      "bytes": 1322,
+      "sha256": "11fba0bbf7277c8a2993103bce490debfdf0815c6d383d1b6ed6f3910c19776b"
+    },
+    {
+      "path": "templates/scatter-chart/template.md",
+      "bytes": 7491,
+      "sha256": "96b65a68948d01352fa561bddd5d59d01d71d48f7fbbacd39ef6f68e5475ef48"
+    },
+    {
+      "path": "templates/scatter-chart/widget-code.html",
+      "bytes": 22683,
+      "sha256": "508962b5f519ee84b57ececd915c6b8a3a3330c28e2db6c3355bf7597b371f06"
+    },
+    {
+      "path": "templates/sequence-diagram/fixture.json",
+      "bytes": 1839,
+      "sha256": "d50d035607fe3e118fbe09be48bc69f1d07166c36db20fe4dae8a776e1617fd7"
+    },
+    {
+      "path": "templates/sequence-diagram/template.md",
+      "bytes": 5498,
+      "sha256": "510968f436976da4952cfa64a2b559f2929aa85a66fea7115427a6d68a650635"
+    },
+    {
+      "path": "templates/sequence-diagram/widget-code.html",
+      "bytes": 16425,
+      "sha256": "a9665b33600244ceb8f14dfc4075fa8de789235c01408566d32134641f67ae40"
+    },
+    {
+      "path": "templates/tree-flow/fixture.json",
+      "bytes": 2720,
+      "sha256": "fa0d990d2e7b945e4f7762d5f142c486b566ffd90a40d9eed59c621288fd4748"
+    },
+    {
+      "path": "templates/tree-flow/template.md",
+      "bytes": 6485,
+      "sha256": "6f65d9b13a5cf6fafc5896f38ab858d3345f5ad1284d8ef6b50dc98a5aeb8381"
+    },
+    {
+      "path": "templates/tree-flow/widget-code.html",
+      "bytes": 8158,
+      "sha256": "152afeefc4d27951f22e8c11563b9cfe64214890f041a36a2bb072165dcdd0d9"
+    },
+    {
+      "path": "tokens/visual-tokens.md",
+      "bytes": 29463,
+      "sha256": "3f110202c2a3dc456ef60de59b8bbe272ccd370cf4cec354621e4ef588b2a310"
+    }
+  ],
+  "bytes": 596172
+}

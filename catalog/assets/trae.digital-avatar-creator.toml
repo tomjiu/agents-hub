@@ -1,0 +1,22 @@
+id = "trae.digital-avatar-creator"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/digital-avatar-creator"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::digital-avatar-creator/0.0.1/package.zip"
+version = "0.0.1"
+build = "default::prod_20260609::digital-avatar-creator"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "422f02ab8c224664a5cb78c8652c3db30a4af87b28132c3de63124edc1fde2a9"
+local_modified = "unknown"
+enabled = false

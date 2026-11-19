@@ -1,0 +1,112 @@
+schema = 1
+kind = "mcp"
+
+[[assets]]
+id = "mcp.keenable"
+path = "catalog/audit/legacy/mcp/servers/keenable"
+source_url = "https://api.keenable.ai/mcp"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "09a968f7b576cb397449fee34a3e5f8e550dcc5f117cacc41c73a92c0282d997"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.tavily-hikari"
+path = "catalog/audit/legacy/mcp/servers/tavily-hikari"
+source_url = "https://tavily.ivanli.cc/mcp"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "be81242d7172cb6ca134ddd8d2e24f8a3c524b7a480b5ac857773e86a90e500b"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.playwright"
+path = "catalog/audit/legacy/mcp/servers/playwright"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "2b45639610b310120a3b97eccf3e72c9edeacbedb7f31f3b94cd3773cdb36f27"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.firefox-devtools"
+path = "mcp/servers/firefox-devtools-mcp"
+source_url = "https://registry.npmjs.org/@mozilla/firefox-devtools-mcp"
+upstream_version = "0.9.5"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "3694fe3d40f3d5efe7a3f666acc5dab19fee4fd4888c9c01c3fd5288e7891db4"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.zen-browser"
+path = "catalog/audit/legacy/mcp/servers/zen-browser"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "02392d00fd90b5750b9011bda174b6e8b53df0822df75e236a84e5bec5fb0b36"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.codex"
+path = "catalog/audit/legacy/mcp/servers/codex"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "e7a361384f45b7c2e472cda1076e532b19465e466d8973400981fe26d10b6980"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.node-repl"
+path = "catalog/audit/legacy/mcp/servers/node_repl"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "17572584c40159ad856f8fc955d7738d251320b0ee45a01d701561d29585ac38"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.brp"
+path = "catalog/audit/legacy/mcp/servers/brp"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "662e7f69f705c71847ff636f61b0013be965ddc508ba7f7a3e0885376af4bed2"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.zai-bridge"
+path = "mcp/servers/zai-bridge"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "0.3.1"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "3e7521148ffb540e39a68cd38c39fd22dbd70dbc6b6ad851142773ab4893662d"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false
+
+[[assets]]
+id = "mcp.search-core"
+path = "mcp/servers/search-core"
+source_url = "https://github.com/tomjiu/agents-hub"
+upstream_version = "unknown"
+upstream_commit = "4f1911081477b49a6610e52537bea1057f216530"
+sha256 = "402210d5390926cd279dc146af062b604ccb2c88049fbdaa910287037133df14"
+local_version = "imported-2026-11-18"
+local_modified = "unknown"
+enabled = false

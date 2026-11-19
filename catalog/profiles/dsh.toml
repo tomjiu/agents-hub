@@ -1,0 +1,9 @@
+schema = 1
+client = "dsh"
+experts = [ "core" ]
+enabled = false
+deploy = "explicit"
+skills_view = "generated-version-directory"
+overwrite_user_config = false
+plugins = []
+mcp = []

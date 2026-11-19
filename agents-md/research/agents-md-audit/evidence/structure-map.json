@@ -1,0 +1,1621 @@
+{
+  "sections": [
+    {
+      "level": 1,
+      "title": "AGENTS.md",
+      "start_line": 1,
+      "parent": null,
+      "end_line": 2,
+      "words": 0,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Purpose",
+      "start_line": 3,
+      "parent": "AGENTS.md",
+      "end_line": 10,
+      "words": 50,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "1. Non-Negotiable Operating Model",
+      "start_line": 11,
+      "parent": "AGENTS.md",
+      "end_line": 39,
+      "words": 82,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "2. Context Is Ephemeral; Repository State Is Durable",
+      "start_line": 40,
+      "parent": "AGENTS.md",
+      "end_line": 57,
+      "words": 65,
+      "code_blocks": 1
+    },
+    {
+      "level": 3,
+      "title": "Durable-state rule",
+      "start_line": 58,
+      "parent": "2. Context Is Ephemeral; Repository State Is Durable",
+      "end_line": 77,
+      "words": 80,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "3. Source of Truth and Documentation Consistency",
+      "start_line": 78,
+      "parent": "AGENTS.md",
+      "end_line": 105,
+      "words": 119,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "4. Work Resumption Protocol",
+      "start_line": 106,
+      "parent": "AGENTS.md",
+      "end_line": 123,
+      "words": 89,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "5. Classify the Work Before Acting",
+      "start_line": 124,
+      "parent": "AGENTS.md",
+      "end_line": 151,
+      "words": 50,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "6. Skills First",
+      "start_line": 152,
+      "parent": "AGENTS.md",
+      "end_line": 180,
+      "words": 110,
+      "code_blocks": 1
+    },
+    {
+      "level": 3,
+      "title": "Useful external Skill repositories",
+      "start_line": 181,
+      "parent": "6. Skills First",
+      "end_line": 196,
+      "words": 119,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "7. Frontend Work Must Be Product-Level, Not Component-Level",
+      "start_line": 197,
+      "parent": "AGENTS.md",
+      "end_line": 226,
+      "words": 164,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "8. No Shell Implementations",
+      "start_line": 227,
+      "parent": "AGENTS.md",
+      "end_line": 259,
+      "words": 81,
+      "code_blocks": 1
+    },
+    {
+      "level": 3,
+      "title": "Implementation completeness",
+      "start_line": 260,
+      "parent": "8. No Shell Implementations",
+      "end_line": 280,
+      "words": 72,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "9. No Degraded Implementation Without Explicit Approval",
+      "start_line": 281,
+      "parent": "AGENTS.md",
+      "end_line": 300,
+      "words": 87,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "10. One-Phase YOLO Execution",
+      "start_line": 301,
+      "parent": "AGENTS.md",
+      "end_line": 330,
+      "words": 117,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "11. Proportional Planning",
+      "start_line": 331,
+      "parent": "AGENTS.md",
+      "end_line": 353,
+      "words": 41,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "12. Research Before Reimplementation",
+      "start_line": 354,
+      "parent": "AGENTS.md",
+      "end_line": 383,
+      "words": 64,
+      "code_blocks": 2
+    },
+    {
+      "level": 2,
+      "title": "13. Rust Rules",
+      "start_line": 384,
+      "parent": "AGENTS.md",
+      "end_line": 387,
+      "words": 10,
+      "code_blocks": 0
+    },
+    {
+      "level": 3,
+      "title": "unsafe",
+      "start_line": 388,
+      "parent": "13. Rust Rules",
+      "end_line": 413,
+      "words": 110,
+      "code_blocks": 1
+    },
+    {
+      "level": 3,
+      "title": "Rust rewrite",
+      "start_line": 414,
+      "parent": "13. Rust Rules",
+      "end_line": 423,
+      "words": 35,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "14. Avoid Overengineering",
+      "start_line": 424,
+      "parent": "AGENTS.md",
+      "end_line": 445,
+      "words": 57,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "15. Avoid Over-Safety and Over-Commenting",
+      "start_line": 446,
+      "parent": "AGENTS.md",
+      "end_line": 463,
+      "words": 58,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "16. Debugging",
+      "start_line": 464,
+      "parent": "AGENTS.md",
+      "end_line": 482,
+      "words": 41,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "17. Verification Is Part of Implementation",
+      "start_line": 483,
+      "parent": "AGENTS.md",
+      "end_line": 525,
+      "words": 125,
+      "code_blocks": 3
+    },
+    {
+      "level": 2,
+      "title": "18. Independent Review",
+      "start_line": 526,
+      "parent": "AGENTS.md",
+      "end_line": 555,
+      "words": 85,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "19. Documentation as an Executable Contract",
+      "start_line": 556,
+      "parent": "AGENTS.md",
+      "end_line": 577,
+      "words": 68,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "20. Git Safety and Delivery",
+      "start_line": 578,
+      "parent": "AGENTS.md",
+      "end_line": 605,
+      "words": 50,
+      "code_blocks": 2
+    },
+    {
+      "level": 2,
+      "title": "21. Durable Phase State",
+      "start_line": 606,
+      "parent": "AGENTS.md",
+      "end_line": 629,
+      "words": 66,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "22. Completion Gate",
+      "start_line": 630,
+      "parent": "AGENTS.md",
+      "end_line": 653,
+      "words": 94,
+      "code_blocks": 1
+    },
+    {
+      "level": 2,
+      "title": "23. Final Report",
+      "start_line": 654,
+      "parent": "AGENTS.md",
+      "end_line": 658,
+      "words": 8,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Result",
+      "start_line": 659,
+      "parent": "AGENTS.md",
+      "end_line": 661,
+      "words": 1,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Changes",
+      "start_line": 662,
+      "parent": "AGENTS.md",
+      "end_line": 664,
+      "words": 2,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Skills",
+      "start_line": 665,
+      "parent": "AGENTS.md",
+      "end_line": 667,
+      "words": 2,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Verification",
+      "start_line": 668,
+      "parent": "AGENTS.md",
+      "end_line": 672,
+      "words": 7,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Review",
+      "start_line": 673,
+      "parent": "AGENTS.md",
+      "end_line": 675,
+      "words": 1,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Git",
+      "start_line": 676,
+      "parent": "AGENTS.md",
+      "end_line": 680,
+      "words": 8,
+      "code_blocks": 0
+    },
+    {
+      "level": 2,
+      "title": "Status",
+      "start_line": 681,
+      "parent": "AGENTS.md",
+      "end_line": 688,
+      "words": 23,
+      "code_blocks": 0
+    },
+    {
+      "level": 1,
+      "title": "Final Rule",
+      "start_line": 689,
+      "parent": null,
+      "end_line": 707,
+      "words": 108,
+      "code_blocks": 0
+    }
+  ],
+  "directive_count": 59,
+  "directives_by_category": {
+    "GENERAL": [
+      "Do not start editing immediately merely because the requested change sounds simple",
+      "Do not stop after producing code merely because it compiles",
+      "If an important fact is discovered during work, do not leave it only in chat",
+      "Do not turn durable documents into a diary",
+      "Use this priority unless the repository explicitly defines another hierarchy:",
+      "If an important inconsistency is discovered: 1",
+      "Never claim documentation is current without checking it against the implementation",
+      "Do not restart completed work merely because the previous conversation is unavailable",
+      "Do not assume an item is complete because a checklist says so",
+      "Classify the task as one or more of:",
+      "Use established high-quality products as reference points for interaction quality, information hierarchy, density, typography, motion, and state handling",
+      "Avoid generic AI UI patterns:",
+      "Do not silently downgrade the requested implementation to:",
+      "If a full implementation is temporarily impossible, stop at the actual boundary and report it",
+      "Do not stop after every tiny step to ask for confirmation",
+      "Do not turn a multi-step phase into dozens of unnecessary conversational checkpoints",
+      "Do not produce enormous plans for trivial work",
+      "Do not replace mature behavior with a clean-looking design based only on your prior knowledge",
+      "Never turn inference into fact",
+      "Prefer:",
+      "Do not spread unsafe through application code",
+      "Do not introduce unsafe merely to make the implementation easier",
+      "Prefer the smallest architecture that satisfies the actual requirements",
+      "Do not invent elaborate security architecture for hypothetical risks",
+      "Do not narrate obvious code",
+      "Use:",
+      "Use the strongest practical verification available:",
+      "If real verification is impossible, report:",
+      "Before modifying files:",
+      "Protect unrelated user changes",
+      "After implementation:",
+      "Do not claim success from intention, compilation, screenshots, or plausible reasoning alone",
+      "**Do not work from memory when the repository can provide the fact",
+      "**Do not stop at a shell when the task requires a working system",
+      "**Do not degrade the implementation silently",
+      "**Use Skills and existing project knowledge before inventing your own workflow"
+    ],
+    "READ/VERIFY": [
+      "Before doing substantial work, inspect the repository's durable project memory if present:",
+      "Inspect the available skill locations and agent capabilities, for example:",
+      "Before declaring completion, test the path using real inputs and inspect the resulting state",
+      "Before introducing it, check:",
+      "Never respond to a failing test by randomly changing several unrelated things",
+      "Before declaring a phase complete, check:",
+      "**After planning a coherent phase, execute it end-to-end and verify it"
+    ],
+    "WRITE": [
+      "Do not create all of these automatically",
+      "Do not use a coding workflow for product analysis, or a greenfield architecture workflow for a small bug fix",
+      "Never intentionally implement a feature as a visual shell, fake workflow, mock success, placeholder backend, or disconnected UI unless the task explicitly asks for a prototype/mockup",
+      "Do not add abstractions merely because they are theoretically reusable",
+      "Do not add:",
+      "Fix meaningful findings and re-run relevant verification",
+      "Do not create a second document containing a competing “truth”",
+      "Do not write a chronological transcript",
+      "**Do not write a plan instead of doing the work"
+    ],
+    "SKILL/PLUGIN": [
+      "Inspect the available skill locations and agent capabilities, for example:",
+      "Prefer the smallest relevant Skill rather than loading a large unrelated collection",
+      "If no suitable Skill exists, continue with the general workflow",
+      "If the environment has no suitable local Skill, these public repositories are useful starting points for discovery",
+      "Use a sub-agent when available and useful, especially for:"
+    ],
+    "NETWORK/EXTERNAL": [
+      "If the environment has no suitable local Skill, these public repositories are useful starting points for discovery",
+      "Never claim a push succeeded without actual evidence"
+    ],
+    "SAFETY-GATE": [
+      "Pause only when:"
+    ],
+    "GIT": [
+      "Commit only relevant work",
+      "Never claim a push succeeded without actual evidence"
+    ]
+  },
+  "directives_full": [
+    {
+      "line": 31,
+      "text": "Do not start editing immediately merely because the requested change sounds simple"
+    },
+    {
+      "line": 33,
+      "text": "Do not stop after producing code merely because it compiles"
+    },
+    {
+      "line": 43,
+      "text": "Before doing substantial work, inspect the repository's durable project memory if present:"
+    },
+    {
+      "line": 55,
+      "text": "Do not create all of these automatically"
+    },
+    {
+      "line": 59,
+      "text": "If an important fact is discovered during work, do not leave it only in chat"
+    },
+    {
+      "line": 73,
+      "text": "Do not turn durable documents into a diary"
+    },
+    {
+      "line": 81,
+      "text": "Use this priority unless the repository explicitly defines another hierarchy:"
+    },
+    {
+      "line": 92,
+      "text": "If an important inconsistency is discovered: 1"
+    },
+    {
+      "line": 99,
+      "text": "Never claim documentation is current without checking it against the implementation"
+    },
+    {
+      "line": 117,
+      "text": "Do not restart completed work merely because the previous conversation is unavailable"
+    },
+    {
+      "line": 119,
+      "text": "Do not assume an item is complete because a checklist says so"
+    },
+    {
+      "line": 125,
+      "text": "Classify the task as one or more of:"
+    },
+    {
+      "line": 147,
+      "text": "Do not use a coding workflow for product analysis, or a greenfield architecture workflow for a small bug fix"
+    },
+    {
+      "line": 155,
+      "text": "Inspect the available skill locations and agent capabilities, for example:"
+    },
+    {
+      "line": 169,
+      "text": "Prefer the smallest relevant Skill rather than loading a large unrelated collection"
+    },
+    {
+      "line": 178,
+      "text": "If no suitable Skill exists, continue with the general workflow"
+    },
+    {
+      "line": 182,
+      "text": "If the environment has no suitable local Skill, these public repositories are useful starting points for discovery"
+    },
+    {
+      "line": 208,
+      "text": "Use established high-quality products as reference points for interaction quality, information hierarchy, density, typography, motion, and state handling"
+    },
+    {
+      "line": 210,
+      "text": "Avoid generic AI UI patterns:"
+    },
+    {
+      "line": 230,
+      "text": "Never intentionally implement a feature as a visual shell, fake workflow, mock success, placeholder backend, or disconnected UI unless the task explicitly asks for a prototype/mockup"
+    },
+    {
+      "line": 276,
+      "text": "Before declaring completion, test the path using real inputs and inspect the resulting state"
+    },
+    {
+      "line": 282,
+      "text": "Do not silently downgrade the requested implementation to:"
+    },
+    {
+      "line": 296,
+      "text": "If a full implementation is temporarily impossible, stop at the actual boundary and report it"
+    },
+    {
+      "line": 304,
+      "text": "Do not stop after every tiny step to ask for confirmation"
+    },
+    {
+      "line": 318,
+      "text": "Pause only when:"
+    },
+    {
+      "line": 326,
+      "text": "Do not turn a multi-step phase into dozens of unnecessary conversational checkpoints"
+    },
+    {
+      "line": 332,
+      "text": "Do not produce enormous plans for trivial work"
+    },
+    {
+      "line": 369,
+      "text": "Do not replace mature behavior with a clean-looking design based only on your prior knowledge"
+    },
+    {
+      "line": 379,
+      "text": "Never turn inference into fact"
+    },
+    {
+      "line": 391,
+      "text": "Before introducing it, check:"
+    },
+    {
+      "line": 399,
+      "text": "Prefer:"
+    },
+    {
+      "line": 407,
+      "text": "Do not spread unsafe through application code"
+    },
+    {
+      "line": 409,
+      "text": "Do not introduce unsafe merely to make the implementation easier"
+    },
+    {
+      "line": 425,
+      "text": "Prefer the smallest architecture that satisfies the actual requirements"
+    },
+    {
+      "line": 427,
+      "text": "Do not add abstractions merely because they are theoretically reusable"
+    },
+    {
+      "line": 429,
+      "text": "Do not add:"
+    },
+    {
+      "line": 447,
+      "text": "Do not invent elaborate security architecture for hypothetical risks"
+    },
+    {
+      "line": 459,
+      "text": "Do not narrate obvious code"
+    },
+    {
+      "line": 465,
+      "text": "Never respond to a failing test by randomly changing several unrelated things"
+    },
+    {
+      "line": 467,
+      "text": "Use:"
+    },
+    {
+      "line": 484,
+      "text": "Use the strongest practical verification available:"
+    },
+    {
+      "line": 516,
+      "text": "If real verification is impossible, report:"
+    },
+    {
+      "line": 529,
+      "text": "Use a sub-agent when available and useful, especially for:"
+    },
+    {
+      "line": 551,
+      "text": "Fix meaningful findings and re-run relevant verification"
+    },
+    {
+      "line": 571,
+      "text": "Do not create a second document containing a competing “truth”"
+    },
+    {
+      "line": 579,
+      "text": "Before modifying files:"
+    },
+    {
+      "line": 587,
+      "text": "Protect unrelated user changes"
+    },
+    {
+      "line": 589,
+      "text": "After implementation:"
+    },
+    {
+      "line": 597,
+      "text": "Commit only relevant work"
+    },
+    {
+      "line": 601,
+      "text": "Never claim a push succeeded without actual evidence"
+    },
+    {
+      "line": 621,
+      "text": "Do not write a chronological transcript"
+    },
+    {
+      "line": 631,
+      "text": "Before declaring a phase complete, check:"
+    },
+    {
+      "line": 684,
+      "text": "Do not claim success from intention, compilation, screenshots, or plausible reasoning alone"
+    },
+    {
+      "line": 690,
+      "text": "**Do not work from memory when the repository can provide the fact"
+    },
+    {
+      "line": 692,
+      "text": "**Do not stop at a shell when the task requires a working system"
+    },
+    {
+      "line": 694,
+      "text": "**Do not degrade the implementation silently"
+    },
+    {
+      "line": 696,
+      "text": "**Do not write a plan instead of doing the work"
+    },
+    {
+      "line": 698,
+      "text": "**After planning a coherent phase, execute it end-to-end and verify it"
+    },
+    {
+      "line": 702,
+      "text": "**Use Skills and existing project knowledge before inventing your own workflow"
+    }
+  ],
+  "shell_commands": [
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "Understand"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Classify"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Inspect durable context"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Discover relevant Skills/tools"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Research if needed"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Form a proportional plan"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Execute one coherent phase"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Verify real behavior"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Review independently"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Fix"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Verify again"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Persist state"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Commit"
+    },
+    {
+      "line": 16,
+      "lang": "text",
+      "cmd": "→ Push when requested/required"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "AGENTS.md / CLAUDE.md / project instructions"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "README / CONTRIBUTING"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "ARCHITECTURE.md"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "DECISIONS.md"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "WORKLOG.md"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "TASKS.md / PLAN.md"
+    },
+    {
+      "line": 47,
+      "lang": "text",
+      "cmd": "DESIGN.md / PAGES.md (frontend projects)"
+    },
+    {
+      "line": 85,
+      "lang": "text",
+      "cmd": "Actual running behavior / tests"
+    },
+    {
+      "line": 85,
+      "lang": "text",
+      "cmd": "> source code and configuration"
+    },
+    {
+      "line": 85,
+      "lang": "text",
+      "cmd": "> current architecture/design decision records"
+    },
+    {
+      "line": 85,
+      "lang": "text",
+      "cmd": "> task plan"
+    },
+    {
+      "line": 85,
+      "lang": "text",
+      "cmd": "> README and user-facing documentation"
+    },
+    {
+      "line": 85,
+      "lang": "text",
+      "cmd": "> stale notes / historical discussion"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "IMPLEMENTATION"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "BUG_FIX"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "REFACTOR"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "MIGRATION"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "RUST_REWRITE"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "RESEARCH"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "PRODUCT_ANALYSIS"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "ARCHITECTURE"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "FRONTEND"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "PERFORMANCE"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "TESTING"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "DEBUGGING"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "DOCUMENTATION"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "RELEASE"
+    },
+    {
+      "line": 129,
+      "lang": "text",
+      "cmd": "OTHER"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": "skills/"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": ".agents/skills/"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": ".claude/skills/"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": ".codex/skills/"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": ".github/skills/"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": "~/.agents/skills/"
+    },
+    {
+      "line": 159,
+      "lang": "text",
+      "cmd": "~/.claude/skills/"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "UI exists"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "but state is fake"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "or"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "button exists"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "but action is not wired"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "or"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "API client exists"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "but real API is never called"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "or"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "backend exists"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "but frontend does not consume it"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "or"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "workflow looks complete"
+    },
+    {
+      "line": 236,
+      "lang": "text",
+      "cmd": "but only happy-path hardcoded data works"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "User action"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ UI state"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ application logic"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ data/API/storage"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ real result"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ error state"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ loading/empty state where applicable"
+    },
+    {
+      "line": 265,
+      "lang": "text",
+      "cmd": "→ UI update"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "Plan phase"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "→ execute phase end-to-end"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "→ run verification"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "→ review"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "→ fix obvious issues"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "→ persist state"
+    },
+    {
+      "line": 310,
+      "lang": "text",
+      "cmd": "→ report"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Goal"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Scope"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Constraints"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Current facts"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Unknowns"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Approach"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Acceptance criteria"
+    },
+    {
+      "line": 338,
+      "lang": "text",
+      "cmd": "Verification"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "Existing implementation"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ behavior"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ architecture"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ constraints"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ tests"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ upstream issues/PRs"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ known tradeoffs"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ target architecture"
+    },
+    {
+      "line": 359,
+      "lang": "text",
+      "cmd": "→ implementation"
+    },
+    {
+      "line": 375,
+      "lang": "text",
+      "cmd": "OBSERVED   directly verified"
+    },
+    {
+      "line": 375,
+      "lang": "text",
+      "cmd": "INFERRED   reasonable interpretation"
+    },
+    {
+      "line": 375,
+      "lang": "text",
+      "cmd": "UNKNOWN    not established"
+    },
+    {
+      "line": 403,
+      "lang": "text",
+      "cmd": "small unsafe boundary"
+    },
+    {
+      "line": 403,
+      "lang": "text",
+      "cmd": "→ safe abstraction"
+    },
+    {
+      "line": 403,
+      "lang": "text",
+      "cmd": "→ ordinary safe code"
+    },
+    {
+      "line": 471,
+      "lang": "text",
+      "cmd": "Observe"
+    },
+    {
+      "line": 471,
+      "lang": "text",
+      "cmd": "→ Reproduce"
+    },
+    {
+      "line": 471,
+      "lang": "text",
+      "cmd": "→ Isolate"
+    },
+    {
+      "line": 471,
+      "lang": "text",
+      "cmd": "→ Hypothesis"
+    },
+    {
+      "line": 471,
+      "lang": "text",
+      "cmd": "→ Minimal change"
+    },
+    {
+      "line": 471,
+      "lang": "text",
+      "cmd": "→ Verify"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "static checks"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "→ unit tests"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "→ integration tests"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "→ build"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "→ real process/service execution"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "→ real user path"
+    },
+    {
+      "line": 488,
+      "lang": "text",
+      "cmd": "→ regression checks"
+    },
+    {
+      "line": 502,
+      "lang": "text",
+      "cmd": "cargo check != working Rust program"
+    },
+    {
+      "line": 502,
+      "lang": "text",
+      "cmd": "build != working frontend"
+    },
+    {
+      "line": 502,
+      "lang": "text",
+      "cmd": "HTTP 200 != correct API behavior"
+    },
+    {
+      "line": 502,
+      "lang": "text",
+      "cmd": "page rendered != working application"
+    },
+    {
+      "line": 502,
+      "lang": "text",
+      "cmd": "button visible != feature implemented"
+    },
+    {
+      "line": 520,
+      "lang": "text",
+      "cmd": "[NOT VERIFIED]"
+    },
+    {
+      "line": 520,
+      "lang": "text",
+      "cmd": "reason: ..."
+    },
+    {
+      "line": 583,
+      "lang": "bash",
+      "cmd": "git status"
+    },
+    {
+      "line": 583,
+      "lang": "bash",
+      "cmd": "git branch --show-current"
+    },
+    {
+      "line": 583,
+      "lang": "bash",
+      "cmd": "git remote -v"
+    },
+    {
+      "line": 593,
+      "lang": "bash",
+      "cmd": "git diff --stat"
+    },
+    {
+      "line": 593,
+      "lang": "bash",
+      "cmd": "git diff"
+    },
+    {
+      "line": 593,
+      "lang": "bash",
+      "cmd": "git status"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Current phase"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Completed verified work"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Known failures"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Open blockers"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Important decisions"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Next phase"
+    },
+    {
+      "line": 613,
+      "lang": "text",
+      "cmd": "Verification evidence"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Goal implemented"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] No intentional degraded/fake implementation"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Relevant Skills discovered/used or explicitly found unnecessary"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Existing architecture understood"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Scope respected"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Tests run"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Real behavior verified where possible"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Independent review performed when warranted"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Important documentation consistent"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Durable phase state updated"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Git state understood"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Commit created when repository work is complete"
+    },
+    {
+      "line": 635,
+      "lang": "text",
+      "cmd": "[ ] Remote synchronized when required"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Result"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Changes"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "- ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Skills"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "- ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Verification"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "[PASS] ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "[PASS] ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "[NOT VERIFIED] ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Review"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Git"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "Branch: ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "Commit: ..."
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "Push: SUCCESS / FAILED"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "## Status"
+    },
+    {
+      "line": 659,
+      "lang": "text",
+      "cmd": "COMPLETED / PARTIALLY VERIFIED / NOT VERIFIED / FAILED"
+    }
+  ],
+  "paths_mentioned": [
+    ".agents/skills/",
+    ".claude/skills/",
+    ".codex/skills/",
+    ".github/skills/",
+    "MengTo/Skills",
+    "OS/runtime",
+    "PracticalSwan/agent-skills",
+    "SKILL.md/instructions",
+    "Skills/tools",
+    "UI/UX",
+    "architecture/design",
+    "browser/rendered",
+    "code/tests/runtime",
+    "create/read/update/restart",
+    "credentials/permissions",
+    "data/API/storage",
+    "degraded/fake",
+    "design/audit",
+    "design/build",
+    "discovered/used",
+    "divyanshu-iitian/agent-website-design-skills",
+    "fake/degraded",
+    "frontend/UI",
+    "frontend/design",
+    "inexpensive/free",
+    "issues/PRs",
+    "loading/empty",
+    "mblode/agent-skills",
+    "metrics/testimonials/content",
+    "overseek944/frontend-ui-ux-skill",
+    "process/service",
+    "product/open-source",
+    "prototype/mockup.",
+    "purple/blue",
+    "requested/required",
+    "runtime/CLI",
+    "skill/tool",
+    "skills/",
+    "task/decision",
+    "thekorn/agent-skills",
+    "unsafe/FFI/runtime",
+    "validation/delivery",
+    "vercel-labs/open-agents"
+  ],
+  "external_repos": [
+    "MengTo/Skills",
+    "PracticalSwan/agent-skills",
+    "divyanshu-iitian/agent-website-design-skills",
+    "mblode/agent-skills",
+    "overseek944/frontend-ui-ux-skill",
+    "thekorn/agent-skills",
+    "vercel-labs/open-agents"
+  ],
+  "dormant_triggers": [
+    {
+      "condition": "新会话开始/上下文重置",
+      "activates": "§4 工作恢复协议: 检查git状态→读指令→读持久状态→查提交→查代码→验证完成度→从已验证状态继续",
+      "line_range": "106-123"
+    },
+    {
+      "condition": "环境提供Skills/插件/代理",
+      "activates": "§6 技能发现: 扫描7个技能目录+宿主注册表, 读取SKILL.md并遵循其契约",
+      "line_range": "152-180"
+    },
+    {
+      "condition": "环境无合适本地Skill",
+      "activates": "§6 检查7个外部GitHub仓库并采用相关内容(供应链入口, 但要求检查后采用)",
+      "line_range": "181-196"
+    },
+    {
+      "condition": "构建/大幅修改前端",
+      "activates": "§7 产品级前端工作流: 检查设计系统→识别主任务→参考商业产品→浏览器渲染验证",
+      "line_range": "197-226"
+    },
+    {
+      "condition": "无法完整实现时",
+      "activates": "§9 必须停在真实边界并报告, 不得将降级版本标记为完成",
+      "line_range": "281-300"
+    },
+    {
+      "condition": "阶段计划已确立",
+      "activates": "§10 YOLO整阶段连续执行, 不逐步确认(仅5种暂停条件)",
+      "line_range": "301-330"
+    },
+    {
+      "condition": "分析/重写现有产品",
+      "activates": "§12 先研究现有实现→行为→架构→约束→测试→上游issue→权衡",
+      "line_range": "354-383"
+    },
+    {
+      "condition": "引入unsafe(Rust)",
+      "activates": "§13 5项检查清单+最小边界+安全不变量文档化",
+      "line_range": "384-423"
+    },
+    {
+      "condition": "测试失败",
+      "activates": "§16 观察→复现→隔离→假设→最小修改→验证",
+      "line_range": "464-482"
+    },
+    {
+      "condition": "有意义变更完成后",
+      "activates": "§18 独立审查(可用子代理), 检查9类缺陷, 修复后重验证",
+      "line_range": "526-555"
+    },
+    {
+      "condition": "修改命令/API/架构/配置",
+      "activates": "§19 同阶段更新持久文档, 不创建第二份竞争'真相'",
+      "line_range": "556-577"
+    },
+    {
+      "condition": "仓库交付需要远程同步",
+      "activates": "§20 验证后push, 不得无证据声称push成功",
+      "line_range": "578-605"
+    },
+    {
+      "condition": "多阶段工作",
+      "activates": "§21 维护紧凑持久状态文件, 阶段完成时提交前更新",
+      "line_range": "606-629"
+    },
+    {
+      "condition": "宣布阶段完成前",
+      "activates": "§22 13项完成门检查清单",
+      "line_range": "630-653"
+    },
+    {
+      "condition": "工作完成",
+      "activates": "§23 固定模板最终报告: Result/Changes/Skills/Verification/Review/Git/Status",
+      "line_range": "654-687"
+    }
+  ]
+}

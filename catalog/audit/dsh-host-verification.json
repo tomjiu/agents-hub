@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "skill": {
+    "name": "asset-management",
+    "deployed": true,
+    "invoked": true,
+    "full_content_seen_by_model": true,
+    "verification": "Entire deployed body excluding frontmatter, normalized CRLF, compared to real subsequent model messages"
+  },
+  "mcp": {
+    "tool": "mcp__search-core__tool_search",
+    "registered": true,
+    "result_returned_to_model": true,
+    "source": "Generated DSH MCP patch + real Search-core stdio server"
+  },
+  "host_version": "0.2.2-rc.1",
+  "scope": "Actual isolated DSH headless profile, local scripted OpenAI-compatible model, real plugin/tool execution and SQLite; not live user profile or paid model.",
+  "checks": [
+    "[verify] ✓ A1 工具注册: memory_net_write + memory_net_recall 出现在 2 个请求的 tools 列表",
+    "[verify] ✓ A2 工具注册: mn_e2e_echo（宿主真实工具）出现在 2 个请求的 tools 列表",
+    "[verify] ✓ B1 区段注入: 宿主预置约束进入 system prompt（memory-net section 生效）",
+    "[verify] ✓ B2 区段注入: 宿主预置进度进入 system prompt",
+    "[verify] ✓ B3 区段注入: 工具写入的推断进入工具后组装（重组装生效）",
+    "[verify] ✓ C 工具闭环: 模型发起 memory_net_write → dsh 执行 → canonical 结果回给模型并进入最终回复",
+    "[verify] ✓ D 持久化: n4 [inference] \"E2E 模型经 memory_net_write 写入的推断节点…\" 已落隔离 workspace/memory.db",
+    "[verify] ✓ E1 auto-observe: n3 [observation] \"工具 mn_e2e_echo 成功·args({\"say\":\"hello auto-observe\"})→ {\"echo…\" 已自动入网（payload 含 call_id）",
+    "[verify] ✓ E2 自指过滤: memory_net_* 工具结果未被递归观测",
+    "[verify] PASS: 适配包经真实 dsh headless 端到端生效（含 auto-observe）"
+  ],
+  "user_profile_modified": false,
+  "telemetry": "DISABLED",
+  "cleanup": "Owned child process, mock endpoint, project deployment, DSH_HOME and test workspace removed after completion."
+}

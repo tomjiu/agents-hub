@@ -1,0 +1,7 @@
+name = "document-engineering"
+extends = [ "core" ]
+skills = [ "docx", "pdf", "xlsx", "pptx" ]
+mcp = []
+plugins = []
+optional_skills = [ "trae.docx", "trae.pdf", "trae.xlsx" ]
+notes = "Vendor skills are optional and require license/runtime review; choose one implementation per same-named skill."

@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "client_config": "opencode",
+      "checks": [
+        "CLI plan/apply/inspect",
+        "MCP initialize",
+        "tools/list",
+        "tool_search local call",
+        "Byte-protected rollback"
+      ],
+      "initial_tools": [
+        "search",
+        "fetch",
+        "tool_search"
+      ],
+      "dsh_schema": "not applicable"
+    },
+    {
+      "client_config": "codex",
+      "checks": [
+        "CLI plan/apply/inspect",
+        "MCP initialize",
+        "tools/list",
+        "tool_search local call",
+        "Byte-protected rollback"
+      ],
+      "initial_tools": [
+        "search",
+        "fetch",
+        "tool_search"
+      ],
+      "dsh_schema": "not applicable"
+    },
+    {
+      "client_config": "dsh",
+      "checks": [
+        "CLI plan/apply/inspect",
+        "MCP initialize",
+        "tools/list",
+        "tool_search local call",
+        "Byte-protected rollback"
+      ],
+      "initial_tools": [
+        "search",
+        "fetch",
+        "tool_search"
+      ],
+      "dsh_schema": "installed Config verified"
+    }
+  ],
+  "scope": "Actual CLI-generated configs start real MCP and execute a local discovery call via standard SDK; not actual Codex/OpenCode host loading or live DSH plugin installation. No external search or account API called."
+}

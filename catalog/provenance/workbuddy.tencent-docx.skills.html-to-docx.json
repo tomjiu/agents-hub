@@ -1,0 +1,366 @@
+{
+  "sha256": "274d6b70a34f8d8a55297fb48bd0a505c1fc19c149700e6cd346bacff4ca7be9",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 14712,
+      "sha256": "3a0001bf341c107284804555e01887ce8fda5102275453fd1c26eea4961493b5"
+    },
+    {
+      "path": "scripts/html_to_docx/__init__.py",
+      "bytes": 1780,
+      "sha256": "1ed7e27dc57772d1a0311e1498b506b710d8bfe9519af55284e2b13282d87c0d"
+    },
+    {
+      "path": "scripts/html_to_docx/__main__.py",
+      "bytes": 4096,
+      "sha256": "9f1ca9a9a1a06c208fa718bb3f9455a242cf32d4fffbb38f83ab15ff4182568d"
+    },
+    {
+      "path": "scripts/html_to_docx/_ooxml_borders.py",
+      "bytes": 4390,
+      "sha256": "934458843d562f224a72b9fbad60affc837b4ee7234e09c5f3c42f8c8a728905"
+    },
+    {
+      "path": "scripts/html_to_docx/body_paragraph_styler.py",
+      "bytes": 7734,
+      "sha256": "1945d5708219a84c78fd309b442dedde8664182068280c550050f7c920fccfb0"
+    },
+    {
+      "path": "scripts/html_to_docx/bookmarks.py",
+      "bytes": 9901,
+      "sha256": "f23c92c606be6310218c6b38566d63e443f09a470efed2aae78a77c91369c5b0"
+    },
+    {
+      "path": "scripts/html_to_docx/components/__init__.py",
+      "bytes": 1815,
+      "sha256": "fbd3dd1108dea45863faf17e0fd9f5575373c9d16f5003220dfa3cc3ae35d169"
+    },
+    {
+      "path": "scripts/html_to_docx/components/_cell_richtext.py",
+      "bytes": 6955,
+      "sha256": "ffb6b86911ca62fa14759cbbe8639983b4d18d872517e4b7f7d94a962ca3a823"
+    },
+    {
+      "path": "scripts/html_to_docx/components/callout.py",
+      "bytes": 3500,
+      "sha256": "fb728b1f57fa6320fe839fac06d1785ab63f7b3435d1f5fc99fa7628d4014993"
+    },
+    {
+      "path": "scripts/html_to_docx/components/data_card.py",
+      "bytes": 7499,
+      "sha256": "318d00248592d6ef7fd4f5a9d55db5cb803d1c9b374dcee83aabcecb2faf3fe4"
+    },
+    {
+      "path": "scripts/html_to_docx/components/divider.py",
+      "bytes": 1256,
+      "sha256": "1777a2a8e7ef4673e211bbaca822b7451143a23d7a971a59d4b336cd9ce4d113"
+    },
+    {
+      "path": "scripts/html_to_docx/components/section_marker.py",
+      "bytes": 2163,
+      "sha256": "7cb1eb6ae7f30f2f71abe722dc62183903a93d20b7edcf22f4b22595e179f59d"
+    },
+    {
+      "path": "scripts/html_to_docx/converter.py",
+      "bytes": 33820,
+      "sha256": "db46e2a8a8991a199c2f9abeaae1821864c700548f493899e216282f2fab25d3"
+    },
+    {
+      "path": "scripts/html_to_docx/css_resolver.py",
+      "bytes": 5814,
+      "sha256": "279bae6efac9e3bcb1a879cf31b3c2a61d91b5b4e55853f3f819ecf59627a62d"
+    },
+    {
+      "path": "scripts/html_to_docx/element_mapper.py",
+      "bytes": 5276,
+      "sha256": "abc618e9e1ec83bc248738325de629e3045eda2cd9efca72d7de4d109e22a716"
+    },
+    {
+      "path": "scripts/html_to_docx/fallback.py",
+      "bytes": 5363,
+      "sha256": "7a6269f99fedc7b8f2ad89a91b57d38d4f5fc95113f14612bd5c10cc2e41ad12"
+    },
+    {
+      "path": "scripts/html_to_docx/fields.py",
+      "bytes": 10723,
+      "sha256": "6ec5586ad6c1b02096cb4b110bfc7ac6528524c81c84db9761a28346c1567731"
+    },
+    {
+      "path": "scripts/html_to_docx/header_footer.py",
+      "bytes": 3748,
+      "sha256": "19bc1012c26e5e639385cb0a43363265e8c8712c7282027d1c15bb839d19e6c3"
+    },
+    {
+      "path": "scripts/html_to_docx/image_handler.py",
+      "bytes": 4965,
+      "sha256": "cb305413029d4f50cee54387d83def046f53df761e4d9299f908dd2d655763a4"
+    },
+    {
+      "path": "scripts/html_to_docx/image_resolver.py",
+      "bytes": 1629,
+      "sha256": "59c8bfab3a8c24798934f091eee4c7b2f828cde0242a583f0dc41399ed9aae30"
+    },
+    {
+      "path": "scripts/html_to_docx/page_css.py",
+      "bytes": 17800,
+      "sha256": "5b17db3c75f8a71d68a1de2c5e924682bfbb7de9e2bd462939327e696e63ed22"
+    },
+    {
+      "path": "scripts/html_to_docx/page_setup.py",
+      "bytes": 3574,
+      "sha256": "d810d0cff272722e457ba6ffe2f5af0ee3a28e6abde34c6330a294fe7b3082ff"
+    },
+    {
+      "path": "scripts/html_to_docx/section_model.py",
+      "bytes": 19583,
+      "sha256": "c86858ff85f82a4d4577063260358e5f1e7e64e558711d9508f85441fdeebd34"
+    },
+    {
+      "path": "scripts/html_to_docx/style_injector.py",
+      "bytes": 18430,
+      "sha256": "2f2e5083b8998474629cf81e403bd6fef077351fc69e7f2c2030f5527354cfdb"
+    },
+    {
+      "path": "scripts/html_to_docx/style_mapper.py",
+      "bytes": 16167,
+      "sha256": "67c65b5a0c7877b3a14f792425c71c004f36277c8957c41042072fa4817a5d29"
+    },
+    {
+      "path": "scripts/html_to_docx/table_style_applier.py",
+      "bytes": 28436,
+      "sha256": "f246c379574a8097c91913a65218e41259e395a759a9d3583587328461c3fcc2"
+    },
+    {
+      "path": "scripts/html_to_docx/text_splitter.py",
+      "bytes": 7361,
+      "sha256": "a781390a974c266f36495923a91ad078782af817ba8dd3f798bae6d383b03991"
+    },
+    {
+      "path": "scripts/html_to_docx/toc_bookmarks.py",
+      "bytes": 7277,
+      "sha256": "022efeb580287ad501fb0fe637918f7ad3ade2d47ac06bcb4c64e928ecc2a5ac"
+    },
+    {
+      "path": "scripts/html_to_docx/toc_renderer.py",
+      "bytes": 6587,
+      "sha256": "1639ef3104d13a9f397532cefed6d9c1ddf5bfad82e33aed71edc94b9e314252"
+    },
+    {
+      "path": "scripts/html_to_docx/types.py",
+      "bytes": 1218,
+      "sha256": "bded245235abf3963842f5744780bf98c481c3e1783d7056dd8c1a238f498bea"
+    },
+    {
+      "path": "scripts/pyproject.toml",
+      "bytes": 578,
+      "sha256": "8154bc25ea6e24b1afd16ce08263c9319e1d8839ac4474adcc0982e5870a3fa5"
+    },
+    {
+      "path": "scripts/requirements.txt",
+      "bytes": 148,
+      "sha256": "5fe8b7e1c2edebcd94edb33b847b50d13c04620e544d2dbf2c87a0e78dc9c05f"
+    },
+    {
+      "path": "scripts/tests/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scripts/tests/conftest.py",
+      "bytes": 169,
+      "sha256": "d889430316dfcedb010282fc22544d342fc4eca9b11e0b7da6fa614757790a95"
+    },
+    {
+      "path": "scripts/tests/fixtures/basic.html",
+      "bytes": 1467,
+      "sha256": "c3518793b7c4bab4a0d79e380641a156566c90e4744a310444ac466c140b60fa"
+    },
+    {
+      "path": "scripts/tests/fixtures/callout_component.html",
+      "bytes": 1040,
+      "sha256": "2fc2b67ffa342c4d1c1ad102fc5ba72c2f10d59aea11fa478a62791b7a055d41"
+    },
+    {
+      "path": "scripts/tests/fixtures/callout_rich.html",
+      "bytes": 944,
+      "sha256": "1a82ee0e208505dff1b73a97a31ff9e6dac34073f046f183cf4fb020fbeb54b4"
+    },
+    {
+      "path": "scripts/tests/fixtures/chinese_fonts.html",
+      "bytes": 760,
+      "sha256": "9fff44638e174ef4ddae14354419eb9eecd3a7e9c0c4dd2c43dee2f2ea0005b8"
+    },
+    {
+      "path": "scripts/tests/fixtures/complex_table.html",
+      "bytes": 842,
+      "sha256": "9eeeffda83a31043c58517ee3aedec737afd19a54eb1d38a7a1dcce9ab1eddb5"
+    },
+    {
+      "path": "scripts/tests/fixtures/css_variables.html",
+      "bytes": 1813,
+      "sha256": "d2b015a9dbdce5032bc52f085395099b274469281c2f2c79d3eb280b53fad823"
+    },
+    {
+      "path": "scripts/tests/fixtures/data_card_grid.html",
+      "bytes": 530,
+      "sha256": "d9f3ac3f8747f1e20d71660d98eb31d199c84d1a4bcd0d418f0405b270ccb4b5"
+    },
+    {
+      "path": "scripts/tests/fixtures/em_scale.html",
+      "bytes": 870,
+      "sha256": "aeb0a8a5c42fffa5601e4f198a5ef9453cd462f0f20aacc9e794adfae231ede4"
+    },
+    {
+      "path": "scripts/tests/fixtures/empty_body.html",
+      "bytes": 135,
+      "sha256": "353278726a3d363565ce888ec4f408f34efc90f3bc310c938d20c756c0e83c68"
+    },
+    {
+      "path": "scripts/tests/fixtures/full_document.html",
+      "bytes": 4487,
+      "sha256": "7345644aa7bf826f3094477532d81f166bb85920e5ded4e54ba59be33faf7753"
+    },
+    {
+      "path": "scripts/tests/fixtures/header_footer.html",
+      "bytes": 531,
+      "sha256": "9f7f2c0c3e1e6b9287fbd052c9a5110f7e011b94ab44b36b0b30b6d3b5bf8e89"
+    },
+    {
+      "path": "scripts/tests/fixtures/legacy_single.html",
+      "bytes": 250,
+      "sha256": "a021d37c78d9ed93eaa42f487d4b91277fed1d2239726983848faa07caa59bfc"
+    },
+    {
+      "path": "scripts/tests/fixtures/page_fields.html",
+      "bytes": 389,
+      "sha256": "67027e2771e4ad4ba1e710dbbbd29c0740e72b2f3d380cc6a362037e90d522d6"
+    },
+    {
+      "path": "scripts/tests/fixtures/page_model_c.html",
+      "bytes": 664,
+      "sha256": "f8e1c721d91686f2849cfba04ffc2843e7af3efecb21d37cda48d54661be0ceb"
+    },
+    {
+      "path": "scripts/tests/fixtures/page_restart.html",
+      "bytes": 465,
+      "sha256": "9e6da00275a1c15190a9673022464cbbfaba77fe335a2fa09bb7e21081667da9"
+    },
+    {
+      "path": "scripts/tests/fixtures/para_border_shading.html",
+      "bytes": 1143,
+      "sha256": "e48edf7cc287a496e1937328678598fc70b12668637447168ff349a4dc65806b"
+    },
+    {
+      "path": "scripts/tests/fixtures/sec_landscape.html",
+      "bytes": 381,
+      "sha256": "4ef2e5e1be60bceb0c82fd9ba0ecedcbd59d74146992fc2395a78896f329ba2f"
+    },
+    {
+      "path": "scripts/tests/fixtures/sec_three.html",
+      "bytes": 369,
+      "sha256": "ee131ed20e8984f5c506d9eb3da631cde9f2c3db604051e0925140127725a799"
+    },
+    {
+      "path": "scripts/tests/fixtures/shading_card.html",
+      "bytes": 601,
+      "sha256": "08b7eef597a1af994d1a62b1f07fbbc70f6172a31c4c8ce2399df230e31c97c2"
+    },
+    {
+      "path": "scripts/tests/fixtures/toc_nav.html",
+      "bytes": 776,
+      "sha256": "c7007141837231d0dd6bddc42f00a7ee65f47feea05c56f081995b8d38f1a57d"
+    },
+    {
+      "path": "scripts/tests/fixtures/with_images.html",
+      "bytes": 879,
+      "sha256": "e000167d9982bed63b0667031d958c19ce1650471f8ed6f8cadddf82bf7db2df"
+    },
+    {
+      "path": "scripts/tests/test_body_paragraph_integration.py",
+      "bytes": 13176,
+      "sha256": "13f1c92af6b10fcad52274e22e90a673690e456030776812c53eefb45ef5286f"
+    },
+    {
+      "path": "scripts/tests/test_callout_richtext.py",
+      "bytes": 6789,
+      "sha256": "ce4e7df048fe200d61d09f94604cbe3e284bf8ea5fa10309e2b495fed6ab5932"
+    },
+    {
+      "path": "scripts/tests/test_component_renderer.py",
+      "bytes": 4701,
+      "sha256": "416b037fa38e4b1627e0eb01901b20c2a13e02eda50d99c2ee148e6d845e5cb1"
+    },
+    {
+      "path": "scripts/tests/test_converter.py",
+      "bytes": 3219,
+      "sha256": "d9ddc81521de468d553a35b15cd7c512a1e5cf064735c203446184deb41d9236"
+    },
+    {
+      "path": "scripts/tests/test_css_resolver.py",
+      "bytes": 4836,
+      "sha256": "12d709b2ca021af6a3821d58e3835d94dc8131d341d480e169a12fe944cdaed5"
+    },
+    {
+      "path": "scripts/tests/test_element_mapper.py",
+      "bytes": 2115,
+      "sha256": "29709f8434b1aff3fe2784757da0476f38fb9a4c229dd2ea8228f613d2096ea9"
+    },
+    {
+      "path": "scripts/tests/test_em_resolve.py",
+      "bytes": 4126,
+      "sha256": "d61a938c5538686ecd71aa705e931f05a2d4eebd7e6eac00602f7a1c911b1d85"
+    },
+    {
+      "path": "scripts/tests/test_fields.py",
+      "bytes": 7452,
+      "sha256": "da98ef3d84302042fe8b5e0f4d95b4d60202eb1a12721976caa5e92801e08c4c"
+    },
+    {
+      "path": "scripts/tests/test_header_footer.py",
+      "bytes": 2009,
+      "sha256": "70ea2f7a7277822da042b142be6d354a6bcbafb626e641f94a09ebe937a876e6"
+    },
+    {
+      "path": "scripts/tests/test_image_handler.py",
+      "bytes": 2322,
+      "sha256": "4f9e76db253efb51d36bf435215c6606463361235c8d45314e4d8efce24f3bf0"
+    },
+    {
+      "path": "scripts/tests/test_page_css.py",
+      "bytes": 8844,
+      "sha256": "6f1bd38e715bafa7c2f9f1122cef81c230758445c070262ba6b1db192490cc63"
+    },
+    {
+      "path": "scripts/tests/test_paragraph_border_shading.py",
+      "bytes": 5435,
+      "sha256": "02f9ce030b50e559715a6b17300c1e0ccc57b95e6fad23e465a1780852bf9751"
+    },
+    {
+      "path": "scripts/tests/test_section_model.py",
+      "bytes": 9940,
+      "sha256": "8f0762901cdf3c82819f9551e310a1762dd8fe72ce650f64561e1d7ad76a43ae"
+    },
+    {
+      "path": "scripts/tests/test_smoke.py",
+      "bytes": 18936,
+      "sha256": "c63aae8f18191b3be48e6425ec6239b37ff1fece63e8120e4fc9565ea280a587"
+    },
+    {
+      "path": "scripts/tests/test_style_mapper.py",
+      "bytes": 2074,
+      "sha256": "80bcfd1520f71744318e47517e83bae9f7de09a257d3c37d52d734a36f66c657"
+    },
+    {
+      "path": "scripts/tests/test_toc_renderer.py",
+      "bytes": 2170,
+      "sha256": "859933fc13d2d53bab4d84fa611cfd14e02d2fde2a5856beff2edfe27e94db82"
+    },
+    {
+      "path": "scripts/tests/test_typography_scale.py",
+      "bytes": 2582,
+      "sha256": "5dffff457a13b6f0581b3ea5c21f780c1b951f7e35d0e97d5a4d588734f13027"
+    }
+  ],
+  "bytes": 384529
+}

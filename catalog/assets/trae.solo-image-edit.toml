@@ -1,0 +1,22 @@
+id = "trae.solo-image-edit"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/solo-image-edit"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_design::default::prod_20260810::solo-image-edit/0.0.1/package.zip"
+version = "0.0.1"
+build = "solo_design::default::prod_20260810::solo-image-edit"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "f9293ad4b289e0c9d1d8478bacb159b7392e9b4731214fca404f359ca4536e46"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,22 @@
+id = "trae.trae-browseruse"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/TRAE-browseruse"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::default::prod_20260609::TRAE-browseruse/0.0.6/package.zip"
+version = "0.0.6"
+build = "default::prod_20260609::TRAE-browseruse"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.6"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "5d85be96a9c9eab8d52583ba9160f961cddf5d5b9b943b48cd00e7e8d5d7e4e6"
+local_modified = "unknown"
+enabled = false

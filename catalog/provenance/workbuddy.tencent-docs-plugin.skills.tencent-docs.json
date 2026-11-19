@@ -1,0 +1,151 @@
+{
+  "sha256": "0ef9e6848bc4962b47225c9d560454d2944fcd22784cb75b2565295d5062bc5b",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 9402,
+      "sha256": "a306930a8b7b86a6e86cf5eb23d48e1951c6f4ff9a7088ce6ac44f5bad162c36"
+    },
+    {
+      "path": "aipage_pack.js",
+      "bytes": 19952,
+      "sha256": "7955cb4e655df284655bbfd2a1b7aeee322f2d48a3353b321bc3c1182fc5c6e1"
+    },
+    {
+      "path": "doc/create.md",
+      "bytes": 1628,
+      "sha256": "3890ef3e126e199bd4736b1832252741356d44056648709d71186147427faf44"
+    },
+    {
+      "path": "doc/doc_format/README.md",
+      "bytes": 2997,
+      "sha256": "5e7345f926cbc3a839c8b4e9940b0663de96c1c01515f65e6a6c2f7fc1ffae87"
+    },
+    {
+      "path": "doc/doc_format/prompt/pure_text_system_prompt.txt",
+      "bytes": 2461,
+      "sha256": "ccdbfaba8e4a1fb22812c212533abd1a4e90faf0684ecbd8821f1b2dc7ee72b2"
+    },
+    {
+      "path": "doc/doc_format/prompt/scenario_recognition_prompt.txt",
+      "bytes": 1738,
+      "sha256": "7ff5e27bb2bc574e02bb3bab037179573369a0346c5402cb4c4017e76867e38a"
+    },
+    {
+      "path": "doc/doc_format/prompt/style_customization_prompt.txt",
+      "bytes": 2626,
+      "sha256": "808f194eadda0ff0c59793c70fdf7c7de086b998095cf5c4eae6d552fd329e75"
+    },
+    {
+      "path": "doc/doc_format/templates/contract.json",
+      "bytes": 1094,
+      "sha256": "a74a339bd8eef41b6e1811f4ea4aab2b77ae4f30dd8ba827896c3b8356587104"
+    },
+    {
+      "path": "doc/doc_format/templates/essay.json",
+      "bytes": 511,
+      "sha256": "b149bcd81527a5902aa17192599bad994e7bb4652af40b93e835f432e84e11f2"
+    },
+    {
+      "path": "doc/doc_format/templates/general.json",
+      "bytes": 2797,
+      "sha256": "f9da21d562273d97d245e78d0e5e83f66db2638863ab79714c259bdeb14959b4"
+    },
+    {
+      "path": "doc/doc_format/templates/government.json",
+      "bytes": 1062,
+      "sha256": "de0d561f562a586dba3b75e8fcc373860af3f75c82d055bbaef52b30977f5736"
+    },
+    {
+      "path": "doc/doc_format/templates/paper.json",
+      "bytes": 4888,
+      "sha256": "4a541b5d07168f87274f118a37202469585f493223853a7d325934afb121f938"
+    },
+    {
+      "path": "doc/edit.md",
+      "bytes": 4002,
+      "sha256": "545c62bd22df8107c9151723f4f1a3e87b572dbd0be6c5c2e38f3cb462d85589"
+    },
+    {
+      "path": "import_file.py",
+      "bytes": 4949,
+      "sha256": "131863fa24e1bd686b36767303a9a175358e59b1373b286ce80ac918c02f4e19"
+    },
+    {
+      "path": "manage.md",
+      "bytes": 2684,
+      "sha256": "3424357bebfbc0b652011154994113058c9ac5b408fffa89e8d3beddafc81c40"
+    },
+    {
+      "path": "ocr.js",
+      "bytes": 7559,
+      "sha256": "0b84d5f333341418ae8333c73639146841985697c135af98a17f2215637ea974"
+    },
+    {
+      "path": "references/aipage_references.md",
+      "bytes": 5671,
+      "sha256": "063afc37afd14effea1d9a3eb52a4637f394cf455fcfb6a4858c56ad220ec7c5"
+    },
+    {
+      "path": "references/auth.md",
+      "bytes": 5792,
+      "sha256": "68d68c1f3b9be1e0bab66c784b1d326396fbfc981d00086bf077782ea1923e01"
+    },
+    {
+      "path": "references/diagram_references.md",
+      "bytes": 2361,
+      "sha256": "f4dda85e60ab6f9b34d5dd3c2bbc12519f9b05a28e63e3095444c37a0f2d14cc"
+    },
+    {
+      "path": "references/ocr_references.md",
+      "bytes": 3434,
+      "sha256": "d696e4a2857255a0eec2ee1e503797a2df25b75da66b747a201b4f6143c16f3a"
+    },
+    {
+      "path": "references/space_references.md",
+      "bytes": 7496,
+      "sha256": "8aa3a3f7daafb344b77a4d74776edf805afaa67c77d15bcc07a6d0bf81e00580"
+    },
+    {
+      "path": "sheet/create.md",
+      "bytes": 957,
+      "sha256": "a423be0802b8f9d5f0352162accedafdf2ba5250528b4337e3889a75846207dd"
+    },
+    {
+      "path": "sheet/edit.md",
+      "bytes": 4292,
+      "sha256": "2bf7a34ec83976815c4f9c736920edb91e4d9820b53589ea3b305d8b2ca57eb1"
+    },
+    {
+      "path": "slide/create.md",
+      "bytes": 201,
+      "sha256": "db3676aef265127b72785ff67ce0596687989b18cd18191daf554f94be2c323b"
+    },
+    {
+      "path": "slide/edit.md",
+      "bytes": 7095,
+      "sha256": "a01a7fb16f936391f0e17c71c3ab77f7d0c494a5168a414fc4f1e1ff7ddd6278"
+    },
+    {
+      "path": "smartcanvas/mdx_references.md",
+      "bytes": 24165,
+      "sha256": "3fe6fab7b656d669c51f9ed44d00ba203581efdd2ab4fde03490515b5837dafc"
+    },
+    {
+      "path": "smartcanvas.md",
+      "bytes": 1211,
+      "sha256": "26027aa50cc374329bb4ea97d6f54ff6186ad0373e498396e5f09e49d2d0d564"
+    },
+    {
+      "path": "smartsheet.md",
+      "bytes": 1534,
+      "sha256": "365d09e4c5fc88ef3d95286bb8a1e20ecd604d1b70de2f9af996f5277fdea59f"
+    },
+    {
+      "path": "tencentdocs.py",
+      "bytes": 19704,
+      "sha256": "82d8489bb5ba704ba59260c148c3c41afe35474b275cb21c404bdd8f7d7e7823"
+    }
+  ],
+  "bytes": 154263
+}

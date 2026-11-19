@@ -1,0 +1,46 @@
+{
+  "sha256": "857a616bdb9d9d58629d243e783b06a4976220123c97aaa3672734d9e23bc284",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 522,
+      "sha256": "a39617091c383bbdc97fd4846d6f5e50f2b7d824a26702ba0d7c6d766c12d8a3"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 3050,
+      "sha256": "d4e66088f7f82920a992b749941b6f8e3d635f143c367f8fc5238daa5b6ade85"
+    },
+    {
+      "path": "references/adaptive-sizing.md",
+      "bytes": 3531,
+      "sha256": "0cd2ab5b7a2ae2a3d53ab74be07d271a04f673157e8298f5ea5005cbd5d2087c"
+    },
+    {
+      "path": "references/person-size-control.md",
+      "bytes": 1355,
+      "sha256": "76392a1ea5139a820027c20a56cd279b139e4d0d1a646b5aaf07ef4f4c1e87f9"
+    },
+    {
+      "path": "references/prompt-examples.md",
+      "bytes": 2141,
+      "sha256": "3bf285123815af6eee657fcaca07206c72d95054f2bbe6d1539497998fd1fee5"
+    },
+    {
+      "path": "references/render-and-compose.md",
+      "bytes": 11585,
+      "sha256": "38616906aaec3f3bdbd982065cd71196e207d026efefd842e41e3e4e4025dbdf"
+    },
+    {
+      "path": "workflows/style-reference.md",
+      "bytes": 3410,
+      "sha256": "1de3628759dbfb4ceb8f9bc158897a51cd7ca947ed7c5897b3ab9c59670f443a"
+    },
+    {
+      "path": "workflows/style-selection.md",
+      "bytes": 6479,
+      "sha256": "7ebee98a9bf2d5fb3a3f8b043859f330ee795182dda260e33587e574919e6b9b"
+    }
+  ],
+  "bytes": 32073
+}

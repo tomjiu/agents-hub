@@ -1,0 +1,36 @@
+{
+  "sha256": "9299284dd38694b806ca1ef34adf56d79e523662b2c236a23c808db021c2fd26",
+  "files": [
+    {
+      "path": ".codebuddy-plugin/plugin.json",
+      "bytes": 502,
+      "sha256": "1f784143f6a2f8f6942862031ac604dbd5e0ae673ea89e51d07200b8b6127726"
+    },
+    {
+      "path": "LICENSE.txt",
+      "bytes": 11558,
+      "sha256": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 14583,
+      "sha256": "13a63e5eb87f2215fb09a0af6238b08966708b202ef77b5c8666744028bbbed4"
+    },
+    {
+      "path": "scripts/init_skill.py",
+      "bytes": 11917,
+      "sha256": "f9c252c76e9cb1ad4a4ddd518b4f5e49688584b1945f608736e3e5848b772cff"
+    },
+    {
+      "path": "scripts/package_skill.py",
+      "bytes": 3357,
+      "sha256": "8c51652bfe187b1f29782e1929c1183b3f14af73d6ece221cc2b33b9a69adafa"
+    },
+    {
+      "path": "scripts/quick_validate.py",
+      "bytes": 2229,
+      "sha256": "5b1b51ae317567c7f389a2b6407677eb1571baf69ac6650d5a2c889ceed3770a"
+    }
+  ],
+  "bytes": 44146
+}

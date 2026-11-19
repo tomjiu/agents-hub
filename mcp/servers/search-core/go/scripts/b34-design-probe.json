@@ -1,0 +1,654 @@
+{
+ "nq/nogold#r1": {
+  "bestCur": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+  "bestCurHasAns": false,
+  "bestSim": "You want to ask yourself, “Where and when does the story take place?” Gone With the Wind, for example, takes place in Georgia during the American Civil War.",
+  "bestSimHasAns": false,
+  "bestSimScore": 5,
+  "longSims": [
+   {
+    "nSegs": 2,
+    "orig": "A few seconds later, my father broke his big toe; but his accident was a mere trifle when set beside what had befallen me in that benighted moment, because thanks to the occult tyrannies of those blandly saluting clocks I had been mysteriously handcuffed to history, my destinies indissolubly chained to those of my country.",
+    "origRunes": 324,
+    "segs": [
+     {
+      "text": "A few seconds later, my father broke his big toe; but his accident was a mere trifle when set beside what had befallen me in that benighted moment, because thanks to the occult tyrannies of those blandly saluting clocks I had been mysteriously handcuffed to history",
+      "runes": 265,
+      "score": 1,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "my destinies indissolubly chained to those of my country.",
+      "runes": 57,
+      "score": 0,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "He describes himself as \"handcuffed to history\" by the circumstances of his birth, and, as I suggested earlier, we are alerted to the possibility of a story to come which will have historical and political associations, reinforced by the assertion that the narrator's \"destinies\" were \"indissolubly chained\" to the future of his country.",
+    "origRunes": 337,
+    "segs": [
+     {
+      "text": "He describes himself as \"handcuffed to history\" by the circumstances of his birth, and, as I suggested earlier, we are alerted to the possibility of a story to come which will have historical and political associations",
+      "runes": 218,
+      "score": 1,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "reinforced by the assertion that the narrator's \"destinies\" were \"indissolubly chained\" to the future of his country.",
+      "runes": 117,
+      "score": 0,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "But Pavel Petrovich returned to his elegant room, hung with fine dark-grey wallpaper and decorated with guns fixed on a colourful Persian rug, with walnut furniture upholstered in dark-green velveteen, a Renaissance-style bookcase in old dark oak, bronze statuettes on a magnificent desk and a fireplace.",
+    "origRunes": 304,
+    "segs": [
+     {
+      "text": "But Pavel Petrovich returned to his elegant room, hung with fine dark-grey wallpaper and decorated with guns fixed on a colourful Persian rug, with walnut furniture upholstered in dark-green velveteen, a Renaissance-style bookcase in old dark oak",
+      "runes": 246,
+      "score": 1,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": true,
+      "boiler": false
+     },
+     {
+      "text": "bronze statuettes on a magnificent desk and a fireplace.",
+      "runes": 56,
+      "score": 1,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "The very diversity of the décor seems to suggest a sense of rootlessness, reinforced by Pavel's behaviour here; the possibility that he is trying to \"hide from the very walls themselves what was happening to his face.\" Even in the sanctuary of his own rooms on his brother's estate he seems to find himself alienated amongst the no doubt impressive, yet strangely soulless artefacts he has gathered around him.",
+    "origRunes": 410,
+    "segs": [
+     {
+      "text": "The very diversity of the décor seems to suggest a sense of rootlessness, reinforced by Pavel's behaviour here",
+      "runes": 110,
+      "score": 0.25,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "the possibility that he is trying to \"hide from the very walls themselves what was happening to his face.\" Even in the sanctuary of his own rooms on his brother's estate he seems to find himself alienated amongst the no doubt impressive, yet strangely soulless artefacts he has gathered around him.",
+      "runes": 298,
+      "score": 0.25,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   }
+  ],
+  "probeAns": "Persia",
+  "q": "where do the events in the story take place geographically",
+  "rowSims": [
+   {
+    "text": "Setting in Fiction · Image from Pixabay",
+    "runes": 39,
+    "score": 0.75,
+    "cover": 0,
+    "lenOk": false,
+    "hasAns": false,
+    "boiler": false
+   },
+   {
+    "text": "40-1) · Answer",
+    "runes": 14,
+    "score": 2.25,
+    "cover": 0,
+    "lenOk": false,
+    "hasAns": false,
+    "boiler": false
+   },
+   {
+    "text": ": Setting in fiction · Contributors and Attributions",
+    "runes": 52,
+    "score": 0.75,
+    "cover": 0,
+    "lenOk": true,
+    "hasAns": false,
+    "boiler": false
+   }
+  ]
+ },
+ "triviaqa/deep#r2": {
+  "bestCur": "Arthur Ira Garfunkel (born November 5, 1941) is an American singer, actor, poet, and former mathematics educator best known as one half of the folk rock duo Simon \u0026 Garfunkel alongside Paul Simon.[1]",
+  "bestCurHasAns": false,
+  "bestSim": "peaking at number 21 on the Billboard 200.[23] The follow-up single \"I Am a Rock\" from the album climbed to number three on the Hot 100 by August 6, 1966.[23] Their third studio album, Parsley, Sage, Rosemary and Thyme, issued on October 10, 1966",
+  "bestSimHasAns": false,
+  "bestSimScore": 12.75,
+  "longSims": [
+   {
+    "nSegs": 2,
+    "orig": "Garfunkel's solo career has yielded collaborations with prominent songwriters and albums spanning covers and originals, including a 2024 release with his son Arthur Jr.; he has earned further recognition through eight Grammy Awards overall, induction into the Rock and Roll Hall of Fame in 1990, and a Lifetime Achievement Grammy in 2003.[1][2]",
+    "origRunes": 344,
+    "segs": [
+     {
+      "text": "Garfunkel's solo career has yielded collaborations with prominent songwriters and albums spanning covers and originals, including a 2024 release with his son Arthur Jr.; he has earned further recognition through eight Grammy Awards overall, induction into the Rock and Roll Hall of Fame in 1990",
+      "runes": 294,
+      "score": 6.75,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "and a Lifetime Achievement Grammy in 2003.[1][2]",
+      "runes": 48,
+      "score": 3.75,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "Beyond music, Garfunkel holds a Master of Arts in mathematics education from Columbia University, taught geometry at a preparatory school in 1971–1972, appeared in films like Catch-22 (1970) and Carnal Knowledge (1971), authored poetry collections such as Still Water (1987) and a memoir What Is It All but Luminous (2017), and undertook notable walking expeditions across the United States and other regions.[1][3][2]",
+    "origRunes": 418,
+    "segs": [
+     {
+      "text": "Beyond music, Garfunkel holds a Master of Arts in mathematics education from Columbia University, taught geometry at a preparatory school in 1971– 1972, appeared in films like Catch-22 (1970) and Carnal Knowledge (1971)",
+      "runes": 219,
+      "score": 10,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "authored poetry collections such as Still Water (1987) and a memoir What Is It All but Luminous (2017), and undertook notable walking expeditions across the United States and other regions.[1][3][2]",
+      "runes": 198,
+      "score": 7.75,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "Arthur Ira Garfunkel was born on November 5, 1941, in Forest Hills, Queens, New York City, to Rose (née Pearlman) Garfunkel and Jacob \"Jack\" Garfunkel, a traveling salesman of Romanian Jewish descent whose parents had emigrated from Iași.[5][5] The family resided in a predominantly Jewish neighborhood in Queens, where Garfunkel's father worked selling men's clothing across the Northeast, including stops in Albany.[6]",
+    "origRunes": 420,
+    "segs": [
+     {
+      "text": "Arthur Ira Garfunkel was born on November 5, 1941, in Forest Hills, Queens, New York City, to Rose (née Pearlman) Garfunkel and Jacob \"Jack\" Garfunkel",
+      "runes": 150,
+      "score": 7.75,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "a traveling salesman of Romanian Jewish descent whose parents had emigrated from Iași.[5][5] The family resided in a predominantly Jewish neighborhood in Queens, where Garfunkel's father worked selling men's clothing across the Northeast, including stops in Albany.[6]",
+      "runes": 268,
+      "score": 7.25,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "As the middle child, Garfunkel grew up with an older brother named Jules and a younger brother named Jerome in a modest household shaped by his father's peripatetic occupation and the cultural traditions of their Jewish heritage, including synagogue attendance that provided early exposure to choral singing.[5][1][7]",
+    "origRunes": 317,
+    "segs": [
+     {
+      "text": "As the middle child, Garfunkel grew up with an older brother named Jules and a younger brother named Jerome in a modest household shaped by his father's peripatetic occupation and the cultural traditions of their Jewish heritage",
+      "runes": 228,
+      "score": 3,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "including synagogue attendance that provided early exposure to choral singing.[5][1][7]",
+      "runes": 87,
+      "score": 3,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "During his early years at Forest Hills Elementary School, Garfunkel displayed an affinity for performance, frequently singing in hallways, participating in school plays, and honing his tenor voice through such activities, which marked the onset of his vocal interests without formal training at that stage.[8][1]",
+    "origRunes": 312,
+    "segs": [
+     {
+      "text": "During his early years at Forest Hills Elementary School, Garfunkel displayed an affinity for performance, frequently singing in hallways, participating in school plays, and honing his tenor voice through such activities",
+      "runes": 220,
+      "score": 3.25,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "which marked the onset of his vocal interests without formal training at that stage.[8][1]",
+      "runes": 90,
+      "score": 3,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "Garfunkel attended Forest Hills High School in Queens, New York, graduating in 1958 alongside future collaborator Paul Simon, whom he first met in 1953 during sixth grade at Public School 164.[9][10] There, the two began experimenting with music as self-taught vocalists, practicing close harmonies inspired by the Everly Brothers and recording sporadically on amateur equipment to refine their technique.[11] This period emphasized disciplined repetition over innate talent, as they honed skills through trial and error without formal training.",
+    "origRunes": 545,
+    "segs": [
+     {
+      "text": "Garfunkel attended Forest Hills High School in Queens, New York, graduating in 1958 alongside future collaborator Paul Simon, whom he first met in 1953 during sixth grade at Public School 164.[9][10] There, the two began experimenting with music as self-taught vocalists",
+      "runes": 270,
+      "score": 10,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "practicing close harmonies inspired by the Everly Brothers and recording sporadically on amateur equipment to refine their technique.[11] This period emphasized disciplined repetition over innate talent, as they honed skills through trial and error without formal training.",
+      "runes": 273,
+      "score": 2.75,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "In 1957, still teenagers, Garfunkel and Simon adopted the pseudonym Tom and Jerry for their debut single \"Hey Schoolgirl,\" released by Big Records, which reached number 49 on the Billboard pop chart but failed to sustain momentum, leading to a hiatus.[12] Additional Tom and Jerry tracks, such as \"Our Song,\" followed sporadically but garnered limited attention, underscoring their early persistence amid commercial setbacks.[13]",
+    "origRunes": 429,
+    "segs": [
+     {
+      "text": "In 1957, still teenagers, Garfunkel and Simon adopted the pseudonym Tom and Jerry for their debut single \"Hey Schoolgirl, \" released by Big Records, which reached number 49 on the Billboard pop chart but failed to sustain momentum, leading to a hiatus.[12] Additional Tom and Jerry tracks",
+      "runes": 288,
+      "score": 9,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "such as \"Our Song, \" followed sporadically but garnered limited attention, underscoring their early persistence amid commercial setbacks.[13]",
+      "runes": 141,
+      "score": 2.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 4,
+    "orig": "Garfunkel enrolled at Columbia University in 1958, initially pursuing architecture before switching to art history at Columbia College, from which he earned a Bachelor of Arts degree in 1965.[14] He balanced these studies with musical pursuits, including membership in the university's a cappella group the Kingsmen.[15] Subsequently, at Teachers College, Columbia University, he obtained a Master of Arts in mathematics education in 1967 and commenced doctoral coursework in the field but abandoned the PhD candidacy to prioritize his emerging music career.[1] This academic rigor in quantitative and analytical disciplines informed his methodical approach to vocal arrangement and harmony, even as pre-fame recordings remained confined to the Tom and Jerry era.[16]",
+    "origRunes": 767,
+    "segs": [
+     {
+      "text": "Garfunkel enrolled at Columbia University in 1958, initially pursuing architecture before switching to art history at Columbia College, from which he earned a Bachelor of Arts degree in 1965.[14] He balanced these studies with musical pursuits",
+      "runes": 243,
+      "score": 7.5,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": true,
+      "boiler": false
+     },
+     {
+      "text": "including membership in the university's a cappella group the Kingsmen.[15] Subsequently, at Teachers College, Columbia University",
+      "runes": 130,
+      "score": 3.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "he obtained a Master of Arts in mathematics education in 1967 and commenced doctoral coursework in the field but abandoned the PhD candidacy to prioritize his emerging music career.[1] This academic rigor in quantitative and analytical disciplines informed his methodical approach to vocal arrangement and harmony",
+      "runes": 313,
+      "score": 5,
+      "cover": 2,
+      "lenOk": false,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "even as pre-fame recordings remained confined to the Tom and Jerry era.[16]",
+      "runes": 75,
+      "score": 2.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 3,
+    "orig": "Paul Simon and Art Garfunkel, both students at Forest Hills High School in Queens, New York, first recorded together in 1957 under the pseudonyms Tom Graph (Garfunkel) and Jerry Landis (Simon), releasing the single \"Hey Schoolgirl\" / \"Dancin' Wild\" on Big Records.[11] Inspired by the close harmonies of the Everly Brothers, the track peaked at number 49 on the Billboard Best Sellers in Stores chart and sold approximately 100,000 copies, marking their earliest commercial success as a duo.[11][17] Subsequent singles under the Tom \u0026 Jerry name failed to chart, leading to the partnership's dissolution by the late 1950s as Simon pursued a solo career writing pop songs under his alias.[18]",
+    "origRunes": 691,
+    "segs": [
+     {
+      "text": "Paul Simon and Art Garfunkel, both students at Forest Hills High School in Queens, New York, first recorded together in 1957 under the pseudonyms Tom Graph (Garfunkel) and Jerry Landis (Simon)",
+      "runes": 192,
+      "score": 8,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "releasing the single \"Hey Schoolgirl\" / \"Dancin' Wild\" on Big Records.[11] Inspired by the close harmonies of the Everly Brothers, the track peaked at number 49 on the Billboard Best Sellers in Stores chart and sold approximately 100, 000 copies",
+      "runes": 245,
+      "score": 9.25,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "marking their earliest commercial success as a duo.[11][17] Subsequent singles under the Tom \u0026 Jerry name failed to chart, leading to the partnership's dissolution by the late 1950s as Simon pursued a solo career writing pop songs under his alias.[18]",
+      "runes": 251,
+      "score": 6,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 3,
+    "orig": "In early 1963, Simon and Garfunkel reunited while both attended Queens College, transitioning from doo-wop and rock influences to acoustic folk music amid the growing popularity of introspective songwriting akin to Bob Dylan.[19] Garfunkel's clear, high tenor voice provided a distinctive counterpoint to Simon's rhythmic guitar and lyrical focus on urban alienation, enhancing the duo's harmonic texture in early demos.[20] They auditioned for Columbia Records producer Tom Wilson, securing a contract that emphasized unadorned folk arrangements over electric instrumentation.",
+    "origRunes": 577,
+    "segs": [
+     {
+      "text": "In early 1963, Simon and Garfunkel reunited while both attended Queens College, transitioning from doo-wop and rock influences to acoustic folk music amid the growing popularity of introspective songwriting akin to Bob Dylan.[19] Garfunkel's clear",
+      "runes": 247,
+      "score": 5.75,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "high tenor voice provided a distinctive counterpoint to Simon's rhythmic guitar and lyrical focus on urban alienation, enhancing the duo's harmonic texture in early demos.[20] They auditioned for Columbia Records producer Tom Wilson",
+      "runes": 232,
+      "score": 3.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "securing a contract that emphasized unadorned folk arrangements over electric instrumentation.",
+      "runes": 94,
+      "score": 0,
+      "cover": 0,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 3,
+    "orig": "The duo's debut album, Wednesday Morning, 3 A.M., was recorded in March 1964 and released on October 19, 1964, featuring original compositions like \"The Sound of Silence\" alongside folk covers.[21] Its sparse, acoustic production clashed with the era's British Invasion rock dominance, resulting in dismal sales of roughly 3,000 copies and no chart placement, prompting Simon to relocate to England for further songwriting pursuits.[22] Despite the commercial failure, the album's blend of Simon's poetic narratives and Garfunkel's vocal elevation laid the groundwork for their later folk-rock evolution, underscoring persistence amid market rejection rather than immediate acclaim.[19]",
+    "origRunes": 686,
+    "segs": [
+     {
+      "text": "The duo's debut album, Wednesday Morning, 3 A.M., was recorded in March 1964 and released on October 19, 1964, featuring original compositions like \"The Sound of Silence\" alongside folk covers.[21] Its sparse, acoustic production clashed with the era's British Invasion rock dominance",
+      "runes": 284,
+      "score": 8.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "resulting in dismal sales of roughly 3, 000 copies and no chart placement, prompting Simon to relocate to England for further songwriting pursuits.[22] Despite the commercial failure",
+      "runes": 182,
+      "score": 5.75,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "the album's blend of Simon's poetic narratives and Garfunkel's vocal elevation laid the groundwork for their later folk-rock evolution, underscoring persistence amid market rejection rather than immediate acclaim.[19]",
+      "runes": 217,
+      "score": 3.5,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 3,
+    "orig": "Following the success of the overdubbed single \"The Sound of Silence,\" which reached number one on the Billboard Hot 100 chart on January 1, 1966, Simon \u0026 Garfunkel released their album The Sounds of Silence on January 17, 1966, peaking at number 21 on the Billboard 200.[23] The follow-up single \"I Am a Rock\" from the album climbed to number three on the Hot 100 by August 6, 1966.[23] Their third studio album, Parsley, Sage, Rosemary and Thyme, issued on October 10, 1966, achieved a peak of number four on the Billboard 200 and has sold over four million copies worldwide.[24] The single \"Scarborough Fair/Canticle\" from this album reached number 11 on the Hot 100 in early 1968.[23]",
+    "origRunes": 688,
+    "segs": [
+     {
+      "text": "Following the success of the overdubbed single \"The Sound of Silence, \" which reached number one on the Billboard Hot 100 chart on January 1, 1966, Simon \u0026 Garfunkel released their album The Sounds of Silence on January 17, 1966",
+      "runes": 228,
+      "score": 11,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "peaking at number 21 on the Billboard 200.[23] The follow-up single \"I Am a Rock\" from the album climbed to number three on the Hot 100 by August 6, 1966.[23] Their third studio album, Parsley, Sage, Rosemary and Thyme, issued on October 10, 1966",
+      "runes": 246,
+      "score": 12.75,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "achieved a peak of number four on the Billboard 200 and has sold over four million copies worldwide.[24] The single \"Scarborough Fair/Canticle\" from this album reached number 11 on the Hot 100 in early 1968.[23]",
+      "runes": 211,
+      "score": 8.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "Robinson,\" which topped the Hot 100 on June 1, 1968, after initial exposure in the film The Graduate.[25] The duo's fifth album, Bridge Over Troubled Water, recorded primarily in late 1969 and released on January 26, 1970, would later peak at number one on the Billboard 200, selling over 25 million copies globally and earning Grammy Awards for Album of the Year and Record of the Year for the title track in 1970.[26]",
+    "origRunes": 419,
+    "segs": [
+     {
+      "text": "Robinson, \" which topped the Hot 100 on June 1, 1968, after initial exposure in the film The Graduate.[25] The duo's fifth album, Bridge Over Troubled Water, recorded primarily in late 1969 and released on January 26, 1970, would later peak at number one on the Billboard 200",
+      "runes": 275,
+      "score": 11.75,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "selling over 25 million copies globally and earning Grammy Awards for Album of the Year and Record of the Year for the title track in 1970.[26]",
+      "runes": 143,
+      "score": 5.5,
+      "cover": 1,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 3,
+    "orig": "Simon \u0026 Garfunkel's live performances escalated in scale during this period, with their 1969 tour featuring large venues including Yankee Stadium on April 16, 1969.[27] Recordings from this tour, later compiled as Live 1969, captured their evolving setlists blending acoustic folk elements with fuller band arrangements.[28] Art Garfunkel's high tenor voice, often delivering the melodic peaks in harmonies, contributed to the duo's distinctive fusion of folk traditions and pop accessibility, evidenced by their sustained chart presence and album sales exceeding tens of millions units by the decade's end.[29][30]",
+    "origRunes": 615,
+    "segs": [
+     {
+      "text": "Simon \u0026 Garfunkel's live performances escalated in scale during this period, with their 1969 tour featuring large venues including Yankee Stadium on April 16, 1969.[27] Recordings from this tour, later compiled as Live 1969",
+      "runes": 223,
+      "score": 8.5,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "captured their evolving setlists blending acoustic folk elements with fuller band arrangements.[28] Art Garfunkel's high tenor voice, often delivering the melodic peaks in harmonies, contributed to the duo's distinctive fusion of folk traditions and pop accessibility",
+      "runes": 267,
+      "score": 4.5,
+      "cover": 3,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "evidenced by their sustained chart presence and album sales exceeding tens of millions units by the decade's end.[29][30]",
+      "runes": 121,
+      "score": 4,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "Garfunkel's commitment to the film Catch-22, directed by Mike Nichols, exemplified these strains; initially cast alongside Simon, Garfunkel's role expanded after Simon's was cut, and the shoot—intended to last six weeks—extended into mid-1970, delaying Garfunkel's return for potential duo work and exacerbating frustrations over scheduling and priorities.",
+    "origRunes": 356,
+    "segs": [
+     {
+      "text": "Garfunkel's commitment to the film Catch-22, directed by Mike Nichols, exemplified these strains; initially cast alongside Simon, Garfunkel's role expanded after Simon's was cut, and the shoot— intended to last six weeks— extended into mid-1970",
+      "runes": 244,
+      "score": 5.5,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "delaying Garfunkel's return for potential duo work and exacerbating frustrations over scheduling and priorities.",
+      "runes": 112,
+      "score": 2.25,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   },
+   {
+    "nSegs": 2,
+    "orig": "Following the dissolution of Simon \u0026 Garfunkel in 1970, Garfunkel ventured into acting, securing supporting roles in two films directed by Mike Nichols: Catch-22 (1970), where he portrayed the soldier Nately, and Carnal Knowledge (1971), as the character Sid.[38] These appearances marked his initial foray into cinema as a means of artistic diversification amid the duo's breakup.[39]",
+    "origRunes": 385,
+    "segs": [
+     {
+      "text": "Following the dissolution of Simon \u0026 Garfunkel in 1970, Garfunkel ventured into acting, securing supporting roles in two films directed by Mike Nichols: Catch-22 (1970), where he portrayed the soldier Nately, and Carnal Knowledge (1971)",
+      "runes": 236,
+      "score": 8.25,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     },
+     {
+      "text": "as the character Sid.[38] These appearances marked his initial foray into cinema as a means of artistic diversification amid the duo's breakup.[39]",
+      "runes": 147,
+      "score": 4.5,
+      "cover": 2,
+      "lenOk": true,
+      "hasAns": false,
+      "boiler": false
+     }
+    ]
+   }
+  ],
+  "probeAns": "Architect",
+  "q": "Art Garfunkel trained for which profession although he didn't qualify?",
+  "rowSims": [
+   {
+    "text": "Art Garfunkel · Ara Eve Leo Sal · 1x",
+    "runes": 36,
+    "score": 3.25,
+    "cover": 2,
+    "lenOk": false,
+    "hasAns": false,
+    "boiler": false
+   },
+   {
+    "text": "Early Life and Education · Family Background and Childhood",
+    "runes": 58,
+    "score": 1.25,
+    "cover": 0,
+    "lenOk": true,
+    "hasAns": false,
+    "boiler": false
+   },
+   {
+    "text": "Simon \u0026 Garfunkel Partnership · Formation and Breakthrough (1957–1964)",
+    "runes": 70,
+    "score": 5,
+    "cover": 2,
+    "lenOk": true,
+    "hasAns": false,
+    "boiler": false
+   },
+   {
+    "text": "[35] [31] · Solo Career Trajectory · Debut and Exploration (1970–1975)",
+    "runes": 70,
+    "score": 5.25,
+    "cover": 0,
+    "lenOk": true,
+    "hasAns": false,
+    "boiler": false
+   }
+  ]
+ }
+}

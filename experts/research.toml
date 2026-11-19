@@ -1,0 +1,6 @@
+name = "research"
+extends = [ "core" ]
+skills = [ "search-core" ]
+mcp = [ "mcp.search-core" ]
+plugins = []
+notes = "Requires building a selected search-core implementation; no default live searches."

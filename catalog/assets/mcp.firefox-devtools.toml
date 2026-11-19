@@ -1,0 +1,26 @@
+id = "mcp.firefox-devtools"
+kind = "mcp"
+path = "mcp/servers/firefox-devtools-mcp"
+registry_id = "firefox-devtools"
+
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
+[source]
+kind = "npm"
+upstream_commit = "b0f4495336b36b875cee29480150e660088c3e1a"
+local_diff_report = "catalog/audit/firefox-upstream-comparison.json"
+url = "https://registry.npmjs.org/@mozilla/firefox-devtools-mcp"
+version = "0.9.5"
+license = "MIT OR Apache-2.0"
+commit = "b0f4495336b36b875cee29480150e660088c3e1a"
+
+[version]
+upstream = "0.9.5"
+commit = "b0f4495336b36b875cee29480150e660088c3e1a"
+local = "imported-2026-11-18"
+sha256 = "3694fe3d40f3d5efe7a3f666acc5dab19fee4fd4888c9c01c3fd5288e7891db4"
+local_modified = true
+enabled = false

@@ -1,0 +1,21 @@
+id = "workbuddy.sheetagent.skills.excel-generation"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-generation"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "7ee07c636002f1da8edb3b4733cea5d13309cf43cddb1665a2fd154b12606985"
+local_modified = "unknown"
+enabled = false

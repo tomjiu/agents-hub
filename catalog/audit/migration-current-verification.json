@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
+  "files": 2418,
+  "unchanged": 2384,
+  "missing": [],
+  "changed": [
+    {
+      "original": ".gitignore",
+      "target": ".gitignore",
+      "baseline_sha256": "9625233cede7c89bba522c6814d6867f6df6ab6897e748343294436b3fa5bc2a",
+      "current_sha256": "4aa29fc9f79532402d4f2408de37e1eed44265767b98189e384aaa17a2ff2565"
+    },
+    {
+      "original": "agents-md/README.md",
+      "target": "agents-md/README.md",
+      "baseline_sha256": "72823aabcc440b0fce68721ec355cfe087570e551dce525a433e80406a53102b",
+      "current_sha256": "52327014754a4555bb77ce59ad3e40456e115daa0496b4c740caff0603f096df"
+    },
+    {
+      "original": "agents-md/REVIEW.md",
+      "target": "agents-md/REVIEW.md",
+      "baseline_sha256": "83b98c8a208202db7b4e0bd473829dfa2fb4e69fc93dbe8c8cd3806cae3e4d4a",
+      "current_sha256": "3ec3de1dd12d8e943b490974d613c8331e3648d013e104279c62d0b0e52106ef"
+    },
+    {
+      "original": "mcp/local/firefox-devtools-mcp/tests/firefox/core-prefs.test.ts",
+      "target": "mcp/servers/firefox-devtools-mcp/tests/firefox/core-prefs.test.ts",
+      "baseline_sha256": "ef80796412331b896de13223ffe3e00fe25d8a4d4e25fae49b08ce73b9d98f5d",
+      "current_sha256": "d971a895fbdb03e99f869f343b08a9aef5e412453fca8e2398508936c99721f3"
+    },
+    {
+      "original": "mcp/local/firefox-devtools-mcp/tests/firefox/core.test.ts",
+      "target": "mcp/servers/firefox-devtools-mcp/tests/firefox/core.test.ts",
+      "baseline_sha256": "190a89c73ec1753857f73a4cdfdbd5a389f9c8d9f12311d5e67433a816cf4f84",
+      "current_sha256": "ad5cea6b6d02f1d460d2c97ac6e64ab97c17a5cddcca37c80637120bc2f91ca4"
+    },
+    {
+      "original": "mcp/local/firefox-devtools-mcp/tests/firefox/profile.test.ts",
+      "target": "mcp/servers/firefox-devtools-mcp/tests/firefox/profile.test.ts",
+      "baseline_sha256": "faff666c0140f808f083f255b3e5edf11b8601741fcb7bd8b24666afcbcdb6ec",
+      "current_sha256": "7c282e3e738eefca53071dd7fd1e7b1d660bf957b5092cde3bf0addde7426520"
+    },
+    {
+      "original": "memory-net/adapters/dsh/package.json",
+      "target": "plugins/memory-net/adapters/dsh/package.json",
+      "baseline_sha256": "d9b4cf8e3dca4e33d32125171f1b4f884b73cec668b910cb4bc4c1620321b464",
+      "current_sha256": "73f779c67cb338fa04d3e9f08d527c95f97097c28b2f579e80891bbd15158aae"
+    },
+    {
+      "original": "memory-net/adapters/dsh/README.md",
+      "target": "plugins/memory-net/adapters/dsh/README.md",
+      "baseline_sha256": "ae43ac2b731b8b259ca0ce5815dd99b86b88167ed955fcedae16d6e8768713ea",
+      "current_sha256": "c0de1e7109573baba7daa3c2c019eb0cb62e49bd22575d1e6d1334d923fb3883"
+    },
+    {
+      "original": "memory-net/adapters/dsh/src/contract.ts",
+      "target": "plugins/memory-net/adapters/dsh/src/contract.ts",
+      "baseline_sha256": "466907394133f86415314ab126ccf6e300adb89a9601889ad707348858413d6a",
+      "current_sha256": "61ec530a949eb60d97238caead730537e8b8cc307b8de3549539376732557205"
+    },
+    {
+      "original": "memory-net/adapters/dsh/src/index.ts",
+      "target": "plugins/memory-net/adapters/dsh/src/index.ts",
+      "baseline_sha256": "5f0a3e69ab75006378feb7763c96ef0af1d1c2d9cbdc2322b725ac8bcd52490c",
+      "current_sha256": "6d1dbf5fe81d0e9e9754314f383068184ad2dffc26846562bf8436533b1ec40c"
+    },
+    {
+      "original": "memory-net/adapters/dsh/tests/adapter.test.ts",
+      "target": "plugins/memory-net/adapters/dsh/tests/adapter.test.ts",
+      "baseline_sha256": "ab81bf887a970cde7a6d84113b6331546c6371b16b181eefb93cede0cade8782",
+      "current_sha256": "6217944860721ecbd050731cb087db7fad55f3cb35f9263ec02b63ac9f7ef6d9"
+    },
+    {
+      "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
+      "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
+      "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
+      "current_sha256": "6c2441c560f0342fe08c972e172e3a037d4df0b110b5be5b42478c0114f055d1"
+    },
+    {
+      "original": "memory-net/console/apps/console/dist/index.html",
+      "target": "plugins/memory-net/console/apps/console/dist/index.html",
+      "baseline_sha256": "fc962e0a8f3371cbac1aa358d0d655ccaacc8dbf3cf02858fed20d34ba48b410",
+      "current_sha256": "f39a5117822fd89aa4c94572449afbc245bd72223a7073dee64de55cc643a6e0"
+    },
+    {
+      "original": "memory-net/console/apps/console/src/main.ts",
+      "target": "plugins/memory-net/console/apps/console/src/main.ts",
+      "baseline_sha256": "ceef8bf095f543a443a3b619304756700b2df1b42a2da4430a8710cd800d998f",
+      "current_sha256": "2e6e653af534e0a4018f54c33bbe8dd9b28308cad6c0857f85238c747fe6f641"
+    },
+    {
+      "original": "memory-net/package.json",
+      "target": "plugins/memory-net/package.json",
+      "baseline_sha256": "19ffc699bcfb74a96e3401c099dfbfd9697f4c6d0f9c0df2aa598bbd9ac98afb",
+      "current_sha256": "ba99a58b778eefeb4e0ce696655bea6b06964a03145f05ffa73bbba605274322"
+    },
+    {
+      "original": "memory-net/src/db.ts",
+      "target": "plugins/memory-net/src/db.ts",
+      "baseline_sha256": "48cd98a2bbd471c0143d1913fc6bc7fe88a8ca9340eb262847c7315a1a6be6a7",
+      "current_sha256": "37b1f9096017202936130b6ab631e55816c2b34886ea81f1e95c48963827bd16"
+    },
+    {
+      "original": "memory-net/tests/09-session12-fixes.test.ts",
+      "target": "plugins/memory-net/tests/09-session12-fixes.test.ts",
+      "baseline_sha256": "0fb291529b76084b09bf16b7f288721b03dcbaa41795373b5b96104e2b12a7f8",
+      "current_sha256": "913796d1df8e767c693267c285b0b5165b260c1a00748e36791a34344abfc417"
+    },
+    {
+      "original": "search-infra/core/package.json",
+      "target": "mcp/servers/search-core/typescript/package.json",
+      "baseline_sha256": "33ec7579a8520708e4c04c7d23371a31c5ac45289feeb433ac631b96b839d064",
+      "current_sha256": "8f56ec646bdafce62b1116a591e7446c7b4b280a4040342d6ba8d4f20aa1a995"
+    },
+    {
+      "original": "search-infra/core/README.md",
+      "target": "mcp/servers/search-core/typescript/README.md",
+      "baseline_sha256": "fc22904fd6960ebff5d0671e6cf7b59d0ffa74e59ff0237ce2eb358dd3cd0a7e",
+      "current_sha256": "995336172ad11d7d4782a65b6880bf5f729635e2e46cf5a7e681d26eeb097e82"
+    },
+    {
+      "original": "search-infra/core/src/mcp.ts",
+      "target": "mcp/servers/search-core/typescript/src/mcp.ts",
+      "baseline_sha256": "36928dab471ad1ddf035e819858f7559a6b3f06eff96fe546e894fcfac7c4902",
+      "current_sha256": "03f330c0355c224ac229471efb68b43a242cceeb69b7e22932a11fe6d5e88519"
+    },
+    {
+      "original": "search-infra/core/src/test/breaker2.test.ts",
+      "target": "mcp/servers/search-core/typescript/src/test/breaker2.test.ts",
+      "baseline_sha256": "e0c80f0a5f9698d641c9f9eb376bb9d66228cd909506426f53707bb55ba7a7c1",
+      "current_sha256": "40e91e17f7b5d33bbea9826af1e295b2ca70f5893b52c3ea40db17528a0fabbe"
+    },
+    {
+      "original": "search-infra/core/src/test/research.test.ts",
+      "target": "mcp/servers/search-core/typescript/src/test/research.test.ts",
+      "baseline_sha256": "b715ca7b36ccf3b14848bdeae573394fc06f483506b0d17ab165993c1ce88dcc",
+      "current_sha256": "9d9b4ff09b9373512f56992dbf78c57ffa4ae165ba3298b6d46a15977470199a"
+    },
+    {
+      "original": "search-infra/core/src/test/router.test.ts",
+      "target": "mcp/servers/search-core/typescript/src/test/router.test.ts",
+      "baseline_sha256": "5b72b746f72056bf6923c3d5dfbed3c11123329d342ed160ea3add2a3306d09c",
+      "current_sha256": "842c1235820dad70cbe3ae04794940a9c9f704c7018a6c27fb0d1b36b5743c1a"
+    },
+    {
+      "original": "search-infra/SKILL.md",
+      "target": "skills/individual/research/search-core/SKILL.md",
+      "baseline_sha256": "23f9567f9b99aad213fa8b6cc71bc180475739a33b0673b9ee2cc1a492e444dd",
+      "current_sha256": "53f925b52350b1f2db3c0db68bdd2560f60712701c3c4fce804f8ca38b16bac1"
+    },
+    {
+      "original": "selected/dfir-workflow/SKILL.md",
+      "target": "skills/individual/research/dfir-workflow/SKILL.md",
+      "baseline_sha256": "00b3535158c7b74211d61c65a4980af90f38f8d4b16ca1de70a2485740b43d15",
+      "current_sha256": "23b7d84d775d05f75d056557d27d0aae86025612c63fd3558725db4782026e07"
+    },
+    {
+      "original": "selected/firmware-analysis/SKILL.md",
+      "target": "skills/individual/research/firmware-analysis/SKILL.md",
+      "baseline_sha256": "13ccee79d3e5b5e3e2c1809cd5f56edb0a9057b657bb1d8a4c011d545fc429db",
+      "current_sha256": "3ffbf566fd7f6df225d14ae2b7483dee201855501a9171958d17c9b8d3923a67"
+    },
+    {
+      "original": "selected/go-performance/SKILL.md",
+      "target": "skills/individual/engineering/go-performance/SKILL.md",
+      "baseline_sha256": "aeddcc585008d6b6cd6079b50a3f3e025ffa713f7af397aa866968e656eaa7e0",
+      "current_sha256": "52f347ae9c806d9b6cb55c3d18b84a087ce97d37af11da3d4fa14479e8e97ef9"
+    },
+    {
+      "original": "selected/godot-dev/SKILL.md",
+      "target": "skills/individual/engineering/godot-dev/SKILL.md",
+      "baseline_sha256": "b1e0f1bd20f1fcd65a45b4542bed57687726230f9249a61f69f87cf4977bb221",
+      "current_sha256": "a7979ea898190315b5bd83e9029328b26beda23d0a3cdb3f993a99024a6027ce"
+    },
+    {
+      "original": "selected/offensive-methodology/SKILL.md",
+      "target": "skills/individual/security/offensive-methodology/SKILL.md",
+      "baseline_sha256": "82b025d0e237189d24cf6e6f5eca737c47863cd2dfd6b3c61e445e06b365f7e2",
+      "current_sha256": "8e9f70587bde79ac8781e05390822fc7f1c5b4c8e89c70864704f778aa825f10"
+    },
+    {
+      "original": "selected/repository-skills/SKILL.md",
+      "target": "skills/individual/research/repository-skills/SKILL.md",
+      "baseline_sha256": "40bedf83119d857bdfbaedf0aef8826b7cdd4f81a709c490da4b9daaba3d9e8b",
+      "current_sha256": "d1a23be931e10e27720fb5019f0fcf4faba579b28ad94cb0976558a6c8af02fe"
+    },
+    {
+      "original": "selected/reverse-engineering-workflow/SKILL.md",
+      "target": "skills/individual/research/reverse-engineering-workflow/SKILL.md",
+      "baseline_sha256": "a88a6fa074bd759643d12f46f518b7b6636e077030206a6a9a963a0c70e2f179",
+      "current_sha256": "9f8f7116616184a1e84f61586be0d04d18e301bfe721cf48e6cff27a387223c0"
+    },
+    {
+      "original": "selected/rust-performance/SKILL.md",
+      "target": "skills/individual/engineering/rust-performance/SKILL.md",
+      "baseline_sha256": "7cdf178881cfcd67e6abc2ed483c01d8eb09a11d02fbbbd273d0d40fd6cc5b99",
+      "current_sha256": "ac9c0e7f6b1ff2e269057c3f1d593737df8598e532e8a3213fd68baff5aae2ce"
+    },
+    {
+      "original": "selected/security-workflow/SKILL.md",
+      "target": "skills/individual/security/security-workflow/SKILL.md",
+      "baseline_sha256": "1a513708d1c13d9285a53e1d1bcee7fa5569aaf1fd189dc414c46d2bf12531f3",
+      "current_sha256": "d81d85cc16fb3a3f1c7d37476b3b80748293ed8a5b032cb3c8c6c64af29683c8"
+    },
+    {
+      "original": "selected/source-index/SKILL.md",
+      "target": "skills/individual/research/source-index/SKILL.md",
+      "baseline_sha256": "057e25f1fff4fb80522ed8486c423347bf2312ba76ad66c7ea974c36022ee65f",
+      "current_sha256": "a03efd45aff2560716ea5a7247c7d3c0908dfebd9bdacfe20a53792c31b0da3d"
+    }
+  ],
+  "note": "Migration apply verified all original hashes before local modifications. Subsequent repairs and new behavior are explicitly listed; original versions remain in preserved Git history."
+}

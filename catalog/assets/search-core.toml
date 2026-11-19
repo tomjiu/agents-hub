@@ -1,0 +1,25 @@
+id = "search-core"
+kind = "skills"
+path = "skills/individual/research/search-core"
+
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
+[source]
+upstream_identity_status = "unverified"
+location_role = "maintenance-or-service-location-not-proof-of-origin"
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+commit = ""
+license = "review-required"
+provenance = "catalog/audit/migration-2026-11.json"
+
+[version]
+upstream = "unknown"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "306b8fee01a3ed64b15af9f514e71d6aa0044a6496822fa7751d46b4b17657b1"
+local_modified = "unknown"
+enabled = false

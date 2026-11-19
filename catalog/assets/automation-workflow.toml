@@ -1,0 +1,25 @@
+id = "automation-workflow"
+kind = "skills"
+path = "skills/individual/engineering/automation-workflow"
+
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
+[source]
+upstream_identity_status = "unverified"
+location_role = "maintenance-or-service-location-not-proof-of-origin"
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+commit = ""
+license = "review-required"
+provenance = "catalog/audit/migration-2026-11.json"
+
+[version]
+upstream = "unknown"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "a2fe95acb3afa4e6ac1f0888a965aea6476529d393a56a84ebf51c0263f23b12"
+local_modified = "unknown"
+enabled = false

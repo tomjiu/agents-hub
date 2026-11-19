@@ -1,0 +1,70 @@
+# Asset Manager 基础执行引擎
+
+入口：在仓库根运行 node asset-manager/cli.mjs help。固定依赖由根 package-lock.json 管理。
+
+## 新代理查找入口
+
+search-assets <query> [--kind skills|mcp|plugins|agents-md] [--limit N]只读本地登记检索，优先ID/name再description/path；skills-status [--verbose]检查canonical技能、登记缺漏、语法和客户端名称限制。库存坏语法/未登记/缺失使validate失败，厂商不兼容名称单独报告、原件不改。优先skills/individual/research/skill-search/SKILL.md及根AGENTS.md，不用手工扫描全部文件。
+
+## 已实现
+
+- catalog/assets 元数据读取、稳定 ID/类型/路径校验，四类独立保护策略。
+- 来源查询：npm / GitHub；本地来源 MANUAL，厂商来源 RESTRICTED。
+- 下载：只接收显式 HTTPS 同登记来源域地址与 SRI，DNS 公网检查并固定地址、无重定向、超时与体积限制；不执行或自动解包。
+- 不可覆盖快照、SHA256 清单、基线/本地/新版本三方差异。
+- 静态结构验证、需要审查的执行文件提示；并非完整安全扫描或许可证判定。
+- 人工批准记录、完整性绑定、过期版本检查、原子启用指针、连续回滚；全局操作锁避免并发写状态。
+- 独立客户端 Skill 视图、配置片段与完整 AGENTS 候选，不覆盖用户配置。profile-view <dsh|codex|opencode> 读取对应 Profile，展开 Expert 与显式 Skill/MCP/Plugin 列表，检查类型与存在性并持久化选择记录。
+- probe-console-ui.mjs 使用已安装 Edge 或 HUB_BROWSER_EXECUTABLE，在隔离数据上真实点击认证、进度写入、轨迹、激活与统计，并刷新读回 SQLite；不是全 UI/全平台覆盖。
+
+## 项目级部署
+
+plan-deploy / deploy / inspect-deployment / uninstall 为显式批准的项目Skill安装与撤销。已有名称或本地修改不覆盖，卸载完整校验后移入保留区；本轮只处理Skill，MCP/插件选择拒绝部分安装。详见 [部署指南](DEPLOYMENT.md)。
+
+## MCP 配置接入
+
+plan-mcp / inspect-mcp / apply-mcp / rollback-mcp 支持独立候选、保留原字节的配置合并和显式应用。已有服务、审核后本地变更、启动器/源码变化拒绝；失败状态保留产物给人工核查。详见 [MCP配置指南](MCP-CONFIG.md)。生成配置的真实MCP握手与一次本地调用通过，实际Codex/OpenCode会话与live DSH插件仍待验。
+
+## DSH独立运行包
+
+dsh-bundle / inspect-dsh-bundle基于已验证DSH版本生成独立Skill/MCP/记忆运行包，不安装或改现有profile。记忆编译副本与配置校验，数据默认存私有包内state。可在独立headless中明确加载，详见 [运行包指南](DSH-BUNDLE.md)。
+
+## 下载与规范候选失败保护
+
+下载检测完整性、中断/取消和体积上限，校验后发布独立原始文件；记录失败只回收本次目录。规范候选检查源变化、独占输出锁并新文件发布来源及正文，保留其他写入。详见 [失败保护说明](FAILURE-PROTECTION.md)，不假装实现自动市场解包或语义冲突判定。
+
+## 持久化与恢复边界
+
+catalog/locks 是导入基线；.asset-state/active.json 是实际选择真相源。export-locks 向全新目录导出选择。新版本的源目录及哈希记录必须一起备份，当前支持已有恢复包的校验恢复；尚未实现从任意远端来源自动恢复全部资产。
+
+版本内容不会在正常更新操作中被覆写；文件系统仍可被外部修改，因此每次使用/启用都验证快照哈希。审批者名字是审计记录，不是密码认证或多用户权限系统。
+
+中断时可能留下 operation.lock；先核对其 PID/时间和状态，再人工恢复，不自动删除可能属于活跃任务的锁。当前未实现自动恢复向导。
+
+export-recovery生成schema2包，保存当前选择及全部回滚历史引用版本；inspect-recovery检查，restore-recovery只恢复缺失内容。restore-selection需明确批准、审核人/理由、完整审核和不存在active.json才发布选择/历史，不启动服务；schema1只支持内容恢复。详见 [恢复指南](RECOVERY.md)。
+
+版本元数据状态与验证/批准报告分开保留；检查到更新、下载、静态验证和启用是独立步骤。activate 不重启服务或替换客户端配置。
+
+## 实际 DSH 宿主验证
+
+probe-dsh-host.mjs复用已有mock-model和verify-e2e，用安装包实际启动独立headless profile，闭环验证已部署Skill、生成MCP和Memory-net插件。无真实账户/付费模型，不改用户运行实例。详见 [宿主验收指南](DSH-HOST-ACCEPTANCE.md)。
+
+## DSH版本兼容
+
+check-dsh <installation> 对照真实宿主验收与当前记忆/搜索资产指纹；不匹配则非零退出。check-dsh-upstream只发现latest/next，不下载或应用。已独立验证0.2.2-rc.1与0.2.2-rc.4；详见 [升级指南](DSH-UPGRADE.md)。
+
+## 未完成的验收
+
+按用户要求，不再把真实Codex/OpenCode加载列为本次门槛。DSH记忆/搜索运行包已在干净clone与两版真实headless验证；用户live profile升级/合并与真实凭据仍须另获明确授权。受限市场发现/安装包提取、自动安全解包和语义规范冲突检测未完成。已有恢复包的隔离恢复通过；任意远端来源的自动恢复未完成。详见 [交付矩阵](../catalog/audit/DELIVERY.md) 和 [实施状态](../catalog/audit/IMPLEMENTATION.md)。
+
+## 来源与许可审计
+
+audit-provenance输出只读的来源身份、导入基线、当前哈希、许可文件证据和完整重复候选。声明限制的技能不能通过vendor审核标志部署；原始资产仍保留。详见 [来源治理说明](../catalog/PROVENANCE.md)。
+
+## 模块
+
+core/files：路径边界、快照、哈希与差异。core/catalog：清单、保护策略与 Expert 解析。core/lifecycle：版本状态操作。core/views：部署副本与规则候选。providers/upstream：来源查询与校验下载。tests：隔离的失败、回滚和集成用例。
+
+probe-dsh-skills.mjs 通过 HUB_DSH_SKILL_PROVIDER 指定已安装的 DSH 文件系统提供者，只使用隔离上下文验证当前 Profile 的发现与读取；不修改宿主。
+
+migration.mjs 和 catalog-build.mjs 是本次迁移工具，不是日常更新命令；迁移记录已有时不会重新建立导入基线。

@@ -1,0 +1,71 @@
+{
+  "sha256": "c266816e10234cb1a0165ac87c4db424faa5b060aeca27ddfc0cea9b15b8b9f1",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 11839,
+      "sha256": "33b10167925cfcf29400251c74059c677c0cf4a50d21f59a6648bfa35d2b0fb7"
+    },
+    {
+      "path": "references/design-system.md",
+      "bytes": 18006,
+      "sha256": "6fd1ea2d5c113bc5b858438a2311e44b58ff395b0f62aee6afa15fdd65746813"
+    },
+    {
+      "path": "references/editing.md",
+      "bytes": 6852,
+      "sha256": "1da86642cba5942c216eb63e6e255fea18d9583a4c9fd5a0930e634389cbf23b"
+    },
+    {
+      "path": "references/pitfalls.md",
+      "bytes": 8533,
+      "sha256": "ca122c8fdfd1d97bd636d68c36c1cf19487a09c5238fe7dcb0eee875caee3489"
+    },
+    {
+      "path": "references/pptxgenjs.md",
+      "bytes": 13172,
+      "sha256": "d76ffcf15c3e6e26c9deac46d53b971f0460561b6ba95cada6e4bb24fea8ebf8"
+    },
+    {
+      "path": "references/python-pptx-recipes.md",
+      "bytes": 1464,
+      "sha256": "8981b68fb9f1c70f256d9f49d2121d6efce204dd52dbb89f6b9d4afc705d8dcc"
+    },
+    {
+      "path": "references/slide-types.md",
+      "bytes": 16203,
+      "sha256": "f366dfcdae9330080119029131d0f862e764a9b3c49bec60765f61e00e6b0bb9"
+    },
+    {
+      "path": "scripts/audit_pptx.py",
+      "bytes": 27430,
+      "sha256": "592622b7a9555dfaf7e93b2925fa165120c94a23d927976ceed8e1324b5e6dc8"
+    },
+    {
+      "path": "scripts/extract_comments.py",
+      "bytes": 15850,
+      "sha256": "078e05bdc30806f152217dec2c4352449bd6f4d778b8eeccc655f7945e55b805"
+    },
+    {
+      "path": "scripts/extract_images.py",
+      "bytes": 6879,
+      "sha256": "86e434d1d52f6983a040f0bbdf3e3af44ca7b64d1cf6f8696e2e8101ccc0ea92"
+    },
+    {
+      "path": "scripts/extract_pptx.py",
+      "bytes": 8820,
+      "sha256": "e4bed78bb9630903a45a98ec98adce7786a3e1a46932eaa1e629cf0d8b55297b"
+    },
+    {
+      "path": "scripts/pdf2png.swift",
+      "bytes": 6258,
+      "sha256": "839a79c7d6d8f81dfb4d7cedf7625d78134032beaf66892efce4894631a8a0df"
+    },
+    {
+      "path": "scripts/pptx-screenshot.sh",
+      "bytes": 2464,
+      "sha256": "4d0624760c77d1861022fa957f716bc37317cfbf8b96c13bedb34f07a467931f"
+    }
+  ],
+  "bytes": 143770
+}

@@ -1,7 +1,7 @@
 # Ignore secrets and junk
 .env
 **/.env
-**/*secret*
+# Do not blanket-ignore names containing secret: skills are source assets.
 **/node_modules/
 **/.git/
 archive/
@@ -9,3 +9,11 @@ sources/
 *.xpi
 .bridge.log
 **/mcp-auth.json
+.asset-state/
+**/operation.lock
+**/.cache/
+**/target/
+# Build outputs except pinned Console vendor artifacts
+**/dist/
+!plugins/memory-net/console/vendor/memory-net/dist/
+!plugins/memory-net/console/vendor/memory-net/dist/**

@@ -1,0 +1,21 @@
+{
+  "sha256": "685c9ec06b8e1767a1a2492176bd6c7264fdc2c542b2603fdf650087db9ee169",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 8223,
+      "sha256": "0f07f19e31c970e8516ba3bbdb0a45a569e495fc4164bec4ccc400bc0e6ec2bb"
+    },
+    {
+      "path": "references/exec-patterns.md",
+      "bytes": 11436,
+      "sha256": "5449f8a1b63be4265dea0f3d340394fe81de369ea3ce166ab29e297b1ffcd77e"
+    },
+    {
+      "path": "references/usecase-patterns.md",
+      "bytes": 7265,
+      "sha256": "f04f8f88b762c462bbd98232fa7e8685fcdf1c48244405200384ffb82f03a4ae"
+    }
+  ],
+  "bytes": 26924
+}

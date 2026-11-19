@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.experts.general-writer"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/general-writer"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "1242e7c652fa8571d5252aa65ce558fdc96c57c82b870a10515b372635a0bb1f"
+local_modified = "unknown"
+enabled = false

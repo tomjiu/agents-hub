@@ -1,0 +1,22 @@
+id = "trae.research-guide"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/research-guide"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260609::research-guide/0.0.4/package.zip"
+version = "0.0.4"
+build = "solo_work::default::prod_20260609::research-guide"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.4"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "2ae15688792dc44a422bad67bf3bfd02646989d9fa0fd1f1840ea50718010afe"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,153 @@
+批 29 证据: 语义压顶复测(严格 gold 口径) + 垃圾 gold 过滤首测
+窗口: b29 新窗 (NQ 98 + TQA 100, dump mtime 2026-09-06T20:44Z/20:51Z, 二进制=b23 检索链路 git 3a6b89d)
+自动预分类: analyze-suppression.mjs v2 (严格 gold=剔除垃圾页后的首个证据页; A cov≤1/3 / B cov≥1/2 / C 灰区 / E 垃圾gold)
+人工裁决: 11 条 A/C 逐条定性, 判据同 b22 (压顶=rank1 不同实体/主题或纯垃圾匹配; 同实体缺答案 token=词面错位)
+
+================ 人工裁决结果 ================
+[NQ C2 + TQA A1 + TQA C8 共 11 条]
+确认压顶 4 条(全部 TQA):
+  1. Stagecoach 导演题   — rank1=Lewis Milestone(另一导演, 词面假亲和), gold=Stagecoach 页(John Ford)
+  2. Balfour 继任首相题  — rank1=Salisbury(另一首相), gold=20 世纪首相列表(Campbell-Bannerman)
+  3. 蹦极发源地题        — rank1=Vilyuysk(西伯利亚城镇, "first permanent settlement" 纯 token 撞车), gold=BBC Kawarau Bridge
+  4. Wonder Girl 题      — rank1=2022 in film(讣告聚合, "Girl in the World" 撞车), gold=rank8 影迷博客(Debra Winger)
+同实体词面错位 7 条(重排救不了):
+  guantanamo(rank1=关塔那摩湾地理页缺 base 史) / catch-22(rank1=正确词条但 snippet 是 Wikipedia 站脚样板!)
+  / Bobby Vinton(rank1=正确歌曲页但 snippet 是 TOC 样板) / Michelle Smith(rank1=本人条目缺禁赛段)
+  / Richard Marx(rank1=歌曲页缺歌手名, b22 已知 SURFACE 子类) / Osbert Lancaster(站脚样板) / You Sexy Thing(歌曲页缺电影名)
+E 桶(唯一证据=垃圾页): 自动 0 条 — 本窗垃圾页均非唯一证据
+  (注意: Wonder Girl 题 rawGold@5=Instagram reel 垃圾页=严格口径下被剔除, strictGold@8=影迷博客; 分类器命中页与 b22 人工裁决完全一致)
+
+定量(b29 窗):
+  miss@1(严格) = 104/198 (NQ 61/98, TQA 43/100)
+  确认压顶 = 4/104 = 3.8% (NQ 0/61=0.0%, TQA 4/43=9.3%)
+    vs b22 基线 8.0%(9/113, raw gold 口径) — 方向向下但小样本(n=9 vs 4)不单独下结论;
+    两点均值 ~5.9% 作监控参考带; 触发线 15% 两窗均未击发 → 神经重排继续挂账
+  A+C 嫌疑上限 = 11/104 = 10.6% (b22 raw 口径上限 15.0%)
+  miss@1 结构画像(严格口径): B 词面错位 62(59.6%) + D 无gold/池外+深池 31(29.8%) + C 灰区 10(9.6%) + 压顶 4(3.8%) - 交叉计数见自动表
+垃圾信号(b29 新增计量):
+  rank1 为垃圾页: NQ 3/98=3.1%(全部 brainly.com 题库农场) / TQA 0/100
+  hit@1 靠垃圾页撑(eval 口径照算): NQ 1 题(congress chosen 题, brainly rank1 含答案文本)
+  垃圾页作唯一证据(E 桶): 0
+  → 产品侧"垃圾页压制"批次证据不足(3.1% 且 TQA 干净), 维持计量不立项
+
+新观察项(本批副产品): Wikipedia 站脚/TOC 样板混入 snippet 子类 3/11(catch-22/Bobby Vinton/Osbert)
+  — rank1 实体正确但 snippet 字段装的是页脚样板文本, 答案 token 被挤掉; 疑某 lane 的 description
+  取了页脚文本或 focus 抽取越界; 与 b22 'rank1 正确但 snippet 缺答案 token'子类(~5pp, b23 已修注入
+  可见性)不同源 — 该子类是 snippet 源头就是样板, 注入救不了(b23 v2 基底完整保留+追加注入, 若基底是
+  样板则注入句仍在但页面其余证据为零)。b30 候选: 样板 snippet 溯源(哪条腿带的原始 snippet 就是页脚)。
+
+================ 垃圾信号明细(b29-junk-probe) ================
+== nq ==
+Q: how are leaders of the two parties in congress chosen
+  rank1 junk[domain:brainly.com]: [FREE] How are the leaders of the two parties in Congress chosen? A. M | https://brainly.com/question/15441637
+Q: what information is displayed in clear text from the ftp header
+  rank1 junk[domain:brainly.com]: [FREE] What information is displayed in clear text from the FTP header | https://brainly.com/question/26103753
+  rank2 junk[domain:brainly.com]: [FREE] Besides the username, what other sensitive informatio
+Q: when was the first documented case of tool mark identification
+  rank2 junk[domain:coursehero.com]: Course Herohttps://www.coursehero.com › Analysis-Of-Tool-Mar
+  rank9 junk[domain:quizlet.com]: Forensic Firearm Identification: History, Types, and Tool Ma
+Q: where did chocolate originate the americas spain asia
+  rank1 junk[domain:brainly.com]: [FREE] Where did chocolate originate? A. The Americas B. Spain C. Asia | https://brainly.com/question/988545
+  rank2 junk[domain:brainly.com]: [FREE] Where did chocolate originate? A. The Americas B. Spa
+Q: what is the maximum data rate for the 802.11a standard select one
+  rank6 junk[title:flashcards?\b]: wireless standards Flashcards by Josh Manion
+  rank14 junk[domain:quizlet.com]: Testout Final Review Flashcards
+
+== triviaqa ==
+Q: Who had an 80s No 1 hit with Hold On To The Nights?
+  rank11 junk[domain:facebook.com]: "Hold On to the Nights" by Richard Marx hit number one on th
+  rank13 junk[domain:x.com]: on X: "On this date in 1988, Richard Marx's powerful ballad 
+Q: Which future Hollywood star got her break as Wonder Girl, Wonder W
+  rank5 junk[domain:instagram.com]: Lynda Carter | 𝐖𝐨𝐧𝐝𝐞𝐫 𝐖𝐨𝐦𝐚𝐧 (@lyndacartereverythi
+  rank11 junk[domain:facebook.com]: Wonder Woman Everything Fans
+
+================ 自动归因渲染(analyze-suppression v2 原样输出) ================
+######## NQ-open — A 0 条 ########
+
+######## NQ-open — C 2 条 ########
+
+[C] Q: what was guantanamo bay before it was a prison
+  cov1=0.40 strictGold@4 rawGold@4 ans=[Guantanamo Bay Naval Base]
+  rank1: Guantánamo Bay
+    snip: Guantánamo Bay ( Spanish: Bahía de Guantánamo, [ baˈia ðe ɣwãnˈtanamo]) is a bay in Guantánamo Province at the southeastern end of Cuba. It is the lar
+  gold页: Guantanamo Bay: From Naval Base To Controversial Prison
+    snip: Well, buckle up, because we’re about to dive into its fascinating history, from its humble beginnings as a naval base to its current controversial rol
+
+[C] Q: who wrote catch 22 (both names)
+  cov1=0.40 strictGold@4 rawGold@4 ans=[Joseph Heller.; American author Joseph Heller; Joseph Heller]
+  rank1: Catch-22 - Wikipedia
+    snip: nal terms may apply. By using this site, you agree to the Terms of Useand Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Founda
+  gold页: Yossarian
+    snip: Main character in Joseph Heller novel Catch-22 · In Catch-22, Yossarian is a 28-year-old captain in the 256th Squadron of the Army Air Forces where he
+
+######## NQ-open — E 0 条 ########
+
+######## TriviaQA — A 1 条 ########
+
+[A] Q: Which singer had a big 60s No 1 with Roses Are Red?
+  cov1=0.33 strictGold@2 rawGold@2 ans=[Bobby Vinton]
+  rank1: Roses Are Red (My Love) - Wikipedia
+    snip: Toggle the table of contents Roses Are Red (My Love) · 1 2 "The Top 50 Country Music and Rhythm & Blues Records of 1962", Billboard, Section II, Decem
+  gold页: Roses Are Red (My Love)
+    snip: “ Roses Are Red (My Love) “ is a popular song composed by Al Byron and Paul Evans. It was recorded by Bobby Vinton, backed by Robert Mersey and his Or
+
+######## TriviaQA — C 8 条 ########
+
+[C] Q: How long was swimmer Michelle Smith-de Bruin banned for attempting to manipulate a drugs test?
+  cov1=0.45 strictGold@4 rawGold@4 ans=[4 years; four  time; 4 time]
+  rank1: Michelle Smith
+    snip: Michelle Smith de Bruin (born 16 December 1969) is an Irish lawyer and retired Olympic swimmer. She won three gold medals at the 1996 Summer Olympics 
+  gold页: SWIMMING; Irish Swimmer Vows to Clear Name - The New York Times
+    snip: Michelle Smith de Bruin, the Irish swimmer who was banned Thursday for four years because her random drug test had been manipulated, denied yesterday 
+
+[C] Q: Who directed the classic 30s western Stagecoach?
+  cov1=0.40 strictGold@2 rawGold@2 ans=[John Ford; John Ford (1895-1973); Sean O'Feeney]
+  rank1: Lewis Milestone
+    snip: 1958, Milestone directed actor Richard Boone, who debuted in Milestone's Kangaroo (1952), in two episodes of the television western Have Gun – Will Tr
+  gold页: Stagecoach (1939) : Classic Movie Hub (CMH)
+    snip: Stagecoach(1939) was a Western - Black-and-white Film directed by John Ford and produced by John Ford. · By Carol Martinheira on Oct 10, 2017 From The
+
+[C] Q: Who had an 80s No 1 hit with Hold On To The Nights?
+  cov1=0.38 strictGold@3 rawGold@3 ans=[Richard Marx; Richard Noel Marx]
+  rank1: Hold On to the Nights - Wikipedia
+    snip: “, (1989), Music video “Hold On to the Nights” on YouTube Audio sample file, help, Release “Hold On to the Nights” reached the Billboard Hot 100 numbe
+  gold页: Richard Marx (album) - Wikipedia
+    snip: Artist Bio Song Info: "Hold On To The Nights" is a power ballad by American singer-songwriter Richard Marx. It was released as the fourth single from 
+
+[C] Q: Who was the next British Prime Minister after Arthur Balfour?
+  cov1=0.43 strictGold@5 rawGold@5 ans=[Campbell-Bannerman; Sir Henry Campbell-Bannerman; Campbell Bannerman]
+  rank1: Robert Gascoyne-Cecil, 3rd Marquess of Salisbury
+    snip: 1903), known as Lord Salisbury, was a British statesman and Conservative politician who served as Prime Minister of the United Kingdom three times for
+  gold页: British prime ministers of the 20th century - Britain Magazine
+    snip: Sir Henry Campbell-BannermanLiberal 1905 to 1908 Following Arthur James Balfour's resignation, Edward VII invited the leader of the next largest party
+
+[C] Q: What is Osbert Lancaster best known for producing?
+  cov1=0.40 strictGold@3 rawGold@3 ans=[Cartoons; Cartoonish; American cartoon]
+  rank1: Osbert Lancaster
+    snip: additional terms may apply. By using this site, you agree to the Terms of Useand Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia
+  gold页: Osbert Lancaster
+    snip: Osbert Lancaster English cartoonist and architectural writer (1908–1986) From Wikipedia, the free encyclopedia Sir Osbert Lancaster CBE (4 August 1908
+
+[C] Q: Which Oscar-nominated film had You Sexy Thing as its theme song?
+  cov1=0.45 strictGold@4 rawGold@4 ans=[The Full Monty; Full Monty; The Full Monty (film)]
+  rank1: You Sexy Thing
+    snip: You Sexy Thing “You Sexy Thing” is a song by the British soul band Hot Chocolate. It was written by lead singer Errol Brown and bass guitarist Tony Wi
+  gold页: You Sexy Thing - Composition
+    snip: You Sexy Thing “You Sexy Thing”  Single by Hot Chocolate from the album Hot Chocolate B-side “Amazing Skin Song” Released October 1975 Format 12“ viny
+
+[C] Q: In which country was the first permanent bungee jumping site situated?
+  cov1=0.43 strictGold@7 rawGold@7 ans=[New Zealand; N Z; Nouvelle-Zelande]
+  rank1: Vilyuysk - Wikipedia
+    snip: The first permanent settlement on the site of the present town was a Cossack winter settlement founded in 1634[2] as Tyukanskoye or Verkhnevilyuyskoye
+  gold页: BBC World Service - Witness History, Kawarau Bridge: The first bungee jumping site in New Zealand
+    snip: Witness History Kawarau Bridge: The first bungee jumping site in New Zealand On 12 November 1988, the world’s first commercial bungee jumping site was
+
+[C] Q: Which future Hollywood star got her break as Wonder Girl, Wonder Woman's sister Drusilla?
+  cov1=0.46 strictGold@8 rawGold@5 ans=[Debra Winger; Mary Debra Winger; Deborah Winger]
+  rank1: 2022 in film
+    snip: Girl in the World,” Dies at 84 Tinoco, Armando (October 3, 2022). &quot;Joan Hotchkis Dies: &#039;The Odd Couple&#039; &amp; &#039;Legacy&#039; Star W
+  gold页: Debra Winger - I Used To Watch This? TV shows from the 70s and 80s like six million dollar man
+    snip: Hollywood’s most celebrated and enigmatic actresses is a testament to her remarkable talent and determination. Winger, known for her strong screen pre
+
+######## TriviaQA — E 0 条 ########
+

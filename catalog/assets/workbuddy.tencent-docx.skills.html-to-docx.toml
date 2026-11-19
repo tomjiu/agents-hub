@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.skills.html-to-docx"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-to-docx"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "274d6b70a34f8d8a55297fb48bd0a505c1fc19c149700e6cd346bacff4ca7be9"
+local_modified = "unknown"
+enabled = false

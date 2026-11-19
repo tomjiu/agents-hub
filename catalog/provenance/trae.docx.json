@@ -1,0 +1,316 @@
+{
+  "sha256": "feeac8471f4113a22141542ffcb4da4d032a0408dc871e46b378b764f77710e8",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 23460,
+      "sha256": "d48554cf7f360c0cf443f882c1a2f20b76a34b4af1fa4a0d806143b4ee49cd04"
+    },
+    {
+      "path": "scripts/__init__.py",
+      "bytes": 66,
+      "sha256": "c9f456f19e3112a11da3c60632de6cdef897c1546db8a8e7b28f8017ea842208"
+    },
+    {
+      "path": "scripts/accept_changes.py",
+      "bytes": 6123,
+      "sha256": "24f6a8f514328e6ebcae88127152ceb5de33ad0e3ad9a38b7040f64443981c46"
+    },
+    {
+      "path": "scripts/comment.py",
+      "bytes": 12541,
+      "sha256": "cabb0580e367e6bc3e9f711b861e1cf77f5b2225588dd51c2e25fe4b82dd303a"
+    },
+    {
+      "path": "scripts/helpers/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scripts/helpers/merge_runs.py",
+      "bytes": 7242,
+      "sha256": "52216daab9ce81a28a87230ab098a38e20a9d955afe7ec55972ade04f3122036"
+    },
+    {
+      "path": "scripts/helpers/simplify_redlines.py",
+      "bytes": 7760,
+      "sha256": "35ca20eb461b682e4865dd5b64220add1e5d6e3fb79dd91c017ab56bd6703ef3"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
+      "bytes": 76483,
+      "sha256": "4de4390a26e7e44e682ed98b39872cce2620f807f5b0de421567a43f74526388"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
+      "bytes": 7102,
+      "sha256": "71a6e04d3dbb21e4b705da8bb9a3c71e4295a389c15c09bd255f216de238097b"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
+      "bytes": 52387,
+      "sha256": "809f77f658f71e10f5cfbf99e25c895a23a4e62c81210b59a2fe8c7fb24849d2"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
+      "bytes": 635,
+      "sha256": "06555ced1e626ebcd9bb4a495b78d9596555f945b09161dea6c4cd4d8874a0ba"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
+      "bytes": 155120,
+      "sha256": "6978ba7e889070b0c3cb5b546b23e5a6c3516134afc53b87a21f482ca33f3858"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
+      "bytes": 1254,
+      "sha256": "17581a2683f0ecbfd4c64656f1dff7236a4563127b5d056da750a9fd61e26f67"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
+      "bytes": 9047,
+      "sha256": "aabcbb126609a518a78b007c1e6ab76e1016f136964f3afb3a5eda51584e983d"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
+      "bytes": 15082,
+      "sha256": "2dbfd4719505bf39b568005994a433997cbeac59cebc9d4867d564c94e9ba03a"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/pml.xsd",
+      "bytes": 85288,
+      "sha256": "39c6396b7b1f096885c3ceba5dab30e3ee14291c45a1d6fa6038ec4db69d88d0"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
+      "bytes": 1297,
+      "sha256": "57567431dcaf5dae08c5f7ae1eeb2c9a4d2d762a912cd09758f620469d226947"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
+      "bytes": 7472,
+      "sha256": "6ec3425c89d6bf6eec5dd0d82c0ed0fb606064b6d4692a696323ee86814de0e4"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
+      "bytes": 6556,
+      "sha256": "d90722af8f1439ae6b82d57858ee0b0720e320eb309cf30371666338aa66d106"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
+      "bytes": 1273,
+      "sha256": "1624b1ee04781508421fd5d8a7a8fd054196be5e1e122736c7ed350161bf4b89"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
+      "bytes": 898,
+      "sha256": "4048c35b8949bab9f8ac58c2fcd0b534c5626fbe1d2bc88522a3724a0514d091"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
+      "bytes": 2667,
+      "sha256": "7f112630ff0a2bf450fb80ccc7d891fb2bfd70866c4913590d3a91f43744d4ec"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
+      "bytes": 3563,
+      "sha256": "2dd1b7ce7cf5be453fd2db72b6d6072259ede8193db7518c72439fa26fd7ad72"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
+      "bytes": 7702,
+      "sha256": "ec24c8039acb44422b65c2d99af82d4f21007d17bc33c87d36549904a29702d8"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
+      "bytes": 23895,
+      "sha256": "f812dffca0bb66db6e2ec2e01dd19258636b2a5a3a0bb949a2e7295665e0ce61"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
+      "bytes": 1392,
+      "sha256": "2a6b823a7c6da33bedb8ea9be74199db8a907530ecf9d3b31f31f92c4539a4c2"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/sml.xsd",
+      "bytes": 246716,
+      "sha256": "495debc8fa967b77ed37799747b049832f2c95b2ecdb9f19ddcd68f8c9f96ab9"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
+      "bytes": 26718,
+      "sha256": "335e9ecd40bb594ec4b916ac8c7b9eead4e16fe1b79f9d4105fdb1c43b66bb1c"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
+      "bytes": 25788,
+      "sha256": "86c9ac8549d84af107daac8f6b3b0b9ed1113eae22be8fef4c5f2b606f23ae36"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
+      "bytes": 547,
+      "sha256": "db28df195a3a1da2c749162c4e5736c94fc4e3d5e20d767d5ff68a37fdd46fd5"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
+      "bytes": 5820,
+      "sha256": "2f7c6b2a8a9d7a7e0dfa32ff3f13856275d83d0bbe968c7fc9954d0f665e7588"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
+      "bytes": 4106,
+      "sha256": "f5e69bc0280a2aae659766f782d2af47738c6c97ffabb0b10a871489f60280bc"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/wml.xsd",
+      "bytes": 175013,
+      "sha256": "a5db454991de6c9d52db8d2dda43d2f27f4cfa2e62c012d6bf202deef90659ce"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ISO-IEC29500-4_2016/xml.xsd",
+      "bytes": 4762,
+      "sha256": "70a3c67959f9ad2333016328716101bf8b476e682f29830cc9ee8da63dca7cc2"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
+      "bytes": 2005,
+      "sha256": "49ec1c03440a9b5590e69acdf92b200fe133697de0b05f43a129fb94d1885026"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
+      "bytes": 2565,
+      "sha256": "69688ea15f82a870053b9a60c79359063dbcfeec9cdabafabad51a53934bc35b"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ecma/fouth-edition/opc-digSig.xsd",
+      "bytes": 2905,
+      "sha256": "ee7e7e1b9a1340536e25e87c8650a2b90a43b0e67d02d6746cd430048b3c1439"
+    },
+    {
+      "path": "scripts/ooxml/schemas/ecma/fouth-edition/opc-relationships.xsd",
+      "bytes": 1377,
+      "sha256": "607ffb6879cf5d5d765bfdfb2548f3f427ea964ddee6d08a15f0dc781749866d"
+    },
+    {
+      "path": "scripts/ooxml/schemas/mce/mc.xsd",
+      "bytes": 3202,
+      "sha256": "fc3d4398375c68a8aa0d608dad9003a3e5cc566f3d16a443f92fca3799ed2df3"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-2010.xsd",
+      "bytes": 27109,
+      "sha256": "60580c222b22548a4c306438a631ae2355db889ff59847cfcfd47943445a7132"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-2012.xsd",
+      "bytes": 3812,
+      "sha256": "85e17de88d4c1af45a571732eb862024cd7897e380efa5825bcfdbe57db21a64"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-2018.xsd",
+      "bytes": 915,
+      "sha256": "b8bf0d8670a8ba8ea2dd441e7f22a81be7dfca520ca93306e99e4403c234a3b2"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-cex-2018.xsd",
+      "bytes": 1798,
+      "sha256": "6731624fcb1b0df9ab0533bc8fa2d8caa09d419b2280285bdda6c9e94d874f7d"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-cid-2016.xsd",
+      "bytes": 1015,
+      "sha256": "73dde8f5752d4047975fe2948d2ea99d26c1dab981a9739e77624a666090272a"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-sdtdatahash-2020.xsd",
+      "bytes": 604,
+      "sha256": "441556f2bfff0b49a3a4bae82cac5188aaee5419ddfa288dc0a58ce271f2237d"
+    },
+    {
+      "path": "scripts/ooxml/schemas/microsoft/wml-symex-2015.xsd",
+      "bytes": 753,
+      "sha256": "1973a7ede01d55d351c50422ff451a1ad1f8f52cc792178f14b62f75c123e01f"
+    },
+    {
+      "path": "scripts/ooxml/scripts/pack.py",
+      "bytes": 5755,
+      "sha256": "66ab328eb16f5ee93d7f39b2dabe60d8f35bed8b632fa0f40fb084ced9f34d1d"
+    },
+    {
+      "path": "scripts/ooxml/scripts/unpack.py",
+      "bytes": 1066,
+      "sha256": "e0886aecfdd08ff92a82b5abad995ff0f4d5b5709432b82dba06d338d107f595"
+    },
+    {
+      "path": "scripts/ooxml/scripts/validate.py",
+      "bytes": 3522,
+      "sha256": "5f11e62cd585037b9352323deb901e544c8b250d162eba1ce3325862598cf953"
+    },
+    {
+      "path": "scripts/ooxml/scripts/validation/__init__.py",
+      "bytes": 351,
+      "sha256": "09a53b0969b042794ce29e5ee2487db365d57f7e95d691b145f5c60cb98144df"
+    },
+    {
+      "path": "scripts/ooxml/scripts/validation/base.py",
+      "bytes": 44607,
+      "sha256": "fffd62e9cf4ff9afc4b8e5547112d0dcd427ac4e5491db1d05ad55bdc1a70ccc"
+    },
+    {
+      "path": "scripts/ooxml/scripts/validation/docx.py",
+      "bytes": 21399,
+      "sha256": "07acf19cb0d272c4c61320114f5c601880916ff4e71442033a8e5d39e968b26b"
+    },
+    {
+      "path": "scripts/ooxml/scripts/validation/pptx.py",
+      "bytes": 12642,
+      "sha256": "4204eda6af41e1e2933ba39c87635ad2e8557fb1423f12da98c5f2f4a76bad41"
+    },
+    {
+      "path": "scripts/ooxml/scripts/validation/redlining.py",
+      "bytes": 11706,
+      "sha256": "914577d63bce818eeb228dd0bcc4f0749bc2220d86b7a80c2eef3a1f84bd212e"
+    },
+    {
+      "path": "scripts/pack.py",
+      "bytes": 5661,
+      "sha256": "8e754bbdca0677a145de11808955f6200940c510b6c41383c85bbf0693b7100c"
+    },
+    {
+      "path": "scripts/sanitize.py",
+      "bytes": 10922,
+      "sha256": "d4360d0aa88ae166c99f36afb9dddf0b7b62cee0afbfa304dd4a8f92848cf994"
+    },
+    {
+      "path": "scripts/templates/comments.xml",
+      "bytes": 2606,
+      "sha256": "c89bad9ffa3b3fc843d10b1542b54ede87b5c3f3bbf8a12b791ea35f6bac3f73"
+    },
+    {
+      "path": "scripts/templates/commentsExtended.xml",
+      "bytes": 2614,
+      "sha256": "1e630582dbb214661b00588d3937722588405374b6d444cc1f0601506c402a3b"
+    },
+    {
+      "path": "scripts/templates/commentsExtensible.xml",
+      "bytes": 2710,
+      "sha256": "0bd252f89a34dcbfec414a88fba101b77726ed7c87fdc96a76dc9b54304bb4a7"
+    },
+    {
+      "path": "scripts/templates/commentsIds.xml",
+      "bytes": 2622,
+      "sha256": "84cdf36ba354077a87c8ac5448d68ada3737d747e1a8a7b6e38c060049975a47"
+    },
+    {
+      "path": "scripts/templates/people.xml",
+      "bytes": 118,
+      "sha256": "3d3273c725e85f7dce810103055072d6c1577c7e51d88b2f7794b647e7a9cc37"
+    },
+    {
+      "path": "scripts/unpack.py",
+      "bytes": 4629,
+      "sha256": "9de145f3caaf60f7f677850ffc24adfe341b97565c912beff5680f377b2802ad"
+    }
+  ],
+  "bytes": 1186765
+}

@@ -1,0 +1,10 @@
+import {spawnSync} from 'node:child_process';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const result=spawnSync(process.execPath,[path.join(root,'node_modules/typescript/bin/tsc'),'-p',path.join(root,'tsconfig.json')],{stdio:'inherit',cwd:root});
+if(result.error)throw result.error;if(result.status!==0)process.exit(result.status??1);
+const fixtures=path.join(root,'test/fixtures');
+await fs.mkdir(path.join(root,'dist/test/fixtures'),{recursive:true});
+await fs.cp(fixtures,path.join(root,'dist/test/fixtures'),{recursive:true});

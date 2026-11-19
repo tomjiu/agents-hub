@@ -1,0 +1,16 @@
+id = "skill-search"
+kind = "skills"
+path = "skills/individual/research/skill-search"
+
+[source]
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+license = "review-required"
+upstream_identity_status = "self-maintained"
+
+[version]
+upstream = "self-maintained"
+local = "1.0.0"
+commit = ""
+sha256 = "57d0713e58117a8809c1b3122df9613b19f1cc7f503f7c0fe5d36cad2d4db625"
+enabled = false

@@ -1,0 +1,21 @@
+{
+  "sha256": "96f901efebced8f0c608cd80b8128dea99282240698f636e6becfca7cca24b19",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 19443,
+      "sha256": "333476ab53432af1af9cbf0dd16116b38897f93a45d534b939d860080aa9dc0a"
+    },
+    {
+      "path": "references/log-schema.md",
+      "bytes": 5293,
+      "sha256": "3ca78b09a0f0eaa177383da6c6f6460aa367e97a0cca44898e0de176b433a204"
+    },
+    {
+      "path": "references/pipeline-state-protocol.md",
+      "bytes": 10702,
+      "sha256": "aa0a3ac03d391d0a4992a7793f663f01e2ec9980b860673571503e8a90d62e60"
+    }
+  ],
+  "bytes": 35438
+}

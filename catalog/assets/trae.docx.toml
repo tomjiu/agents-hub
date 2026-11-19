@@ -1,0 +1,22 @@
+id = "trae.docx"
+kind = "skills"
+path = "skills/collections/vendors/trae/skills/docx"
+collection = "trae"
+runtime_review_required = true
+
+[source]
+kind = "trae-cdn"
+url = "https://p11-market.byteimg.com/tos-cn-i-17oceyzymr/skills/1001/trae_agent::solo_work::default::prod_20260203_windows::docx/0.0.1/package.zip"
+version = "0.0.1"
+build = "solo_work::default::prod_20260203_windows::docx"
+license = "vendor-restricted"
+discovery = "restricted"
+snapshot = "2026-09-05"
+
+[version]
+upstream = "0.0.1"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "feeac8471f4113a22141542ffcb4da4d032a0408dc871e46b378b764f77710e8"
+local_modified = "unknown"
+enabled = false

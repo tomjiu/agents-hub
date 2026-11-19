@@ -1,0 +1,206 @@
+批 37 窗口翻转逐案归因 (b34win → b37win, SC_RERANK=1, 同题集)
+判定签名: b37-fix/b37-reg=同URL snippet 变(改动涉入); 其余=上游(出池/换血/降位)
+
+NQ tally: {"b37-fix":1,"upstream-出池":6,"upstream-重排入顶":5,"demoted/换血":3}
+TQA tally: {"upstream-出池":13,"upstream-换血":2,"demoted/换血":2,"b37-reg":1}
+
+[nq FIX b37-fix] 1 the bureau of land management manages over acres of land
+   old@1 https://en.wikipedia.org/wiki/Bureau_of_Land_Management
+   snip: Fact-checked by Grok 3 months ago Bureau of Land Management The Bureau of Land Management 
+   new@1 https://en.wikipedia.org/wiki/Bureau_of_Land_Management
+   snip: Bureau of Land Management The Bureau of Land Management (BLM) is an agency within the Unit
+   goldInOldTop20@rank=0 goldInNewTop20@rank=1
+[nq REG upstream-出池] how many votes to approve supreme court justice
+   old@1 https://rochybylawoffice.com/how-many-votes-needed-to-appoint-supreme-court.ht
+   snip: To confirm a new Supreme Court justice, a simple majority of 51 votes is required in the U
+   new@1 https://en.wikipedia.org/wiki/Nomination_and_confirmation_to_the_Supreme_Court
+   snip: With the exception of temporary recess appointments, in order for a Justice to be appointe
+   goldInOldTop20@rank=1 goldInNewTop20@rank=0
+[nq FIX upstream-重排入顶] what is the name of season 6 of american horror story
+   old@1 https://en.wikipedia.org/wiki/American_Horror_Story:_Delicate
+   snip: The fifth season of the American horror anthology television series American Horror Story,
+   new@1 https://headhuntershorrorhouse.fandom.com/wiki/American_Horror_Story/Season_6
+   snip: American Horror Story/Season 6 American Horror Story: Roanoke is the sixth season of the F
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[nq REG demoted/换血] when did drop it like it's hot release
+   old@1 https://genius.com/Snoop-dogg-drop-it-like-its-hot-lyrics/q/release-date
+   snip: Community Answer Snoop Dogg released “Drop It Like It’s Hot” on September 12, 2004.
+   new@1 https://en.wikipedia.org/wiki/Drop_It_Like_It's_Hot
+   snip: The Masterpiece B-side: “Get 2 Know U” Released: September 27, 2004 Genre: Hip-hop Length:
+   goldInOldTop20@rank=1 goldInNewTop20@rank=0
+[nq FIX upstream-重排入顶] where is hallmark channel home and family filmed
+   old@1 https://en.wikipedia.org/wiki/Home_%26_Family
+   snip: Family Channel (1996–98) Hallmark Channel (2012–21)  Release April 1, 1996 – August 4, 202
+   new@1 https://vault.denox.es/article/where-is-home-and-family-filmed
+   snip: Entertainment Where Is Home and Family Filmed The daytime talk show Home and Family is fil
+   goldInOldTop20@rank=0 goldInNewTop20@rank=1
+[nq REG demoted/换血] who did michigan state play in the rose bowl
+   old@1 https://en.wikipedia.org/wiki/2014_Rose_Bowl
+   snip: Rose Bowl Game matched Big Ten Conference Champions Michigan State Spartans against Pac-12
+   new@1 https://en.wikipedia.org/wiki/List_of_Michigan_State_Spartans_bowl_games
+   snip: The Michigan State Spartans college football team competes as part of the National Collegi
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[nq FIX upstream-重排入顶] who was the youngest president to be elected
+   old@1 https://www.usnews.com/news/politics/slideshows/the-10-youngest-presidents
+   snip: # The 10 Youngest U.S. Presidents
+## James K. Polk
+Polk was the youngest person to serve a
+   new@1 https://en.wikipedia.org/wiki/List_of_presidents_of_the_United_States_by_age
+   snip: The youngest person to become U.S. president was Theodore Roosevelt at age 42, who succeed
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[nq FIX upstream-出池] what is the angle of the tower of pisa
+   old@1 https://towerofpisa.net/lean-angle-of-the-tower-of-pisa-explained
+   snip:  The Leaning Tower of Pisa is one of the most recognizable monuments in the world, famous 
+   new@1 https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa
+   snip: The Leaning Tower of Pisa, or as the Pisani call it, “La Torre” currently has and angle of
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[nq REG upstream-出池] when was the first documented case of tool mark identifica
+   old@1 https://www.coursehero.com/file/145050494/Analysis-Of-Tool-Markspptx
+   snip: History of examination of tool marks The history of tool marks and firearms stretches back
+   new@1 https://deathpenaltyinfo.org/policy-issues/policy/junk-science/ballistics-and-
+   snip: The formal use of firearm identification in U.S. courts dates to the late 19th century, wi
+   goldInOldTop20@rank=1 goldInNewTop20@rank=11
+[nq REG upstream-出池] chemicals produced in one part of a plant that affect the 
+   old@1 https://brainly.com/question/39501653
+   snip: Correct answer： hormones Analyze： Keyword analysis: The question focuses on chemicals prod
+   new@1 https://pmc.ncbi.nlm.nih.gov/articles/PMC6695906
+   snip: Plants produce and release a wide variety of primary and secondary metabolites, including 
+   goldInOldTop20@rank=1 goldInNewTop20@rank=5
+[nq FIX upstream-出池] how many farmers are there in the usa
+   old@1 https://www.poidata.io/report/farm/united-states
+   snip:  How many Farms are there in United States? There are 83,041 Farms in United States as of 
+   new@1 https://www.vox.com/future-perfect/460046/usda-census-two-million-farms
+   snip: ”  Around that same time, as the Supreme Court prepared to argue a highly consequential ca
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[nq FIX upstream-重排入顶] what was the purpose of the mall of america
+   old@1 https://www.britannica.com/place/Mall-of-America
+   snip: Located in Bloomington, just minutes from downtown Minneapolis, the Mall of America is not
+   new@1 https://grokipedia.com/page/Mall_of_America
+   snip: Fact-checked by Grok 7 months ago Mall of America The Mall of America is a super-regional 
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[nq REG upstream-出池] who does the voice of the gorilla in the movie sing
+   old@1 https://www.answerfoundry.com/who/who-is-gorilla-in-sing
+   snip:  Who is the gorilla singing in Sing? Songs Performed Johnny is a male British-accented mou
+   new@1 https://www.rambles.net/~ramblesn/rocketman19.html
+   snip: Then, as the voice of the gorilla character named Johnny, Edgerton aptly performs Elton's,
+   goldInOldTop20@rank=1 goldInNewTop20@rank=11
+[nq FIX upstream-重排入顶] who played stonewall jackson in gods and generals
+   old@1 https://en.wikipedia.org/wiki/Kali_Rocha
+   snip: Bloody's love interest, Cecily. Rocha played Stonewall Jackson's wife, Anna in Ron Maxwell
+   new@1 https://en.wikipedia.org/wiki/List_of_memorials_to_Stonewall_Jackson
+   snip: In the 2003 film Gods and Generals, Jackson is portrayed by. Stephen Lang. and is the stor
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[nq REG demoted/换血] what is the maximum data rate for the 802.11a standard sel
+   old@1 https://en.wikipedia.org/wiki/IEEE_802.11a-1999
+   snip: The 802.11a standard uses the same core protocol as the original standard, operates in 5 G
+   new@1 https://hub.sivo.it.com/wireless-networking-standards/what-is-the-maximum-data
+   snip: Dec 1, 2025 ·   The maximum theoretical data rate for the 802.11a standard is 54 Mbps. The
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa FIX upstream-出池] How long was swimmer Michelle Smith-de Bruin banned for at
+   old@1 https://www.nytimes.com/1998/08/07/sports/swimming-olympic-swimming-star-banne
+   snip: Swimming's world governing body bans Michelle Smith de Bruin from competition for four yea
+   new@1 https://owiki.org/wiki/Michelle_Smith
+   snip: freestyle and 200 m individual medley, and also won the bronze medal for the 200 m butterf
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[tqa FIX upstream-出池] Where did Jonathan Edwards set his 1995 triple jump world 
+   old@1 https://www.middleeastbulletin.com/jonathan-edwards-triple-jump-record-turns-3
+   snip: Today marks 30 years since British athlete Jonathan Edwards set his unbelievable triple ju
+   new@1 https://guinnessworldrecords.com/world-records/longest-triple-jump-male
+   snip: 29 metre(s) Where Sweden (Gothenburg,) When 07 August 1995 The longest triple jump by a ma
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[tqa REG upstream-出池] Which was the first European city this century to open an 
+   old@1 https://www.openguideonline.com/answer/which-was-the-first-european-city-this-
+   snip: Which was the first European city this century to open an underground railway system? Pari
+   new@1 https://cronfeed.work/history-london-budapest-comparative-history-underground-
+   snip: Thirty-three years later, on May 2, 1896, Budapest opened continental Europe’s first under
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa REG upstream-出池] Who was the next British Prime Minister after Arthur Balfo
+   old@1 https://www.discoverbritain.com/history/historic-events/20th-century-british-p
+   snip: Sir Henry Campbell-BannermanLiberal 1905 to 1908 Following Arthur James Balfour's resignat
+   new@1 https://en.wikipedia.org/wiki/Arthur_Balfour
+   snip: Arthur James Balfour, 1st Earl of Balfour ( / ˈ b æ l f ər, - f ɔːr /; 25 July 1848 – 19 M
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa REG upstream-出池] What was the Paramount Film Company originally called?
+   old@1 https://www.paramountstudiotour.com/paramount-history.html
+   snip: Paramount Pictures began humbly in 1912 when Adolph Zukor, the owner of a New York nickelo
+   new@1 https://ipfs.ssi.eecc.de/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/w
+   snip: Lasky Paramount Pictures Corporation, commonly known as Paramount Pictures or simply Param
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa REG upstream-出池] Which journalist first told the world about the My Lai mas
+   old@1 https://www.history.com/this-day-in-history/november-12/seymour-hersh-breaks-m
+   snip: In a cable filed through Dispatch News Service and picked up by more than 30 newspapers, i
+   new@1 https://en.wikipedia.org/wiki/List_of_Jewish-American_journalists
+   snip: investigative journalist, uncovered My Lai massacre Mickey Herskowitz (born 1933), sportsw
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa FIX upstream-换血] Which singer had a big 60s No 1 with Roses Are Red?
+   old@1 https://en.wikipedia.org/wiki/List_of_country_performers_by_era
+   snip: He was a songwriter&#039;s songwriter. Marie Osmond, Youngest female to date to have a No.
+   new@1 https://parade.com/news/1962-no-1-pop-hit-originally-a-rejected-track-ranked-a
+   snip: The American singer and actor was almost axed from his record label before the hit track. 
+   goldInOldTop20@rank=0 goldInNewTop20@rank=1
+[tqa REG upstream-出池] Who first hosted Family Feud?
+   old@1 https://www.familyfeud.com/about
+   snip: Created by Mark Goodson, Family Feud premiered in July 1976 on ABC, and was first hosted b
+   new@1 https://en.wikipedia.org/wiki/Family_Feud
+   snip: Family Feud, or simply Feud, is an American television game show created by Mark Goodson a
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa REG upstream-出池] Who was the director of the CIA from 1976-81?
+   old@1 https://www.cityclub.org/forums/1976/06/25/remarks-from-cia-director-george-hw
+   snip: Appointed the Director of the Central Intelligence Agency by President Gerald Ford in 1976
+   new@1 https://en.wikipedia.org/wiki/U.S._Senate_report_on_CIA_torture
+   snip: CIA Director of the National Clandestine Service Jose Rodriguez destroyed almost 100 video
+   goldInOldTop20@rank=1 goldInNewTop20@rank=0
+[tqa REG upstream-出池] How was President Kennedy assassinated?
+   old@1 https://pmc.ncbi.nlm.nih.gov/articles/PMC5934694
+   snip: Introduction U.S. President John F. Kennedy was assassinated while riding in an open limou
+   new@1 https://en.wikipedia.org/wiki/John_F._Kennedy_assassination_conspiracy_theorie
+   snip: 1963, President John F. Kennedy was assassinated while traveling in a motorcade in an open
+   goldInOldTop20@rank=1 goldInNewTop20@rank=3
+[tqa FIX upstream-出池] Mickey Braddock in the 50s series Circus Boy found fame wi
+   old@1 https://en-academic.com/dic.nsf/enwiki/23714
+   snip: Circus Boy  Dolenz began his show business career in 1956 when he starred in a children’s 
+   new@1 https://www.facebook.com/groups/1888548517823177/posts/9704802776197673
+   snip: ... Mickey Dolenz, latterly of The Monkees pop grouup, but had the surname of Braddock for
+   goldInOldTop20@rank=2 goldInNewTop20@rank=1
+[tqa FIX upstream-出池] What claimed the life of singer Kathleen Ferrier?
+   old@1 https://doi.org/10.2307/937630
+   snip: [paper] Cedric Wallis, Winifred Ferrier, Neville Cardus · The Musical Times · 1959
+   new@1 http://en.wikipedia.org/wiki/Kathleen_Ferrier
+   snip: Kathleen Mary Ferrier CBE (22 April 1912 – 8 October 1953) was an English contralto singer
+   goldInOldTop20@rank=0 goldInNewTop20@rank=1
+[tqa REG demoted/换血] What is the largest city in Ohio?
+   old@1 https://bellmoving.com/blog/largest-cities-in-ohio
+   snip: Columbus  Columbus, Ohio is the state capital and largest city in Ohio. Columbus has alway
+   new@1 https://worldatlas.com/articles/biggest-cities-in-ohio.html
+   snip: The state is the 7th most populous state in the country with a population of about 11,613,
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa FIX upstream-换血] Which US president won the Nobel Peace Prize in 1920?
+   old@1 https://news.google.com/rss/articles/CBMizAFBVV95cUxPbmFWYnB3RkdQMkkzY0NSU09vS
+   snip: <a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxPbmFWYnB3RkdQMkkzY0NSU09vSU1p
+   new@1 https://politico.com/story/2012/12/woodrow-wilson-nobel-peace-prize-dec-10-192
+   snip: the 1919 selection process, the five-member Nobel Committee, chosen by the Norwegian Parli
+   goldInOldTop20@rank=0 goldInNewTop20@rank=1
+[tqa FIX upstream-出池] Who became Israel's head of state in 1993?
+   old@1 https://en.wikipedia.org/wiki/History_of_Israel_%281948%E2%80%93present%29
+   snip: History of the State of Israel since its independence · On 11 May 1949, Israel was admitte
+   new@1 https://worldfactbook.co/edition.php?country=israel&year=1993
+   snip: Southern, Tel Aviv Capital Jerusalem note: Israel proclaimed Jerusalem its capital in 1950
+   goldInOldTop20@rank=0 goldInNewTop20@rank=1
+[tqa REG b37-reg] Who won baseball's first World Series of the 80s?
+   old@1 https://en.wikipedia.org/wiki/1987_World_Series
+   snip: The 1980 World Series was the championship series of Major League Baseball ’s (MLB) 1980 s
+   new@1 https://en.wikipedia.org/wiki/1987_World_Series
+   snip: CT, and it was the first World Series in which all games were won by the home team, four p
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2
+[tqa REG upstream-出池] Throughout the 80s and 90s Phil Collins recorded on which 
+   old@1 https://www.atlanticrecords.com/artists/phil-collins
+   snip: Over 60 years of recorded music history from Aretha Franklin & Led Zeppelin to Bruno Mars 
+   new@1 http://en.wikipedia.org/wiki/Phil_collins
+   snip: Philip David Charles Collins (born 30 January 1951) is an English singer, drummer, songwri
+   goldInOldTop20@rank=1 goldInNewTop20@rank=0
+[tqa REG demoted/换血] What was the name of the brothel in The Best Little Whoreh
+   old@1 https://en.wikipedia.org/wiki/Chicken_Ranch_(Texas)
+   snip: The Chicken Ranch was an illegal brothel in the U.S. state of Texas that operated from 190
+   new@1 https://en.wikipedia.org/wiki/The_Best_Little_Cathouse_in_Texas_(film)
+   snip: Whorehouse in Texas is a 1982 American musical comedy film based on the 1978 stage musical
+   goldInOldTop20@rank=1 goldInNewTop20@rank=2

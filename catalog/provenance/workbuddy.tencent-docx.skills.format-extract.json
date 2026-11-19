@@ -1,0 +1,26 @@
+{
+  "sha256": "0b4e5b076d3c406e39ab1e2917fd3234dd330aef0ee8f58d624911081b9b28cf",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 10280,
+      "sha256": "712f689b4fb1cdf1dd683cae784e8a0e2089da030a5a0055417bf94c15927e20"
+    },
+    {
+      "path": "references/cli-reference.md",
+      "bytes": 3986,
+      "sha256": "63a361195702057284714141828712063a01ac4a91bb6b69734c3dcf2314791c"
+    },
+    {
+      "path": "references/node-install.md",
+      "bytes": 1826,
+      "sha256": "f402c4934225bcba3dd56632285c435bcb1bd2072bc67061286af767a9616648"
+    },
+    {
+      "path": "run.py",
+      "bytes": 14752,
+      "sha256": "f4372228166baed72188dba9db1858852a42f9f3feb33de65993823a2d02cb43"
+    }
+  ],
+  "bytes": 30844
+}

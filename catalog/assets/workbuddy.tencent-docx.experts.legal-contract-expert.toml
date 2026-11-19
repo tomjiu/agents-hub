@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.experts.legal-contract-expert"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/legal-contract-expert"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "c2203450fae4fd493e9e69b65cf143ea6086fe099f1b858c347b2234fca2905a"
+local_modified = "unknown"
+enabled = false

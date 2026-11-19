@@ -1,0 +1,21 @@
+id = "workbuddy.shared-styles"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/shared-styles"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "dad83240c2ca8b62a281b5bd0b247cf4704d911d774b97ad97f24e979139e2d3"
+local_modified = "unknown"
+enabled = false

@@ -1,0 +1,26 @@
+{
+  "sha256": "f9293ad4b289e0c9d1d8478bacb159b7392e9b4731214fca404f359ca4536e46",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 13066,
+      "sha256": "586eb6276185b4e14a07d57c05d48b91a23f40582819f7fc2fde11ac339020d3"
+    },
+    {
+      "path": "references/canvas-image-contract.md",
+      "bytes": 3695,
+      "sha256": "1f071de0f08deb25956e65f28c4f8d78a30b92350fe6075984ffbc0d2b6de404"
+    },
+    {
+      "path": "scripts/validate-image-edit-canvas.mjs",
+      "bytes": 6220,
+      "sha256": "9a3a77a77b0411d2c5810563de45aaacc7f4a500d416e87b4648027702a400fb"
+    },
+    {
+      "path": "skill-release-manifest.json",
+      "bytes": 207,
+      "sha256": "85430706489934fba32b8f6c5bead33150735512daed8482cf1628d1ed99ad00"
+    }
+  ],
+  "bytes": 23188
+}

@@ -1,0 +1,25 @@
+id = "web-search-hikari"
+kind = "skills"
+path = "skills/individual/research/web-search-hikari"
+
+[import]
+baseline_commit = "4f1911081477b49a6610e52537bea1057f216530"
+provenance = "catalog/audit/migration-2026-11.json"
+commit_role = "local-import-baseline-not-upstream"
+
+[source]
+upstream_identity_status = "unverified"
+location_role = "maintenance-or-service-location-not-proof-of-origin"
+kind = "local"
+url = "https://github.com/tomjiu/agents-hub"
+commit = ""
+license = "review-required"
+provenance = "catalog/audit/migration-2026-11.json"
+
+[version]
+upstream = "unknown"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "21650bf789645ff28fa99bc1791c5d3809333033b8fa59167994f9c2e58e27c8"
+local_modified = "unknown"
+enabled = false

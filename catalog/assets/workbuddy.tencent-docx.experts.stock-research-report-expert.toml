@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.experts.stock-research-report-expert"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/stock-research-report-expert"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "a3610db0a260e0b9d2b959e9e8dbc6f093a833cb8ce5a29273fd1765ab127e13"
+local_modified = "unknown"
+enabled = false

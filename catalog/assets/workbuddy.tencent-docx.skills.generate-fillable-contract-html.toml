@@ -1,0 +1,21 @@
+id = "workbuddy.tencent-docx.skills.generate-fillable-contract-html"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/generate-fillable-contract-html"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "8155227bba121888407c9b6d4d6387e5fe9e92aae3103a6e6edb873de3206a50"
+local_modified = "unknown"
+enabled = false

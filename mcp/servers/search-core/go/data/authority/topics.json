@@ -1,0 +1,1354 @@
+{
+ "_meta": "第 1 层主题分档表(topic -> AuthorityEntry[])。tier: s=1.2/a=0.75/b=0.4; zh 条目仅中文题生效; kind=community 条目讨论意图升档; 个人博客不给 s(用户点名口径); 预印本≠同行评审(b 档)。增删跑 npm test。",
+ "topics": {
+  "programming": [
+   {
+    "domain": "developer.mozilla.org",
+    "tier": "s"
+   },
+   {
+    "domain": "docs.python.org",
+    "tier": "s"
+   },
+   {
+    "domain": "python.org",
+    "tier": "s"
+   },
+   {
+    "domain": "go.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "rust-lang.org",
+    "tier": "s"
+   },
+   {
+    "domain": "doc.rust-lang.org",
+    "tier": "s"
+   },
+   {
+    "domain": "nodejs.org",
+    "tier": "s"
+   },
+   {
+    "domain": "php.net",
+    "tier": "s"
+   },
+   {
+    "domain": "ruby-lang.org",
+    "tier": "s"
+   },
+   {
+    "domain": "docs.ruby-lang.org",
+    "tier": "s"
+   },
+   {
+    "domain": "swift.org",
+    "tier": "s"
+   },
+   {
+    "domain": "kotlinlang.org",
+    "tier": "s"
+   },
+   {
+    "domain": "react.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "vuejs.org",
+    "tier": "s"
+   },
+   {
+    "domain": "angular.io",
+    "tier": "s"
+   },
+   {
+    "domain": "svelte.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "solidjs.com",
+    "tier": "s"
+   },
+   {
+    "domain": "nextjs.org",
+    "tier": "s"
+   },
+   {
+    "domain": "nuxt.com",
+    "tier": "s"
+   },
+   {
+    "domain": "remix.run",
+    "tier": "s"
+   },
+   {
+    "domain": "astro.build",
+    "tier": "s"
+   },
+   {
+    "domain": "qwik.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "emberjs.com",
+    "tier": "s"
+   },
+   {
+    "domain": "spring.io",
+    "tier": "s"
+   },
+   {
+    "domain": "quarkus.io",
+    "tier": "s"
+   },
+   {
+    "domain": "micronaut.io",
+    "tier": "s"
+   },
+   {
+    "domain": "fastapi.tiangolo.com",
+    "tier": "s"
+   },
+   {
+    "domain": "palletsprojects.com",
+    "tier": "s"
+   },
+   {
+    "domain": "djangoproject.com",
+    "tier": "s"
+   },
+   {
+    "domain": "laravel.com",
+    "tier": "s"
+   },
+   {
+    "domain": "symfony.com",
+    "tier": "s"
+   },
+   {
+    "domain": "docs.oracle.com",
+    "tier": "s"
+   },
+   {
+    "domain": "learn.microsoft.com",
+    "tier": "s"
+   },
+   {
+    "domain": "developer.apple.com",
+    "tier": "s"
+   },
+   {
+    "domain": "developer.android.com",
+    "tier": "s"
+   },
+   {
+    "domain": "flutter.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "reactnative.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "expo.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "tc39.es",
+    "tier": "s"
+   },
+   {
+    "domain": "ecma-international.org",
+    "tier": "s"
+   },
+   {
+    "domain": "whatwg.org",
+    "tier": "s"
+   },
+   {
+    "domain": "w3.org",
+    "tier": "s"
+   },
+   {
+    "domain": "csswg.org",
+    "tier": "s"
+   },
+   {
+    "domain": "webkit.org",
+    "tier": "s"
+   },
+   {
+    "domain": "chromium.org",
+    "tier": "s"
+   },
+   {
+    "domain": "developer.chrome.com",
+    "tier": "s"
+   },
+   {
+    "domain": "web.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "caniuse.com",
+    "tier": "b",
+    "kind": "reference"
+   },
+   {
+    "domain": "kernel.org",
+    "tier": "s"
+   },
+   {
+    "domain": "gnu.org",
+    "tier": "s"
+   },
+   {
+    "domain": "freedesktop.org",
+    "tier": "s"
+   },
+   {
+    "domain": "systemd.io",
+    "tier": "s"
+   },
+   {
+    "domain": "debian.org",
+    "tier": "s"
+   },
+   {
+    "domain": "ubuntu.com",
+    "tier": "s"
+   },
+   {
+    "domain": "archlinux.org",
+    "tier": "s"
+   },
+   {
+    "domain": "alpinelinux.org",
+    "tier": "s"
+   },
+   {
+    "domain": "openbsd.org",
+    "tier": "s"
+   },
+   {
+    "domain": "freebsd.org",
+    "tier": "s"
+   },
+   {
+    "domain": "fedoraproject.org",
+    "tier": "s"
+   },
+   {
+    "domain": "redhat.com",
+    "tier": "s"
+   },
+   {
+    "domain": "github.com",
+    "tier": "a"
+   },
+   {
+    "domain": "gitlab.com",
+    "tier": "a"
+   },
+   {
+    "domain": "stackoverflow.com",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "stackexchange.com",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "news.ycombinator.com",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "lobste.rs",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "programming.dev",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "users.rust-lang.org",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "internals.rust-lang.org",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "cplusplus.com",
+    "tier": "a"
+   },
+   {
+    "domain": "codeproject.com",
+    "tier": "a",
+    "kind": "community"
+   },
+   {
+    "domain": "realpython.com",
+    "tier": "a"
+   },
+   {
+    "domain": "martinfowler.com",
+    "tier": "a",
+    "kind": "expert"
+   },
+   {
+    "domain": "refactoring.com",
+    "tier": "b",
+    "kind": "expert"
+   },
+   {
+    "domain": "12factor.net",
+    "tier": "b",
+    "kind": "expert"
+   },
+   {
+    "domain": "thoughtworks.com",
+    "tier": "b",
+    "kind": "expert"
+   },
+   {
+    "domain": "infoq.com",
+    "tier": "b",
+    "kind": "media"
+   },
+   {
+    "domain": "ruanyifeng.com",
+    "tier": "a",
+    "lang": "zh"
+   },
+   {
+    "domain": "liaoxuefeng.com",
+    "tier": "a",
+    "lang": "zh"
+   },
+   {
+    "domain": "coolshell.cn",
+    "tier": "a",
+    "lang": "zh"
+   },
+   {
+    "domain": "infoq.cn",
+    "tier": "a",
+    "lang": "zh",
+    "kind": "media"
+   },
+   {
+    "domain": "runoob.com",
+    "tier": "b",
+    "lang": "zh"
+   },
+   {
+    "domain": "cnblogs.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "zhihu.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "juejin.cn",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "segmentfault.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "v2ex.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "oschina.net",
+    "tier": "b",
+    "lang": "zh"
+   },
+   {
+    "domain": "geekbang.org",
+    "tier": "b",
+    "lang": "zh"
+   },
+   {
+    "domain": "ruby-china.org",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "emacs-china.org",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "community"
+   },
+   {
+    "domain": "rustwiki.org",
+    "tier": "b",
+    "lang": "zh"
+   },
+   {
+    "domain": "draveness.me",
+    "tier": "b",
+    "lang": "zh"
+   },
+   {
+    "domain": "phodal.com",
+    "tier": "b",
+    "lang": "zh"
+   },
+   {
+    "domain": "cloud.tencent.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "official"
+   }
+  ],
+  "packages": [
+   {
+    "domain": "npmjs.com",
+    "tier": "s"
+   },
+   {
+    "domain": "registry.npmjs.org",
+    "tier": "s"
+   },
+   {
+    "domain": "pypi.org",
+    "tier": "s"
+   },
+   {
+    "domain": "crates.io",
+    "tier": "s"
+   },
+   {
+    "domain": "pkg.go.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "rubygems.org",
+    "tier": "s"
+   },
+   {
+    "domain": "packagist.org",
+    "tier": "s"
+   },
+   {
+    "domain": "central.sonatype.com",
+    "tier": "s"
+   },
+   {
+    "domain": "mvnrepository.com",
+    "tier": "s"
+   },
+   {
+    "domain": "nuget.org",
+    "tier": "s"
+   },
+   {
+    "domain": "pub.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "hex.pm",
+    "tier": "s"
+   },
+   {
+    "domain": "maven.apache.org",
+    "tier": "s"
+   },
+   {
+    "domain": "github.com",
+    "tier": "a"
+   },
+   {
+    "domain": "gitlab.com",
+    "tier": "a"
+   },
+   {
+    "domain": "bitbucket.org",
+    "tier": "b"
+   },
+   {
+    "domain": "codeberg.org",
+    "tier": "b"
+   },
+   {
+    "domain": "sourceforge.net",
+    "tier": "b"
+   },
+   {
+    "domain": "cocoapods.org",
+    "tier": "b"
+   },
+   {
+    "domain": "anaconda.org",
+    "tier": "b"
+   },
+   {
+    "domain": "quay.io",
+    "tier": "b"
+   },
+   {
+    "domain": "gitee.com",
+    "tier": "b",
+    "lang": "zh"
+   }
+  ],
+  "devops": [
+   {
+    "domain": "kubernetes.io",
+    "tier": "s"
+   },
+   {
+    "domain": "cncf.io",
+    "tier": "s"
+   },
+   {
+    "domain": "docker.com",
+    "tier": "s"
+   },
+   {
+    "domain": "podman.io",
+    "tier": "s"
+   },
+   {
+    "domain": "nginx.org",
+    "tier": "s"
+   },
+   {
+    "domain": "apache.org",
+    "tier": "s"
+   },
+   {
+    "domain": "istio.io",
+    "tier": "s"
+   },
+   {
+    "domain": "envoyproxy.io",
+    "tier": "s"
+   },
+   {
+    "domain": "terraform.io",
+    "tier": "s"
+   },
+   {
+    "domain": "hashicorp.com",
+    "tier": "s"
+   },
+   {
+    "domain": "prometheus.io",
+    "tier": "s"
+   },
+   {
+    "domain": "grafana.com",
+    "tier": "s"
+   },
+   {
+    "domain": "aliyun.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "official"
+   },
+   {
+    "domain": "cloud.tencent.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "official"
+   },
+   {
+    "domain": "huaweicloud.com",
+    "tier": "b",
+    "lang": "zh",
+    "kind": "official"
+   }
+  ],
+  "academic": [
+   {
+    "domain": "arxiv.org",
+    "tier": "s"
+   },
+   {
+    "domain": "nature.com",
+    "tier": "s"
+   },
+   {
+    "domain": "science.org",
+    "tier": "s"
+   },
+   {
+    "domain": "cell.com",
+    "tier": "s"
+   },
+   {
+    "domain": "ieee.org",
+    "tier": "s"
+   },
+   {
+    "domain": "acm.org",
+    "tier": "s"
+   },
+   {
+    "domain": "springer.com",
+    "tier": "s"
+   },
+   {
+    "domain": "sciencedirect.com",
+    "tier": "s"
+   },
+   {
+    "domain": "wiley.com",
+    "tier": "s"
+   },
+   {
+    "domain": "tandfonline.com",
+    "tier": "s"
+   },
+   {
+    "domain": "oup.com",
+    "tier": "s"
+   },
+   {
+    "domain": "pnas.org",
+    "tier": "s"
+   },
+   {
+    "domain": "nejm.org",
+    "tier": "s"
+   },
+   {
+    "domain": "thelancet.com",
+    "tier": "s"
+   },
+   {
+    "domain": "bmj.com",
+    "tier": "s"
+   },
+   {
+    "domain": "jamanetwork.com",
+    "tier": "s"
+   },
+   {
+    "domain": "cochrane.org",
+    "tier": "s"
+   },
+   {
+    "domain": "ncbi.nlm.nih.gov",
+    "tier": "s"
+   },
+   {
+    "domain": "nlm.nih.gov",
+    "tier": "s"
+   },
+   {
+    "domain": "plos.org",
+    "tier": "s"
+   },
+   {
+    "domain": "openreview.net",
+    "tier": "s"
+   },
+   {
+    "domain": "aclanthology.org",
+    "tier": "s"
+   },
+   {
+    "domain": "semanticscholar.org",
+    "tier": "a"
+   },
+   {
+    "domain": "openalex.org",
+    "tier": "a"
+   },
+   {
+    "domain": "core.ac.uk",
+    "tier": "a"
+   },
+   {
+    "domain": "paperswithcode.com",
+    "tier": "a"
+   },
+   {
+    "domain": "biorxiv.org",
+    "tier": "a"
+   },
+   {
+    "domain": "medrxiv.org",
+    "tier": "a"
+   },
+   {
+    "domain": "ssrn.com",
+    "tier": "a"
+   },
+   {
+    "domain": "frontiersin.org",
+    "tier": "a"
+   },
+   {
+    "domain": "researchgate.net",
+    "tier": "b"
+   },
+   {
+    "domain": "mdpi.com",
+    "tier": "b"
+   }
+  ],
+  "ai-models": [
+   {
+    "domain": "huggingface.co",
+    "tier": "s"
+   },
+   {
+    "domain": "pytorch.org",
+    "tier": "s"
+   },
+   {
+    "domain": "tensorflow.org",
+    "tier": "s"
+   },
+   {
+    "domain": "scikit-learn.org",
+    "tier": "s"
+   },
+   {
+    "domain": "pydata.org",
+    "tier": "s"
+   },
+   {
+    "domain": "numpy.org",
+    "tier": "s"
+   },
+   {
+    "domain": "scipy.org",
+    "tier": "s"
+   },
+   {
+    "domain": "jupyter.org",
+    "tier": "s"
+   },
+   {
+    "domain": "conda.io",
+    "tier": "s"
+   },
+   {
+    "domain": "openai.com",
+    "tier": "s"
+   },
+   {
+    "domain": "anthropic.com",
+    "tier": "s"
+   },
+   {
+    "domain": "ai.google.dev",
+    "tier": "s"
+   },
+   {
+    "domain": "deepmind.google",
+    "tier": "s"
+   },
+   {
+    "domain": "paperswithcode.com",
+    "tier": "a"
+   },
+   {
+    "domain": "ollama.com",
+    "tier": "a"
+   },
+   {
+    "domain": "vllm.ai",
+    "tier": "a"
+   },
+   {
+    "domain": "langchain.com",
+    "tier": "a"
+   },
+   {
+    "domain": "llamaindex.ai",
+    "tier": "a"
+   },
+   {
+    "domain": "dify.ai",
+    "tier": "a"
+   },
+   {
+    "domain": "replicate.com",
+    "tier": "b"
+   }
+  ],
+  "entities": [
+   {
+    "domain": "wikidata.org",
+    "tier": "a"
+   },
+   {
+    "domain": "britannica.com",
+    "tier": "a"
+   },
+   {
+    "domain": "scholarpedia.org",
+    "tier": "a"
+   },
+   {
+    "domain": "baike.baidu.com",
+    "tier": "b",
+    "lang": "zh"
+   }
+  ],
+  "images": [
+   {
+    "domain": "unsplash.com",
+    "tier": "s"
+   },
+   {
+    "domain": "pexels.com",
+    "tier": "s"
+   },
+   {
+    "domain": "pixabay.com",
+    "tier": "s"
+   }
+  ],
+  "medical": [
+   {
+    "domain": "pubmed.ncbi.nlm.nih.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "clinicaltrials.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "dailymed.nlm.nih.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "cochrane.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "who.int",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "mayoclinic.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "nejm.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "thelancet.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "bmj.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "jamanetwork.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "nih.gov",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "medlineplus.gov",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "europepmc.org",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "chemistry": [
+   {
+    "domain": "pubchem.ncbi.nlm.nih.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "rsc.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "chemspider.com",
+    "tier": "b",
+    "kind": "reference"
+   }
+  ],
+  "dictionary": [
+   {
+    "domain": "en.wiktionary.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "zh.wiktionary.org",
+    "tier": "s",
+    "kind": "reference",
+    "lang": "zh"
+   },
+   {
+    "domain": "oxfordlearnersdictionaries.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "etymonline.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "merriam-webster.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "zdic.net",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   }
+  ],
+  "travel": [
+   {
+    "domain": "en.wikivoyage.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "zh.wikivoyage.org",
+    "tier": "s",
+    "kind": "reference",
+    "lang": "zh"
+   }
+  ],
+  "sport": [
+   {
+    "domain": "nba.com",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "premierleague.com",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "fifa.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "espn.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "hupu.com",
+    "tier": "b",
+    "kind": "community",
+    "lang": "zh"
+   }
+  ],
+  "finance": [
+   {
+    "domain": "xe.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "coindesk.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "coinmarketcap.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "pbc.gov.cn",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   },
+   {
+    "domain": "exchangerate.host",
+    "tier": "b",
+    "kind": "reference"
+   }
+  ],
+  "drug": [
+   {
+    "domain": "dailymed.nlm.nih.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "open.fda.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "ncbi.nlm.nih.gov",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "food": [
+   {
+    "domain": "themealdb.com",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "world.openfoodfacts.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "nlc.chinanutri.cn",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   }
+  ],
+  "species": [
+   {
+    "domain": "inaturalist.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "gbif.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "itis.gov",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "tv": [
+   {
+    "domain": "imdb.com",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "tvmaze.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "thetvdb.com",
+    "tier": "b",
+    "kind": "reference"
+   }
+  ],
+  "games": [
+   {
+    "domain": "steampowered.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "igdb.com",
+    "tier": "b",
+    "kind": "reference"
+   }
+  ],
+  "manga": [
+   {
+    "domain": "mangadex.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "myanimelist.net",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "anime": [
+   {
+    "domain": "myanimelist.net",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "anilist.co",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "kitsu.io",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "books": [
+   {
+    "domain": "gutenberg.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "standardebooks.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "archive.org",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "drinks": [
+   {
+    "domain": "thecocktaildb.com",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "diffordsguide.com",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "space": [
+   {
+    "domain": "thespacedevs.com",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "spaceflightnow.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "nasa.gov",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "geo": [
+   {
+    "domain": "openstreetmap.org",
+    "tier": "s",
+    "kind": "reference"
+   }
+  ],
+  "quakes": [
+   {
+    "domain": "earthquake.usgs.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "cwa.gov.tw",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   },
+   {
+    "domain": "ceic.ac.cn",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   }
+  ],
+  "weather": [
+   {
+    "domain": "metoffice.gov.uk",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "weather.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "open-meteo.com",
+    "tier": "b",
+    "kind": "reference"
+   },
+   {
+    "domain": "nmc.cn",
+    "tier": "s",
+    "kind": "reference",
+    "lang": "zh"
+   },
+   {
+    "domain": "cma.gov.cn",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   }
+  ],
+  "lyrics": [
+   {
+    "domain": "lrclib.net",
+    "tier": "s",
+    "kind": "reference"
+   }
+  ],
+  "music": [
+   {
+    "domain": "musicbrainz.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "last.fm",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "legal": [
+   {
+    "domain": "federalregister.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "law.cornell.edu",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "courtlistener.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "govinfo.gov",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "supremecourt.gov",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "data": [
+   {
+    "domain": "worldbank.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "ourworldindata.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "stats.gov.cn",
+    "tier": "a",
+    "kind": "reference",
+    "lang": "zh"
+   }
+  ],
+  "security": [
+   {
+    "domain": "nvd.nist.gov",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "openssl.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "snyk.io",
+    "tier": "b",
+    "kind": "reference"
+   }
+  ],
+  "wordpress": [
+   {
+    "domain": "wordpress.org",
+    "tier": "s",
+    "kind": "reference"
+   }
+  ],
+  "ide-ext": [
+   {
+    "domain": "open-vsx.org",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "plugins.jetbrains.com",
+    "tier": "a",
+    "kind": "reference"
+   },
+   {
+    "domain": "marketplace.visualstudio.com",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "browser-ext": [
+   {
+    "domain": "addons.mozilla.org",
+    "tier": "s",
+    "kind": "reference"
+   },
+   {
+    "domain": "chromewebstore.google.com",
+    "tier": "a",
+    "kind": "reference"
+   }
+  ],
+  "podcast": [
+   {
+    "domain": "podcasts.apple.com",
+    "tier": "b",
+    "kind": "reference"
+   }
+  ]
+ }
+}

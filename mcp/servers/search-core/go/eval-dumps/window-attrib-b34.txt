@@ -1,0 +1,70 @@
+
+======== nq ========
+[FIX][upstream] how many votes to approve supreme court justice
+    gold@none rowShape=- hitUrl=https://rochybylawoffice.com/how-many-votes-needed-to-appoin top3overlap=1/3
+[REG][upstream] what is the name of season 6 of american horror story
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://en.wikipedia.org/wiki/American_Horror_Story%3A_ top3overlap=2/3
+[FIX][upstream] when did drop it like it's hot release
+    gold@none rowShape=- hitUrl=https://genius.com/Snoop-dogg-drop-it-like-its-hot-lyrics/q/ top3overlap=3/3
+[REG][upstream] when was the term social justice first used
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://isi.org/the-origins-of-social-justice top3overlap=1/3
+[REG][upstream] who was the youngest president to be elected
+    同URL存活=true 同URL仍有gold=true b33hitUrl=http://en.wikipedia.org/wiki/Timeline_of_Presidents_of_ top3overlap=1/3
+[REG][upstream] anastomosis between the epididymis and the vas deferens
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://sciencedirect.com/science/article/pii/S00150282 top3overlap=0/3
+[REG][upstream] what is the angle of the tower of pisa
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa top3overlap=1/3
+[FIX][upstream] when did the song the joker come out
+    gold@base rowShape=- hitUrl=https://mythcon.ca/who-sings-the-song-the-joker-why-steve-mi top3overlap=2/3
+[FIX][upstream] who votes in the speaker of the house
+    gold@title rowShape=- hitUrl=https://en.wikipedia.org/wiki/Speaker_of_the_United_States_H top3overlap=0/3
+[REG][upstream] who won last year's ncaa women's basketball
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://www.espn.com/womens-college-basketball/story/_/ top3overlap=2/3
+[REG][upstream] how many farmers are there in the usa
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://www.vox.com/future-perfect/460046/usda-census-t top3overlap=1/3
+[FIX][upstream] what is the maximum data rate for the 802.11a standard select one
+    gold@tail rowShape=- hitUrl=https://en.wikipedia.org/wiki/IEEE_802.11a-1999 top3overlap=0/3
+[REG][upstream] when did the eagles last play in a superbowl
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://phdns.latahcountyid.gov/article/when-did-the-ea top3overlap=2/3
+[REG][upstream] where did the potter's wheel first develop
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://en.wikipedia.org/wiki/Stone_vessels_in_ancient_ top3overlap=1/3
+-- nq 小计: row-fix=0 row-reg=0 upstream=14
+
+======== tqa ========
+[REG][upstream] How long was swimmer Michelle Smith-de Bruin banned for attempting to ma
+    同URL存活=true 同URL仍有gold=false b33hitUrl=https://owiki.org/wiki/Michelle_Smith top3overlap=0/3
+[FIX][upstream] Which was the first European city this century to open an underground ra
+    gold@none rowShape=- hitUrl=https://www.openguideonline.com/answer/which-was-the-first-e top3overlap=1/3
+[FIX][upstream] Who had an 80s No 1 hit with Hold On To The Nights?
+    gold@title rowShape=- hitUrl=https://www.tv80s.com/richard-marx/hold-on-to-the-nights top3overlap=0/3
+[FIX][upstream] Who was the next British Prime Minister after Arthur Balfour?
+    gold@tail rowShape=- hitUrl=https://www.discoverbritain.com/history/historic-events/20th top3overlap=1/3
+[REG][upstream] What is Osbert Lancaster best known for producing?
+    同URL存活=true 同URL仍有gold=true b33hitUrl=https://theguardian.com/books/2008/oct/11/osbert-lancas top3overlap=0/3
+[FIX][upstream] Which journalist first told the world about the My Lai massacre?
+    gold@title rowShape=- hitUrl=https://www.history.com/this-day-in-history/november-12/seym top3overlap=0/3
+[REG][upstream] Which singer had a big 60s No 1 with Roses Are Red?
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://parade.com/news/1962-no-1-pop-hit-originally-a- top3overlap=0/3
+[FIX][upstream] Who first hosted Family Feud?
+    gold@none rowShape=- hitUrl=https://www.familyfeud.com/about top3overlap=1/3
+[FIX][upstream] Who was the director of the CIA from 1976-81?
+    gold@title rowShape=- hitUrl=https://www.cityclub.org/forums/1976/06/25/remarks-from-cia- top3overlap=0/3
+[REG][upstream] What claimed the life of singer Kathleen Ferrier?
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://en.wikipedia.org/wiki/Kathleen_Ferrier top3overlap=0/3
+[REG][upstream] Where was the American venue of the Live Aid concert?
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://pupjunkies.com/where-was-live-aid-held-the-twin top3overlap=0/3
+[REG][upstream] Which US president won the Nobel Peace Prize in 1920?
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://politico.com/story/2012/12/woodrow-wilson-nobel top3overlap=0/3
+[REG][upstream] In music, who was Sweet and Innocent and Too Young?
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://elyrics.net/read/d/donny-osmond-lyrics/sweet-an top3overlap=1/3
+[FIX][upstream] Throughout the 80s and 90s Phil Collins recorded on which record label?
+    gold@title rowShape=- hitUrl=https://www.atlanticrecords.com/artists/phil-collins top3overlap=0/3
+[FIX][upstream] What did the Lone Ranger's title Kemo Sabe mean in Apache?
+    gold@base rowShape=- hitUrl=https://answersuniverse.com/what-does-the-lone-rangers-title top3overlap=1/3
+[FIX][upstream] What was the name of the brothel in The Best Little Whorehouse in Texas?
+    gold@title rowShape=- hitUrl=https://en.wikipedia.org/wiki/Chicken_Ranch_(Texas) top3overlap=2/3
+[FIX][upstream] Which 70s show was based on the British show Till Death Us Do Part?
+    gold@title rowShape=- hitUrl=https://en.wikipedia.org/wiki/All_in_the_Family top3overlap=2/3
+[REG][upstream] Who was the male star of the movie The Man of La Mancha?
+    同URL存活=false 同URL仍有gold=null b33hitUrl=https://derekwinnert.com/man-of-la-mancha-1972-peter-ot top3overlap=1/3
+-- tqa 小计: row-fix=0 row-reg=0 upstream=18

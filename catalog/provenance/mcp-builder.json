@@ -1,0 +1,56 @@
+{
+  "sha256": "73db45851b16a242edd6c8da92bbdaae67cd5405619d2bf48fb70d7ec27621c0",
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 11546,
+      "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 9328,
+      "sha256": "57231330040e18e033dad8b2fdc0340a6185034c32b42b7d3448f444a6af6cf2"
+    },
+    {
+      "path": "reference/evaluation.md",
+      "bytes": 22264,
+      "sha256": "830d9a3a69c9d6d01b638ce3497e0a7680b1d422d318929181a101f7d3816983"
+    },
+    {
+      "path": "reference/mcp_best_practices.md",
+      "bytes": 7579,
+      "sha256": "900b5c9ec725b594ea04270d27c33cc51a0c8e866f5cb7ad4f57fb48d3838380"
+    },
+    {
+      "path": "reference/node_mcp_server.md",
+      "bytes": 29519,
+      "sha256": "2157ec5b77d6a7f2f84884d81acd060126f969e01a8a780470c1d927c2dabd37"
+    },
+    {
+      "path": "reference/python_mcp_server.md",
+      "bytes": 25817,
+      "sha256": "890a64d0949e5b40c639682cda46661311ab818fc03976884ce46f00e2eff462"
+    },
+    {
+      "path": "scripts/connections.py",
+      "bytes": 5026,
+      "sha256": "9db2f1ff6442010b131817c1ec127dcf29949c787e7d7948049145c0a39627a9"
+    },
+    {
+      "path": "scripts/evaluation.py",
+      "bytes": 12952,
+      "sha256": "0797ae0f3c50bfa5d7281ebc8bc936ac89f33450aca6a36b95c4862ca8c21482"
+    },
+    {
+      "path": "scripts/example_evaluation.xml",
+      "bytes": 1216,
+      "sha256": "4df64ca67ca193021364d4d148997b8821f392353dab73c852fa41cfaa822048"
+    },
+    {
+      "path": "scripts/requirements.txt",
+      "bytes": 31,
+      "sha256": "f53f4d884919bbc75bc971f62d196c6f0a443eccf2539f534fd2b66e0618c49d"
+    }
+  ],
+  "bytes": 125278
+}

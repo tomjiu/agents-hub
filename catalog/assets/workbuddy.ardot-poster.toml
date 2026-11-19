@@ -1,0 +1,21 @@
+id = "workbuddy.ardot-poster"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-poster"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "eaf50818a844c450727c451a7e4098a456d2aed3a03cfd150bd0d7d48970401d"
+local_modified = "unknown"
+enabled = false

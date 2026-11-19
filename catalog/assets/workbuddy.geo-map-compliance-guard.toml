@@ -1,0 +1,21 @@
+id = "workbuddy.geo-map-compliance-guard"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/geo-map-compliance-guard"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "9275aeef3c5652fb8b387be7e96fec6107a2615dea5dc805278b0bea6ab4cfd8"
+local_modified = "unknown"
+enabled = false

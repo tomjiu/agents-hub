@@ -1,0 +1,21 @@
+id = "workbuddy.library"
+kind = "skills"
+path = "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/library"
+collection = "workbuddy"
+runtime_review_required = true
+
+[source]
+kind = "workbuddy-installer"
+url = ""
+version = "5.4.2"
+license = "vendor-restricted"
+discovery = "restricted"
+provenance = "skills/collections/vendors/workbuddy/README.md"
+
+[version]
+upstream = "5.4.2"
+commit = ""
+local = "imported-2026-11-18"
+sha256 = "b6fcc402667150b8e17e3542109e9f7e8c83177ef6fcbce54773a0ea63274a49"
+local_modified = "unknown"
+enabled = false

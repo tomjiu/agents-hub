@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "status": "PASS_WITH_DECLARED_LIMITS",
+  "suites": [
+    {
+      "file": "asset-manager/tests/download.test.mjs",
+      "passed": 11,
+      "coverage": [
+        "DNS address pin and no request for private DNS",
+        "Redirect and invalid length rejection",
+        "Advertised and actual size cap",
+        "Interrupted, truncated, premature close rejection",
+        "Explicit abort and post-write cancellation",
+        "SHA256/SHA512, digest validation and mismatch",
+        "Origin mismatch before request",
+        "Metadata failure cleanup preserving prior artifacts"
+      ],
+      "boundary": "Controlled HTTP transport events and actual isolated filesystem writes, not actual remote TLS/CDN acceptance"
+    },
+    {
+      "file": "asset-manager/tests/composition.test.mjs",
+      "passed": 7,
+      "coverage": [
+        "Complete content and sidecar hash",
+        "Concurrent composition and existing output lock",
+        "Publication/metadata failure cleanup",
+        "Source modification before publish",
+        "Concurrent user output preservation",
+        "Linked paths, placeholders and duplicate fragment rejection"
+      ],
+      "boundary": "Normal handled failures; forced-kill recovery and semantic conflict detection remain manual"
+    }
+  ],
+  "root_suite": {
+    "total": 96,
+    "passed": 95,
+    "skipped": 1,
+    "skip_reason": "Windows file-symlink privilege unavailable; junction rejection independently tested"
+  },
+  "dsh": {
+    "versions": [
+      "0.2.2-rc.1",
+      "0.2.2-rc.4"
+    ],
+    "direct_host": "PASS",
+    "current_bundle": "PASS on rc.1",
+    "assets_sha256": "62abb69f57609a3343e9eb46e649aaeadca5fe675e293ac5c437f7a9e1160839",
+    "running_user_profile_changed": false
+  },
+  "auto_download_execution": false,
+  "auto_activation": false,
+  "limits": [
+    "No automatic archive extraction",
+    "Partial source/candidate artifacts after process kill require inspection",
+    "Two-file publication is not a universal atomic transaction",
+    "Malformed remote/network environments not exhaustively tested"
+  ]
+}
