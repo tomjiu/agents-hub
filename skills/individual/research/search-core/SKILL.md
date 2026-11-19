@@ -33,7 +33,7 @@ node <repo>/mcp/servers/search-core/typescript/dist/cli.js research "topic" --lo
 { "mcpServers": { "search-core": { "command": "node", "args": ["<repo>/mcp/servers/search-core/typescript/dist/mcp.js"] } } }
 ```
 
-接入 Claude Code / Cursor / Claude Code on Bedrock（WebSearch 不可用场景的官方补法）详见 **[docs/mcp-exit.md](docs/mcp-exit.md)**（含真网络 stdio 实测证据与诚实边界）。
+接入 Claude Code / Cursor / Claude Code on Bedrock（WebSearch 不可用场景的官方补法）详见 **[当前DSH搜索验收说明](../../../../asset-manager/SEARCH-ACCEPTANCE.md)**（本仓已验证的是隔离DSH和本地来源，旧其他客户端/公网记录不作为当前验收）。
 
 工具（渐进披露，Direct 3 个按需激活 Deferred 5 个）：
 

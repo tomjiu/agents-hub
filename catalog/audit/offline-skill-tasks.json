@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "status": "PASS_FOR_BOUNDED_OFFLINE_TASKS",
+  "tasks": {
+    "schema": 1,
+    "status": "PASS",
+    "results": [
+      {
+        "test": "test_skill_packager.py",
+        "status": "PASS",
+        "test_summary": "...........\r\n----------------------------------------------------------------------\r\nRan 11 tests in 0.983s\r\n\r\nOK",
+        "scope": "Actual CLI archive content, failure cleanup and no-overwrite on synthetic Skill"
+      },
+      {
+        "test": "test_ownership_task.py",
+        "status": "PASS",
+        "test_summary": "....\r\n----------------------------------------------------------------------\r\nRan 4 tests in 3.540s\r\n\r\nOK",
+        "scope": "Actual synthetic Git repository to security ownership CSV/JSON and bounded query; no user repository analysis"
+      }
+    ],
+    "python_version": "Python 3.13.7",
+    "scope": "Pinned test dependencies supplied externally; no downloads or user runtime changes; not all Skill scripts tested."
+  },
+  "dependencies": {
+    "python": "3.13.7",
+    "PyYAML": "6.0.3",
+    "networkx": "3.5",
+    "location": "private ignored test directory; no global interpreter changes"
+  },
+  "root_tests": {
+    "total": 135,
+    "passed": 134,
+    "skipped": 1
+  },
+  "resources": {
+    "skills_checked": 123,
+    "counts": {
+      "explicit_references": 246,
+      "found": 223,
+      "missing": 21,
+      "unresolved_examples": 2,
+      "unsafe_or_external": 0
+    },
+    "unresolved_is_not_automatically_missing_dependency": true
+  },
+  "fixed": [
+    "Skill packager direct invocation import failure",
+    "Empty/duplicate/malformed YAML validation",
+    "Existing output archive/report overwritten",
+    "Packaging into source and credential-shaped data inclusion",
+    "Concurrent output publication and source/license change refusal",
+    "Legacy ownership script paths and missing companion docs"
+  ],
+  "limits": [
+    "Only synthetic Skill archive and synthetic Git ownership tasks executed",
+    "No complete script/dependency or professional-task evaluation",
+    "Vendor unresolved paths require contextual review; original contents unchanged",
+    "with_server lifecycle was not executed or repaired",
+    "No user runtime, real accounts or restricted assets changed"
+  ]
+}

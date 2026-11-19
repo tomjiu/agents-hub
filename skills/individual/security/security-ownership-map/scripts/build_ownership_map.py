@@ -405,8 +405,13 @@ def iter_commits(lines: Iterable[list[str]]) -> Iterable[tuple[dict[str, object]
 
 
 def ensure_out_dir(path: str) -> Path:
-    out_dir = Path(path)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = Path(path).absolute()
+    for ancestor in [out_dir, *out_dir.parents]:
+        if ancestor.is_symlink() or getattr(ancestor, 'is_junction', lambda: False)():
+            raise ValueError('Linked output path is refused; choose an independent --out')
+    if out_dir.exists() or out_dir.is_symlink():
+        raise ValueError("Output directory already exists; preserve previous analysis and choose a new --out")
+    out_dir.mkdir(parents=True, exist_ok=False)
     return out_dir
 
 

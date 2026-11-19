@@ -2,14 +2,14 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2380,
+  "unchanged": 2375,
   "missing": [],
   "changed": [
     {
       "original": ".gitignore",
       "target": ".gitignore",
       "baseline_sha256": "9625233cede7c89bba522c6814d6867f6df6ab6897e748343294436b3fa5bc2a",
-      "current_sha256": "4aa29fc9f79532402d4f2408de37e1eed44265767b98189e384aaa17a2ff2565"
+      "current_sha256": "70b2b2746c711901d121203d832b66fd35fa6a85ab0cf6ee8a7f427c65209c89"
     },
     {
       "original": "agents-md/README.md",
@@ -147,7 +147,7 @@
       "original": "search-infra/SKILL.md",
       "target": "skills/individual/research/search-core/SKILL.md",
       "baseline_sha256": "23f9567f9b99aad213fa8b6cc71bc180475739a33b0673b9ee2cc1a492e444dd",
-      "current_sha256": "53f925b52350b1f2db3c0db68bdd2560f60712701c3c4fce804f8ca38b16bac1"
+      "current_sha256": "0f5cec52dc72ca83abaea0e4930c8c459092e69c5b79b9c63f6c1a4f21ffe2bb"
     },
     {
       "original": "selected/dfir-workflow/SKILL.md",
@@ -210,10 +210,40 @@
       "current_sha256": "ac9c0e7f6b1ff2e269057c3f1d593737df8598e532e8a3213fd68baff5aae2ce"
     },
     {
+      "original": "selected/security-ownership-map/scripts/build_ownership_map.py",
+      "target": "skills/individual/security/security-ownership-map/scripts/build_ownership_map.py",
+      "baseline_sha256": "d34be76b879699131aad9a996bad4f6c791fa0b5659d473100a80f70f5eb627c",
+      "current_sha256": "cd69106ad25dd5d9436cea27ae19192b8bb526f89afbcb424f9807cc141a925f"
+    },
+    {
+      "original": "selected/security-ownership-map/SKILL.md",
+      "target": "skills/individual/security/security-ownership-map/SKILL.md",
+      "baseline_sha256": "f855af8ef91e173adf931c82b0fe21931d5e32b661eeb3d95fed18df46c0ef6e",
+      "current_sha256": "7ba0f95722256d03eb0bfbde4520ffff12546dec12d166c50ed2ecf60a2ca199"
+    },
+    {
       "original": "selected/security-workflow/SKILL.md",
       "target": "skills/individual/security/security-workflow/SKILL.md",
       "baseline_sha256": "1a513708d1c13d9285a53e1d1bcee7fa5569aaf1fd189dc414c46d2bf12531f3",
       "current_sha256": "d81d85cc16fb3a3f1c7d37476b3b80748293ed8a5b032cb3c8c6c64af29683c8"
+    },
+    {
+      "original": "selected/skill-creator/scripts/package_skill.py",
+      "target": "skills/individual/engineering/skill-creator/scripts/package_skill.py",
+      "baseline_sha256": "2cd9a9891844516fd30466eae30e4a9b9a199802522de3fb12f59a063fba58ab",
+      "current_sha256": "e66f3a750eeb9dd71877b865b5f0026d56326cad9ca7dc8a94407ba4a2c5e408"
+    },
+    {
+      "original": "selected/skill-creator/scripts/quick_validate.py",
+      "target": "skills/individual/engineering/skill-creator/scripts/quick_validate.py",
+      "baseline_sha256": "99f76b23da5882ccc9301890e4c31837e4a9262bd1a9a75dc729df0b12459d52",
+      "current_sha256": "b91871aa66554412e9aba132eed9b687fca7f96ef2a140e5328b22ffb00e4d44"
+    },
+    {
+      "original": "selected/skill-creator/SKILL.md",
+      "target": "skills/individual/engineering/skill-creator/SKILL.md",
+      "baseline_sha256": "e030e7685e26283b4a76f5202aa3ae8516fb41dde799be5ae8ea6393ec009fe9",
+      "current_sha256": "a0aa22c36e424bc0ad197988fe19f650d56269565bc46b8c0df592b938b40e26"
     },
     {
       "original": "selected/source-index/SKILL.md",

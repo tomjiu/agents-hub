@@ -574,9 +574,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "7d5b285b1ae34d0baff45882972da11500402774b171696b53b9a667b5b0c1f8",
+      "current_sha256": "b88d4f00f028b11e1aa28b277d5949683820f7fbb6a324018bcbaa6a81f1130e",
       "baseline_sha256": "7d5b285b1ae34d0baff45882972da11500402774b171696b53b9a667b5b0c1f8",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "playwright",
@@ -718,9 +718,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "306b8fee01a3ed64b15af9f514e71d6aa0044a6496822fa7751d46b4b17657b1",
+      "current_sha256": "e2ad89feb0e24359f37ad60f51a6930e09888bc077eb707020406c60c7382245",
       "baseline_sha256": "306b8fee01a3ed64b15af9f514e71d6aa0044a6496822fa7751d46b4b17657b1",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "security-and-hardening",
@@ -735,9 +735,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "2ba512487db7ab87709d5157c515c97fe59da4104d0508bda1de054f3fa1d63e",
+      "current_sha256": "3add7c02d331d2caac06ddac5da06e1b3b454e811f93f8588674b129e8e7daf4",
       "baseline_sha256": "2ba512487db7ab87709d5157c515c97fe59da4104d0508bda1de054f3fa1d63e",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "security-best-practices",
@@ -773,9 +773,9 @@
       "license": "Apache-2.0",
       "license_status": "declared-file-not-legal-approval",
       "deployment_restricted": false,
-      "current_sha256": "d7d746d49adb3fd54b1e7ddf4e783cf332bd6fe5f34411d97d046158b2ebd8f4",
+      "current_sha256": "952371e8041f9a17f48859d660c68fbed06ef07caa5e02f9fa9bb1bd63bbe3cc",
       "baseline_sha256": "d7d746d49adb3fd54b1e7ddf4e783cf332bd6fe5f34411d97d046158b2ebd8f4",
-      "local_modified": false,
+      "local_modified": true,
       "license_evidence": {
         "path": "skills/individual/security/security-ownership-map/LICENSE.txt",
         "sha256": "44e03f7e263eb3ad256440c1eeab5e49168baff5a78ecef9a5447261cf3a91bc"
@@ -832,9 +832,9 @@
       "license": "Apache-2.0",
       "license_status": "declared-file-not-legal-approval",
       "deployment_restricted": false,
-      "current_sha256": "44351cb9b5d44254f1ca4cff196c09988b29f55626db677a6607eb2049ec5ea4",
+      "current_sha256": "33de8ee928cf505200adef6f463ce1ffcc36047c453453e805d5f672203b1a21",
       "baseline_sha256": "44351cb9b5d44254f1ca4cff196c09988b29f55626db677a6607eb2049ec5ea4",
-      "local_modified": false,
+      "local_modified": true,
       "license_evidence": {
         "path": "skills/individual/engineering/skill-creator/LICENSE.txt",
         "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"

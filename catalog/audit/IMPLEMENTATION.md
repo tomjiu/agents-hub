@@ -1,6 +1,6 @@
 # v2 基础重构实施状态
 
-状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试131通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
+状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试134通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
 ## 已完成
 
@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 131 PASS，1 SKIP（总132） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 134 PASS，1 SKIP（总135） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -142,6 +142,14 @@
 - 人工复核修复4份工程Skill中的错误指令层级、全局强制加载与禁止派生时的子代理要求；旧导入基线/许可不修改。自动预检不保证任意语义指令无冲突。
 - 实装rc.5 provider发现/读取全部48个正文合格技能、正文匹配且0警告，75个Skill排除并记录原因；不是全部脚本/专业任务验证。rc.1/rc.5记忆/搜索/并发发现重新验收，组合实现变更纳入指纹。
 - 详见 [可用性指南](../../asset-manager/USABILITY.md)，本次报告记录真实检索、加载通道、结构及限制，后续专业任务/外部依赖仍需逐项审核。
+
+## 第二层资源与离线任务审核
+
+- 新audit-resources遍历全部123 canonical Skill的显式链接及资源名，./和仓库内../可正确检查、越界/目录链接拒绝，不执行任何资源。当前246引用中223存在、21未解析、2示例；21项均在厂商内容，不能据此判定均为缺失依赖。
+- 3类独立断链修复：补充security/performance本地检查表（明确非找回的上游材料）、search-core修正失效链接、安全归属技能修正skills/skills旧命令路径。
+- 11项技能打包离线回归通过：真实CLI/help/归档正文、空/重复YAML、旧输出、源内输出、私密文件与许可拒绝、源变化、写入失败和并发写入保护。4项安全归属合成Git历史→报告→查询及原输出保护通过。
+- Python3.13.7用显式解释器和私有固定PyYAML6.0.3/networkx3.5，未修改Windows Store别名/全局配置；root新增3项资源回归，总135项134通过1跳过。见 [任务验收](../../asset-manager/TASK-ACCEPTANCE.md)。
+- 未执行厂商/Office受限资产，也未验证所有Python/浏览器/外部依赖，with_server只核对help与源码、未声称服务器生命周期修复已完成。
 
 ## 未认证与后续事项
 

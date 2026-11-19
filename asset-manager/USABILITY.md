@@ -46,4 +46,6 @@ node --test asset-manager/tests/usability.test.mjs asset-manager/tests/discovery
 node asset-manager/probe-dsh-skills.mjs
 ~~~
 
+第二层显式资源/离线任务审核见 [任务验收](TASK-ACCEPTANCE.md)：不是只验证加载，还执行了合成Skill打包和合成Git安全归属报告。audit-resources列出真实链接与未解析项；剩余厂商路径必须人工分类，不能将示例当缺失脚本自动补造。
+
 未完成：全部专业任务效果基准、全部脚本依赖执行、所有公网来源、厂商移植/许可授权、任意语义矛盾自动排除。本轮保证可检索和已声明/已检测冲突可拦截，不保证所有库存已运行通过。

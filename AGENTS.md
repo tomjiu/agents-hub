@@ -26,6 +26,7 @@ node asset-manager/cli.mjs expert research
 node asset-manager/cli.mjs skills-status
 node asset-manager/cli.mjs preflight --expert research --client dsh
 node asset-manager/cli.mjs audit-usability --client dsh
+node asset-manager/cli.mjs audit-resources
 ~~~
 
 search-assets搜索本地ID/name/description/path与登记discovery.aliases，中文长词按二字片段匹配、精确ID优先。支持skills、mcp、plugins、agents-md；结果含当前usability/blockers/requirements/next_step，不是语义搜索或远端安装。skills-status列出canonical文件、登记缺漏、坏frontmatter、同名提供方。一个name可有多个ID，例如docx与trae.docx，不一起混装。看到源码不能声称宿主已加载。preflight检查组合重名/依赖/声明冲突/MCP运行ID及许可、宿主障碍，BLOCKED返回非零、不写视图。audit-usability检查全部登记。CONTENT_READY只指内容可读，CONDITIONAL有额外步骤，BLOCKED有障碍；不是法务批准或任意指令无语义冲突保证。详见 [使用审核](asset-manager/USABILITY.md)。

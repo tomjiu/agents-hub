@@ -8,6 +8,8 @@ search-assets <query> [--kind skills|mcp|plugins|agents-md] [--limit N]只读本
 
 preflight <id,id>或--expert NAME检查当前组合；audit-usability列全部登记障碍，不启动服务、不改文件。search-assets支持任务用语/登记别名并返回一致可用性和下一步。CONTENT_READY不是全功能验证，见 [使用审核](USABILITY.md)。
 
+audit-resources只读检查全部canonical Skill的显式Markdown链接与脚本/参考文件路径，区分FOUND、MISSING、示例/动态路径及越界。仓库内相对链接存在不代表独立部署包包含它。probe-python-tasks.mjs需显式Python、私有依赖目录和Git路径，运行合成任务，不自动安装；详见 [离线任务审核](TASK-ACCEPTANCE.md)。
+
 ## 已实现
 
 - catalog/assets 元数据读取、稳定 ID/类型/路径校验，四类独立保护策略。
