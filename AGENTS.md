@@ -24,9 +24,11 @@ node asset-manager/cli.mjs search-assets "memory-net" --kind plugins
 node asset-manager/cli.mjs inspect source-index
 node asset-manager/cli.mjs expert research
 node asset-manager/cli.mjs skills-status
+node asset-manager/cli.mjs preflight --expert research --client dsh
+node asset-manager/cli.mjs audit-usability --client dsh
 ~~~
 
-search-assets搜索本地ID/name/description/path，支持skills、mcp、plugins、agents-md；是关键词检索，不是语义搜索或远端安装。skills-status列出canonical文件、登记缺漏、坏frontmatter、同名提供方。一个name可有多个ID，例如docx与trae.docx，不一起混装。看到源码不能声称宿主已加载。
+search-assets搜索本地ID/name/description/path与登记discovery.aliases，中文长词按二字片段匹配、精确ID优先。支持skills、mcp、plugins、agents-md；结果含当前usability/blockers/requirements/next_step，不是语义搜索或远端安装。skills-status列出canonical文件、登记缺漏、坏frontmatter、同名提供方。一个name可有多个ID，例如docx与trae.docx，不一起混装。看到源码不能声称宿主已加载。preflight检查组合重名/依赖/声明冲突/MCP运行ID及许可、宿主障碍，BLOCKED返回非零、不写视图。audit-usability检查全部登记。CONTENT_READY只指内容可读，CONDITIONAL有额外步骤，BLOCKED有障碍；不是法务批准或任意指令无语义冲突保证。详见 [使用审核](asset-manager/USABILITY.md)。
 
 - 真相源：[catalog/assets](catalog/README.md)稳定ID → canonical path；[experts](experts/README.md)只引用ID；[MCP注册表](mcp/registry.toml)定义运行命令；版本选择在私有.asset-state/active.json。
 - [skills目录](skills/README.md)：individual按工程/文档/安全/研究分组；collections/vendors保留厂商内部结构；asset-management是通用管理入口。运行副本不能变成第二维护源。
@@ -48,7 +50,7 @@ DSH发布可能改变tools/register/output、systemPrompt/section、tools/result
 
 ## 4. 新资产登记与更新
 
-1. 先search-assets确认没有同一来源重复登记，读repository-skills工作流。
+1. 先search-assets确认没有同一来源重复登记，读repository-skills工作流。可添加discovery.description/aliases；确认的依赖/互斥写顶层requires/conflicts稳定ID数组，预检不自动安装，不能用声明替代正文审核。
 2. 登记catalog/assets/<id>.toml：id/kind/path、source身份与许可、上游版本（未知就未知）、version内容哈希；新增provenance/<id>.json记录首次文件基线。不重写旧基线隐藏本地修改。
 3. 四类 [updates/locks](catalog/README.md)相互独立；日常不运行catalog-build或migration重建整个登记。前者是首次导入器，不是新增按钮。
 4. 新版本独立stage → validate-version →实际许可/依赖/运行审查→approve→activate。approve记录人工决定，不认证审核者身份。activate仅指针；客户端需新运行包才能采用，MCP/记忆新快照须有独立编译验收。

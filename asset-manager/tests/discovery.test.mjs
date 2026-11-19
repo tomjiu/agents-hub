@@ -34,3 +34,10 @@ test('real repository priority assets are registered and onboarding links resolv
  const guidance=await fs.readFile(path.join(root,'AGENTS.md'),'utf8');const links=guidance.split('](').slice(1).map(part=>part.split(')')[0]);assert.ok(links.length>=10);for(const target of links){if(!target.startsWith('http'))await fs.access(path.join(root,target));}
  const {resolveExpert,loadCatalog}=await import('../core/catalog.mjs');const recipe=await resolveExpert(root,'research',await loadCatalog(root));assert.ok(recipe.skills.includes('skill-search'));assert.ok(recipe.skills.includes('source-index'));assert.ok(recipe.mcp.includes('mcp.search-core'));
 });
+
+test('real task wording finds memory search and local skill discovery, not just exact IDs',async()=>{
+ const {fileURLToPath}=await import('node:url');const root=fileURLToPath(new URL('../..',import.meta.url));
+ for(const [query,kind,id] of [['记忆插件','plugins','memory-net'],['搜索插件','mcp','mcp.search-core'],['查找技能','skills','skill-search'],['来源索引','skills','source-index']]){
+  const r=await searchAssets(root,query,{kind,limit:3});assert.ok(r.results.some(a=>a.id===id),'Missing usable task lookup for '+query);
+ }
+});

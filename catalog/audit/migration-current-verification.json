@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2384,
+  "unchanged": 2380,
   "missing": [],
   "changed": [
     {
@@ -156,6 +156,12 @@
       "current_sha256": "23b7d84d775d05f75d056557d27d0aae86025612c63fd3558725db4782026e07"
     },
     {
+      "original": "selected/executing-plans/SKILL.md",
+      "target": "skills/individual/engineering/executing-plans/SKILL.md",
+      "baseline_sha256": "d97039071302785fe4f5191bf426782dc4409cfb2f08bf0f7a4b75815ad291e9",
+      "current_sha256": "10f115165a71ad30e9ef331ba97d85ea09ba634c4e334b12857e077069758bb6"
+    },
+    {
       "original": "selected/firmware-analysis/SKILL.md",
       "target": "skills/individual/research/firmware-analysis/SKILL.md",
       "baseline_sha256": "13ccee79d3e5b5e3e2c1809cd5f56edb0a9057b657bb1d8a4c011d545fc429db",
@@ -186,6 +192,12 @@
       "current_sha256": "d1a23be931e10e27720fb5019f0fcf4faba579b28ad94cb0976558a6c8af02fe"
     },
     {
+      "original": "selected/requesting-code-review/SKILL.md",
+      "target": "skills/individual/engineering/requesting-code-review/SKILL.md",
+      "baseline_sha256": "fb1c965693e9b71799462b4bf445f65c82806c32aff1cd041acacb552a7da9ca",
+      "current_sha256": "52e9621c4d8a1c12c7ab779117eab8bfeaed3bbdfe3dfccf8e7c66dfb0eed888"
+    },
+    {
       "original": "selected/reverse-engineering-workflow/SKILL.md",
       "target": "skills/individual/research/reverse-engineering-workflow/SKILL.md",
       "baseline_sha256": "a88a6fa074bd759643d12f46f518b7b6636e077030206a6a9a963a0c70e2f179",
@@ -208,6 +220,18 @@
       "target": "skills/individual/research/source-index/SKILL.md",
       "baseline_sha256": "057e25f1fff4fb80522ed8486c423347bf2312ba76ad66c7ea974c36022ee65f",
       "current_sha256": "a03efd45aff2560716ea5a7247c7d3c0908dfebd9bdacfe20a53792c31b0da3d"
+    },
+    {
+      "original": "selected/using-superpowers/SKILL.md",
+      "target": "skills/individual/engineering/using-superpowers/SKILL.md",
+      "baseline_sha256": "f85a019a5fce0adb17eb66496f301b3909f6ef93fddbe51b6b316eecee23b735",
+      "current_sha256": "fd7bce10ef2fe6b11c605286a779b6b5061f4cb0b2a38c7475d03d1acc5fb5bd"
+    },
+    {
+      "original": "selected/writing-plans/SKILL.md",
+      "target": "skills/individual/engineering/writing-plans/SKILL.md",
+      "baseline_sha256": "6f76fc9d4817a070c5deea6bfac91ff8dec32d0698d39cbc749d4ea37daa8658",
+      "current_sha256": "b1018a7772158bdd7d58771b89c36c65c0a3f1445b2e1f46af3952dfad2dbfb7"
     }
   ],
   "note": "Migration apply verified all original hashes before local modifications. Subsequent repairs and new behavior are explicitly listed; original versions remain in preserved Git history."

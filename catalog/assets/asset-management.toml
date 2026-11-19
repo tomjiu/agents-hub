@@ -14,3 +14,7 @@ local = "2.0.0"
 sha256 = "7b79b0f7219cb3938db6d5b6bd892ac288e6273bba2fd563d86889fadd4a650f"
 local_modified = false
 enabled = false
+
+[discovery]
+description = "管理技能MCP插件和规范的登记版本部署回滚。"
+aliases = [ "资产登记", "部署技能", "版本回滚" ]

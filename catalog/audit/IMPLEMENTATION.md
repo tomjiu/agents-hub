@@ -1,6 +1,6 @@
 # v2 基础重构实施状态
 
-状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试117通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
+状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试131通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
 ## 已完成
 
@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 117 PASS，1 SKIP（总118） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 131 PASS，1 SKIP（总132） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -133,6 +133,15 @@
 - 新search-assets只读关键词检索和skills-status库存检查，4项测试包括真实登记/规范链接/预选组合。validate拒绝坏frontmatter、缺失或未登记技能。
 - 123个canonical Skill全部登记，51独立、71厂商、1管理。security-workflow描述含未转义冒号造成YAML坏语法已修复，正文原样。10个厂商name跨客户端不兼容、5组同名提供方分别报告，不删除或偷偷改名。
 - 当前137资产的存在不意味着全部可用：许可/厂商运行时限制保留，真实公网搜索与收费鉴权不在当前测试范围。
+
+## 全仓索引体验与组合审核
+
+- 真实任务“记忆插件”检索遗漏先失败复现；当前增加6个关键资产的discovery.description/aliases及中文二字片段、精确ID加权。137个稳定ID逐项检索命中、4类任务检索和4个Expert预检通过，不是语义模型或远端查找。
+- audit-usability覆盖全部137项，默认DSH为48 CONTENT_READY、5 CONDITIONAL、84 BLOCKED；CONTENT_READY仅正文可读，阻止项包括75个厂商/许可Skill与9个MCP宿主/配置缺口。逐项原因不能被“库存完整”掩盖。
+- 新preflight只读组合检查，重复Skill name/MCP runtime ID、声明requires/conflicts、循环和Expert继承/Profile追加排斥检查；BLOCKED返回exit1，view也执行相同组合规则。
+- 人工复核修复4份工程Skill中的错误指令层级、全局强制加载与禁止派生时的子代理要求；旧导入基线/许可不修改。自动预检不保证任意语义指令无冲突。
+- 实装rc.5 provider发现/读取全部48个正文合格技能、正文匹配且0警告，75个Skill排除并记录原因；不是全部脚本/专业任务验证。rc.1/rc.5记忆/搜索/并发发现重新验收，组合实现变更纳入指纹。
+- 详见 [可用性指南](../../asset-manager/USABILITY.md)，本次报告记录真实检索、加载通道、结构及限制，后续专业任务/外部依赖仍需逐项审核。
 
 ## 未认证与后续事项
 

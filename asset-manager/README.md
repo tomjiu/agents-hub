@@ -6,6 +6,8 @@
 
 search-assets <query> [--kind skills|mcp|plugins|agents-md] [--limit N]只读本地登记检索，优先ID/name再description/path；skills-status [--verbose]检查canonical技能、登记缺漏、语法和客户端名称限制。库存坏语法/未登记/缺失使validate失败，厂商不兼容名称单独报告、原件不改。优先skills/individual/research/skill-search/SKILL.md及根AGENTS.md，不用手工扫描全部文件。
 
+preflight <id,id>或--expert NAME检查当前组合；audit-usability列全部登记障碍，不启动服务、不改文件。search-assets支持任务用语/登记别名并返回一致可用性和下一步。CONTENT_READY不是全功能验证，见 [使用审核](USABILITY.md)。
+
 ## 已实现
 
 - catalog/assets 元数据读取、稳定 ID/类型/路径校验，四类独立保护策略。

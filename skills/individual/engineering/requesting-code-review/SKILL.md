@@ -5,7 +5,7 @@ description: Use when completing tasks, implementing major features, or before m
 
 # Requesting Code Review
 
-Dispatch superpowers:code-reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
+When independent review is available and the user permits delegation, request an authorized reviewer. Otherwise review requirements/diff/tests inline and clearly mark it as self-review, not independent approval. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
 **Core principle:** Review early, review often.
 
@@ -29,9 +29,9 @@ BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
 HEAD_SHA=$(git rev-parse HEAD)
 ```
 
-**2. Dispatch code-reviewer subagent:**
+**2. Choose the permitted review path:**
 
-Use Task tool with superpowers:code-reviewer type, fill template at `code-reviewer.md`
+With explicit permission and an available reviewer, fill `code-reviewer.md` and use the host reviewer. Without permission/tool, compare requirements with the exact diff, test normal and failure paths, check data/config preservation, license and runtime assumptions, record findings inline. Do not fabricate Task or a reviewer asset. Fix critical issues and report lack of independent review. In agents-hub the current preference is no subagents. If independence is essential, ask the user to review rather than claiming it happened.
 
 **Placeholders:**
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built

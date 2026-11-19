@@ -49,7 +49,7 @@ This structure informs the task decomposition. Each task should produce self-con
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** Execute inline using the available executing-plans workflow, with review checkpoints. Delegate only if permitted by the user and exposed by the host; never invent a required sub-skill. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** [One sentence describing what this builds]
 
@@ -133,7 +133,7 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan, check existing delegation preferences. If subagents are prohibited (as in agents-hub), do not ask again or create them: execute inline with checkpoints. Only when delegation is available/permitted and no user choice exists, offer execution choice:
 
 **"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
 
@@ -144,7 +144,7 @@ After saving the plan, offer execution choice:
 **Which approach?"**
 
 **If Subagent-Driven chosen:**
-- **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development
+- Use a separate worker workflow only if it actually exists in the host and the user selected delegation; otherwise use inline execution.
 - Fresh subagent per task + two-stage review
 
 **If Inline Execution chosen:**

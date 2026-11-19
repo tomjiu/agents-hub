@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import YAML from 'yaml';
 import {loadCatalog,readToml,resolveExpert,resolveProfile} from './catalog.mjs';
 import {effectivePath} from './lifecycle.mjs';
+import {selectionConflicts,blockedMcpStatuses} from './usability.mjs';
 import {assertDeployableLicense} from './license-review.mjs';
 import {clientMcpConfig,encodeClientConfig} from './mcp-config.mjs';
 import {confined,exists,snapshot,tree,createJson,sha256} from './files.mjs';
@@ -13,6 +14,7 @@ export async function createView(root,client,expert,{allowRestricted=false,selec
  for(const k of ['skills','mcp','plugins']){if(!Array.isArray(selected[k]))throw new Error('Invalid selected list '+k);for(const id of selected[k])if(catalog.get(id)?.kind!==k)throw new Error('Invalid selected '+k+' reference '+id);}
  const parent=await confined(root,'.asset-state/views',{mustExist:false});await fs.mkdir(parent,{recursive:true});const view=path.join(parent,client+'-'+crypto.randomUUID());await fs.mkdir(view);
  try {
+  const conflicts=await selectionConflicts(root,selected,{catalog});if(conflicts.length)throw new Error(conflicts.map(c=>c.reason+' ['+c.ids.join(', ')+']').join('; '));
   const skills=path.join(view,'skills');await fs.mkdir(skills);const used=new Set(),records=[];
   for(const id of selected.skills){const a=catalog.get(id);if(a.runtime_review_required&&!allowRestricted)throw new Error('Restricted vendor asset needs explicit license/runtime review: '+id);
    const source=await effectivePath(root,a);await assertDeployableLicense(a,source);const text=await fs.readFile(path.join(source,'SKILL.md'),'utf8');
@@ -24,8 +26,8 @@ export async function createView(root,client,expert,{allowRestricted=false,selec
   }
   const registry=await readToml(path.join(root,'mcp/registry.toml'));const mcp={},unsupported=[],runtime=[];
   for(const id of selected.mcp) {
-   const a=catalog.get(id),s=registry.servers.find(s=>s.id===a.registry_id);if(!s)throw new Error('Missing MCP registration '+id);
-   if(['unlocked-upstream','external-install-required','review-required','upstream-diff-pending'].includes(s.status))throw new Error('MCP not deployable before review: '+id);
+   const a=catalog.get(id),matches=registry.servers.filter(s=>s.id===a.registry_id);if(matches.length!==1)throw new Error('MCP registration must exist exactly once: '+id);const s=matches[0];
+   if(blockedMcpStatuses.includes(s.status))throw new Error('MCP not deployable before review: '+id);
    if(!['stdio','http'].includes(s.transport))throw new Error('Unknown MCP transport '+id);
    if(s.clients&&(!Array.isArray(s.clients)||!s.clients.includes(client))&&client!=='generic')throw new Error('MCP client not registered: '+id+' for '+client);
    if(Object.hasOwn(mcp,s.id))throw new Error('Duplicate MCP runtime ID '+s.id);
