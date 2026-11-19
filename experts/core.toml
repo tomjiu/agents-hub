@@ -1,5 +1,5 @@
 name = "core"
 description = "最小工程纪律与能力管理"
-skills = [ "asset-management", "source-index", "repository-skills", "systematic-debugging", "verification-before-completion", "writing-plans", "executing-plans" ]
+skills = [ "asset-management", "source-index", "skill-search", "repository-skills", "systematic-debugging", "verification-before-completion", "writing-plans", "executing-plans" ]
 mcp = []
 plugins = []

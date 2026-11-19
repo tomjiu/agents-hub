@@ -1,0 +1,891 @@
+{
+  "schema": 1,
+  "total": 123,
+  "registered": 123,
+  "by_scope": {
+    "individual": 51,
+    "vendors": 71,
+    "management": 1,
+    "other": 0
+  },
+  "invalid": [],
+  "incompatible": [
+    {
+      "id": "trae.trae-browseruse-external",
+      "path": "skills/collections/vendors/trae/skills/TRAE-browseruse-external/SKILL.md",
+      "name": "TRAE-browseruse-external",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "trae.trae-browseruse",
+      "path": "skills/collections/vendors/trae/skills/TRAE-browseruse/SKILL.md",
+      "name": "TRAE-browseruse",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "trae.trae-code-mode-orchestrator",
+      "path": "skills/collections/vendors/trae/skills/TRAE-code-mode-orchestrator/SKILL.md",
+      "name": "TRAE-code-mode-orchestrator",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "trae.trae-computer-use-ptc",
+      "path": "skills/collections/vendors/trae/skills/TRAE-computer-use-ptc/SKILL.md",
+      "name": "TRAE-computer-use-ptc",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "trae.trae-computer-use",
+      "path": "skills/collections/vendors/trae/skills/TRAE-computer-use/SKILL.md",
+      "name": "TRAE-computer-use",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "trae.trae-doctor",
+      "path": "skills/collections/vendors/trae/skills/TRAE-doctor/SKILL.md",
+      "name": "TRAE-doctor",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "trae.trae-product-knowledge",
+      "path": "skills/collections/vendors/trae/skills/TRAE-product-knowledge/SKILL.md",
+      "name": "TRAE-product-knowledge",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "workbuddy.buddy-multimodal-generation",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/buddy-multimodal-generation/SKILL.md",
+      "name": "3D模型与视频特效",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "workbuddy.library",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/library/SKILL.md",
+      "name": "资料库",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    },
+    {
+      "id": "workbuddy.sites",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/sites/SKILL.md",
+      "name": "发布为应用",
+      "reason": "Client-safe lowercase name required before deployment; preserve vendor original"
+    }
+  ],
+  "unregistered": [],
+  "missing": [],
+  "duplicate_client_names": [
+    {
+      "name": "docx",
+      "entries": [
+        {
+          "id": "trae.docx",
+          "path": "skills/collections/vendors/trae/skills/docx/SKILL.md"
+        },
+        {
+          "id": "docx",
+          "path": "skills/individual/document/docx/SKILL.md"
+        }
+      ]
+    },
+    {
+      "name": "pdf",
+      "entries": [
+        {
+          "id": "trae.pdf",
+          "path": "skills/collections/vendors/trae/skills/pdf/SKILL.md"
+        },
+        {
+          "id": "pdf",
+          "path": "skills/individual/document/pdf/SKILL.md"
+        }
+      ]
+    },
+    {
+      "name": "pptx",
+      "entries": [
+        {
+          "id": "trae.pptx",
+          "path": "skills/collections/vendors/trae/skills/pptx/SKILL.md"
+        },
+        {
+          "id": "pptx",
+          "path": "skills/individual/document/pptx/SKILL.md"
+        }
+      ]
+    },
+    {
+      "name": "skill-creator",
+      "entries": [
+        {
+          "id": "trae.skill-creator",
+          "path": "skills/collections/vendors/trae/skills/skill-creator/SKILL.md"
+        },
+        {
+          "id": "workbuddy.skill-creator",
+          "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/skill-creator/SKILL.md"
+        },
+        {
+          "id": "skill-creator",
+          "path": "skills/individual/engineering/skill-creator/SKILL.md"
+        }
+      ]
+    },
+    {
+      "name": "xlsx",
+      "entries": [
+        {
+          "id": "trae.xlsx",
+          "path": "skills/collections/vendors/trae/skills/xlsx/SKILL.md"
+        },
+        {
+          "id": "xlsx",
+          "path": "skills/individual/document/xlsx/SKILL.md"
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "asset-management",
+      "path": "skills/asset-management/SKILL.md",
+      "name": "asset-management",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-browseruse-external",
+      "path": "skills/collections/vendors/trae/skills/TRAE-browseruse-external/SKILL.md",
+      "name": "TRAE-browseruse-external",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-browseruse",
+      "path": "skills/collections/vendors/trae/skills/TRAE-browseruse/SKILL.md",
+      "name": "TRAE-browseruse",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-code-mode-orchestrator",
+      "path": "skills/collections/vendors/trae/skills/TRAE-code-mode-orchestrator/SKILL.md",
+      "name": "TRAE-code-mode-orchestrator",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-computer-use-ptc",
+      "path": "skills/collections/vendors/trae/skills/TRAE-computer-use-ptc/SKILL.md",
+      "name": "TRAE-computer-use-ptc",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-computer-use",
+      "path": "skills/collections/vendors/trae/skills/TRAE-computer-use/SKILL.md",
+      "name": "TRAE-computer-use",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-doctor",
+      "path": "skills/collections/vendors/trae/skills/TRAE-doctor/SKILL.md",
+      "name": "TRAE-doctor",
+      "valid": true
+    },
+    {
+      "id": "trae.trae-product-knowledge",
+      "path": "skills/collections/vendors/trae/skills/TRAE-product-knowledge/SKILL.md",
+      "name": "TRAE-product-knowledge",
+      "valid": true
+    },
+    {
+      "id": "trae.design-library-creator",
+      "path": "skills/collections/vendors/trae/skills/design-library-creator/SKILL.md",
+      "name": "design-library-creator",
+      "valid": true
+    },
+    {
+      "id": "trae.digital-avatar-creator",
+      "path": "skills/collections/vendors/trae/skills/digital-avatar-creator/SKILL.md",
+      "name": "digital-avatar-creator",
+      "valid": true
+    },
+    {
+      "id": "trae.doc-writing-guide",
+      "path": "skills/collections/vendors/trae/skills/doc-writing-guide/SKILL.md",
+      "name": "doc-writing-guide",
+      "valid": true
+    },
+    {
+      "id": "trae.docx",
+      "path": "skills/collections/vendors/trae/skills/docx/SKILL.md",
+      "name": "docx",
+      "valid": true
+    },
+    {
+      "id": "trae.dynamic-ui",
+      "path": "skills/collections/vendors/trae/skills/dynamic-ui/SKILL.md",
+      "name": "dynamic-ui",
+      "valid": true
+    },
+    {
+      "id": "trae.feedback",
+      "path": "skills/collections/vendors/trae/skills/feedback/SKILL.md",
+      "name": "feedback",
+      "valid": true
+    },
+    {
+      "id": "trae.html-deck",
+      "path": "skills/collections/vendors/trae/skills/html-deck/SKILL.md",
+      "name": "html-deck",
+      "valid": true
+    },
+    {
+      "id": "trae.html-report",
+      "path": "skills/collections/vendors/trae/skills/html-report/SKILL.md",
+      "name": "html-report",
+      "valid": true
+    },
+    {
+      "id": "trae.pdf",
+      "path": "skills/collections/vendors/trae/skills/pdf/SKILL.md",
+      "name": "pdf",
+      "valid": true
+    },
+    {
+      "id": "trae.pptx",
+      "path": "skills/collections/vendors/trae/skills/pptx/SKILL.md",
+      "name": "pptx",
+      "valid": true
+    },
+    {
+      "id": "trae.research-guide",
+      "path": "skills/collections/vendors/trae/skills/research-guide/SKILL.md",
+      "name": "research-guide",
+      "valid": true
+    },
+    {
+      "id": "trae.skill-creator",
+      "path": "skills/collections/vendors/trae/skills/skill-creator/SKILL.md",
+      "name": "skill-creator",
+      "valid": true
+    },
+    {
+      "id": "trae.solo-design",
+      "path": "skills/collections/vendors/trae/skills/solo-design/SKILL.md",
+      "name": "solo-design",
+      "valid": true
+    },
+    {
+      "id": "trae.solo-graphic-generation",
+      "path": "skills/collections/vendors/trae/skills/solo-graphic-generation/SKILL.md",
+      "name": "solo-graphic-generation",
+      "valid": true
+    },
+    {
+      "id": "trae.solo-image-edit",
+      "path": "skills/collections/vendors/trae/skills/solo-image-edit/SKILL.md",
+      "name": "solo-image-edit",
+      "valid": true
+    },
+    {
+      "id": "trae.xlsx",
+      "path": "skills/collections/vendors/trae/skills/xlsx/SKILL.md",
+      "name": "xlsx",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.sheetagent.skills.excel-generation",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-generation/SKILL.md",
+      "name": "tencent-docs-sheet-generation",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.sheetagent.skills.excel-handler",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-handler/SKILL.md",
+      "name": "tencent-docs-sheetagent",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docs-plugin.skills.tencent-docs",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docs-plugin/skills/tencent-docs/SKILL.md",
+      "name": "tencent-docs",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docs-plugin.skills.tencent-saas-docs",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docs-plugin/skills/tencent-saas-docs/SKILL.md",
+      "name": "tencent-saas-docs",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/SKILL.md",
+      "name": "tencent-docx",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.academic-paper-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/academic-paper-expert/SKILL.md",
+      "name": "academic-paper-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.business-copy-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/business-copy-expert/SKILL.md",
+      "name": "business-copy-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.general-writer",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/general-writer/SKILL.md",
+      "name": "general-writer",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.legal-contract-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/legal-contract-expert/SKILL.md",
+      "name": "legal-contract-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.poetry-prose-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/poetry-prose-expert/SKILL.md",
+      "name": "poetry-prose-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.science-writing-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/science-writing-expert/SKILL.md",
+      "name": "science-writing-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.stock-research-report-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/stock-research-report-expert/SKILL.md",
+      "name": "stock-research-report-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.tech-blog-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/tech-blog-expert/SKILL.md",
+      "name": "tech-blog-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.work-report-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/work-report-expert/SKILL.md",
+      "name": "work-report-expert",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.brief-compose",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/brief-compose/SKILL.md",
+      "name": "brief-compose",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.design-token",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/design-token/SKILL.md",
+      "name": "design-token",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.doc-typeset",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/doc-typeset/SKILL.md",
+      "name": "doc-typeset",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.format-extract",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/format-extract/SKILL.md",
+      "name": "format-extract",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.generate-fillable-contract-html",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/generate-fillable-contract-html/SKILL.md",
+      "name": "generate-fillable-contract-html",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.html-review",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-review/SKILL.md",
+      "name": "html-review",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.html-to-docx",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-to-docx/SKILL.md",
+      "name": "html-to-docx",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.tdoc-orchestrator",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/tdoc-orchestrator/SKILL.md",
+      "name": "tdoc-orchestrator",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-pptx.skills.tencent-pptx",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-pptx/skills/tencent-pptx/SKILL.md",
+      "name": "tencent-pptx",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.weixinpay.skills.weixinpay-feedback",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-feedback/SKILL.md",
+      "name": "weixinpay-feedback",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.weixinpay.skills.weixinpay-pay",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-pay/SKILL.md",
+      "name": "weixinpay-pay",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.weixinpay.skills.weixinpay-register",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-register/SKILL.md",
+      "name": "weixinpay-register",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.ardot-design-core",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/SKILL.md",
+      "name": "ardot-design-core",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.component-instance",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/component-instance/SKILL.md",
+      "name": "component-instance",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.design-variables",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/design-variables/SKILL.md",
+      "name": "design-variables",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.shared-styles",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/shared-styles/SKILL.md",
+      "name": "shared-styles",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.ardot-design-router",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-router/SKILL.md",
+      "name": "ardot-design-router",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.ardot-design-to-code",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-to-code/SKILL.md",
+      "name": "ardot-design-to-code",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.ardot-poster",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-poster/SKILL.md",
+      "name": "ardot-poster",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.ardot-slides",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-slides/SKILL.md",
+      "name": "ardot-slides",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.ardot-ui-design",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-ui-design/SKILL.md",
+      "name": "ardot-ui-design",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.buddy-multimodal-generation",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/buddy-multimodal-generation/SKILL.md",
+      "name": "3D模型与视频特效",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.expert-manager",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/expert-manager/SKILL.md",
+      "name": "expert-manager",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.geo-map-compliance-guard",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/geo-map-compliance-guard/SKILL.md",
+      "name": "geo-map-compliance-guard",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.library",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/library/SKILL.md",
+      "name": "资料库",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.livestream-poster",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/livestream-poster/SKILL.md",
+      "name": "livestream-poster",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.marketplace-skill-installer",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/marketplace-skill-installer/SKILL.md",
+      "name": "marketplace-skill-installer",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.recommend-connectors",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-connectors/SKILL.md",
+      "name": "recommend-connectors",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.recommend-experts",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-experts/SKILL.md",
+      "name": "recommend-experts",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.sites",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/sites/SKILL.md",
+      "name": "发布为应用",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.skill-creator",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/skill-creator/SKILL.md",
+      "name": "skill-creator",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-docs-routing",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-docs-routing/SKILL.md",
+      "name": "tencent-docs-routing",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.tencent-local-office-edit",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-local-office-edit/SKILL.md",
+      "name": "tencent-local-office-edit",
+      "valid": true
+    },
+    {
+      "id": "workbuddy.wb-finance-skill",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/wb-finance-skill/SKILL.md",
+      "name": "wb-finance-skill",
+      "valid": true
+    },
+    {
+      "id": "doc-coauthoring",
+      "path": "skills/individual/document/doc-coauthoring/SKILL.md",
+      "name": "doc-coauthoring",
+      "valid": true
+    },
+    {
+      "id": "docx",
+      "path": "skills/individual/document/docx/SKILL.md",
+      "name": "docx",
+      "valid": true
+    },
+    {
+      "id": "frontend-design",
+      "path": "skills/individual/document/frontend-design/SKILL.md",
+      "name": "frontend-design",
+      "valid": true
+    },
+    {
+      "id": "pdf",
+      "path": "skills/individual/document/pdf/SKILL.md",
+      "name": "pdf",
+      "valid": true
+    },
+    {
+      "id": "pptx",
+      "path": "skills/individual/document/pptx/SKILL.md",
+      "name": "pptx",
+      "valid": true
+    },
+    {
+      "id": "theme-factory",
+      "path": "skills/individual/document/theme-factory/SKILL.md",
+      "name": "theme-factory",
+      "valid": true
+    },
+    {
+      "id": "webapp-testing",
+      "path": "skills/individual/document/webapp-testing/SKILL.md",
+      "name": "webapp-testing",
+      "valid": true
+    },
+    {
+      "id": "xlsx",
+      "path": "skills/individual/document/xlsx/SKILL.md",
+      "name": "xlsx",
+      "valid": true
+    },
+    {
+      "id": "automation-workflow",
+      "path": "skills/individual/engineering/automation-workflow/SKILL.md",
+      "name": "automation-workflow",
+      "valid": true
+    },
+    {
+      "id": "debugging-and-error-recovery",
+      "path": "skills/individual/engineering/debugging-and-error-recovery/SKILL.md",
+      "name": "debugging-and-error-recovery",
+      "valid": true
+    },
+    {
+      "id": "executing-plans",
+      "path": "skills/individual/engineering/executing-plans/SKILL.md",
+      "name": "executing-plans",
+      "valid": true
+    },
+    {
+      "id": "finishing-a-development-branch",
+      "path": "skills/individual/engineering/finishing-a-development-branch/SKILL.md",
+      "name": "finishing-a-development-branch",
+      "valid": true
+    },
+    {
+      "id": "go-performance",
+      "path": "skills/individual/engineering/go-performance/SKILL.md",
+      "name": "go-performance",
+      "valid": true
+    },
+    {
+      "id": "godot-dev",
+      "path": "skills/individual/engineering/godot-dev/SKILL.md",
+      "name": "godot-dev",
+      "valid": true
+    },
+    {
+      "id": "mcp-builder",
+      "path": "skills/individual/engineering/mcp-builder/SKILL.md",
+      "name": "mcp-builder",
+      "valid": true
+    },
+    {
+      "id": "performance-optimization",
+      "path": "skills/individual/engineering/performance-optimization/SKILL.md",
+      "name": "performance-optimization",
+      "valid": true
+    },
+    {
+      "id": "playwright",
+      "path": "skills/individual/engineering/playwright/SKILL.md",
+      "name": "playwright",
+      "valid": true
+    },
+    {
+      "id": "receiving-code-review",
+      "path": "skills/individual/engineering/receiving-code-review/SKILL.md",
+      "name": "receiving-code-review",
+      "valid": true
+    },
+    {
+      "id": "requesting-code-review",
+      "path": "skills/individual/engineering/requesting-code-review/SKILL.md",
+      "name": "requesting-code-review",
+      "valid": true
+    },
+    {
+      "id": "rust-performance",
+      "path": "skills/individual/engineering/rust-performance/SKILL.md",
+      "name": "rust-performance",
+      "valid": true
+    },
+    {
+      "id": "skill-creator",
+      "path": "skills/individual/engineering/skill-creator/SKILL.md",
+      "name": "skill-creator",
+      "valid": true
+    },
+    {
+      "id": "source-driven-development",
+      "path": "skills/individual/engineering/source-driven-development/SKILL.md",
+      "name": "source-driven-development",
+      "valid": true
+    },
+    {
+      "id": "systematic-debugging",
+      "path": "skills/individual/engineering/systematic-debugging/SKILL.md",
+      "name": "systematic-debugging",
+      "valid": true
+    },
+    {
+      "id": "test-driven-development",
+      "path": "skills/individual/engineering/test-driven-development/SKILL.md",
+      "name": "test-driven-development",
+      "valid": true
+    },
+    {
+      "id": "ts-performance",
+      "path": "skills/individual/engineering/ts-performance/SKILL.md",
+      "name": "ts-performance",
+      "valid": true
+    },
+    {
+      "id": "using-git-worktrees",
+      "path": "skills/individual/engineering/using-git-worktrees/SKILL.md",
+      "name": "using-git-worktrees",
+      "valid": true
+    },
+    {
+      "id": "using-superpowers",
+      "path": "skills/individual/engineering/using-superpowers/SKILL.md",
+      "name": "using-superpowers",
+      "valid": true
+    },
+    {
+      "id": "verification-before-completion",
+      "path": "skills/individual/engineering/verification-before-completion/SKILL.md",
+      "name": "verification-before-completion",
+      "valid": true
+    },
+    {
+      "id": "writing-plans",
+      "path": "skills/individual/engineering/writing-plans/SKILL.md",
+      "name": "writing-plans",
+      "valid": true
+    },
+    {
+      "id": "dfir-workflow",
+      "path": "skills/individual/research/dfir-workflow/SKILL.md",
+      "name": "dfir-workflow",
+      "valid": true
+    },
+    {
+      "id": "exa-search",
+      "path": "skills/individual/research/exa-search/SKILL.md",
+      "name": "exa-search",
+      "valid": true
+    },
+    {
+      "id": "firmware-analysis",
+      "path": "skills/individual/research/firmware-analysis/SKILL.md",
+      "name": "firmware-analysis",
+      "valid": true
+    },
+    {
+      "id": "keenable-cli",
+      "path": "skills/individual/research/keenable-cli/SKILL.md",
+      "name": "keenable-cli",
+      "valid": true
+    },
+    {
+      "id": "repository-skills",
+      "path": "skills/individual/research/repository-skills/SKILL.md",
+      "name": "repository-skills",
+      "valid": true
+    },
+    {
+      "id": "reverse-engineering-workflow",
+      "path": "skills/individual/research/reverse-engineering-workflow/SKILL.md",
+      "name": "reverse-engineering-workflow",
+      "valid": true
+    },
+    {
+      "id": "search-core",
+      "path": "skills/individual/research/search-core/SKILL.md",
+      "name": "search-core",
+      "valid": true
+    },
+    {
+      "id": "skill-search",
+      "path": "skills/individual/research/skill-search/SKILL.md",
+      "name": "skill-search",
+      "valid": true
+    },
+    {
+      "id": "source-index",
+      "path": "skills/individual/research/source-index/SKILL.md",
+      "name": "source-index",
+      "valid": true
+    },
+    {
+      "id": "tavily-hikari-best-practices",
+      "path": "skills/individual/research/tavily-hikari-best-practices/SKILL.md",
+      "name": "tavily-hikari-best-practices",
+      "valid": true
+    },
+    {
+      "id": "tavily-hikari-cli",
+      "path": "skills/individual/research/tavily-hikari-cli/SKILL.md",
+      "name": "tavily-hikari-cli",
+      "valid": true
+    },
+    {
+      "id": "tavily-hikari-extract",
+      "path": "skills/individual/research/tavily-hikari-extract/SKILL.md",
+      "name": "tavily-hikari-extract",
+      "valid": true
+    },
+    {
+      "id": "tavily-hikari-research",
+      "path": "skills/individual/research/tavily-hikari-research/SKILL.md",
+      "name": "tavily-hikari-research",
+      "valid": true
+    },
+    {
+      "id": "tavily-hikari-search",
+      "path": "skills/individual/research/tavily-hikari-search/SKILL.md",
+      "name": "tavily-hikari-search",
+      "valid": true
+    },
+    {
+      "id": "web-search-hikari",
+      "path": "skills/individual/research/web-search-hikari/SKILL.md",
+      "name": "web-search-hikari",
+      "valid": true
+    },
+    {
+      "id": "authorized-analysis-scope",
+      "path": "skills/individual/security/authorized-analysis-scope/SKILL.md",
+      "name": "authorized-analysis-scope",
+      "valid": true
+    },
+    {
+      "id": "offensive-methodology",
+      "path": "skills/individual/security/offensive-methodology/SKILL.md",
+      "name": "offensive-methodology",
+      "valid": true
+    },
+    {
+      "id": "security-and-hardening",
+      "path": "skills/individual/security/security-and-hardening/SKILL.md",
+      "name": "security-and-hardening",
+      "valid": true
+    },
+    {
+      "id": "security-best-practices",
+      "path": "skills/individual/security/security-best-practices/SKILL.md",
+      "name": "security-best-practices",
+      "valid": true
+    },
+    {
+      "id": "security-ownership-map",
+      "path": "skills/individual/security/security-ownership-map/SKILL.md",
+      "name": "security-ownership-map",
+      "valid": true
+    },
+    {
+      "id": "security-threat-model",
+      "path": "skills/individual/security/security-threat-model/SKILL.md",
+      "name": "security-threat-model",
+      "valid": true
+    },
+    {
+      "id": "security-workflow",
+      "path": "skills/individual/security/security-workflow/SKILL.md",
+      "name": "security-workflow",
+      "valid": true
+    }
+  ],
+  "scope": "Read-only canonical SKILL.md inventory. Duplicate client names are alternative providers, not automatic deletion candidates.",
+  "source": "Read-only current canonical inventory; no vendor content renaming or legal approval",
+  "review_required_vendor_assets": 71,
+  "explicit_office_restrictions": 4
+}

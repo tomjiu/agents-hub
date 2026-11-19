@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2385,
+  "unchanged": 2384,
   "missing": [],
   "changed": [
     {
@@ -15,7 +15,7 @@
       "original": "agents-md/README.md",
       "target": "agents-md/README.md",
       "baseline_sha256": "72823aabcc440b0fce68721ec355cfe087570e551dce525a433e80406a53102b",
-      "current_sha256": "754a0c94112d0580a569ac82ee446fcd891e3ea565618892ca555773bdd4013d"
+      "current_sha256": "52327014754a4555bb77ce59ad3e40456e115daa0496b4c740caff0603f096df"
     },
     {
       "original": "agents-md/REVIEW.md",
@@ -183,7 +183,7 @@
       "original": "selected/repository-skills/SKILL.md",
       "target": "skills/individual/research/repository-skills/SKILL.md",
       "baseline_sha256": "40bedf83119d857bdfbaedf0aef8826b7cdd4f81a709c490da4b9daaba3d9e8b",
-      "current_sha256": "87911931c3cdce129a3c0b11d8a4a5f2e3c7b72bae43baf2809b3eb347aeabbf"
+      "current_sha256": "d1a23be931e10e27720fb5019f0fcf4faba579b28ad94cb0976558a6c8af02fe"
     },
     {
       "original": "selected/reverse-engineering-workflow/SKILL.md",
@@ -198,10 +198,16 @@
       "current_sha256": "ac9c0e7f6b1ff2e269057c3f1d593737df8598e532e8a3213fd68baff5aae2ce"
     },
     {
+      "original": "selected/security-workflow/SKILL.md",
+      "target": "skills/individual/security/security-workflow/SKILL.md",
+      "baseline_sha256": "1a513708d1c13d9285a53e1d1bcee7fa5569aaf1fd189dc414c46d2bf12531f3",
+      "current_sha256": "d81d85cc16fb3a3f1c7d37476b3b80748293ed8a5b032cb3c8c6c64af29683c8"
+    },
+    {
       "original": "selected/source-index/SKILL.md",
       "target": "skills/individual/research/source-index/SKILL.md",
       "baseline_sha256": "057e25f1fff4fb80522ed8486c423347bf2312ba76ad66c7ea974c36022ee65f",
-      "current_sha256": "2b5baf57c8b98671e91c7339e1e29458077fba50e9109b45ac20f9a9b677e868"
+      "current_sha256": "a03efd45aff2560716ea5a7247c7d3c0908dfebd9bdacfe20a53792c31b0da3d"
     }
   ],
   "note": "Migration apply verified all original hashes before local modifications. Subsequent repairs and new behavior are explicitly listed; original versions remain in preserved Git history."

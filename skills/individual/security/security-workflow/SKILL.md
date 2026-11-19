@@ -1,6 +1,6 @@
 ---
 name: security-workflow
-description: Use when designing or reviewing software security (AppSec) — threat model, secure coding, dependency/SAST/secrets scanning, supply chain. Index of tools: where to get, how to install, how to run, how chains fit. Prefer defense for product design.
+description: "Use when designing or reviewing software security (AppSec) — threat model, secure coding, dependency/SAST/secrets scanning, supply chain. Index of tools: where to get, how to install, how to run, how chains fit. Prefer defense for product design."
 ---
 
 # Security Workflow (defensive / product design)

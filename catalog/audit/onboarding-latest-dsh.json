@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "status": "VERIFIED_BEFORE_MERGE",
+  "observed_channels": {
+    "date": "2026-11-19",
+    "latest": "0.2.2-rc.1",
+    "next": "0.2.2-rc.5",
+    "source": "npm view dist-tags; exact next installation isolated"
+  },
+  "runtime": {
+    "version": "0.2.2-rc.5",
+    "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+    "assets_sha256": "50a3bc4b938a265743d7eee06e4d8c2a5d515b307f6eacae09f47f21a81a5db9",
+    "direct_host": "PASS",
+    "generated_bundle": "PASS",
+    "parallel_discovery": true,
+    "search": {
+      "queried": true,
+      "refs_returned": true,
+      "cache_hit": true,
+      "provider_requests": 1,
+      "cache_isolated": true,
+      "source": "Local SearXNG-compatible fixture; not public web"
+    },
+    "memory": {
+      "persisted": true,
+      "prompt_injection": true,
+      "auto_observe": true,
+      "self_filter": true
+    },
+    "skill": {
+      "name": "asset-management",
+      "deployed": true,
+      "invoked": true,
+      "full_content_seen_by_model": true
+    }
+  },
+  "preselected_skills": [
+    "asset-management",
+    "executing-plans",
+    "repository-skills",
+    "skill-search",
+    "source-index",
+    "systematic-debugging",
+    "verification-before-completion",
+    "writing-plans"
+  ],
+  "inventory": {
+    "total_skills": 123,
+    "registered": 123,
+    "invalid_yaml": 0,
+    "unregistered": 0,
+    "missing": 0,
+    "independent": 51,
+    "vendor": 71,
+    "management": 1,
+    "client_name_incompatible_vendor": 10,
+    "duplicate_name_groups": 5
+  },
+  "root_tests": {
+    "total": 118,
+    "passed": 117,
+    "skipped": 1
+  },
+  "new_entries": [
+    "search-assets",
+    "skills-status",
+    "skill-search",
+    "root AGENTS operational onboarding"
+  ],
+  "restrictions": [
+    "Only memory-net is the registered native DSH plugin; Search-core is MCP not native plugin",
+    "Vendor host-native plugins and restricted assets not enabled/certified",
+    "Public source availability and paid authentication not certified",
+    "Live DSH and user profile untouched",
+    "No configured GitHub checks observed; local tests not remote CI"
+  ],
+  "merge_authorization": "User explicitly requested review and merge existing PR to main"
+}

@@ -6,12 +6,16 @@
 
 [最终验收](final-dsh-acceptance.json)与[初次干净副本证据](fresh-checkout-verification.json)记录固定安装、构建、根测试、完整迁移目标核对、两版真实DSH和Console实际点击。[详细阶段记录](IMPLEMENTATION.md)保留此前实现与失败修复历史。
 
+## 当前新代理入口与最新版本
+
+当前next已为DSH rc.5，Memory-net和Search-core直接/生成运行包实测通过；latest仍rc.1。新代理先读根AGENTS.md，按search-assets/skills-status找到并阅读canonical Skill，不自动启用。当前123个技能全登记（51独立、71厂商、1管理），137个总资产；10个厂商名称不满足通用客户端规范，5组同名提供方需明确选择，保留原件与许可限制。
+
 ## 本次已交付
 
 | 范围 | 状态 | 验收 |
 |---|---|---|
 | 原始内容与目录职责 | 已交付 | 2,418个迁移目标在提交/干净副本无缺失，当前字节与Git一致；目录结构按Skills/Experts/MCP/Plugins/agents-md/Catalog分工 |
-| 稳定身份与来源 | 已交付基础 | 136资产登记，导入commit不冒充上游，逐文件基线和历史锁保留，未核实项明确标识 |
+| 稳定身份与来源 | 已交付基础 | 137资产登记（新增skill-search），导入commit不冒充上游，逐文件基线和历史锁保留，未核实项明确标识 |
 | 原始下载与候选发布 | 已交付失败保护 | 超量/中断/校验/记录失败不正常交付；候选源一致性、并发和写入失败通过；传输替身不证明真实TLS |
 | 版本生命周期 | 已交付 | 独立暂存、三方比较、验证、人工批准记录、指针激活、连续回滚；失败与改动保护测试 |
 | 恢复与配置 | 已交付有边界 | schema2打包全部历史引用版本，内容恢复不启用；独立明确批准可在无active.json环境恢复选择并连续回滚。Skill/MCP部署保持原件保护 |
@@ -38,4 +42,4 @@
 2. npm test和validate；check-dsh对安装包与当前产物指纹检查。不同Node版本、宿主或构建变化先按 [升级指南](../../asset-manager/DSH-UPGRADE.md) 复验。
 3. dsh-bundle --memory创建全新私有运行包，inspect-dsh-bundle后明确启动独立headless；[运行包指南](../../asset-manager/DSH-BUNDLE.md)详列路径、状态与保留边界。
 4. 默认不会读或接管现有记忆库。没有用户授权，不改正在运行的profile；state有用户数据时不能当垃圾清理。
-5. 成果保存于功能分支与草稿PR，供用户审阅；未声称第三方审查已通过。远端更新不等于main合并或生产实例升级。
+5. 成果通过已有PR按用户授权审查/合并，合并结果以GitHub为准；本地检查不是第三方审查或CI通过，main合并也不等于生产实例升级。

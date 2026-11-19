@@ -1,6 +1,6 @@
 # v2 基础重构实施状态
 
-状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。最终独立副本95测试通过、1权限项跳过，记忆/搜索/Skill运行包在两版DSH通过；main未合并，运行中的DSH不变。详见 [最终验收](final-dsh-acceptance.json)，未认证资产不自动启用。
+状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试117通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
 ## 已完成
 
@@ -8,7 +8,7 @@
 - 基线 2,418 个文件建立原路径、目标、SHA256，搬迁后全部字节一致。后续定向修复单独列出差异，不隐瞒成原样迁移。
 - 49 个原独立 Skill + search-core + 71 个厂商 Skill保持唯一内容位置；新增资产管理工作流。厂商包内部结构、Manifest、专家候选保留。
 - Search-core TS/Go 分开放入 MCP，Zai-bridge与Firefox完整迁入；Memory-net核心、DSH Adapter、Console及vendor dist整体保留。
-- Catalog登记136项资产：122 Skill、10 MCP、1插件和3组模板；稳定ID、来源、四类独立更新策略/基线锁、逐文件溯源及客户端配置意图建立，无自动覆盖或启用。
+- Catalog现登记137项资产：123 Skill（新增本地skill-search）、10 MCP、1插件和3组模板；稳定ID、来源、四类独立更新策略/基线锁、逐文件溯源及客户端配置意图建立，无自动覆盖或启用。
 - 暂存核查发现10个旧忽略规则排除的原始运行产物，已明确纳入Git；全部2,418个原迁移目标以Git blob ID验证与当前工作字节相同。为避免clone时改变资源哈希，根.gitattributes保留字节及原换行。
 - CLI基础来源检查、校验下载、三方差异、独立快照、静态验证、人工批准记录、版本指针、连续回滚、独立视图、AGENTS候选拼接、恢复包导出与非启用恢复。
 
@@ -16,14 +16,14 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 113 PASS，1 SKIP（总114） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 117 PASS，1 SKIP（总118） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
 | Zai-bridge Go | go test ./... PASS | 本地及隔离测试，没有动真实Z.ai账户 |
 | Firefox | 491/491单元测试PASS，构建成功 | 本地实现保留；平台fixture已修复；真实交互待验 |
-| DSH Skill filesystem provider | 实装0.2.2-rc.1从当前dsh Profile在隔离ctx读取7个Skill成功，0警告 | 真实provider list/get；未更改运行中DSH配置，测试视图结束后回收 |
+| DSH Skill filesystem provider | rc.5从当前core Profile在隔离ctx读取8个Skill成功，0警告；rc.1旧7项证据保留 | 真实provider list/get；未更改运行中DSH配置，测试视图结束后回收 |
 | Search-core MCP | initialize、tools/list、search与缓存/失败路径PASS | 真实服务+本地HTTP来源；两版DSH查询及缓存结果回到模型；不证明公网来源全部可用 |
 | npm来源查询 | 安全拒绝 | 本机DNS返回受禁止地址，未绕过公网限制、未应用更新 |
 | Search-core Go | 未通过构建 | ONNX依赖在CGO_ENABLED=0时被排除，当前无C编译器 |
@@ -125,6 +125,14 @@
 - inspect-recovery和restore-selection新入口：内容恢复永不自动选择；明确approve/审核人/理由且目标active.json不存在时，核对闭包、内容、review、许可和checkout后独占发布选择，旧状态与其他写入不覆盖，不启动服务。
 - 16项恢复专项测试及1项历史导出回归通过，覆盖连续回滚、重启用/基线、schema1、篡改、锁/链接、许可、复制/临时写入/并发失败；真实CLI全链路通过。详见asset-manager/RECOVERY.md。
 - 不打包DSH安装、node_modules、实际记忆库、搜索缓存或用户配置，普通崩溃自动恢复向导仍未实现；原始导入锁和provenance保持不变。
+
+## 新代理上手与最新DSH检查
+
+- npm观测latest=rc.1、next=rc.5（2026-11-19）；在私有目录固定安装rc.5，真实headless及生成包完成记忆工具/注入/SQLite、搜索并发发现/查询及缓存回流，不升级当前实例。兼容登记保留rc.1/rc.4旧证据、新增rc.5精确指纹。
+- 根AGENTS.md增加四类预选入口与实际CLI命令：搜索MCP、Memory-net、source-index和skill-search；core Expert增skill-search（8技能），research另选搜索Skill和MCP，记忆仍须--memory显式创建。
+- 新search-assets只读关键词检索和skills-status库存检查，4项测试包括真实登记/规范链接/预选组合。validate拒绝坏frontmatter、缺失或未登记技能。
+- 123个canonical Skill全部登记，51独立、71厂商、1管理。security-workflow描述含未转义冒号造成YAML坏语法已修复，正文原样。10个厂商name跨客户端不兼容、5组同名提供方分别报告，不删除或偷偷改名。
+- 当前137资产的存在不意味着全部可用：许可/厂商运行时限制保留，真实公网搜索与收费鉴权不在当前测试范围。
 
 ## 未认证与后续事项
 

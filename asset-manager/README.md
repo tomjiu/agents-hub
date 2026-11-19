@@ -2,6 +2,10 @@
 
 入口：在仓库根运行 node asset-manager/cli.mjs help。固定依赖由根 package-lock.json 管理。
 
+## 新代理查找入口
+
+search-assets <query> [--kind skills|mcp|plugins|agents-md] [--limit N]只读本地登记检索，优先ID/name再description/path；skills-status [--verbose]检查canonical技能、登记缺漏、语法和客户端名称限制。库存坏语法/未登记/缺失使validate失败，厂商不兼容名称单独报告、原件不改。优先skills/individual/research/skill-search/SKILL.md及根AGENTS.md，不用手工扫描全部文件。
+
 ## 已实现
 
 - catalog/assets 元数据读取、稳定 ID/类型/路径校验，四类独立保护策略。

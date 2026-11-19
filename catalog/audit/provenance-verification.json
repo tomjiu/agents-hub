@@ -650,7 +650,7 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "a9b75b9a7db554b424f5317d266de4b797ab035b76287af06de0dd397168e186",
+      "current_sha256": "5c249d47d3d0179576028981451b2c78d1d0a0cf34a5a282670460bdfce529c1",
       "baseline_sha256": "89da5a2cc1a34063816f8cfb7ba4e9891a9a5f2a4fe6b473d36e992da362be1a",
       "local_modified": true
     },
@@ -815,9 +815,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "ad0a1550ad942f07a4cf17ca16c644b2226ad5911681a77946016d857a51460b",
+      "current_sha256": "5bcdf9073c1f848f40ac2acff46554535d8646e8a5cadfc09356dcf0e7b48af5",
       "baseline_sha256": "ad0a1550ad942f07a4cf17ca16c644b2226ad5911681a77946016d857a51460b",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "skill-creator",
@@ -839,6 +839,23 @@
         "path": "skills/individual/engineering/skill-creator/LICENSE.txt",
         "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"
       }
+    },
+    {
+      "id": "skill-search",
+      "kind": "skills",
+      "path": "skills/individual/research/skill-search",
+      "maintenance_url": "https://github.com/tomjiu/agents-hub",
+      "source_kind": "local",
+      "upstream_commit": "",
+      "upstream_version": "self-maintained",
+      "identity_status": "self-maintained",
+      "import_baseline": "",
+      "license": "review-required",
+      "license_status": "review-required",
+      "deployment_restricted": false,
+      "current_sha256": "57d0713e58117a8809c1b3122df9613b19f1cc7f503f7c0fe5d36cad2d4db625",
+      "baseline_sha256": "57d0713e58117a8809c1b3122df9613b19f1cc7f503f7c0fe5d36cad2d4db625",
+      "local_modified": false
     },
     {
       "id": "source-driven-development",
@@ -870,7 +887,7 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "1078ec3d4917208d1857a445c44d6d2bc453427573ae1d01fb0dc8fe444c6bec",
+      "current_sha256": "45f8d074b62fa94598f0812e18ee2d58357acf10fbcce1841f1bd74111aab9eb",
       "baseline_sha256": "d3d8bb4dd1e04c58e69f93fa709331dfcf8449f0129c34d44c6658ecd82b8bd1",
       "local_modified": true
     },
@@ -2367,7 +2384,7 @@
     }
   ],
   "counts": {
-    "assets": 136,
+    "assets": 137,
     "upstream_unverified": 60,
     "declared_restricted": 4,
     "vendor_runtime_review": 71

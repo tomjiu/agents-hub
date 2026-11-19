@@ -139,11 +139,11 @@ test('actual CLI previews deploys inspects and quarantines default DSH Profile w
  const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
  const cli=path.join(root,'asset-manager/cli.mjs');
  const call=(...args)=>JSON.parse(execFileSync(process.execPath,[cli,...args],{cwd:root,maxBuffer:4*1024*1024}).toString());
- const preview=call('plan-deploy','dsh',dir);assert.equal(preview.skills.length,7);assert.equal(preview.approved,false);
+ const preview=call('plan-deploy','dsh',dir);assert.equal(preview.skills.length,8);assert.equal(preview.approved,false);
  assert.deepEqual(await fs.readdir(dir),['AGENTS.md']);
- const result=call('deploy','dsh',dir,'--approve');assert.equal(result.status,'INSTALLED');assert.equal(result.skills.length,7);
+ const result=call('deploy','dsh',dir,'--approve');assert.equal(result.status,'INSTALLED');assert.equal(result.skills.length,8);
  const state=call('inspect-deployment',dir,result.id);assert.ok(state.skills.every(s=>s.matches));
- const removed=call('uninstall',dir,result.id,'--approve');assert.equal(removed.quarantined,7);
+ const removed=call('uninstall',dir,result.id,'--approve');assert.equal(removed.quarantined,8);
  assert.equal(await fs.readFile(path.join(dir,'AGENTS.md'),'utf8'),'User-authored project policy');
  assert.deepEqual(await fs.readdir(path.join(dir,'.dsh/skills')),[]);
 });

@@ -9,6 +9,8 @@
 - audit：迁移映射、上游差异和实施验证记录。
 - audit/legacy：不参与自动加载的历史说明、注册表和路径，不作为当前执行指令。
 
+只读发现：node asset-manager/cli.mjs search-assets "关键词" --kind skills --limit 5；skills-status [--verbose]核查canonical技能语法/登记/名称限制/同名提供方。新增资产手写单个清单＋首次provenance，勿重跑首次catalog-build以重写旧基线。
+
 ID：独立 Skill 保留原名字；集合 Skill 使用 trae.<name> 或 workbuddy.<内部层级>；MCP 使用 mcp.<server>，避免与 Skill 重名；插件为 memory-net；模板为 agents-md.*。
 
 来源身份、导入基线和上游提交必须分开，详见 [来源治理说明](PROVENANCE.md)。audit-provenance只读核对当前元数据；原始locks/provenance不重写以掩盖差异。
