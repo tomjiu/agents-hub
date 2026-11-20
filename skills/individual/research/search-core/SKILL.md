@@ -25,7 +25,7 @@ node <repo>/mcp/servers/search-core/typescript/dist/cli.js fetch <url> --focus "
 node <repo>/mcp/servers/search-core/typescript/dist/cli.js research "topic" --loops 3           # 深度研究循环
 ```
 
-首次使用先构建：`cd <repo>/core && npm install && npm run build`
+首次使用在仓库根固定安装：`npm ci --ignore-scripts --no-audit --no-fund --prefix mcp/servers/search-core/typescript`，然后`npm run build:dsh`（还需README列出的记忆子包固定依赖）；没有`<repo>/core`入口。不要执行旧路径或无锁安装。
 
 ### 2. MCP server（推荐给 agent）
 
@@ -35,7 +35,7 @@ node <repo>/mcp/servers/search-core/typescript/dist/cli.js research "topic" --lo
 
 接入 Claude Code / Cursor / Claude Code on Bedrock（WebSearch 不可用场景的官方补法）详见 **[当前DSH搜索验收说明](../../../../asset-manager/SEARCH-ACCEPTANCE.md)**（本仓已验证的是隔离DSH和本地来源，旧其他客户端/公网记录不作为当前验收）。
 
-工具（渐进披露，Direct 3 个按需激活 Deferred 5 个）：
+工具默认渐进披露（Direct 3个，Deferred 5个）；DSH生成配置显式SC_MCP_DISCLOSURE=static，启动时登记全部8工具，tool_search不再变更列表：
 
 | 工具 | 类型 | 干什么 |
 |---|---|---|
@@ -94,6 +94,13 @@ curl -X POST localhost:8629/research -d '{"query":"..."}'   # SSE 事件流
 | `TAVILY_API_KEY` 等 | 可选 key 插槽，自动并联，月度额度（`SC_TAVILY_MONTHLY_QUOTA`，默认 1000）用完自动回落免 key 池 |
 | `SC_SEARXNG_BASE_URL` | 自托管 SearXNG 实例（公共实例不可依赖） |
 | `SC_TIMEOUT_MS` / `SC_UA` / `SC_HTTP_PORT` | 单引擎超时 12s / 规范 UA 勿改 / 网关端口 |
+
+## 实际研究任务发现的限制
+
+- 搜索返回官方域名也需核对版本；Node SQLite研究首位为旧nightly文档，不能当当前v26.13.1说明。
+- 当前领域专线路由会改写显式engines：传duckduckgo/bingrss/yahoo仍可能调用github/mdn/keenable等。因此engines不是严格允许列表，需检查meta.engines_used/failed；真正限定来源的需求尚待修复，不能用来保证隐私/预算。
+- 当前DNS将公开官方域名映射198.18.x时，fetch严格SSRF拒绝；如实报告，勿设SC_SSRF=off绕过。可用用户允许的独立阅读工具，但不要称为Search-core抓取成功。
+- 本次真实Lead研究→检索→来源核验→报告→隔离Memory-net跨进程召回有证据，但全文阅读使用了独立Harness工具，没有证明搜索/抓取完整链路或全部研究效果。见 [实际研究任务](../../../../catalog/audit/research-memory-sqlite.md)。
 
 ## 已知边界（诚实声明）
 

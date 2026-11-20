@@ -31,6 +31,21 @@ node --test asset-manager/tests/resources.test.mjs
 
 三个tests/fixtures脚本经探针运行，需HUB_PYTHON_DEPS/HUB_GIT_EXECUTABLE；嵌入式Python忽略PYTHONPATH时，探针会用显式sys.path插入私有依赖，不修改解释器配置。
 
+## 实际资料研究任务
+
+[Memory-net SQLite决策报告](../catalog/audit/research-memory-sqlite.md)由Lead实际使用索引选技能、调用公开Search-core MCP、独立阅读官方版本文档并形成建议。不是脚本化模拟模型预设研究结果。真实搜索返回5引用但降级；Search-core官方全文fetch被DNS保留地址守卫拒绝，全文通过单独Harness reader核验，所以不标“完整搜索/抓取链路通过”。
+
+本次具体已知结论写入临时Memory-net，关闭后另一个Node进程召回，验证inference类型、based_on和持久化。probe-research-memory只重放报告里的固定已核验语句，不会重新证明外部文档真假或研究质量；读取官方引用不等于通过任何自动批准。
+
+~~~sh
+# 明确选择真实公网调用，不读取用户搜索配置或凭据：
+node asset-manager/probe-research-network.mjs --live
+# 指定已审阅的报告，只在临时库重放写入/召回：
+node asset-manager/probe-research-memory.mjs catalog/audit/research-memory-sqlite.md
+~~~
+
+发现并修正文档问题：搜索Skill首次构建旧路径、Node22旗标笼统说明、记忆插件“上游升级零改动”保证；补source-driven-development索引别名。未修复领域路由覆盖engines或旧nightly优先，也未迁移DatabaseSync兼容别名。实际证据见 [研究任务记录](../catalog/audit/real-research-task.json)。
+
 ## 未保证
 
 未遍历全部自然语言中的动态依赖；没有完整Markdown解析器。资源报告不证明可执行/合法。脚本关键词和许可短语拒绝不能代替秘密扫描/法务审查。打包不认证审查者身份、不获得分发权、不保证敌对进程修改路径时完全无竞态；强杀可能留下临时包。归属任务关闭了cochange/communities进行有限合成测试，不认证全部NetworkX输出。

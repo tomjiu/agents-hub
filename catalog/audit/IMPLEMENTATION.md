@@ -1,6 +1,6 @@
 # v2 基础重构实施状态
 
-状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试134通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
+状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
 ## 已完成
 
@@ -16,7 +16,7 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 134 PASS，1 SKIP（总135） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Asset Manager | 138 PASS，1 SKIP（总139） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
 | Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
@@ -158,6 +158,15 @@
 - Windows进程挂入kill-on-close job之前以挂起状态创建，成功归属后恢复，避免早派生逃逸；失败不运行测试，命令结束/中断/超时统一回收job内服务器与命令。POSIX用process group，但本次仅Windows验收。
 - 17项实际CLI/HTTP回归通过，含噪声2MB、多服务器、命令7退出保留、124超时、SIGBREAK、强杀helper及shell祖孙清理，不改运行中DSH、不创建子代理。加入probe-python-tasks，总32项Python任务回归通过；根仍134通过、1权限跳过。
 - [生命周期指南](../../asset-manager/WEB-SERVER-LIFECYCLE.md)保留跨exec端口竞争、应用身份检查、daemon/外部job限制及全平台未认证，不声称浏览器UI测试完成。
+
+## Lead实际资料研究任务
+
+- 不再以模拟模型脚本证明研究质量：Lead通过索引和preflight选择能力，真实Search-core MCP公开搜索Node SQLite→5引用/降级，独立读取固定版本Node/SQLite官方文档，核对本地实现并产出[决策报告](research-memory-sqlite.md)。
+- 首位检索旧nightly，不直接当当前版本；指定engines被领域路由改写，尚未修复。官方全文fetch因本机DNS保留地址被守卫拒绝，Harness独立web_fetch替代，明确不算Search-core完整fetch链路通过。
+- Node26.13.1实测Database/DatabaseSync同一类、SQLite3.54.1；文档给出弃用兼容别名/同步API，建议后续独立迁移。不将WAL当多写者或网络盘数据库，召回不当语义RAG。
+- 临时Memory-net记录报告里的核验语句及inference，关闭后跨Node进程回读类型/based_on/正文；不触及用户记忆库。探针只重放已审阅输入，不再次验证远端内容。
+- 修复搜索Skill旧core构建路径与Node22说明、记忆上游兼容过度承诺，source-driven-development增加官方文档任务别名及回归；没有API或router实现改动。
+- 没有无技能对照、独立审稿或自由运行真实模型全流程，真实账户及全部研究题效果未认证。详见[任务记录](real-research-task.json)。
 
 ## 未认证与后续事项
 

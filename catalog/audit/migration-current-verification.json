@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2373,
+  "unchanged": 2372,
   "missing": [],
   "changed": [
     {
@@ -96,6 +96,12 @@
       "current_sha256": "ba99a58b778eefeb4e0ce696655bea6b06964a03145f05ffa73bbba605274322"
     },
     {
+      "original": "memory-net/README.md",
+      "target": "plugins/memory-net/README.md",
+      "baseline_sha256": "b38cace33e3e5e6fddccaada6dc0d2b33d27264df87864cf99fc71e8ca20ce8f",
+      "current_sha256": "94175a9ac56a1a7a0d52dfa6aff3e4f2e65374faa5cdf68b5f735b03959e8d66"
+    },
+    {
       "original": "memory-net/src/db.ts",
       "target": "plugins/memory-net/src/db.ts",
       "baseline_sha256": "48cd98a2bbd471c0143d1913fc6bc7fe88a8ca9340eb262847c7315a1a6be6a7",
@@ -147,7 +153,7 @@
       "original": "search-infra/SKILL.md",
       "target": "skills/individual/research/search-core/SKILL.md",
       "baseline_sha256": "23f9567f9b99aad213fa8b6cc71bc180475739a33b0673b9ee2cc1a492e444dd",
-      "current_sha256": "0f5cec52dc72ca83abaea0e4930c8c459092e69c5b79b9c63f6c1a4f21ffe2bb"
+      "current_sha256": "4b50f5df6c26491460892940ba0abe069316c115d0390a5168739a6833f6fbcf"
     },
     {
       "original": "selected/dfir-workflow/SKILL.md",

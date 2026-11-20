@@ -41,3 +41,5 @@ test('real task wording finds memory search and local skill discovery, not just 
   const r=await searchAssets(root,query,{kind,limit:3});assert.ok(r.results.some(a=>a.id===id),'Missing usable task lookup for '+query);
  }
 });
+
+test('official documentation task finds the source-grounding workflow',async()=>{const {fileURLToPath}=await import('node:url');const root=fileURLToPath(new URL('../..',import.meta.url));const result=await searchAssets(root,'官方文档',{kind:'skills',limit:3});assert.ok(result.results.some(asset=>asset.id==='source-driven-development'));});

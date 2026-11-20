@@ -27,7 +27,7 @@
 
 ## 快速开始（三条命令演示双 agent 共享 progress）
 
-要求 Node ≥ 22.5（内置 `node:sqlite`，**零 npm 运行时依赖**）。注：`node:sqlite` 自 Node 23.4 起默认启用；22.5–22.x 需加 `--experimental-sqlite` 旗标运行。
+要求 Node ≥ 22.5（内置 `node:sqlite`，**零 npm 运行时依赖**）。注：`node:sqlite` 自 Node 23.4 起默认启用；22.5–22.12需加 `--experimental-sqlite`；22.13+无需该旗标。Node 26.13.1文档将DatabaseSync列为Database的弃用兼容别名，两者仍同步执行；本实现尚未迁移，不能假定未来兼容。详见 [本仓实际研究任务](../../catalog/audit/research-memory-sqlite.md)。
 
 ```bash
 npm install && npm run build
@@ -74,7 +74,7 @@ mn init | add | get | link | progress | trail | replay | activate
 
 ## 存储
 
-- **SQLite（node:sqlite，写死）**：一个 workspace = 一个 `<dir>/memory.db`，WAL + busy_timeout，多实例并发共享安全
+- **SQLite（node:sqlite，写死）**：一个 workspace = 一个 `<dir>/memory.db`，WAL + busy_timeout，本机多实例共享且写者串行；不支持活跃WAL库跨机器网络盘共享写入，超时/失败仍需处理
 - 轻量边：`based_on`（JSON 数组列）与 trail 序号——**不上图数据库**
 - `export/import` 单 workspace 记忆包：跨机迁移、备份、审计
 
@@ -83,7 +83,7 @@ mn init | add | get | link | progress | trail | replay | activate
 向量库 / 双曲几何 / 完整 Multi-Agent 编排 / 预测预取（留扩展点，默认关闭）/ 云远程控制面 / 通用 chatbot RAG。
 
 dsh 适配包（把 memory-net 接入 Kokoa 桌面的 dsh 运行时）位于 [`adapters/dsh/`](adapters/dsh/README.md)：
-零 import dsh/cordis（只依赖自声明的最小结构契约），dsh 官方上游升级零改动；已对真实
+零 import dsh/cordis（只依赖自声明的最小结构契约），但DSH上游升级仍须精确指纹与实际宿主复验，不能保证零改动。历史验证为真实
 dsh 0.1.2-rc.1 端到端验证（headless 冒烟：插件加载/工具注册/区段注入/模型工具调用/SQLite
 落盘/宿主工具结果自动观测全闭环）。模型工具面只暴露 inference/tip，observation 写路径仅宿主
 可达（host API + auto-observe 桥：dsh 宿主工具的执行结果经 `tools/result` 事件自动入网，
