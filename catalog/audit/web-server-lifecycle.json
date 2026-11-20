@@ -82,5 +82,46 @@
     "dual_server_repeats": 10,
     "repeat_status": "PASS",
     "root_cause_certainty": "Original complete exception was obscured; fixture reset handling is a verified robustness improvement, not proof all possible intermittent causes are eliminated"
+  },
+  "independent_checkout": {
+    "code_commit": "a3b3bcdf9cff518a37238f49aee674db732a0ebc",
+    "root_tests": {
+      "total": 135,
+      "passed": 134,
+      "skipped": 1
+    },
+    "python_tasks": {
+      "schema": 1,
+      "status": "PASS",
+      "results": [
+        {
+          "test": "test_skill_packager.py",
+          "status": "PASS",
+          "test_summary": "...........\r\n----------------------------------------------------------------------\r\nRan 11 tests in 1.020s\r\n\r\nOK",
+          "scope": "Actual CLI archive content, failure cleanup and no-overwrite on synthetic Skill"
+        },
+        {
+          "test": "test_ownership_task.py",
+          "status": "PASS",
+          "test_summary": "....\r\n----------------------------------------------------------------------\r\nRan 4 tests in 3.810s\r\n\r\nOK",
+          "scope": "Actual synthetic Git repository to security ownership CSV/JSON and bounded query; no user repository analysis"
+        },
+        {
+          "test": "test_web_server.py",
+          "status": "PASS",
+          "test_summary": ".................\r\n----------------------------------------------------------------------\r\nRan 17 tests in 19.123s\r\n\r\nOK",
+          "scope": "Owned loopback HTTP services, noisy output, startup/test failure, bounded timeout, interruption and child cleanup; not browser UI acceptance"
+        }
+      ],
+      "python_version": "Python 3.13.7",
+      "scope": "Pinned test dependencies supplied externally; no downloads or user runtime changes; not all Skill scripts tested."
+    },
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true
   }
 }
