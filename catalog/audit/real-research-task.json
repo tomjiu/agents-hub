@@ -336,5 +336,54 @@
     "failed_fetch_preserved_in_report": true,
     "asserts_recalled_text_and_confidence": true,
     "incomplete_report_rejected": true
+  },
+  "independent_checkout": {
+    "code_commit": "ad0a24816f3c100c945746613ba72dadd7f11b7f",
+    "root_tests": {
+      "total": 139,
+      "passed": 138,
+      "skipped": 1
+    },
+    "memory_replay": {
+      "schema": 1,
+      "status": "PASS_FOR_THIS_RESEARCH_TASK",
+      "scripted_model": false,
+      "live_user_profile_changed": false,
+      "report_sha256": "1866093f5a83d683f40d4a18bd39fa385d96fbb8d4e3c2749d1aa9f2d3286a1e",
+      "evidence_urls": [
+        "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+        "https://www.sqlite.org/wal.html"
+      ],
+      "stored_inference": {
+        "id": "n3",
+        "kind": "inference",
+        "status": "active",
+        "confidence": 0.85,
+        "based_on": [
+          "n1",
+          "n2"
+        ],
+        "text": "Memory-net SQLite task-memory recommendation: retain local workspace SQLite for bounded agent tasks; keep explicit close/reopen and WAL write serialization, migrate the Node 26 DatabaseSync alias through a separately tested compatibility change, and do not call recall semantic/vector search."
+      },
+      "readback": {
+        "separate_process": true,
+        "close_reopen": true,
+        "recalled": true,
+        "tokens_used": 210,
+        "budgets": {
+          "max_nodes": 8,
+          "max_tokens": 1600
+        }
+      },
+      "scope": "Lead wrote and reviewed the actual cited research report. The statements are replay inputs drawn from the Lead-reviewed report, not fresh network observations verified by this probe. They and the recommendation were stored/recalled by real MemoryNet in a temporary SQLite workspace; not a free-running model or full semantic RAG quality benchmark."
+    },
+    "network_repeated": false,
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true
   }
 }
