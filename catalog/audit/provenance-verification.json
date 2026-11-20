@@ -1520,9 +1520,9 @@
       "license": "Apache-2.0",
       "license_status": "declared-file-not-legal-approval",
       "deployment_restricted": false,
-      "current_sha256": "c1a752df5ca2de0508aef56a997121fa0a835ab2dc4c576c0997627980e3e8cf",
+      "current_sha256": "86f3736e1bbd8f33a3b68a5b093377aa9b0050ebf630fd7cc46f48c6b42ffb04",
       "baseline_sha256": "c1a752df5ca2de0508aef56a997121fa0a835ab2dc4c576c0997627980e3e8cf",
-      "local_modified": false,
+      "local_modified": true,
       "license_evidence": {
         "path": "skills/individual/document/webapp-testing/LICENSE.txt",
         "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"

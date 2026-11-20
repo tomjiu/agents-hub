@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2375,
+  "unchanged": 2373,
   "missing": [],
   "changed": [
     {
@@ -256,6 +256,18 @@
       "target": "skills/individual/engineering/using-superpowers/SKILL.md",
       "baseline_sha256": "f85a019a5fce0adb17eb66496f301b3909f6ef93fddbe51b6b316eecee23b735",
       "current_sha256": "fd7bce10ef2fe6b11c605286a779b6b5061f4cb0b2a38c7475d03d1acc5fb5bd"
+    },
+    {
+      "original": "selected/webapp-testing/scripts/with_server.py",
+      "target": "skills/individual/document/webapp-testing/scripts/with_server.py",
+      "baseline_sha256": "529b5f10f6ecf2e6234747be6d6601be7ef9011ee29a3eee0879e7823f608238",
+      "current_sha256": "67fefe8307b0dd8942efc5c1ed0c140e0ae6c5668227154b37568d85a02872cf"
+    },
+    {
+      "original": "selected/webapp-testing/SKILL.md",
+      "target": "skills/individual/document/webapp-testing/SKILL.md",
+      "baseline_sha256": "8bc27790f6e6dfc2bfa6692326d4518baacf6a31dcc646d963c729adad2f7e34",
+      "current_sha256": "e9a472c8ed7d67328e527d5cfa508a96f383669ecab204f7749f74ca114590fa"
     },
     {
       "original": "selected/writing-plans/SKILL.md",
