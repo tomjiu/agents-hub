@@ -156,7 +156,7 @@
 - 真实复现旧with_server把占用端口当自建服务ready，测试误连既有listener并exit0。修复为先检查全部端口、进程存活和稳定TCP可达，不接管既有服务；readiness不等于UI正确或认证端口所有权。
 - 兼容可信--server shell入口，新增--server-argv JSON无shell和--cwd、--command-timeout；拒绝重复端口、非法/非有限超时、空命令。内部不创建未读取PIPE，输出继承调用者。
 - Windows进程挂入kill-on-close job之前以挂起状态创建，成功归属后恢复，避免早派生逃逸；失败不运行测试，命令结束/中断/超时统一回收job内服务器与命令。POSIX用process group，但本次仅Windows验收。
-- 16项实际CLI/HTTP回归通过，含噪声2MB、多服务器、命令7退出保留、124超时、SIGBREAK、强杀helper及shell祖孙清理，不改运行中DSH、不创建子代理。加入probe-python-tasks，总31项Python任务回归通过；根仍134通过、1权限跳过。
+- 17项实际CLI/HTTP回归通过，含噪声2MB、多服务器、命令7退出保留、124超时、SIGBREAK、强杀helper及shell祖孙清理，不改运行中DSH、不创建子代理。加入probe-python-tasks，总32项Python任务回归通过；根仍134通过、1权限跳过。
 - [生命周期指南](../../asset-manager/WEB-SERVER-LIFECYCLE.md)保留跨exec端口竞争、应用身份检查、daemon/外部job限制及全平台未认证，不声称浏览器UI测试完成。
 
 ## 未认证与后续事项

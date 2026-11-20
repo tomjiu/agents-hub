@@ -35,7 +35,7 @@ POSIX实现新session/process group，退出先TERM再KILL；本次不认证Linu
 
 ## 实测范围
 
-16项标准库真实子进程/127.0.0.1服务回归：占用端口（含第二端口）、真实HTTP正文、2MB噪声输出、多服务、失败码、超时、服务启动/运行中退出、shell父/子/孙清理、中断、Windows强杀、带空格cwd和shell特殊字符literal参数、无效argv/超时/无测试命令。全部使用临时合成服务。
+17项标准库真实子进程/127.0.0.1服务回归：占用端口（含第二端口）、真实HTTP正文、2MB噪声输出、多服务、失败码、超时、服务启动/运行中退出、shell父/子/孙清理、中断、Windows强杀、带空格cwd和shell特殊字符literal参数、无效argv/超时/无测试命令。全部使用临时合成服务。独立副本曾遇双服务夹具偶发失败且编码遮蔽诊断，已增加空探测/连接重置后真实HTTP回归；夹具不向无请求连接写入响应，捕获ConnectionError，并用backslashreplace保留诊断字节，不改实际helper输出编码。
 
 ~~~powershell
 $env:HUB_PYTHON_EXECUTABLE = "<real Python path>"
@@ -44,4 +44,4 @@ $env:HUB_GIT_EXECUTABLE = "<git path>"
 node asset-manager/probe-python-tasks.mjs
 ~~~
 
-探针还复跑先前11项Skill打包与4项Git归属任务，总31项。没有浏览器页面点击验收、真实账户/用户服务/DSH修改。
+探针还复跑先前11项Skill打包与4项Git归属任务，总32项。没有浏览器页面点击验收、真实账户/用户服务/DSH修改。

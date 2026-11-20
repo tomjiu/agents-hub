@@ -35,7 +35,7 @@ node --test asset-manager/tests/resources.test.mjs
 
 未遍历全部自然语言中的动态依赖；没有完整Markdown解析器。资源报告不证明可执行/合法。脚本关键词和许可短语拒绝不能代替秘密扫描/法务审查。打包不认证审查者身份、不获得分发权、不保证敌对进程修改路径时完全无竞态；强杀可能留下临时包。归属任务关闭了cochange/communities进行有限合成测试，不认证全部NetworkX输出。
 
-with_server.py已完成16项真实本地服务生命周期回归：端口占用拒绝、2MB启动输出、HTTP正文、启动/命令失败、启动/命令超时、双服务、运行中服务死亡、shell子孙清理、SIGBREAK及Windows强杀父进程、无shell参数/cwd和无效输入。运行流程使用Windows kill-on-close Job Object，先挂载后执行，常规退出回收所有自建服务和命令进程树。
+with_server.py已完成17项真实本地服务生命周期回归：端口占用拒绝、2MB启动输出、HTTP正文、启动/命令失败、启动/命令超时、双服务、运行中服务死亡、shell子孙清理、SIGBREAK及Windows强杀父进程、无shell参数/cwd和无效输入。运行流程使用Windows kill-on-close Job Object，先挂载后执行，常规退出回收所有自建服务和命令进程树。
 
 这是Windows/Python3.13.7实测，不认证POSIX强杀清理、脱离进程组/已有daemon、任意占端口竞争或全部浏览器UI。TCP可达仍不是应用正确，预检查到服务启动之间不能跨exec永久预留端口；必须在自动化检查预期页面/API身份与状态。继承输出要求调用方排空自己创建的PIPE；探针只使用临时服务，不启动替代DSH。详见 [服务器生命周期](WEB-SERVER-LIFECYCLE.md)。
 
