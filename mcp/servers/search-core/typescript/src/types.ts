@@ -86,6 +86,7 @@ export interface SearchResult {
   refs: Reference[];
   meta: {
     enginesUsed: string[];
+    quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v1" };
     /** Executed selection mode; X explicit lists bypass official/guest/oEmbed chain. */
     engineSelection?: { mode: "explicit" | "auto"; requested?: string[] };
     enginesFailed: EngineFailure[];

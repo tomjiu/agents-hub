@@ -24,7 +24,7 @@ function fakeFetchFactory(blockHosts: string[]) {
     if (blockHosts.some((h) => u.includes(h))) return new Response("forbidden", { status: 403 });
     if (u.includes("/search?") && u.includes("format=json")) {
       return Response.json({
-        results: [{ url: "https://example.org/rescued", title: "rescued hit", content: "github actions cache docker layers" }],
+        results: [{ url: "https://example.org/rescued", title: "rescued hit", content: "github actions cache docker layers; some normal query" }],
       });
     }
     if (u.includes("api.keenable.ai")) {

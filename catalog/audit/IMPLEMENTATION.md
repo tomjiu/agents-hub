@@ -17,7 +17,7 @@
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
 | Asset Manager | 138 PASS，1 SKIP（总139） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
-| Search-core TypeScript | 312/312 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
+| Search-core TypeScript | 322/322 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
@@ -175,6 +175,14 @@
 - 实际公开查询只尝试指定bingrss/duckduckgo/yahoo，provider边界通过，但内容偏题/降级，不计任务质量合格。DNS官方fetch未修复/绕过，原报告保留。
 - 宿主默认领域查询验证名单回流；兼容要求explicit_selection_verified，保存selection后缀新证据。rc.5曾90秒冷启动超时，保留失败，预算180秒复验通过，不保证性能；rc.1/rc.5直接和生成包重新验收。
 - provider内部端点/聚合器转发、embedding请求不是名单覆盖的网络边界，不保证X特定结果格式；不改live DSH或默认启用状态。
+
+## 搜索偏题质量修复
+
+- 实际上游RSS q请求正确但响应改写/宽泛首页；旧融合无硬词证据拒绝，research直接入池。Bing现拒绝可确认的q回显改写；search/xSearch词法门槛与research入池过滤，MCP可见quality状态/计数，全部无证据标空/降级。
+- 新quality缓存key及命中证据检查防旧记录绕过；保留旧缓存/journal，不把历史研究重放当新质量认证。322项搜索回归通过，embedding失败不会恢复已拒绝结果。
+- 实际原Node题剔55/60返回3条SQLite文档候选；WAL题剔32/40找到官方WAL文档；简短Node题首位当前v26.13.1。仍不是全题语义准确率，旧nightly/相似词/短摘要/跨语言需复核。
+- Meta DNS为198.18.0.2，公开域名解析198.18.x；fetch安全拒绝并新增可操作诊断，未改代理或DNS、不关闭SSRF。官方全文链路在此环境尚未通过。
+- DSH验收新增quality_verified：正常候选和偏题空结果/降级都须回流，新证据-quality.json，历史保留。
 
 ## 未认证与后续事项
 

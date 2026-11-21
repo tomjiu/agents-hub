@@ -8,6 +8,7 @@
  *    - 语义去重: ref↔ref 相似度 > 0.75 → 合并(不同 URL 的转载/同稿)
  *    - 失败语义: embedder 挂 → similarity=1 全部放行(baseSearch.ts:73-86 教训)
  */
+import {filterEvidence} from './relevance.js';
 import type { Reference } from "./types.js";
 import { cosine, TF_EMBEDDER, type Embedder } from "./embed.js";
 import { matchAuthority, matchTopicAuthority, matchCategoryAuthority, classifySourceKind } from "./authority.js";
@@ -218,6 +219,8 @@ export function fuse(engineLists: Reference[], opts: FuseOptions): Reference[] {
 // ---------- v0.2: embedding 双阈值 (Perplexica[12]) ----------
 
 export interface FuseSemanticOptions extends FuseOptions {
+  /** Search entry points enable a deterministic evidence floor; low-level fusion remains compatible. */
+  evidenceGate?: boolean;
   /** query↔ref 相关过滤阈值(Perplexica 口径 0.5);undefined = 关闭 */
   relevanceThreshold?: number;
   /** ref↔ref 语义去重阈值(Perplexica 口径 0.75);undefined = 用默认 0.75 */
@@ -229,6 +232,7 @@ export interface FuseSemanticOptions extends FuseOptions {
 }
 
 export interface FuseSemanticMeta {
+  quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v1" };
   dedupMerged: number;
   relevanceDropped: number;
   embedder: string;
@@ -250,7 +254,9 @@ export async function fuseSemantic(
   const meta: FuseSemanticMeta = {
     dedupMerged: 0, relevanceDropped: 0, embedder: "-", embedderFailed: false, spamBlocked: 0, authorityGuarded: 0,
   };
-  const base = fuse(engineLists, {
+  const evidence = opts.evidenceGate ? filterEvidence(opts.query,engineLists) : undefined;
+  if(evidence)meta.quality={status:evidence.refs.length?"candidate_results":"no_relevant_results",evaluated:evidence.evaluated,rejected:evidence.rejected,reasons:evidence.reasons,policy:"lexical-evidence-v1"};
+  const base = fuse(evidence?.refs ?? engineLists, {
     query: opts.query, topN: 100, // 先取宽池,语义阶段裁剪
     // phase AC: 三层权威参数透传(主题/意图/语言/社区意图)
     topic: opts.topic, category: opts.category, lang: opts.lang, communityIntent: opts.communityIntent,

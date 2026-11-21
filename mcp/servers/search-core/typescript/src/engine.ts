@@ -10,6 +10,7 @@ import { Journal } from "./journal.js";
 import { HealthTracker } from "./providers/base.js";
 import { Router } from "./router.js";
 import { Fetcher } from "./fetcher.js";
+import {filterEvidence} from './relevance.js';
 import { plan } from "./planner.js";
 import { laneLegProviders } from "./domains.js";
 import { fuseSemantic } from "./fusion.js";
@@ -91,14 +92,14 @@ export class SearchCore {
     // phase AA: 调用方显式 opts.lang 优先; 未传时用 planner 检测结果(zh 题自动切 zh 源腿)
     const runOpts = !opts.lang && decision.lang ? { ...opts, lang: decision.lang } : opts;
     const cacheKey = Cache.hash(JSON.stringify({
-      policy: "provider-allowlist-v1", q: decision.queries, r: decision.route, o: {
+      policy: "provider-allowlist-v1+lexical-evidence-v1", q: decision.queries, r: decision.route, o: {
         f: runOpts.freshness, l: runOpts.lang, m: runOpts.maxResults, t: runOpts.topN,
         d: runOpts.domains, e: runOpts.engines,
       },
     }));
     if (cacheable) {
       const hit = this.cache.getSearch(cacheKey);
-      if (hit && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
+      if (hit && (hit as SearchResult).meta?.quality?.policy === "lexical-evidence-v1" && Array.isArray((hit as SearchResult).refs) && filterEvidence(rawQuery,(hit as SearchResult).refs).rejected === 0 && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
         this.cache.kvIncr("stat:search_cache_hit");
         const h = hit as SearchResult;
         return { ...h, meta: { ...h.meta, fromCache: true, elapsedMs: Date.now() - t0 }, planner: decision };
@@ -170,7 +171,7 @@ export class SearchCore {
     // phase AC: 三层权威(全局兜底/主题分档/意图类别)+zh 守卫+社区意图翻转, 检测在 authority.ts,
     // 传参在融合层生效(召回面不变 — 用户"召回/质量分层"架构指令)。
     const { refs, meta: fuseMeta } = await fuseSemantic(allRefs, {
-      query: rawQuery, topN: opts.topN ?? 20, embedder: this.embedder,
+      query: rawQuery, evidenceGate: true, topN: opts.topN ?? 20, embedder: this.embedder,
       authorityBoost: decision.domainPlan?.topic === "academic" ? 0.75 : 0.4,
       domainCap: decision.domainPlan
         ? (decision.domainPlan.topic === "packages" || decision.domainPlan.topic === "devops" ? 0 : 3)
@@ -192,7 +193,8 @@ export class SearchCore {
         elapsedMs: Date.now() - t0,
         fromCache: false,
         // v0.4 降级信号: 多腿全灭或大面积缺席时告知调用方
-        degraded: batches.some((b) => b.degraded) || rescueBatches.length > 0,
+        degraded: batches.some((b) => b.degraded) || rescueBatches.length > 0 || refs.length === 0,
+        quality: fuseMeta.quality ? {...fuseMeta.quality,status:refs.length?"candidate_results":"no_relevant_results"} : undefined,
         // phase AH 零结果抢救腿出勤标记(诚实可见)
         rescued: rescueBatches.length > 0,
         // v0.8 置信度筛选: 被硬屏蔽剔除的内容农场条数(透明可审计)
@@ -221,11 +223,11 @@ export class SearchCore {
     const t0 = Date.now();
     const { refs, used, failed, skipped, degraded } = await this.router.runX(query, opts, kind);
     // x 结果同域是特性(twitter/x.com), 多样性 cap 不适用
-    const { refs: fused } = await fuseSemantic(refs, { query, topN: opts.topN ?? 20, embedder: this.embedder, domainCap: 0 });
+    const { refs: fused, meta: fuseMeta } = await fuseSemantic(refs, { query, evidenceGate: true, topN: opts.topN ?? 20, embedder: this.embedder, domainCap: 0 });
     for (const r of fused) r.kind = "x";
     return {
       query, refs: fused, planner: decision,
-      meta: { enginesUsed: used, enginesFailed: failed, enginesSkipped: skipped, degraded, elapsedMs: Date.now() - t0, fromCache: false, engineSelection: selection === undefined ? { mode: "auto" } : { mode: "explicit", requested: selection } },
+      meta: { enginesUsed: used, enginesFailed: failed, enginesSkipped: skipped, degraded:degraded||fused.length===0, quality:fuseMeta.quality?{...fuseMeta.quality,status:fused.length?"candidate_results":"no_relevant_results"}:undefined, elapsedMs: Date.now() - t0, fromCache: false, engineSelection: selection === undefined ? { mode: "auto" } : { mode: "explicit", requested: selection } },
     };
   }
 

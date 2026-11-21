@@ -86,6 +86,7 @@ Returns ranked references (refId, url, title, snippet) — use fetch(url, focus=
           snippet: ref.snippet, engines: ref.engines, published: ref.published,
         })),
         meta: {
+          quality: r.meta.quality,
           engine_selection: r.meta.engineSelection,
           engines_used: r.meta.enginesUsed,
           engines_failed: r.meta.enginesFailed,
@@ -192,6 +193,7 @@ Do NOT fetch a full page when a focused read suffices.`,
           snippet: ref.snippet, engines: ref.engines, published: ref.published,
         })),
         meta: {
+          quality: r.meta.quality,
           engine_selection: r.meta.engineSelection,
           engines_used: r.meta.enginesUsed, engines_failed: r.meta.enginesFailed,
           engines_skipped: r.meta.enginesSkipped ?? [], degraded: r.meta.degraded ?? false,

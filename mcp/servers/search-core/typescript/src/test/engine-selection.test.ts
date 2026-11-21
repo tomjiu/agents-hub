@@ -15,7 +15,7 @@ import {serveHttp} from '../http.js';
 import {once} from 'node:events';
 process.env.SC_DDG_MIN_INTERVAL_MS='0';
 function fixture(t:any){const dir=mkdtempSync(join(tmpdir(),'sc-selection-')),calls:string[]=[];
- const core=new SearchCore({config:{dataDir:dir,engines:['searxng','keenable'],keySlots:'auto',timeoutMs:500,softDeadlineMs:500,earlyHarvestMs:0,searxng:{baseUrl:'https://selected.example',instances:[]}},fetchImpl:async input=>{const url=String(input);calls.push(url);if(url.startsWith('https://selected.example/'))return Response.json({results:[{url:'https://evidence.example/selected',title:'Selected result',content:'Node SQLite python github fixture'}]});return new Response('forbidden',{status:403});}});
+ const core=new SearchCore({config:{dataDir:dir,engines:['searxng','keenable'],keySlots:'auto',timeoutMs:500,softDeadlineMs:500,earlyHarvestMs:0,searxng:{baseUrl:'https://selected.example',instances:[]}},fetchImpl:async input=>{const url=String(input);calls.push(url);if(url.startsWith('https://selected.example/'))return Response.json({results:[{url:'https://evidence.example/selected',title:'Selected result',content:'Node SQLite python github actions cache agent memory ordinary fixture cached query task rust'}]});return new Response('forbidden',{status:403});}});
  t.after(()=>{core.close();rmSync(dir,{recursive:true,force:true});});return {core,calls};}
 for(const query of ['Node SQLite python tutorial','github actions cache','site:x.com agent memory'])test('explicit engines constrain route '+query,async t=>{const {core,calls}=fixture(t);const r=await core.search(query,{engines:['searxng'],noCache:true});assert.ok(r.refs.length);assert.deepEqual(r.meta.enginesUsed,['searxng']);assert.ok(calls.length);assert.ok(calls.every(url=>url.startsWith('https://selected.example/')),calls.join(','));});
 test('explicit empty engines performs no requests even for domain github and X',async t=>{const {core,calls}=fixture(t);for(const query of ['Node SQLite python tutorial','github actions cache','site:x.com task']){const r=await core.search(query,{engines:[]});assert.deepEqual(r.refs,[]);assert.deepEqual(r.meta.enginesUsed,[]);}assert.deepEqual(calls,[]);});
@@ -31,7 +31,7 @@ test('normalized selections share cache but old unrestricted and contaminated ca
  core.cache.putSearch(oldKey,bad);
  const first=await core.search(query,{engines:['searxng','searxng']});assert.equal(first.meta.fromCache,false);assert.deepEqual(first.meta.engineSelection,{mode:'explicit',requested:['searxng']});
  const count=calls.length;const second=await core.search(query,{engines:['searxng']});assert.equal(second.meta.fromCache,true);assert.equal(calls.length,count);
- const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1',q:decision.queries,r:decision.route,o:{e:['searxng']}}));core.cache.putSearch(key,bad);
+ const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v1',q:decision.queries,r:decision.route,o:{e:['searxng']}}));core.cache.putSearch(key,bad);
  const next=await core.search(query,{engines:['searxng']});assert.equal(next.meta.fromCache,false);assert.ok(calls.length>count);assert.ok(next.refs.every(ref=>ref.engines.every(name=>name==='searxng')));
 });
 test('explicit X API uses selected provider only and preserves failure metadata',async t=>{
@@ -62,7 +62,7 @@ test('HTTP search and X honor selection and research rejects unsupported lists b
 test('research API rejects engines rather than treating it as an ignored authorization constraint',async t=>{const {core,calls}=fixture(t);await assert.rejects(core.deepResearch('query',{engines:[]} as any),/allowlist/);await assert.rejects(core.resumeResearch('unknown',{engines:[]} as any),/allowlist/);assert.deepEqual(calls,[]);});
 test('legacy RSS provenance labels do not invalidate a legitimate selected-provider cache',async t=>{
  const {core,calls}=fixture(t),query='ordinary cache label query',decision=plan(query);
- const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1',q:decision.queries,r:decision.route,o:{e:['bingrss']}}));
- core.cache.putSearch(key,{query,refs:[{url:'https://evidence.example/rss',title:'RSS',snippet:'fixture',engines:['bing-rss']}],meta:{enginesUsed:['bingrss'],enginesFailed:[],engineSelection:{mode:'explicit',requested:['bingrss']},elapsedMs:1,fromCache:false}});
+ const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v1',q:decision.queries,r:decision.route,o:{e:['bingrss']}}));
+ core.cache.putSearch(key,{query,refs:[{url:'https://evidence.example/rss',title:'ordinary cache label query',snippet:'fixture',engines:['bing-rss']}],meta:{enginesUsed:['bingrss'],enginesFailed:[],engineSelection:{mode:'explicit',requested:['bingrss']},quality:{status:'candidate_results',policy:'lexical-evidence-v1',evaluated:1,rejected:0,reasons:{}},elapsedMs:1,fromCache:false}});
  const result=await core.search(query,{engines:['bingrss']});assert.equal(result.meta.fromCache,true);assert.deepEqual(calls,[]);
 });

@@ -30,6 +30,20 @@ MCP/HTTP search及x_search、CLI search/x支持名单；research/resume、CLI其
 
 一次真实MCP公开查询只尝试bingrss/duckduckgo/yahoo，名单边界通过，但返回搜狗/企业页面等偏题结果且降级；不是搜索质量通过。官网fetch的DNS守卫问题未绕过，原研究失败记录保留。
 
+## 真实偏题结果与质量门槛
+
+本次抓到Bing RSS原始响应：请求q正确，最终重定向及channel link有时改写q；另外即使q回显一致，结果仍只有Node/SQLite宽泛首页。旧fusion只加词法分、权威加分清零而不拒绝，SearchCore未启用可选embedding相关阈值；ResearchLoop直接把router结果入池，零证据也可消费fetch预算。
+
+现在Bing RSS只在最终URL或channel link确有q回显且与请求不同时报query mismatch；无回显不捏造校验通过。search/xSearch启用lexical-evidence-v1：NFKC/词级+CJK bigram、去常见停用/检索指令词、排除provider前缀和URL主机/查询参数；以title/snippet/path的词匹配数至少2或40%为最低门槛（单词题1）。它不是语义或事实判断，跨语言/纯URL/很短摘要可能被拒绝；证据不足明确no_relevant_results、degraded和拒绝计数，不输出假证据。候选通过也须核验版本、来源、内容。底层fuseSemantic默认保留兼容行为，entry point开启；embedding失败不恢复已拒绝结果。
+
+Research新轮次在原主题上过滤引用后才入池，搜索角度通用词不当证据；search_quality写journal。既有研究journal重放内容属于历史输出，未自动删除或重写，也不是本轮质量认证。新cache策略provider-allowlist-v1+lexical-evidence-v1不复用旧key，并检查策略元数据及引用词证据，原缓存不删除。
+
+真实MCP复测：原长Node查询60条原始候选剔55条，返回3个相关SQLite API文档但含旧nightly；WAL并发40条剔32条并找到sqlite.org/wal.html；简短Node SQLite DatabaseSync查询首位为Node v26.13.1当前API文档。这是实际题目的改善，不是泛化搜索准确率。SSRF官网fetch仍拒绝198.18.x，独立reader核验需明确披露。
+
+本机Meta虚拟网卡DNS为198.18.0.2，公开域名lookup/resolve4返回198.18.x；仅证明此映射导致守卫拒绝，不认证代理服务内部原因。fetch新增可操作诊断：可信网络配置须返回真实目标地址，不能设ssrf=off或豁免网段。本轮未改用户DNS/代理，没有请求受阻地址。
+
+兼容门槛新增quality_verified，宿主同批验证正常候选、偏题空结果/降级、名单与缓存回流；历史selection证据保留，新的质量报告用-quality.json。真实外网探针是node asset-manager/probe-search-quality.mjs --live，要求显式联网；独立测试不重复公网。
+
 ## 范围
 
 本地来源通过证明DSH调用路径、搜索解析、融合、缓存及失败透明性，不证明默认公网引擎如今全部可用，也不证明搜索质量达到所有研究任务。公网来源受网络、配额、验证码与服务版本影响；未经测试不标为通过。

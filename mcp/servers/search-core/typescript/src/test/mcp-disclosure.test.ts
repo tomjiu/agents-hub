@@ -11,7 +11,7 @@ import {createSearchMcpServer,disclosureMode,type McpDisclosure} from '../mcp.js
 
 async function setup(mode: McpDisclosure) {
  const dir=await mkdtemp(join(tmpdir(),'search-mcp-disclosure-'));
- const core=new SearchCore({config:{dataDir:dir,engines:['searxng'],keySlots:'off',searxng:{baseUrl:'https://fixture.example',instances:[]}},fetchImpl:async()=>new Response(JSON.stringify({results:[{url:'https://fixture.example/aurora',title:'Aurora glacier',content:'fixture reference'}]}),{headers:{'content-type':'application/json'}})});
+ const core=new SearchCore({config:{dataDir:dir,engines:['searxng'],keySlots:'off',searxng:{baseUrl:'https://fixture.example',instances:[]}},fetchImpl:async()=>new Response(JSON.stringify({results:[{url:'https://fixture.example/aurora',title:'Aurora glacier',content:'Aurora glacier fixture reference; Node SQLite python documentation; task memory'}]}),{headers:{'content-type':'application/json'}})});
  const server=createSearchMcpServer(core,mode),client=new Client({name:'disclosure-test',version:'1'});
  let changes=0;client.setNotificationHandler(ToolListChangedNotificationSchema,async()=>{changes++;});
  const [a,b]=InMemoryTransport.createLinkedPair();await server.connect(a);await client.connect(b);

@@ -3744,6 +3744,342 @@
       ],
       "user_profile_modified": false,
       "telemetry": "DISABLED"
+    },
+    {
+      "status": "PASS",
+      "parallel_discovery": true,
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "quality_verified": true,
+        "explicit_selection_verified": true,
+        "provider_requests": 3,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "bundle_test": false,
+      "fingerprint": {
+        "schema": 1,
+        "version": "0.2.2-rc.1",
+        "host": [
+          {
+            "name": "@deepseek-ai/dsh",
+            "version": "0.2.2-rc.1",
+            "engines": {
+              "node": ">=24.9.0"
+            },
+            "package_sha256": "3e14837ceb3bbc0ba419ed08e9b5ba164338369b1268b93c3c25d89f7b1c9953",
+            "lib_sha256": "9a91be9b351e6919652896b029004c97fa164f2b80347856a639539c44788455"
+          },
+          {
+            "name": "@deepseek-ai/dsh-base",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "e4c91192e947bfe6879092845d65f5bccb9fd77d3251b292f446205f442a95d8",
+              "lib": "467586e3f50c5f647250a4969262bf7f23dce6a8c321f1625c353b028186a156",
+              "cordis.patch.yml": "b65a86e55f02d863286bb6faac8ae292c18fffca3c8aa4491b600fa4dd6b48d0"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-official-bundles",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "3cbbd3599342c9779e2eaad34179e34e05b4683563c3f235095f008a2e4436fa",
+              "lib": "9eed224590fcb3366894c12d743dccea554dec444c9a93947dd0d3474b807d44"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-tool-skill",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "051e1d0c03c679e907ac6a8aa15dbacf0ae26fb6c53ae857b20e4e24468d301e",
+              "lib": "68e10b3489ffad16ac7ec1e1344b5159d82c504c0cbfe994b5f7a77e1309ce25"
+            }
+          },
+          {
+            "name": "@deepseek-ai/cordis",
+            "version": "4.1.0",
+            "hashes": {
+              "package.json": "70be1056619663339433309474b1e6a2307088097af3cb082afe4b5ca2021b26",
+              "lib": "1a84e660c2d92322f92463e66dc7e3efab24d1af4a5a446358bcd43574e8f69d"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-tools",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "fe2268802ba2d9259e413464e9ab0411440a81904785a2fee78f68a39ad30655",
+              "lib": "6a427be6d9257b5da817436166df9e2d9b85e58c0c32ae82fe7c56dc20748890"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-system-prompt",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "bdbf20a3aa49d2d7d98b66786e0115145a40e85978a5282ae8f42c52c2360c59",
+              "lib": "a0d5622bfed3cea4b3e215ca28e87bd6c92fef89beb8983aa406da9006a8b2d6"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-skill-filesystem",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "531e26bcb01b8e5d637580e3fd985e5814e24f2fdc451fafe06ac9949f04f98e",
+              "lib": "40b698bc92280620ad659c06262dab3d1c78e6b60354ad9fa402620673cc671b"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-mcp-client",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "51e2e04fd599b43306b88f42fbb2f5efb8f67d2be5223f29bf5f0fe82a8ad7f1",
+              "lib": "ade573d77b69ca712fdbfbef5996533836a7869828dfebc6b1da3f31cf8daf62"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-llm-pi-ai",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "f08cd8d54ddcb7af93d3d13c9ee52c42c913b2dc75525a99283916f997e73377",
+              "lib": "338645add321500f261a97cbc60936ccc4de4ecf6d65dbaa563063b50c9e9e4d"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-headless",
+            "version": "0.2.2-rc.1",
+            "hashes": {
+              "package.json": "3b6146768aee51cac006282dfe89ba644082def59043fd637b9c972d763e8101",
+              "lib": "fea98323990dc82693264f8bd339de699b1c2b638ae80f312984ae154f3a6ec2",
+              "cordis.patch.yml": "dfc81e1e44e1080263ac24c86ff2dec5831676e9c5b76096e6bc7ecf6aa817a3"
+            }
+          }
+        ],
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets": {
+          "node_runtime": "26.13.1",
+          "plugins/memory-net/src": "09f3fb3de8eee31adef08272dc6a628f47db8599114c1839102f095776b663cd",
+          "plugins/memory-net/adapters/dsh/src": "f9899987a4a52eecdac4d2d080528e7d00ef3cb892e425828fe18fbe0b27ad54",
+          "plugins/memory-net/adapters/dsh/dist": "f5d138476ee2eb8bb601c86dc53c33877ebda88e22949d27076750e266e0c15b",
+          "mcp/servers/search-core/typescript/src": "e90f384fa34ea566397dfa912b7f46f60c27077bea967f6e844ae9c20464caf6",
+          "mcp/servers/search-core/typescript/dist": "552de36e6260bb437081039d62c249956bc952e14fcc3a652e8ddca924d4217d",
+          "plugins/memory-net/adapters/dsh/package.json": "73f779c67cb338fa04d3e9f08d527c95f97097c28b2f579e80891bbd15158aae",
+          "plugins/memory-net/adapters/dsh/package-lock.json": "4eacb61d495f6c6f05838e435eb142030980f60e66f3a93c28eeb352806c4d81",
+          "mcp/registry.toml": "4475e360aa8c53982bccb68f4c50efea769cc7c52f3ff70bbb5894e14c1216c7",
+          "asset-manager/core/views.mjs": "13ff6adaf6bc7fc742d1b8528d9eec89927f4719a66c60dede1df122621d0102",
+          "asset-manager/core/usability.mjs": "c5c9dbbaad3284eb6f062838aef6148aa071041fc5003054ac408e456118e528",
+          "asset-manager/core/catalog.mjs": "5e2142ea79605b40ee51946dd6a6335b9207be3f00fc719223603349f0112696",
+          "asset-manager/core/license-review.mjs": "55304cdc85d1a475a0f886040ec6125ec5ab51a834609bc13ca880e913bfccea",
+          "asset-manager/core/mcp-config.mjs": "3d20de3ffddb10ce06358d7ebea7af752f7407ea46b0e14a0b5ec2da4e83936b",
+          "plugins/memory-net/adapters/dsh/dist/adapters/dsh/src/index.js": "8b62af285fd55d8413e676f4da90bfd19461a5cea5ac220c7ff54edd6a4adcef",
+          "mcp/servers/search-core/typescript/package.json": "8f56ec646bdafce62b1116a591e7446c7b4b280a4040342d6ba8d4f20aa1a995",
+          "mcp/servers/search-core/typescript/package-lock.json": "78c933ebfd8c8bc92f04a0aeae12f3575901b376e8113c29e4cc083de5b159f4",
+          "mcp/servers/search-core/typescript/dist/mcp.js": "64ad5e3cd009fc785ad4b450c7f9a7112b49ead53ef8170c54a68ee9dc56b2f1"
+        },
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "mcp": {
+        "tool": "mcp__search-core__search",
+        "registered": true,
+        "result_returned_to_model": true,
+        "source": "Generated DSH MCP patch + real Search-core stdio server"
+      },
+      "host_version": "0.2.2-rc.1",
+      "scope": "Actual isolated DSH headless profile, local scripted OpenAI-compatible model, real plugin/tool execution and SQLite; not live user profile or paid model.",
+      "checks": [
+        "[verify] ✓ A1 工具注册: memory_net_write + memory_net_recall 出现在 3 个请求的 tools 列表",
+        "[verify] ✓ A2 工具注册: mn_e2e_echo（宿主真实工具）出现在 3 个请求的 tools 列表",
+        "[verify] ✓ B1 区段注入: 宿主预置约束进入 system prompt（memory-net section 生效）",
+        "[verify] ✓ B2 区段注入: 宿主预置进度进入 system prompt",
+        "[verify] ✓ B3 区段注入: 工具写入的推断进入工具后组装（重组装生效）",
+        "[verify] ✓ C 工具闭环: 模型发起 memory_net_write → dsh 执行 → canonical 结果回给模型并进入最终回复",
+        "[verify] ✓ D 持久化: n4 [inference] \"E2E 模型经 memory_net_write 写入的推断节点…\" 已落隔离workspace/memory.db",
+        "[verify] ✓ E1 auto-observe: n3 [observation] \"工具 mn_e2e_echo 成功·args({\"say\":\"hello auto-observe\"})→ {\"echo…\" 已自动入网（payload 含 call_id）",
+        "[verify] ✓ E2 自指过滤: memory_net_* 工具结果未被递归观测",
+        "[verify] PASS: 适配包经真实 dsh headless 端到端生效（含 auto-observe）"
+      ],
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
+    },
+    {
+      "status": "PASS",
+      "parallel_discovery": true,
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "quality_verified": true,
+        "explicit_selection_verified": true,
+        "provider_requests": 3,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "bundle_test": false,
+      "fingerprint": {
+        "schema": 1,
+        "version": "0.2.2-rc.5",
+        "host": [
+          {
+            "name": "@deepseek-ai/dsh",
+            "version": "0.2.2-rc.5",
+            "engines": {
+              "node": ">=24.9.0"
+            },
+            "package_sha256": "2a694f0180a778c1c083fdc0369500d3638fa72457aee882e0aeedf14581f2ff",
+            "lib_sha256": "527a4238663179d06f2971c670743b417663cfdd313421fdda0fe4c9adfa5483"
+          },
+          {
+            "name": "@deepseek-ai/dsh-base",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "45efcc83b2a6ae6fcfe5cc7cebae4011f52d8e1e37fbff372cd91e07f4b8fe01",
+              "lib": "ce9e7c82c4023465db43f0a15cfd5224763206ef697fa285ae19fcb61d8d6e21",
+              "cordis.patch.yml": "1a7a094e659c2d775709d0ebcee4d78f8e06fb351096af50bbeef59b5b763aa2"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-official-bundles",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "168201555aeba4ada6fc7c509e0a6cc2fe0e1fc87faf4539a2433b42de0ea533",
+              "lib": "12a04f2fe0972d734600d31d37524e7d233f0a4511407c2b4e545ab5503c4c41"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-tool-skill",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "d44884dfe98b364a1cac81abcdbcb8872bf948c61d34f35cf058022d1ea31aeb",
+              "lib": "5a6ccedca30b861710c812fdae03e63b2fbe8e02458af980de2957af3051de6d"
+            }
+          },
+          {
+            "name": "@deepseek-ai/cordis",
+            "version": "4.1.0",
+            "hashes": {
+              "package.json": "70be1056619663339433309474b1e6a2307088097af3cb082afe4b5ca2021b26",
+              "lib": "1a84e660c2d92322f92463e66dc7e3efab24d1af4a5a446358bcd43574e8f69d"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-tools",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "4e2b0b859275f0ce2261c806b710d997186a9eba69fdf8e9950aac8eb7237136",
+              "lib": "adc6e54aacca8b810830706e003437b32bb1f79e02ac9ab3b4a690744f882461"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-system-prompt",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "e501da4c9f523cfa74909d280bd7af5ef3d58eb2d08fb4d48604369943724716",
+              "lib": "a7bbb9c76e9c366e9b806675b52628e0fb77a1d09a30008b53a593b9118939cb"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-skill-filesystem",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "c7657d34afd5994ac6a1a67f08e3b3ea1636c337d06f80406fcfc99c1ac11071",
+              "lib": "a58043bd465dd73cdda7f907747778c4f5f1e11e9302ad74861565b3525da99d"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-mcp-client",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "da86d164962cf08134893266f624563e9e3311406ce557a31be9bdb675ab7db3",
+              "lib": "642949d674086e54d4467d3c7856fc6200b2f9c68b6524e1d0fe44c7ef887c58"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-llm-pi-ai",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "e64fae441751728b7f477e0e5170bde888f03f3e905b00606dde1e9a94dd0d37",
+              "lib": "d094bc81e41c54cc5aac486f3e0b88f3ce8167cc120b3dcc413646584d41c400"
+            }
+          },
+          {
+            "name": "@deepseek-ai/dsh-headless",
+            "version": "0.2.2-rc.5",
+            "hashes": {
+              "package.json": "4b2cb203d1e97b5678cd504208ed54105ee6fe3572ed0e5ab8dacc404663d29d",
+              "lib": "d2b2c17ac4627a9604e1d79ef83beea1ae2ceda6f86b219ffb9bf135f151d4c6",
+              "cordis.patch.yml": "dfc81e1e44e1080263ac24c86ff2dec5831676e9c5b76096e6bc7ecf6aa817a3"
+            }
+          }
+        ],
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets": {
+          "node_runtime": "26.13.1",
+          "plugins/memory-net/src": "09f3fb3de8eee31adef08272dc6a628f47db8599114c1839102f095776b663cd",
+          "plugins/memory-net/adapters/dsh/src": "f9899987a4a52eecdac4d2d080528e7d00ef3cb892e425828fe18fbe0b27ad54",
+          "plugins/memory-net/adapters/dsh/dist": "f5d138476ee2eb8bb601c86dc53c33877ebda88e22949d27076750e266e0c15b",
+          "mcp/servers/search-core/typescript/src": "e90f384fa34ea566397dfa912b7f46f60c27077bea967f6e844ae9c20464caf6",
+          "mcp/servers/search-core/typescript/dist": "552de36e6260bb437081039d62c249956bc952e14fcc3a652e8ddca924d4217d",
+          "plugins/memory-net/adapters/dsh/package.json": "73f779c67cb338fa04d3e9f08d527c95f97097c28b2f579e80891bbd15158aae",
+          "plugins/memory-net/adapters/dsh/package-lock.json": "4eacb61d495f6c6f05838e435eb142030980f60e66f3a93c28eeb352806c4d81",
+          "mcp/registry.toml": "4475e360aa8c53982bccb68f4c50efea769cc7c52f3ff70bbb5894e14c1216c7",
+          "asset-manager/core/views.mjs": "13ff6adaf6bc7fc742d1b8528d9eec89927f4719a66c60dede1df122621d0102",
+          "asset-manager/core/usability.mjs": "c5c9dbbaad3284eb6f062838aef6148aa071041fc5003054ac408e456118e528",
+          "asset-manager/core/catalog.mjs": "5e2142ea79605b40ee51946dd6a6335b9207be3f00fc719223603349f0112696",
+          "asset-manager/core/license-review.mjs": "55304cdc85d1a475a0f886040ec6125ec5ab51a834609bc13ca880e913bfccea",
+          "asset-manager/core/mcp-config.mjs": "3d20de3ffddb10ce06358d7ebea7af752f7407ea46b0e14a0b5ec2da4e83936b",
+          "plugins/memory-net/adapters/dsh/dist/adapters/dsh/src/index.js": "8b62af285fd55d8413e676f4da90bfd19461a5cea5ac220c7ff54edd6a4adcef",
+          "mcp/servers/search-core/typescript/package.json": "8f56ec646bdafce62b1116a591e7446c7b4b280a4040342d6ba8d4f20aa1a995",
+          "mcp/servers/search-core/typescript/package-lock.json": "78c933ebfd8c8bc92f04a0aeae12f3575901b376e8113c29e4cc083de5b159f4",
+          "mcp/servers/search-core/typescript/dist/mcp.js": "64ad5e3cd009fc785ad4b450c7f9a7112b49ead53ef8170c54a68ee9dc56b2f1"
+        },
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f"
+      },
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      },
+      "mcp": {
+        "tool": "mcp__search-core__search",
+        "registered": true,
+        "result_returned_to_model": true,
+        "source": "Generated DSH MCP patch + real Search-core stdio server"
+      },
+      "host_version": "0.2.2-rc.5",
+      "scope": "Actual isolated DSH headless profile, local scripted OpenAI-compatible model, real plugin/tool execution and SQLite; not live user profile or paid model.",
+      "checks": [
+        "[verify] ✓ A1 工具注册: memory_net_write + memory_net_recall 出现在 3 个请求的 tools 列表",
+        "[verify] ✓ A2 工具注册: mn_e2e_echo（宿主真实工具）出现在 3 个请求的 tools 列表",
+        "[verify] ✓ B1 区段注入: 宿主预置约束进入 system prompt（memory-net section 生效）",
+        "[verify] ✓ B2 区段注入: 宿主预置进度进入 system prompt",
+        "[verify] ✓ B3 区段注入: 工具写入的推断进入工具后组装（重组装生效）",
+        "[verify] ✓ C 工具闭环: 模型发起 memory_net_write → dsh 执行 → canonical 结果回给模型并进入最终回复",
+        "[verify] ✓ D 持久化: n4 [inference] \"E2E 模型经 memory_net_write 写入的推断节点…\" 已落隔离workspace/memory.db",
+        "[verify] ✓ E1 auto-observe: n3 [observation] \"工具 mn_e2e_echo 成功·args({\"say\":\"hello auto-observe\"})→ {\"echo…\" 已自动入网（payload 含 call_id）",
+        "[verify] ✓ E2 自指过滤: memory_net_* 工具结果未被递归观测",
+        "[verify] PASS: 适配包经真实 dsh headless 端到端生效（含 auto-observe）"
+      ],
+      "user_profile_modified": false,
+      "telemetry": "DISABLED"
     }
   ]
 }

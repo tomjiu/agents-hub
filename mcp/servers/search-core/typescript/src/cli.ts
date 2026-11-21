@@ -80,6 +80,7 @@ async function main(): Promise<number> {
           console.log(
             `planner: ${r.planner.complexity}/${r.planner.route} (${r.planner.reasons.join(", ") || "-"})  engines: ${r.meta.enginesUsed.join("+") || "none"}  failed: ${r.meta.enginesFailed.map((f) => `${f.name}(${f.status})`).join(",") || "-"}  ${r.meta.degraded ? "DEGRADED " : ""}${r.meta.elapsedMs}ms${r.meta.fromCache ? " [cache]" : ""}`,
           );
+          if (r.meta.quality) console.log(`quality: ${r.meta.quality.status}; rejected=${r.meta.quality.rejected}/${r.meta.quality.evaluated}; candidate refs still require source verification`);
           for (const ref of r.refs) {
             console.log(`\n[${ref.refId}] ${ref.title}  (${ref.engines.join(",")})`);
             console.log(`    ${ref.url}`);
@@ -114,6 +115,7 @@ async function main(): Promise<number> {
         const r = await core.xSearch(query, "tweets", { engines });
         if (json) console.log(JSON.stringify(r, null, 2));
         else {
+          if (r.meta.quality) console.log(`quality: ${r.meta.quality.status}; rejected=${r.meta.quality.rejected}/${r.meta.quality.evaluated}; candidate refs still require source verification`);
           for (const ref of r.refs) {
             console.log(`[${ref.refId}] ${ref.title}  (${ref.engines.join(",")})`);
             console.log(`    ${ref.url}`);

@@ -37,7 +37,7 @@ function strings(value) {
 }
 const extraCalls = [
   ...(MCP_NAME && (!SEARCH_NAME || PARALLEL_DISCOVERY) ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
-  ...(SEARCH_NAME ? [searchCall] : []),
+  ...(SEARCH_NAME ? [searchCall,{id:'call_search_quality_empty',type:'function',function:{name:SEARCH_NAME,arguments:JSON.stringify({query:'pasta carbonara',engines:['searxng'],no_cache:true})}}] : []),
   ...(SKILL_NAME ? [{ id: 'call_skill_1', type: 'function', function: { name: 'skill', arguments: JSON.stringify({ name: SKILL_NAME }) } }] : []),
 ]
 
@@ -71,6 +71,8 @@ const server = createServer((req, res) => {
       has_search_tool: SEARCH_NAME ? toolNames.includes(SEARCH_NAME) : false,
       has_search_result: hasSearchResult,
       has_search_cache: hasSearchCache,
+      has_quality_candidate: messageStrings.some(text=>{try{const r=JSON.parse(text);return r?.meta?.quality?.policy==='lexical-evidence-v1'&&r.meta.quality.status==='candidate_results'&&r.refs.length>0;}catch{return false;}}),
+      has_quality_empty: messageStrings.some(text=>{try{const r=JSON.parse(text);return r?.meta?.quality?.status==='no_relevant_results'&&r.refs.length===0&&r.meta.quality.rejected>0&&r.meta.degraded===true;}catch{return false;}}),
       has_explicit_selection: messageStrings.some(text => {try {const result=JSON.parse(text),selection=result?.meta?.engine_selection;return selection?.mode==='explicit'&&JSON.stringify(selection.requested)==='["searxng"]'&&result.meta.engines_used.every(name=>name==='searxng')&&result.meta.engines_failed.every(f=>f.name==='searxng')&&result.refs.every(ref=>ref.engines.every(name=>name==='searxng'));} catch{return false;}}),
       has_static_discovery: messageStrings.some((text) => /"disclosure"[ ]*:[ ]*"static"/.test(text)),
       search_result_diagnostics: SEARCH_NAME ? messages.filter((m) => m.role === 'tool' && (m.tool_call_id === 'call_search_1' || m.tool_call_id === 'call_search_cached')).map((m) => m.content) : undefined,
