@@ -108,7 +108,10 @@ export class Fetcher {
       const safe = this.#cfg.ssrf === "off"
         ? validateUrl(current, policy)
         : await safeFetchUrl(current, policy, ssrfOpts);
-      if ("error" in safe) throw new Error(`ssrf: ${safe.error}`);
+      if ("error" in safe) {
+        const fakeIpHint=/private address blocked:.* -> 198[.]1[89][.]/.test(safe.error) ? "; reserved 198.18.0.0/15 DNS answer (possible TUN/fake-IP mapping). Configure real DNS answers for this host in your trusted network/adapter settings; do not disable SSRF or exempt reserved ranges. No request sent." : "";
+        throw new Error(`ssrf: ${safe.error}${fakeIpHint}`);
+      }
       res = await this.#fetchImpl(safe.url.href, {
         redirect: "manual",
         signal: AbortSignal.timeout(timeoutMs),

@@ -44,6 +44,20 @@ HTTP/SSE 探针: `node scripts/http-probe.mjs`;MCP 渐进披露探针: `node scr
 
 static模式多携带5个初始schema；未改变实际research/search等执行或授权语义，不修补DSH官方bridge。旧配置和运行包需要显式重新生成，当前实例不会自动改变。详见 [搜索验收说明](../../../../asset-manager/SEARCH-ACCEPTANCE.md)。
 
+## 每次调用的provider名单
+
+search/xSearch与MCP/HTTP search、x_search的engines是明确provider allowlist：省略为自动路由，[]不出勤，已登记名称去重排序，未知/空名称/错误类型拒绝。名单优先于领域与GitHub/X链、rescue和自动key slots；X显式名单走site:X查询，禁用official/guest/oEmbed额外层。不保证provider内部转发域名或embedding端点，fetch/research不继承它。research/resume和非search/x CLI命令拒绝engines。
+
+CLI用--engines searxng或--engines ""，查询需在flag前；裸--engines报错。MCP meta.engine_selection、core/HTTP meta.engineSelection显示mode/requested，仍须核对结果相关性。provider-allowlist-v1缓存不使用旧key且验证缓存来源，原缓存不删除。旧真实偏题/限流和DNS fetch失败记录保留，不标公网质量通过。
+
+## 查询证据质量门槛
+
+search/xSearch的默认最低质量门槛lexical-evidence-v1只检查词法证据：title/snippet/path至少匹配2个或40%独立有效查询词（单词题1），CJK用bigram；URL主机和provider前缀不算。它不是语义/事实鉴定，会漏掉跨语言、同义词或过短摘要，纯URL/无有效词可返回空。meta.quality含candidate_results/no_relevant_results、evaluated/rejected/reasons；候选必须人工核验，全部拒绝标degraded不输出错题引用。Bing q回显改写会报query mismatch，缺回显不作为确认。
+
+Research新搜索结果在原主题上过滤后入池，不对既有journal执行破坏性重写。质量cache新key不复用旧缓存，命中仍查词证据。底层fusion可选evidenceGate默认关闭保兼容，搜索entry启用；embedding失败不恢复词门槛拒绝。公网效果只认证已测Node/SQLite题，默认自动池可能加入keyless聚合器。
+
+当前Meta DNS映射198.18.x时官网fetch安全拒绝；新诊断提示可信网络返回真实DNS，不关闭SSRF/豁免fake-IP，也不假装已全文抓取成功。
+
 ## 配置
 
 `~/.search-core/config.json` 或环境变量(优先):

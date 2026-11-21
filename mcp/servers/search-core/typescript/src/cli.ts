@@ -40,6 +40,8 @@ async function main(): Promise<number> {
   const cmd = _[0] ?? "help";
   const json = !!flags.json;
 
+  if (flags.engines !== undefined && !["search", "x"].includes(cmd)) throw new Error("--engines is supported only for search and x; research/serve do not honor a per-call list");
+
   if (cmd === "serve") {
     const { serveMcp } = await import("./mcp.js");
     await serveMcp();
@@ -57,6 +59,8 @@ async function main(): Promise<number> {
     return 0; // unreachable
   }
 
+  if (flags.engines === true) throw new Error("--engines requires a comma-separated list; use an empty string for no providers");
+  const engines = flags.engines === undefined ? undefined : flags.engines === "" ? [] : String(flags.engines).split(",");
   const core = new SearchCore();
 
   try {
@@ -66,7 +70,7 @@ async function main(): Promise<number> {
         if (!query) throw new Error('usage: search-core search "query"');
         const r = await core.search(query, {
           freshness: flags.freshness as never,
-          engines: flags.engines ? String(flags.engines).split(",") : undefined,
+          engines,
           lang: flags.lang as string | undefined,
         });
         if (json) {
@@ -76,6 +80,7 @@ async function main(): Promise<number> {
           console.log(
             `planner: ${r.planner.complexity}/${r.planner.route} (${r.planner.reasons.join(", ") || "-"})  engines: ${r.meta.enginesUsed.join("+") || "none"}  failed: ${r.meta.enginesFailed.map((f) => `${f.name}(${f.status})`).join(",") || "-"}  ${r.meta.degraded ? "DEGRADED " : ""}${r.meta.elapsedMs}ms${r.meta.fromCache ? " [cache]" : ""}`,
           );
+          if (r.meta.quality) console.log(`quality: ${r.meta.quality.status}; rejected=${r.meta.quality.rejected}/${r.meta.quality.evaluated}; candidate refs still require source verification`);
           for (const ref of r.refs) {
             console.log(`\n[${ref.refId}] ${ref.title}  (${ref.engines.join(",")})`);
             console.log(`    ${ref.url}`);
@@ -107,9 +112,10 @@ async function main(): Promise<number> {
       case "x": {
         const query = _.slice(1).join(" ");
         if (!query) throw new Error('usage: search-core x "query"');
-        const r = await core.xSearch(query);
+        const r = await core.xSearch(query, "tweets", { engines });
         if (json) console.log(JSON.stringify(r, null, 2));
         else {
+          if (r.meta.quality) console.log(`quality: ${r.meta.quality.status}; rejected=${r.meta.quality.rejected}/${r.meta.quality.evaluated}; candidate refs still require source verification`);
           for (const ref of r.refs) {
             console.log(`[${ref.refId}] ${ref.title}  (${ref.engines.join(",")})`);
             console.log(`    ${ref.url}`);

@@ -1,0 +1,362 @@
+{
+  "schema": 1,
+  "status": "PASS_FOR_PROVIDER_SELECTION_NOT_SEARCH_QUALITY",
+  "defect": {
+    "reproduced_failures": 8,
+    "paths": [
+      "domain route",
+      "GitHub route",
+      "X chain",
+      "empty list",
+      "rescue",
+      "invalid names",
+      "router key slots",
+      "cache"
+    ]
+  },
+  "contract": {
+    "undefined": "automatic routing preserved",
+    "array": "exact registered provider allowlist; validated/deduplicated/sorted",
+    "empty_array": "no provider requests",
+    "unknown_or_malformed": "reject before network/cache",
+    "scoped_interfaces": [
+      "core search/xSearch",
+      "MCP search/x_search",
+      "HTTP search/x_search",
+      "CLI search/x"
+    ],
+    "research": "engines rejected; not supported",
+    "cache": "provider-allowlist-v1 keys; old records retained not reused; selected-provider provenance checked on hit"
+  },
+  "tests": {
+    "search_core": {
+      "passed": 312,
+      "failed": 0
+    },
+    "selection_specialized": 15,
+    "mcp_selected_mode_test": 1,
+    "root": {
+      "passed": 138,
+      "skipped": 1,
+      "total": 139
+    },
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "bundle_test": false,
+        "status": "PASS",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "bundle_test": false,
+        "status": "PASS",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.1",
+        "bundle_test": true,
+        "status": "PASS",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "bundle_test": true,
+        "status": "PASS",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ]
+  },
+  "public_query": {
+    "real_network": true,
+    "scripted_model": false,
+    "credentials_used": false,
+    "requested": [
+      "bingrss",
+      "duckduckgo",
+      "yahoo"
+    ],
+    "provider_selection_verified": true,
+    "meta": {
+      "engine_selection": {
+        "mode": "explicit",
+        "requested": [
+          "bingrss",
+          "duckduckgo",
+          "yahoo"
+        ]
+      },
+      "engines_used": [
+        "bingrss"
+      ],
+      "engines_failed": [
+        {
+          "name": "yahoo",
+          "error": "yahoo http 500",
+          "elapsedMs": 1309,
+          "status": "error",
+          "retryable": true
+        },
+        {
+          "name": "duckduckgo",
+          "error": "ddg: no results parsed (markup drift or soft-block?)",
+          "elapsedMs": 7379,
+          "status": "rate_limited",
+          "retryable": true
+        },
+        {
+          "name": "yahoo",
+          "error": "yahoo http 500",
+          "elapsedMs": 1341,
+          "status": "error",
+          "retryable": true
+        },
+        {
+          "name": "duckduckgo",
+          "error": "ddg: no results parsed (markup drift or soft-block?)",
+          "elapsedMs": 6744,
+          "status": "rate_limited",
+          "retryable": true
+        }
+      ],
+      "engines_skipped": [],
+      "degraded": true,
+      "elapsed_ms": 7413,
+      "from_cache": false,
+      "complexity": "simple",
+      "route": "domain",
+      "domain": "programming"
+    },
+    "refs": [
+      {
+        "refId": 1,
+        "title": "搜狗输入法-官网",
+        "url": "http://shurufa.sogou.com/",
+        "snippet": "[bing-rss] 搜狗拼音输入法官网下载，荣获多个国内软件大奖的搜狗拼音输入法是一款打字更准、词库更大、速度更快、外观漂亮、用了让您爱不释手的输入法，是您装机输入的好选择。享受输入，从搜狗开始！",
+        "engines": [
+          "bing-rss"
+        ],
+        "published": "周四, 19 11月 2026 07:24:00 GMT"
+      },
+      {
+        "refId": 2,
+        "title": "搜狗五笔输入法",
+        "url": "https://wubi.sogou.com/",
+        "snippet": "[bing-rss] 搜狗五笔输入法官网下载，搜狗五笔输入法具有免费、无广告、兼容性好等优点，支持86版、98版、新世纪版五笔方案；搜狗五笔输入法支持五笔拼音混合输入、词库同步，兼容搜狗拼音的细胞词库和皮肤，适合五笔输入用户选用。享受输入，从搜狗开始。",
+        "engines": [
+          "bing-rss"
+        ],
+        "published": "周六, 21 11月 2026 01:31:00 GMT"
+      },
+      {
+        "refId": 3,
+        "title": "大庆油田昆仑新型建材有限公司型材分公司 - 油田昆仑 - 爱企查",
+        "url": "https://aiqicha.baidu.com/company_detail_31675688495159",
+        "snippet": "[bing-rss] 爱企查为您提供大庆油田昆仑新型建材有限公司型材分公司的企业信息查询服务，查询大庆油田昆仑新型建材有限公司型材分公司工商注册信息、电话邮箱、公司地址、经营风险、控股持股、发展动态、财务状况、股东法人高管、商标专利、品牌项目、竞品信息 ...",
+        "engines": [
+          "bing-rss"
+        ],
+        "published": "周日, 08 1月 2023 18:28:00 GMT"
+      },
+      {
+        "refId": 4,
+        "title": "昆仑集团 - CNPC",
+        "url": "http://dqyt.cnpc.com.cn/dq/kljt/common.shtml",
+        "snippet": "[bing-rss] 组建于2004年9月，集团下设成员企业有商贸有限公司、庆港包装材料有限公司、水泥有限公司、建筑工程有限公司、达源新型建材分公司、型材分公司、管业分公司、电缆分公司、乳山大庆工业园分公司、农牧分公司、大庆石油管理局农场等11家。 主要从事餐饮服务、包装制品、新型建材、种植养殖和食品加工等行业。 集团主营业务分为四大板块：即商饮服务板块主要由4万平方米以上商业零售商场、3家星级酒店及其他4家租赁式经营的商业场所组成；包装制品板块主导产品有庆港牌塑料薄膜、瓦楞纸箱、编织袋、夹层玻璃等；新型建材板块主导产品有奥维牌系列建材，包括PVC型材、PVC管材、建筑涂料、彩涂板、电缆、混凝土小型空心砌块及油龙牌普通硅酸盐水泥；种植养殖板块主导产品有普园牌放心食品、“恒亚”牌矿泉水及鹿产品系列。",
+        "engines": [
+          "bing-rss"
+        ],
+        "published": "周四, 19 11月 2026 22:26:00 GMT"
+      },
+      {
+        "refId": 5,
+        "title": "大庆油田昆仑集团型材有限公司 - 企查查",
+        "url": "https://www.qcc.com/firm/731e4324b328fd99d23d4cd7b2e187f8.html",
+        "snippet": "[bing-rss] 企查查为您提供大庆油田昆仑集团型材有限公司的最新工商信息、公司简介、公司地址、电话号码、招聘信息、信用信息、财务信息、法律诉讼等多维度详细信息查询，让您对大庆油田昆仑集团型材有限公司能够做到全面的了解！",
+        "engines": [
+          "bing-rss"
+        ],
+        "published": "周三, 27 5月 2026 18:09:00 GMT"
+      }
+    ],
+    "quality": "FAILED_MANUAL_RELEVANCE_REVIEW: Node SQLite query returned unrelated input-method/company pages; degraded result is not useful research evidence",
+    "source": "Original .asset-state live MCP response; verified metadata here, not replayed public requests"
+  },
+  "acceptance_failures": {
+    "rc5": "Two 90-second startup timeouts before model request; later exact assertions passed with bounded 180-second main task allowance",
+    "cause": "Not established; rc.5 isolated headless help itself observed about70seconds. No performance guarantee",
+    "diagnostic_fixture": "Initial regex missed multiline JSON selection; actual results contained correct metadata; replaced with structural JSON assertions"
+  },
+  "limits": [
+    "Provider names are not domain network/firewall constraints; aggregators and configured embedding can contact their own endpoints",
+    "No strict list inherited by fetch/research; research rejects engines",
+    "Explicit X mode uses site:X general selected providers, not official/users-specific result guarantee",
+    "Default config is not a caller-level hard allowlist when per-call engines omitted",
+    "No search relevance/quality or startup performance certification",
+    "No user DSH upgrade/restart/profile change, no real private accounts or subagents"
+  ],
+  "independent_checkout": {
+    "code_commit": "15f232de4ed7dd4ec9f2e231ed70cef23e3dabcc",
+    "search_tests": {
+      "passed": 312,
+      "failed": 0
+    },
+    "root_tests": {
+      "passed": 138,
+      "skipped": 1,
+      "total": 139
+    },
+    "real_mcp_fixture_passed": true,
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ],
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0,
+      "banned": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "public_query_repeated": false
+  }
+}

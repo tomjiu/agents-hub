@@ -25,7 +25,7 @@ node <repo>/mcp/servers/search-core/typescript/dist/cli.js fetch <url> --focus "
 node <repo>/mcp/servers/search-core/typescript/dist/cli.js research "topic" --loops 3           # 深度研究循环
 ```
 
-首次使用先构建：`cd <repo>/core && npm install && npm run build`
+首次使用在仓库根固定安装：`npm ci --ignore-scripts --no-audit --no-fund --prefix mcp/servers/search-core/typescript`，然后`npm run build:dsh`（还需README列出的记忆子包固定依赖）；没有`<repo>/core`入口。不要执行旧路径或无锁安装。
 
 ### 2. MCP server（推荐给 agent）
 
@@ -33,9 +33,9 @@ node <repo>/mcp/servers/search-core/typescript/dist/cli.js research "topic" --lo
 { "mcpServers": { "search-core": { "command": "node", "args": ["<repo>/mcp/servers/search-core/typescript/dist/mcp.js"] } } }
 ```
 
-接入 Claude Code / Cursor / Claude Code on Bedrock（WebSearch 不可用场景的官方补法）详见 **[docs/mcp-exit.md](docs/mcp-exit.md)**（含真网络 stdio 实测证据与诚实边界）。
+接入 Claude Code / Cursor / Claude Code on Bedrock（WebSearch 不可用场景的官方补法）详见 **[当前DSH搜索验收说明](../../../../asset-manager/SEARCH-ACCEPTANCE.md)**（本仓已验证的是隔离DSH和本地来源，旧其他客户端/公网记录不作为当前验收）。
 
-工具（渐进披露，Direct 3 个按需激活 Deferred 5 个）：
+工具默认渐进披露（Direct 3个，Deferred 5个）；DSH生成配置显式SC_MCP_DISCLOSURE=static，启动时登记全部8工具，tool_search不再变更列表：
 
 | 工具 | 类型 | 干什么 |
 |---|---|---|
@@ -94,6 +94,21 @@ curl -X POST localhost:8629/research -d '{"query":"..."}'   # SSE 事件流
 | `TAVILY_API_KEY` 等 | 可选 key 插槽，自动并联，月度额度（`SC_TAVILY_MONTHLY_QUOTA`，默认 1000）用完自动回落免 key 池 |
 | `SC_SEARXNG_BASE_URL` | 自托管 SearXNG 实例（公共实例不可依赖） |
 | `SC_TIMEOUT_MS` / `SC_UA` / `SC_HTTP_PORT` | 单引擎超时 12s / 规范 UA 勿改 / 网关端口 |
+
+## 实际研究任务发现的限制
+
+- 搜索返回官方域名也需核对版本；Node SQLite研究首位为旧nightly文档，不能当当前v26.13.1说明。
+- 旧版本会改写显式engines，已由本仓严格provider名单修复：search/x_search传数组覆盖领域/GitHub/X链/兜底/key slots，[]不调用provider，未知名称报错；不传仍自动路由。MCP结果meta.engine_selection包含mode/requested，可核对engines_used/failed/skipped。它不是provider内部域名/第三方服务或embedding端点防火墙；research不支持名单并明确拒绝，勿将search限制自动推广到fetch/research。
+- 当前DNS将公开官方域名映射198.18.x时，fetch严格SSRF拒绝；如实报告，勿设SC_SSRF=off绕过。可用用户允许的独立阅读工具，但不要称为Search-core抓取成功。
+- 本次真实Lead研究→检索→来源核验→报告→隔离Memory-net跨进程召回有证据，但全文阅读使用了独立Harness工具，没有证明搜索/抓取完整链路或全部研究效果。见 [实际研究任务](../../../../catalog/audit/research-memory-sqlite.md)。
+
+## 质量输出与查询方法
+
+- 使用简短主题+关键术语，避免把所有问题塞一串关键词；例如Node SQLite DatabaseSync或SQLite WAL concurrency。实际复测已找到相关官方候选，但旧nightly仍要核对版本。
+- meta.quality的candidate_results只表示最低词证据通过，不表示真实/最新/结论可用；no_relevant_results明确无可用候选、degraded和拒绝计数。不要为凑数引用无关输出。
+- entry默认lexical-evidence-v1过滤title/snippet/path词证据，不把URL主机/provider前缀当相关性；跨语言/同义词/纯URL/短摘要可能被保守拒绝。research新结果入池也过滤，旧journal重放不升级质量认证。
+- RSS最终URL/channel link q回显与请求不一致报query mismatch；无回显不冒充确认。新质量缓存策略不复用旧偏题记录，原缓存保留。
+- DNS返回198.18.x时fetch仍拒绝；诊断网络/可信DNS配置，不关闭SSRF、不自动修改用户代理。此时全文核验若换独立工具必须标明。
 
 ## 已知边界（诚实声明）
 

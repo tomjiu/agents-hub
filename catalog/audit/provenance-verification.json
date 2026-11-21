@@ -205,9 +205,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "66364aad66bcc3f054b807c3784ce39c32f4e5762f03a80a7f3069d1ce059de6",
+      "current_sha256": "f0d6729c8e004be6a26ae1a513e77753fdb774c58bbf701e434850e65b902182",
       "baseline_sha256": "66364aad66bcc3f054b807c3784ce39c32f4e5762f03a80a7f3069d1ce059de6",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "finishing-a-development-branch",
@@ -451,7 +451,7 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "01394945f5df4d928fa02f607458be0aa34edf89f685f2f6a4b37b8dca63d1b9",
+      "current_sha256": "6e1409436783eacf012b293da4a0250c77ecdfeb726f17920725de195cb02e8c",
       "baseline_sha256": "402210d5390926cd279dc146af062b604ccb2c88049fbdaa910287037133df14",
       "local_modified": true
     },
@@ -519,7 +519,7 @@
       "license": "MIT",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "344c71a917c58437fbf7b2bc9e18dcfffb8313168f3c56fdd7b01fe4615520f8",
+      "current_sha256": "3c6461543e18f1ca06c022d000280c9918cca04cb2455a77797a42ce30ab9af9",
       "baseline_sha256": "33e0076b1440b7e7608bcb1c81fc1f7d1bb49af10aab6138364388e5f1b827a3",
       "local_modified": true
     },
@@ -574,9 +574,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "7d5b285b1ae34d0baff45882972da11500402774b171696b53b9a667b5b0c1f8",
+      "current_sha256": "b88d4f00f028b11e1aa28b277d5949683820f7fbb6a324018bcbaa6a81f1130e",
       "baseline_sha256": "7d5b285b1ae34d0baff45882972da11500402774b171696b53b9a667b5b0c1f8",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "playwright",
@@ -667,9 +667,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "89424832c7cb031b7dc169c8bf1bfffa449fd08af4efaaf16aba5a087e9f4f79",
+      "current_sha256": "1881014132a8cff5013bb5a80a0564e78046c65734f990f3e4226a222565df7e",
       "baseline_sha256": "89424832c7cb031b7dc169c8bf1bfffa449fd08af4efaaf16aba5a087e9f4f79",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "reverse-engineering-workflow",
@@ -718,9 +718,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "306b8fee01a3ed64b15af9f514e71d6aa0044a6496822fa7751d46b4b17657b1",
+      "current_sha256": "976742defaff3254900e4ce1a6b995cbb89721f3070e438e82c38b4081718f3d",
       "baseline_sha256": "306b8fee01a3ed64b15af9f514e71d6aa0044a6496822fa7751d46b4b17657b1",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "security-and-hardening",
@@ -735,9 +735,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "2ba512487db7ab87709d5157c515c97fe59da4104d0508bda1de054f3fa1d63e",
+      "current_sha256": "3add7c02d331d2caac06ddac5da06e1b3b454e811f93f8588674b129e8e7daf4",
       "baseline_sha256": "2ba512487db7ab87709d5157c515c97fe59da4104d0508bda1de054f3fa1d63e",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "security-best-practices",
@@ -773,9 +773,9 @@
       "license": "Apache-2.0",
       "license_status": "declared-file-not-legal-approval",
       "deployment_restricted": false,
-      "current_sha256": "d7d746d49adb3fd54b1e7ddf4e783cf332bd6fe5f34411d97d046158b2ebd8f4",
+      "current_sha256": "952371e8041f9a17f48859d660c68fbed06ef07caa5e02f9fa9bb1bd63bbe3cc",
       "baseline_sha256": "d7d746d49adb3fd54b1e7ddf4e783cf332bd6fe5f34411d97d046158b2ebd8f4",
-      "local_modified": false,
+      "local_modified": true,
       "license_evidence": {
         "path": "skills/individual/security/security-ownership-map/LICENSE.txt",
         "sha256": "44e03f7e263eb3ad256440c1eeab5e49168baff5a78ecef9a5447261cf3a91bc"
@@ -832,9 +832,9 @@
       "license": "Apache-2.0",
       "license_status": "declared-file-not-legal-approval",
       "deployment_restricted": false,
-      "current_sha256": "44351cb9b5d44254f1ca4cff196c09988b29f55626db677a6607eb2049ec5ea4",
+      "current_sha256": "33de8ee928cf505200adef6f463ce1ffcc36047c453453e805d5f672203b1a21",
       "baseline_sha256": "44351cb9b5d44254f1ca4cff196c09988b29f55626db677a6607eb2049ec5ea4",
-      "local_modified": false,
+      "local_modified": true,
       "license_evidence": {
         "path": "skills/individual/engineering/skill-creator/LICENSE.txt",
         "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"
@@ -853,9 +853,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "57d0713e58117a8809c1b3122df9613b19f1cc7f503f7c0fe5d36cad2d4db625",
+      "current_sha256": "e5c1ccd60e13cd2d12f30118587adf28ac5d8438798c7787af592904f6586757",
       "baseline_sha256": "57d0713e58117a8809c1b3122df9613b19f1cc7f503f7c0fe5d36cad2d4db625",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "source-driven-development",
@@ -1469,9 +1469,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "7521169d61e315f9cf0f1952e61a0ffd345bee1b4729c68d97029b111707f442",
+      "current_sha256": "b188533a2a9fa443608cbe54e49eac507c58eae56ec4dc128dc6f7f44423cd57",
       "baseline_sha256": "7521169d61e315f9cf0f1952e61a0ffd345bee1b4729c68d97029b111707f442",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "verification-before-completion",
@@ -1520,9 +1520,9 @@
       "license": "Apache-2.0",
       "license_status": "declared-file-not-legal-approval",
       "deployment_restricted": false,
-      "current_sha256": "c1a752df5ca2de0508aef56a997121fa0a835ab2dc4c576c0997627980e3e8cf",
+      "current_sha256": "86f3736e1bbd8f33a3b68a5b093377aa9b0050ebf630fd7cc46f48c6b42ffb04",
       "baseline_sha256": "c1a752df5ca2de0508aef56a997121fa0a835ab2dc4c576c0997627980e3e8cf",
-      "local_modified": false,
+      "local_modified": true,
       "license_evidence": {
         "path": "skills/individual/document/webapp-testing/LICENSE.txt",
         "sha256": "52b223c318576d65c32f70cb745f31352730e9f4c2c2c2570a66ce700f4f5a64"
@@ -2357,9 +2357,9 @@
       "license": "review-required",
       "license_status": "review-required",
       "deployment_restricted": false,
-      "current_sha256": "21e72c6ba92a92052333f3a244ae49b9671d8559900bddf78e08bcf7a8292808",
+      "current_sha256": "bd5bfba9460526a5dd4d6e122ddefa0c7d60a1cc8ac9293a39c0c9221d732a70",
       "baseline_sha256": "21e72c6ba92a92052333f3a244ae49b9671d8559900bddf78e08bcf7a8292808",
-      "local_modified": false
+      "local_modified": true
     },
     {
       "id": "xlsx",

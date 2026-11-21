@@ -1,6 +1,6 @@
 # v2 基础重构实施状态
 
-状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试117通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
+状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。合并状态以GitHub PR为准，运行中的DSH不变。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
 ## 已完成
 
@@ -16,8 +16,8 @@
 
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
-| Asset Manager | 117 PASS，1 SKIP（总118） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
-| Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
+| Asset Manager | 138 PASS，1 SKIP（总139） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
+| Search-core TypeScript | 322/322 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
@@ -133,6 +133,56 @@
 - 新search-assets只读关键词检索和skills-status库存检查，4项测试包括真实登记/规范链接/预选组合。validate拒绝坏frontmatter、缺失或未登记技能。
 - 123个canonical Skill全部登记，51独立、71厂商、1管理。security-workflow描述含未转义冒号造成YAML坏语法已修复，正文原样。10个厂商name跨客户端不兼容、5组同名提供方分别报告，不删除或偷偷改名。
 - 当前137资产的存在不意味着全部可用：许可/厂商运行时限制保留，真实公网搜索与收费鉴权不在当前测试范围。
+
+## 全仓索引体验与组合审核
+
+- 真实任务“记忆插件”检索遗漏先失败复现；当前增加6个关键资产的discovery.description/aliases及中文二字片段、精确ID加权。137个稳定ID逐项检索命中、4类任务检索和4个Expert预检通过，不是语义模型或远端查找。
+- audit-usability覆盖全部137项，默认DSH为48 CONTENT_READY、5 CONDITIONAL、84 BLOCKED；CONTENT_READY仅正文可读，阻止项包括75个厂商/许可Skill与9个MCP宿主/配置缺口。逐项原因不能被“库存完整”掩盖。
+- 新preflight只读组合检查，重复Skill name/MCP runtime ID、声明requires/conflicts、循环和Expert继承/Profile追加排斥检查；BLOCKED返回exit1，view也执行相同组合规则。
+- 人工复核修复4份工程Skill中的错误指令层级、全局强制加载与禁止派生时的子代理要求；旧导入基线/许可不修改。自动预检不保证任意语义指令无冲突。
+- 实装rc.5 provider发现/读取全部48个正文合格技能、正文匹配且0警告，75个Skill排除并记录原因；不是全部脚本/专业任务验证。rc.1/rc.5记忆/搜索/并发发现重新验收，组合实现变更纳入指纹。
+- 详见 [可用性指南](../../asset-manager/USABILITY.md)，本次报告记录真实检索、加载通道、结构及限制，后续专业任务/外部依赖仍需逐项审核。
+
+## 第二层资源与离线任务审核
+
+- 新audit-resources遍历全部123 canonical Skill的显式链接及资源名，./和仓库内../可正确检查、越界/目录链接拒绝，不执行任何资源。当前246引用中223存在、21未解析、2示例；21项均在厂商内容，不能据此判定均为缺失依赖。
+- 3类独立断链修复：补充security/performance本地检查表（明确非找回的上游材料）、search-core修正失效链接、安全归属技能修正skills/skills旧命令路径。
+- 11项技能打包离线回归通过：真实CLI/help/归档正文、空/重复YAML、旧输出、源内输出、私密文件与许可拒绝、源变化、写入失败和并发写入保护。4项安全归属合成Git历史→报告→查询及原输出保护通过。
+- Python3.13.7用显式解释器和私有固定PyYAML6.0.3/networkx3.5，未修改Windows Store别名/全局配置；root新增3项资源回归，总135项134通过1跳过。见 [任务验收](../../asset-manager/TASK-ACCEPTANCE.md)。
+- 未执行厂商/Office受限资产，也未验证所有Python/浏览器/外部依赖，with_server只核对help与源码、未声称服务器生命周期修复已完成。
+
+## 本地Web服务生命周期修复
+
+- 真实复现旧with_server把占用端口当自建服务ready，测试误连既有listener并exit0。修复为先检查全部端口、进程存活和稳定TCP可达，不接管既有服务；readiness不等于UI正确或认证端口所有权。
+- 兼容可信--server shell入口，新增--server-argv JSON无shell和--cwd、--command-timeout；拒绝重复端口、非法/非有限超时、空命令。内部不创建未读取PIPE，输出继承调用者。
+- Windows进程挂入kill-on-close job之前以挂起状态创建，成功归属后恢复，避免早派生逃逸；失败不运行测试，命令结束/中断/超时统一回收job内服务器与命令。POSIX用process group，但本次仅Windows验收。
+- 17项实际CLI/HTTP回归通过，含噪声2MB、多服务器、命令7退出保留、124超时、SIGBREAK、强杀helper及shell祖孙清理，不改运行中DSH、不创建子代理。加入probe-python-tasks，总32项Python任务回归通过；根仍134通过、1权限跳过。
+- [生命周期指南](../../asset-manager/WEB-SERVER-LIFECYCLE.md)保留跨exec端口竞争、应用身份检查、daemon/外部job限制及全平台未认证，不声称浏览器UI测试完成。
+
+## Lead实际资料研究任务
+
+- 不再以模拟模型脚本证明研究质量：Lead通过索引和preflight选择能力，真实Search-core MCP公开搜索Node SQLite→5引用/降级，独立读取固定版本Node/SQLite官方文档，核对本地实现并产出[决策报告](research-memory-sqlite.md)。
+- 首位检索旧nightly，不直接当当前版本；指定engines被领域路由改写，尚未修复。官方全文fetch因本机DNS保留地址被守卫拒绝，Harness独立web_fetch替代，明确不算Search-core完整fetch链路通过。
+- Node26.13.1实测Database/DatabaseSync同一类、SQLite3.54.1；文档给出弃用兼容别名/同步API，建议后续独立迁移。不将WAL当多写者或网络盘数据库，召回不当语义RAG。
+- 临时Memory-net记录报告里的核验语句及inference，关闭后跨Node进程回读类型/based_on/正文；不触及用户记忆库。探针只重放已审阅输入，不再次验证远端内容。
+- 修复搜索Skill旧core构建路径与Node22说明、记忆上游兼容过度承诺，source-driven-development增加官方文档任务别名及回归；没有API或router实现改动。
+- 没有无技能对照、独立审稿或自由运行真实模型全流程，真实账户及全部研究题效果未认证。详见[任务记录](real-research-task.json)。
+
+## 显式搜索选源修复
+
+- 先复现8项失败：领域/GitHub/X路由、空名单、rescue、无效名称与缓存突破provider选择；实现统一验证优先级、[]不发provider请求、未知名称失败，未指定维持自动模式。
+- MCP/core/HTTP search/x_search及CLI一致输出选源信息；research/resume及不支持命令明确拒绝engines。15项选择专题和新增MCP选源测试通过，TS总312通过；旧缓存保留但新策略key及来源核验阻止污染。
+- 实际公开查询只尝试指定bingrss/duckduckgo/yahoo，provider边界通过，但内容偏题/降级，不计任务质量合格。DNS官方fetch未修复/绕过，原报告保留。
+- 宿主默认领域查询验证名单回流；兼容要求explicit_selection_verified，保存selection后缀新证据。rc.5曾90秒冷启动超时，保留失败，预算180秒复验通过，不保证性能；rc.1/rc.5直接和生成包重新验收。
+- provider内部端点/聚合器转发、embedding请求不是名单覆盖的网络边界，不保证X特定结果格式；不改live DSH或默认启用状态。
+
+## 搜索偏题质量修复
+
+- 实际上游RSS q请求正确但响应改写/宽泛首页；旧融合无硬词证据拒绝，research直接入池。Bing现拒绝可确认的q回显改写；search/xSearch词法门槛与research入池过滤，MCP可见quality状态/计数，全部无证据标空/降级。
+- 新quality缓存key及命中证据检查防旧记录绕过；保留旧缓存/journal，不把历史研究重放当新质量认证。322项搜索回归通过，embedding失败不会恢复已拒绝结果。
+- 实际原Node题剔55/60返回3条SQLite文档候选；WAL题剔32/40找到官方WAL文档；简短Node题首位当前v26.13.1。仍不是全题语义准确率，旧nightly/相似词/短摘要/跨语言需复核。
+- Meta DNS为198.18.0.2，公开域名解析198.18.x；fetch安全拒绝并新增可操作诊断，未改代理或DNS、不关闭SSRF。官方全文链路在此环境尚未通过。
+- DSH验收新增quality_verified：正常候选和偏题空结果/降级都须回流，新证据-quality.json，历史保留。
 
 ## 未认证与后续事项
 

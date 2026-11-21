@@ -67,7 +67,7 @@ Returns ranked references (refId, url, title, snippet) — use fetch(url, focus=
       freshness: z.enum(["day", "week", "month", "year", "any"]).optional(),
       max_results: z.number().int().min(1).max(20).optional().describe("Per-engine result cap (default 10)"),
       top_n: z.number().int().min(1).max(50).optional().describe("Fused result cap (default 20)"),
-      engines: z.array(z.string()).optional().describe("Explicit engines, e.g. [\"duckduckgo\",\"brave\"]"),
+      engines: z.array(z.string().min(1)).max(100).optional().describe("Exact provider allowlist; overrides routes/rescue/key slots. [] means none. Unknown names reject; providers may access their own endpoints."),
       lang: z.string().optional(),
       no_cache: z.boolean().optional(),
     },
@@ -86,6 +86,8 @@ Returns ranked references (refId, url, title, snippet) — use fetch(url, focus=
           snippet: ref.snippet, engines: ref.engines, published: ref.published,
         })),
         meta: {
+          quality: r.meta.quality,
+          engine_selection: r.meta.engineSelection,
           engines_used: r.meta.enginesUsed,
           engines_failed: r.meta.enginesFailed,
           engines_skipped: r.meta.enginesSkipped ?? [],
@@ -141,6 +143,7 @@ Do NOT fetch a full page when a focused read suffices.`,
     description: `Deep research loop: decomposes the query into 5 parallel angles, searches each loop with reference/fetch dual budgets, extracts quoted facts from focused fetches, scores 6 reflection questions (facts/coverage/authority/freshness/multi-source/usability), stops on strict-or-relaxed pass / max-loops (degraded, not blocked) / budget / convergence. Citations [n] are exit-validated 100% resolvable. Resumable via run_id journal replay. Slow (30-120s) — use ONLY when one-shot search is not enough.`,
     schema: {
       query: z.string().min(1).describe("Research question (one sentence)"),
+      engines: z.never().optional().describe("Provider allowlists are not supported by research; restricted queries must use search/x_search"),
       preset: z.enum(["summary", "report", "deep"]).optional().describe("Budget preset: summary(1 loop/4 fetch) < report(default) < deep(5 loops/24 fetch); explicit fields override it"),
       max_loops: z.number().int().min(1).max(8).optional().describe("Hard loop cap, default 3 (MAX_LOOPS_DEGRADED on hit)"),
       strict: z.boolean().optional().describe("Require all 6 reflection gates (incl. authority/tier-1 + freshness) before exit"),
@@ -179,16 +182,19 @@ Do NOT fetch a full page when a focused read suffices.`,
     schema: {
       query: z.string().min(1),
       kind: z.enum(["tweets", "users"]).optional(),
+      engines: z.array(z.string().min(1)).max(100).optional().describe("If explicit, only these providers are used for site:X queries; disables official/guest/oEmbed layers."),
       top_n: z.number().int().min(1).max(30).optional(),
     },
     handler: async (args) => {
-      const r = await core.xSearch(String(args.query), (args.kind as string) ?? "tweets", { topN: args.top_n as number | undefined });
+      const r = await core.xSearch(String(args.query), (args.kind as string) ?? "tweets", { topN: args.top_n as number | undefined, engines: args.engines as string[] | undefined });
       const payload = {
         refs: r.refs.map((ref) => ({
           refId: ref.refId, title: ref.title, url: ref.url,
           snippet: ref.snippet, engines: ref.engines, published: ref.published,
         })),
         meta: {
+          quality: r.meta.quality,
+          engine_selection: r.meta.engineSelection,
           engines_used: r.meta.enginesUsed, engines_failed: r.meta.enginesFailed,
           engines_skipped: r.meta.enginesSkipped ?? [], degraded: r.meta.degraded ?? false,
           elapsed_ms: r.meta.elapsedMs,

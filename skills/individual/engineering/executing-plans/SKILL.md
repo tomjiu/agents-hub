@@ -11,7 +11,7 @@ Load plan, review critically, execute all tasks, report when complete.
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."
 
-**Note:** Tell your human partner that Superpowers works much better with access to subagents. The quality of its work will be significantly higher if run on a platform with subagent support (such as Claude Code or Codex). If subagents are available, use superpowers:subagent-driven-development instead of this skill.
+**Host adaptation:** Execute inline when delegation is unavailable or prohibited. Do not ask the user to enable subagents after they declined, or invent unavailable sub-skills. Use actual host tools (DSH: todo_write for checklists), preserve checkpoints and mark self-review as such.
 
 ## The Process
 

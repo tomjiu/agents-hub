@@ -16,7 +16,7 @@
  * 鉴权: 设了 SC_HTTP_TOKEN 时,除 /health 外都要 Authorization: Bearer <token>。
  * 运行: search-core serve-http [--port 8787]
  */
-import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
+import { createServer, type Server, type IncomingMessage, type ServerResponse } from "node:http";
 import { SearchCore } from "./engine.js";
 import type { ResearchEvent } from "./research.js";
 import { VERSION } from "./version.js";
@@ -107,7 +107,7 @@ function sseizeEvent(e: ResearchEvent): { type: string; [k: string]: unknown } {
   return e;
 }
 
-export function serveHttp(core: SearchCore, port: number, token?: string): void {
+export function serveHttp(core: SearchCore, port: number, token?: string, options: { host?: string; installSignalHandlers?: boolean } = {}): Server {
   const server = createServer(async (req, res) => {
     const url = new URL(req.url ?? "/", `http://localhost:${port}`);
     const path = url.pathname;
@@ -174,6 +174,7 @@ export function serveHttp(core: SearchCore, port: number, token?: string): void 
           return;
         }
         const r = await core.xSearch(String(body.query ?? ""), (body.kind as string) ?? "tweets", {
+          engines: body.engines as string[] | undefined,
           topN: body.top_n as number | undefined,
         });
         sendJson(res, 200, r);
@@ -183,6 +184,7 @@ export function serveHttp(core: SearchCore, port: number, token?: string): void 
       // ---------- POST SSE: research ----------
       if (req.method === "POST" && (path === "/research" || path === "/research/resume")) {
         const body = await readBody(req);
+        if (body.engines !== undefined) throw new Error("Research does not support a provider allowlist; use search/x_search for restricted selection");
         const sse = new SseStream(res);
         const onEvent = (e: ResearchEvent): void => {
           const ev = sseizeEvent(e);
@@ -223,7 +225,7 @@ export function serveHttp(core: SearchCore, port: number, token?: string): void 
     }
   });
 
-  server.listen(port, () => {
+  server.listen(port, options.host, () => {
     console.error(`search-core http gateway on :${port} (SSE: POST /research)`);
   });
   // 优雅退出
@@ -232,6 +234,10 @@ export function serveHttp(core: SearchCore, port: number, token?: string): void 
     core.close();
     process.exit(0);
   };
-  process.on("SIGINT", shutdown);
-  process.on("SIGTERM", shutdown);
+  if (options.installSignalHandlers !== false) {
+    process.on("SIGINT", shutdown);
+    process.on("SIGTERM", shutdown);
+    server.once("close", () => {process.off("SIGINT", shutdown);process.off("SIGTERM", shutdown);});
+  }
+  return server;
 }

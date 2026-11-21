@@ -23,3 +23,7 @@ local = "imported-2026-11-18"
 sha256 = "d3d8bb4dd1e04c58e69f93fa709331dfcf8449f0129c34d44c6658ecd82b8bd1"
 local_modified = "unknown"
 enabled = false
+
+[discovery]
+description = "来源索引，查找本仓资产目录与上游出处。"
+aliases = [ "来源索引", "仓库索引", "资产索引" ]

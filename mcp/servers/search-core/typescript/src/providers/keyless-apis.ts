@@ -379,7 +379,15 @@ export const bingrss: Provider = {
       headers: { "User-Agent": ctx.ua, Accept: "application/rss+xml, application/xml, text/xml" },
     });
     if (!res.ok) throw new Error(`bingrss http ${res.status}`);
-    const out = parseRssItems(await res.text(), "item", "bing-rss", ctx);
+    const xml=await res.text();
+    const $=cheerio.load(xml,{xmlMode:true});
+    const normalize=(q:string)=>q.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();
+    // Only compare explicit q echoes; absence is not fabricated confirmation.
+    for(const link of [res.url,$("channel > link").first().text()]){
+      if(!link)continue;let echoed:string|null=null;try{echoed=new URL(link).searchParams.get("q");}catch{continue;}
+      if(echoed!==null&&normalize(echoed)!==normalize(query))throw new Error("bingrss: query mismatch in response; refusing rewritten search");
+    }
+    const out = parseRssItems(xml, "item", "bing-rss", ctx);
     if (out.length === 0) throw new Error("bingrss: no items parsed (blocked or markup drift?)");
     return out.slice(0, ctx.opts.maxResults ?? 10);
   },

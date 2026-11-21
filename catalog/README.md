@@ -15,4 +15,6 @@ ID：独立 Skill 保留原名字；集合 Skill 使用 trae.<name> 或 workbudd
 
 来源身份、导入基线和上游提交必须分开，详见 [来源治理说明](PROVENANCE.md)。audit-provenance只读核对当前元数据；原始locks/provenance不重写以掩盖差异。
 
+可在资产清单增加[discovery] description/aliases，不改来源或基线。顶层requires/conflicts为已登记ID数组；缺依赖/循环/互斥由preflight和view检查，Expert排斥在继承/Profile追加时保持有效。索引状态不代表全部运行认证。
+
 许可按已有声明登记，不通过猜测补齐。review-required 表示仍需核实；vendor-restricted 默认不部署。不得据这些字段断言再分发获得法律许可。

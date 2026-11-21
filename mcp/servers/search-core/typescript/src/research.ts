@@ -23,6 +23,7 @@ import type { Fetcher } from "./fetcher.js";
 import type { Cache } from "./cache.js";
 import type { Journal } from "./journal.js";
 import type { Reference } from "./types.js";
+import {filterEvidence} from './relevance.js';
 import { lexicalScore } from "./fusion.js";
 import { hostOf } from "./governor.js";
 import {
@@ -531,7 +532,9 @@ export class ResearchLoop {
       const settled = await Promise.allSettled(
         angleQueries.map(async (aq) => {
           const r = await router.run(aq.query, searchOpts);
-          return { aq, ...r };
+          const evidence=filterEvidence(state.query,r.refs);
+          this.#append(state.runId,{event:"search_quality",loop,angle:aq.angle,query:aq.query,evaluated:evidence.evaluated,rejected:evidence.rejected,reasons:evidence.reasons});
+          return { aq, ...r, refs:evidence.refs };
         }),
       );
       for (const s of settled) {

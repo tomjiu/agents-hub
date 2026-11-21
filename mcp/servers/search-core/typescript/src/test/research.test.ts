@@ -264,3 +264,10 @@ test("research: reflect scoring + decide unit sanity", () => {
   assert.equal(s2.q1Facts, 1);
   assert.equal(decide(st, s2, 1), "EXIT");
 });
+
+test('research cannot admit unrelated results into its pool or spend fetch budget on them',async()=>{
+ const {dir,clean}=tmp();const deps=makeDeps(dir);let fetched=0;
+ deps.router.run=async()=>({refs:[{url:'https://sogou.example/',title:'搜狗输入法下载',snippet:'typing tools',engines:['fake']}],used:['fake'],failed:[],skipped:[],degraded:false});
+ deps.fetcher.run=async()=>{fetched++;throw new Error('Unrelated result must not be fetched');};
+ try{const result=await deps.loop.run(QUERY,{angles:ANGLES,maxLoops:1,minFacts:1});assert.equal(result.refs.length,0);assert.equal(result.facts.length,0);assert.equal(fetched,0);assert.equal(result.stats.fetchUsed,0);}finally{deps.cache.close();clean();}
+});
