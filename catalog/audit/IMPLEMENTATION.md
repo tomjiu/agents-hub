@@ -17,7 +17,7 @@
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
 | Asset Manager | 138 PASS，1 SKIP（总139） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
-| Search-core TypeScript | 296/296 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
+| Search-core TypeScript | 312/312 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
@@ -167,6 +167,14 @@
 - 临时Memory-net记录报告里的核验语句及inference，关闭后跨Node进程回读类型/based_on/正文；不触及用户记忆库。探针只重放已审阅输入，不再次验证远端内容。
 - 修复搜索Skill旧core构建路径与Node22说明、记忆上游兼容过度承诺，source-driven-development增加官方文档任务别名及回归；没有API或router实现改动。
 - 没有无技能对照、独立审稿或自由运行真实模型全流程，真实账户及全部研究题效果未认证。详见[任务记录](real-research-task.json)。
+
+## 显式搜索选源修复
+
+- 先复现8项失败：领域/GitHub/X路由、空名单、rescue、无效名称与缓存突破provider选择；实现统一验证优先级、[]不发provider请求、未知名称失败，未指定维持自动模式。
+- MCP/core/HTTP search/x_search及CLI一致输出选源信息；research/resume及不支持命令明确拒绝engines。15项选择专题和新增MCP选源测试通过，TS总312通过；旧缓存保留但新策略key及来源核验阻止污染。
+- 实际公开查询只尝试指定bingrss/duckduckgo/yahoo，provider边界通过，但内容偏题/降级，不计任务质量合格。DNS官方fetch未修复/绕过，原报告保留。
+- 宿主默认领域查询验证名单回流；兼容要求explicit_selection_verified，保存selection后缀新证据。rc.5曾90秒冷启动超时，保留失败，预算180秒复验通过，不保证性能；rc.1/rc.5直接和生成包重新验收。
+- provider内部端点/聚合器转发、embedding请求不是名单覆盖的网络边界，不保证X特定结果格式；不改live DSH或默认启用状态。
 
 ## 未认证与后续事项
 

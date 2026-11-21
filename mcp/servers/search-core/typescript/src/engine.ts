@@ -79,6 +79,8 @@ export class SearchCore {
   }
 
   async search(rawQuery: string, opts: SearchOptions = {}): Promise<SearchResult & { planner: PlannerDecision }> {
+    const selection = this.router.normalizeEngines(opts.engines);
+    opts = selection === undefined ? opts : { ...opts, engines: selection };
     const t0 = Date.now();
     this.cache.kvIncr("stat:search_total");
     const decision = plan(rawQuery);
@@ -89,14 +91,14 @@ export class SearchCore {
     // phase AA: 调用方显式 opts.lang 优先; 未传时用 planner 检测结果(zh 题自动切 zh 源腿)
     const runOpts = !opts.lang && decision.lang ? { ...opts, lang: decision.lang } : opts;
     const cacheKey = Cache.hash(JSON.stringify({
-      q: decision.queries, r: decision.route, o: {
+      policy: "provider-allowlist-v1", q: decision.queries, r: decision.route, o: {
         f: runOpts.freshness, l: runOpts.lang, m: runOpts.maxResults, t: runOpts.topN,
         d: runOpts.domains, e: runOpts.engines,
       },
     }));
     if (cacheable) {
       const hit = this.cache.getSearch(cacheKey);
-      if (hit) {
+      if (hit && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
         this.cache.kvIncr("stat:search_cache_hit");
         const h = hit as SearchResult;
         return { ...h, meta: { ...h.meta, fromCache: true, elapsedMs: Date.now() - t0 }, planner: decision };
@@ -113,7 +115,9 @@ export class SearchCore {
     const dp = decision.domainPlan;
     // phase AE(vs-zai 第 7 采样): leg-0 经 laneLegProviders — programming 专线补聚合兜底腿,
     // registry 专线(packages/devops)保持纯 API 腿; site: 子查询腿不变。
-    const legEngines: (string[] | undefined)[] = dp
+    const legEngines: (string[] | undefined)[] = selection !== undefined
+      ? decision.queries.map(() => selection)
+      : dp
       ? decision.queries.map((_q, i) => (i === 0 ? laneLegProviders(dp.topic, dp.apiProviders) : dp.siteEngines))
       : decision.queries.map(() => engineForRoute);
 
@@ -140,7 +144,7 @@ export class SearchCore {
         ...batches.flatMap((b) => (b.skipped ?? []).map((s) => s.name)),
       ]);
       // 尊重用户 engines 配置: 用户显式排除的引擎不被抢救腿强注入(engines=[] → 抢救自动失效)
-      const allowed = new Set(this.cfg.engines);
+      const allowed = new Set(selection ?? this.cfg.engines);
       const rescueLegs = ["searxng", "tavily", "keenable"].filter((e) => !attempted.has(e) && allowed.has(e));
       if (rescueLegs.length) {
         this.#journal?.write("zero_ref_rescue", { query: rawQuery, legs: rescueLegs });
@@ -182,6 +186,7 @@ export class SearchCore {
       refs,
       meta: {
         enginesUsed: used,
+        engineSelection: selection === undefined ? { mode: "auto" } : { mode: "explicit", requested: selection },
         enginesFailed: failed,
         enginesSkipped: skipped,
         elapsedMs: Date.now() - t0,
@@ -207,18 +212,20 @@ export class SearchCore {
   }
 
   async xSearch(query: string, kind = "tweets", opts: SearchOptions = {}): Promise<SearchResult & { planner: PlannerDecision }> {
+    const selection = this.router.normalizeEngines(opts.engines);
+    opts = selection === undefined ? opts : { ...opts, engines: selection };
     const decision: PlannerDecision = {
       complexity: "simple", queries: [query], route: "x",
       reasons: ["explicit x_search call"],
     };
     const t0 = Date.now();
-    const { refs, used, failed } = await this.router.runX(query, opts, kind);
+    const { refs, used, failed, skipped, degraded } = await this.router.runX(query, opts, kind);
     // x 结果同域是特性(twitter/x.com), 多样性 cap 不适用
     const { refs: fused } = await fuseSemantic(refs, { query, topN: opts.topN ?? 20, embedder: this.embedder, domainCap: 0 });
     for (const r of fused) r.kind = "x";
     return {
       query, refs: fused, planner: decision,
-      meta: { enginesUsed: used, enginesFailed: failed, elapsedMs: Date.now() - t0, fromCache: false },
+      meta: { enginesUsed: used, enginesFailed: failed, enginesSkipped: skipped, degraded, elapsedMs: Date.now() - t0, fromCache: false, engineSelection: selection === undefined ? { mode: "auto" } : { mode: "explicit", requested: selection } },
     };
   }
 
@@ -233,12 +240,14 @@ export class SearchCore {
     opts: ResearchOptions = {},
     onEvent?: (e: ResearchEvent) => void,
   ): Promise<ResearchResult> {
+    if ((opts as Record<string, unknown>).engines !== undefined) throw new Error("Research does not support an engines allowlist; use search/x_search");
     this.cache.kvIncr("stat:research_total");
     return (await this.#getResearch()).run(query, opts, onEvent);
   }
 
   /** v0.2: 断点恢复(journal replay → 从未完成循环继续) */
   async resumeResearch(runId: string, opts: ResearchOptions = {}, onEvent?: (e: ResearchEvent) => void): Promise<ResearchResult> {
+    if ((opts as Record<string, unknown>).engines !== undefined) throw new Error("Research does not support an engines allowlist; use search/x_search");
     this.cache.kvIncr("stat:research_total");
     return (await this.#getResearch()).resume(runId, opts, onEvent);
   }
@@ -280,4 +289,13 @@ export class SearchCore {
 
 function opts_noDomains(_o: FetchOptions): string[] | undefined {
   return undefined; // v0.1: fetch 不带 run 级 allow;黑名单已走全局
+}
+
+function cachedSelectionMatches(result: SearchResult, selection: string[]): boolean {
+  const allowed = new Set(selection);
+  if (!result || !Array.isArray(result.refs) || !result.meta || !Array.isArray(result.meta.enginesUsed) || !Array.isArray(result.meta.enginesFailed) || (result.meta.enginesSkipped !== undefined && !Array.isArray(result.meta.enginesSkipped))) return false;
+  if (result.refs.some(ref => !ref || !Array.isArray(ref.engines)) || result.meta.enginesFailed.some(f => !f || typeof f.name !== "string") || (result.meta.enginesSkipped ?? []).some(s => !s || typeof s.name !== "string")) return false;
+  const names = [...result.meta.enginesUsed, ...result.meta.enginesFailed.map(f => f.name), ...(result.meta.enginesSkipped ?? []).map(s => s.name), ...result.refs.flatMap(ref => Array.isArray(ref.engines) ? ref.engines : [null])];
+  // Cache cannot authorize nonselected providers, including X chain layer labels.
+  return names.every(name => typeof name === "string" && allowed.has(({ "bing-rss": "bingrss", "bing-news": "bingnews" } as Record<string, string>)[name] ?? name)) && (selection.length > 0 || result.refs.length === 0);
 }

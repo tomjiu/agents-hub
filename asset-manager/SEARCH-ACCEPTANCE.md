@@ -20,6 +20,16 @@ fixture只在本地提供JSON，不将生产引擎地址改成本地，也不关
 
 真实宿主探针默认进行并发回归（HUB_DSH_PARALLEL_DISCOVERY=0只能诊断，不能批准），模拟模型同批调用发现与查询，断言static发现结果、查询refs和缓存回流，无unknown tool；rc.1/rc.4及生成包均复验。已有旧profile或旧包必须重新生成/显式采用新配置，当前运行中的用户DSH不被自动更改。
 
+## 显式provider选择修复
+
+旧查询engines会被领域/GitHub/X链和rescue改写。当前统一验证每次调用的provider数组，去重/排序，[]为空名单、未知或错误类型拒绝。不传engines仍自动路由，默认池和未指定X链不取消。显式X名单使用所选provider做site:X查询，不调用官方/guest/oEmbed额外层；不等于承诺返回全是X域名或users专用格式。
+
+MCP/HTTP search及x_search、CLI search/x支持名单；research/resume、CLI其他命令明确拒绝engines，不静默忽略。缓存key加入provider-allowlist-v1，旧缓存保留但不复用；cache命中仍检查来源标签，Bing旧标签兼容。不提供provider内部域名或embedding服务网络隔离，严格network firewall需另行实施。
+
+宿主探针默认验证领域查询的选源元数据和双查询缓存回流，HUB_DSH_EXPLICIT_SELECTION=0仅诊断、不可批准。当前兼容门槛要求explicit_selection_verified，旧仅注册/串行/未核验选源证据不批准新资产。rc.5冷启动曾两次90秒超时，保留失败；帮助入口也约70秒，未确定根因。测试主任务预算调整为180秒且失败仍非零，两版及运行包通过，不称性能合格。
+
+一次真实MCP公开查询只尝试bingrss/duckduckgo/yahoo，名单边界通过，但返回搜狗/企业页面等偏题结果且降级；不是搜索质量通过。官网fetch的DNS守卫问题未绕过，原研究失败记录保留。
+
 ## 范围
 
 本地来源通过证明DSH调用路径、搜索解析、融合、缓存及失败透明性，不证明默认公网引擎如今全部可用，也不证明搜索质量达到所有研究任务。公网来源受网络、配额、验证码与服务版本影响；未经测试不标为通过。

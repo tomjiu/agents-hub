@@ -2,7 +2,7 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2372,
+  "unchanged": 2367,
   "missing": [],
   "changed": [
     {
@@ -75,7 +75,7 @@
       "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
-      "current_sha256": "6c2441c560f0342fe08c972e172e3a037d4df0b110b5be5b42478c0114f055d1"
+      "current_sha256": "393f1ab935b663948aa94d08e2eac4a8e87a7babcbdf7dc63ff47c8eb3659e91"
     },
     {
       "original": "memory-net/console/apps/console/dist/index.html",
@@ -123,13 +123,37 @@
       "original": "search-infra/core/README.md",
       "target": "mcp/servers/search-core/typescript/README.md",
       "baseline_sha256": "fc22904fd6960ebff5d0671e6cf7b59d0ffa74e59ff0237ce2eb358dd3cd0a7e",
-      "current_sha256": "995336172ad11d7d4782a65b6880bf5f729635e2e46cf5a7e681d26eeb097e82"
+      "current_sha256": "0e49eba974fb9e41fd85792df798b2150d26d45c1d1d86b570d72a94604ad6ee"
+    },
+    {
+      "original": "search-infra/core/src/cli.ts",
+      "target": "mcp/servers/search-core/typescript/src/cli.ts",
+      "baseline_sha256": "0702d1671c4b8840835df634d4fa30b2a9478d76eddcbd8f4fc9c3795da2a10b",
+      "current_sha256": "12dbfd94a3c1d198696acaf50a881ced2b12d0d08ad449342214a6553da4d546"
+    },
+    {
+      "original": "search-infra/core/src/engine.ts",
+      "target": "mcp/servers/search-core/typescript/src/engine.ts",
+      "baseline_sha256": "fb882de980a07a168bc555876a6d60f877aee3de0e08cd6f2633ab99886e4789",
+      "current_sha256": "ce0e74265f7a96ed3555626cb86660e85f6fa797524559a4a9012c8e761fc4f5"
+    },
+    {
+      "original": "search-infra/core/src/http.ts",
+      "target": "mcp/servers/search-core/typescript/src/http.ts",
+      "baseline_sha256": "8d2ae645fa52eef8d90ce29dc6f4f5ad09cc4ada10cedbcbdb842d47e5370dff",
+      "current_sha256": "f98216bf3895c10e85bfd33609b3cf8af85e40f1a85ec95c33117fd74ff0e30b"
     },
     {
       "original": "search-infra/core/src/mcp.ts",
       "target": "mcp/servers/search-core/typescript/src/mcp.ts",
       "baseline_sha256": "36928dab471ad1ddf035e819858f7559a6b3f06eff96fe546e894fcfac7c4902",
-      "current_sha256": "03f330c0355c224ac229471efb68b43a242cceeb69b7e22932a11fe6d5e88519"
+      "current_sha256": "2412f6cad6e1ed2b20022438815f09cf056b355095ad7ebd5c85be1ca6782832"
+    },
+    {
+      "original": "search-infra/core/src/router.ts",
+      "target": "mcp/servers/search-core/typescript/src/router.ts",
+      "baseline_sha256": "a34bd89dd340869ee1d5c26f38e53f77d66ebf4cc17a876aa4ae3d89e9286270",
+      "current_sha256": "3a273b2fddff00270011716d601fbe468ec440b58ab96acaf951c7c2af7fc7b7"
     },
     {
       "original": "search-infra/core/src/test/breaker2.test.ts",
@@ -150,10 +174,16 @@
       "current_sha256": "842c1235820dad70cbe3ae04794940a9c9f704c7018a6c27fb0d1b36b5743c1a"
     },
     {
+      "original": "search-infra/core/src/types.ts",
+      "target": "mcp/servers/search-core/typescript/src/types.ts",
+      "baseline_sha256": "807d94e1bf7b53604f19a67d549387e993babbe32b2d73724849b737fe9dd091",
+      "current_sha256": "f872672daa81cf9b50f6f19432f72b17ca6b6e13ca4399be09a0d93754f6faf7"
+    },
+    {
       "original": "search-infra/SKILL.md",
       "target": "skills/individual/research/search-core/SKILL.md",
       "baseline_sha256": "23f9567f9b99aad213fa8b6cc71bc180475739a33b0673b9ee2cc1a492e444dd",
-      "current_sha256": "4b50f5df6c26491460892940ba0abe069316c115d0390a5168739a6833f6fbcf"
+      "current_sha256": "f52ddea0c2d5e70001ee06b14972330c081d4fe49a9ae440c984c6812a63f854"
     },
     {
       "original": "selected/dfir-workflow/SKILL.md",

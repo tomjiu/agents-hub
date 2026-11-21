@@ -98,7 +98,7 @@ curl -X POST localhost:8629/research -d '{"query":"..."}'   # SSE 事件流
 ## 实际研究任务发现的限制
 
 - 搜索返回官方域名也需核对版本；Node SQLite研究首位为旧nightly文档，不能当当前v26.13.1说明。
-- 当前领域专线路由会改写显式engines：传duckduckgo/bingrss/yahoo仍可能调用github/mdn/keenable等。因此engines不是严格允许列表，需检查meta.engines_used/failed；真正限定来源的需求尚待修复，不能用来保证隐私/预算。
+- 旧版本会改写显式engines，已由本仓严格provider名单修复：search/x_search传数组覆盖领域/GitHub/X链/兜底/key slots，[]不调用provider，未知名称报错；不传仍自动路由。MCP结果meta.engine_selection包含mode/requested，可核对engines_used/failed/skipped。它不是provider内部域名/第三方服务或embedding端点防火墙；research不支持名单并明确拒绝，勿将search限制自动推广到fetch/research。
 - 当前DNS将公开官方域名映射198.18.x时，fetch严格SSRF拒绝；如实报告，勿设SC_SSRF=off绕过。可用用户允许的独立阅读工具，但不要称为Search-core抓取成功。
 - 本次真实Lead研究→检索→来源核验→报告→隔离Memory-net跨进程召回有证据，但全文阅读使用了独立Harness工具，没有证明搜索/抓取完整链路或全部研究效果。见 [实际研究任务](../../../../catalog/audit/research-memory-sqlite.md)。
 

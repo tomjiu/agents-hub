@@ -40,6 +40,8 @@ async function main(): Promise<number> {
   const cmd = _[0] ?? "help";
   const json = !!flags.json;
 
+  if (flags.engines !== undefined && !["search", "x"].includes(cmd)) throw new Error("--engines is supported only for search and x; research/serve do not honor a per-call list");
+
   if (cmd === "serve") {
     const { serveMcp } = await import("./mcp.js");
     await serveMcp();
@@ -57,6 +59,8 @@ async function main(): Promise<number> {
     return 0; // unreachable
   }
 
+  if (flags.engines === true) throw new Error("--engines requires a comma-separated list; use an empty string for no providers");
+  const engines = flags.engines === undefined ? undefined : flags.engines === "" ? [] : String(flags.engines).split(",");
   const core = new SearchCore();
 
   try {
@@ -66,7 +70,7 @@ async function main(): Promise<number> {
         if (!query) throw new Error('usage: search-core search "query"');
         const r = await core.search(query, {
           freshness: flags.freshness as never,
-          engines: flags.engines ? String(flags.engines).split(",") : undefined,
+          engines,
           lang: flags.lang as string | undefined,
         });
         if (json) {
@@ -107,7 +111,7 @@ async function main(): Promise<number> {
       case "x": {
         const query = _.slice(1).join(" ");
         if (!query) throw new Error('usage: search-core x "query"');
-        const r = await core.xSearch(query);
+        const r = await core.xSearch(query, "tweets", { engines });
         if (json) console.log(JSON.stringify(r, null, 2));
         else {
           for (const ref of r.refs) {

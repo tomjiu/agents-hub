@@ -123,6 +123,16 @@ export class Router {
     this.#providers = byName(deps.providers ?? buildProviders(deps.config));
   }
 
+  /** Undefined uses automatic routing; an explicit array is a provider allowlist, including []. */
+  normalizeEngines(value: unknown): string[] | undefined {
+    if (value === undefined) return undefined;
+    if (!Array.isArray(value) || value.length > 100 || value.some(n => typeof n !== "string" || !n || n !== n.trim())) {
+      throw new Error("Invalid engines: expected up to 100 nonempty exact provider names");
+    }
+    for (const name of value) if (!this.#providers.has(name)) throw new Error("Unknown engine: " + name);
+    return [...new Set(value)].sort();
+  }
+
   get quota(): QuotaTracker {
     return this.#quota;
   }
@@ -138,7 +148,7 @@ export class Router {
 
   /**
    * 并行执行多引擎搜索 (v0.4: 软截止+额度门+插槽自动并联+失败标注)。
-   * @param engineNames 引擎清单;为空时用 config.engines(+自动并入可用 key 插槽),并过滤掉未配置/熔断/额度尽的
+   * @param engineNames planner引擎清单；undefined用默认池，[]不出勤；opts.engines优先且严格限制provider选择。
    */
   async run(query: string, opts: SearchOptions, engineNames?: string[]): Promise<{
     refs: Reference[];
@@ -149,8 +159,10 @@ export class Router {
     /** v0.4: 出勤引擎不到一半或全灭 → 调用方应降低对结果信任 */
     degraded: boolean;
   }> {
-    const explicit = !!(engineNames?.length);
-    const names = (engineNames?.length ? engineNames : [...this.#cfg.engines]).filter(Boolean);
+    const callerSelection = this.normalizeEngines(opts.engines);
+    const selection = callerSelection ?? this.normalizeEngines(engineNames);
+    const explicit = selection !== undefined;
+    const names = selection !== undefined ? [...selection] : [...this.#cfg.engines].filter(Boolean);
     const timeoutMs = opts.timeoutMs ?? this.#cfg.timeoutMs;
     const softMs = opts.softDeadlineMs ?? this.#cfg.softDeadlineMs;
 
@@ -306,6 +318,14 @@ export class Router {
     skipped: EngineSkip[];
     degraded: boolean;
   }> {
+    const selection = this.normalizeEngines(opts.engines);
+    if (selection !== undefined) {
+      // Do not run official/guest/oEmbed layers outside an explicit provider allowlist.
+      const siteQuery = query.includes("site:x.com") || query.includes("site:twitter.com")
+        ? query : query + " (site:x.com OR site:twitter.com)";
+      const result = await this.run(siteQuery, { ...opts, engines: selection });
+      return { ...result, refs: result.refs.map(ref => ({ ...ref, kind: "x" as const })) };
+    }
     try {
       const { xSearchChain } = await import("./xchain.js");
       const result = await xSearchChain(query, opts, {
