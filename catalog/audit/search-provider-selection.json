@@ -282,5 +282,81 @@
     "Default config is not a caller-level hard allowlist when per-call engines omitted",
     "No search relevance/quality or startup performance certification",
     "No user DSH upgrade/restart/profile change, no real private accounts or subagents"
-  ]
+  ],
+  "independent_checkout": {
+    "code_commit": "15f232de4ed7dd4ec9f2e231ed70cef23e3dabcc",
+    "search_tests": {
+      "passed": 312,
+      "failed": 0
+    },
+    "root_tests": {
+      "passed": 138,
+      "skipped": 1,
+      "total": 139
+    },
+    "real_mcp_fixture_passed": true,
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "ae687bde6f482810b357fc165e49347ac26736bea09cdc3ce0f1d97cbdd671d7",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 2,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ],
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0,
+      "banned": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "public_query_repeated": false
+  }
 }
