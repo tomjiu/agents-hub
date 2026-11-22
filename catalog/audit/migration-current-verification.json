@@ -2,14 +2,14 @@
   "schema": 1,
   "baseline_commit": "4f1911081477b49a6610e52537bea1057f216530",
   "files": 2418,
-  "unchanged": 2384,
+  "unchanged": 2358,
   "missing": [],
   "changed": [
     {
       "original": ".gitignore",
       "target": ".gitignore",
       "baseline_sha256": "9625233cede7c89bba522c6814d6867f6df6ab6897e748343294436b3fa5bc2a",
-      "current_sha256": "4aa29fc9f79532402d4f2408de37e1eed44265767b98189e384aaa17a2ff2565"
+      "current_sha256": "70b2b2746c711901d121203d832b66fd35fa6a85ab0cf6ee8a7f427c65209c89"
     },
     {
       "original": "agents-md/README.md",
@@ -75,7 +75,7 @@
       "original": "memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "target": "plugins/memory-net/adapters/dsh/tests/fixtures/mock-model.mjs",
       "baseline_sha256": "5201aa4fb1ad5a05e018226bb8149014c6c355f8b1973f85ae44e2c37453ac53",
-      "current_sha256": "6c2441c560f0342fe08c972e172e3a037d4df0b110b5be5b42478c0114f055d1"
+      "current_sha256": "ea51991b7974cebf663bf98d168e28541ec9292dd2c321885aae8380713b4c9a"
     },
     {
       "original": "memory-net/console/apps/console/dist/index.html",
@@ -94,6 +94,12 @@
       "target": "plugins/memory-net/package.json",
       "baseline_sha256": "19ffc699bcfb74a96e3401c099dfbfd9697f4c6d0f9c0df2aa598bbd9ac98afb",
       "current_sha256": "ba99a58b778eefeb4e0ce696655bea6b06964a03145f05ffa73bbba605274322"
+    },
+    {
+      "original": "memory-net/README.md",
+      "target": "plugins/memory-net/README.md",
+      "baseline_sha256": "b38cace33e3e5e6fddccaada6dc0d2b33d27264df87864cf99fc71e8ca20ce8f",
+      "current_sha256": "94175a9ac56a1a7a0d52dfa6aff3e4f2e65374faa5cdf68b5f735b03959e8d66"
     },
     {
       "original": "memory-net/src/db.ts",
@@ -117,13 +123,79 @@
       "original": "search-infra/core/README.md",
       "target": "mcp/servers/search-core/typescript/README.md",
       "baseline_sha256": "fc22904fd6960ebff5d0671e6cf7b59d0ffa74e59ff0237ce2eb358dd3cd0a7e",
-      "current_sha256": "995336172ad11d7d4782a65b6880bf5f729635e2e46cf5a7e681d26eeb097e82"
+      "current_sha256": "fe803d6828f4bce827422e2764342861830954ca785366370a516ce196ad641d"
+    },
+    {
+      "original": "search-infra/core/src/cache.ts",
+      "target": "mcp/servers/search-core/typescript/src/cache.ts",
+      "baseline_sha256": "8607686f26d4dbd450c0f1560383b87ded0a538878d517ac0c7f43fac91e26a3",
+      "current_sha256": "8b0936bd4427bde77827746023f9ac8a9e02ee2319b5726cfaa7d98809076be7"
+    },
+    {
+      "original": "search-infra/core/src/cli.ts",
+      "target": "mcp/servers/search-core/typescript/src/cli.ts",
+      "baseline_sha256": "0702d1671c4b8840835df634d4fa30b2a9478d76eddcbd8f4fc9c3795da2a10b",
+      "current_sha256": "587e04bdc476df6646f1c654b0e9858031fba6619cda9652c09b1f3d112a040c"
+    },
+    {
+      "original": "search-infra/core/src/config.ts",
+      "target": "mcp/servers/search-core/typescript/src/config.ts",
+      "baseline_sha256": "db028255deaa94d49ba926babb971a41f4b8f1548e55776c512d4c9c571dec36",
+      "current_sha256": "822f2d05b3c24efdd1bb7ad545e6e016bafc33c83ee517af81ef9943a73d1414"
+    },
+    {
+      "original": "search-infra/core/src/engine.ts",
+      "target": "mcp/servers/search-core/typescript/src/engine.ts",
+      "baseline_sha256": "fb882de980a07a168bc555876a6d60f877aee3de0e08cd6f2633ab99886e4789",
+      "current_sha256": "02f357258bc08b32eebf480b80735368e501dfe335e4d35f90a38ba1f036f514"
+    },
+    {
+      "original": "search-infra/core/src/fetcher.ts",
+      "target": "mcp/servers/search-core/typescript/src/fetcher.ts",
+      "baseline_sha256": "f12bfa3230172f44cec6e26376fb581fb84e2f6ed32a70f4e6b56f53fe91c1fe",
+      "current_sha256": "dbe031de4c1e1c29c81faeb9c06006d29970f98fbae19291ac887499a1922401"
+    },
+    {
+      "original": "search-infra/core/src/fusion.ts",
+      "target": "mcp/servers/search-core/typescript/src/fusion.ts",
+      "baseline_sha256": "303ffc11d0754a2d74ad00107b8447c12f200a2700995ff7799e9fc086a3ea34",
+      "current_sha256": "965a2ae2578be7677ee8fe3bd50c809626d3ac8b04a3bd40f40305de9f8a2ae8"
+    },
+    {
+      "original": "search-infra/core/src/governor.ts",
+      "target": "mcp/servers/search-core/typescript/src/governor.ts",
+      "baseline_sha256": "e000e1691045a1b9af3c64ee29792dc175bb541288f2cef60a1ca9ecd5540b4a",
+      "current_sha256": "cb59b2b5ac0a1baf6438b06af59f03d67518f725fda4ff197630bd1868dd77d4"
+    },
+    {
+      "original": "search-infra/core/src/http.ts",
+      "target": "mcp/servers/search-core/typescript/src/http.ts",
+      "baseline_sha256": "8d2ae645fa52eef8d90ce29dc6f4f5ad09cc4ada10cedbcbdb842d47e5370dff",
+      "current_sha256": "f98216bf3895c10e85bfd33609b3cf8af85e40f1a85ec95c33117fd74ff0e30b"
     },
     {
       "original": "search-infra/core/src/mcp.ts",
       "target": "mcp/servers/search-core/typescript/src/mcp.ts",
       "baseline_sha256": "36928dab471ad1ddf035e819858f7559a6b3f06eff96fe546e894fcfac7c4902",
-      "current_sha256": "03f330c0355c224ac229471efb68b43a242cceeb69b7e22932a11fe6d5e88519"
+      "current_sha256": "9bdaf728d3d0d45e3dedbe03b7f39765d5d89c632464a11b4f5c0c8c24f921ac"
+    },
+    {
+      "original": "search-infra/core/src/providers/keyless-apis.ts",
+      "target": "mcp/servers/search-core/typescript/src/providers/keyless-apis.ts",
+      "baseline_sha256": "ff27806c987acb24a5b501baa2f5e12fb80c8279a0f71b0f7767bb85d8157702",
+      "current_sha256": "cb8a1e637c114b65c365b0f978aec9b243470c1799d6f63d253e10c4461ff620"
+    },
+    {
+      "original": "search-infra/core/src/research.ts",
+      "target": "mcp/servers/search-core/typescript/src/research.ts",
+      "baseline_sha256": "8a56068917496fff5dc8b185340218181b50a448e0a33b96901e396ccbacb112",
+      "current_sha256": "677b18ed0dc73e612f4a56cf86cdfe92bf692440404998da3ccca1ca1b1d5056"
+    },
+    {
+      "original": "search-infra/core/src/router.ts",
+      "target": "mcp/servers/search-core/typescript/src/router.ts",
+      "baseline_sha256": "a34bd89dd340869ee1d5c26f38e53f77d66ebf4cc17a876aa4ae3d89e9286270",
+      "current_sha256": "3a273b2fddff00270011716d601fbe468ec440b58ab96acaf951c7c2af7fc7b7"
     },
     {
       "original": "search-infra/core/src/test/breaker2.test.ts",
@@ -132,10 +204,22 @@
       "current_sha256": "40e91e17f7b5d33bbea9826af1e295b2ca70f5893b52c3ea40db17528a0fabbe"
     },
     {
+      "original": "search-infra/core/src/test/governor.test.ts",
+      "target": "mcp/servers/search-core/typescript/src/test/governor.test.ts",
+      "baseline_sha256": "b5f40a6e7935c46f98e25cdec15abe68e51af5c51590f57f99bdeb2024e8a30b",
+      "current_sha256": "2dbf5a7db1fe351ec60cd7066c123205f654e2196964336025dac8d075b9cd33"
+    },
+    {
+      "original": "search-infra/core/src/test/rescue.test.ts",
+      "target": "mcp/servers/search-core/typescript/src/test/rescue.test.ts",
+      "baseline_sha256": "8332fe8e4a7c36e767834de853e639694e939acf8951e8e416f6ea4aa4b07cda",
+      "current_sha256": "65822b8910ee203622026c226500c96a96f12f0c4f6c684f85cad5731804d88b"
+    },
+    {
       "original": "search-infra/core/src/test/research.test.ts",
       "target": "mcp/servers/search-core/typescript/src/test/research.test.ts",
       "baseline_sha256": "b715ca7b36ccf3b14848bdeae573394fc06f483506b0d17ab165993c1ce88dcc",
-      "current_sha256": "9d9b4ff09b9373512f56992dbf78c57ffa4ae165ba3298b6d46a15977470199a"
+      "current_sha256": "cbdf756cf8cad79e67b89dfaef2f28a549c06844cc7ca76847ed444e75b13a21"
     },
     {
       "original": "search-infra/core/src/test/router.test.ts",
@@ -144,16 +228,28 @@
       "current_sha256": "842c1235820dad70cbe3ae04794940a9c9f704c7018a6c27fb0d1b36b5743c1a"
     },
     {
+      "original": "search-infra/core/src/types.ts",
+      "target": "mcp/servers/search-core/typescript/src/types.ts",
+      "baseline_sha256": "807d94e1bf7b53604f19a67d549387e993babbe32b2d73724849b737fe9dd091",
+      "current_sha256": "83a1f1d7f9cfb71786c4064b8eed0fa16cd6b68781e86e03db4be88aee43b4b4"
+    },
+    {
       "original": "search-infra/SKILL.md",
       "target": "skills/individual/research/search-core/SKILL.md",
       "baseline_sha256": "23f9567f9b99aad213fa8b6cc71bc180475739a33b0673b9ee2cc1a492e444dd",
-      "current_sha256": "53f925b52350b1f2db3c0db68bdd2560f60712701c3c4fce804f8ca38b16bac1"
+      "current_sha256": "32c1ba7745cd03f7b23dfdfbcd75d6902e8a69f2f16abf9f3febc76fb71a9a38"
     },
     {
       "original": "selected/dfir-workflow/SKILL.md",
       "target": "skills/individual/research/dfir-workflow/SKILL.md",
       "baseline_sha256": "00b3535158c7b74211d61c65a4980af90f38f8d4b16ca1de70a2485740b43d15",
       "current_sha256": "23b7d84d775d05f75d056557d27d0aae86025612c63fd3558725db4782026e07"
+    },
+    {
+      "original": "selected/executing-plans/SKILL.md",
+      "target": "skills/individual/engineering/executing-plans/SKILL.md",
+      "baseline_sha256": "d97039071302785fe4f5191bf426782dc4409cfb2f08bf0f7a4b75815ad291e9",
+      "current_sha256": "10f115165a71ad30e9ef331ba97d85ea09ba634c4e334b12857e077069758bb6"
     },
     {
       "original": "selected/firmware-analysis/SKILL.md",
@@ -186,6 +282,12 @@
       "current_sha256": "d1a23be931e10e27720fb5019f0fcf4faba579b28ad94cb0976558a6c8af02fe"
     },
     {
+      "original": "selected/requesting-code-review/SKILL.md",
+      "target": "skills/individual/engineering/requesting-code-review/SKILL.md",
+      "baseline_sha256": "fb1c965693e9b71799462b4bf445f65c82806c32aff1cd041acacb552a7da9ca",
+      "current_sha256": "52e9621c4d8a1c12c7ab779117eab8bfeaed3bbdfe3dfccf8e7c66dfb0eed888"
+    },
+    {
       "original": "selected/reverse-engineering-workflow/SKILL.md",
       "target": "skills/individual/research/reverse-engineering-workflow/SKILL.md",
       "baseline_sha256": "a88a6fa074bd759643d12f46f518b7b6636e077030206a6a9a963a0c70e2f179",
@@ -198,16 +300,70 @@
       "current_sha256": "ac9c0e7f6b1ff2e269057c3f1d593737df8598e532e8a3213fd68baff5aae2ce"
     },
     {
+      "original": "selected/security-ownership-map/scripts/build_ownership_map.py",
+      "target": "skills/individual/security/security-ownership-map/scripts/build_ownership_map.py",
+      "baseline_sha256": "d34be76b879699131aad9a996bad4f6c791fa0b5659d473100a80f70f5eb627c",
+      "current_sha256": "cd69106ad25dd5d9436cea27ae19192b8bb526f89afbcb424f9807cc141a925f"
+    },
+    {
+      "original": "selected/security-ownership-map/SKILL.md",
+      "target": "skills/individual/security/security-ownership-map/SKILL.md",
+      "baseline_sha256": "f855af8ef91e173adf931c82b0fe21931d5e32b661eeb3d95fed18df46c0ef6e",
+      "current_sha256": "7ba0f95722256d03eb0bfbde4520ffff12546dec12d166c50ed2ecf60a2ca199"
+    },
+    {
       "original": "selected/security-workflow/SKILL.md",
       "target": "skills/individual/security/security-workflow/SKILL.md",
       "baseline_sha256": "1a513708d1c13d9285a53e1d1bcee7fa5569aaf1fd189dc414c46d2bf12531f3",
       "current_sha256": "d81d85cc16fb3a3f1c7d37476b3b80748293ed8a5b032cb3c8c6c64af29683c8"
     },
     {
+      "original": "selected/skill-creator/scripts/package_skill.py",
+      "target": "skills/individual/engineering/skill-creator/scripts/package_skill.py",
+      "baseline_sha256": "2cd9a9891844516fd30466eae30e4a9b9a199802522de3fb12f59a063fba58ab",
+      "current_sha256": "e66f3a750eeb9dd71877b865b5f0026d56326cad9ca7dc8a94407ba4a2c5e408"
+    },
+    {
+      "original": "selected/skill-creator/scripts/quick_validate.py",
+      "target": "skills/individual/engineering/skill-creator/scripts/quick_validate.py",
+      "baseline_sha256": "99f76b23da5882ccc9301890e4c31837e4a9262bd1a9a75dc729df0b12459d52",
+      "current_sha256": "b91871aa66554412e9aba132eed9b687fca7f96ef2a140e5328b22ffb00e4d44"
+    },
+    {
+      "original": "selected/skill-creator/SKILL.md",
+      "target": "skills/individual/engineering/skill-creator/SKILL.md",
+      "baseline_sha256": "e030e7685e26283b4a76f5202aa3ae8516fb41dde799be5ae8ea6393ec009fe9",
+      "current_sha256": "a0aa22c36e424bc0ad197988fe19f650d56269565bc46b8c0df592b938b40e26"
+    },
+    {
       "original": "selected/source-index/SKILL.md",
       "target": "skills/individual/research/source-index/SKILL.md",
       "baseline_sha256": "057e25f1fff4fb80522ed8486c423347bf2312ba76ad66c7ea974c36022ee65f",
       "current_sha256": "a03efd45aff2560716ea5a7247c7d3c0908dfebd9bdacfe20a53792c31b0da3d"
+    },
+    {
+      "original": "selected/using-superpowers/SKILL.md",
+      "target": "skills/individual/engineering/using-superpowers/SKILL.md",
+      "baseline_sha256": "f85a019a5fce0adb17eb66496f301b3909f6ef93fddbe51b6b316eecee23b735",
+      "current_sha256": "fd7bce10ef2fe6b11c605286a779b6b5061f4cb0b2a38c7475d03d1acc5fb5bd"
+    },
+    {
+      "original": "selected/webapp-testing/scripts/with_server.py",
+      "target": "skills/individual/document/webapp-testing/scripts/with_server.py",
+      "baseline_sha256": "529b5f10f6ecf2e6234747be6d6601be7ef9011ee29a3eee0879e7823f608238",
+      "current_sha256": "67fefe8307b0dd8942efc5c1ed0c140e0ae6c5668227154b37568d85a02872cf"
+    },
+    {
+      "original": "selected/webapp-testing/SKILL.md",
+      "target": "skills/individual/document/webapp-testing/SKILL.md",
+      "baseline_sha256": "8bc27790f6e6dfc2bfa6692326d4518baacf6a31dcc646d963c729adad2f7e34",
+      "current_sha256": "e9a472c8ed7d67328e527d5cfa508a96f383669ecab204f7749f74ca114590fa"
+    },
+    {
+      "original": "selected/writing-plans/SKILL.md",
+      "target": "skills/individual/engineering/writing-plans/SKILL.md",
+      "baseline_sha256": "6f76fc9d4817a070c5deea6bfac91ff8dec32d0698d39cbc749d4ea37daa8658",
+      "current_sha256": "b1018a7772158bdd7d58771b89c36c65c0a3f1445b2e1f46af3952dfad2dbfb7"
     }
   ],
   "note": "Migration apply verified all original hashes before local modifications. Subsequent repairs and new behavior are explicitly listed; original versions remain in preserved Git history."

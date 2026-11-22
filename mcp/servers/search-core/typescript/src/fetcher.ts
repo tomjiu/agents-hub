@@ -6,7 +6,7 @@
  */
 import type { FetchOptions, FetchResult } from "./types.js";
 import { Cache } from "./cache.js";
-import { Budget, safeFetchUrl, validateUrl, type DomainPolicy } from "./governor.js";
+import { Budget, safeFetchUrl, validateUrl, type DomainPolicy, type DnsLookup, validateNetworkTarget } from "./governor.js";
 import { extractHtml, extractFocus } from "./focus.js";
 import type { Journal } from "./journal.js";
 import type { CoreConfig } from "./config.js";
@@ -18,9 +18,11 @@ export class Fetcher {
   #cfg: CoreConfig;
   #journal?: Journal;
   #fetchImpl: typeof fetch;
+  #lookup?: DnsLookup;
 
-  constructor(cfg: CoreConfig, cache: Cache, journal?: Journal, fetchImpl?: typeof fetch) {
+  constructor(cfg: CoreConfig, cache: Cache, journal?: Journal, fetchImpl?: typeof fetch, lookup?: DnsLookup) {
     this.#cfg = cfg;
+    this.#lookup = lookup;
     this.#cache = cache;
     this.#journal = journal;
     this.#fetchImpl = fetchImpl ?? fetch;
@@ -97,6 +99,8 @@ export class Fetcher {
     timeoutMs = 20000,
   ): Promise<{ finalUrl: string; status: number; contentType: string | null; body: string }> {
     const ssrfOpts = {
+      networkMode: this.#cfg.fetchNetworkMode,
+      lookup: this.#lookup,
       fakeIpCidrs: this.#cfg.fakeIpCidrs,
       allowPrivate: this.#cfg.ssrf === "allowPrivate",
     };
@@ -108,7 +112,10 @@ export class Fetcher {
       const safe = this.#cfg.ssrf === "off"
         ? validateUrl(current, policy)
         : await safeFetchUrl(current, policy, ssrfOpts);
-      if ("error" in safe) throw new Error(`ssrf: ${safe.error}`);
+      if ("error" in safe) {
+        const fakeIpHint=/private address blocked:.* -> 198[.]1[89][.]/.test(safe.error) ? "; reserved 198.18.0.0/15 DNS answer (possible TUN/fake-IP mapping). Default strict mode refuses fake-IP. For an explicitly trusted local TUN, configure SC_FETCH_NETWORK_MODE=trusted-tun and SC_FAKE_IP_CIDRS for its exact range in Search-core only; remote proxy IP is not verified. Do not use ssrf=off or general private-IP exemptions. No request sent." : "";
+        throw new Error(`ssrf: ${safe.error}${fakeIpHint}`);
+      }
       res = await this.#fetchImpl(safe.url.href, {
         redirect: "manual",
         signal: AbortSignal.timeout(timeoutMs),
@@ -203,11 +210,15 @@ export class Fetcher {
     policy?: DomainPolicy,
   ): Promise<FetchResult> {
     const t0 = Date.now();
+    const initial=validateUrl(rawUrl,policy);if("error" in initial)throw new Error(initial.error);
+    if(this.#cfg.ssrf==="strict"){const error=validateNetworkTarget(initial.url,this.#cfg.fetchNetworkMode);if(error)throw new Error(error);}
+    const cacheScope=JSON.stringify({policy:"fetch-network-v1",mode:this.#cfg.fetchNetworkMode,ssrf:this.#cfg.ssrf,fake:this.#cfg.fetchNetworkMode==="trusted-tun"?[...this.#cfg.fakeIpCidrs].sort():[],domains:policy});
+    const transport={mode:this.#cfg.fetchNetworkMode,remoteIpVerified:false as const,cacheScope:Cache.hash(cacheScope),...(this.#cfg.fetchNetworkMode==="trusted-tun"?{warning:"Explicitly trusted local TUN. Ultimate remote IP is not visible/verified; DNS prechecks cannot prove proxy destination."}:{})};
     const ttl = opts.ttlSeconds ?? 900;
     const maxChars = opts.maxChars ?? 8000;
     const budget = new Budget(this.#cfg.budgetChars);
 
-    let cached = opts.noCache ? null : this.#cache.getPage(rawUrl, ttl);
+    let cached = opts.noCache ? null : this.#cache.getScopedPage(rawUrl, ttl,cacheScope);
     let fromCache = !!cached;
     let status = 200;
     let title: string | undefined;
@@ -243,7 +254,7 @@ export class Fetcher {
         title = x.title;
         finalCt = x.contentType;
       }
-      this.#cache.putPage(rawUrl, status, finalCt, title ?? null, text);
+      this.#cache.putScopedPage(rawUrl, status, finalCt, title ?? null, text,cacheScope);
     }
 
     const textLength = text.length;
@@ -255,7 +266,7 @@ export class Fetcher {
       if (segments) {
         const returnedChars = segments.join("\n…\n").length;
         return {
-          url: rawUrl, title, status, fromCache,
+          url: rawUrl, title, status, fromCache, transport,
           textLength, returnedChars,
           savedPct: Math.max(0, 1 - returnedChars / textLength),
           segments,
@@ -264,7 +275,7 @@ export class Fetcher {
       }
       // focus 无命中 → 降级: 返回头部截断(明确标注)
       return {
-        url: rawUrl, title, status, fromCache,
+        url: rawUrl, title, status, fromCache, transport,
         textLength, returnedChars: Math.min(maxChars, textLength),
         savedPct: Math.max(0, 1 - Math.min(maxChars, textLength) / textLength),
         segments: null as unknown as string[],
@@ -276,7 +287,7 @@ export class Fetcher {
     // 无 focus: 头部截断返回
     const out = text.slice(0, maxChars);
     return {
-      url: rawUrl, title, status, fromCache,
+      url: rawUrl, title, status, fromCache, transport,
       textLength, returnedChars: out.length,
       savedPct: Math.max(0, 1 - out.length / textLength),
       text: out,

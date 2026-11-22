@@ -3,6 +3,8 @@
 **/.env
 # Do not blanket-ignore names containing secret: skills are source assets.
 **/node_modules/
+**/__pycache__/
+**/*.pyc
 **/.git/
 archive/
 sources/

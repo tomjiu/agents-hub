@@ -44,6 +44,38 @@ HTTP/SSE 探针: `node scripts/http-probe.mjs`;MCP 渐进披露探针: `node scr
 
 static模式多携带5个初始schema；未改变实际research/search等执行或授权语义，不修补DSH官方bridge。旧配置和运行包需要显式重新生成，当前实例不会自动改变。详见 [搜索验收说明](../../../../asset-manager/SEARCH-ACCEPTANCE.md)。
 
+## 每次调用的provider名单
+
+search/xSearch与MCP/HTTP search、x_search的engines是明确provider allowlist：省略为自动路由，[]不出勤，已登记名称去重排序，未知/空名称/错误类型拒绝。名单优先于领域与GitHub/X链、rescue和自动key slots；X显式名单走site:X查询，禁用official/guest/oEmbed额外层。不保证provider内部转发域名或embedding端点，fetch/research不继承它。research/resume和非search/x CLI命令拒绝engines。
+
+CLI用--engines searxng或--engines ""，查询需在flag前；裸--engines报错。MCP meta.engine_selection、core/HTTP meta.engineSelection显示mode/requested，仍须核对结果相关性。provider-allowlist-v1缓存不使用旧key且验证缓存来源，原缓存不删除。旧真实偏题/限流和DNS fetch失败记录保留，不标公网质量通过。
+
+## 查询证据质量门槛
+
+search/xSearch的默认最低质量门槛lexical-evidence-v1只检查词法证据：title/snippet/path至少匹配2个或40%独立有效查询词（单词题1），CJK用bigram；URL主机和provider前缀不算。它不是语义/事实鉴定，会漏掉跨语言、同义词或过短摘要，纯URL/无有效词可返回空。meta.quality含candidate_results/no_relevant_results、evaluated/rejected/reasons；候选必须人工核验，全部拒绝标degraded不输出错题引用。Bing q回显改写会报query mismatch，缺回显不作为确认。
+
+Research新搜索结果在原主题上过滤后入池，不对既有journal执行破坏性重写。质量cache新key不复用旧缓存，命中仍查词证据。底层fusion可选evidenceGate默认关闭保兼容，搜索entry启用；embedding失败不恢复词门槛拒绝。公网效果只认证已测Node/SQLite题，默认自动池可能加入keyless聚合器。
+
+当前Meta DNS映射198.18.x时官网fetch安全拒绝；新诊断提示可信网络返回真实DNS，不关闭SSRF/豁免fake-IP，也不假装已全文抓取成功。
+
+## 本机Clash/TUN显式兼容
+
+不需要改Clash的fake-IP排除或关闭TUN。只在明确信任本机代理后，为Search-core配置fetchNetworkMode=trusted-tun、fakeIpCidrs=["198.18.0.0/15"]、ssrf=strict（也可用下方环境变量）。默认strict不会检测到TUN就自动放行；旧fakeIpCidrs单独配置也不再是私网豁免。错误模式/CIDR、空CIDR或与off/allowPrivate混用拒绝启动。
+
+仅正常多标签公网形式域名的DNS答案命中指定范围可继续域名fetch，由操作系统/TUN接管；直接IP字面量（含数字/十六进制/IPv6）全部拒绝，localhost/单标签/.local/.internal等拒绝，真实私网DNS及混合不安全答案拒绝。HTTP(s)协议/端口/域名策略、逐跳重定向检查及HTTPS默认TLS证书验证保留。不是识别或认证Clash服务，也不能看到最终代理IP；攻击者公网域名可能经代理解析到私网，必须只在可信个人环境显式采用，不当开放抓取服务的SSRF隔离保证。strict本来也未把检查IP固定到连接，不能宣称防DNS重绑定完整认证。
+
+返回transport.mode、remoteIpVerified=false和trusted-tun警告。缓存新增scoped_pages按网络模式/ssrf/CIDR/域名策略隔离，旧pages保留为离线语料、不作策略证据；search_cache明确检索历史本地内容，不保证来源属于当前网络模式。
+
+~~~powershell
+# 仅此Search-core进程；无需修改Clash配置：
+$env:SC_FETCH_NETWORK_MODE = "trusted-tun"
+$env:SC_FAKE_IP_CIDRS = "198.18.0.0/15"
+$env:SC_SSRF = "strict"
+node mcp/servers/search-core/typescript/dist/cli.js fetch https://www.sqlite.org/wal.html --focus "one writer" --json
+~~~
+
+以上命令从仓库根运行。DSH新独立运行包可在包内私有state/search-core/config.json明确设置相同字段；不要编辑运行中服务已打开配置或修改用户profile。registry/生成包默认不打开trusted-tun。实际复跑node asset-manager/probe-tun-fetch.mjs --live；结果只认证当前TUN的Node/SQLite官方全文和缓存，不认证任意网络。
+
 ## 配置
 
 `~/.search-core/config.json` 或环境变量(优先):
@@ -66,7 +98,8 @@ static模式多携带5个初始schema；未改变实际research/search等执行�
 | searxng.baseUrl | `SC_SEARXNG_BASE_URL` | 自建/可信实例 |
 | brave/tavily/exa.apiKey | `BRAVE_API_KEY` 等 | 有 key 自动加入并行 |
 | blockedDomains | `SC_BLOCKED_DOMAINS` | 全局黑名单(csv) |
-| fakeIpCidrs | `SC_FAKE_IP_CIDRS` | Clash TUN fake-ip 豁免网段 [10] |
+| fetchNetworkMode | `SC_FETCH_NETWORK_MODE` | strict默认；trusted-tun须明确可信本机TUN，不能逐请求开启 |
+| fakeIpCidrs | `SC_FAKE_IP_CIDRS` | trusted-tun域名DNS映射范围，只接受198.18.0.0/15及其规范子网；strict不作为豁免 |
 | ssrf | `SC_SSRF` | `strict`(默认)/`allowPrivate`/`off`(测试) |
 | x.bearerToken | `X_BEARER_TOKEN` | X 官方 API 层(可选) |
 | x.guestEnabled | `SC_X_GUEST=0` 关 | Guest GraphQL 匿名层(默认开,自愈轮换) [10] |

@@ -19,7 +19,10 @@ def validate_skill(skill_path):
         return False, "SKILL.md not found"
 
     # Read and validate frontmatter
-    content = skill_md.read_text()
+    try:
+        content = skill_md.read_text(encoding='utf-8')
+    except (OSError, UnicodeError) as error:
+        return False, f'Cannot read UTF-8 SKILL.md: {error}'
     if not content.startswith('---'):
         return False, "No YAML frontmatter found"
 
@@ -32,7 +35,23 @@ def validate_skill(skill_path):
 
     # Parse YAML frontmatter
     try:
-        frontmatter = yaml.safe_load(frontmatter_text)
+        class UniqueKeyLoader(yaml.SafeLoader):
+            pass
+
+        def unique_mapping(loader, node, deep=False):
+            loader.flatten_mapping(node)
+            result = {}
+            for key_node, value_node in node.value:
+                key = loader.construct_object(key_node, deep=deep)
+                if not isinstance(key, str):
+                    raise yaml.YAMLError('Frontmatter mapping keys must be strings')
+                if key in result:
+                    raise yaml.YAMLError(f'Duplicate frontmatter key: {key}')
+                result[key] = loader.construct_object(value_node, deep=deep)
+            return result
+
+        UniqueKeyLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, unique_mapping)
+        frontmatter = yaml.load(frontmatter_text, Loader=UniqueKeyLoader)
         if not isinstance(frontmatter, dict):
             return False, "Frontmatter must be a YAML dictionary"
     except yaml.YAMLError as e:
@@ -60,6 +79,8 @@ def validate_skill(skill_path):
     if not isinstance(name, str):
         return False, f"Name must be a string, got {type(name).__name__}"
     name = name.strip()
+    if not name:
+        return False, "Name must not be empty"
     if name:
         # Check naming convention (kebab-case: lowercase with hyphens)
         if not re.match(r'^[a-z0-9-]+$', name):
@@ -75,6 +96,8 @@ def validate_skill(skill_path):
     if not isinstance(description, str):
         return False, f"Description must be a string, got {type(description).__name__}"
     description = description.strip()
+    if not description:
+        return False, "Description must not be empty"
     if description:
         # Check for angle brackets
         if '<' in description or '>' in description:

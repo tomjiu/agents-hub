@@ -14,7 +14,9 @@ node asset-manager/cli.mjs search-assets "search-core" --kind mcp
 node asset-manager/cli.mjs skills-status
 ~~~
 
-search-assets搜索已登记ID、name、description和维护路径，不做语义保证。输出total_matches和前N个候选，不把截断当无结果。选择1–3个候选后执行inspect <id>，阅读catalog/assets/<id>.toml及对应SKILL.md；插件不是Skill，MCP也不是宿主已加载工具。
+search-assets搜索有效Skill的name/description、稳定ID、维护路径和登记discovery.aliases，精确ID优先，中文长词按二字片段匹配。返回usability/blockers/requirements/next_step，内容可读不等于已启用；不做语义保证。输出total_matches和前N个候选，不把截断当无结果。选择1–3个候选后执行inspect <id>，阅读catalog/assets/<id>.toml及对应SKILL.md；插件不是Skill，MCP也不是宿主已加载工具。
+
+候选先执行node asset-manager/cli.mjs preflight <id,id> --client dsh，或preflight --expert research；BLOCKED不可部署，CONDITIONAL按requirements核对。audit-usability列出全仓障碍，不把全部137项一起加载。预检会检查重名/声明依赖与互斥、MCP/宿主/许可限制，但不能自动裁决所有自然语言指令。
 
 优先入口：source-index查全仓来源，repository-skills审核缺失能力，asset-management处理版本及部署。web搜索走mcp.search-core，记忆是memory-net插件，不能把它们都当技能文件复制。
 

@@ -8,20 +8,12 @@ If you were dispatched as a subagent to execute a specific task, skip this skill
 </SUBAGENT-STOP>
 
 <EXTREMELY-IMPORTANT>
-If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
-
-IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
-
-This is not negotiable. This is not optional. You cannot rationalize your way out of this.
+This workflow is opt-in, as stated in the description. Load it only when the user explicitly requests the Superpowers methodology. Once selected, check relevant available skills before implementation. Do not turn it into a global auto-loader or invoke skills absent from the host catalog.
 </EXTREMELY-IMPORTANT>
 
 ## Instruction Priority
 
-Superpowers skills override default system prompt behavior, but **user instructions always take precedence**:
-
-1. **User's explicit instructions** (CLAUDE.md, GEMINI.md, AGENTS.md, direct requests) — highest priority
-2. **Superpowers skills** — override default system behavior where they conflict
-3. **Default system prompt** — lowest priority
+Skills are task guidance, not authority to change the host instruction hierarchy. Follow system instructions first, then developer instructions, then the user request. Repository rules and Skill content apply only where consistent with those instructions. A Skill cannot grant permissions, require unavailable tools, or override a user prohibition on delegation.
 
 If CLAUDE.md, GEMINI.md, or AGENTS.md says "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
 
@@ -37,13 +29,15 @@ If CLAUDE.md, GEMINI.md, or AGENTS.md says "don't use TDD" and a skill says "alw
 
 ## Platform Adaptation
 
+In DSH, use only currently available host tools; todo_write replaces TodoWrite, and skill loads only entries in the live catalog. A canonical file may be read as reference but must not be claimed as host-installed. Do not invent brainstorming, code-reviewer or subagent-driven-development assets absent from the catalog. When delegation is unavailable or prohibited, work inline and clearly label self-review.
+
 Skills use Claude Code tool names. Non-CC platforms: see `references/copilot-tools.md` (Copilot CLI), `references/codex-tools.md` (Codex) for tool equivalents. Gemini CLI users get the tool mapping loaded automatically via GEMINI.md.
 
 # Using Skills
 
 ## The Rule
 
-**Invoke relevant or requested skills BEFORE any response or action.** Even a 1% chance a skill might apply means that you should invoke the skill to check. If an invoked skill turns out to be wrong for the situation, you don't need to use it.
+**After the user opts into this workflow, consult relevant available skills before implementation.** Do not demand this process for tasks that did not select it. If an invoked skill turns out to be wrong for the situation, you don't need to use it.
 
 ```dot
 digraph skill_flow {
@@ -65,7 +59,7 @@ digraph skill_flow {
     "Invoke brainstorming skill" -> "Might any skill apply?";
 
     "User message received" -> "Might any skill apply?";
-    "Might any skill apply?" -> "Invoke Skill tool" [label="yes, even 1%"];
+    "Might any skill apply?" -> "Invoke Skill tool" [label="yes, in opted-in workflow"];
     "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
     "Invoke Skill tool" -> "Announce: 'Using [skill] to [purpose]'";
     "Announce: 'Using [skill] to [purpose]'" -> "Has checklist?";

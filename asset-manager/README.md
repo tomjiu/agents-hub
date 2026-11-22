@@ -6,6 +6,10 @@
 
 search-assets <query> [--kind skills|mcp|plugins|agents-md] [--limit N]只读本地登记检索，优先ID/name再description/path；skills-status [--verbose]检查canonical技能、登记缺漏、语法和客户端名称限制。库存坏语法/未登记/缺失使validate失败，厂商不兼容名称单独报告、原件不改。优先skills/individual/research/skill-search/SKILL.md及根AGENTS.md，不用手工扫描全部文件。
 
+preflight <id,id>或--expert NAME检查当前组合；audit-usability列全部登记障碍，不启动服务、不改文件。search-assets支持任务用语/登记别名并返回一致可用性和下一步。CONTENT_READY不是全功能验证，见 [使用审核](USABILITY.md)。
+
+audit-resources只读检查全部canonical Skill的显式Markdown链接与脚本/参考文件路径，区分FOUND、MISSING、示例/动态路径及越界。仓库内相对链接存在不代表独立部署包包含它。probe-python-tasks.mjs需显式Python、私有依赖目录和Git路径，运行合成任务，不自动安装；详见 [离线任务审核](TASK-ACCEPTANCE.md)。
+
 ## 已实现
 
 - catalog/assets 元数据读取、稳定 ID/类型/路径校验，四类独立保护策略。

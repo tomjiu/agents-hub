@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {classifyDshCompatibility,checkDshUpstream,saveDshAcceptance} from '../core/dsh-compatibility.mjs';
 const fingerprint={version:'0.2.2-rc.1',host_sha256:'host-A',assets_sha256:'assets-A'};
-const accepted={status:'PASS',parallel_discovery:true,search:{queried:true,refs_returned:true,cache_hit:true,cache_isolated:true},host_version:fingerprint.version,fingerprint,skill:{full_content_seen_by_model:true},mcp:{result_returned_to_model:true},memory:{persisted:true,prompt_injection:true,auto_observe:true,self_filter:true}};
+const accepted={status:'PASS',fetch:{literal_refused:true},parallel_discovery:true,search:{queried:true,refs_returned:true,cache_hit:true,cache_isolated:true,explicit_selection_verified:true,quality_verified:true},host_version:fingerprint.version,fingerprint,skill:{full_content_seen_by_model:true},mcp:{result_returned_to_model:true},memory:{persisted:true,prompt_injection:true,auto_observe:true,self_filter:true}};
 test('matching exact host and asset fingerprints passes but never grants auto-upgrade',()=>{
  const result=classifyDshCompatibility(fingerprint,[accepted]);assert.equal(result.status,'VERIFIED');assert.equal(result.auto_upgrade,false);assert.equal(result.auto_enable,false);
 });
@@ -16,7 +16,7 @@ test('memory/search edits invalidate old acceptance instead of declaring all ver
  assert.equal(classifyDshCompatibility({...fingerprint,assets_sha256:'changed-plugin'},[accepted]).status,'NEEDS_ACCEPTANCE');
 });
 test('partial fixture or failed host run is not accepted',()=>{
- for(const record of [{...accepted,status:'FAIL'},{...accepted,memory:{}},{...accepted,mcp:{}},{...accepted,skill:{}},{...accepted,search:{}},{...accepted,parallel_discovery:false}])assert.equal(classifyDshCompatibility(fingerprint,[record]).status,'NEEDS_ACCEPTANCE');
+ for(const record of [{...accepted,status:'FAIL'},{...accepted,fetch:{}},{...accepted,memory:{}},{...accepted,mcp:{}},{...accepted,skill:{}},{...accepted,search:{}},{...accepted,parallel_discovery:false},{...accepted,search:{...accepted.search,explicit_selection_verified:false}},{...accepted,search:{...accepted.search,quality_verified:false}}])assert.equal(classifyDshCompatibility(fingerprint,[record]).status,'NEEDS_ACCEPTANCE');
  assert.equal(classifyDshCompatibility(fingerprint,[]).status,'NEEDS_ACCEPTANCE');assert.throws(()=>classifyDshCompatibility(fingerprint,null),/Invalid/);
 });
 

@@ -26,3 +26,7 @@ local = "imported-2026-11-18"
 sha256 = "33e0076b1440b7e7608bcb1c81fc1f7d1bb49af10aab6138364388e5f1b827a3"
 local_modified = "unknown"
 enabled = false
+
+[discovery]
+description = "共享记忆网DSH插件：记忆检索、结论记录、任务进度、提示注入、自动工具观测和SQLite持久化。"
+aliases = [ "记忆插件", "记住进度", "共享记忆", "memory", "recall" ]

@@ -24,3 +24,7 @@ local = "imported-2026-11-18"
 sha256 = "402210d5390926cd279dc146af062b604ccb2c88049fbdaa910287037133df14"
 local_modified = "unknown"
 enabled = false
+
+[discovery]
+description = "DSH搜索MCP：搜索插件接入、网络查询、网页抓取、研究、引用和缓存。"
+aliases = [ "搜索插件", "网页搜索", "查找资料", "search", "fetch" ]

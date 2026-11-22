@@ -23,3 +23,7 @@ local = "imported-2026-11-18"
 sha256 = "24757097b12e6ecb7105d9bed04cd51922c543d1e2c63574807dadaa7e214101"
 local_modified = "unknown"
 enabled = false
+
+[discovery]
+description = "基于官方文档、固定版本和实现证据制定开发决策，验证引用而非照搬搜索摘要。"
+aliases = [ "官方文档", "官方资料", "来源核验", "版本文档", "source cited development" ]

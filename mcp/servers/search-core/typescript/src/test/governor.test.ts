@@ -46,11 +46,9 @@ test("assertResolvableSafe: blocks localhost via DNS", async () => {
   const { assertResolvableSafe } = await import("../governor.js");
   const r = await assertResolvableSafe(new URL("http://localhost:80/x"));
   assert.ok("error" in r, "localhost must be blocked");
-  // fake-ip 豁免: 198.18.0.5 属 Clash TUN fake-ip 段
-  const r2 = await assertResolvableSafe(new URL("http://example.com/"), {
-    fakeIpCidrs: ["198.18.0.0/15"],
-  });
-  assert.ok(!("error" in r2) || !r2.error.includes("private"), "public domain resolves fine");
+  // A CIDR alone is no longer permission: strict keeps reserved DNS blocked.
+  const r2 = await assertResolvableSafe(new URL("http://example.com/"), {fakeIpCidrs:["198.18.0.0/15"],lookup:async()=>[{address:"198.18.0.5",family:4}]});
+  assert.ok("error" in r2);
 });
 
 // ---------- Cache ----------

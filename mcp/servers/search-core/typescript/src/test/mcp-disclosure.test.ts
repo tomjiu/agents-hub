@@ -11,7 +11,7 @@ import {createSearchMcpServer,disclosureMode,type McpDisclosure} from '../mcp.js
 
 async function setup(mode: McpDisclosure) {
  const dir=await mkdtemp(join(tmpdir(),'search-mcp-disclosure-'));
- const core=new SearchCore({config:{dataDir:dir,engines:['searxng'],keySlots:'off',searxng:{baseUrl:'https://fixture.example',instances:[]}},fetchImpl:async()=>new Response(JSON.stringify({results:[{url:'https://fixture.example/aurora',title:'Aurora glacier',content:'fixture reference'}]}),{headers:{'content-type':'application/json'}})});
+ const core=new SearchCore({config:{dataDir:dir,engines:['searxng'],keySlots:'off',searxng:{baseUrl:'https://fixture.example',instances:[]}},fetchImpl:async()=>new Response(JSON.stringify({results:[{url:'https://fixture.example/aurora',title:'Aurora glacier',content:'Aurora glacier fixture reference; Node SQLite python documentation; task memory'}]}),{headers:{'content-type':'application/json'}})});
  const server=createSearchMcpServer(core,mode),client=new Client({name:'disclosure-test',version:'1'});
  let changes=0;client.setNotificationHandler(ToolListChangedNotificationSchema,async()=>{changes++;});
  const [a,b]=InMemoryTransport.createLinkedPair();await server.connect(a);await client.connect(b);
@@ -41,4 +41,14 @@ test('dynamic default still progressively registers matched capabilities and not
 });
 test('invalid mode is rejected rather than silently falling back to unsafe host behavior',()=>{
  assert.equal(disclosureMode(undefined),'dynamic');assert.equal(disclosureMode('static'),'static');assert.equal(disclosureMode('dynamic'),'dynamic');assert.throws(()=>disclosureMode('invalid'),/must be/);
+});
+
+test('MCP explicit selection is visible and routes cannot replace it',async()=>{
+ const h=await setup('static');try{
+  const r=content(await h.client.callTool({name:'search',arguments:{query:'Node SQLite python documentation',engines:['searxng']}}));assert.deepEqual(r.meta.engine_selection,{mode:'explicit',requested:['searxng']});assert.deepEqual(r.meta.engines_used,['searxng']);assert.ok(r.refs.length);assert.ok(r.refs.every((ref:any)=>ref.engines.every((name:string)=>name==='searxng')));
+  const empty=content(await h.client.callTool({name:'search',arguments:{query:'github repository',engines:[]}}));assert.deepEqual(empty.refs,[]);assert.deepEqual(empty.meta.engines_used,[]);
+  const unknown=await h.client.callTool({name:'search',arguments:{query:'query',engines:['not-registered']}});assert.equal(unknown.isError,true);assert.match(JSON.stringify(unknown.content),/Unknown engine/);
+  const research=await h.client.callTool({name:'research',arguments:{query:'query',engines:[]}});assert.equal(research.isError,true);
+  const x=content(await h.client.callTool({name:'x_search',arguments:{query:'task memory',engines:['searxng']}}));assert.deepEqual(x.meta.engine_selection,{mode:'explicit',requested:['searxng']});assert.deepEqual(x.meta.engines_used,['searxng']);
+ }finally{await h.close();}
 });

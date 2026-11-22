@@ -23,3 +23,7 @@ local = "imported-2026-11-18"
 sha256 = "89da5a2cc1a34063816f8cfb7ba4e9891a9a5f2a4fe6b473d36e992da362be1a"
 local_modified = "unknown"
 enabled = false
+
+[discovery]
+description = "审核和发现新能力来源，登记安全更新。"
+aliases = [ "新技能", "技能来源", "安装审核" ]

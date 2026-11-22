@@ -1,0 +1,2822 @@
+{
+  "schema": 1,
+  "skills_checked": 123,
+  "counts": {
+    "explicit_references": 246,
+    "found": 223,
+    "missing": 21,
+    "unresolved_examples": 2,
+    "unsafe_or_external": 0
+  },
+  "assets": [
+    {
+      "id": "asset-management",
+      "path": "skills/asset-management",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "authorized-analysis-scope",
+      "path": "skills/individual/security/authorized-analysis-scope",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "automation-workflow",
+      "path": "skills/individual/engineering/automation-workflow",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "debugging-and-error-recovery",
+      "path": "skills/individual/engineering/debugging-and-error-recovery",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "dfir-workflow",
+      "path": "skills/individual/research/dfir-workflow",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "doc-coauthoring",
+      "path": "skills/individual/document/doc-coauthoring",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "docx",
+      "path": "skills/individual/document/docx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/office/soffice.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/unpack.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/accept_changes.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/validate.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/comment.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/pack.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "exa-search",
+      "path": "skills/individual/research/exa-search",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "executing-plans",
+      "path": "skills/individual/engineering/executing-plans",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "finishing-a-development-branch",
+      "path": "skills/individual/engineering/finishing-a-development-branch",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "firmware-analysis",
+      "path": "skills/individual/research/firmware-analysis",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "frontend-design",
+      "path": "skills/individual/document/frontend-design",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "go-performance",
+      "path": "skills/individual/engineering/go-performance",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "godot-dev",
+      "path": "skills/individual/engineering/godot-dev",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "keenable-cli",
+      "path": "skills/individual/research/keenable-cli",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "mcp-builder",
+      "path": "skills/individual/engineering/mcp-builder",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "reference/mcp_best_practices.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "reference/node_mcp_server.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "reference/python_mcp_server.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "reference/evaluation.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "offensive-methodology",
+      "path": "skills/individual/security/offensive-methodology",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "pdf",
+      "path": "skills/individual/document/pdf",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "performance-optimization",
+      "path": "skills/individual/engineering/performance-optimization",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "references/performance-checklist.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "playwright",
+      "path": "skills/individual/engineering/playwright",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "scripts/playwright_cli.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/cli.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/workflows.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "pptx",
+      "path": "skills/individual/document/pptx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "editing.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "pptxgenjs.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/thumbnail.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/unpack.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/soffice.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "receiving-code-review",
+      "path": "skills/individual/engineering/receiving-code-review",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "repository-skills",
+      "path": "skills/individual/research/repository-skills",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "requesting-code-review",
+      "path": "skills/individual/engineering/requesting-code-review",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "reverse-engineering-workflow",
+      "path": "skills/individual/research/reverse-engineering-workflow",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "rust-performance",
+      "path": "skills/individual/engineering/rust-performance",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "search-core",
+      "path": "skills/individual/research/search-core",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "../../../../asset-manager/SEARCH-ACCEPTANCE.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Repository reference: available in checkout, not necessarily standalone deployment"
+        }
+      ]
+    },
+    {
+      "id": "security-and-hardening",
+      "path": "skills/individual/security/security-and-hardening",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "references/security-checklist.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "security-best-practices",
+      "path": "skills/individual/security/security-best-practices",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "security-ownership-map",
+      "path": "skills/individual/security/security-ownership-map",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "scripts/run_ownership_map.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/query_ownership.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/neo4j-import.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/community_maintainers.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "skills/individual/security/security-ownership-map/scripts/run_ownership_map.py",
+          "origins": [
+            "repository-command"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "skills/individual/security/security-ownership-map/scripts/query_ownership.py",
+          "origins": [
+            "repository-command"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "skills/individual/security/security-ownership-map/scripts/community_maintainers.py",
+          "origins": [
+            "repository-command"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "security-threat-model",
+      "path": "skills/individual/security/security-threat-model",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "references/prompt-template.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/security-controls-and-assets.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "security-workflow",
+      "path": "skills/individual/security/security-workflow",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "skill-creator",
+      "path": "skills/individual/engineering/skill-creator",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "eval-viewer/generate_review.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/schemas.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "agents/grader.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "agents/analyzer.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "agents/comparator.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/package_skill.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "assets/eval_review.html",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "skill-search",
+      "path": "skills/individual/research/skill-search",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "source-driven-development",
+      "path": "skills/individual/engineering/source-driven-development",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "source-index",
+      "path": "skills/individual/research/source-index",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "systematic-debugging",
+      "path": "skills/individual/engineering/systematic-debugging",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "tavily-hikari-best-practices",
+      "path": "skills/individual/research/tavily-hikari-best-practices",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "tavily-hikari-cli",
+      "path": "skills/individual/research/tavily-hikari-cli",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "tavily-hikari-extract",
+      "path": "skills/individual/research/tavily-hikari-extract",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "tavily-hikari-research",
+      "path": "skills/individual/research/tavily-hikari-research",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "tavily-hikari-search",
+      "path": "skills/individual/research/tavily-hikari-search",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "test-driven-development",
+      "path": "skills/individual/engineering/test-driven-development",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "theme-factory",
+      "path": "skills/individual/document/theme-factory",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "trae.design-library-creator",
+      "path": "skills/collections/vendors/trae/skills/design-library-creator",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "examples/templates/phase-2-analysts.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "examples/templates/figma-token-gen.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "examples/templates/phase-2.5-intent-synthesis.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "examples/templates/phase-5-docs.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/validate-design-library-output.mjs",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/css-to-json.mjs",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.digital-avatar-creator",
+      "path": "skills/collections/vendors/trae/skills/digital-avatar-creator",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.doc-writing-guide",
+      "path": "skills/collections/vendors/trae/skills/doc-writing-guide",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/prd-document.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/interact-prd-document.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.docx",
+      "path": "skills/collections/vendors/trae/skills/docx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/unpack.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/accept_changes.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/sanitize.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/comment.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/pack.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.dynamic-ui",
+      "path": "skills/collections/vendors/trae/skills/dynamic-ui",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.feedback",
+      "path": "skills/collections/vendors/trae/skills/feedback",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.html-deck",
+      "path": "skills/collections/vendors/trae/skills/html-deck",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/decorations.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/image-generation.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/authoring-guide.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/themes.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/layouts.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/animations.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/presenter-mode.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/01_startup_funding/01_pitch_deck.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/01_startup_funding/02_elevator_pitch.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/01_startup_funding/03_business_plan.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/01_startup_funding/04_investor_update.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/02_corporate_management/05_quarterly_business_review.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/02_corporate_management/06_all_hands_meeting.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/02_corporate_management/07_project_kickoff.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/02_corporate_management/08_post_mortem.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/02_corporate_management/09_onboarding.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/02_corporate_management/10_change_management.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/03_sales_marketing/11_sales_deck.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/03_sales_marketing/12_product_launch.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/03_sales_marketing/13_company_profile.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/03_sales_marketing/14_case_study.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/03_sales_marketing/15_media_kit.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/03_sales_marketing/16_brand_guidelines.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/04_academic_education/17_thesis_defense.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/04_academic_education/18_lecture.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/04_academic_education/19_research_poster.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/04_academic_education/20_book_review.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/04_academic_education/21_workshop.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/05_consulting_strategy/22_market_analysis.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/05_consulting_strategy/23_strategic_plan.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/05_consulting_strategy/24_consulting_proposal.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/05_consulting_strategy/25_persona_analysis.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/26_portfolio.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/27_visual_resume.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/28_travelogue.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/29_moodboard.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/30_event_speech.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/31_self_introduction.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide_best_practices/06_personal_creative/32_webinar.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/new-deck.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.html-report",
+      "path": "skills/collections/vendors/trae/skills/html-report",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/new-report.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "assets/charts.js",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "assets/js/echarts.min.js",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "assets/chart-revenue.js",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "assets/js/mermaid.min.js",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/interactive-prd.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.pdf",
+      "path": "skills/collections/vendors/trae/skills/pdf",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/search_extracted.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/search_extracted.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/extract_pages.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.pptx",
+      "path": "skills/collections/vendors/trae/skills/pptx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/editing.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/extract_pptx.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/extract_images.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/extract_comments.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/audit_pptx.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/pptx-screenshot.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/design-system.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/pitfalls.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/slide-types.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/python-pptx-recipes.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/windows-tool-bootstrap.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "references/pptxgenjs.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.research-guide",
+      "path": "skills/collections/vendors/trae/skills/research-guide",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/research-report.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/comparison-analysis.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.skill-creator",
+      "path": "skills/collections/vendors/trae/skills/skill-creator",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.solo-design",
+      "path": "skills/collections/vendors/trae/skills/solo-design",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.solo-graphic-generation",
+      "path": "skills/collections/vendors/trae/skills/solo-graphic-generation",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/graphic-asset-design-file-format.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/validate-graphic-asset-design.mjs",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.solo-image-edit",
+      "path": "skills/collections/vendors/trae/skills/solo-image-edit",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/canvas-image-contract.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/validate-image-edit-canvas.mjs",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.trae-browseruse-external",
+      "path": "skills/collections/vendors/trae/skills/TRAE-browseruse-external",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.trae-browseruse",
+      "path": "skills/collections/vendors/trae/skills/TRAE-browseruse",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.trae-code-mode-orchestrator",
+      "path": "skills/collections/vendors/trae/skills/TRAE-code-mode-orchestrator",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/exec-patterns.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/usecase-patterns.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.trae-computer-use-ptc",
+      "path": "skills/collections/vendors/trae/skills/TRAE-computer-use-ptc",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.trae-computer-use",
+      "path": "skills/collections/vendors/trae/skills/TRAE-computer-use",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.trae-doctor",
+      "path": "skills/collections/vendors/trae/skills/TRAE-doctor",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/disk.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "trae.trae-product-knowledge",
+      "path": "skills/collections/vendors/trae/skills/TRAE-product-knowledge",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "trae.xlsx",
+      "path": "skills/collections/vendors/trae/skills/xlsx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/recalc.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/soffice.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "ts-performance",
+      "path": "skills/individual/engineering/ts-performance",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "using-git-worktrees",
+      "path": "skills/individual/engineering/using-git-worktrees",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "using-superpowers",
+      "path": "skills/individual/engineering/using-superpowers",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "references/copilot-tools.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/codex-tools.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "verification-before-completion",
+      "path": "skills/individual/engineering/verification-before-completion",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "web-search-hikari",
+      "path": "skills/individual/research/web-search-hikari",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "webapp-testing",
+      "path": "skills/individual/document/webapp-testing",
+      "restricted_or_vendor": false,
+      "references": [
+        {
+          "target": "scripts/with_server.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.ardot-design-core",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/ardot-schema.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.ardot-design-router",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-router",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.ardot-design-to-code",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-to-code",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/guidelines-code.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/guidelines-tailwind.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.ardot-poster",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-poster",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/guidelines-poster.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.ardot-slides",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-slides",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/guidelines-slides.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.ardot-ui-design",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-ui-design",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/guidelines-mobile-app.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/guidelines-landing-page.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/guidelines-table.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/guidelines-web-app.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.buddy-multimodal-generation",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/buddy-multimodal-generation",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/buddy-cloud.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.component-instance",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/component-instance",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.design-variables",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/design-variables",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.expert-manager",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/expert-manager",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/init_expert.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/avatar-spec.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/validate_expert.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/register_expert.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/package_expert.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/batch_create.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/plugin-json-spec.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/agent-md-spec.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/team-spec.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "agents/design-expert.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "agents/my-expert.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "EXAMPLE_OR_DYNAMIC",
+          "reason": "Placeholder or generated/example path, not a verified bundled dependency"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.geo-map-compliance-guard",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/geo-map-compliance-guard",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.library",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/library",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.livestream-poster",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/livestream-poster",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "workflows/style-reference.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "workflows/style-selection.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/render-and-compose.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/adaptive-sizing.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/person-size-control.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/prompt-examples.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.marketplace-skill-installer",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/marketplace-skill-installer",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.recommend-connectors",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-connectors",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.recommend-experts",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/recommend-experts",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.shared-styles",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/ardot-design-core/func-rule/shared-styles",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.sheetagent.skills.excel-generation",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-generation",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/extract.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/schema_principle.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/recalc.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.sheetagent.skills.excel-handler",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/sheetagent/skills/excel-handler",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.sites",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/sites",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.skill-creator",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/skill-creator",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/rotate_pdf.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "references/finance.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "references/mnda.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "references/policies.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "references/api_docs.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "references/schema.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "scripts/init_skill.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/package_skill.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docs-plugin.skills.tencent-docs",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docs-plugin/skills/tencent-docs",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/auth.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "manage.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/space_references.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "doc/edit.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "doc/create.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "sheet/edit.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "sheet/create.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "slide/edit.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "slide/create.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "smartcanvas.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "smartsheet.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/diagram_references.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/ocr_references.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/aipage_references.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docs-plugin.skills.tencent-saas-docs",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docs-plugin/skills/tencent-saas-docs",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/auth.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "manage.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/space_references.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "doc/edit.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "doc/create.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "sheet/edit.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "sheet/create.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "slide/edit.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "slide/create.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "smartcanvas.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "smartsheet.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/diagram_references.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docs-routing",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-docs-routing",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.academic-paper-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/academic-paper-expert",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.business-copy-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/business-copy-expert",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/brand-copy.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/product-copy.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/email-marketing.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/social-media.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/copy-diagnosis.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/anti-patterns.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/examples/index.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.general-writer",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/general-writer",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/doc-type-matrix.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/quality-framework.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.legal-contract-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/legal-contract-expert",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/terms-library.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/anti-patterns.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/quality-framework.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.poetry-prose-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/poetry-prose-expert",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.science-writing-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/science-writing-expert",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.stock-research-report-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/stock-research-report-expert",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/structure_contract.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/quality-framework.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.tech-blog-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/tech-blog-expert",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/tech-article.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/tech-tutorial.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/arch-design.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/project-docs.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/article-diagnosis.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/anti-patterns.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/examples/index.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.experts.work-report-expert",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/work-report-expert",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.brief-compose",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/brief-compose",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/wb/local/resolve_output_docx_path.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "scripts/wb/local/setup-html-to-docx.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.design-token",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/design-token",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/build_tokens.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.doc-typeset",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/doc-typeset",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.format-extract",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/format-extract",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/cli-reference.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/node-install.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.generate-fillable-contract-html",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/generate-fillable-contract-html",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.html-review",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-review",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/review_html.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/design-token-compliance.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/structural-integrity.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/typographic-quality.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/genre-fit.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/decoration-usage.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/security-check.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.html-to-docx",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/html-to-docx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/wb/local/setup.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "scripts/wb/local/setup-html-to-docx.sh",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "scripts/requirements.txt",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx.skills.tdoc-orchestrator",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/tdoc-orchestrator",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/pipeline-state-protocol.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/log-schema.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "agents/doc-formatter.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "agents/doc-converter.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "scripts/wb/local/resolve_output_docx_path.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        },
+        {
+          "target": "agents/doc-writer.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-docx",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "skills/tdoc-orchestrator/SKILL.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "MISSING",
+          "reason": "Explicit reference not present at documented path",
+          "interpretation": "Needs manual review: may be an omitted dependency or a generated example, not an automatic repair directive"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-local-office-edit",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/tencent-local-office-edit",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "doc.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "sheet.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "slide.md",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.tencent-pptx.skills.tencent-pptx",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-pptx/skills/tencent-pptx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/create-from-scratch.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/create-from-material.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/human-alignment.md",
+          "origins": [
+            "markdown-link",
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.wb-finance-skill",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/skills/wb-finance-skill",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "references/html-report-style.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/peer-comparison.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/valuation-pricing.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "references/tdx-mcp-quick-reference.md",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    },
+    {
+      "id": "workbuddy.weixinpay.skills.weixinpay-feedback",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-feedback",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.weixinpay.skills.weixinpay-pay",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-pay",
+      "restricted_or_vendor": true,
+      "references": []
+    },
+    {
+      "id": "workbuddy.weixinpay.skills.weixinpay-register",
+      "path": "skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/weixinpay/skills/weixinpay-register",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "URL",
+          "origins": [
+            "markdown-link"
+          ],
+          "status": "EXAMPLE_OR_DYNAMIC",
+          "reason": "Placeholder or generated/example path, not a verified bundled dependency"
+        }
+      ]
+    },
+    {
+      "id": "writing-plans",
+      "path": "skills/individual/engineering/writing-plans",
+      "restricted_or_vendor": false,
+      "references": []
+    },
+    {
+      "id": "xlsx",
+      "path": "skills/individual/document/xlsx",
+      "restricted_or_vendor": true,
+      "references": [
+        {
+          "target": "scripts/recalc.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        },
+        {
+          "target": "scripts/office/soffice.py",
+          "origins": [
+            "local-resource"
+          ],
+          "status": "FOUND",
+          "reason": "Skill-relative bundled reference"
+        }
+      ]
+    }
+  ],
+  "scope": "Read-only explicit Markdown links and literal bundled resource references in all canonical SKILL.md; not exhaustive natural-language dependency detection, script execution or legal approval."
+}

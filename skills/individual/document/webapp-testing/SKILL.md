@@ -26,7 +26,7 @@ User task → Is it static HTML?
         │        Then use the helper + write simplified Playwright script
         │
         └─ Yes → Reconnaissance-then-action:
-            1. Navigate and wait for networkidle
+            1. Navigate and wait for a task-specific ready selector/response
             2. Take screenshot or inspect DOM
             3. Identify selectors from rendered state
             4. Execute actions with discovered selectors
@@ -34,7 +34,19 @@ User task → Is it static HTML?
 
 ## Example: Using with_server.py
 
-To start a server, run `--help` first, then use the helper:
+Run `--help` first. The helper refuses every preoccupied port before spawning; it never adopts or kills an existing listener. Readiness means TCP reachability plus process survival, not authenticated ownership or application health. Verify the expected page/API in automation before clicking.
+
+Prefer --server-argv with a JSON string array (no shell). Legacy --server accepts trusted shell commands like cd backend && npm run dev; never interpolate untrusted input. --cwd applies to all server and test processes. Commands below assume this Skill directory; from the repository root use the full canonical script path.
+
+~~~sh
+python scripts/with_server.py --server-argv '["python", "server.py"]' --port 5173 --timeout 30 --command-timeout 120 -- python your_automation.py
+~~~
+
+All ports must be unique IPv4 loopback ports. Startup failure, service death, test failure, timeout and interruption clean up owned server/test process trees. Windows uses kill-on-close Job Objects assigned while suspended; POSIX uses process groups. Daemonized/detached services are not supported. Output inherits the caller, which must drain or redirect its own pipes. Startup timeout defaults to 30s per server; command timeout defaults to 300s and returns 124. Normal test failure preserves its exit code.
+
+An existing server is tested directly after identity review, not managed by this helper. The helper needs only Python standard library; actual browser automation still needs installed Playwright/browser. No dependencies or services are installed automatically.
+
+Legacy trusted-shell examples:
 
 **Single server:**
 ```bash
@@ -57,7 +69,8 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=True) # Always launch chromium in headless mode
     page = browser.new_page()
     page.goto('http://localhost:5173') # Server already running and ready
-    page.wait_for_load_state('networkidle') # CRITICAL: Wait for JS to execute
+    page.wait_for_load_state('domcontentloaded')
+    # Then await a task-specific visible UI or API state; long-polling apps may never be idle.
     # ... your automation logic
     browser.close()
 ```
@@ -77,8 +90,8 @@ with sync_playwright() as p:
 
 ## Common Pitfall
 
-❌ **Don't** inspect the DOM before waiting for `networkidle` on dynamic apps
-✅ **Do** wait for `page.wait_for_load_state('networkidle')` before inspection
+❌ Do not treat a listening TCP port or an elapsed sleep as application readiness.
+✅ Use a bounded task-specific selector, response or state before inspection. Network-idle is only appropriate for apps that actually become idle.
 
 ## Best Practices
 
@@ -86,7 +99,7 @@ with sync_playwright() as p:
 - Use `sync_playwright()` for synchronous scripts
 - Always close the browser when done
 - Use descriptive selectors: `text=`, `role=`, CSS selectors, or IDs
-- Add appropriate waits: `page.wait_for_selector()` or `page.wait_for_timeout()`
+- Use bounded observable waits such as `page.wait_for_selector()` or expected API/UI state; fixed sleeps are not readiness evidence.
 
 ## Reference Files
 

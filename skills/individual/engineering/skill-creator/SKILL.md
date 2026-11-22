@@ -330,6 +330,12 @@ This is optional, requires subagents, and most users won't need it. The human re
 
 ---
 
+## Local packaging and host prerequisites
+
+The bundled scripts require an actual Python interpreter and PyYAML; a Windows Store python alias is not an interpreter. Use a project/private environment and check versions before running. From this Skill directory, `python scripts/package_skill.py --help` works directly; from the repository root pass the full canonical script path. Do not assume the script changes cwd or installs dependencies.
+
+The packager creates a new archive outside its source, never overwrites existing output, rejects credential-shaped/private state and linked content, checks source hashes, and refuses explicit redistribution restrictions. It is not a license authority or an authenticated approval workflow: inspect the asset catalog/license before distribution. Ordinary write failure removes its own temporary archive; forced-kill recovery is manual. No automatic extraction or execution is performed.
+
 ## Description Optimization
 
 The description field in SKILL.md frontmatter is the primary mechanism that determines whether Claude invokes a skill. After creating or improving a skill, offer to optimize the description for better triggering accuracy.

@@ -1,0 +1,1179 @@
+{
+  "schema": 1,
+  "status": "AUDIT_PASS_WITH_EXPLICIT_BARRIERS",
+  "counts": {
+    "total": 137,
+    "content_ready": 48,
+    "conditional": 5,
+    "blocked": 84
+  },
+  "index_exercise": {
+    "schema": 1,
+    "status": "PASS_WITH_EXPLICIT_ASSET_BARRIERS",
+    "total_assets": 137,
+    "exact_id_lookups": [
+      {
+        "id": "agents-md.base",
+        "kind": "agents-md",
+        "status": "CONDITIONAL",
+        "milliseconds": 222
+      },
+      {
+        "id": "agents-md.project",
+        "kind": "agents-md",
+        "status": "CONDITIONAL",
+        "milliseconds": 220
+      },
+      {
+        "id": "agents-md.ui-acceptance",
+        "kind": "agents-md",
+        "status": "CONDITIONAL",
+        "milliseconds": 240
+      },
+      {
+        "id": "asset-management",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 379
+      },
+      {
+        "id": "authorized-analysis-scope",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 347
+      },
+      {
+        "id": "automation-workflow",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 343
+      },
+      {
+        "id": "debugging-and-error-recovery",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 327
+      },
+      {
+        "id": "dfir-workflow",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 415
+      },
+      {
+        "id": "doc-coauthoring",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 353
+      },
+      {
+        "id": "docx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 380
+      },
+      {
+        "id": "exa-search",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 375
+      },
+      {
+        "id": "executing-plans",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 382
+      },
+      {
+        "id": "finishing-a-development-branch",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 371
+      },
+      {
+        "id": "firmware-analysis",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 366
+      },
+      {
+        "id": "frontend-design",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 374
+      },
+      {
+        "id": "go-performance",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 368
+      },
+      {
+        "id": "godot-dev",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 369
+      },
+      {
+        "id": "keenable-cli",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 360
+      },
+      {
+        "id": "mcp-builder",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 365
+      },
+      {
+        "id": "mcp.brp",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 234
+      },
+      {
+        "id": "mcp.codex",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 236
+      },
+      {
+        "id": "mcp.firefox-devtools",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 234
+      },
+      {
+        "id": "mcp.keenable",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 235
+      },
+      {
+        "id": "mcp.node-repl",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 235
+      },
+      {
+        "id": "mcp.playwright",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 241
+      },
+      {
+        "id": "mcp.search-core",
+        "kind": "mcp",
+        "status": "CONDITIONAL",
+        "milliseconds": 239
+      },
+      {
+        "id": "mcp.tavily-hikari",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 234
+      },
+      {
+        "id": "mcp.zai-bridge",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 238
+      },
+      {
+        "id": "mcp.zen-browser",
+        "kind": "mcp",
+        "status": "BLOCKED",
+        "milliseconds": 233
+      },
+      {
+        "id": "memory-net",
+        "kind": "plugins",
+        "status": "CONDITIONAL",
+        "milliseconds": 238
+      },
+      {
+        "id": "offensive-methodology",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 367
+      },
+      {
+        "id": "pdf",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 361
+      },
+      {
+        "id": "performance-optimization",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 363
+      },
+      {
+        "id": "playwright",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 361
+      },
+      {
+        "id": "pptx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 367
+      },
+      {
+        "id": "receiving-code-review",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 366
+      },
+      {
+        "id": "repository-skills",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 361
+      },
+      {
+        "id": "requesting-code-review",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 367
+      },
+      {
+        "id": "reverse-engineering-workflow",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 367
+      },
+      {
+        "id": "rust-performance",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 364
+      },
+      {
+        "id": "search-core",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 371
+      },
+      {
+        "id": "security-and-hardening",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 376
+      },
+      {
+        "id": "security-best-practices",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 377
+      },
+      {
+        "id": "security-ownership-map",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 369
+      },
+      {
+        "id": "security-threat-model",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 362
+      },
+      {
+        "id": "security-workflow",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 368
+      },
+      {
+        "id": "skill-creator",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 362
+      },
+      {
+        "id": "skill-search",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 363
+      },
+      {
+        "id": "source-driven-development",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 367
+      },
+      {
+        "id": "source-index",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 363
+      },
+      {
+        "id": "systematic-debugging",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 364
+      },
+      {
+        "id": "tavily-hikari-best-practices",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 367
+      },
+      {
+        "id": "tavily-hikari-cli",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 374
+      },
+      {
+        "id": "tavily-hikari-extract",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 371
+      },
+      {
+        "id": "tavily-hikari-research",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 369
+      },
+      {
+        "id": "tavily-hikari-search",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 375
+      },
+      {
+        "id": "test-driven-development",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 374
+      },
+      {
+        "id": "theme-factory",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 365
+      },
+      {
+        "id": "trae.design-library-creator",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 360
+      },
+      {
+        "id": "trae.digital-avatar-creator",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 374
+      },
+      {
+        "id": "trae.doc-writing-guide",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 368
+      },
+      {
+        "id": "trae.docx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 365
+      },
+      {
+        "id": "trae.dynamic-ui",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 373
+      },
+      {
+        "id": "trae.feedback",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 370
+      },
+      {
+        "id": "trae.html-deck",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 369
+      },
+      {
+        "id": "trae.html-report",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 367
+      },
+      {
+        "id": "trae.pdf",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "trae.pptx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 368
+      },
+      {
+        "id": "trae.research-guide",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 367
+      },
+      {
+        "id": "trae.skill-creator",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 363
+      },
+      {
+        "id": "trae.solo-design",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 370
+      },
+      {
+        "id": "trae.solo-graphic-generation",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 367
+      },
+      {
+        "id": "trae.solo-image-edit",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 369
+      },
+      {
+        "id": "trae.trae-browseruse-external",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 372
+      },
+      {
+        "id": "trae.trae-browseruse",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 363
+      },
+      {
+        "id": "trae.trae-code-mode-orchestrator",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 368
+      },
+      {
+        "id": "trae.trae-computer-use-ptc",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 370
+      },
+      {
+        "id": "trae.trae-computer-use",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "trae.trae-doctor",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 366
+      },
+      {
+        "id": "trae.trae-product-knowledge",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "trae.xlsx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "ts-performance",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 367
+      },
+      {
+        "id": "using-git-worktrees",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 362
+      },
+      {
+        "id": "using-superpowers",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 358
+      },
+      {
+        "id": "verification-before-completion",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 366
+      },
+      {
+        "id": "web-search-hikari",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 363
+      },
+      {
+        "id": "webapp-testing",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 366
+      },
+      {
+        "id": "workbuddy.ardot-design-core",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 365
+      },
+      {
+        "id": "workbuddy.ardot-design-router",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "workbuddy.ardot-design-to-code",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 367
+      },
+      {
+        "id": "workbuddy.ardot-poster",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "workbuddy.ardot-slides",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 357
+      },
+      {
+        "id": "workbuddy.ardot-ui-design",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 365
+      },
+      {
+        "id": "workbuddy.buddy-multimodal-generation",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "workbuddy.component-instance",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "workbuddy.design-variables",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "workbuddy.expert-manager",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 360
+      },
+      {
+        "id": "workbuddy.geo-map-compliance-guard",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "workbuddy.library",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 361
+      },
+      {
+        "id": "workbuddy.livestream-poster",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 363
+      },
+      {
+        "id": "workbuddy.marketplace-skill-installer",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 367
+      },
+      {
+        "id": "workbuddy.recommend-connectors",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "workbuddy.recommend-experts",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 360
+      },
+      {
+        "id": "workbuddy.shared-styles",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 365
+      },
+      {
+        "id": "workbuddy.sheetagent.skills.excel-generation",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 368
+      },
+      {
+        "id": "workbuddy.sheetagent.skills.excel-handler",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 358
+      },
+      {
+        "id": "workbuddy.sites",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 362
+      },
+      {
+        "id": "workbuddy.skill-creator",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 369
+      },
+      {
+        "id": "workbuddy.tencent-docs-plugin.skills.tencent-docs",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "workbuddy.tencent-docs-plugin.skills.tencent-saas-docs",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "workbuddy.tencent-docs-routing",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 361
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.academic-paper-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 364
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.business-copy-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 363
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.general-writer",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 363
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.legal-contract-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 370
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.poetry-prose-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 376
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.science-writing-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 375
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.stock-research-report-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 374
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.tech-blog-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 366
+      },
+      {
+        "id": "workbuddy.tencent-docx.experts.work-report-expert",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 372
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.brief-compose",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 378
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.design-token",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 370
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.doc-typeset",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 372
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.format-extract",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 432
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.generate-fillable-contract-html",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 1547
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.html-review",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 1222
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.html-to-docx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 631
+      },
+      {
+        "id": "workbuddy.tencent-docx.skills.tdoc-orchestrator",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 540
+      },
+      {
+        "id": "workbuddy.tencent-docx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 533
+      },
+      {
+        "id": "workbuddy.tencent-local-office-edit",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 502
+      },
+      {
+        "id": "workbuddy.tencent-pptx.skills.tencent-pptx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 518
+      },
+      {
+        "id": "workbuddy.wb-finance-skill",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 460
+      },
+      {
+        "id": "workbuddy.weixinpay.skills.weixinpay-feedback",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 456
+      },
+      {
+        "id": "workbuddy.weixinpay.skills.weixinpay-pay",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 441
+      },
+      {
+        "id": "workbuddy.weixinpay.skills.weixinpay-register",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 425
+      },
+      {
+        "id": "writing-plans",
+        "kind": "skills",
+        "status": "CONTENT_READY",
+        "milliseconds": 377
+      },
+      {
+        "id": "xlsx",
+        "kind": "skills",
+        "status": "BLOCKED",
+        "milliseconds": 365
+      }
+    ],
+    "task_queries": [
+      {
+        "query": "记忆插件",
+        "kind": "plugins",
+        "expected": "memory-net",
+        "found": [
+          "memory-net"
+        ]
+      },
+      {
+        "query": "搜索插件",
+        "kind": "mcp",
+        "expected": "mcp.search-core",
+        "found": [
+          "mcp.search-core"
+        ]
+      },
+      {
+        "query": "查找技能",
+        "kind": "skills",
+        "expected": "skill-search",
+        "found": [
+          "skill-search",
+          "asset-management",
+          "repository-skills"
+        ]
+      },
+      {
+        "query": "来源索引",
+        "kind": "skills",
+        "expected": "source-index",
+        "found": [
+          "source-index",
+          "repository-skills",
+          "asset-management"
+        ]
+      }
+    ],
+    "counts": {
+      "total": 137,
+      "content_ready": 48,
+      "conditional": 5,
+      "blocked": 84
+    },
+    "combination_previews": [
+      {
+        "expert": "core",
+        "status": "CONTENT_READY",
+        "conflicts": [],
+        "blockers": [],
+        "requirements": []
+      },
+      {
+        "expert": "research",
+        "status": "CONDITIONAL",
+        "conflicts": [],
+        "blockers": [],
+        "requirements": [
+          {
+            "id": "mcp.search-core",
+            "reason": "Installed executable node and package dependencies; preflight does not execute it"
+          },
+          {
+            "id": "mcp.search-core",
+            "reason": "Generate explicit DSH static-disclosure patch or guarded bundle; keep SC_DATA_DIR private"
+          },
+          {
+            "id": "mcp.search-core",
+            "reason": "Exact DSH runtime check-dsh acceptance required"
+          }
+        ]
+      },
+      {
+        "expert": "reverse-engineering",
+        "status": "CONTENT_READY",
+        "conflicts": [],
+        "blockers": [],
+        "requirements": []
+      },
+      {
+        "expert": "document-engineering",
+        "status": "BLOCKED",
+        "conflicts": [],
+        "blockers": [
+          {
+            "id": "docx",
+            "code": "license",
+            "reason": "Declared license restriction blocks deployment: docx; inspect original license and resolve separately"
+          },
+          {
+            "id": "pdf",
+            "code": "license",
+            "reason": "Declared license restriction blocks deployment: pdf; inspect original license and resolve separately"
+          },
+          {
+            "id": "pptx",
+            "code": "license",
+            "reason": "Declared license restriction blocks deployment: pptx; inspect original license and resolve separately"
+          },
+          {
+            "id": "xlsx",
+            "code": "license",
+            "reason": "Declared license restriction blocks deployment: xlsx; inspect original license and resolve separately"
+          }
+        ],
+        "requirements": []
+      }
+    ],
+    "duplicate_example": {
+      "ids": [
+        "skill-creator",
+        "trae.skill-creator"
+      ],
+      "status": "BLOCKED",
+      "conflicts": [
+        {
+          "code": "duplicate-skill-name",
+          "ids": [
+            "skill-creator",
+            "trae.skill-creator"
+          ],
+          "reason": "Multiple assets have client skill name skill-creator; select one implementation"
+        }
+      ]
+    },
+    "duration_ms": 56131,
+    "scope": "Actual local search/preflight API used by CLI; all137 stable IDs exercised. No inference quality, license grant, credentials or external services certified."
+  },
+  "skill_provider": {
+    "host": "0.2.2-rc.5",
+    "status": "PASS",
+    "full_body_equality": true,
+    "skills": [
+      "asset-management",
+      "authorized-analysis-scope",
+      "automation-workflow",
+      "debugging-and-error-recovery",
+      "dfir-workflow",
+      "doc-coauthoring",
+      "exa-search",
+      "executing-plans",
+      "finishing-a-development-branch",
+      "firmware-analysis",
+      "frontend-design",
+      "go-performance",
+      "godot-dev",
+      "keenable-cli",
+      "mcp-builder",
+      "offensive-methodology",
+      "performance-optimization",
+      "playwright",
+      "receiving-code-review",
+      "repository-skills",
+      "requesting-code-review",
+      "reverse-engineering-workflow",
+      "rust-performance",
+      "search-core",
+      "security-and-hardening",
+      "security-best-practices",
+      "security-ownership-map",
+      "security-threat-model",
+      "security-workflow",
+      "skill-creator",
+      "skill-search",
+      "source-driven-development",
+      "source-index",
+      "systematic-debugging",
+      "tavily-hikari-best-practices",
+      "tavily-hikari-cli",
+      "tavily-hikari-extract",
+      "tavily-hikari-research",
+      "tavily-hikari-search",
+      "test-driven-development",
+      "theme-factory",
+      "ts-performance",
+      "using-git-worktrees",
+      "using-superpowers",
+      "verification-before-completion",
+      "web-search-hikari",
+      "webapp-testing",
+      "writing-plans"
+    ],
+    "warnings": [],
+    "excluded": 75,
+    "scope": "Actual provider list/get; no certification of all professional tasks, scripts or dependencies"
+  },
+  "host_bundles": [
+    {
+      "version": "0.2.2-rc.1",
+      "status": "PASS",
+      "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+      "assets_sha256": "61a715c189c04966f3b0ede4d382c2f85a917c2a8b2b284b64cf15bf31e9400f",
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      }
+    },
+    {
+      "version": "0.2.2-rc.5",
+      "status": "PASS",
+      "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+      "assets_sha256": "61a715c189c04966f3b0ede4d382c2f85a917c2a8b2b284b64cf15bf31e9400f",
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true
+      },
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "provider_requests": 1,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "skill": {
+        "name": "asset-management",
+        "deployed": true,
+        "invoked": true,
+        "full_content_seen_by_model": true
+      }
+    }
+  ],
+  "root_tests": {
+    "total": 132,
+    "passed": 131,
+    "skipped": 1,
+    "skip_reason": "Windows file-symlink privilege unavailable; junction rejection tested"
+  },
+  "semantic_review": {
+    "reviewed": [
+      "using-superpowers",
+      "writing-plans",
+      "executing-plans",
+      "requesting-code-review"
+    ],
+    "fixed": [
+      "Incorrect system/developer/user authority hierarchy",
+      "Description opt-in versus body global auto-loading",
+      "Subagent demands when user forbids delegation; inline self-review fallback"
+    ],
+    "exhaustive": false
+  },
+  "restrictions": [
+    "All registered assets discoverable, not all approved for simultaneous loading",
+    "71 vendor Skills need license/host review and 4 local Office Skills explicitly blocked",
+    "9 MCP assets have DSH host/configuration/review barriers",
+    "Unreferenced implicit tools, accounts and professional-task effects not exhaustively validated",
+    "No UI changes or live user profile changes",
+    "No semantic non-conflict guarantee for arbitrary instruction combinations"
+  ],
+  "independent_checkout": {
+    "code_commit": "9ef53f76cb3ec80b4507fd5f00ca888a8ffca592",
+    "root_tests": {
+      "total": 132,
+      "passed": 131,
+      "skipped": 1
+    },
+    "exact_id_lookups": 137,
+    "task_queries_passed": 4,
+    "skill_provider_full_body_equality": 48,
+    "skill_provider_warnings": 0,
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "host_bundles": [
+      {
+        "version": "0.2.2-rc.1",
+        "status": "PASS",
+        "assets_sha256": "61a715c189c04966f3b0ede4d382c2f85a917c2a8b2b284b64cf15bf31e9400f",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "provider_requests": 1,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "status": "PASS",
+        "assets_sha256": "61a715c189c04966f3b0ede4d382c2f85a917c2a8b2b284b64cf15bf31e9400f",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "provider_requests": 1,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ]
+  }
+}

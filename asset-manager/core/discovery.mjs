@@ -3,19 +3,21 @@ import path from 'node:path';
 import YAML from 'yaml';
 import {loadCatalog,kinds} from './catalog.mjs';
 import {confined,sha256} from './files.mjs';
-function tokens(text){return [...new Set(text.toLowerCase().match(/[a-z0-9][a-z0-9._-]*|[\u3400-\u9fff]+/g)||[])];}
-export async function searchAssets(root,query,{kind,limit=10}={}){
+import {describeAssetUsability,skillMetadata} from './usability.mjs';
+import {effectivePath} from './lifecycle.mjs';
+function tokens(text){const runs=text.toLowerCase().match(/[a-z0-9][a-z0-9._-]*|[\u3400-\u9fff]+/g)||[];return [...new Set(runs.flatMap(run=>/[\u3400-\u9fff]/.test(run)&&run.length>2?[run,...Array.from({length:run.length-1},(_,i)=>run.slice(i,i+2))]:[run]))];}
+export async function searchAssets(root,query,{kind,limit=10,client='dsh'}={}){
  if(typeof query!=='string'||!query.trim()||query.length>500)throw new Error('Provide a nonempty query up to 500 characters');
  if(kind&&!kinds.includes(kind))throw new Error('Unknown asset kind');if(!Number.isInteger(limit)||limit<1||limit>50)throw new Error('Limit must be 1..50');
  const catalog=await loadCatalog(root),words=tokens(query),results=[];if(!words.length)throw new Error('Query needs searchable letters or digits');
  for(const asset of catalog.values()){
-  if(kind&&asset.kind!==kind)continue;let name=asset.id,description=asset.notes||'',metadata_valid=true;
-  if(asset.kind==='skills'){const file=await confined(root,asset.path+'/SKILL.md');const text=await fs.readFile(file,'utf8');const front=/^---\r?\n([\s\S]*?)\r?\n---/.exec(text);if(!front)metadata_valid=false;if(front){try{const data=YAML.parse(front[1]);if(typeof data?.name!=='string'||!data.name.trim()||typeof data?.description!=='string'||!data.description.trim())throw new Error('Missing Skill metadata');name=typeof data?.name==='string'?data.name:name;description=typeof data?.description==='string'?data.description:description;}catch{metadata_valid=false;description+=' [Invalid Skill frontmatter: inspect skills-status]';}}}
-  const id=(asset.id+' '+name).toLowerCase(),body=(description+' '+asset.path+' '+(asset.source.url||'')).toLowerCase();let score=0;
-  for(const word of words){if(id.includes(word))score+=5;if(body.includes(word))score+=1;}if(!score)continue;
+  if(kind&&asset.kind!==kind)continue;let name=asset.id,description=asset.discovery?.description||asset.notes||'',metadata_valid=true;
+  if(asset.kind==='skills'){try{const metadata=await skillMetadata(await effectivePath(root,asset));name=metadata.name;description=metadata.description;}catch{metadata_valid=false;description+=' [Invalid or unavailable effective Skill: inspect asset state and skills-status]';}}
+  const id=(asset.id+' '+name).toLowerCase(),aliases=(asset.discovery?.aliases||[]).join(' ').toLowerCase(),body=(description+' '+asset.path+' '+(asset.source.url||'')).toLowerCase();let score=0;const phrase=query.trim().toLowerCase();if(asset.id.toLowerCase()===phrase)score+=100;else if(id.includes(phrase))score+=20;if(aliases.includes(phrase))score+=25;if(body.includes(phrase))score+=5;
+  for(const word of words){if(id.includes(word))score+=5;if(aliases.includes(word))score+=4;if(body.includes(word))score+=1;}if(!score)continue;
   results.push({id:asset.id,kind:asset.kind,name,path:asset.path,description:description.length>500?description.slice(0,500)+'…':description,metadata_valid,score,source_kind:asset.source.kind,upstream:asset.version.upstream||'unknown',review_required:asset.runtime_review_required===true||asset.source.redistribution_review_required===true,declared_restriction:asset.source.license_status==='restricted-declared',instructions:'Read the canonical asset and inspect state before deployment; search never enables content.'});
  }
- results.sort((a,b)=>b.score-a.score||a.id.localeCompare(b.id));return {query,kind:kind||'all',total_matches:results.length,results:results.slice(0,limit),activated:false,scope:'Local registered metadata and Skill frontmatter; lexical matching, not semantic search or upstream discovery.'};
+ results.sort((a,b)=>b.score-a.score||a.id.localeCompare(b.id));const top=results.slice(0,limit),readiness=await describeAssetUsability(root,top.map(a=>a.id),{client});for(let i=0;i<top.length;i++){const r=readiness[i];Object.assign(top[i],{usability:r.status,blockers:r.blockers,requirements:r.requirements,warnings:r.warnings,declared_restriction:r.declared_restriction,next_step:r.next_step});}return {query,kind:kind||'all',client,total_matches:results.length,results:top,activated:false,scope:'Local registered metadata and Skill frontmatter; lexical matching, not semantic search or upstream discovery.'};
 }
 export async function inspectSkillDirectory(root){
  const catalog=await loadCatalog(root),skills=[...catalog.values()].filter(a=>a.kind==='skills'),registered=new Map(skills.map(a=>[a.path+'/SKILL.md',a.id]));if(registered.size!==skills.length)throw new Error('Multiple asset IDs point to one canonical Skill path');

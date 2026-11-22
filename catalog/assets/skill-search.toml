@@ -14,3 +14,7 @@ local = "1.0.0"
 commit = ""
 sha256 = "57d0713e58117a8809c1b3122df9613b19f1cc7f503f7c0fe5d36cad2d4db625"
 enabled = false
+
+[discovery]
+description = "查找技能，搜索本地登记并选择任务需要的Skill。"
+aliases = [ "查找技能", "找技能", "技能搜索", "发现技能" ]

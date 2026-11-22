@@ -62,7 +62,7 @@ export interface SearchOptions {
   /** 融合后保留条数,默认 20 */
   topN?: number;
   domains?: { allow?: string[]; block?: string[] };
-  /** 显式指定引擎列表(覆盖默认/健康度选择) */
+  /** Provider allowlist: overrides planner/rescue/key-slot selection; [] disables requests, unknown names reject. Not a network-domain firewall. */
   engines?: string[];
   /** 单引擎超时 ms,默认 12000 (v0-spec §4.2: 12s Promise.race 剔除慢腿) */
   timeoutMs?: number;
@@ -86,6 +86,9 @@ export interface SearchResult {
   refs: Reference[];
   meta: {
     enginesUsed: string[];
+    quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v1" };
+    /** Executed selection mode; X explicit lists bypass official/guest/oEmbed chain. */
+    engineSelection?: { mode: "explicit" | "auto"; requested?: string[] };
     enginesFailed: EngineFailure[];
     /** v0.4: 因熔断/额度耗尽/未配置而跳过的引擎(wigolo 诚实契约) */
     enginesSkipped?: EngineSkip[];
@@ -117,6 +120,7 @@ export interface FetchOptions {
 }
 
 export interface FetchResult {
+  transport?: { mode: "strict" | "trusted-tun"; remoteIpVerified: false; warning?: string; cacheScope: string };
   url: string;
   title?: string;
   status: number;

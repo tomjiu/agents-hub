@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "status": "PASS_FOR_EXPLICIT_LOCAL_TUN_DOMAIN_FETCH",
+  "user_intent": "Support current Clash/TUN without altering Clash fake-IP exclusion or user network settings",
+  "policy": {
+    "default": "strict; no automatic TUN detection or opt-in",
+    "opt_in": {
+      "fetchNetworkMode": "trusted-tun",
+      "fakeIpCidrs": [
+        "198.18.0.0/15"
+      ],
+      "ssrf": "strict"
+    },
+    "domain_only": true,
+    "literals": "all IP literals refused in trusted-tun, including URL numeric/hex and IPv6 forms",
+    "cidrs": "canonical subnets of198.18.0.0/15 only; required for trusted-tun",
+    "refusals": [
+      "localhost/nonpublic suffix/single label",
+      "real private DNS including mixed unsafe answers",
+      "DNS error/empty answer",
+      "dangerous protocols/ports/URL credentials",
+      "unsafe redirects rechecked before request"
+    ],
+    "cache": "scoped_pages keyed by network mode,ssrf,CIDRs and domain policy; legacy pages retained as explicit historical offline corpus",
+    "remoteIpVerified": false,
+    "tls": "default certificate/hostname validation retained, no rejectUnauthorized:false or IP URL substitution"
+  },
+  "tests": {
+    "initial_failure_regressions": 4,
+    "tun_specialized": 8,
+    "search_total": 330,
+    "root": {
+      "passed": 138,
+      "total": 139,
+      "skipped": 1
+    },
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "bundle": false,
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": true,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c"
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "bundle": false,
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": true,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c"
+      },
+      {
+        "version": "0.2.2-rc.1",
+        "bundle": true,
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c"
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "bundle": true,
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c"
+      }
+    ]
+  },
+  "real_network": {
+    "status": "PASS_FOR_CURRENT_TRUSTED_TUN_OFFICIAL_FETCH",
+    "dns": [
+      {
+        "host": "nodejs.org",
+        "answers": [
+          {
+            "address": "198.18.2.69",
+            "family": 4
+          }
+        ]
+      },
+      {
+        "host": "www.sqlite.org",
+        "answers": [
+          {
+            "address": "198.18.3.227",
+            "family": 4
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "mode": "strict",
+        "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+        "elapsed_ms": 11,
+        "isError": true,
+        "payload": "ssrf: private address blocked: nodejs.org -> 198.18.2.69; reserved 198.18.0.0/15 DNS answer (possible TUN/fake-IP mapping). Configure real DNS answers for this host in your trusted network/adapter settings; do not disable SSRF or exempt reserved ranges. No request sent."
+      },
+      {
+        "mode": "strict",
+        "url": "https://www.sqlite.org/wal.html",
+        "elapsed_ms": 4,
+        "isError": true,
+        "payload": "ssrf: private address blocked: www.sqlite.org -> 198.18.3.227; reserved 198.18.0.0/15 DNS answer (possible TUN/fake-IP mapping). Configure real DNS answers for this host in your trusted network/adapter settings; do not disable SSRF or exempt reserved ranges. No request sent."
+      },
+      {
+        "mode": "trusted-tun",
+        "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+        "elapsed_ms": 5778,
+        "isError": false,
+        "cache_verified": true,
+        "payload": {
+          "title": "SQLite | Node.js v26.13.1 Documentation",
+          "transport": {
+            "mode": "trusted-tun",
+            "remoteIpVerified": false,
+            "cacheScope": "98b059acc661c83977223058",
+            "warning": "Explicitly trusted local TUN. Ultimate remote IP is not visible/verified; DNS prechecks cannot prove proxy destination."
+          },
+          "text_length": 66647,
+          "returned_chars": 4218,
+          "evidence": [
+            "This class represents a single connection to a SQLite database. All APIs\nexposed by this class execute synchronously.\nDatabaseSync is a deprecated alias for Database, kept for backward\ncompatibility with the class's previous name. See\nDEP0210.",
+            "StatementSync is a deprecated alias for Statement, kept for backward\ncompatibility with the class's previous name. See\nDEP0211. A prepared statement is an efficient binary representation of the SQL used to\ncreate it."
+          ]
+        }
+      },
+      {
+        "mode": "trusted-tun",
+        "url": "https://www.sqlite.org/wal.html",
+        "elapsed_ms": 5999,
+        "isError": false,
+        "cache_verified": true,
+        "payload": {
+          "title": "Write-Ahead Logging",
+          "transport": {
+            "mode": "trusted-tun",
+            "remoteIpVerified": false,
+            "cacheScope": "98b059acc661c83977223058",
+            "warning": "Explicitly trusted local TUN. Ultimate remote IP is not visible/verified; DNS prechecks cannot prove proxy destination."
+          },
+          "text_length": 31502,
+          "returned_chars": 5503,
+          "evidence": [
+            "The wal-index greatly improves the performance of readers,\nbut the use of shared memory means that all readers must exist on the\nsame machine. This is why the write-ahead log implementation will not\nwork on a network filesystem.",
+            "Writers merely append new content to the end of the WAL file.\nBecause writers do nothing that would interfere with the actions of\nreaders, writers and readers can run at the same time. However,\nsince there is only one WAL file, there can only be one writer at\na time."
+          ]
+        }
+      }
+    ],
+    "clash_config_changed": false,
+    "live_dsh_changed": false,
+    "credentials_used": false
+  },
+  "scope": "Only current trusted local TUN and two official public pages tested; scripted host tests verify execution/return plumbing, not autonomous model quality.",
+  "limits": [
+    "Ultimate proxy destination IP is not visible; not equivalent to destination-IP SSRF firewall",
+    "Strict DNS precheck also does not pin verified IP to connection; DNS rebinding defense not certified",
+    "Public domains can hide private destinations behind trusted proxy; only opt-in personal trusted environment, not open untrusted URL service",
+    "No detection/authentication of Clash process or packet-capture proof",
+    "Historical search_cache corpus is not filtered by current network-mode ownership",
+    "No automatic user profile/main/Clash switch"
+  ],
+  "independent_checkout": {
+    "code_commit": "a6605d0bb06d20f78e107ee5ee52ba906f883f58",
+    "search_tests": {
+      "passed": 330,
+      "failed": 0
+    },
+    "root_tests": {
+      "passed": 138,
+      "total": 139,
+      "skipped": 1
+    },
+    "real_mcp_local_fixture": true,
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ],
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0,
+      "banned": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "public_fetch_repeated": false,
+    "scope": "Independent rebuild and deterministic TUN safety/cache tests plus default-strict DSH host regression. Public TUN fetch was verified in original workspace and not repeated here."
+  }
+}

@@ -1,0 +1,709 @@
+{
+  "schema": 1,
+  "status": "PASS_FOR_REPRODUCED_OFF_TOPIC_REJECTION_AND_MEASURED_CANDIDATES",
+  "root_causes": [
+    "Bing query transport contained correct q but some actual response URL/channel link q changed; payload remained parseable RSS",
+    "Even unchanged query echo returned broad home/download pages; echo is not relevance proof",
+    "Fusion had lexical boosts but entry did not enable relevance filtering; research admitted raw provider results"
+  ],
+  "reproduced_failures": 3,
+  "policy": {
+    "id": "lexical-evidence-v1",
+    "minimum": "1 matched term for single-term queries; otherwise max(2,ceil(0.4*terms))",
+    "evidence": "NFKC/word and CJK bigrams from title/snippet/URL path; excludes hostname, URL params, provider labels and common generic words",
+    "scope": "search/xSearch default; new research admission; underlying fusion optional",
+    "output": "candidate_results is evidence floor only, not factual or semantic certification; no_relevant_results is empty/degraded",
+    "cache": "new policy key plus evidence checks on hit, old records retained",
+    "rss_query": "Compare explicit q echo in final URL/channel link; altered q rejected, absent q not claimed as confirmed"
+  },
+  "tests": {
+    "search": 322,
+    "root_passed": 138,
+    "root_skipped": 1,
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "bundle": false,
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "bundle": false,
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.1",
+        "bundle": true,
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "bundle": true,
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ]
+  },
+  "public_queries": [
+    {
+      "name": "search",
+      "args": {
+        "query": "Node.js node:sqlite DatabaseSync stability synchronous Node 22 26 official documentation",
+        "engines": [
+          "bingrss",
+          "keenable",
+          "mdn"
+        ],
+        "top_n": 5,
+        "no_cache": true
+      },
+      "elapsed_ms": 5363,
+      "isError": false,
+      "payload": {
+        "refs": [
+          {
+            "refId": 1,
+            "title": "SQLite | Node.js v26.0.0 Documentation",
+            "url": "https://nodejs.org/download/nightly/v26.0.0-nightly20260412dfe438dc73/docs/api/sqlite.html",
+            "snippet": "```mjs import { DatabaseSync } from 'node:sqlite'; const database = new DatabaseSync(':memory:'); ### Class: `DatabaseSync`# Added in: v22.5.0History | Version | Changes | |---|---| | v24.0.0, v22.16.0 | Add `timeout` option. | | v23.10.0, v22.15.0 | The `path` argument now supports Buffer and URL objects. | This class represents a single [connection](https://www.sqlite.org/c3ref/sqlite3.html) to ",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "refId": 2,
+            "title": "node/doc/api/sqlite.md at v26.3.0 · nodejs/node",
+            "url": "https://github.com/nodejs/node/blob/v26.3.0/doc/api/sqlite.md",
+            "snippet": "# SQLite > Stability: 1.2 - Release candidate. ``` import { DatabaseSync } from 'node:sqlite'; const database = new DatabaseSync(':memory:'); // Execute SQL statements from strings. database.exec(` CREATE TABLE data( key INTEGER PRIMARY KEY, value TEXT ) STRICT `); All APIs exposed by this class execute synchronously.",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "refId": 3,
+            "title": "raw.githubusercontent.com/nodejs/node/v22.22.0/doc/api/sqlite.md",
+            "url": "https://raw.githubusercontent.com/nodejs/node/v22.22.0/doc/api/sqlite.md",
+            "snippet": "> Stability: 1.1 - Active development. This class represents a single [connection][] to a SQLite database. All APIs exposed by this class execute synchronously. ### `database[Symbol.dispose]()` <!-- YAML added: v22.15.0 --> > Stability: 1 - Experimental Closes the database connection. If the database connection is already closed then this is a no-op.",
+            "engines": [
+              "keenable"
+            ]
+          }
+        ],
+        "meta": {
+          "quality": {
+            "status": "candidate_results",
+            "evaluated": 60,
+            "rejected": 55,
+            "reasons": {
+              "insufficient_query_evidence": 55
+            },
+            "policy": "lexical-evidence-v1"
+          },
+          "engine_selection": {
+            "mode": "explicit",
+            "requested": [
+              "bingrss",
+              "keenable",
+              "mdn"
+            ]
+          },
+          "engines_used": [
+            "bingrss",
+            "mdn",
+            "keenable"
+          ],
+          "engines_failed": [],
+          "engines_skipped": [],
+          "degraded": false,
+          "elapsed_ms": 5358,
+          "from_cache": false,
+          "complexity": "simple",
+          "route": "domain",
+          "domain": "programming"
+        }
+      }
+    },
+    {
+      "name": "search",
+      "args": {
+        "query": "SQLite WAL concurrency",
+        "engines": [
+          "bingrss",
+          "keenable"
+        ],
+        "top_n": 5,
+        "no_cache": true
+      },
+      "elapsed_ms": 734,
+      "isError": false,
+      "payload": {
+        "refs": [
+          {
+            "refId": 1,
+            "title": "File Locking And Concurrency In SQLite Version 3",
+            "url": "https://sqlite.org/lockingv3.html",
+            "snippet": "The document only describes locking for the older rollback-mode transaction mechanism. Locking for the newer [write-ahead log](https://sqlite.org/wal.html) or [WAL mode](https://sqlite.org/wal.html) is described separately. SQLite [Version 3.0.0](https://sqlite.org/releaselog/3_0_0.html) introduced a new locking and journaling mechanism designed to improve concurrency over SQLite version 2 and to ",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "refId": 2,
+            "title": "Write-Ahead Logging",
+            "url": "https://sqlite.org/wal.html",
+            "snippet": "The default method by which SQLite implements [atomic commit and rollback](https://sqlite.org/atomiccommit.html) is a [rollback journal](https://sqlite.org/lockingv3.html#rollback). Beginning with [version 3.7.0](https://sqlite.org/releaselog/3_7_0.html) (2010-07-21), a new \"Write-Ahead Log\" option (hereafter referred to as \"WAL\") is available. There are advantages and disadvantages to using WAL i",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "refId": 3,
+            "title": "SQLite: Begin Concurrent",
+            "url": "https://sqlite.org/src/doc/begin-concurrent/doc/begin_concurrent.md",
+            "snippet": "Usually, SQLite allows at most one writer to proceed concurrently. The BEGIN CONCURRENT enhancement allows multiple writers to process write transactions simultanously if the database is in \"wal\" or \"wal2\" mode, although the system still serializes COMMIT commands. When a write-transaction is opened with \"BEGIN CONCURRENT\", actually locking the database is deferred until a COMMIT is executed. This",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "refId": 4,
+            "title": "How SQLite Scales Read Concurrency",
+            "url": "https://fly.io/blog/sqlite-internals-wal",
+            "snippet": "In 2010, SQLite introduced a second method called the *write-ahead log*, or as it’s more commonly referred to: the WAL. The rollback journal worked by copying the old version of changed pages to another file so that they can be copied back to the main database file if the transaction rolls back. The WAL does the opposite. It writes the new version of a page to another file and leaves the original ",
+            "engines": [
+              "keenable"
+            ],
+            "published": "2022-08-24T00:00:00Z"
+          },
+          {
+            "refId": 5,
+            "title": "Concurrency when writing data into SQLite?",
+            "url": "https://reddit.com/r/golang/comments/16xswxd/concurrency_when_writing_data_into_sqlite",
+            "snippet": "Here are my general tips regarding [mattn's driver](/search/?q=mattn%27s+driver+golang+sqlite&cId=ac1d45a0-340c-45a4-9beb-049a20dfaf0e&iId=1a71114c-2860-4059-8fb9-8f5968fc2621), which my team has used to build SQLite-backed microservices: 0. Set the journal mode to WAL and synchronous to Normal. 1. Use two connections, one read-only with max open connections set to some large number, and one read-",
+            "engines": [
+              "keenable"
+            ],
+            "published": "2023-10-02T10:20:59Z"
+          }
+        ],
+        "meta": {
+          "quality": {
+            "status": "candidate_results",
+            "evaluated": 40,
+            "rejected": 32,
+            "reasons": {
+              "insufficient_query_evidence": 32
+            },
+            "policy": "lexical-evidence-v1"
+          },
+          "engine_selection": {
+            "mode": "explicit",
+            "requested": [
+              "bingrss",
+              "keenable"
+            ]
+          },
+          "engines_used": [
+            "bingrss",
+            "keenable"
+          ],
+          "engines_failed": [],
+          "engines_skipped": [],
+          "degraded": false,
+          "elapsed_ms": 731,
+          "from_cache": false,
+          "complexity": "simple",
+          "route": "domain",
+          "domain": "programming"
+        }
+      }
+    },
+    {
+      "name": "search",
+      "args": {
+        "query": "Node SQLite DatabaseSync",
+        "top_n": 5,
+        "no_cache": true
+      },
+      "elapsed_ms": 8037,
+      "isError": false,
+      "payload": {
+        "refs": [
+          {
+            "refId": 1,
+            "title": "SQLite | Node.js v26.13.1 Documentation",
+            "url": "https://nodejs.org/api/sqlite.html",
+            "snippet": "Added in: v22.5.0History | Version | Changes | --- | | v24.0.0, v22.16.0 | Add `timeout` option. | | v23.10.0, v22.15.0 | The `path` argument now supports Buffer and URL objects. | This class represents a single connection to a SQLite database. All APIs exposed by this class execute synchronously. `DatabaseSync` is a deprecated alias for `Database`, kept for backward compatibility with the class's",
+            "engines": [
+              "tavily"
+            ]
+          },
+          {
+            "refId": 2,
+            "title": "DatabaseSync | Node.js 26.8.1 Documentation",
+            "url": "https://beta.docs.nodejs.org/sqlite/DatabaseSync",
+            "snippet": "# DatabaseSync This class represents a single [connection](https://www.sqlite.org/c3ref/sqlite3.html) to a SQLite database. All APIs exposed by this class execute synchronously. C ## DatabaseSync Constructor ``` new DatabaseSync(path, options?): DatabaseSync ``` Attributes options:`Object` Configuration options for the database connection. The following options are supported: open?:`boolean` If `t",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "refId": 3,
+            "title": "Using SQL `IN` operator with DatabaseSync in Node (sqlite)",
+            "url": "https://stackoverflow.com/questions/79441096/using-sql-in-operator-with-databasesync-in-node-sqlite",
+            "snippet": "[SO] answered ✓ · 2 score · 2 answers · tags: node.js, database, sqlite, select",
+            "engines": [
+              "stackexchange"
+            ],
+            "published": "2025-02-24T22:32:28.000Z"
+          },
+          {
+            "refId": 4,
+            "title": "Ashwin-Maharaja/Car-Dealership-Inventory",
+            "url": "https://github.com/Ashwin-Maharaja/Car-Dealership-Inventory",
+            "snippet": "A lightweight Car Dealership Inventory system built with Express / TypeScript (backend) and React / Vite (frontend). It uses the built‑in node:sqlite (DatabaseSync) for persistent SQLite storage, eliminating native compilation. The backend serves a friendly root landing page, provides concise API documentation, and includes robust 404 handling.",
+            "engines": [
+              "github"
+            ],
+            "published": "2026-11-04T17:36:28Z"
+          },
+          {
+            "refId": 5,
+            "title": "GitHub - AppThreat/node-sqlite3: SQLite3 bindings for Node.js · GitHub",
+            "url": "https://github.com/AppThreat/node-sqlite3",
+            "snippet": "Migrating from `node:sqlite` is mostly mechanical — `DatabaseSync` maps to `Database` plus the `Sync` methods — and since 9.1 there is a drop-in shim: `import { DatabaseSync } from '@appthreat/sqlite3/compat'` maps the `node:sqlite` surface onto this package's sync fast path (with the documented divergences where a synchronous form cannot exist). See MIGRATING-TO-V9.md for the value-marshalling di",
+            "engines": [
+              "tavily"
+            ]
+          }
+        ],
+        "meta": {
+          "quality": {
+            "status": "candidate_results",
+            "evaluated": 42,
+            "rejected": 21,
+            "reasons": {
+              "insufficient_query_evidence": 21
+            },
+            "policy": "lexical-evidence-v1"
+          },
+          "engine_selection": {
+            "mode": "auto"
+          },
+          "engines_used": [
+            "keenable",
+            "mdn",
+            "github",
+            "stackexchange",
+            "tavily",
+            "bingrss"
+          ],
+          "engines_failed": [
+            {
+              "name": "hn",
+              "error": "hn: no results parsed",
+              "elapsedMs": 1696,
+              "status": "error",
+              "retryable": true
+            },
+            {
+              "name": "searxng",
+              "error": "The operation was aborted due to timeout",
+              "elapsedMs": 8010,
+              "status": "timeout",
+              "retryable": true
+            },
+            {
+              "name": "duckduckgo",
+              "error": "ddg: no results parsed (markup drift or soft-block?)",
+              "elapsedMs": 4444,
+              "status": "rate_limited",
+              "retryable": true
+            }
+          ],
+          "engines_skipped": [],
+          "degraded": false,
+          "elapsed_ms": 8035,
+          "from_cache": false,
+          "complexity": "simple",
+          "route": "domain",
+          "domain": "programming"
+        }
+      }
+    },
+    {
+      "name": "fetch",
+      "args": {
+        "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+        "focus": "DatabaseSync synchronous",
+        "max_chars": 8000,
+        "no_cache": true
+      },
+      "elapsed_ms": 10,
+      "isError": true,
+      "payload": "ssrf: private address blocked: nodejs.org -> 198.18.2.69"
+    },
+    {
+      "name": "fetch",
+      "args": {
+        "url": "https://www.sqlite.org/wal.html",
+        "focus": "one writer concurrency",
+        "max_chars": 8000,
+        "no_cache": true
+      },
+      "elapsed_ms": 4,
+      "isError": true,
+      "payload": "ssrf: private address blocked: www.sqlite.org -> 198.18.3.227"
+    }
+  ],
+  "public_source_review": {
+    "reader": "Independent Harness web_fetch, not Search-core fetch",
+    "results": [
+      {
+        "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+        "status": 200,
+        "truncated": true,
+        "term": "DatabaseSync is a deprecated alias",
+        "found": true,
+        "excerpt": "upports Buffer and URL objects. This class represents a single connection to a SQLite database. All APIs exposed by this class execute synchronously. DatabaseSync is a deprecated alias for Database , kept for backward compatibility with the class's previous name. See DEP0210 . new Database(path[, options]) # Added in: v22.5.0 History Version Changes v25.5.0, v24.14.0 Enable defensive by default. v25.1.0, v24.12.0 Add defensive option. v24.4.0, v22.18.0 Add new SQLite database options. path &lt;string> | &lt;Buffer> | &lt;URL> The path of the database. A SQLite database can be stored in a file "
+      },
+      {
+        "url": "https://www.sqlite.org/wal.html",
+        "status": 200,
+        "truncated": false,
+        "term": "only be one writer",
+        "found": true,
+        "excerpt": " that would interfere with the actions of readers, writers and readers can run at the same time. However, since there is only one WAL file, there can only be one writer at a time. A checkpoint operation takes content from the WAL file and transfers it back into the original database file. A checkpoint can run concurrently with readers, however the checkpoint must stop when it reaches a page in the WAL that is past the end mark of any current reader. The checkpoint has to stop at that point because otherwise it might overwrite part of the database file that the reader is actively using. The che"
+      }
+    ]
+  },
+  "raw_diagnosis": {
+    "dns": [
+      {
+        "host": "www.bing.com",
+        "lookup": [
+          {
+            "address": "198.18.1.108",
+            "family": 4
+          }
+        ],
+        "resolve4": [
+          "198.18.1.108"
+        ]
+      },
+      {
+        "host": "nodejs.org",
+        "lookup": [
+          {
+            "address": "198.18.2.69",
+            "family": 4
+          }
+        ],
+        "resolve4": [
+          "198.18.2.69"
+        ]
+      },
+      {
+        "host": "www.sqlite.org",
+        "lookup": [
+          {
+            "address": "198.18.3.227",
+            "family": 4
+          }
+        ],
+        "resolve4": [
+          "198.18.3.227"
+        ]
+      }
+    ],
+    "responses": [
+      {
+        "query": "Node.js node:sqlite DatabaseSync stability synchronous Node 22 26 official documentation",
+        "recorded_request": "https://www.bing.com/search?q=Node.js+node%3Asqlite+DatabaseSync+stability+synchronous+Node+22+26+official+documentation+site%3Adocs.python.org&format=rss&count=10",
+        "final_url": "https://cn.bing.com/search?q=Node.js+node%3Asqlite+DatabaseSync+stability+synchronous+Node+22+26+official+documentation&format=rss&count=10",
+        "channel_title": "必应：Node.js node:sqlite DatabaseSync stability synchronous Node 22 26 official documentation",
+        "channel_link": "http://www.bing.com:80/search?q=Node.js+node%3asqlite+DatabaseSync+stability+synchronous+Node+22+26+official+documentation",
+        "items": [
+          {
+            "title": "Node.js — Run JavaScript Everywhere",
+            "url": "https://nodejs.org/"
+          },
+          {
+            "title": "Node.js — 在任何地方运行 JavaScript - Node.js 运行环境",
+            "url": "https://node.org.cn/"
+          },
+          {
+            "title": "Node.js 中文网 — 下载 Node.js®",
+            "url": "https://nodejs.cn/en/download/prebuilt-installer"
+          },
+          {
+            "title": "Node.js 教程 | 菜鸟教程",
+            "url": "https://www.runoob.com/nodejs/nodejs-tutorial.html"
+          },
+          {
+            "title": "Node.js 中文网",
+            "url": "https://nodejs.cn/"
+          },
+          {
+            "title": "GitHub - nodejs/node: Node.js JavaScript runtime · GitHub",
+            "url": "https://github.com/nodejs/node"
+          },
+          {
+            "title": "Node.js 安装配置 | 菜鸟教程",
+            "url": "https://www.runoob.com/nodejs/nodejs-install-setup.html"
+          },
+          {
+            "title": "Node.js 中文网",
+            "url": "https://www.nodejs.com.cn/download.html"
+          },
+          {
+            "title": "Node.js保姆级教程（下载+安装+环境配置，包含所有版本 ...",
+            "url": "https://zhuanlan.zhihu.com/p/2098525665389720355"
+          },
+          {
+            "title": "node.js_百度百科",
+            "url": "https://baike.baidu.com/item/node.js/7567977"
+          }
+        ]
+      },
+      {
+        "query": "SQLite WAL concurrency",
+        "recorded_request": "https://www.bing.com/search?q=SQLite+WAL+concurrency+site%3Adocs.python.org&format=rss&count=10",
+        "final_url": "https://cn.bing.com/search?q=SQLite+WAL+concurrency+site%3Adocs.python.org&format=rss&count=10",
+        "channel_title": "必应：SQLite WAL concurrency site:docs.python.org",
+        "channel_link": "http://www.bing.com:80/search?q=SQLite+WAL+concurrency+site%3adocs.python.org",
+        "items": [
+          {
+            "title": "SQLite Home Page",
+            "url": "https://sqlite.org/index.html"
+          },
+          {
+            "title": "SQLite 教程 | 菜鸟教程",
+            "url": "https://www.runoob.com/sqlite/sqlite-tutorial.html"
+          },
+          {
+            "title": "SQLite Download Page",
+            "url": "https://sqlite.org/download.html"
+          },
+          {
+            "title": "SQLite 入门教程（非常详细）零基础入门到精通，收藏这 ...",
+            "url": "https://blog.csdn.net/Javachichi/article/details/138106632"
+          },
+          {
+            "title": "SQLite 主页 - SQLite 数据库",
+            "url": "https://sqlite.ac.cn/"
+          },
+          {
+            "title": "【SQLite】SQLite3下载、安装、数据库操作保姆级教程 ...",
+            "url": "https://developer.aliyun.com/article/1748389"
+          },
+          {
+            "title": "【数据库】SQLite安装部署与使用指南_sqlite安装教程 ...",
+            "url": "https://blog.csdn.net/yxzone/article/details/151793081"
+          },
+          {
+            "title": "SQLite_百度百科",
+            "url": "https://baike.baidu.com/item/SQLite/375020"
+          },
+          {
+            "title": "SQlite中文网",
+            "url": "https://www.sqlite.net.cn/"
+          },
+          {
+            "title": "一小时实践入门 SQLite - 知乎",
+            "url": "https://zhuanlan.zhihu.com/p/643923428"
+          }
+        ]
+      }
+    ]
+  },
+  "assessment": {
+    "long_node": "3 related SQLite API candidates after rejecting55/60; old nightly and other versions remain, not current-version certification",
+    "wal": "Official WAL and concurrency candidates found after rejecting32/40; rollback locking and begin-concurrent branch require context review",
+    "short_node": "Current Node v26.13.1 API doc ranked first in observed automatic query; independently verified relevant API excerpt",
+    "comparison": "Measured before/after cases plus deterministic regressions; live sources/time/provider cohort differ, not controlled ranking accuracy benchmark",
+    "fetch": "Both Search-core official fetches still refused reserved DNS IP; independent Harness reader used for content review, not Search-core full pipeline success"
+  },
+  "network_diagnosis": {
+    "interface": "Meta virtual adapter",
+    "dns_server": "198.18.0.2",
+    "effect": "lookup and resolve4 for public domains returned198.18.x reserved IPs",
+    "action": "No user DNS/adapter/proxy changes; add actionable refusal message, do not disable SSRF or exempt range"
+  },
+  "limits": [
+    "Heuristic may reject relevant sparse summaries, synonyms/cross-language/URL-only queries or admit keyword-rich irrelevant pages",
+    "Does not verify factual accuracy, exact runtime version or all query concepts",
+    "Old research journal replay is historical output not retroactively revalidated",
+    "Low-level direct provider/router/fusion APIs are not default quality-gated",
+    "No live DSH configuration or private accounts/subagents changed"
+  ],
+  "independent_checkout": {
+    "code_commit": "af7a53274a60e05eed6d4828b9e0ba396476fd71",
+    "search_tests": {
+      "passed": 322,
+      "failed": 0
+    },
+    "root_tests": {
+      "passed": 138,
+      "skipped": 1,
+      "total": 139
+    },
+    "real_mcp_local_fixture": true,
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "assets_sha256": "8eff2f290eb052bf1b9666c334011812b7559d98996ffaf2adcb09692e2b545f",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ],
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0,
+      "banned": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "public_queries_repeated": false
+  }
+}
