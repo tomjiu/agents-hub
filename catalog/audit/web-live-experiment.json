@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "status": "LIVE_WEB_MODEL_TOOL_PATH_VERIFIED_WITH_SEARCH_LIMITS",
+  "profile": "web",
+  "host_version": "0.2.2-rc.1",
+  "repository_base": "bf05a4eb38a95ebf251e874fb51039be11bf97fb",
+  "scope": "User explicitly authorized current Web experiment and restarted it; actual resumed conversation tool calls, not scripted headless model",
+  "initial_issue": {
+    "symptom": "Empty model Skill catalog after restart despite Search-core and Memory-net running",
+    "live_diagnostic": "Global and scoped registry both saw9 repository Skills and4 existing Skills, complete=true; skill tool visible. Global and scoped tool-skill were both mounted.",
+    "cause": "Global catalog hook publishes empty when ctx.tools.get(skill,agent) is not its own tool identity; scoped preset hook publishes real catalog. Duplicate host/preset tool-skill hooks conflicted.",
+    "fix": "Disable extra host tool-skill only; retain preset tool-skill and global filesystem provider. Catalog restored during same live process.",
+    "temporary_diagnostic_removed": true
+  },
+  "verification": {
+    "repository_skills": [
+      {
+        "name": "asset-management",
+        "provider": "filesystem",
+        "characters": 2347,
+        "body_sha256": "77cd99ed27a539020a2c86b6016896fa0a621d8bd4a263f09f5d19d99026ce16"
+      },
+      {
+        "name": "source-index",
+        "provider": "filesystem",
+        "characters": 576,
+        "body_sha256": "e15187d67eab051ad896abae992c6b3e207790118702dc168a5925f0b30ccb25"
+      },
+      {
+        "name": "skill-search",
+        "provider": "filesystem",
+        "characters": 1163,
+        "body_sha256": "e99af398ca79136bce1230b9336a27e325272b410f2c1f0d5e64d9ea3030e911"
+      },
+      {
+        "name": "repository-skills",
+        "provider": "filesystem",
+        "characters": 567,
+        "body_sha256": "416b7fe8e65a461389aa6200eaf4653b9f8eb897f621694fe40b645b00d1a2a0"
+      },
+      {
+        "name": "systematic-debugging",
+        "provider": "filesystem",
+        "characters": 10008,
+        "body_sha256": "a9faa2de75f89d0f37dee8d244b5a7253e2a360126d81b974a5cf2405de48c2e"
+      },
+      {
+        "name": "verification-before-completion",
+        "provider": "filesystem",
+        "characters": 3996,
+        "body_sha256": "970f45038ee339fdd0800a56350b89cd6ef73e0b9431ab078369b1df83767015"
+      },
+      {
+        "name": "writing-plans",
+        "provider": "filesystem",
+        "characters": 6381,
+        "body_sha256": "f270b4685357e02d7c0399667fef340a4374f6c460d564c81dbe9a7c69e3bb05"
+      },
+      {
+        "name": "executing-plans",
+        "provider": "filesystem",
+        "characters": 2339,
+        "body_sha256": "1b9841e0c909714f0cc020d5cdc0678813984e7ef60d361e872f91ca2d51c65f"
+      },
+      {
+        "name": "search-core",
+        "provider": "filesystem",
+        "characters": 7745,
+        "body_sha256": "74740686950511890baf13a13c250b059c3af22a47dc13b9ec6a7818ff5a5173"
+      }
+    ],
+    "full_body_matches_deployed_copy": true,
+    "total_catalog_confirmed": 13,
+    "tun_fetch": {
+      "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+      "title": "SQLite | Node.js v26.13.1 Documentation",
+      "transport": {
+        "mode": "trusted-tun",
+        "remoteIpVerified": false,
+        "cacheScope": "98b059acc661c83977223058",
+        "warning": "Explicitly trusted local TUN. Ultimate remote IP is not visible/verified; DNS prechecks cannot prove proxy destination."
+      },
+      "returned_chars": 3494,
+      "cache_repeat_equal": true
+    },
+    "literal_target_refused": true,
+    "memory": {
+      "tool_write_id": "n1",
+      "recall_marker_found": true,
+      "persisted_new_process_readback": true,
+      "kind": "tip",
+      "workspace": "web-experiment-check"
+    },
+    "search": {
+      "initial_query": "Node SQLite DatabaseSync",
+      "provider": "keenable",
+      "initial_refs_returned": 2,
+      "initial_degraded": true,
+      "observed_limits": "Beta/older version docs and one subquery timeout; results are candidates, not exact-version proof",
+      "latest_query": "SQLite WAL concurrency",
+      "latest_refs_returned": 0,
+      "meta": {
+        "quality": {
+          "status": "no_relevant_results",
+          "evaluated": 0,
+          "rejected": 0,
+          "reasons": {},
+          "policy": "lexical-evidence-v1"
+        },
+        "engine_selection": {
+          "mode": "explicit",
+          "requested": [
+            "keenable"
+          ]
+        },
+        "engines_used": [],
+        "engines_failed": [
+          {
+            "name": "keenable",
+            "error": "This operation was aborted",
+            "elapsedMs": 6002,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "keenable",
+            "error": "This operation was aborted",
+            "elapsedMs": 6114,
+            "status": "timeout",
+            "retryable": true
+          }
+        ],
+        "engines_skipped": [],
+        "degraded": true,
+        "elapsed_ms": 6267,
+        "from_cache": false,
+        "complexity": "simple",
+        "route": "domain",
+        "domain": "programming"
+      }
+    },
+    "additional_restart_required": false
+  },
+  "profile_protection": {
+    "original_prefix_bytes_preserved": true,
+    "model_auth_unchanged": true,
+    "box_zai_unchanged": true,
+    "clash_unchanged": true,
+    "existing_memory_not_imported": true,
+    "profile_backup_verified": true,
+    "rollback_hash_updated": true
+  },
+  "limits": [
+    "Model-facing live execution verified, not authenticated browser UI menus/click matrix",
+    "Provider timeouts and old document versions remain, no universal search quality claim",
+    "Experimental memory now contains actual tool observations; do not delete generated state as cache",
+    "TUN remote proxy final IP not verified; trusted personal network only",
+    "No changes to DSH implementation or model account secrets"
+  ]
+}

@@ -29,7 +29,7 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 ## 当前合并与运行状态
 
-PR #3已审阅并合入main（合并提交6a2ba83），包含资产可用性/组合、脚本生命周期、搜索选源/偏题和显式可信TUN抓取修复。已生成并验证独立DSH运行包；这不是当前用户Web会话已加载。最新验收与限制见 [合并交付记录](catalog/audit/pr3-merge-delivery.json)。模型鉴权、用户profile采用和真实记忆迁移仍须独立确认；不自动替换。
+PR #3已审阅并合入main（合并提交6a2ba83），包含资产可用性/组合、脚本生命周期、搜索选源/偏题和显式可信TUN抓取修复。独立DSH运行包已验证；其后用户授权当前Web实验并自行重启，搜索/可信TUN抓取、9个仓库技能及独立记忆工具路径已实测。首次重复tool-skill导致空目录已最小修复，见[实际Web实验](catalog/audit/web-live-experiment.json)。合并时的历史状态见 [合并交付记录](catalog/audit/pr3-merge-delivery.json)。此次实验沿用原模型鉴权，profile已由用户重启采用；其他profile/新宿主采用及真实记忆迁移仍须独立确认，不自动替换。
 
 ## 真实可用性与组合预检
 

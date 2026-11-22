@@ -35,6 +35,10 @@ node <installed-dsh-directory>/lib/bin.js --profile headless --patch <bundle-dir
 
 记忆包装器启动时核对目标DSH、运行副本及源资产；内容不匹配即拒绝激活。MCP/Skill可能先由宿主激活，所以必须运行inspect，不把记忆包装器校验说成整棵profile的原子授权门槛。运行期间依赖或代码被外部修改不在持续监控范围。
 
+## Web预设的额外注意
+
+Standard/PTC预设已包含tool-skill时，不要再启用同名宿主层工具，否则两个目录发布hook可能冲突并输出空目录。全局filesystem provider与preset provider可叠加，不能仅因同名就猜测技能丢失；先检查实际作用域目录和工具身份。headless无预设的模式仍需原工具。当前用户实验的最小修复与真实回流证据见[Web实验](WEB-EXPERIMENT.md)。
+
 ## 数据与回收
 
 关闭所有使用该包的宿主后，才可决定保留/归档运行包。state可能含用户记忆，不提供自动清包命令。新生成包有新的记忆库；如需继承记忆必须另做有备份、审核的迁移。本轮避免为了“临时脚本清理”误删实际记忆。
