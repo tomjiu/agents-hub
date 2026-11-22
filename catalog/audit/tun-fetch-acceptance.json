@@ -239,5 +239,94 @@
     "No detection/authentication of Clash process or packet-capture proof",
     "Historical search_cache corpus is not filtered by current network-mode ownership",
     "No automatic user profile/main/Clash switch"
-  ]
+  ],
+  "independent_checkout": {
+    "code_commit": "a6605d0bb06d20f78e107ee5ee52ba906f883f58",
+    "search_tests": {
+      "passed": 330,
+      "failed": 0
+    },
+    "root_tests": {
+      "passed": 138,
+      "total": 139,
+      "skipped": 1
+    },
+    "real_mcp_local_fixture": true,
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c",
+        "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c",
+        "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        }
+      }
+    ],
+    "migration_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0,
+      "banned": 0
+    },
+    "tracked_clean": true,
+    "git_fsck": true,
+    "public_fetch_repeated": false,
+    "scope": "Independent rebuild and deterministic TUN safety/cache tests plus default-strict DSH host regression. Public TUN fetch was verified in original workspace and not repeated here."
+  }
 }
