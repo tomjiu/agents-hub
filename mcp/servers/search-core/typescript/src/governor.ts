@@ -98,28 +98,52 @@ function inCidr4(ip: string, cidr: string): boolean {
   return (v4ToInt(ip) & mask) === (v4ToInt(net) & mask);
 }
 
-function isPrivateIp(ip: string, extraCidrs: string[]): boolean {
+function isPrivateIp(ip: string): boolean {
   if (isIP(ip) === 6) {
     const low = ip.toLowerCase();
     if (low === "::1" || low === "::") return true;
-    if (low.startsWith("fe80") || low.startsWith("fc") || low.startsWith("fd")) return true;
-    if (low.startsWith("::ffff:")) return isPrivateIp(low.slice(7), extraCidrs); // v4-mapped
+    if (/^fe[89ab]/.test(low) || low.startsWith("fc") || low.startsWith("fd") || low.startsWith("ff") || low.startsWith("2001:db8:")) return true;
+    if (low.startsWith("::ffff:")) {
+      const tail = low.slice(7);
+      if (isIP(tail) === 4) return isPrivateIp(tail);
+      const parts = tail.split(":");
+      if (parts.length === 2 && parts.every(p => /^[a-f0-9]{1,4}$/.test(p))) {const n = parseInt(parts[0],16)*65536+parseInt(parts[1],16);return isPrivateIp([n>>>24,(n>>>16)&255,(n>>>8)&255,n&255].join("."));}
+      return true;
+    }
     return false;
   }
   if (isIP(ip) !== 4) return true; // 无法解析的一律拒绝
   for (const c of PRIVATE_V4) if (inCidr4(ip, c)) return true;
-  for (const c of extraCidrs) {
-    if (c.includes(".") && c.includes("/")) {
-      // 用户声明的 fake-ip 豁免网段不应落入私网判定之外的拦截,仅记录
-      continue;
-    }
-  }
   return false;
 }
 
+export type FetchNetworkMode = "strict" | "trusted-tun";
+export type DnsLookup = (host: string) => Promise<{ address: string; family: number }[]>;
+export function validateFetchNetwork(mode: unknown, cidrs: unknown): string[] {
+  if (mode !== "strict" && mode !== "trusted-tun") throw new Error("Invalid fetch network mode; use strict or trusted-tun");
+  if (!Array.isArray(cidrs) || cidrs.length > 16) throw new Error("Invalid fake-IP CIDR list");
+  for (const cidr of cidrs) {
+    if (typeof cidr !== "string" || !/^198[.](?:18|19)[.]\d{1,3}[.]\d{1,3}\/(?:1[5-9]|2[0-9]|3[0-2])$/.test(cidr)) throw new Error("TUN CIDRs must be subnets of 198.18.0.0/15");
+    const [ip, bitsRaw] = cidr.split("/"), bits = Number(bitsRaw);
+    const parts = ip.split(".").map(Number), mask = (0xffffffff << (32-bits)) >>> 0;
+    if (parts.some(p => p > 255) || ip !== parts.join(".") || ((v4ToInt(ip)&mask)>>>0)!==v4ToInt(ip)) throw new Error("Invalid or noncanonical TUN CIDR");
+  }
+  if (mode === "trusted-tun" && cidrs.length === 0) throw new Error("Trusted TUN requires an explicit fake-IP CIDR list");
+  return [...new Set(cidrs)];
+}
+export function validateNetworkTarget(u: URL, mode: FetchNetworkMode): string | null {
+  const host = u.hostname.toLowerCase().replace(/^\[|\]$/g, "").replace(/[.]$/, "");
+  if (u.username || u.password) return "URL credentials are not allowed";
+  const literal = isIP(host) !== 0;
+  if (mode === "trusted-tun" && literal) return "IP literal target forbidden in trusted TUN mode";
+  if (!literal && (!host.includes(".") || !/^[a-z0-9.-]+$/.test(host) || host.split(".").some(label=>!label || label.startsWith("-") || label.endsWith("-")) || /(?:^|[.])(?:localhost|local|internal|lan|home|home[.]arpa|test|invalid|example|onion)$/.test(host))) return "Local or nonpublic hostname target forbidden";
+  return null;
+}
 export interface SsrfOptions {
-  fakeIpCidrs?: string[]; // 豁免网段(Clash TUN fake-ip, dsh[10]): 判定私网时忽略这些
-  allowPrivate?: boolean; // 测试用
+  networkMode?: FetchNetworkMode;
+  fakeIpCidrs?: string[]; // Only trusted-tun domain DNS answers, never a general private-IP exemption.
+  allowPrivate?: boolean; // Existing isolated test-only mode.
+  lookup?: DnsLookup; // Test injection; not configurable via JSON/env/MCP.
 }
 
 /** 校验 URL 本身(协议/端口/域名治理),不涉及 DNS */
@@ -143,27 +167,27 @@ export function validateUrl(
   return { url: u };
 }
 
-/** DNS 解析 + 私网判定。fakeIpCidrs 中的地址视为豁免(代理 TUN 场景)。 */
+/** DNS precheck: strict rejects reserved IPs; trusted-tun only trusts domain fake-IP mappings. Not connection-IP pinning. */
 export async function assertResolvableSafe(
   u: URL,
   opts: SsrfOptions = {},
 ): Promise<{ ip: string } | { error: string }> {
+  const mode = opts.networkMode ?? "strict";
+  let fake: string[];
+  try {fake = validateFetchNetwork(mode, opts.fakeIpCidrs ?? []);}catch(e){return {error:(e as Error).message};}
+  if (mode === "trusted-tun" && opts.allowPrivate) return {error:"Trusted TUN requires strict SSRF checks"};
+  if (!opts.allowPrivate) {const error=validateNetworkTarget(u,mode);if(error)return {error};}
   let addrs;
   try {
-    addrs = await lookup(u.hostname, { all: true, verbatim: true });
+    addrs = await (opts.lookup ?? (host=>lookup(host,{all:true,verbatim:true})))(u.hostname.replace(/^\[|\]$/g,""));
   } catch (e) {
     return { error: `dns fail: ${u.hostname} (${(e as Error).message})` };
   }
-  const fake = opts.fakeIpCidrs ?? [];
+  if (!addrs.length) return {error:"DNS returned no addresses"};
   for (const a of addrs) {
-    const isFake = fake.some((cidr) => {
-      if (isIP(a.address) === 4 && cidr.includes("/")) {
-        return inCidr4(a.address, cidr) || v4ToInt(a.address) >>> 16 === 0xc06a || v4ToInt(a.address) >>> 16 === 0xc06b;
-      }
-      return false;
-    });
+    const isFake = mode === "trusted-tun" && isIP(a.address) === 4 && fake.some(cidr=>inCidr4(a.address,cidr));
     if (isFake) continue;
-    if (!opts.allowPrivate && isPrivateIp(a.address, fake)) {
+    if (!opts.allowPrivate && isPrivateIp(a.address)) {
       return { error: `private address blocked: ${u.hostname} -> ${a.address}` };
     }
   }

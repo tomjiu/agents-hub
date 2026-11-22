@@ -6,7 +6,7 @@
 
 | 需要 | 登记ID／入口 | 怎么用 |
 |---|---|---|
-| 搜索资料、官方文档、最新信息 | mcp.search-core；[搜索Skill](skills/individual/research/search-core/SKILL.md) | DSH加载后工具为mcp__search-core__search、mcp__search-core__fetch、mcp__search-core__tool_search；query用简短主题+关键术语，结果空/降级如实报告。meta.quality仅表示最低词法证据：candidate_results仍需核验来源/版本，no_relevant_results不能当完成研究。复杂研究可用research，但它不支持engines名单并会拒绝。search/x_search显式engines仅约束provider选择（[]为空），不传自动路由；不能当provider内部域名/embedding防火墙，fetch不继承。当前适配static预注册防止并发发现掉工具，不用旧动态配置。 |
+| 搜索资料、官方文档、最新信息 | mcp.search-core；[搜索Skill](skills/individual/research/search-core/SKILL.md) | DSH加载后工具为mcp__search-core__search、mcp__search-core__fetch、mcp__search-core__tool_search；query用简短主题+关键术语，结果空/降级如实报告。meta.quality仅表示最低词法证据：candidate_results仍需核验来源/版本，no_relevant_results不能当完成研究。复杂研究可用research，但它不支持engines名单并会拒绝。search/x_search显式engines仅约束provider选择（[]为空），不传自动路由；不能当provider内部域名/embedding防火墙，fetch不继承。本机Clash/TUN可由用户显式配置SC_FETCH_NETWORK_MODE=trusted-tun及SC_FAKE_IP_CIDRS，默认strict；仅域名fake-IP映射，代理最终IP不可见，不自动改变Clash/profile。当前适配static预注册防止并发发现掉工具，不用旧动态配置。 |
 | 记住进度、决策、已验证结论 | memory-net；[DSH记忆适配](plugins/memory-net/adapters/dsh/README.md) | 宿主已加载时先memory_net_recall({query:当前任务})；完成可复用小阶段后memory_net_write({kind:"inference",text:结论,confidence:0.8})或kind:"tip"。不向记忆写密钥、未验证结果；observation只由宿主写。没有工具就报告未加载，不假装有记忆。 |
 | 找仓库内容和上游索引 | source-index；[索引Skill](skills/individual/research/source-index/SKILL.md) | 查看catalog/assets与catalog/sources；先查本地登记ID、路径和版本，再查外部来源。旧E盘镜像不作前置。 |
 | 搜索/选择合适技能 | skill-search；[技能搜索Skill](skills/individual/research/skill-search/SKILL.md) | search-assets只读检索，下文命令；取1–3候选、inspect后读对应SKILL.md，不能把搜索结果当启用。 |

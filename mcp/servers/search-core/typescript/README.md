@@ -58,6 +58,24 @@ Research新搜索结果在原主题上过滤后入池，不对既有journal执�
 
 当前Meta DNS映射198.18.x时官网fetch安全拒绝；新诊断提示可信网络返回真实DNS，不关闭SSRF/豁免fake-IP，也不假装已全文抓取成功。
 
+## 本机Clash/TUN显式兼容
+
+不需要改Clash的fake-IP排除或关闭TUN。只在明确信任本机代理后，为Search-core配置fetchNetworkMode=trusted-tun、fakeIpCidrs=["198.18.0.0/15"]、ssrf=strict（也可用下方环境变量）。默认strict不会检测到TUN就自动放行；旧fakeIpCidrs单独配置也不再是私网豁免。错误模式/CIDR、空CIDR或与off/allowPrivate混用拒绝启动。
+
+仅正常多标签公网形式域名的DNS答案命中指定范围可继续域名fetch，由操作系统/TUN接管；直接IP字面量（含数字/十六进制/IPv6）全部拒绝，localhost/单标签/.local/.internal等拒绝，真实私网DNS及混合不安全答案拒绝。HTTP(s)协议/端口/域名策略、逐跳重定向检查及HTTPS默认TLS证书验证保留。不是识别或认证Clash服务，也不能看到最终代理IP；攻击者公网域名可能经代理解析到私网，必须只在可信个人环境显式采用，不当开放抓取服务的SSRF隔离保证。strict本来也未把检查IP固定到连接，不能宣称防DNS重绑定完整认证。
+
+返回transport.mode、remoteIpVerified=false和trusted-tun警告。缓存新增scoped_pages按网络模式/ssrf/CIDR/域名策略隔离，旧pages保留为离线语料、不作策略证据；search_cache明确检索历史本地内容，不保证来源属于当前网络模式。
+
+~~~powershell
+# 仅此Search-core进程；无需修改Clash配置：
+$env:SC_FETCH_NETWORK_MODE = "trusted-tun"
+$env:SC_FAKE_IP_CIDRS = "198.18.0.0/15"
+$env:SC_SSRF = "strict"
+node mcp/servers/search-core/typescript/dist/cli.js fetch https://www.sqlite.org/wal.html --focus "one writer" --json
+~~~
+
+以上命令从仓库根运行。DSH新独立运行包可在包内私有state/search-core/config.json明确设置相同字段；不要编辑运行中服务已打开配置或修改用户profile。registry/生成包默认不打开trusted-tun。实际复跑node asset-manager/probe-tun-fetch.mjs --live；结果只认证当前TUN的Node/SQLite官方全文和缓存，不认证任意网络。
+
 ## 配置
 
 `~/.search-core/config.json` 或环境变量(优先):
@@ -80,7 +98,8 @@ Research新搜索结果在原主题上过滤后入池，不对既有journal执�
 | searxng.baseUrl | `SC_SEARXNG_BASE_URL` | 自建/可信实例 |
 | brave/tavily/exa.apiKey | `BRAVE_API_KEY` 等 | 有 key 自动加入并行 |
 | blockedDomains | `SC_BLOCKED_DOMAINS` | 全局黑名单(csv) |
-| fakeIpCidrs | `SC_FAKE_IP_CIDRS` | Clash TUN fake-ip 豁免网段 [10] |
+| fetchNetworkMode | `SC_FETCH_NETWORK_MODE` | strict默认；trusted-tun须明确可信本机TUN，不能逐请求开启 |
+| fakeIpCidrs | `SC_FAKE_IP_CIDRS` | trusted-tun域名DNS映射范围，只接受198.18.0.0/15及其规范子网；strict不作为豁免 |
 | ssrf | `SC_SSRF` | `strict`(默认)/`allowPrivate`/`off`(测试) |
 | x.bearerToken | `X_BEARER_TOKEN` | X 官方 API 层(可选) |
 | x.guestEnabled | `SC_X_GUEST=0` 关 | Guest GraphQL 匿名层(默认开,自愈轮换) [10] |

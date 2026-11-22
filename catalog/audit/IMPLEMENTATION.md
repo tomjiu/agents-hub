@@ -17,7 +17,7 @@
 | 范围 | 结果 | 能证明什么 |
 |---|---|---|
 | Asset Manager | 138 PASS，1 SKIP（总139） | 原件保护、失败路径、路径边界、审批、连续回滚、配置生成、清空运行态后的恢复 |
-| Search-core TypeScript | 322/322 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
+| Search-core TypeScript | 330/330 PASS | 原有解析、调度、缓存、研究与本地测试服务；不是所有公网来源当前可用 |
 | Memory-net核心 | 29/29 PASS | SQLite记忆、隔离与CLI行为 |
 | Memory-net DSH Adapter | 21/21 PASS + 真实独立DSH headless通过 | Memory-net工具、注入、持久化、自指过滤；销毁关闭全部workspace契约；不改用户live profile |
 | Memory-net Console | 构建成功，21/21服务测试PASS，Edge真实点击冒烟PASS | 认证拒绝/连接、进度和轨迹写入、键盘激活、统计、搜索及刷新读回；不是完整可访问性或全平台覆盖 |
@@ -183,6 +183,13 @@
 - 实际原Node题剔55/60返回3条SQLite文档候选；WAL题剔32/40找到官方WAL文档；简短Node题首位当前v26.13.1。仍不是全题语义准确率，旧nightly/相似词/短摘要/跨语言需复核。
 - Meta DNS为198.18.0.2，公开域名解析198.18.x；fetch安全拒绝并新增可操作诊断，未改代理或DNS、不关闭SSRF。官方全文链路在此环境尚未通过。
 - DSH验收新增quality_verified：正常候选和偏题空结果/降级都须回流，新证据-quality.json，历史保留。
+
+## 用户授权的本机TUN兼容抓取
+
+- 明确trusted-tun配置替代改Clash：只允许正常域名DNS落指定198.18.0.0/15子网，IP字面量/本地域名/真实私网/混合不安全DNS/危险重定向拒绝。旧fakeIpCidrs不能单独豁免；默认strict保留，错误/空范围和off混用fail closed。
+- 330项搜索测试通过；网络策略缓存隔离，旧缓存不丢弃，TLS默认不关闭。remoteIpVerified=false明确TUN最终IP不可见，非开放抓取服务安全认证。
+- 当前TUN实际Node v26.13.1及SQLite WAL官方全文和重复缓存通过；两版DSH受控实际fetch/保留IP拒绝回流验证；不更改Clash、用户profile或live DSH。
+- 兼容门新增fetch.literal_refused，旧质量-only报告不批准新代码，新的证据-fetch.json。详细操作见[本机TUN验收](../../asset-manager/TUN-FETCH.md)。
 
 ## 未认证与后续事项
 

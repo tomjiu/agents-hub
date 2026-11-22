@@ -124,7 +124,7 @@ Do NOT fetch a full page when a focused read suffices.`,
         noCache: args.no_cache,
       });
       const payload = {
-        url: r.url, title: r.title, from_cache: r.fromCache,
+        url: r.url, title: r.title, from_cache: r.fromCache, transport: r.transport,
         text_length: r.textLength, returned_chars: r.returnedChars,
         saved_pct: r.savedPct !== undefined ? Math.round(r.savedPct * 100) / 100 : undefined,
         segments: r.segments ?? undefined,

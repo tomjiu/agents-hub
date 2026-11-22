@@ -120,6 +120,7 @@ export interface FetchOptions {
 }
 
 export interface FetchResult {
+  transport?: { mode: "strict" | "trusted-tun"; remoteIpVerified: false; warning?: string; cacheScope: string };
   url: string;
   title?: string;
   status: number;

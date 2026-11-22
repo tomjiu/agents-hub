@@ -44,6 +44,14 @@ Research新轮次在原主题上过滤引用后才入池，搜索角度通用词
 
 兼容门槛新增quality_verified，宿主同批验证正常候选、偏题空结果/降级、名单与缓存回流；历史selection证据保留，新的质量报告用-quality.json。真实外网探针是node asset-manager/probe-search-quality.mjs --live，要求显式联网；独立测试不重复公网。
 
+## 显式可信本机TUN抓取
+
+后续按用户明确同意实现trusted-tun，而非要求改Clash配置。仅设置Search-core fetchNetworkMode=trusted-tun、fakeIpCidrs=["198.18.0.0/15"]、ssrf=strict；默认strict不变，不从存在TUN推断授权，不逐工具请求切换。原fakeIpCidrs宽豁免收紧，无法在strict放行保留IP字面量。
+
+当前Clash/TUN真实MCP：Node/SQLite官网正文成功、重复缓存内容相等，strict同DNS拒绝仍保留；两版DSH的受控脚本模型调用真实fetch可看到正文与transport警告，并验证IP字面量拒绝。默认DSH探针只做离线搜索/拒绝，HUB_DSH_TUN_FETCH=1明确开启官方网络fetch，不默认出网。
+
+范围和配置详见 [TUN抓取](TUN-FETCH.md)。remoteIpVerified=false代表没验证最终连接IP，strict也只有DNS预检查而非连接IP固定；trusted-tun只在用户信任的个人TUN环境采用，不把它当SSRF完整防御。模式/CIDR/域名策略缓存隔离，旧pages保留为历史语料。
+
 ## 范围
 
 本地来源通过证明DSH调用路径、搜索解析、融合、缓存及失败透明性，不证明默认公网引擎如今全部可用，也不证明搜索质量达到所有研究任务。公网来源受网络、配额、验证码与服务版本影响；未经测试不标为通过。

@@ -5,6 +5,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import {validateFetchNetwork,type FetchNetworkMode} from "./governor.js";
 
 export interface CoreConfig {
   /** 数据目录: cache.db + journal/ */
@@ -64,8 +65,10 @@ export interface CoreConfig {
   authorityOverride?: string;
   /** 域名治理 (v0-spec §4.6) */
   blockedDomains: string[];
-  /** Clash TUN fake-ip 网段豁免 (dsh[10] 教训),CIDR 列表 */
+  /** Explicit trusted-tun fake-IP subnets of 198.18.0.0/15; ignored as exemptions in strict mode. */
   fakeIpCidrs: string[];
+  /** Explicit local TUN trust, default strict; not remotely controllable per request. */
+  fetchNetworkMode: FetchNetworkMode;
   /** 抓取页大小上限 */
   maxPageBytes: number;
   /** v0.2: SSRF 模式 — strict(默认,全检) / allowPrivate(跳过私网判定,不跳 DNS) / off(仅协议/端口/域名校验,测试/离线用) */
@@ -193,6 +196,7 @@ export function loadConfig(overrides?: Partial<CoreConfig>): CoreConfig {
       (file.blockedDomains as string[] | undefined) ?? [
         // 默认黑名单: 常见 SEO 农场/垃圾域可由用户追加
       ],
+    fetchNetworkMode: (env("SC_FETCH_NETWORK_MODE") ?? file.fetchNetworkMode ?? "strict") as FetchNetworkMode,
     fakeIpCidrs: csv(env("SC_FAKE_IP_CIDRS")) ?? (file.fakeIpCidrs as string[] | undefined) ?? [],
     maxPageBytes: Number(env("SC_MAX_PAGE_BYTES") ?? file.maxPageBytes ?? 2_000_000),
     ssrf: (env("SC_SSRF") ?? (file.ssrf as string | undefined) ?? "strict") as CoreConfig["ssrf"],
@@ -210,7 +214,11 @@ export function loadConfig(overrides?: Partial<CoreConfig>): CoreConfig {
     authorityOverride: env("SC_AUTHORITY_JSON") ?? (file.authorityOverride as string | undefined),
   };
 
-  return { ...cfg, ...stripUndefined(overrides) };
+  const merged = { ...cfg, ...stripUndefined(overrides) };
+  if (!["strict","allowPrivate","off"].includes(merged.ssrf)) throw new Error("Invalid SSRF mode");
+  merged.fakeIpCidrs=validateFetchNetwork(merged.fetchNetworkMode,merged.fakeIpCidrs);
+  if(merged.fetchNetworkMode==="trusted-tun"&&merged.ssrf!=="strict")throw new Error("Trusted TUN requires strict SSRF");
+  return merged;
 }
 
 function stripUndefined<T extends object>(o?: T): Partial<T> {

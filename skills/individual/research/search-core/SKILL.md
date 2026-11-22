@@ -110,6 +110,14 @@ curl -X POST localhost:8629/research -d '{"query":"..."}'   # SSE 事件流
 - RSS最终URL/channel link q回显与请求不一致报query mismatch；无回显不冒充确认。新质量缓存策略不复用旧偏题记录，原缓存保留。
 - DNS返回198.18.x时fetch仍拒绝；诊断网络/可信DNS配置，不关闭SSRF、不自动修改用户代理。此时全文核验若换独立工具必须标明。
 
+## 用户明确选择的Clash/TUN抓取
+
+无需更改Clash；仅Search-core环境变量SC_FETCH_NETWORK_MODE=trusted-tun、SC_FAKE_IP_CIDRS=198.18.0.0/15、SC_SSRF=strict（或对应私有config字段）。默认strict不变，模型fetch参数不能开启。域名DNS映射命中指定fake范围才交给本机TUN；IP字面量、本地域名、真实私网和危险重定向仍拒绝。不要用ssrf=off或通用IP豁免。
+
+transport.mode=trusted-tun、remoteIpVerified=false明确安全取舍：代理最后连接IP不可见，不能证明远端无内网访问，只适合用户明确可信本机代理环境；不开成不可信用户的公网抓取服务。TLS默认校验保留。不自动升级DSH/配置Clash/启用profile。
+
+已在当前TUN实际获取Node v26.13.1 SQLite API和SQLite WAL正文，重复缓存相等；strict仍拒绝198.18.x。网络策略缓存分域保存，旧缓存为历史语料，不证明当前模式。详见 [TUN抓取验收](../../../../asset-manager/TUN-FETCH.md)。
+
 ## 已知边界（诚实声明）
 
 - Google/Bing 主站永不进池：裸 HTTP 抓到的是 JS 空壳假货（HTTP 200 最阴险），不装浏览器的前提下无解；新闻面走 Google News RSS。

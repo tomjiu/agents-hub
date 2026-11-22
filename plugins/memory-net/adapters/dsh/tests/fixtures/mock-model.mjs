@@ -23,6 +23,8 @@ const TOOL_ARGS = JSON.stringify({ kind: 'inference', text: WRITE_TEXT, confiden
 const MCP_NAME = process.env.MN_E2E_MCP_TOOL
 const SKILL_NAME = process.env.MN_E2E_SKILL
 const SEARCH_NAME = process.env.MN_E2E_SEARCH_TOOL
+const FETCH_NAME = process.env.MN_E2E_FETCH_TOOL
+const TUN_FETCH = process.env.MN_E2E_TUN_FETCH === "1"
 const PARALLEL_DISCOVERY = process.env.MN_E2E_PARALLEL_DISCOVERY === '1'
 const SEARCH_ARGS = JSON.stringify({ query: process.env.MN_E2E_SEARCH_QUERY || 'aurora glacier', engines: ['searxng'], top_n: 3 })
 const searchCall = { id: 'call_search_1', type: 'function', function: { name: SEARCH_NAME, arguments: SEARCH_ARGS } }
@@ -38,6 +40,7 @@ function strings(value) {
 const extraCalls = [
   ...(MCP_NAME && (!SEARCH_NAME || PARALLEL_DISCOVERY) ? [{ id: 'call_mcp_1', type: 'function', function: { name: MCP_NAME, arguments: JSON.stringify({ query: 'engine health', limit: 1 }) } }] : []),
   ...(SEARCH_NAME ? [searchCall,{id:'call_search_quality_empty',type:'function',function:{name:SEARCH_NAME,arguments:JSON.stringify({query:'pasta carbonara',engines:['searxng'],no_cache:true})}}] : []),
+  ...(FETCH_NAME ? [{id:"call_fetch_blocked",type:"function",function:{name:FETCH_NAME,arguments:JSON.stringify({url:"https://198.18.0.5/private"})}},...(TUN_FETCH?[{id:"call_fetch_tun",type:"function",function:{name:FETCH_NAME,arguments:JSON.stringify({url:"https://nodejs.org/docs/v26.13.1/api/sqlite.html",focus:"DatabaseSync deprecated alias",max_chars:16000})}}]:[])] : []),
   ...(SKILL_NAME ? [{ id: 'call_skill_1', type: 'function', function: { name: 'skill', arguments: JSON.stringify({ name: SKILL_NAME }) } }] : []),
 ]
 
@@ -71,6 +74,8 @@ const server = createServer((req, res) => {
       has_search_tool: SEARCH_NAME ? toolNames.includes(SEARCH_NAME) : false,
       has_search_result: hasSearchResult,
       has_search_cache: hasSearchCache,
+      has_fetch_blocked: messages.some(m=>m.role==='tool'&&m.tool_call_id==='call_fetch_blocked'&&/IP literal target forbidden|private address blocked/.test(JSON.stringify(m.content))),
+      has_tun_fetch: messageStrings.some(text=>{try{const r=JSON.parse(text);return r?.transport?.mode==='trusted-tun'&&r.transport.remoteIpVerified===false&&/DatabaseSync/.test(JSON.stringify(r.segments??r.text))&&/deprecated/.test(JSON.stringify(r.segments??r.text));}catch{return false;}}),
       has_quality_candidate: messageStrings.some(text=>{try{const r=JSON.parse(text);return r?.meta?.quality?.policy==='lexical-evidence-v1'&&r.meta.quality.status==='candidate_results'&&r.refs.length>0;}catch{return false;}}),
       has_quality_empty: messageStrings.some(text=>{try{const r=JSON.parse(text);return r?.meta?.quality?.status==='no_relevant_results'&&r.refs.length===0&&r.meta.quality.rejected>0&&r.meta.degraded===true;}catch{return false;}}),
       has_explicit_selection: messageStrings.some(text => {try {const result=JSON.parse(text),selection=result?.meta?.engine_selection;return selection?.mode==='explicit'&&JSON.stringify(selection.requested)==='["searxng"]'&&result.meta.engines_used.every(name=>name==='searxng')&&result.meta.engines_failed.every(f=>f.name==='searxng')&&result.refs.every(ref=>ref.engines.every(name=>name==='searxng'));} catch{return false;}}),

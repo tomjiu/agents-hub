@@ -36,6 +36,11 @@ export class Cache {
         title TEXT,
         text TEXT NOT NULL
       );
+      CREATE TABLE IF NOT EXISTS scoped_pages (
+        scope TEXT NOT NULL, url TEXT NOT NULL, fetched_at INTEGER NOT NULL,
+        status INTEGER NOT NULL, content_type TEXT, title TEXT, text TEXT NOT NULL,
+        PRIMARY KEY(scope,url)
+      );
       CREATE TABLE IF NOT EXISTS search_cache (
         key TEXT PRIMARY KEY,
         fetched_at INTEGER NOT NULL,
@@ -66,6 +71,17 @@ export class Cache {
 
   static hash(s: string): string {
     return createHash("sha256").update(s).digest("hex").slice(0, 24);
+  }
+
+  /** Network-policy scoped fetch cache. Legacy pages remain an offline corpus, never policy evidence. */
+  getScopedPage(url: string, ttlSeconds: number, scope: string): { title?: string; text: string; fetchedAt: number } | null {
+    const row=this.#db.prepare("SELECT title,text,fetched_at FROM scoped_pages WHERE scope=? AND url=?").get(scope,url) as {title:string|null;text:string;fetched_at:number}|undefined;
+    return row && Date.now()-row.fetched_at<=ttlSeconds*1000 ? {title:row.title??undefined,text:row.text,fetchedAt:row.fetched_at} : null;
+  }
+  putScopedPage(url: string,status:number,contentType:string|null,title:string|null,text:string,scope:string):void {
+    this.#db.prepare("INSERT OR REPLACE INTO scoped_pages(scope,url,fetched_at,status,content_type,title,text) VALUES(?,?,?,?,?,?,?)").run(scope,url,Date.now(),status,contentType,title,text);
+    // Search-cache tool explicitly searches historical local content, not network authorization.
+    this.putPage(url,status,contentType,title,text);
   }
 
   // ---------- 页面缓存 ----------
