@@ -45,4 +45,4 @@ HUB_DSH_BUNDLE_TEST=1配合HUB_DSH_INSTALLATION运行 [真实宿主探针](probe
 
 实际测试曾发现异步Cordis包装器返回HostApi对象会报Invalid effect，导致记忆插件没挂载。修复为异步入口只完成挂载、不返回该对象，且拒绝空激活结果；重新测试不是仅把断言改宽。
 
-公开证据仅包含隔离测试，不能证明所有profile、平台或付费模型。目前rc.1与rc.4独立headless是支持证据；见实施记录。
+公开证据包含隔离脚本模型执行及明确公开官网抓取，不证明所有profile、平台或付费模型。当前rc.1/rc.5生成包已验证；PR #3合并后保留的独立运行包也实际加载搜索/Skill/记忆和可信TUN正文。测试状态已归档，交付记忆为空，正式搜索配置不含本地fixture。见 [合并交付记录](../catalog/audit/pr3-merge-delivery.json)。包仍需用户明确选择模型/profile采用，不自动更新当前Web。

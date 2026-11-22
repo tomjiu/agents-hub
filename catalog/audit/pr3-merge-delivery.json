@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "status": "MERGED_AND_ISOLATED_BUNDLE_VERIFIED_NOT_LIVE_PROFILE_ADOPTED",
+  "pr": {
+    "number": 3,
+    "url": "https://github.com/tomjiu/agents-hub/pull/3",
+    "reviewed_head": "d1cc72254e4bd0cac675cfebaad1be4c1d3a383b",
+    "base": "354c44e367af644fd1f2bbde542f7e107fbc9b92",
+    "merge_commit": "6a2ba83dbe9ec6df20216b28215d6ccaf25c574b",
+    "merged": true,
+    "head_tree_equals_merge_tree": true,
+    "ci": {
+      "check_runs": 0,
+      "statuses": 0,
+      "required_checks": 0,
+      "claim": "No CI reported; local and isolated verification only"
+    }
+  },
+  "verification": {
+    "root": {
+      "total": 139,
+      "passed": 138,
+      "skipped": 1
+    },
+    "search": 330,
+    "memory_core": 29,
+    "memory_adapter": 21,
+    "python_tasks": {
+      "packager": 11,
+      "ownership": 4,
+      "web_server": 17
+    },
+    "assets_exact_lookup": 137,
+    "readable_skill_provider": 48,
+    "asset_states": {
+      "content_ready": 48,
+      "conditional": 5,
+      "blocked": 84
+    },
+    "original_targets": {
+      "files": 2418,
+      "missing": 0,
+      "mismatch": 0,
+      "banned": 0
+    },
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        },
+        "fingerprint": {
+          "host_sha256": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+          "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c"
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "fetch": {
+          "literal_refused": true,
+          "trusted_tun_verified": false,
+          "remote_ip_verified": false
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true
+        },
+        "skill": {
+          "name": "asset-management",
+          "deployed": true,
+          "invoked": true,
+          "full_content_seen_by_model": true
+        },
+        "fingerprint": {
+          "host_sha256": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+          "assets_sha256": "e82bab7d01c211d7ebb9d48e4036bd2984d3324823c8e5d7d9ddc31b8843866c"
+        }
+      }
+    ]
+  },
+  "delivery": {
+    "bundle_id": "a035e60e-8566-456e-b11e-35e01e5722e3",
+    "host_version": "0.2.2-rc.1",
+    "skills": 9,
+    "mcp": [
+      "search-core"
+    ],
+    "memory": true,
+    "exact_retained_bundle_host_test": "PASS: actual isolated headless scripted model, full Skill/search/cache/memory/TUN official fetch",
+    "test_state": "Owned test state archived; no user database deleted",
+    "clean_state": {
+      "memory_empty": true,
+      "fixture_config_removed": true,
+      "search_mode": "trusted-tun",
+      "cidrs": [
+        "198.18.0.0/15"
+      ],
+      "private_credentials": false
+    },
+    "clean_functional": {
+      "status": "PASS",
+      "bundle_id": "a035e60e-8566-456e-b11e-35e01e5722e3",
+      "fixture_config_removed": true,
+      "tools": 8,
+      "actual_official_fetch": true,
+      "cache_repeat_equal": true,
+      "transport": {
+        "mode": "trusted-tun",
+        "remoteIpVerified": false,
+        "cacheScope": "98b059acc661c83977223058",
+        "warning": "Explicitly trusted local TUN. Ultimate remote IP is not visible/verified; DNS prechecks cannot prove proxy destination."
+      },
+      "text_length": 31502,
+      "returned_chars": 5038,
+      "model_credentials_used": false
+    },
+    "bundle_inspect": "VERIFIED",
+    "portable": false,
+    "notes": "Private generated paths stay under ignored .asset-state; artifact depends on repository and exact installed DSH. State is not a distributable installer."
+  },
+  "unchanged": {
+    "live_dsh": true,
+    "clash_config": true,
+    "user_credentials": true,
+    "user_memory": true
+  },
+  "limits": [
+    "Live Web profile/model credential adoption not done",
+    "Memory SQLite deprecated API migration still pending",
+    "No all-skill professional task or license certification",
+    "TUN proxy final IP not verified; not open-service SSRF firewall",
+    "Lexical relevance floor does not prove semantic/factual accuracy",
+    "Startup performance and all platform coverage not certified"
+  ]
+}
