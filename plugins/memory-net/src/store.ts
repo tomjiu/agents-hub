@@ -287,8 +287,8 @@ export class MemoryNet {
     // instr 精确子串（带引号 id）替代全表 JS 逐行比对，把过滤下推到 SQLite
     for (const sid of supersededIds) {
       this.db.prepare(
-        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status IN ('active','promoted') AND instr(based_on_json, ?) > 0",
-      ).run(Date.now(), `"${sid}"`)
+        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status IN ('active','promoted') AND (instr(based_on_json, ?) > 0 OR EXISTS (SELECT 1 FROM json_each(nodes.payload_json, '$.promote_evidence') WHERE value = ?))",
+      ).run(Date.now(), `"${sid}"`, sid)
     }
     void newId
   }

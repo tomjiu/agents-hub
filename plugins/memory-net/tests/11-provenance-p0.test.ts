@@ -19,6 +19,18 @@ test('promoted inference is recalled until explicit subject evidence changes', (
   } finally {net.close();cleanupDir(ws)}
 })
 
+test('promotion-only evidence participates in explicit subject invalidation', () => {
+  const ws = makeTempWs('mn-review-promote-')
+  const net = MemoryNet.open(ws, {agentId:'review-fixture',role:'host'})
+  try {
+    const evidence = net.add('observation', {key:'subject:A',text:'before',source:'tool'})
+    const decision = net.add('inference', {text:'reviewed',confidence:.8})
+    net.promote(decision.id, {evidence:[evidence.id]})
+    net.add('observation', {key:'subject:A',text:'after',source:'tool'})
+    assert.equal(net.get(decision.id)!.status, 'contradicted')
+  } finally {net.close();cleanupDir(ws)}
+})
+
 test('GC keeps transitive based-on and promotion evidence for live conclusions', () => {
   const ws=makeTempWs('mn-p0-gc-')
   const net=MemoryNet.open(ws,{agentId:'fixture-host',role:'host'})
