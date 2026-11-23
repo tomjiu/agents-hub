@@ -68,6 +68,7 @@ export interface SearchOptions {
   timeoutMs?: number;
   /** v0.4: 软截止 ms —— 到点先收割已完成引擎,慢腿剔除;0=关闭;默认取 config(6000) */
   softDeadlineMs?: number;
+  recoveryDeadlineMs?: number;
   noCache?: boolean;
 }
 
@@ -79,6 +80,7 @@ export interface EngineFailure {
   status: EngineStatus;
   /** true=过会儿再试有意义; false=换引擎/人工介入 */
   retryable: boolean;
+  cancellation?: "early_harvest" | "soft_deadline" | "hard_deadline";
 }
 
 export interface SearchResult {

@@ -167,7 +167,7 @@ test('memory_net_recall: 双 agent 共享——host 写 progress/observation，�
   const root = makeRoot()
   try {
     const { ctx, tools, provided } = mockCtx()
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
     const recall = tools.find((t) => t.name === 'memory_net_recall')!
 
     api.addConstraint({ key: 'no-force-push', text: '永不 force push main', mode: 'forbid' })
@@ -199,11 +199,11 @@ test('section text: 空网返回空串（不占 prompt 预算）；有内容时�
   const root = makeRoot()
   try {
     const { ctx, sections } = mockCtx()
-    apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })
+    apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })
     const section = sections[0]!
     assert.match(renderSection(section), /^$/, '空网 → 空区段')
 
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
     api.addConstraint({ key: 'c1', text: '必须先跑测试', mode: 'require' })
     api.updateProgress('t2', { status: 'doing', summary: '重构进行中' })
     const out = renderSection(section)
@@ -307,7 +307,7 @@ test('auto-observe 成功路径: tools/result 事件 → observation 落网（�
     assert.match(hit!.node.text, /example\.com/, '参数摘要进文本（协作 agent 可分辨同工具不同调用）')
 
     // 模型面可达：recall 能读到这条自动观测
-    const out = (tools.find((t) => t.name === 'memory_net_recall')!.execute({ query: 'browser_open' }) as { text: string }).text
+    const out = (tools.find((t) => t.name === 'memory_net_recall')!.execute({ query: 'browser_open', view: 'raw' }) as { text: string }).text
     assert.match(out, /\[观测\] 工具 browser_open 成功/)
     api.close()
   } finally {

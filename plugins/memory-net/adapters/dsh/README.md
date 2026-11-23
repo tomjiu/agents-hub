@@ -4,6 +4,17 @@
 已对 **真实 dsh 0.1.2-rc.1** 端到端验证（见文末冒烟）：插件加载 / 工具注册 / systemPrompt
 区段注入 / 模型工具调用 / SQLite 落盘 / 宿主工具结果自动观测（auto-observe）全链路闭环。
 
+## 精选模式（本分支候选，当前Web未采用）
+
+`recall.view`配置默认curated，作用于提示区段及memory_net_recall。工具传`view:"raw"`仅诊断本次调用，不改变后续注入；非法模式拒绝。核心host api.activate默认raw以兼容旧接口，显式传curated才精选。工具结果、失败证据仍自动落库；精选排除日志不是删除日志。
+
+```js
+memory_net_recall({query:"SQLite WAL",task_id:"task-A",view:"curated"})
+memory_net_recall({query:"browser_open",view:"raw"})
+```
+
+没有task/run上下文时，其他任务进度不进入提示；需要该任务时显式recall。全局tip/已审阅推断仍按预算竞争，正文匹配不是语义正确性。输出含节点ID/based_on及精选排除统计，已审阅推断明确不是物理观测。旧自动观测、GC依据、workspace内容不被重写。宿主能力与真实模型上下文仍需独立验证，不能直接覆盖运行中包。
+
 ## 当前宿主验收
 
 在agents-hub中新增 [跨平台真实宿主探针](../../../../asset-manager/DSH-HOST-ACCEPTANCE.md)，P0实装DSH 0.2.2-rc.1与隔离0.2.2-rc.5独立headless及新clone重复验证通过（旧rc.4记录为历史）：Memory-net工具与持久化、生成MCP bridge及部署Skill实际调用同时闭环。本地脚本化模拟模型、不动用户live profile、不下载或修改DSH。

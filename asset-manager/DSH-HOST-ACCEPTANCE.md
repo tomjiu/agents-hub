@@ -26,6 +26,10 @@ node asset-manager/probe-dsh-host.mjs
 
 详见 [搜索功能验收](SEARCH-ACCEPTANCE.md)。当前DSH Search-core配置采用static预注册，避免调用中工具列表刷新。默认实际验证同批tool_search和search；HUB_DSH_PARALLEL_DISCOVERY=0仅供串行诊断，不能生成可批准的兼容记录；未改DSH官方bridge，也不证明其他动态MCP不存在竞态。
 
+## 精选召回专项
+
+设置HUB_MEMORY_P0=1与HUB_MEMORY_CURATED=1后复跑同一探针：预置持久tip，检查默认系统提示排除自动日志/未审阅推断/无上下文进度，实际memory_net_recall精选/显式raw结果均返回模型；SQLite仍保留独立观测及GC依据。两版报告含curated_prompt/curated_recall/raw_diagnostic。模型为本地脚本化fixture，不代表公网源或当前Web采用。未开启CURATED时，探针显式raw维持旧注入契约。
+
 ## P0专项
 
 显式HUB_MEMORY_P0=1增加合成fixture的seed → 重复/无关echo → check → memory_net_recall链路。实际验证自动观测独立追加、promoted结论回到模型、GC保留旧依据；SQLite独立读取验证引用。fixture使用显式evidence审核，不模拟用户授权。核心另测传递闭包/引用环/失败回滚/写锁；宿主结果不代替这些测试，也不代表当前Web采用。见[P0记录](../catalog/audit/memory-provenance-p0.json)。

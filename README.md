@@ -33,6 +33,10 @@ PR #3已审阅并合入main（合并提交6a2ba83），包含资产可用性/组
 
 2026-11-23补充：PR [#4](https://github.com/tomjiu/agents-hub/pull/4) 与 [#5](https://github.com/tomjiu/agents-hub/pull/5) 已审阅合并；记忆P0及审阅补丁已在当前Web实际采用，保留原记忆/搜索目录和模型配置，无重启。**基础记忆、抓取与缓存实测通过，不等于完整可用：最终通用搜索查询均降级为空，仍有明显上游可用性/相关性缺口。** 详见[本轮Web验收与缺口](<catalog/audit/web-review-adoption.json>)。下文/其他证据中的未采用、尚未合并和旧测试计数为阶段历史。
 
+## 本分支候选：搜索可靠性与精选召回
+
+基于已合并main隔离开发，**尚未合并、当前Web未采用**。搜索新增证据感知早收割、有限恢复等待、实例分预算及迟到结果隔离，空/降级结果不缓存；相关性与网络守卫不放宽。记忆新增非破坏性精选投影，DSH默认不注入自动工具日志、无当前上下文的任务进度；原日志/依据仍存储，显式raw用于排障。详见[搜索阶段验收](<catalog/audit/search-reliability-candidate.json>)、[精选召回验收](<catalog/audit/curated-recall-candidate.json>)及[适配说明](<plugins/memory-net/adapters/dsh/README.md>)。以下运行状态记录为此前main/Web，不表示当前候选已经部署。
+
 ## 按任务找能力
 
 先看[用户能力目录](<catalog/CAPABILITIES.md>)，不必理解维护源目录或厂商内部命名。首版是14条精选路线，按办公、设计、工程、研究、安全展示，提供多领域/阶段标签；不是所有123个Skill的自动分类，也不是新建三个同名工作流Skill。

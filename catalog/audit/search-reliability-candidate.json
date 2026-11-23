@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "status": "ISOLATED_CANDIDATE_NOT_LIVE_ADOPTED",
+  "baseline": "922fdb6",
+  "root_causes": [
+    "Raw result count used for early harvest before query evidence filtering.",
+    "SearX chain shared a single abort budget across instances.",
+    "Rescue tested raw-empty, not evidence-empty; transient empty/degraded responses cached.",
+    "Late canceled providers wrote health after router return; uncooperative providers could outlive disabled soft deadline."
+  ],
+  "test": {
+    "pass": 335,
+    "fail": 0,
+    "new_regressions": 5,
+    "red": "Three scheduling failures reproduced; SearX pre-aborted injected fixture hang fixed before green; red process explicitly killed."
+  },
+  "measurement": {
+    "scope": "Separate development SearchCore process, isolated cache, actual public network; not paired same-time A/B and not Web adoption.",
+    "raw": "Bing returned 5 broad SQLite pages rejected by unchanged gate; Keenable 5672ms/3 accepted; HN 5981ms/4 accepted; SearX 16494ms/429 after connect timeout.",
+    "after": "SQLite WAL concurrency:5 candidates/10033ms including official wal.html; Zed DeltaDB:5 candidates/1897ms including zed.dev/deltadb. Mixed domain routing still selects specialty sources beyond default config.engines; explicit opts.engines is provider allowlist.",
+    "limitations": [
+      "Public availability changes; unpaired samples cannot quantify guaranteed improvement.",
+      "Old/draft pages can rank first; candidate evidence is not version correctness.",
+      "Recovery can increase quality-empty latency to10s; endpoint rate limits remain.",
+      "Existing DDG throttle/backoff and external X chain remain outside this milestone."
+    ]
+  },
+  "safety": {
+    "ssrf_unchanged": true,
+    "lexical_gate_unchanged": true,
+    "live_sources_unchanged": true,
+    "user_state_unchanged": true
+  }
+}

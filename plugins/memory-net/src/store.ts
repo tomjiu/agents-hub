@@ -39,6 +39,7 @@ import {
   rankCandidates,
   resolveBudgets,
 } from './activate.js'
+import {curationReason} from './curation.js'
 
 /** 写纪律矩阵（v1 写死）。 */
 const KIND_ALLOWED_ROLES: Record<Exclude<NodeKind, 'progress'>, readonly Role[]> = {
@@ -409,8 +410,17 @@ export class MemoryNet {
    * contradicted / demoted / superseded 不进入激活；promoted inference 按 observation 级权重。
    */
   activate(query: string, opts?: ActivateOpts): ActivationResult {
+    if (opts?.view !== undefined && opts.view !== 'raw' && opts.view !== 'curated') throw new WorkspaceError('Invalid recall view')
     const now = Date.now()
     const budgets = resolveBudgets(opts?.budgets)
+    const curated = opts?.view === 'curated'
+    const curation: ActivationResult['curation'] = curated ? {view:'curated',excluded:0,reasons:{}} : undefined
+    const eligible = (n: MemoryNode): boolean => {
+      const reason = curationReason(n, query ?? '', opts ?? {})
+      if (!reason) return true
+      if (curation) {curation.excluded++;curation.reasons[reason] = (curation.reasons[reason] ?? 0)+1}
+      return false
+    }
 
     const constraints = (this.db.prepare(
       "SELECT * FROM nodes WHERE kind = 'constraint' AND status = 'active' ORDER BY updated_at DESC",
@@ -432,8 +442,12 @@ export class MemoryNet {
       ).all() as unknown as NodeRow[]).map(rowToNode)
     }
 
+    if (curated) progress = (this.db.prepare(
+      "SELECT * FROM nodes WHERE kind = 'progress' AND status = 'active'",
+    ).all() as unknown as NodeRow[]).map(rowToNode).filter(eligible)
+
     // 竞争候选：其余 active 节点
-    const competitors = (this.db.prepare(
+    let competitors = (this.db.prepare(
       `SELECT * FROM nodes WHERE (status = 'active' OR (kind = 'inference' AND status = 'promoted'))
          AND NOT (kind = 'progress' AND task_id IS NOT NULL)
        ORDER BY updated_at DESC`,
@@ -443,6 +457,7 @@ export class MemoryNet {
       return true
     })
 
+    if (curated) competitors = competitors.filter(n => n.kind !== 'progress').filter(eligible)
     const ranked = rankCandidates(competitors, query ?? '', now)
 
     // trail 摘要（weight 最低，预算紧时最先丢）
@@ -469,6 +484,7 @@ export class MemoryNet {
     return {
       nodes: picked.sort((a, b) => (b.weight - a.weight) || (b.score - a.score)),
       trail: trailIncluded ? trailDigest : undefined,
+      ...(curation ? {curation} : {}),
       tokens_used: tokensUsed,
       nodes_dropped: droppedTotal,
       budgets,

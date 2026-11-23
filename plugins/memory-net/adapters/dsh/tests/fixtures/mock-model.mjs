@@ -25,6 +25,7 @@ const SKILL_NAME = process.env.MN_E2E_SKILL
 const SEARCH_NAME = process.env.MN_E2E_SEARCH_TOOL
 const FETCH_NAME = process.env.MN_E2E_FETCH_TOOL
 const MEMORY_P0 = process.env.MN_E2E_MEMORY_P0 === '1'
+const CURATED = process.env.MN_E2E_CURATED === '1'
 const TUN_FETCH = process.env.MN_E2E_TUN_FETCH === "1"
 const PARALLEL_DISCOVERY = process.env.MN_E2E_PARALLEL_DISCOVERY === '1'
 const SEARCH_ARGS = JSON.stringify({ query: process.env.MN_E2E_SEARCH_QUERY || 'aurora glacier', engines: ['searxng'], top_n: 3 })
@@ -71,8 +72,14 @@ const server = createServer((req, res) => {
       else if (!hasCall('call_echo_3')) p0Calls = [call('call_echo_2','mn_e2e_echo',{say:'unrelated B'}),call('call_echo_3','mn_e2e_echo',{say:'hello auto-observe'})]
       else if (!hasCall('call_p0_check')) p0Calls = [call('call_p0_check','mn_e2e_provenance',{phase:'check'})]
       else if (!hasCall('call_p0_recall')) p0Calls = [call('call_p0_recall','memory_net_recall',{query:'MN-P0-REVIEWED-DECISION'})]
+      else if (CURATED && !hasCall('call_curated')) p0Calls = [call('call_curated','memory_net_recall',{query:'hello auto-observe'})]
+      else if (CURATED && !hasCall('call_raw')) p0Calls = [call('call_raw','memory_net_recall',{query:'hello auto-observe',view:'raw'})]
     }
+    const prompt = strings(messages.filter(m=>m.role==='system'||m.role==='developer')).join('\n')
     const diag = {
+      has_curated_prompt:CURATED&&prompt.includes('MN-CURATED-DURABLE-TIP')&&!prompt.includes('工具 mn_e2e_echo 成功')&&!prompt.includes(WRITE_TEXT)&&!prompt.includes('登录页'),
+      has_curated_recall:messages.some(m=>m.role==='tool'&&m.tool_call_id==='call_curated'&&strings(m.content).some(s=>s.includes('[精选]')&&!s.includes('工具 mn_e2e_echo 成功'))),
+      has_raw_recall:messages.some(m=>m.role==='tool'&&m.tool_call_id==='call_raw'&&strings(m.content).some(s=>s.includes('工具 mn_e2e_echo 成功'))),
       ts: Date.now(),
       round: afterTool ? 'after_tool' : 'first',
       stream: j.stream === true,

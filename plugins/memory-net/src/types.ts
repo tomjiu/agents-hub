@@ -91,6 +91,8 @@ export interface Budgets {
 }
 
 export interface ActivateOpts {
+  /** Core defaults to raw for compatibility; curated is a read-only projection. */
+  view?: 'raw' | 'curated'
   run_id?: string | null
   task_id?: string | null
   agent_id?: string
@@ -116,6 +118,7 @@ export interface TrailDigest {
 }
 
 export interface ActivationResult {
+  curation?: { view: 'curated'; excluded: number; reasons: Record<string, number> }
   nodes: RankedNode[]
   trail?: TrailDigest
   tokens_used: number

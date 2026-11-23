@@ -40,10 +40,15 @@ export const searxng: Provider = {
     if (candidates.length === 0) throw new Error("searxng: no instance configured");
 
     let lastErr: Error | undefined;
+    const budget = ctx.opts.recoveryDeadlineMs ?? ctx.opts.timeoutMs ?? 10000;
+    const instanceMs = Math.max(1,Math.min(2500,Math.floor(budget/candidates.length)));
     for (const base of candidates) {
+      ctx.signal.throwIfAborted();
+      const signal = AbortSignal.any([ctx.signal,AbortSignal.timeout(instanceMs)]);
       try {
-        return await searchOne(base, query, ctx);
+        return await searchOne(base, query, {...ctx,signal});
       } catch (e) {
+        ctx.signal.throwIfAborted();
         lastErr = e instanceof Error ? e : new Error(String(e));
         // 伪 200(挑战页)/429/超时都换下一家;全灭才抛最后一个错误交熔断
       }

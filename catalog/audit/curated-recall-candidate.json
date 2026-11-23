@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "status": "LOCAL_AND_ISOLATED_HOST_VERIFIED_NOT_MERGED_NOT_WEB_ADOPTED",
+  "baseline": "922fdb67cf775bdaec69ba63b66d7747ca115faf",
+  "tests": {
+    "core": {
+      "total": 39,
+      "pass": 39,
+      "fail": 0
+    },
+    "adapter": {
+      "total": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "root": {
+      "total": 149,
+      "pass": 148,
+      "skip": 1,
+      "fail": 0
+    },
+    "search": {
+      "total": 335,
+      "pass": 335,
+      "fail": 0
+    }
+  },
+  "tdd": {
+    "core": "Three behavioral failures before projection; TypeScript fixture typo corrected before red.",
+    "adapter": "Two behavior/config failures before default curated policy; legacy raw assertions changed to explicit raw. Cleanup EPERM hid assertion failures, no ACL workaround. Final core suite launched from root failed four cwd-relative CLI smoke tests; rerun from plugins/memory-net passed all 38."
+  },
+  "projection": {
+    "method": "Read-only selection, no schema or lifecycle change",
+    "automatic_observations": "payload.tool excluded from curated only",
+    "context": "Constraint protected; progress current task/run only; unscoped tips/reviewed inference durable default; explicit query literal token hit; raw compatibility retained",
+    "storage_unchanged": "Core fixtures compare all exported nodes/trail/seq before and after activation (export timestamp excluded).",
+    "render": "IDs/based_on included; reviewed inference explicitly distinct from physical observation",
+    "limitations": [
+      "Literal OR term hits, not semantic relevance; generic queries may match broadly.",
+      "Empty injection has no current task/run context, omits scoped progress; caller must recall explicitly.",
+      "Global tips and reviewed conclusions still compete; no automatic summary or promotion.",
+      "Automatic logs remain on disk; growth, sensitive data capture, immutable histories and reference concurrency unresolved."
+    ]
+  },
+  "hosts": [
+    {
+      "version": "0.2.2-rc.1",
+      "assets": "25b79afafbbd762a394dc0ae51e20a8330497c05af22c7f7b7703ab8698bfc2f",
+      "host": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
+      "status": "PASS",
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true,
+        "curated_prompt": true,
+        "curated_recall": true,
+        "raw_diagnostic": true,
+        "independent_observations": true,
+        "promoted_recalled": true,
+        "gc_evidence_preserved": true
+      },
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "quality_verified": true,
+        "explicit_selection_verified": true,
+        "provider_requests": 3,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "fetch": {
+        "literal_refused": true,
+        "trusted_tun_verified": false,
+        "remote_ip_verified": false
+      }
+    },
+    {
+      "version": "0.2.2-rc.5",
+      "assets": "25b79afafbbd762a394dc0ae51e20a8330497c05af22c7f7b7703ab8698bfc2f",
+      "host": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
+      "status": "PASS",
+      "memory": {
+        "persisted": true,
+        "prompt_injection": true,
+        "auto_observe": true,
+        "self_filter": true,
+        "curated_prompt": true,
+        "curated_recall": true,
+        "raw_diagnostic": true,
+        "independent_observations": true,
+        "promoted_recalled": true,
+        "gc_evidence_preserved": true
+      },
+      "search": {
+        "queried": true,
+        "refs_returned": true,
+        "cache_hit": true,
+        "quality_verified": true,
+        "explicit_selection_verified": true,
+        "provider_requests": 3,
+        "cache_isolated": true,
+        "source": "Local SearXNG-compatible fixture; not public web"
+      },
+      "fetch": {
+        "literal_refused": true,
+        "trusted_tun_verified": false,
+        "remote_ip_verified": false
+      }
+    }
+  ],
+  "scope": {
+    "live_profile_modified": false,
+    "live_sources_rebuilt": false,
+    "user_database_modified": false,
+    "skills_or_asset_baselines_changed": false
+  },
+  "next": "Review isolated branch and test proposed deployment separately; no implicit runtime adoption.",
+  "review": {
+    "finding": "Rendered dependency/provenance IDs were omitted from token accounting; promotion-only review evidence was not displayed.",
+    "fix": "Include provenance in estimate with fixed per-node label overhead and render review_evidence; regression fails before fix.",
+    "compatibility": "Legacy budget-priority fixture now derives size from nodeTokens rather than old body-only estimate; cleanup EPERM was an unclosed test handle after assertion, not ACL denial."
+  }
+}

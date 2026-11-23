@@ -2,6 +2,12 @@
 
 > 同目标、多 Agent 分工，维护**一张共享记忆网**。按 workspace 物理隔离；事实（observation）与推断（inference）硬隔离；activate 预算化注入。**不是通用 chatbot RAG** —— 没有向量库、没有相似度检索，只有结构化节点、权重序与双预算裁剪。
 
+## 精选召回（隔离候选）
+
+核心activate默认raw兼容旧调用；`activate(query,{view:"curated",task_id,run_id})`使用只读精选投影。自动工具观测（payload.tool）不进入精选，原件/引用仍完整保留，显式raw可诊断。约束始终保护，进度仅当前上下文保护；没有上下文时不冻结其他任务。非空查询按NFKC字面词命中，ASCII词边界避免react命中reactivity；不作向量或语义召回。空查询只保留持久tip、已审阅推断和明确当前上下文内容。
+
+精选返回curation排除数及原因；预算裁剪统计与策略排除分开。`promoted`仍是经过审阅的推断，不是物理事实或身份认证。此投影不删除、不自动升级、也不解决存储增长、不可变版本/代码绑定、引用并发竞态及敏感信息脱敏。DSH默认策略见[适配说明](<adapters/dsh/README.md>)。
+
 ## 与「每人私有记忆」的区别
 
 常见的 agent 记忆方案是每个 agent 一份私有记忆库：进度不可见、路径不可复现、互相踩踏重做。memory-net 反其道而行：

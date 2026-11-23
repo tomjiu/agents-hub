@@ -10,7 +10,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { MemoryNet } from '../src/store.js'
 import { WriteForbiddenError, WorkspaceError } from '../src/errors.js'
-import { estimateTokens } from '../src/activate.js'
+import { nodeTokens } from '../src/activate.js'
 import { runCli } from '../src/cli.js'
 import { makeTempWs, cleanupDir } from './helpers.js'
 
@@ -23,8 +23,8 @@ test('P2-1: 预算紧时候选（weight 5）优先于 trail（weight 1）入选'
     for (let i = 1; i <= 6; i++) host.appendTrail(runId, { action: `step-${i}` })
     // 高权重候选：observation（正文加长，token 估算与 nodeTokens 同源）
     const longText = '数据库主从延迟扩大到三秒，写入侧出现堆积，需要延迟回放与限流介入。'.repeat(6)
-    host.add('observation', { key: 'db-status', text: longText, source: 'tool' })
-    const obsTokens = estimateTokens(`observation db-status ${longText}`)
+    const observation = host.add('observation', { key: 'db-status', text: longText, source: 'tool' })
+    const obsTokens = nodeTokens(observation)
 
     // 预算 = 观测 + 10：观测必入选，trail（远大于 10）必被丢——
     // 旧实现 trail 先占 → 观测被裁（倒挂）；新实现观测先入 → trail 被丢（文档语义）
