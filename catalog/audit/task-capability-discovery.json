@@ -1,0 +1,541 @@
+{
+  "schema": 1,
+  "status": "TASK_DISCOVERY_P0_LOCAL_VERIFIED_NOT_MERGED_NOT_RUNTIME_ADOPTED",
+  "baseline_commit": "766dff208c5abd17c7066c4a66e62492ee38ef19",
+  "branch": "task-capability-discovery",
+  "validation": {
+    "status": "PASS",
+    "routes": 14,
+    "mapped_assets": 15,
+    "unmapped_assets": 122,
+    "mapping_reviews": [],
+    "activated": false,
+    "scope": "Registry structure, reference identities and reviewed Skill-body digests; not runtime acceptance."
+  },
+  "counts": {
+    "routes": 14,
+    "mapped": 15,
+    "unmapped": 122
+  },
+  "queries": [
+    {
+      "query": "需求分析与规划",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "requirements-planning",
+          "status": "PARTIAL_CANDIDATE",
+          "coverage": "partial",
+          "providers": [
+            {
+              "id": "writing-plans",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "review-required",
+              "declared_restriction": false,
+              "blockers": []
+            },
+            {
+              "id": "doc-coauthoring",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "review-required",
+              "declared_restriction": false,
+              "blockers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "办公质量验收",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "quality-acceptance",
+          "status": "PARTIAL_CANDIDATE",
+          "coverage": "partial",
+          "providers": [
+            {
+              "id": "verification-before-completion",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "review-required",
+              "declared_restriction": false,
+              "blockers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "执行计划",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "task-execution",
+          "status": "PARTIAL_CANDIDATE",
+          "coverage": "partial",
+          "providers": [
+            {
+              "id": "executing-plans",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "review-required",
+              "declared_restriction": false,
+              "blockers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "UI设计",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "ui-design",
+          "status": "CANDIDATES",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "frontend-design",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "Apache-2.0",
+              "declared_restriction": false,
+              "blockers": []
+            },
+            {
+              "id": "workbuddy.ardot-ui-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "workbuddy-installer",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            },
+            {
+              "id": "trae.solo-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "trae-cdn",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "自动化测试",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "webapp-testing",
+          "status": "CANDIDATES",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "webapp-testing",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "Apache-2.0",
+              "declared_restriction": false,
+              "blockers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "浏览器自动化",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "browser-automation",
+          "status": "CANDIDATES",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "playwright",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "Apache-2.0",
+              "declared_restriction": false,
+              "blockers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "业务排期",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "business-scheduling",
+          "status": "UNAVAILABLE",
+          "coverage": "none",
+          "providers": []
+        }
+      ]
+    },
+    {
+      "query": "Word文档",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "word-document",
+          "status": "UNAVAILABLE",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "docx",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "proprietary-restricted-declared",
+              "declared_restriction": true,
+              "blockers": [
+                {
+                  "code": "license",
+                  "reason": "Declared license restriction blocks deployment: docx; inspect original license and resolve separately"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "PPT制作",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "pptx-work",
+          "status": "UNAVAILABLE",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "pptx",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "proprietary-restricted-declared",
+              "declared_restriction": true,
+              "blockers": [
+                {
+                  "code": "license",
+                  "reason": "Declared license restriction blocks deployment: pptx; inspect original license and resolve separately"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "Excel数据处理",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "xlsx-work",
+          "status": "UNAVAILABLE",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "xlsx",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "proprietary-restricted-declared",
+              "declared_restriction": true,
+              "blockers": [
+                {
+                  "code": "license",
+                  "reason": "Declared license restriction blocks deployment: xlsx; inspect original license and resolve separately"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "PDF处理",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "pdf-work",
+          "status": "UNAVAILABLE",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "pdf",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "proprietary-restricted-declared",
+              "declared_restriction": true,
+              "blockers": [
+                {
+                  "code": "license",
+                  "reason": "Declared license restriction blocks deployment: pdf; inspect original license and resolve separately"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "设计系统",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "design-system",
+          "status": "UNAVAILABLE",
+          "coverage": "partial",
+          "providers": [
+            {
+              "id": "workbuddy.ardot-ui-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "workbuddy-installer",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "quantum agriculture",
+      "status": "NO_MATCH",
+      "total_matches": 0,
+      "routes": []
+    },
+    {
+      "query": "UI设计和自动化测试",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 2,
+      "routes": [
+        {
+          "id": "webapp-testing",
+          "status": "CANDIDATES",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "webapp-testing",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "Apache-2.0",
+              "declared_restriction": false,
+              "blockers": []
+            }
+          ]
+        },
+        {
+          "id": "ui-design",
+          "status": "CANDIDATES",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "frontend-design",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "Apache-2.0",
+              "declared_restriction": false,
+              "blockers": []
+            },
+            {
+              "id": "workbuddy.ardot-ui-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "workbuddy-installer",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            },
+            {
+              "id": "trae.solo-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "trae-cdn",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "不要UI设计",
+      "status": "TASK_CANDIDATES",
+      "total_matches": 1,
+      "routes": [
+        {
+          "id": "ui-design",
+          "status": "CANDIDATES",
+          "coverage": "scoped",
+          "providers": [
+            {
+              "id": "frontend-design",
+              "usability": "CONTENT_READY",
+              "mapping_status": "CURRENT",
+              "source_kind": "local",
+              "license": "Apache-2.0",
+              "declared_restriction": false,
+              "blockers": []
+            },
+            {
+              "id": "workbuddy.ardot-ui-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "workbuddy-installer",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            },
+            {
+              "id": "trae.solo-design",
+              "usability": "BLOCKED",
+              "mapping_status": "CURRENT",
+              "source_kind": "trae-cdn",
+              "license": "vendor-restricted",
+              "declared_restriction": false,
+              "blockers": [
+                {
+                  "code": "vendor-review",
+                  "reason": "Vendor license/host requirements must be reviewed; not portable-by-default"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "regression": {
+    "root": {
+      "tests": 149,
+      "pass": 148,
+      "fail": 0,
+      "skipped": 1
+    },
+    "capability_tests": {
+      "tests": 10,
+      "pass": 10,
+      "fail": 0
+    },
+    "catalog": {
+      "status": "PASS",
+      "assets": 137,
+      "historical_local_edit_warnings_retained": true
+    }
+  },
+  "tdd": {
+    "module_missing_before_implementation": true,
+    "cli_unknown_command_before_integration": true,
+    "directory_missing_before_renderer": true,
+    "optional_validation_missing_before_helper": true,
+    "scope": "Actual observed red results followed by passing feature tests. Harness syntax/write failures do not constitute TDD evidence."
+  },
+  "preservation": {
+    "canonical_skill_count": 123,
+    "asset_count": 137,
+    "original_targets": 2418,
+    "missing": 0,
+    "mismatch": 0,
+    "banned": 0,
+    "protected_paths_unchanged": [
+      "skills",
+      "plugins",
+      "mcp",
+      "experts",
+      "catalog/assets",
+      "catalog/locks",
+      "catalog/provenance",
+      "catalog/runtime"
+    ],
+    "memory_pr4_modified": false,
+    "current_web_modified": false,
+    "source_profiles_modified": false
+  },
+  "file_sha256": {
+    "asset-manager/core/capabilities.mjs": "7ca7ce6b8de6ab1fef5d3cf0bb09a7f19846e11b2d3f7a4ddc61747ee6070f0a",
+    "asset-manager/cli.mjs": "fe46c5cc039a54f1f4adb33e1ae9d90c8bcd7877ca4fdddecd882428cf85878f",
+    "catalog/capabilities.json": "b0836516de8e5bf7be1086455d26881b1d02e77bb11c627d19ae75644a40e36b",
+    "catalog/CAPABILITIES.md": "70bc450cdefa5bd0a7629bc35d042173c7bced43c440f5427976cbf348d2736f",
+    "asset-manager/tests/capabilities.test.mjs": "bd07f8ee672b4d35629488212d0ff2c81ef4fbddb286663643c8ff487a8e05c7"
+  },
+  "retained_failures": [
+    "First full-test logging failed because ignored output directory did not exist; exit0 did not prove test success",
+    "Full regression then found onboarding test treated angle-bracket Markdown destinations as literal filenames; parser corrected and regression rerun"
+  ],
+  "limitations": [
+    "Curated literal task aliases, not semantic search or complete request understanding; negated UI query still matches UI label",
+    "14 routes reference15 distinct Skill assets;122 registered assets are not mapped, including MCP/plugins/rules",
+    "Office planning/execution/acceptance only partial scope, not three newly validated general workflows",
+    "Word/PPT/Excel/PDF and vendor offerings retain declared license/runtime barriers",
+    "Reviewed hash covers SKILL.md only; resources/scripts and race-free deployment require original preflight/integrity checks",
+    "No authenticated Web UI test or DSH runtime plugin changes, no professional task execution acceptance",
+    "No public CI success asserted"
+  ],
+  "next_step": "Review this separate task-discovery branch; do not merge Memory-net PR4 or adopt runtime content implicitly."
+}

@@ -4,6 +4,8 @@
 
 ## 新代理查找入口
 
+按任务查找使用 find-capability <query>，按分组浏览使用 capabilities --group office；与下述库存search-assets并列，不改其行为。首版精选子集与完整别名路由会展示部分覆盖/未覆盖、来源/许可、映射复核和原审核障碍，不执行或安装。详见[任务路由说明](<TASK-CAPABILITIES.md>)和[用户目录](<../catalog/CAPABILITIES.md>)。
+
 search-assets <query> [--kind skills|mcp|plugins|agents-md] [--limit N]只读本地登记检索，优先ID/name再description/path；skills-status [--verbose]检查canonical技能、登记缺漏、语法和客户端名称限制。库存坏语法/未登记/缺失使validate失败，厂商不兼容名称单独报告、原件不改。优先skills/individual/research/skill-search/SKILL.md及根AGENTS.md，不用手工扫描全部文件。
 
 preflight <id,id>或--expert NAME检查当前组合；audit-usability列全部登记障碍，不启动服务、不改文件。search-assets支持任务用语/登记别名并返回一致可用性和下一步。CONTENT_READY不是全功能验证，见 [使用审核](USABILITY.md)。

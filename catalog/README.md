@@ -1,5 +1,7 @@
 # Catalog
 
+- [capabilities.json](<capabilities.json>)：任务别名、用户分组、领域/阶段、覆盖边界及已审阅正文哈希，引用稳定Skill ID，不复制Skill。
+- [CAPABILITIES.md](<CAPABILITIES.md>)：同份任务元数据生成的用户目录，动态状态以CLI为准。
 - assets/<id>.toml：稳定 ID、类型、维护路径、来源、许可及基线信息。
 - sources.toml：从旧索引迁移的来源 URL；不暗示已克隆或已审核。
 - updates/{skills,mcp,plugins,agents-md}.toml：四类独立策略。默认检查/下载允许，自动应用禁止；不得覆盖或自动合并。
