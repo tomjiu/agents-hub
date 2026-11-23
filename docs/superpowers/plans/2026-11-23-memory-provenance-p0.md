@@ -12,7 +12,7 @@
 
 ## 边界及验证入口
 
-计划尚未执行。不得从本计划的代码示例推断修复已上线。专用worktree执行，不触碰原main运行dist、用户数据库和Web配置；改动产物先独立编译/新包验收。新库实验不用真实工具日志或完整代码；基线证据见[8项复现](../../../catalog/audit/memory-provenance-baseline.json)。
+执行状态：P0已在隔离分支按红绿测试实施，核心34/adapter22/搜索330/根138通过（根1项跳过），rc.1/rc.5及新clone独立验收见[记录](../../../catalog/audit/memory-provenance-p0.json)。复跑步骤保留为清单；未在当前Web采用。不得从代码示例推断P1或版本绑定已上线。专用worktree执行，不触碰原main运行dist、用户数据库和Web配置；改动产物先独立编译/新包验收。新库实验不用真实工具日志或完整代码；基线证据见[8项复现](../../../catalog/audit/memory-provenance-baseline.json)。
 
 P0不修progress修订漂移、trail稳定地址、代码状态needs_review、任务隔离或噪音预算。GC事务只保护当次可见的已提交引用图；当前add/link先校验引用再写入，与GC并发时仍有检查到使用之间的竞态，P1必须把依赖校验与修改纳入同一写事务，不能把P0宣称成完整并发引用完整性。这些由P1-P3独立计划解决；尤其取消tool名覆盖后观测量会增长，P0不能默认更新live配置。不能做无限提示注入或把新增调用记录当精选记忆。
 

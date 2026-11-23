@@ -1,6 +1,6 @@
 # Memory-net 操作历史与上下文版本绑定设计
 
-状态：**研究与提议，不是已实现功能**。基线为766dff2；复现记录见[临时库证据](../../catalog/audit/memory-provenance-baseline.json)。本轮仅新增文档和基线探针，当前DSH、SQLite用户库、运行产物与原分析仓均不修改。
+状态：**研究与提议，不是已实现功能**。基线为766dff2；复现记录见[临时库证据](../../catalog/audit/memory-provenance-baseline.json)。原研究阶段仅新增文档和基线探针。后续已实施P0正确性补丁并独立验收（[P0记录](../../catalog/audit/memory-provenance-p0.json)）；下文P1-P3仍是提议，当前DSH配置、SQLite用户库及原分析仓不修改。
 
 ## 1. 复用哪些Delta结论
 
@@ -85,4 +85,4 @@ GC先只降级投影，不删除账本。保留被active/promoted/current或明�
 
 成功场景：关于Web重复tool-skill的决策绑定原会话与A配置修订；读取B不推翻它，改A提示复核，历史引用仍显示原A；GC后仍可定位支持证据。分别测bad-key误失效、同内容重验、progress前后、CAS冲突、promoted入选、证据闭包、外部未知编辑、导出缺引用拒绝、会话绑定缺失标unknown、1000条工具噪音下精选预算。追溯身份与检索效果分开验收。
 
-本轮确认8项基线问题，P0计划5项示例在原实现均失败、在临时修补副本均通过并完成类型检查（[计划验证](../../catalog/audit/memory-provenance-plan-validation.json)）。**没有将P0修复加入正式源码，也没有实现P1/P2/P3或迁移**，没有运行Delta二进制或新增网络账号。仅研究材料本地读取与隔离原Memory-net复现，不代表新系统质量验收。
+原研究阶段确认8项基线问题，P0计划5项示例在原实现均失败、在临时修补副本均通过并完成类型检查（[计划验证](../../catalog/audit/memory-provenance-plan-validation.json)）。随后用户授权实施P0，修复已进入隔离分支源码并完成两版宿主及干净副本验收（[P0记录](../../catalog/audit/memory-provenance-p0.json)）。**P1/P2/P3及迁移尚未实现，当前Web未采用P0**；没有运行Delta二进制或新增网络账号。

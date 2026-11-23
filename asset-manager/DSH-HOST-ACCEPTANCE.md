@@ -11,7 +11,7 @@ $env:HUB_DSH_INSTALLATION = '<installed @deepseek-ai/dsh directory>'
 node asset-manager/probe-dsh-host.mjs
 ~~~
 
-其他平台设置同名环境变量后运行。此处HUB_DSH_INSTALLATION指包目录，不是个人配置目录。实测宿主版本为0.2.2-rc.1与next 0.2.2-rc.4；其他版本必须重新验收，不能由结构类型或单元测试推断兼容。
+其他平台设置同名环境变量后运行。此处HUB_DSH_INSTALLATION指包目录，不是个人配置目录。P0当前实测宿主为0.2.2-rc.1与0.2.2-rc.5（历史rc.4记录保留）；其他版本必须重新验收，不能由结构类型或单元测试推断兼容。
 
 ## 完整链路
 
@@ -25,6 +25,10 @@ node asset-manager/probe-dsh-host.mjs
 8. 回收已部署Skill，停止模拟模型并清理测试profile、workspace及视图。遥测DISABLED；不启动Web应用，也不调用公网搜索或真实账户API。
 
 详见 [搜索功能验收](SEARCH-ACCEPTANCE.md)。当前DSH Search-core配置采用static预注册，避免调用中工具列表刷新。默认实际验证同批tool_search和search；HUB_DSH_PARALLEL_DISCOVERY=0仅供串行诊断，不能生成可批准的兼容记录；未改DSH官方bridge，也不证明其他动态MCP不存在竞态。
+
+## P0专项
+
+显式HUB_MEMORY_P0=1增加合成fixture的seed → 重复/无关echo → check → memory_net_recall链路。实际验证自动观测独立追加、promoted结论回到模型、GC保留旧依据；SQLite独立读取验证引用。fixture使用显式evidence审核，不模拟用户授权。核心另测传递闭包/引用环/失败回滚/写锁；宿主结果不代替这些测试，也不代表当前Web采用。见[P0记录](../catalog/audit/memory-provenance-p0.json)。
 
 ## 证据与限制
 

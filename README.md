@@ -90,9 +90,9 @@ node asset-manager/cli.mjs inspect-dsh-bundle <generated-bundle-directory>
 
 生成新的独立包，含Skill副本、搜索MCP原生patch和记忆插件运行副本；必须先通过版本指纹验收。当前DSH搜索配置使用static预注册，已修复自有Search-core同批发现/查询导致unknown tool的竞态；旧包需重新生成、明确采用，运行中实例不会自动更新。不会改DSH profile或复制真实记忆库，用户审查后才明确启动。记忆数据默认落包内私有state，不能自动清理。详见 [运行包指南](asset-manager/DSH-BUNDLE.md)。
 
-## 记忆下一阶段研究（尚未上线）
+## 记忆下一阶段：P0已实现，当前Web未采用
 
-复用已有Zed Delta分析，采用“操作账本＋不可变记忆修订＋精选召回”方向，保留SQLite、不照搬CRDT或内部DDL。已在隔离库复现8项来源/历史/召回差距，并验证第一阶段计划的5项示例在旧实现失败、临时修补副本通过；这不是正式修复或当前Web采用。见[设计](plugins/memory-net/PROVENANCE-DESIGN.md)、[P0实施计划](docs/superpowers/plans/2026-11-23-memory-provenance-p0.md)及[基线证据](catalog/audit/memory-provenance-baseline.json)。
+复用已有Zed Delta分析，采用“操作账本＋不可变记忆修订＋精选召回”方向，保留SQLite、不照搬CRDT或内部DDL。隔离库复现8项差距后，P0已修独立观测误覆盖、promoted漏召回和GC传递依据/原子回滚；核心34、适配22、搜索330与根138项通过（根1项跳过），两版宿主及新clone重复验收，见[P0记录](catalog/audit/memory-provenance-p0.json)。这不是当前Web采用；修订历史和代码版本绑定仍未实现。见[设计](plugins/memory-net/PROVENANCE-DESIGN.md)、[P0实施计划](docs/superpowers/plans/2026-11-23-memory-provenance-p0.md)及[基线证据](catalog/audit/memory-provenance-baseline.json)。
 
 ## 显式项目 Skill 部署
 

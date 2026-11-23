@@ -6,7 +6,7 @@
 
 ## 当前宿主验收
 
-在agents-hub中新增 [跨平台真实宿主探针](../../../../asset-manager/DSH-HOST-ACCEPTANCE.md)，实装DSH 0.2.2-rc.1与隔离next 0.2.2-rc.4独立headless验证通过：Memory-net工具与持久化、生成MCP bridge及部署Skill实际调用同时闭环。本地脚本化模拟模型、不动用户live profile、不下载或修改DSH。
+在agents-hub中新增 [跨平台真实宿主探针](../../../../asset-manager/DSH-HOST-ACCEPTANCE.md)，P0实装DSH 0.2.2-rc.1与隔离0.2.2-rc.5独立headless及新clone重复验证通过（旧rc.4记录为历史）：Memory-net工具与持久化、生成MCP bridge及部署Skill实际调用同时闭环。本地脚本化模拟模型、不动用户live profile、不下载或修改DSH。
 
 ctx.effect可用时销毁自动关闭全部workspace；陈旧工具/事件不得重新打开。原0.1.2-rc.1记录是历史证据，不是全部新版本免验收保证。
 

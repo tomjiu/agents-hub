@@ -6,6 +6,10 @@
 
 2026-11-23，基于766dff2隔离研究复用Delta0.18.2已有符号/DDL分析，形成[记忆版本绑定设计](../../plugins/memory-net/PROVENANCE-DESIGN.md)及[P0计划](../../docs/superpowers/plans/2026-11-23-memory-provenance-p0.md)。8项基线差距已复现，5项计划示例旧实现红灯、临时修补副本绿灯；无正式源码/数据库格式/运行配置变更，不是当前Web修复上线。进度修订、代码状态复核和精选召回分别独立实施；Delta核心开源尚未确认，不复制其内部实现。
 
+## P0记忆正确性实施（隔离验收）
+
+研究之后用户授权继续：独立自动观测追加、promoted召回及显式失效、GC传递证据闭包/事务回滚已分阶段提交。e654b96在新clone重新安装固定依赖和构建：核心34、adapter22、搜索330、根138通过/1权限跳过；rc.1/rc.5实际宿主P0工具回流和持久化重复通过，见[P0证据](memory-provenance-p0.json)。未改schema2/CRDT、当前Web/profile或用户库；研究段为当时历史，不再表示P0未实施。
+
 ## 已完成
 
 - 功能分支 refactor/asset-runtime-center；迁移前 Git bundle 在仓库外保存并验证。
