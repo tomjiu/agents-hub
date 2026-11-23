@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "baseline_hashes": {
+    "src/store.ts": "eef3f8cd702168f5633d26c0c928ec26bcd7d63b317e05c8935fd5e5c8e6a0d4",
+    "src/db.ts": "37b1f9096017202936130b6ab631e55816c2b34886ea81f1e95c48963827bd16",
+    "src/activate.ts": "d07b77d848603589571ba711663e8bb3284efe69e96642cddaf672366d547872",
+    "src/types.ts": "0f9adb39328387e5a1dba4110184a97abe7ad1e2230286b2ccef3f4a4516cf1b",
+    "adapters/dsh/src/bridge.ts": "266f387927f03fd60549f7afbca00cb696a372c2d475a2066b463b0d151cbd29",
+    "adapters/dsh/src/contract.ts": "61ec530a949eb60d97238caead730537e8b8cc307b8de3549539376732557205",
+    "adapters/dsh/src/index.ts": "6d1dbf5fe81d0e9e9754314f383068184ad2dffc26846562bf8436533b1ec40c"
+  },
+  "compiled_hashes": {
+    "src/store.js": "75203cb2a43ac2c8349ee7b1212b053f1d7cfe5e872b24132b8a37ec53a1e9dd",
+    "src/db.js": "96d36b44d6d9af605996c66f34f90292a2833702a3519c189dd8280b858c9b71",
+    "src/activate.js": "9bba29d45b669d92cd8783b3aeed9c18c2b28e81171e4801e9f3aab5d208d94a",
+    "adapters/dsh/src/bridge.js": "5af097b6df903eefcd6a43aed6a79d87334d7bb63664dac46cc601f5f3bd86f4"
+  },
+  "status": "BASELINE_GAPS_CONFIRMED_NOT_FIXED",
+  "baseline_source_commit": "766dff208c5abd17c7066c4a66e62492ee38ef19",
+  "node": "v26.13.1",
+  "cases": [
+    {
+      "name": "unrelated same-tool invocation contradicts dependent conclusion",
+      "confirmed": true,
+      "evidence": {
+        "dependency": "n1",
+        "conclusion_status": "contradicted",
+        "scope": "A and B are different subjects, not opposing evidence"
+      }
+    },
+    {
+      "name": "identical repeated evidence also invalidates conclusion",
+      "confirmed": true,
+      "evidence": {
+        "unchanged_text": true,
+        "status": "contradicted"
+      }
+    },
+    {
+      "name": "progress evidence reference points to mutable current row",
+      "confirmed": true,
+      "evidence": {
+        "same_node_id": true,
+        "old_content_in_export": false,
+        "decision_still_active": true
+      }
+    },
+    {
+      "name": "promoted conclusion is excluded by current active-only query",
+      "confirmed": true,
+      "evidence": {
+        "status": "promoted",
+        "in_activation": false
+      }
+    },
+    {
+      "name": "GC removes old evidence still referenced by a promoted conclusion",
+      "confirmed": true,
+      "evidence": {
+        "purged": 1,
+        "promoted_dependency_missing": true
+      }
+    },
+    {
+      "name": "trail GC renumbers retained steps and loses original operation address",
+      "confirmed": true,
+      "evidence": {
+        "original_seq": 8,
+        "retained_seq": 4,
+        "detail_count_after": 4
+      }
+    },
+    {
+      "name": "unmatched query still activates unrelated high-weight observation",
+      "confirmed": true,
+      "evidence": {
+        "query_match": false,
+        "returned_kind": "observation"
+      }
+    },
+    {
+      "name": "observation bridge discards session root-call and code-state identities",
+      "confirmed": true,
+      "evidence": {
+        "key": "tool:run_code",
+        "payload_keys": [
+          "tool",
+          "is_error",
+          "call_id",
+          "truncated"
+        ],
+        "session_bound": false,
+        "root_call_bound": false
+      }
+    }
+  ],
+  "scope": "Reproduction using compiled unchanged baseline and new synthetic temporary SQLite stores. Assertions describe existing gaps, not desired behavior or feature acceptance. No user database or DSH profile accessed."
+}
