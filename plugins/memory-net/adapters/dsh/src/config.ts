@@ -13,6 +13,7 @@ export interface AdapterConfig {
   agent_id: string
   budgets: { max_nodes: number; max_tokens: number }
   inject: { section_order: number }
+  recall: { view: 'raw' | 'curated' }
   tools: { recall: boolean; write: boolean; max_obs_chars: number }
   /** 宿主工具结果自动 observe 入网（dsh-tools 'tools/result' 事件桥；写纪律不破——仅宿主路径）。 */
   auto_observe: {
@@ -49,7 +50,10 @@ import path from 'node:path'
 
 /** 默认配置（骨架建议值；dsh cordis.patch.yml 行 config 可覆盖）。 */
 export function resolveConfig(raw: Dict = {}): AdapterConfig {
+  const view = obj(raw.recall).view ?? 'curated'
+  if (view !== 'raw' && view !== 'curated') throw new Error('Invalid recall view')
   const c: AdapterConfig = {
+    recall: {view},
     enabled: raw.enabled === undefined ? true : boolOr(raw.enabled, true),
     workspaces_root: String(raw.workspaces_root ?? ''),
     default_workspace: String(raw.default_workspace ?? 'default'),

@@ -35,12 +35,15 @@ ok(`A2 工具注册: mn_e2e_echo（宿主真实工具）出现在 ${withEcho.len
 const withConstraint = rows.filter((r) => r.has_constraint_section)
 if (withConstraint.length === 0) fail('预置约束（永不 force push main）未注入 system prompt（memory-net 区段未生效）')
 ok('B1 区段注入: 宿主预置约束进入 system prompt（memory-net section 生效）')
+const curated = process.env.MN_E2E_CURATED === '1'
 const withProgress = rows.filter((r) => r.has_progress_section)
-if (withProgress.length === 0) fail('预置进度（登录页 60%）未注入 system prompt')
-ok('B2 区段注入: 宿主预置进度进入 system prompt')
+if (!curated && withProgress.length === 0) fail('预置进度（登录页 60%）未注入 system prompt')
+ok(curated ? 'B2 精选区段: 无当前任务时排除其他任务进度' : 'B2 区段注入: 宿主预置进度进入 system prompt')
 const withInference = rows.filter((r) => r.round === 'after_tool' && r.has_inference_section)
-if (withInference.length === 0) fail('工具写入的推断未在后续组装中出现（激活/重组装未生效）')
-ok('B3 区段注入: 工具写入的推断进入工具后组装（重组装生效）')
+if (!curated && withInference.length === 0) fail('工具写入的推断未在后续组装中出现（激活/重组装未生效）')
+ok(curated ? 'B3 精选区段: 不自动注入未审阅推断' : 'B3 区段注入: 工具写入的推断进入工具后组装（重组装生效）')
+
+if (curated && !rows.some(r=>r.has_curated_prompt&&r.has_curated_recall&&r.has_raw_recall)) fail('Curated prompt/recall/raw diagnosis missing')
 
 // C. 闭环回显
 const stdout = readFileSync(stdoutPath, 'utf8')

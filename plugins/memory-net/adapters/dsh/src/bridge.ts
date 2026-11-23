@@ -88,16 +88,17 @@ export function openHostApi(
 }
 
 /** 渲染单节点（progress 带状态；冲突显式标注——不静默双真相）。 */
-function renderNode(x: { node: { kind: string; text: string; confidence: number | null; conflict: boolean; payload: Record<string, unknown> } }): string {
+function renderNode(x: { node: { id: string; status: string; based_on: string[]; kind: string; text: string; confidence: number | null; conflict: boolean; payload: Record<string, unknown> } }): string {
   const n = x.node
   const tag = n.kind === 'observation' ? '观测'
     : n.kind === 'progress' ? `进度${typeof n.payload?.status === 'string' ? `·${n.payload.status}` : ''}`
     : n.kind === 'tip' ? '提示'
     : n.kind === 'constraint' ? '约束'
-    : '推断·未证实'
+    : n.status === 'promoted' ? '推断·已审阅（非物理观测）' : '推断·未证实'
   const conf = n.confidence !== null ? `（置信 ${n.confidence}）` : ''
   const conflict = n.conflict ? ' ⚠冲突' : ''
-  return `[${tag}]${conf}${conflict} ${n.text}`
+  const based = n.based_on.length ? ` based_on=${n.based_on.join(',')}` : ''
+  return `[${tag}]${conf}${conflict} ${n.text} (id=${n.id}${based})`
 }
 
 /** 渲染 ActivationResult 为注入文本（冻结集在前：约束 + 当次进度；trail 摘要收尾）。 */
@@ -108,13 +109,16 @@ export function renderActivation(r: ActivationResult): string {
   for (const x of frozen) lines.push(renderNode(x))
   for (const x of rest) lines.push(renderNode(x))
   if (r.trail) lines.push(`[路径 r=${r.trail.run_id}] ${r.trail.text}`)
+  if (r.curation) lines.push(`[精选] 排除 ${r.curation.excluded}：${JSON.stringify(r.curation.reasons)}`)
   lines.push(`（激活 ${r.nodes.length} 节点 / ${r.tokens_used} tokens，裁掉 ${r.nodes_dropped}）`)
   return lines.join('\n')
 }
 
 /** 工具默认预算（config.budgets 展开为 activate opts）。 */
-export function activateOpts(cfg: AdapterConfig, runId?: string | null, taskId?: string | null) {
+export function activateOpts(cfg: AdapterConfig, runId?: string | null, taskId?: string | null, view: unknown = cfg.recall.view) {
+  if (view !== 'raw' && view !== 'curated') throw new Error('Invalid recall view')
   return {
+    view: view as 'raw' | 'curated',
     run_id: runId ?? null,
     task_id: taskId ?? null,
     agent_id: cfg.agent_id,

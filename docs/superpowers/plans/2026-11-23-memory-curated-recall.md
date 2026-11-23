@@ -8,6 +8,10 @@
 
 **Tech Stack:** Existing SQLite store, pure TypeScript selection, node:test; no embeddings, new databases or credentials.
 
+## Execution status
+
+Local implementation and combined acceptance complete: core38, adapter24, search335, root148 pass/1 permission skip; exact rc.1/rc.5 scripted hosts pass curated prompt/recall/raw diagnosis. Original nodes/seq/trail verified unchanged by projection. Plan terms exportPackage refer to the existing exportPkg API. All steps executed inline; checkboxes retain replay instructions, not deployment authorization. Still to deliver: review PR; currentWeb remains on prior approved package.
+
 ### 1. Non-destructive projection
 Files: `plugins/memory-net/src/curation.ts`, `src/types.ts`, `src/store.ts`, `tests/12-curated-recall.test.ts`.
 - [ ] Seed 30 automatic observations (payload.tool and no subject key), one relevant tip, one reviewed inference, one unrelated tip, task A/B progress, and an active constraint. Capture exportPackage before/after.

@@ -8,6 +8,10 @@
 
 **Tech Stack:** Node TypeScript, node:test, injected fetch, isolated public-source probes. Baseline main 922fdb6; never build into the live review worktree.
 
+## Execution status
+
+Search milestone committed3210f79 with335 passing tests and isolated public-source samples; no live adoption. Compatibility decision: raw Router callers keep old raw-count semantics, SearchCore and Research pass original intent. Kept existing cache identity to preserve legitimate non-degraded selected-provider caches; empty/degraded reads and writes are now denied directly. Public samples are not paired A/B or guaranteed stable/updated results.
+
 ### 1. Scheduling and provider health
 Files: `mcp/servers/search-core/typescript/src/router.ts`, `src/config.ts`, `src/types.ts`, `src/test/reliability.test.ts` (paths below the TypeScript package).
 - [ ] Add regression: fast provider returns 20 unrelated refs, slow provider returns SQLite WAL evidence after early-harvest edge; assert slow evidence survives. Use four injected providers, `earlyHarvestMs:30`, `softDeadlineMs:100`, `timeoutMs:300`, `recoveryDeadlineMs:250`.

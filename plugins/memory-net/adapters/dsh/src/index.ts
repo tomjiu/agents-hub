@@ -99,7 +99,8 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
       parameters: {
         type: 'object',
         properties: {
-          query: { type: 'string', description: '检索词（可空 = 全量按权重序激活）' },
+          query: { type: 'string', description: '检索词（可空 = 精选持久提示/已审阅结论，不是原始日志）' },
+          view: { type: 'string', enum: ['raw', 'curated'], description: '默认精选；raw仅本次调用用于诊断' },
           workspace: { type: 'string', description: `workspace 名（默认 ${cfg.default_workspace}）` },
           run_id: { type: 'string' },
           task_id: { type: 'string' },
@@ -116,7 +117,7 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
       },
       execute: (args) => {
         const net = netOf(workspaceDir(cfg, str(args.workspace, cfg.default_workspace)))
-        const r = net.activate(str(args.query, ''), activateOpts(cfg, args.run_id as string | null | undefined, args.task_id as string | null | undefined))
+        const r = net.activate(str(args.query, ''), activateOpts(cfg, args.run_id as string | null | undefined, args.task_id as string | null | undefined, args.view === undefined ? cfg.recall.view : args.view))
         return { text: renderActivation(r) }
       },
     }
