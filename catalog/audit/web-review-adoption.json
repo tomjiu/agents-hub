@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "status": "LIVE_ADOPTED_BASIC_PATHS_PASS_WITH_EXPLICIT_GAPS",
+  "as_of": "2026-11-23T08:51:51.845Z",
+  "review": {
+    "memory_pr": 4,
+    "memory_head": "7a1c77514d12f7a044e50c9ec4df46d64384ca79",
+    "memory_merge": "86689e8bc7cb19c30a8482d420dc96f36dd7b719",
+    "directory_pr": 5,
+    "directory_merge": "621d4a41877b7aa6e30441009708f66b4e736b6a",
+    "finding": "Promotion-only evidence was omitted from subject invalidation; failing regression reproduced and fixed before adoption.",
+    "fix": "351b8490e61216b46818a638c38df79dac073232",
+    "ci": "No public CI checks; local and isolated host evidence only"
+  },
+  "runtime": {
+    "host": "0.2.2-rc.1",
+    "isolated_hosts": [
+      "0.2.2-rc.1",
+      "0.2.2-rc.5"
+    ],
+    "assets_sha256": "bd4c734fedd6bb73433af2069c21bf81bdceca2f0f8729c20c57e34416876495",
+    "same_web_process": true,
+    "restart": false,
+    "memory_state_retained": true,
+    "search_state_retained": true,
+    "config_prefix_retained": true,
+    "model_global_and_package_unchanged": true,
+    "sqlite_consistent_backups": true,
+    "guarded_profile_rollback": true,
+    "live_source": "Pinned review worktree and immutable memory-runtime copy; retained after merge, not deleted"
+  },
+  "tests": {
+    "root": {
+      "total": 149,
+      "pass": 148,
+      "skip": 1,
+      "fail": 0
+    },
+    "memory": {
+      "pass": 35,
+      "fail": 0
+    },
+    "adapter": {
+      "pass": 22,
+      "fail": 0
+    },
+    "search": {
+      "pass": 330,
+      "fail": 0
+    },
+    "host": "Concurrent discovery, MCP result returned to model, prompt injection, persistence, independent observations and evidence-preserving GC passed on both hosts; search fixture is not public web"
+  },
+  "web": {
+    "scope": "Actual tools executed by this existing Web conversation; direct SQLite readback. Not authenticated GUI click coverage.",
+    "memory": {
+      "marker_persisted": true,
+      "promoted_recall": true,
+      "gc_evidence_preserved": true,
+      "promotion_only_invalidation": true,
+      "workspace": "web-review-check",
+      "fixture": "Host fixture changes only isolated test workspace; actual model memory tool write/recall"
+    },
+    "independent_observations": [
+      {
+        "id": "n344",
+        "key": null,
+        "status": "active"
+      },
+      {
+        "id": "n343",
+        "key": null,
+        "status": "active"
+      },
+      {
+        "id": "n342",
+        "key": null,
+        "status": "active"
+      }
+    ],
+    "retained_main_count_at_read": 344,
+    "old_marker_retained": true,
+    "model_observation_refused": true,
+    "fetch": {
+      "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+      "cache_hit": true,
+      "equal_cached_body": true,
+      "mode": "trusted-tun",
+      "ultimate_remote_ip_verified": false,
+      "literal_ip_refused": true
+    },
+    "searches": [
+      {
+        "query": "Zed DeltaDB",
+        "selection": {
+          "mode": "explicit",
+          "requested": [
+            "bingrss",
+            "keenable"
+          ]
+        },
+        "refs": 0,
+        "quality": {
+          "status": "no_relevant_results",
+          "evaluated": 10,
+          "rejected": 10,
+          "reasons": {
+            "insufficient_query_evidence": 10
+          },
+          "policy": "lexical-evidence-v1"
+        },
+        "degraded": true,
+        "failures": [
+          {
+            "name": "keenable",
+            "error": "This operation was aborted",
+            "elapsedMs": 6001,
+            "status": "timeout",
+            "retryable": true
+          }
+        ]
+      },
+      {
+        "query": "SQLite WAL concurrency",
+        "selection": {
+          "mode": "explicit",
+          "requested": [
+            "bingrss",
+            "keenable"
+          ]
+        },
+        "refs": 0,
+        "quality": {
+          "status": "no_relevant_results",
+          "evaluated": 30,
+          "rejected": 30,
+          "reasons": {
+            "insufficient_query_evidence": 30
+          },
+          "policy": "lexical-evidence-v1"
+        },
+        "degraded": true,
+        "failures": [
+          {
+            "name": "keenable",
+            "error": "This operation was aborted",
+            "elapsedMs": 6197,
+            "status": "timeout",
+            "retryable": true
+          }
+        ]
+      },
+      {
+        "query": "Zed DeltaDB",
+        "selection": {
+          "mode": "auto"
+        },
+        "refs": 0,
+        "quality": {
+          "status": "no_relevant_results",
+          "evaluated": 20,
+          "rejected": 20,
+          "reasons": {
+            "insufficient_query_evidence": 20
+          },
+          "policy": "lexical-evidence-v1"
+        },
+        "degraded": true,
+        "failures": [
+          {
+            "name": "yahoo",
+            "error": "yahoo http 500",
+            "elapsedMs": 5661,
+            "status": "error",
+            "retryable": true
+          },
+          {
+            "name": "mojeek",
+            "error": "This operation was aborted",
+            "elapsedMs": 6145,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "hn",
+            "error": "This operation was aborted",
+            "elapsedMs": 6203,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "wiby",
+            "error": "This operation was aborted",
+            "elapsedMs": 6228,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "keenable",
+            "error": "This operation was aborted",
+            "elapsedMs": 6256,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "anysearch",
+            "error": "This operation was aborted",
+            "elapsedMs": 6294,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "marginalia",
+            "error": "marginalia api2+legacy both failed (api2: AbortError: This operation was aborted; legacy: AbortError: This operation was aborted)",
+            "elapsedMs": 6326,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "searxng",
+            "error": "This operation was aborted",
+            "elapsedMs": 6369,
+            "status": "timeout",
+            "retryable": true
+          },
+          {
+            "name": "duckduckgo",
+            "error": "soft deadline: aborted after 6389ms",
+            "elapsedMs": 6389,
+            "status": "timeout",
+            "retryable": true
+          }
+        ]
+      }
+    ]
+  },
+  "reload": {
+    "finding": "Replacing file plugin entry did not immediately replace old memory observation behavior. Tools can transiently disappear during live reload.",
+    "resolution": "Disable old instance, remount with fresh entry ID, verify new key=null observations and retained old data; leave final enabled configuration. Repeated toggling during this review was unnecessary and prolonged verification.",
+    "final_enabled": true
+  },
+  "gaps": {
+    "memory": [
+      "No immutable revisions or conversation/code-version anchors; progress and lifecycle payloads remain mutable.",
+      "No curated/semantic task recall; default injection uses empty query and raw tool observations cause noise and storage growth.",
+      "add/link/promote validation-before-write concurrency races and transitive invalidation are not solved by P0.",
+      "Promoted nodes still render as unverified inference; prior superseded/contradicted history is retained, not repaired or restored.",
+      "Automatic observations may include sensitive tool args/results; clipping and self-filtering are not comprehensive secret redaction."
+    ],
+    "search": [
+      "Multiple public sources timed out or errored; latest explicit and auto acceptance queries all returned zero relevant refs. This is not stable general-purpose search.",
+      "Lexical candidate relevance is not semantic intent, source authority or correct-version certification.",
+      "Deep research/X/image/news paths were not fully exercised against live accounts/public upstreams.",
+      "Trusted local TUN leaves ultimate remote IP unverified; literal rejection does not certify proxy destination."
+    ],
+    "web": [
+      "Full authenticated GUI click/request/refresh matrix not exercised; no shell/UI artifact changes in this batch."
+    ]
+  }
+}

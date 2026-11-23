@@ -31,6 +31,8 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 PR #3已审阅并合入main（合并提交6a2ba83），包含资产可用性/组合、脚本生命周期、搜索选源/偏题和显式可信TUN抓取修复。独立DSH运行包已验证；其后用户授权当前Web实验并自行重启，搜索/可信TUN抓取、9个仓库技能及独立记忆工具路径已实测。首次重复tool-skill导致空目录已最小修复，见[实际Web实验](catalog/audit/web-live-experiment.json)。合并时的历史状态见 [合并交付记录](catalog/audit/pr3-merge-delivery.json)。此次实验沿用原模型鉴权，profile已由用户重启采用；其他profile/新宿主采用及真实记忆迁移仍须独立确认，不自动替换。
 
+2026-11-23补充：PR [#4](https://github.com/tomjiu/agents-hub/pull/4) 与 [#5](https://github.com/tomjiu/agents-hub/pull/5) 已审阅合并；记忆P0及审阅补丁已在当前Web实际采用，保留原记忆/搜索目录和模型配置，无重启。**基础记忆、抓取与缓存实测通过，不等于完整可用：最终通用搜索查询均降级为空，仍有明显上游可用性/相关性缺口。** 详见[本轮Web验收与缺口](<catalog/audit/web-review-adoption.json>)。下文/其他证据中的未采用、尚未合并和旧测试计数为阶段历史。
+
 ## 按任务找能力
 
 先看[用户能力目录](<catalog/CAPABILITIES.md>)，不必理解维护源目录或厂商内部命名。首版是14条精选路线，按办公、设计、工程、研究、安全展示，提供多领域/阶段标签；不是所有123个Skill的自动分类，也不是新建三个同名工作流Skill。
