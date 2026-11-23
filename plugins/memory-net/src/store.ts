@@ -271,7 +271,7 @@ export class MemoryNet {
 
   /**
    * observation 覆盖联动：同 key 旧 active 观测 → superseded；
-   * 基于这些旧观测的 active inference → contradicted（物理事实变了，推断自动失效）。
+   * 基于这些旧观测的 active/promoted inference → contradicted（物理事实变了，推断自动失效）。
    */
   private supersedeSameKey(key: string, newId: string): void {
     const oldRows = this.db.prepare(
@@ -287,7 +287,7 @@ export class MemoryNet {
     // instr 精确子串（带引号 id）替代全表 JS 逐行比对，把过滤下推到 SQLite
     for (const sid of supersededIds) {
       this.db.prepare(
-        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status = 'active' AND instr(based_on_json, ?) > 0",
+        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status IN ('active','promoted') AND instr(based_on_json, ?) > 0",
       ).run(Date.now(), `"${sid}"`)
     }
     void newId
@@ -434,7 +434,7 @@ export class MemoryNet {
 
     // 竞争候选：其余 active 节点
     const competitors = (this.db.prepare(
-      `SELECT * FROM nodes WHERE status = 'active'
+      `SELECT * FROM nodes WHERE (status = 'active' OR (kind = 'inference' AND status = 'promoted'))
          AND NOT (kind = 'progress' AND task_id IS NOT NULL)
        ORDER BY updated_at DESC`,
     ).all() as unknown as NodeRow[]).map(rowToNode).filter((n) => {
