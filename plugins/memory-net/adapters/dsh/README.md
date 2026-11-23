@@ -50,8 +50,8 @@ ctx.effect可用时销毁自动关闭全部workspace；陈旧工具/事件不得
 本包订阅后把**非记忆类宿主工具**的执行结果自动写为 observation——模型无需、也不可
 伪造观测（写纪律不变：observation 只由宿主路径写入）。
 
-- **key 语义 = 状态观测**（`tool:<名>`）：同工具最新结果覆盖旧观测，并自动 contradict
-  基于旧观测的 active 推断（memory-net 核心 store 的既有覆盖语义）——工具结果变化即现实变化
+- **独立调用追加**：自动观测不设状态key；同工具读取不同文件或重复重验不会覆盖旧依据。工具名在payload.tool、调用标识在payload.call_id；不承诺跨重启事件去重。
+- **显式状态观测**：宿主api.observe给出的subject key仍按核心规则覆盖；工具执行成功不等于事实变化或用户接受变更。追加会增加库大小与召回候选，预算与精选投影尚需后续改进；不默认清理或直接更新当前Web。
 - **文本形态**：`工具 <名> 成功·args(<参数摘要>)→ <结果摘要>`；失败为 `…失败·…`
 - **自指过滤**：`memory_net_*` 自身的结果不入网（防自指噪声）
 - **嵌套过滤**：`exec.parent` 存在（嵌套 dispatch，如 code-mode 子调用）默认不观察；
@@ -123,8 +123,7 @@ mock OpenAI 兼容模型（脚本化两轮：第一轮并行发起 `mn_e2e_echo`
 - B 区段注入：宿主预置约束/进度进 system prompt；工具写入的推断进工具后重组装
 - C 调用闭环：模型 → 工具 → canonical 结果 → 最终回复
 - D 持久化：模型写入的 inference 落 workspace `memory.db`（node:sqlite 只读核验）
-- E auto-observe：`mn_e2e_echo` 的执行结果被自动写为观测（key=`tool:mn_e2e_echo`，
-  payload 含 call_id）；且 `memory_net_*` 未被递归观测（自指过滤真实生效）
+- E auto-observe：`mn_e2e_echo` 的执行结果被自动写为独立观测（key为空，payload.tool=`mn_e2e_echo`且含call_id）；`memory_net_*` 未被递归观测。文末2026-09历史验收使用旧tool-name key，不是当前行为证明。
 
 2026-09-10 首验 PASS（dsh@0.1.2-rc.1，A/B1/B2/B3/C/D 全绿）；
 2026-09-10 auto-observe 复验 PASS（A1/A2/B1/B2/B3/C/D/E1/E2 全绿）。
