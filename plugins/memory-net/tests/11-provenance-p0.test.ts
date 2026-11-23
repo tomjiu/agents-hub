@@ -70,3 +70,26 @@ test('protected evidence survives package roundtrip', () => {
     assert.ok(reopened.activate('decision').nodes.some(r=>r.node.id===d.id))
   } finally {reopened?.close();net.close();cleanupDir(source);cleanupDir(target)}
 })
+
+test('GC cannot partially change a workspace while another writer owns the lock', () => {
+  const ws = makeTempWs('mn-p0-lock-')
+  const net = MemoryNet.open(ws, {agentId:'fixture-host',role:'host'})
+  const blocker = new DatabaseSync(join(ws,'memory.db'))
+  try {
+    const obsolete = net.add('tip',{text:'obsolete'})
+    net.demote(obsolete.id)
+    for (let i=1;i<=8;i++) net.appendTrail('run',{action:'step-'+i})
+    const before = net.exportPkg()
+    blocker.exec('BEGIN IMMEDIATE')
+    assert.throws(() => net.gc({trail_keep:4,purge:true}), /locked|busy/i)
+    const failed = net.exportPkg()
+    assert.deepEqual(failed.nodes,before.nodes)
+    assert.deepEqual(failed.trail,before.trail)
+    blocker.exec('ROLLBACK')
+    assert.equal(net.gc({trail_keep:4,purge:true}).purged,1)
+    assert.equal(net.replayTrail('run').length,4)
+  } finally {
+    try {blocker.exec('ROLLBACK')} catch {}
+    blocker.close();net.close();cleanupDir(ws)
+  }
+})
