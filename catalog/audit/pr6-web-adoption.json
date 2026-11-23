@@ -1,0 +1,385 @@
+{
+  "schema": 1,
+  "status": "PR6_MERGED_LIVE_ADOPTED_WITH_EXPLICIT_GAPS",
+  "measured_at": "2026-11-23T12:36:50.953Z",
+  "rechecked_at": "2026-11-23T14:23:29.106Z",
+  "pr": {
+    "number": 6,
+    "url": "https://github.com/tomjiu/agents-hub/pull/6",
+    "head": "536c7ca4af75ce8048e7f5783d3be0d664eee20a",
+    "merge": "b6a34c91e0f8b5e90428056424192a3408570804",
+    "review_finding": "Provenance IDs were omitted from token estimate; promotion-only review evidence was not rendered.",
+    "resolution": "Include node/dependency/review IDs in budget, render review_evidence; regression fails before fix; legacy budget fixture derives nodeTokens.",
+    "ci": "No public checks recorded; local and isolated-host evidence only"
+  },
+  "acceptance": {
+    "root": {
+      "total": 149,
+      "pass": 148,
+      "skip": 1,
+      "fail": 0
+    },
+    "memory_core": {
+      "pass": 39,
+      "fail": 0
+    },
+    "adapter": {
+      "pass": 24,
+      "fail": 0
+    },
+    "search": {
+      "pass": 335,
+      "fail": 0
+    },
+    "hosts": [
+      "0.2.2-rc.1",
+      "0.2.2-rc.5"
+    ],
+    "assets_sha256": "25b79afafbbd762a394dc0ae51e20a8330497c05af22c7f7b7703ab8698bfc2f",
+    "host_scope": "Actual isolated DSH headless; scripted local model/search fixture, concurrent MCP discovery, curated prompt/recall/raw diagnosis, SQLite persistence and P0 evidence-preserving GC."
+  },
+  "web": {
+    "host": "0.2.2-rc.1",
+    "same_process": true,
+    "restarted": false,
+    "gui_scope": "Actual tools in this existing Web conversation and SQLite readback; not authenticated full GUI click matrix.",
+    "memory": {
+      "curated_tool_written": true,
+      "curated_tool_recalled": true,
+      "main_auto_logs_excluded": true,
+      "raw_diagnostic_available": true,
+      "raw_call_did_not_change_policy": true,
+      "recall_did_not_mutate_storage": true,
+      "model_observation_refused": true,
+      "curated_summary": "[精选] 排除 282：{\"auto_observation\":282}\n（激活 0 节点 / 0 tokens，裁掉 0）",
+      "raw_nodes": 1,
+      "latest": [
+        {
+          "id": "n589",
+          "key": null,
+          "status": "active"
+        },
+        {
+          "id": "n588",
+          "key": null,
+          "status": "active"
+        },
+        {
+          "id": "n587",
+          "key": null,
+          "status": "active"
+        },
+        {
+          "id": "n586",
+          "key": null,
+          "status": "active"
+        }
+      ],
+      "workspace": "pr6-live-check",
+      "fixture": true
+    },
+    "default_prompt": "Curated excludes automatic observation payloads; raw affects only one explicit call. System injection verified by isolated actual host; live tool path verified by this conversation.",
+    "durable_tip_recalled": true,
+    "old_marker_retained": true,
+    "retention": {
+      "main": {
+        "snapshot": 575,
+        "current": 593,
+        "missing": 0
+      },
+      "web-experiment-check": {
+        "snapshot": 1,
+        "current": 1,
+        "missing": 0
+      },
+      "web-review-check": {
+        "snapshot": 6,
+        "current": 6,
+        "missing": 0
+      }
+    },
+    "final_main_count": 609,
+    "recall_read_only": true,
+    "searches": [
+      {
+        "query": "SQLite WAL concurrency",
+        "refs": [
+          {
+            "url": "https://sqlite.org/wal.html",
+            "title": "Write-Ahead Logging",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "url": "https://sqlite.org/src/artifact?name=4bee2c3990d1eb80&txt=1",
+            "title": "SQLite: Artifact [4bee2c3990]",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "url": "https://sqlite.org/forum/forumpost/c4dbf6ca17",
+            "title": "Using WAL mode with multiple processes",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "url": "https://stackoverflow.com/questions/30821179/sqlite-wal-mode-in-python-concurrency-with-one-writer-and-one-reader",
+            "title": "SQlite WAL-mode in python. Concurrency with one writer and one reader",
+            "engines": [
+              "stackexchange"
+            ],
+            "published": "2020-06-28T11:27:18.000Z"
+          },
+          {
+            "url": "https://github.com/CornerstoneCode/EntityFrameworkCore.Sqlite.Concurrency",
+            "title": "CornerstoneCode/EntityFrameworkCore.Sqlite.Concurrency",
+            "engines": [
+              "github"
+            ],
+            "published": "2026-10-21T14:10:22Z"
+          }
+        ],
+        "quality": {
+          "status": "candidate_results",
+          "evaluated": 40,
+          "rejected": 14,
+          "reasons": {
+            "insufficient_query_evidence": 14
+          },
+          "policy": "lexical-evidence-v1"
+        },
+        "elapsed_ms": 10172,
+        "from_cache": false,
+        "degraded": false,
+        "engines_used": [
+          "mdn",
+          "stackexchange",
+          "github",
+          "keenable",
+          "bingrss"
+        ],
+        "engines_failed": [
+          {
+            "name": "tavily",
+            "error": "tavily http 429 (rate limited, reduce request rate)",
+            "elapsedMs": 747,
+            "status": "rate_limited",
+            "retryable": true
+          },
+          {
+            "name": "hn",
+            "error": "early harvest: aborted after 1629ms",
+            "elapsedMs": 1629,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "early_harvest"
+          },
+          {
+            "name": "searxng",
+            "error": "early harvest: aborted after 1629ms",
+            "elapsedMs": 1629,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "early_harvest"
+          },
+          {
+            "name": "duckduckgo",
+            "error": "soft deadline: aborted after 10005ms",
+            "elapsedMs": 10005,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "soft_deadline"
+          }
+        ]
+      },
+      {
+        "query": "Zed DeltaDB",
+        "refs": [
+          {
+            "url": "https://zed.dev/deltadb",
+            "title": "Zed DeltaDB",
+            "engines": [
+              "hn"
+            ],
+            "published": "2026-08-05T18:52:54Z"
+          },
+          {
+            "url": "https://github.com/zed-industries/delta-claude",
+            "title": "GitHub - zed-industries/delta-claude: Claude code plugin for DeltaDB",
+            "engines": [
+              "keenable"
+            ]
+          },
+          {
+            "url": "https://koru.do/en/blog/zed-deltadb-review",
+            "title": "Zed's DeltaDB, reviewed: version control for agent context",
+            "engines": [
+              "keenable"
+            ],
+            "published": "2026-10-29T00:00:00Z"
+          },
+          {
+            "url": "https://delta.dev/blog/fine-grained-version-control-for-agents",
+            "title": "Building fine-grained version control for agents with Rust and Durable Objects",
+            "engines": [
+              "keenable"
+            ],
+            "published": "2026-10-29T00:00:00Z"
+          },
+          {
+            "url": "https://delta.dev/blog/future-of-version-control",
+            "title": "DeltaDB: The Future of Version Control",
+            "engines": [
+              "keenable"
+            ],
+            "published": "2026-10-15T00:00:00Z"
+          }
+        ],
+        "quality": {
+          "status": "candidate_results",
+          "evaluated": 36,
+          "rejected": 29,
+          "reasons": {
+            "insufficient_query_evidence": 29
+          },
+          "policy": "lexical-evidence-v1"
+        },
+        "elapsed_ms": 6030,
+        "from_cache": false,
+        "degraded": true,
+        "engines_used": [
+          "bingrss",
+          "anysearch",
+          "keenable",
+          "hn"
+        ],
+        "engines_failed": [
+          {
+            "name": "yahoo",
+            "error": "fetch failed",
+            "elapsedMs": 357,
+            "status": "error",
+            "retryable": true
+          },
+          {
+            "name": "searxng",
+            "error": "fetch failed",
+            "elapsedMs": 2514,
+            "status": "error",
+            "retryable": true
+          },
+          {
+            "name": "mojeek",
+            "error": "mojeek http 403",
+            "elapsedMs": 3342,
+            "status": "blocked",
+            "retryable": false
+          },
+          {
+            "name": "duckduckgo",
+            "error": "soft deadline: aborted after 6007ms",
+            "elapsedMs": 6007,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "soft_deadline"
+          },
+          {
+            "name": "marginalia",
+            "error": "soft deadline: aborted after 6007ms",
+            "elapsedMs": 6007,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "soft_deadline"
+          },
+          {
+            "name": "wikipedia",
+            "error": "soft deadline: aborted after 6007ms",
+            "elapsedMs": 6007,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "soft_deadline"
+          },
+          {
+            "name": "wiby",
+            "error": "soft deadline: aborted after 6007ms",
+            "elapsedMs": 6007,
+            "status": "timeout",
+            "retryable": true,
+            "cancellation": "soft_deadline"
+          }
+        ]
+      }
+    ],
+    "search_cache": {
+      "first_from_cache": false,
+      "second_from_cache": true,
+      "refs": 5
+    },
+    "fetch": {
+      "url": "https://nodejs.org/docs/v26.13.1/api/sqlite.html",
+      "cache_hit": true,
+      "equal": true,
+      "transport": {
+        "mode": "trusted-tun",
+        "remoteIpVerified": false,
+        "cacheScope": "98b059acc661c83977223058",
+        "warning": "Explicitly trusted local TUN. Ultimate remote IP is not visible/verified; DNS prechecks cannot prove proxy destination."
+      },
+      "literal_refused": true
+    },
+    "source_verification": [
+      {
+        "url": "https://sqlite.org/wal.html",
+        "title": "Write-Ahead Logging",
+        "remote_ip_verified": false
+      },
+      {
+        "url": "https://zed.dev/deltadb",
+        "error": "fetch failed"
+      }
+    ]
+  },
+  "preservation": {
+    "profile_prefix_retained": true,
+    "configuration_integrity": {
+      "profile": true,
+      "package": true,
+      "global": true
+    },
+    "model_and_global_settings_unchanged": true,
+    "memory_and_search_roots_retained": true,
+    "consistent_sqlite_backups": true,
+    "guarded_profile_rollback": true,
+    "old_runtime_copies_retained": true,
+    "pinned_live_source": "Reviewed branch remains the live immutable deployment source; no rebuilding or cleanup of loaded runtime."
+  },
+  "reload": {
+    "method": "Disable old memory entry, then replace experiment block with fresh PR6 instance identity and explicit curated policy. Transient tool absence observed; final actual calls returned successfully.",
+    "repeat_toggles": false
+  },
+  "limits": {
+    "search": [
+      "Both tested queries now returned five candidates; not a same-time controlled A/B or reliability guarantee.",
+      "SQLite domain query still took 10172ms due to a slower parallel subquery; global early completion across subqueries is not implemented.",
+      "429, blocked sources and failed fetches remain; DeltaDB query degraded=true and zed.dev/deltadb fetch failed.",
+      "Lexical evidence is not semantic relevance or correct-version certification. Experimental BEGIN CONCURRENT artifacts must not be assumed default SQLite behavior.",
+      "Trusted TUN ultimate remote IP remains unverified."
+    ],
+    "memory": [
+      "Curated filtering does not delete or summarize raw logs; storage and capture still grow.",
+      "Empty curated view may be empty where durable tips/reviewed conclusions do not exist; explicit task/run context needed for scoped progress.",
+      "Literal matching, not semantic recall; no immutable code/conversation binding or reference-write concurrency repair.",
+      "Shared workspace stores observations from other sessions as seen by diagnostic raw recall. Task filters are not confidentiality boundaries; use physically separate workspace roots for unrelated sensitive work.",
+      "No comprehensive secret redaction; do not write credentials.",
+      "Budget remains approximate with label/provenance overhead, frozen constraints may exceed soft budget."
+    ],
+    "runtime": [
+      "Same package must be retained; source fingerprint changes require a new accepted bundle.",
+      "Authenticated full GUI click matrix and long-run resilience not certified."
+    ]
+  },
+  "next": "Use the adopted curated tools and verify each search source/version. Separate request needed for further global-latency or semantic/privacy work."
+}

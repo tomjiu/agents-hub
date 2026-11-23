@@ -2,9 +2,9 @@
 
 状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。PR #3已于本轮核验后合入main，合并提交6a2ba83；后续用户授权当前Web实验并自行重启，实际搜索/可信TUN抓取/9仓库Skill/独立记忆已验证，重复宿主tool-skill空目录问题已修复，见[Web实验](web-live-experiment.json)。后文阶段记录保留当时状态，不作当前合并状态。详见[合并交付](pr3-merge-delivery.json)。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
-## 本分支候选：搜索可靠性与精选召回（尚未采用）
+## 当前：PR6审阅合并与Web采用
 
-搜索阶段3210f79：基于查询证据截止、质量为空时有限恢复、SearXNG实例预算及迟到写隔离；限定选源不越界，降级/空结果不缓存。真实公网独立样本返回SQLite WAL与DeltaDB候选，仍有老版本页面和来源超时，不是稳定性保证。随后精选投影排除自动日志和其他任务材料，保留原库/依据、约束冻结与raw诊断，已审阅推断不再伪装物理观测。组合根148通过/1权限跳过、核心38、adapter24、搜索335；两版隔离DSH验证精选提示、实际recall/raw工具回流与持久化。详见[搜索验收](<search-reliability-candidate.json>)及[精选验收](<curated-recall-candidate.json>)。main、当前Web源/profile及用户库未改；本段候选不能视为已部署。
+PR6合并b6a34c9，审阅补丁536c7ca计入依赖/审核证据token并公开review_evidence。组合根148通过/1权限跳过、核心39、adapter24、搜索335，两版隔离DSH通过；当前Web已实际调用精选/raw、持久提示读写、旧标记召回、搜索/cache/fetch与安全拒绝。备份时575条main节点全部保留，最终读回609条；其他两个已有workspace节点无缺失。原模型/全局配置及实验块外前缀不改，无进程重启；一次卸载旧记忆后新ID挂载，过渡工具短暂不可见，最终调用通过。SQLite WAL和DeltaDB各5候选，但前者约10秒、后者降级且官网fetch失败，不能称全部可靠。raw能看到共享workspace其他会话日志：精选不是机密隔离，敏感任务要物理独立workspace。详见[本轮实际验收](<pr6-web-adoption.json>)。下面旧阶段/未采用/旧计数是历史，不代表当前状态。
 
 ## 当前：PR审阅与Web采用（2026-11-23）
 

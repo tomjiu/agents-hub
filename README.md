@@ -33,9 +33,9 @@ PR #3已审阅并合入main（合并提交6a2ba83），包含资产可用性/组
 
 2026-11-23补充：PR [#4](https://github.com/tomjiu/agents-hub/pull/4) 与 [#5](https://github.com/tomjiu/agents-hub/pull/5) 已审阅合并；记忆P0及审阅补丁已在当前Web实际采用，保留原记忆/搜索目录和模型配置，无重启。**基础记忆、抓取与缓存实测通过，不等于完整可用：最终通用搜索查询均降级为空，仍有明显上游可用性/相关性缺口。** 详见[本轮Web验收与缺口](<catalog/audit/web-review-adoption.json>)。下文/其他证据中的未采用、尚未合并和旧测试计数为阶段历史。
 
-## 本分支候选：搜索可靠性与精选召回
+## 当前：搜索可靠性与精选召回已采用
 
-基于已合并main隔离开发，**尚未合并、当前Web未采用**。搜索新增证据感知早收割、有限恢复等待、实例分预算及迟到结果隔离，空/降级结果不缓存；相关性与网络守卫不放宽。记忆新增非破坏性精选投影，DSH默认不注入自动工具日志、无当前上下文的任务进度；原日志/依据仍存储，显式raw用于排障。详见[搜索阶段验收](<catalog/audit/search-reliability-candidate.json>)、[精选召回验收](<catalog/audit/curated-recall-candidate.json>)及[适配说明](<plugins/memory-net/adapters/dsh/README.md>)。以下运行状态记录为此前main/Web，不表示当前候选已经部署。
+PR [#6](https://github.com/tomjiu/agents-hub/pull/6) 经审阅补预算/审核证据追溯修复后合并（b6a34c9），新运行包已在当前Web实测采用，无进程重启。精选召回排除自动日志但保留原库，raw仅单次诊断；旧记忆标记、持久提示及独立观测保留。SQLite WAL并发、Zed DeltaDB各返回5候选，搜索缓存、官网抓取及IP拒绝通过；**仍有10秒拖尾、429/阻断、DeltaDB抓取失败与版本核验缺口，不是全面稳定保证**。详见[实际Web验收](<catalog/audit/pr6-web-adoption.json>)；[搜索候选验收](<catalog/audit/search-reliability-candidate.json>)及[精选候选验收](<catalog/audit/curated-recall-candidate.json>)保留实施阶段历史。
 
 ## 按任务找能力
 
