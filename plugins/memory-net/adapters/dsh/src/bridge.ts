@@ -98,7 +98,9 @@ function renderNode(x: { node: { id: string; status: string; based_on: string[];
   const conf = n.confidence !== null ? `（置信 ${n.confidence}）` : ''
   const conflict = n.conflict ? ' ⚠冲突' : ''
   const based = n.based_on.length ? ` based_on=${n.based_on.join(',')}` : ''
-  return `[${tag}]${conf}${conflict} ${n.text} (id=${n.id}${based})`
+  const evidence = Array.isArray(n.payload.promote_evidence) ? n.payload.promote_evidence.filter((id): id is string => typeof id === 'string') : []
+  const review = evidence.length ? ` review_evidence=${evidence.join(',')}` : ''
+  return `[${tag}]${conf}${conflict} ${n.text} (id=${n.id}${based}${review})`
 }
 
 /** 渲染 ActivationResult 为注入文本（冻结集在前：约束 + 当次进度；trail 摘要收尾）。 */

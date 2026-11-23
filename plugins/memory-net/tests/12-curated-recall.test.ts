@@ -1,10 +1,18 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {MemoryNet} from '../src/store.js'
+import {nodeTokens,estimateTokens} from '../src/activate.js'
 import {makeTempWs,cleanupDir} from './helpers.js'
 function fixture(t:any){const ws=makeTempWs('mn-curated-'),net=MemoryNet.open(ws,{role:'host'});t.after(()=>{net.close();cleanupDir(ws)});return net}
 const ids=(r:any)=>r.nodes.map((x:any)=>x.node.id)
 const stable=(n:MemoryNet)=>{const {exported_at,...pkg}=n.exportPkg();return pkg}
+test('recall token budget accounts for dependency and review provenance',t=>{
+ const net=fixture(t),e=net.add('observation',{text:'proof',source:'tool'}),d=net.add('inference',{text:'reviewed',confidence:.8})
+ net.promote(d.id,{evidence:[e.id]});const node=net.get(d.id)!
+ node.based_on=Array.from({length:200},(_,i)=>'dependency-'+i);node.payload.promote_evidence=Array.from({length:200},(_,i)=>'review-'+i)
+ assert.ok(nodeTokens(node)>=estimateTokens(node.based_on.join(',')+' '+(node.payload.promote_evidence as string[]).join(',')))
+})
+
 test('curation excludes raw logs and unrelated tasks without rewriting storage',t=>{
  const net=fixture(t);const constraint=net.add('constraint',{key:'safe',text:'never delete user memory',payload:{mode:'forbid'}})
  const evidence=net.add('observation',{key:'sqlite:wal',text:'SQLite WAL enabled',source:'tool'})

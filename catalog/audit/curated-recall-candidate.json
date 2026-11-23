@@ -4,8 +4,8 @@
   "baseline": "922fdb67cf775bdaec69ba63b66d7747ca115faf",
   "tests": {
     "core": {
-      "total": 38,
-      "pass": 38,
+      "total": 39,
+      "pass": 39,
       "fail": 0
     },
     "adapter": {
@@ -45,7 +45,7 @@
   "hosts": [
     {
       "version": "0.2.2-rc.1",
-      "assets": "f454aa00dbbe8e86f234a0d06c4fed19a9836b96f8c51ed94fe3903cdd18d345",
+      "assets": "25b79afafbbd762a394dc0ae51e20a8330497c05af22c7f7b7703ab8698bfc2f",
       "host": "3371c9a47757d6874441f1143732291d44f694c59a0b69d9328cf8697a58e11c",
       "status": "PASS",
       "memory": {
@@ -78,7 +78,7 @@
     },
     {
       "version": "0.2.2-rc.5",
-      "assets": "f454aa00dbbe8e86f234a0d06c4fed19a9836b96f8c51ed94fe3903cdd18d345",
+      "assets": "25b79afafbbd762a394dc0ae51e20a8330497c05af22c7f7b7703ab8698bfc2f",
       "host": "b3e8f3b196ce05f512662a9b89fe56d9d5a0d39a790d69f408b02ed2143bd27b",
       "status": "PASS",
       "memory": {
@@ -116,5 +116,10 @@
     "user_database_modified": false,
     "skills_or_asset_baselines_changed": false
   },
-  "next": "Review isolated branch and test proposed deployment separately; no implicit runtime adoption."
+  "next": "Review isolated branch and test proposed deployment separately; no implicit runtime adoption.",
+  "review": {
+    "finding": "Rendered dependency/provenance IDs were omitted from token accounting; promotion-only review evidence was not displayed.",
+    "fix": "Include provenance in estimate with fixed per-node label overhead and render review_evidence; regression fails before fix.",
+    "compatibility": "Legacy budget-priority fixture now derives size from nodeTokens rather than old body-only estimate; cleanup EPERM was an unclosed test handle after assertion, not ACL denial."
+  }
 }

@@ -25,7 +25,10 @@ test('DSH defaults to curated prompt and recall while explicit raw remains diagn
    assert.ok((recall.execute({query:'SQLite',view:'raw'}) as {text:string}).text.includes('RAW-NOISE'))
    assert.ok(!String(render()).includes('RAW-NOISE'),'raw call cannot change prompt policy')
    assert.throws(()=>recall.execute({view:'invalid'}),/view/)
-   assert.equal(storage.exportPkg().nodes.length,3)
+   const reviewOnly=storage.add('inference',{text:'SQLite review-only',confidence:.8});storage.promote(reviewOnly.id,{evidence:[tip.id]})
+   const reviewed=(recall.execute({query:'review-only'}) as {text:string}).text
+   assert.ok(reviewed.includes('review_evidence='+tip.id),'promotion-only evidence must be traceable')
+   assert.equal(storage.exportPkg().nodes.length,4)
   }finally{storage.close()}
  }finally{api.close();rmSync(dir,{recursive:true,force:true})}
 })

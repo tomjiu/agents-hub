@@ -82,7 +82,8 @@ export function nodeTokens(n: MemoryNode): number {
     typeof n.payload.strategy === 'string' ? n.payload.strategy : '',
     typeof n.payload.recovery === 'string' ? n.payload.recovery : '',
   ].join(' ')
-  return estimateTokens(`${n.kind} ${n.key ?? ''} ${n.text} ${extra}`)
+  const review = Array.isArray(n.payload.promote_evidence) ? n.payload.promote_evidence.filter((id): id is string => typeof id === 'string').join(',') : ''
+  return estimateTokens(`${n.kind} ${n.key ?? ''} ${n.text} ${extra} id=${n.id} based_on=${n.based_on.join(',')} review_evidence=${review}`) + 24
 }
 
 export interface ScoredCandidate {
