@@ -99,7 +99,7 @@ export class SearchCore {
     }));
     if (cacheable) {
       const hit = this.cache.getSearch(cacheKey);
-      if (hit && (hit as SearchResult).meta?.quality?.policy === "lexical-evidence-v1" && Array.isArray((hit as SearchResult).refs) && filterEvidence(rawQuery,(hit as SearchResult).refs).rejected === 0 && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
+      if (hit && !(hit as SearchResult).meta?.degraded && (hit as SearchResult).refs?.length > 0 && (hit as SearchResult).meta?.quality?.policy === "lexical-evidence-v1" && Array.isArray((hit as SearchResult).refs) && filterEvidence(rawQuery,(hit as SearchResult).refs).rejected === 0 && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
         this.cache.kvIncr("stat:search_cache_hit");
         const h = hit as SearchResult;
         return { ...h, meta: { ...h.meta, fromCache: true, elapsedMs: Date.now() - t0 }, planner: decision };
@@ -126,7 +126,7 @@ export class SearchCore {
       decision.queries.map((q, i) =>
         decision.route === "x"
           ? this.router.runX(q, runOpts, "tweets")
-          : this.router.run(q, runOpts, legEngines[i]),
+          : this.router.run(q, runOpts, legEngines[i], rawQuery),
       ),
     );
 
@@ -138,7 +138,7 @@ export class SearchCore {
     //   抢救是兜底不是第二轮全量; 抢救腿再失败 → 行为回到空结果(真断网无额外伤害);
     //   正常查询 refs>0 时零开销(不触发)。
     let rescueBatches: typeof batches = [];
-    if (batches.every((b) => b.refs.length === 0) && decision.route !== "x") {
+    if (filterEvidence(rawQuery,batches.flatMap(b=>b.refs)).refs.length === 0 && decision.route !== "x") {
       const attempted = new Set([
         ...batches.flatMap((b) => b.used),
         ...batches.flatMap((b) => b.failed.map((f) => f.name)),
@@ -150,7 +150,7 @@ export class SearchCore {
       if (rescueLegs.length) {
         this.#journal?.write("zero_ref_rescue", { query: rawQuery, legs: rescueLegs });
         try {
-          rescueBatches = [await this.router.run(rawQuery, { ...runOpts, softDeadlineMs: Math.min(runOpts.softDeadlineMs ?? this.cfg.softDeadlineMs, 3000) }, rescueLegs)];
+          rescueBatches = [await this.router.run(rawQuery, { ...runOpts, softDeadlineMs: Math.min(runOpts.softDeadlineMs ?? this.cfg.softDeadlineMs, 3000) }, rescueLegs, rawQuery)];
         } catch { /* 抢救失败不吞掉主流程: 保持空结果原语义 */ }
       }
     }
@@ -209,7 +209,7 @@ export class SearchCore {
       embedder: fuseMeta.embedder, embedderFailed: fuseMeta.embedderFailed,
       authorityGuarded: fuseMeta.authorityGuarded,
     });
-    if (cacheable) this.cache.putSearch(cacheKey, result);
+    if (cacheable && refs.length > 0 && !result.meta.degraded) this.cache.putSearch(cacheKey, result);
     return { ...result, planner: decision };
   }
 

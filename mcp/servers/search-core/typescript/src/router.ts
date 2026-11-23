@@ -10,6 +10,7 @@ import type { Reference, SearchOptions, EngineFailure, EngineSkip, Freshness } f
 import type { Provider, FetchImpl, SearchCtx } from "./providers/base.js";
 import { HealthTracker, classifyFailure } from "./providers/base.js";
 import { QuotaTracker } from "./quota.js";
+import {filterEvidence} from "./relevance.js";
 import { searxng } from "./providers/searxng.js";
 import { duckduckgo } from "./providers/duckduckgo.js";
 import { mojeek } from "./providers/mojeek.js";
@@ -150,7 +151,7 @@ export class Router {
    * 并行执行多引擎搜索 (v0.4: 软截止+额度门+插槽自动并联+失败标注)。
    * @param engineNames planner引擎清单；undefined用默认池，[]不出勤；opts.engines优先且严格限制provider选择。
    */
-  async run(query: string, opts: SearchOptions, engineNames?: string[]): Promise<{
+  async run(query: string, opts: SearchOptions, engineNames?: string[], evidenceQuery?: string): Promise<{
     refs: Reference[];
     used: string[];
     failed: EngineFailure[];
@@ -163,8 +164,10 @@ export class Router {
     const selection = callerSelection ?? this.normalizeEngines(engineNames);
     const explicit = selection !== undefined;
     const names = selection !== undefined ? [...selection] : [...this.#cfg.engines].filter(Boolean);
-    const timeoutMs = opts.timeoutMs ?? this.#cfg.timeoutMs;
-    const softMs = opts.softDeadlineMs ?? this.#cfg.softDeadlineMs;
+    const finite = (v: number | undefined, fallback: number) => typeof v === "number" && Number.isFinite(v) && v >= 0 ? v : fallback;
+    const timeoutMs = Math.max(1, Math.min(120000, finite(opts.timeoutMs ?? this.#cfg.timeoutMs, 12000)));
+    const softMs = Math.min(timeoutMs, finite(opts.softDeadlineMs ?? this.#cfg.softDeadlineMs, 6000));
+    const recoveryMs = Math.min(timeoutMs, Math.max(softMs, finite(opts.recoveryDeadlineMs ?? this.#cfg.recoveryDeadlineMs, softMs)));
 
     // v0.4 key 插槽自动并联: 走默认池(未显式点名)时,已配 key 且额度未尽的插槽引擎自动加入;
     // 额度用尽后 allow() 返回 false → 不加入 → 免 key 池接管(回落零代码)
@@ -208,99 +211,63 @@ export class Router {
     const failed: EngineFailure[] = [];
     const allRefs: Reference[] = [];
     let pending = active.length;
-    // 每腿的"报账状态": 软截止时代报过 timeout 的腿,迟到自报作废(不重复入账)
-    const states = new Map<string, { reported: boolean }>();
-    for (const p of active) states.set(p.name, { reported: false });
-
-    // 每腿永不 reject(内部转成结果对象),健康/日志/分类在腿内完成 —— 迟到腿也不会产生未处理异常
-    const leg = (p: Provider) => (async (): Promise<
-      { ok: true; name: string; refs: Reference[] } | { ok: false; f: EngineFailure }
-    > => {
-      const t0 = Date.now();
-      const signal = AbortSignal.any([AbortSignal.timeout(timeoutMs), deadlineController.signal]);
-      const ctx: SearchCtx = { fetchImpl: this.#fetchImpl, signal, ua: this.#cfg.userAgent, opts };
-      try {
-        const refs = await p.search(query, ctx);
-        const dt = Date.now() - t0;
-        this.#health.record(p.name, true, dt);
-        this.#quota.record(p.name); // 受控引擎记一次消耗(未登记的内部自会跳过)
-        this.#journal?.write("engine_result", { engine: p.name, count: refs.length, ms: dt });
-        return { ok: true, name: p.name, refs };
-      } catch (e) {
-        const dt = Date.now() - t0;
-        const msg = e instanceof Error ? e.message : String(e);
-        const cls = classifyFailure(msg);
-        this.#health.record(p.name, false, dt, msg, cls.status);
-        // 额度类失败(tavily 432/433 等)一票标记: 当月不再尝试
-        if (cls.status === "quota" && this.#quota.governed(p.name)) this.#quota.exhaust(p.name);
-        this.#journal?.write("engine_error", {
-          engine: p.name, status: cls.status, retryable: cls.retryable, error: msg.slice(0, 200), ms: dt,
-        });
-        return {
-          ok: false,
-          f: { name: p.name, error: msg.slice(0, 200), elapsedMs: dt, status: cls.status, retryable: cls.retryable },
-        };
-      }
-    })();
-
-    const deadlineController = new AbortController();
-    const collectors = active.map((p) =>
-      leg(p).then((r) => {
-        pending--;
-        const st = states.get(r.ok ? r.name : r.f.name)!;
-        if (st.reported) return; // 软截止已代报,迟到结果不入本次响应
-        st.reported = true;
-        if (r.ok) {
-          used.push(r.name);
-          allRefs.push(...r.refs);
+    const states = new Map(active.map(p => [p.name, { reported: false }]));
+    const controller = new AbortController();
+    const started = Date.now();
+    // Completion bookkeeping owns health writes. Late/uncooperative providers are ignored.
+    const collectors = active.map(p => {
+      const ctx: SearchCtx = {fetchImpl:this.#fetchImpl,signal:controller.signal,ua:this.#cfg.userAgent,
+        opts:{...opts,timeoutMs,softDeadlineMs:softMs,recoveryDeadlineMs:recoveryMs}};
+      const settle = (refs?: Reference[], error?: unknown) => {
+        const state = states.get(p.name)!;
+        if (state.reported) return;
+        state.reported = true; pending--;
+        const elapsedMs = Date.now()-started;
+        if (refs) {
+          used.push(p.name); allRefs.push(...refs);
+          this.#health.record(p.name,true,elapsedMs);
+          this.#quota.record(p.name);
+          this.#journal?.write("engine_result",{engine:p.name,count:refs.length,ms:elapsedMs});
         } else {
-          failed.push(r.f);
+          const msg = error instanceof Error ? error.message : String(error);
+          const cls = classifyFailure(msg);
+          this.#health.record(p.name,false,elapsedMs,msg,cls.status);
+          if (cls.status === "quota" && this.#quota.governed(p.name)) this.#quota.exhaust(p.name);
+          failed.push({name:p.name,error:msg.slice(0,200),elapsedMs,...cls});
+          this.#journal?.write("engine_error",{engine:p.name,error:msg.slice(0,200),ms:elapsedMs,...cls});
         }
-      }),
-    );
-
-    const attempted = active.length; // 提前: AG-2 早收割条件需要
-    if (softMs > 0 && active.length > 0) {
-      // phase AG-2 早收割: 实测(ag2-latency-measure) 7/9 真实查询 refs 已 12-20 条仍干等满 6s 软截止
-      // —— 慢腿拖尾是 vs-zai 延迟差距(1.8-3.8s vs 1.0s)的结构性根因。
-      // 到 earlyHarvestMs 后,若(60% 腿已结算 且 refs≥15,证据已足够)则立即断慢腿交付;
-      // 条件不满足继续等(边缘对齐轮询),软截止仍是无条件上限兜底。0=关(行为同 v0.4)。
-      const harvestMs = this.#cfg.earlyHarvestMs;
-      const minRefs = 15;
-      const t0 = Date.now();
-      for (;;) {
-        if (pending <= 0) break; // 全部结算,正常出
-        const elapsed = Date.now() - t0;
-        const enough = (attempted - pending) >= Math.ceil(attempted * 0.6) && allRefs.length >= minRefs;
-        if (harvestMs > 0 && elapsed >= harvestMs && enough) break; // 早收割
-        if (elapsed >= softMs) break; // 软截止兜底(v0.4 语义)
-        // 睡到下一个判定点(enough 未真 → harvest/soft 边缘;已真 → soft 边缘), 25ms 粒度防越过边缘
-        const nextEdge = harvestMs > 0 && !enough ? Math.min(harvestMs, softMs) : softMs;
-        await new Promise((r) => setTimeout(r, Math.max(1, Math.min(25, nextEdge - elapsed))));
-      }
-      if (pending > 0) {
-        deadlineController.abort(); // 慢腿的 AbortSignal.any 触发 → 腿内 catch 记健康/日志
-        // AG-2: 排空一轮宏任务,让被断腿的 catch 微任务链(健康落库/journal/failed 入账)在返回前完成
-        // —— 旧 Promise.race 实现下这些微任务恰好在返回前跑完,轮询版时序变了,必须显式等(契约: failed 里以 timeout 身份出现)
-        await new Promise((r) => setImmediate(r));
-        // 失败标注契约: 被断的慢腿必须在 failed 里以 timeout 身份出现,不能无声消失
-        for (const [name, st] of states) {
-          if (!st.reported) {
-            st.reported = true;
-            failed.push({
-              name, error: `soft deadline: aborted after ${Date.now() - t0}ms`,
-              elapsedMs: Date.now() - t0, status: "timeout", retryable: true,
-            });
-          }
-        }
-        this.#journal?.write("soft_deadline", {
-          aborted: pending, softMs,
-          earlyHarvest: harvestMs > 0 && Date.now() - t0 < softMs, // AG-2: 透出早收割是否触发
-        });
-      }
-    } else {
-      await Promise.all(collectors);
+      };
+      return Promise.resolve().then(()=>p.search(query,ctx)).then(refs=>settle(refs),error=>settle(undefined,error));
+    });
+    const attempted = active.length;
+    const harvestMs = finite(this.#cfg.earlyHarvestMs,0);
+    let cause: "early_harvest" | "soft_deadline" | "hard_deadline" | undefined;
+    while (pending > 0) {
+      const elapsed = Date.now()-started;
+      // Legacy raw Router callers retain their counting semantics. SearchCore supplies raw intent.
+      const evidence = evidenceQuery === undefined ? allRefs : filterEvidence(evidenceQuery,allRefs).refs;
+      const count = new Set(evidence.map(r=>r.url)).size;
+      const enough = attempted-pending >= Math.ceil(attempted*.6) && count >= 15;
+      if (elapsed >= timeoutMs) {cause="hard_deadline";break;}
+      if (softMs > 0 && harvestMs > 0 && elapsed >= harvestMs && enough) {cause="early_harvest";break;}
+      if (softMs > 0 && elapsed >= softMs &&
+          (evidenceQuery === undefined || count > 0 || elapsed >= recoveryMs)) {cause="soft_deadline";break;}
+      await new Promise(resolve=>setTimeout(resolve,Math.max(1,Math.min(25,timeoutMs-elapsed))));
     }
+    if (pending > 0 && cause) {
+      const elapsedMs = Date.now()-started;
+      // Mark before abort: an abort-aware provider must not duplicate bookkeeping or poison health.
+      for (const [name,state] of states) if (!state.reported) {
+        state.reported = true;
+        const error = cause.replaceAll("_"," ")+": aborted after "+elapsedMs+"ms";
+        failed.push({name,error,elapsedMs,status:"timeout",retryable:true,cancellation:cause});
+        if (cause === "hard_deadline") this.#health.record(name,false,elapsedMs,error,"timeout");
+      }
+      this.#journal?.write("soft_deadline",{aborted:pending,softMs,recoveryMs,cause,earlyHarvest:cause==="early_harvest"});
+      controller.abort(new Error(cause));
+    }
+    // Each collector handles rejection; do not await providers which ignore cancellation.
+    void collectors;
 
     const degraded = attempted > 0 && (used.length === 0 || used.length / attempted < 0.5);
     return { refs: allRefs, used, failed, skipped, degraded };

@@ -16,6 +16,8 @@ export interface CoreConfig {
   timeoutMs: number;
   /** v0.4: 软截止 ms —— 到点先收割已完成的引擎返回,慢腿剔除不再等满 timeout(0=关);默认 6000 */
   softDeadlineMs: number;
+  /** Quality-empty recovery edge, bounded by hard timeout. */
+  recoveryDeadlineMs: number;
   /** phase AG-2: 早收割 ms —— 到点后若(60% 腿已结算 且 refs≥15)则立即断慢腿交付,不再干等满软截止(0=关);默认 1200 */
   earlyHarvestMs: number;
   /** v0.4: key 引擎插槽自动并联: auto=已配 key 且额度未尽的引擎自动加入默认池(用完自动回落免 key 池); off=只走显式 engines */
@@ -156,6 +158,7 @@ export function loadConfig(overrides?: Partial<CoreConfig>): CoreConfig {
     timeoutMs: Number(env("SC_TIMEOUT_MS") ?? file.timeoutMs ?? 12000),
     // 软截止: wigolo[09] 思路,到点先交付;0 关闭。默认 6s(12s 超时的一半,慢腿不值得等)
     softDeadlineMs: Number(env("SC_SOFT_DEADLINE_MS") ?? file.softDeadlineMs ?? 6000),
+    recoveryDeadlineMs: Number(env("SC_RECOVERY_DEADLINE_MS") ?? file.recoveryDeadlineMs ?? 10000),
     // 早收割(AG-2): 实测 7/9 真实查询在 refs≥12-20 时仍干等满 6s 软截止(慢腿拖尾,vs-zai 延迟差距的结构性根因);
     // 到点 1.2s 后若证据已足够(60% 腿结算+refs≥15)立即交付,质量由 bench 守(0=关)
     earlyHarvestMs: Number(env("SC_EARLY_HARVEST_MS") ?? file.earlyHarvestMs ?? 1200),

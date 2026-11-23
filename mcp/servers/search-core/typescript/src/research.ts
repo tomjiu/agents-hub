@@ -531,7 +531,7 @@ export class ResearchLoop {
       } as const;
       const settled = await Promise.allSettled(
         angleQueries.map(async (aq) => {
-          const r = await router.run(aq.query, searchOpts);
+          const r = await router.run(aq.query, searchOpts, undefined, aq.query);
           const evidence=filterEvidence(state.query,r.refs);
           this.#append(state.runId,{event:"search_quality",loop,angle:aq.angle,query:aq.query,evaluated:evidence.evaluated,rejected:evidence.rejected,reasons:evidence.reasons});
           return { aq, ...r, refs:evidence.refs };
