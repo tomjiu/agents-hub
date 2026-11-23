@@ -72,6 +72,14 @@ mn init | add | get | link | progress | trail | replay | activate
 
 写纪律演示：`mn add <dir> observation --role model --text "…"` → 可读拒绝（模型不得伪造观测）。
 
+## P0正确性修复（schema1，需新宿主验收）
+
+- 自动工具观测在DSH适配桥中独立追加，不以工具名覆盖旧依据；显式subject key仍按保守覆盖规则推翻active/promoted推断。
+- promoted推断可参与召回，仍是推断，不自动变成observation。
+- GC压缩/TTL/purge同一BEGIN IMMEDIATE事务内执行，失败全部回滚；保护active/promoted节点通过based_on和生命周期evidence可达的传递依据，循环引用用visited集终止。purge与TTL仍默认关闭。
+- 尚无不可变修订/代码版本绑定。trail清理仍重编号；已有缺失引用不补造。GC只保护当次已提交图，add/link的校验到写入竞态尚未解决，不能宣称完整并发引用完整性。
+- 追加增加存储与召回噪音，不能直接采用到运行Web；当前预算不是精选召回或存储配额。设计见[操作历史设计](PROVENANCE-DESIGN.md)。
+
 ## 存储
 
 - **SQLite（node:sqlite，写死）**：一个 workspace = 一个 `<dir>/memory.db`，WAL + busy_timeout，本机多实例共享且写者串行；不支持活跃WAL库跨机器网络盘共享写入，超时/失败仍需处理
