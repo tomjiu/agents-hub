@@ -24,6 +24,7 @@ const MCP_NAME = process.env.MN_E2E_MCP_TOOL
 const SKILL_NAME = process.env.MN_E2E_SKILL
 const SEARCH_NAME = process.env.MN_E2E_SEARCH_TOOL
 const FETCH_NAME = process.env.MN_E2E_FETCH_TOOL
+const MEMORY_P0 = process.env.MN_E2E_MEMORY_P0 === '1'
 const TUN_FETCH = process.env.MN_E2E_TUN_FETCH === "1"
 const PARALLEL_DISCOVERY = process.env.MN_E2E_PARALLEL_DISCOVERY === '1'
 const SEARCH_ARGS = JSON.stringify({ query: process.env.MN_E2E_SEARCH_QUERY || 'aurora glacier', engines: ['searxng'], top_n: 3 })
@@ -62,6 +63,15 @@ const server = createServer((req, res) => {
     const hasSearchResult = messageStrings.some((text) => text.includes('DSH-SEARCH-FIXTURE'))
     const hasSearchCache = messageStrings.some((text) => text.includes('DSH-SEARCH-FIXTURE') && /"from_cache"[ ]*:[ ]*true/.test(text))
     const repeatSearch = !!SEARCH_NAME && afterTool && hasSearchResult && !hasSearchCache
+    const hasCall = id => messages.some(m => m.role === 'tool' && m.tool_call_id === id)
+    const call = (id, name, args) => ({id,type:'function',function:{name,arguments:JSON.stringify(args)}})
+    let p0Calls = []
+    if (MEMORY_P0 && afterTool && !repeatSearch) {
+      if (!hasCall('call_p0_seed')) p0Calls = [call('call_p0_seed','mn_e2e_provenance',{phase:'seed'})]
+      else if (!hasCall('call_echo_3')) p0Calls = [call('call_echo_2','mn_e2e_echo',{say:'unrelated B'}),call('call_echo_3','mn_e2e_echo',{say:'hello auto-observe'})]
+      else if (!hasCall('call_p0_check')) p0Calls = [call('call_p0_check','mn_e2e_provenance',{phase:'check'})]
+      else if (!hasCall('call_p0_recall')) p0Calls = [call('call_p0_recall','memory_net_recall',{query:'MN-P0-REVIEWED-DECISION'})]
+    }
     const diag = {
       ts: Date.now(),
       round: afterTool ? 'after_tool' : 'first',
@@ -87,6 +97,8 @@ const server = createServer((req, res) => {
       has_constraint_section: body.includes('force push'),
       has_progress_section: body.includes('登录页'),
       has_inference_section: body.includes(WRITE_TEXT),
+      has_p0_checked: messages.filter(m => m.role === 'tool' && m.tool_call_id === 'call_p0_check').some(m => strings(m.content).some(text => {try{const v=JSON.parse(text);return v.phase==='check'&&v.independent===true&&v.promoted===true&&v.evidence_preserved===true}catch{return false}})),
+      has_p0_recall: messages.some(m => m.role === 'tool' && m.tool_call_id === 'call_p0_recall' && strings(m.content).some(text => text.includes('MN-P0-REVIEWED-DECISION'))),
     }
     try { appendFileSync(diagPath, JSON.stringify(diag) + '\n') } catch {}
     console.error(`mock-model] ${JSON.stringify(diag)}`)
@@ -118,6 +130,10 @@ const server = createServer((req, res) => {
         finish({ role: 'assistant', content: '' })
         finish({ tool_calls: [{ index: 0, ...searchCall, id: 'call_search_cached' }] })
         finish({}, 'tool_calls')
+      } else if (p0Calls.length) {
+        finish({role:'assistant',content:''})
+        finish({tool_calls:p0Calls.map((call,index)=>({index,...call}))})
+        finish({},'tool_calls')
       } else {
         const toolResult = typeof last.content === 'string' ? last.content : JSON.stringify(last.content ?? '')
         finish({ role: 'assistant', content: '' })
@@ -141,6 +157,8 @@ const server = createServer((req, res) => {
         }
       } else if (repeatSearch) {
         message = { role: 'assistant', content: null, tool_calls: [{ ...searchCall, id: 'call_search_cached' }] }
+      } else if (p0Calls.length) {
+        message = {role:'assistant',content:null,tool_calls:p0Calls}
       } else {
         const toolResult = typeof last.content === 'string' ? last.content : JSON.stringify(last.content ?? '')
         message = { role: 'assistant', content: `MN-E2E-OK 工具结果回显: ${String(toolResult).slice(0, 300)}` }
@@ -151,7 +169,7 @@ const server = createServer((req, res) => {
         object: 'chat.completion',
         created: Math.floor(Date.now() / 1000),
         model: 'mock-flash',
-        choices: [{ index: 0, message, finish_reason: afterTool && !repeatSearch ? 'stop' : 'tool_calls' }],
+        choices: [{ index: 0, message, finish_reason: afterTool && !repeatSearch && !p0Calls.length ? 'stop' : 'tool_calls' }],
       }))
     }
   })

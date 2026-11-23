@@ -7,7 +7,7 @@
 //   C 闭环回显     —— dsh stdout 含 MN-E2E-OK（模型最终回复携带工具结果）
 //   D SQLite 落盘   —— 模型经工具写入的 inference 真实持久化在 workspace memory.db
 //   E auto-observe —— 宿主工具 mn_e2e_echo 的执行结果被 tools/result 桥自动写为观测
-//                     （key=tool:mn_e2e_echo）；且 memory_net_* 未被递归观测（自指过滤真实生效）
+//                     （独立调用无状态key，payload.tool=mn_e2e_echo）；且 memory_net_* 未被递归观测（自指过滤真实生效）
 import { readFileSync, existsSync } from 'node:fs'
 import { DatabaseSync } from 'node:sqlite'
 
@@ -55,10 +55,11 @@ if (!row) { db.close(); fail('SQLite 中未找到模型写入的 inference 节�
 ok(`D 持久化: ${row.id} [inference] "${row.text.slice(0, 40)}…" 已落 ${dbPath}`)
 
 // E. auto-observe：宿主工具结果自动观测入网（tools/result 事件桥在真实 dsh 里生效）
-const obs = db.prepare("SELECT id, text, payload_json FROM nodes WHERE kind='observation' AND key='tool:mn_e2e_echo'").get()
+const echoes = db.prepare("SELECT id, key, status, text, payload_json FROM nodes WHERE kind='observation' AND json_extract(payload_json, '$.tool')='mn_e2e_echo' ORDER BY seq").all()
+const obs = echoes[0]
 if (!obs) {
   db.close()
-  fail('auto-observe 未生效：workspace 无 key=tool:mn_e2e_echo 的观测（ctx.on 不可达或事件未分发？）')
+  fail('auto-observe 未生效：workspace 无 payload.tool=mn_e2e_echo 的观测（ctx.on 不可达或事件未分发？）')
 }
 if (!obs.text.includes('工具 mn_e2e_echo 成功') || !obs.text.includes('hello auto-observe')) {
   db.close()
@@ -69,11 +70,21 @@ if (!JSON.parse(obs.payload_json).call_id) {
   fail(`auto-observe 观测 payload 缺 call_id（非本桥写入？）: ${obs.payload_json.slice(0, 120)}`)
 }
 ok(`E1 auto-observe: ${obs.id} [observation] "${obs.text.slice(0, 60)}…" 已自动入网（payload 含 call_id）`)
-const selfObs = db.prepare("SELECT COUNT(*) AS n FROM nodes WHERE kind='observation' AND key LIKE 'tool:memory_net_%'").get()
+const selfObs = db.prepare("SELECT COUNT(*) AS n FROM nodes WHERE kind='observation' AND substr(json_extract(payload_json, '$.tool'),1,11)='memory_net_'").get()
 if (selfObs.n !== 0) {
   db.close()
   fail(`自身工具被递归观测（${selfObs.n} 条）——memory_net_* 过滤失效`)
 }
 ok('E2 自指过滤: memory_net_* 工具结果未被递归观测')
+if (process.env.MN_E2E_MEMORY_P0 === '1') {
+  if (echoes.length !== 3 || !echoes.every(n => n.key === null)) fail('P0 independent echo invocations missing')
+  const finding = db.prepare("SELECT id, status, based_on_json, payload_json FROM nodes WHERE text='MN-P0-REVIEWED-DECISION'").get()
+  if (!finding || finding.status !== 'promoted') fail('P0 reviewed decision not retained')
+  const dependencies = JSON.parse(finding.based_on_json)
+  if (!dependencies.includes(obs.id) || !db.prepare('SELECT id FROM nodes WHERE id=?').get(obs.id)) fail('P0 GC removed decision evidence')
+  if (!rows.some(r => r.has_p0_checked) || !rows.some(r => r.has_p0_recall)) fail('P0 actual tool check/recall result missing from model')
+  ok('P0 independent invocations, reviewed recall and GC evidence retained through actual host')
+}
+if (echoes.some(n=>n.key!==null)) fail('Automatic observations still use mutable state key')
 db.close()
 console.log('[verify] PASS: 适配包经真实 dsh headless 端到端生效（含 auto-observe）')

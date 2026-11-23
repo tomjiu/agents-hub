@@ -282,7 +282,7 @@ test('host api 全景: addInference/addTip/addConstraint/exportPkg/activate + cl
 
 // ---------- auto-observe：宿主工具结果自动入网（dsh-tools 'tools/result' 事件桥） ----------
 
-test('auto-observe 成功路径: tools/result 事件 → observation 落网（key=tool:<名>、payload 带 call_id、args 摘要进文本）', () => {
+test('auto-observe 成功路径: tools/result 事件 → observation 落网（独立追加无状态key、payload 带 call_id、args 摘要进文本）', () => {
   const root = makeRoot()
   try {
     const { ctx, tools, emit, bus } = mockCtx({ withBus: true })
@@ -294,8 +294,9 @@ test('auto-observe 成功路径: tools/result 事件 → observation 落网（ke
       { isError: false, value: { title: 'Example Domain' } })
 
     const r = api.activate('browser_open', {})
-    const hit = r.nodes.find((x) => x.node.key === 'tool:browser_open')
-    assert.ok(hit, '观测已入网且 key=tool:browser_open')
+    const hit = r.nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'browser_open')
+    assert.ok(hit, '观测已入网且 payload.tool=browser_open')
+    assert.equal(hit.node.key, null)
     assert.equal(hit!.node.kind, 'observation')
     assert.equal(hit!.node.source, 'tool')
     assert.equal(hit!.node.payload.call_id, 'c-1')
@@ -322,7 +323,7 @@ test('auto-observe 失败路径: isError=true 也入网（include_error 默认�
     emit('tools/result',
       { callId: 'c-2', name: 'bash', arguments: { cmd: 'make test' } },
       { isError: true, error: { message: 'exit 1' } })
-    const hit = api.activate('bash', {}).nodes.find((x) => x.node.key === 'tool:bash')
+    const hit = api.activate('bash', {}).nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'bash')
     assert.ok(hit, '失败结果同样是有价值的协作事实')
     assert.equal(hit!.node.payload.is_error, true)
     assert.match(hit!.node.text, /工具 bash 失败/)
@@ -336,7 +337,7 @@ test('auto-observe 失败路径: isError=true 也入网（include_error 默认�
       { isError: true, error: { message: 'boom' } })
     assert.equal(api2.activate('bash', {}).nodes.filter((x) => x.node.kind === 'observation').length, 0, 'include_error=false 不入网')
     emit2('tools/result', { callId: 'c-4', name: 'bash', arguments: { cmd: 'y' } }, { isError: false, value: 'ok' })
-    assert.ok(api2.activate('bash', {}).nodes.find((x) => x.node.key === 'tool:bash'), '成功结果不受 include_error 影响')
+    assert.ok(api2.activate('bash', {}).nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'bash'), '成功结果不受 include_error 影响')
     api2.close()
   } finally {
     cleanup(root)
@@ -372,7 +373,7 @@ test('auto-observe 截断: 超长结果/参数 → 文本截断 + payload.trunca
     emit('tools/result',
       { callId: 'c-7', name: 'read_file', arguments: { path: '/very/long/path/'.padEnd(120, 'x') } },
       { isError: false, value: 'r'.repeat(5000) })
-    const hit = api.activate('read_file', {}).nodes.find((x) => x.node.key === 'tool:read_file')
+    const hit = api.activate('read_file', {}).nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'read_file')
     assert.ok(hit)
     assert.equal(hit!.node.payload.truncated, true)
     assert.ok(hit!.node.text.length <= 100 + 30 + 40, `文本有界（实长 ${hit!.node.text.length}）`)
@@ -382,7 +383,7 @@ test('auto-observe 截断: 超长结果/参数 → 文本截断 + payload.trunca
     const { ctx: ctx2, emit: emit2 } = mockCtx({ withBus: true })
     const api2 = apply(ctx2, { workspaces_root: join(root, 'ws2'), default_workspace: 'main' })!
     emit2('tools/result', { callId: 'c-8', name: 'small', arguments: { a: 1 } }, { isError: false, value: { ok: true } })
-    const hit2 = api2.activate('small', {}).nodes.find((x) => x.node.key === 'tool:small')
+    const hit2 = api2.activate('small', {}).nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'small')
     assert.equal(hit2!.node.payload.truncated, false)
     api2.close()
   } finally {
@@ -406,7 +407,7 @@ test('auto-observe 嵌套过滤: exec.parent 存在（嵌套 dispatch）默认�
     emit2('tools/result',
       { callId: 'c-10', name: 'run_code', parent: 'tok-2', arguments: {} },
       { isError: false, value: 2 })
-    assert.ok(api2.activate('run_code', {}).nodes.find((x) => x.node.key === 'tool:run_code'), 'include_nested=true 入网')
+    assert.ok(api2.activate('run_code', {}).nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'run_code'), 'include_nested=true 入网')
     api2.close()
   } finally {
     cleanup(root)

@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "status": "PLAN_EXAMPLES_VALIDATED_ONLY_NOT_RUNTIME_RELEASED",
+  "baseline_commit": "766dff208c5abd17c7066c4a66e62492ee38ef19",
+  "baseline_source_hashes": {
+    "src/store.ts": "eef3f8cd702168f5633d26c0c928ec26bcd7d63b317e05c8935fd5e5c8e6a0d4",
+    "src/db.ts": "37b1f9096017202936130b6ab631e55816c2b34886ea81f1e95c48963827bd16",
+    "src/activate.ts": "d07b77d848603589571ba711663e8bb3284efe69e96642cddaf672366d547872",
+    "src/types.ts": "0f9adb39328387e5a1dba4110184a97abe7ad1e2230286b2ccef3f4a4516cf1b",
+    "adapters/dsh/src/bridge.ts": "266f387927f03fd60549f7afbca00cb696a372c2d475a2066b463b0d151cbd29",
+    "adapters/dsh/src/contract.ts": "61ec530a949eb60d97238caead730537e8b8cc307b8de3549539376732557205",
+    "adapters/dsh/src/index.ts": "6d1dbf5fe81d0e9e9754314f383068184ad2dffc26846562bf8436533b1ec40c"
+  },
+  "plan_sha256": "80dcfa14e899864195f1e4cddf17eed2575f0571cde1ec392d68208dcfcfd635",
+  "red": {
+    "tests": 5,
+    "pass": 0,
+    "fail": 5,
+    "reason": "Expected behavior assertion failures on unchanged baseline after fixing extraction/import harness issues",
+    "log_sha256": "1644d9f8e95d1675cd7eea0f4d5b47b45aa0ed80eabe76ee6e5771e1dbf3f73a"
+  },
+  "green": {
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "typecheck": true,
+    "scope": "Exact code samples extracted from P0 plan plus minimal edits in ignored temporary copy only. No full patched regression or real-host acceptance."
+  },
+  "temporary_patch_source_hashes": {
+    "src/store.ts": "887b6e68ef75fca880b36dd12d9d90d527ea1e0fab9005ce8c74ebeadfdde345",
+    "adapters/dsh/src/bridge.ts": "27d28348b172fa854fd346425e1aff4c0dae59367873f2a900818e8b545d6f12"
+  },
+  "retained_harness_failures": [
+    "Extraction initially confused legitimate TypeScript undefined with missing block",
+    "First red run had missing helper module; not counted as behavioral proof",
+    "Temporary patch initial whitespace mismatch; canonical source unchanged"
+  ],
+  "runtime_memory_source_modified": false,
+  "live_database_accessed": false,
+  "live_profile_modified": false,
+  "tests": [
+    "independent observations and repeated unchanged evidence",
+    "promoted recall and explicit subject invalidation",
+    "transitive GC evidence and cycle termination",
+    "GC failure rolls back prior trail compression",
+    "GC protected evidence package roundtrip"
+  ],
+  "reproduce": "Extract plan ts code blocks into standalone tests with imports to isolated baseline, transpile with pinned TypeScript; apply only Task1/Task2/Task3 snippets in another copied temporary source tree; typecheck and run same tests. Use temporary synthetic DBs only.",
+  "next_gate": "Formal implementation still needs original full suites, concurrency tests, independent checkout and rc.1/rc.5 real-host acceptance before explicit adoption.",
+  "regression": {
+    "root": {
+      "total": 139,
+      "pass": 138,
+      "fail": 0,
+      "skipped": 1
+    },
+    "memory_core": {
+      "pass": 29,
+      "fail": 0
+    },
+    "baseline_adapter": {
+      "pass": 21,
+      "fail": 0
+    },
+    "catalog": {
+      "status": "PASS",
+      "assets": 137,
+      "scope": "Static catalog validation only; historical local-edit warnings retained"
+    },
+    "environment_prerequisites": "Initial root runs lacked isolated memory dist and root dependencies; built unchanged source and installed pinned root dependencies in worktree only. Those failures are retained privately and not counted as passing runs."
+  },
+  "analysis_sources": [
+    {
+      "name": "README.md",
+      "local_path": "E:/Code/ai/md/audit/_archive/typora-re-analysis/projects/delta/README.md",
+      "sha256": "bc06c00d6a4bcc0f5c6f7c2c127ac40adb5bc5644d61ef71e55b33be41a2c0ae",
+      "evidence": "Existing local analysis, not DeltaDB publicly licensed source. No binaries executed or original analysis modified."
+    },
+    {
+      "name": "CLOSURE.md",
+      "local_path": "E:/Code/ai/md/audit/_archive/typora-re-analysis/projects/delta/CLOSURE.md",
+      "sha256": "2e6750bdb6e19a16482b670962e2d5453642e2b06a67b0402bbd98f12866afff",
+      "evidence": "Existing local analysis, not DeltaDB publicly licensed source. No binaries executed or original analysis modified."
+    },
+    {
+      "name": "deep_dive/D1_history_ops_dag.md",
+      "local_path": "E:/Code/ai/md/audit/_archive/typora-re-analysis/projects/delta/deep_dive/D1_history_ops_dag.md",
+      "sha256": "7bb81c34a018ba719a8e913c57d493b843f45da0cb4c4402bb4db9f7e70eb2ea",
+      "evidence": "Existing local analysis, not DeltaDB publicly licensed source. No binaries executed or original analysis modified."
+    },
+    {
+      "name": "deep_dive/D2_replica_concurrency.md",
+      "local_path": "E:/Code/ai/md/audit/_archive/typora-re-analysis/projects/delta/deep_dive/D2_replica_concurrency.md",
+      "sha256": "bea3fcb7fb4c9627b04bbfe22d1e1ed5ba0ec4d393211e1e40b1aa1580c85b95",
+      "evidence": "Existing local analysis, not DeltaDB publicly licensed source. No binaries executed or original analysis modified."
+    },
+    {
+      "name": "deep_dive/D3_sqlite_schema.md",
+      "local_path": "E:/Code/ai/md/audit/_archive/typora-re-analysis/projects/delta/deep_dive/D3_sqlite_schema.md",
+      "sha256": "3990c190c6cf60bb13ef36f6b3391ce126e0665a7ef18c1cfada30fb43a51221",
+      "evidence": "Existing local analysis, not DeltaDB publicly licensed source. No binaries executed or original analysis modified."
+    },
+    {
+      "name": "deep_dive/D4_thread_worktree_binding.md",
+      "local_path": "E:/Code/ai/md/audit/_archive/typora-re-analysis/projects/delta/deep_dive/D4_thread_worktree_binding.md",
+      "sha256": "366440df69f4a22a476c469f45b8b4c52b66cb131f57a0d4299888cfee1da48e",
+      "evidence": "Existing local analysis, not DeltaDB publicly licensed source. No binaries executed or original analysis modified."
+    }
+  ]
+}

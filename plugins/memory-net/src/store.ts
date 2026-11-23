@@ -271,7 +271,7 @@ export class MemoryNet {
 
   /**
    * observation 覆盖联动：同 key 旧 active 观测 → superseded；
-   * 基于这些旧观测的 active inference → contradicted（物理事实变了，推断自动失效）。
+   * 基于这些旧观测的 active/promoted inference → contradicted（物理事实变了，推断自动失效）。
    */
   private supersedeSameKey(key: string, newId: string): void {
     const oldRows = this.db.prepare(
@@ -287,8 +287,8 @@ export class MemoryNet {
     // instr 精确子串（带引号 id）替代全表 JS 逐行比对，把过滤下推到 SQLite
     for (const sid of supersededIds) {
       this.db.prepare(
-        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status = 'active' AND instr(based_on_json, ?) > 0",
-      ).run(Date.now(), `"${sid}"`)
+        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status IN ('active','promoted') AND (instr(based_on_json, ?) > 0 OR EXISTS (SELECT 1 FROM json_each(nodes.payload_json, '$.promote_evidence') WHERE value = ?))",
+      ).run(Date.now(), `"${sid}"`, sid)
     }
     void newId
   }
@@ -434,7 +434,7 @@ export class MemoryNet {
 
     // 竞争候选：其余 active 节点
     const competitors = (this.db.prepare(
-      `SELECT * FROM nodes WHERE status = 'active'
+      `SELECT * FROM nodes WHERE (status = 'active' OR (kind = 'inference' AND status = 'promoted'))
          AND NOT (kind = 'progress' AND task_id IS NOT NULL)
        ORDER BY updated_at DESC`,
     ).all() as unknown as NodeRow[]).map(rowToNode).filter((n) => {
@@ -552,9 +552,13 @@ export class MemoryNet {
   /**
    * gc：trail 压缩（per-run 超保留上限时中间段合并，保留首尾）+ 可选 TTL 降级
    * （仅 tip/inference；observation 默认绝不因 TTL 删）+ 可选 purge（物理清理，
-   * 保护被 active inference 引用的行）。
+   * 保护存活节点的传递依据（含 promote_evidence））。
    */
   gc(opts?: GcOpts): GcReport {
+    return this.txn(() => this.gcWithinTransaction(opts))
+  }
+
+  private gcWithinTransaction(opts?: GcOpts): GcReport {
     const keep = opts?.trail_keep && opts.trail_keep >= 4 ? Math.floor(opts.trail_keep) : 50
     const report: GcReport = { trail_runs_compressed: 0, trail_steps_merged: 0, demoted_by_ttl: 0, purged: 0 }
 
@@ -599,13 +603,27 @@ export class MemoryNet {
       }
     }
 
-    // 3) purge（默认关）：物理删除已降级/已推翻/已覆盖行，保护被 active inference 引用的行
+    // 3) purge（默认关）：物理删除已降级/已推翻/已覆盖行，保护存活节点的传递依据（含 promote_evidence）
     if (opts?.purge) {
+      const rows = this.db.prepare('SELECT * FROM nodes').all() as unknown as NodeRow[]
+      const byId = new Map(rows.map((r) => [r.id, rowToNode(r)]))
       const protectedIds = new Set<string>()
-      const infRows = this.db.prepare(
-        "SELECT based_on_json FROM nodes WHERE status = 'active' AND kind = 'inference'",
-      ).all() as Array<{ based_on_json: string }>
-      for (const r of infRows) for (const d of safeJson<string[]>(r.based_on_json, [])) protectedIds.add(d)
+      const queue = rows.filter((r) => r.status === 'active' || r.status === 'promoted').map((r) => r.id)
+      while (queue.length) {
+        const id = queue.pop()!
+        if (protectedIds.has(id)) continue
+        protectedIds.add(id)
+        const node = byId.get(id)
+        if (!node) continue // Historic missing references are not invented.
+        const edges = [...node.based_on]
+        for (const key of ['promote_evidence', 'contradict_evidence']) {
+          const value = node.payload[key]
+          if (Array.isArray(value)) {
+            for (const dep of value) if (typeof dep === 'string') edges.push(dep)
+          }
+        }
+        for (const dep of edges) if (!protectedIds.has(dep)) queue.push(dep)
+      }
       const dead = this.db.prepare(
         "SELECT id FROM nodes WHERE status IN ('demoted','contradicted','superseded')",
       ).all() as Array<{ id: string }>

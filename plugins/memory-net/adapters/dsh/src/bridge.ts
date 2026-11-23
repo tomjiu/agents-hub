@@ -126,7 +126,7 @@ export function activateOpts(cfg: AdapterConfig, runId?: string | null, taskId?:
 
 /** buildObservation 的产出：可直接投递给 MemoryNet.add('observation') 的内容。 */
 export interface AutoObservation {
-  key: string
+  key?: string
   text: string
   payload: Record<string, unknown>
 }
@@ -152,8 +152,9 @@ function digest(v: unknown): string {
  *   - include_error=false 时的失败结果
  *   - include_nested=false 时的嵌套 dispatch（exec.parent 存在；字段缺失 fail-open 视为根调用）
  *
- * key 语义 = 状态观测（tool:<名>）：同工具最新结果覆盖旧观测，并自动 contradict 基于旧观测的
- * active 推断（memory-net 核心 store 的既有覆盖语义）——工具结果变化即现实变化。
+ * 独立调用观测不设状态 key：同工具读取不同主体或重复重验不会覆盖旧依据。
+ * 宿主显式 observe 的 subject key 仍用于状态覆盖；工具名/调用 ID 不等于事实主体。
+ * 本桥不承诺跨重启去重，也不把执行成功当作用户接受变更。
  */
 export function buildObservation(
   ao: AdapterConfig['auto_observe'],
@@ -173,7 +174,6 @@ export function buildObservation(
     ? `工具 ${name} 失败·args(${args.text})→ ${body.text}`
     : `工具 ${name} 成功·args(${args.text})→ ${body.text}`
   return {
-    key: `tool:${name}`,
     text,
     payload: {
       tool: name,
