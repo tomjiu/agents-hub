@@ -31,7 +31,7 @@ test('real repository priority assets are registered and onboarding links resolv
  const {fileURLToPath}=await import('node:url');const root=fileURLToPath(new URL('../..',import.meta.url));
  const report=await inspectSkillDirectory(root);assert.deepEqual(report.invalid,[]);assert.deepEqual(report.unregistered,[]);assert.deepEqual(report.missing,[]);assert.equal(report.total,report.registered);
  for(const [query,kind,id] of [['source-index','skills','source-index'],['skill-search','skills','skill-search'],['search-core','mcp','mcp.search-core'],['memory-net','plugins','memory-net']])assert.equal((await searchAssets(root,query,{kind,limit:1})).results[0].id,id);
- const guidance=await fs.readFile(path.join(root,'AGENTS.md'),'utf8');const links=guidance.split('](').slice(1).map(part=>part.split(')')[0]);assert.ok(links.length>=10);for(const target of links){if(!target.startsWith('http'))await fs.access(path.join(root,target));}
+ const guidance=await fs.readFile(path.join(root,'AGENTS.md'),'utf8');const links=guidance.split('](').slice(1).map(part=>part.split(')')[0].replace(/^<|>$/g,'').split('#')[0]);assert.ok(links.length>=10);for(const target of links){if(!target.startsWith('http'))await fs.access(path.join(root,target));}
  const {resolveExpert,loadCatalog}=await import('../core/catalog.mjs');const recipe=await resolveExpert(root,'research',await loadCatalog(root));assert.ok(recipe.skills.includes('skill-search'));assert.ok(recipe.skills.includes('source-index'));assert.ok(recipe.mcp.includes('mcp.search-core'));
 });
 

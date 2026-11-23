@@ -15,6 +15,8 @@
 
 ## 2. 新代理怎样发现并使用登记
 
+自然任务先用 node asset-manager/cli.mjs find-capability "任务" 或 capabilities --group office，查看[任务目录](<catalog/CAPABILITIES.md>)。只匹配经审阅的完整任务别名；NO_MATCH不代表库存没有资产，PARTIAL_CANDIDATE不代表整项任务可完成。规划/验收复用工程技能并显式限制适用范围；不要凭名字新增重复Skill。CURRENT只验证正文映射，来源许可/依赖与preflight仍必须核验，不把selectable_candidate当部署批准。多提供方是备选，不能把路线当Expert共同安装配方。
+
 以下命令在仓库根执行（Node/npm；若依赖未装按README先npm ci --ignore-scripts）：
 
 ~~~sh

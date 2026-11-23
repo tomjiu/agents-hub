@@ -2,6 +2,10 @@
 
 状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。PR #3已于本轮核验后合入main，合并提交6a2ba83；后续用户授权当前Web实验并自行重启，实际搜索/可信TUN抓取/9仓库Skill/独立记忆已验证，重复宿主tool-skill空目录问题已修复，见[Web实验](web-live-experiment.json)。后文阶段记录保留当时状态，不作当前合并状态。详见[合并交付](pr3-merge-delivery.json)。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
+## 面向任务的能力目录P0（独立分支，尚未合并）
+
+新增14条精选任务路线、15个不同Skill映射及只读capabilities/find-capability入口；完整别名匹配，不回退中文碎片检索。规划/验收仅部分覆盖，受限文档、厂商与业务排期缺口显式展示。正文变化需重新审阅映射；多提供方不是安装配方。根测试148通过、1权限跳过（含10项专项），137项catalog校验通过；2418个原迁移目标无缺失/字节差异。Skill/插件/MCP/Expert/登记/锁/来源和运行配置不改，Memory-net PR4独立。详见[验收记录](<task-capability-discovery.json>)及[用户目录](<../CAPABILITIES.md>)。后文历史测试计数保留，不作此分支新增功能计数。
+
 ## 已完成
 
 - 功能分支 refactor/asset-runtime-center；迁移前 Git bundle 在仓库外保存并验证。
