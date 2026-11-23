@@ -10,6 +10,10 @@
 
 研究之后用户授权继续：独立自动观测追加、promoted召回及显式失效、GC传递证据闭包/事务回滚已分阶段提交。e654b96在新clone重新安装固定依赖和构建：核心34、adapter22、搜索330、根138通过/1权限跳过；rc.1/rc.5实际宿主P0工具回流和持久化重复通过，见[P0证据](memory-provenance-p0.json)。未改schema2/CRDT、当前Web/profile或用户库；研究段为当时历史，不再表示P0未实施。
 
+## 面向任务的能力目录P0（独立分支，尚未合并）
+
+新增14条精选任务路线、15个不同Skill映射及只读capabilities/find-capability入口；完整别名匹配，不回退中文碎片检索。规划/验收仅部分覆盖，受限文档、厂商与业务排期缺口显式展示。正文变化需重新审阅映射；多提供方不是安装配方。根测试148通过、1权限跳过（含10项专项），137项catalog校验通过；2418个原迁移目标无缺失/字节差异。Skill/插件/MCP/Expert/登记/锁/来源和运行配置不改，Memory-net PR4独立。详见[验收记录](<task-capability-discovery.json>)及[用户目录](<../CAPABILITIES.md>)。后文历史测试计数保留，不作此分支新增功能计数。
+
 ## 已完成
 
 - 功能分支 refactor/asset-runtime-center；迁移前 Git bundle 在仓库外保存并验证。
