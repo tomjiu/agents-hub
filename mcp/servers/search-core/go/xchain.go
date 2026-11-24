@@ -318,7 +318,10 @@ func (x *xKv) guestToken(client *http.Client, ua string) (string, error) {
 	if res.StatusCode < 200 || res.StatusCode > 299 {
 		return "", fmt.Errorf("http %d for api.x.com", res.StatusCode)
 	}
-	b, _ := io.ReadAll(res.Body)
+	b, berr := ReadBounded(res.Body, 12<<20)
+	if berr != nil {
+		return "", fmt.Errorf("x body over limit: %w", berr)
+	}
 	if json.Unmarshal(b, &resp) != nil || resp.GuestToken == "" {
 		return "", fmt.Errorf("guest activate: bad payload")
 	}

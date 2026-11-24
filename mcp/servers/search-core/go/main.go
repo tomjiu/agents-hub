@@ -171,6 +171,11 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 	}
 	slots := make([]legSlot, attempted)
 	var mu sync.Mutex
+	// G1-6: run 级 ctx — 收割退出时取消所有在飞腿(超时后网络/任务不存活);
+	// 结算走事件通知 (settleCh), 不再 25ms 轮询。
+	runCtx, runCancel := context.WithCancel(context.Background())
+	defer runCancel()
+	settleCh := make(chan struct{}, attempted)
 	idx := 0
 	for _, ls := range legSets {
 		for _, e := range ls.engines {
@@ -179,12 +184,13 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 				lo.Query = q
 				lo.Engines = []string{e}
 				lt0 := time.Now()
-				rs := runLanes(lo, client)
+				rs := runLanesCtx(runCtx, lo, client)
 				dt := time.Since(lt0).Milliseconds()
 				mu.Lock()
 				slots[i].settled = true
 				slots[i].results = rs
 				mu.Unlock()
+				settleCh <- struct{}{}
 				for _, lr := range rs {
 					if lr.Err != nil {
 						msg := lr.Err.Error()
@@ -200,14 +206,15 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 			idx++
 		}
 	}
-	// 收割轮询(TS 25ms 粒度防越过边缘)
+	// 收割循环(G1-6: 事件驱动 — 结算即醒, 边缘(earlyHarvest/软截止)走定时器;
+	// 语义与 TS 25ms 轮询逐条对齐: 60% 腿 + refs>=15 早收割, 软截止无条件兜底)
 	ht0 := time.Now()
 	minRefs := 15
 	degradedEarly := false
-	for {
+	settledCount := 0
+	snapshot := func() (pending, totalRefs int) {
 		mu.Lock()
-		pending := 0
-		totalRefs := 0
+		defer mu.Unlock()
 		for i := 0; i < attempted; i++ {
 			if !slots[i].settled {
 				pending++
@@ -216,12 +223,36 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 				totalRefs += len(lr.Refs)
 			}
 		}
-		mu.Unlock()
+		return pending, totalRefs
+	}
+	for settledCount < attempted {
+		pending, totalRefs := snapshot()
 		if pending <= 0 {
 			break // 全部结算, 正常出
 		}
 		elapsed := time.Since(ht0).Milliseconds()
 		enough := (attempted-pending) >= int(math.Ceil(float64(attempted)*0.6)) && totalRefs >= minRefs
+		nextEdge := int64(softMs)
+		if harvestMs > 0 && !enough {
+			nextEdge = int64(math.Min(float64(harvestMs), float64(softMs)))
+		}
+		waitMs := nextEdge - elapsed
+		if waitMs < 1 {
+			waitMs = 1
+		}
+		select {
+		case <-settleCh:
+			settledCount++
+			continue
+		case <-time.After(time.Duration(waitMs) * time.Millisecond):
+		}
+		// 边缘到点: 重估收割条件
+		pending, totalRefs = snapshot()
+		if pending <= 0 {
+			break // 全部结算, 正常出
+		}
+		elapsed = time.Since(ht0).Milliseconds()
+		enough = (attempted-pending) >= int(math.Ceil(float64(attempted)*0.6)) && totalRefs >= minRefs
 		if harvestMs > 0 && elapsed >= int64(harvestMs) && enough {
 			degradedEarly = true
 			break // 早收割
@@ -229,19 +260,9 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 		if elapsed >= int64(softMs) {
 			break // 软截止兜底(v0.4 语义)
 		}
-		nextEdge := int64(softMs)
-		if harvestMs > 0 && !enough {
-			nextEdge = int64(math.Min(float64(harvestMs), float64(softMs)))
-		}
-		sleepMs := int64(25)
-		if d := nextEdge - elapsed; d < sleepMs {
-			sleepMs = d
-		}
-		if sleepMs < 1 {
-			sleepMs = 1
-		}
-		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
 	}
+	// G1-6: 收割退出 — 断掉所有未结算腿的在飞请求 (不留后台网络任务)
+	runCancel()
 	// 聚合快照: 只采纳收割时刻已结算的腿; 未结算的以 timeout 身份进 failed(TS 契约)
 	var lanes []laneResult
 	var failedTimeout []string

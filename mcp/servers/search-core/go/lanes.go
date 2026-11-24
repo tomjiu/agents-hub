@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -193,7 +192,7 @@ func laneKeenable(ctx context.Context, opts SearchOpts, client *http.Client) ([]
 	} else if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("keenable http %d", resp.StatusCode)
 	}
-	data, err := io.ReadAll(resp.Body)
+	data, err := ReadBounded(resp.Body, maxAPIBodyBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -259,7 +258,7 @@ func laneBingrss(ctx context.Context, opts SearchOpts, client *http.Client) ([]R
 	if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("bingrss http %d", resp.StatusCode)
 	}
-	data, err := io.ReadAll(resp.Body)
+	data, err := ReadBounded(resp.Body, maxAPIBodyBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -330,7 +329,7 @@ func laneSearxng(ctx context.Context, opts SearchOpts, client *http.Client) ([]R
 			lastErr = fmt.Errorf("%s: %w", base, err)
 			continue
 		}
-		data, err := io.ReadAll(resp.Body)
+		data, err := ReadBounded(resp.Body, maxAPIBodyBytes)
 		resp.Body.Close()
 		if err != nil {
 			lastErr = fmt.Errorf("%s: %w", base, err)
@@ -423,7 +422,7 @@ func laneWikipedia(ctx context.Context, opts SearchOpts, client *http.Client) ([
 	if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("wikipedia http %d", resp.StatusCode)
 	}
-	data, err := io.ReadAll(resp.Body)
+	data, err := ReadBounded(resp.Body, maxAPIBodyBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -434,7 +433,9 @@ func laneWikipedia(ctx context.Context, opts SearchOpts, client *http.Client) ([
 func urlQueryEscape(s string) string { return url.QueryEscape(s) }
 
 // runLanes allSettled 语义: 全并行, 腿失败报账不阻塞(TS router 同款)
-func runLanes(opts SearchOpts, client *http.Client) []laneResult {
+// runLanesCtx: run 级 ctx 版 — 收割退出/调用方取消时断掉所有在飞腿
+// (G1-6: 超时后网络/任务不存活)。每腿自身超时仍叠加 (min 语义由派生 ctx 保证)。
+func runLanesCtx(ctx context.Context, opts SearchOpts, client *http.Client) []laneResult {
 	names := opts.Engines
 	if len(names) == 0 {
 		for name := range laneRegistry {
@@ -448,12 +449,11 @@ func runLanes(opts SearchOpts, client *http.Client) []laneResult {
 		go func(i int, name string) {
 			fn, ok := laneRegistry[name]
 			if !ok {
-				// TS router 语义: 未注册/未配置引擎跳过不塌方(skipped 报账)
 				results[i] = laneResult{Name: name, Err: nil, Refs: nil, Skipped: true}
 				done <- i
 				return
 			}
-			tCtx, cancel := context.WithTimeout(context.Background(), time.Duration(opts.TimeoutMs)*time.Millisecond)
+			tCtx, cancel := context.WithTimeout(ctx, time.Duration(opts.TimeoutMs)*time.Millisecond)
 			defer cancel()
 			refs, err := fn(tCtx, opts, client)
 			results[i] = laneResult{Name: name, Refs: refs, Err: err}
@@ -464,6 +464,10 @@ func runLanes(opts SearchOpts, client *http.Client) []laneResult {
 		<-done
 	}
 	return results
+}
+
+func runLanes(opts SearchOpts, client *http.Client) []laneResult {
+	return runLanesCtx(context.Background(), opts, client)
 }
 
 func sortStrings(s []string) {

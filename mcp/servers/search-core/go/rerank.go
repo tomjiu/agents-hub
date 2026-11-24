@@ -29,7 +29,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"runtime"
 	"sort"
 	"strconv"
 	"strings"
@@ -38,7 +37,6 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	ort "github.com/yalue/onnxruntime_go"
 	"golang.org/x/text/unicode/norm"
 )
 
@@ -46,7 +44,6 @@ import (
 
 var (
 	rerankMu       sync.Mutex
-	rerankSession  *ort.DynamicAdvancedSession
 	rerankVocab    map[string]int
 	rerankUNK      int = 100
 	rerankCLS      int = 101
@@ -104,40 +101,21 @@ func rerankInit() error {
 		if id, ok := rerankVocab["[SEP]"]; ok {
 			rerankSEP = id
 		}
-		ort.SetSharedLibraryPath(lib)
-		if err := ort.InitializeEnvironment(); err != nil {
-			rerankState = rerankFailed
-			rerankLastErr = fmt.Sprintf("onnxruntime 初始化失败: %v", err)
-			return
-		}
-		// intra-op 线程数: 缺省跟 CPU 核数 (b28: 单线程 batch 打分 ~140ms, 多线程压延迟)
-		sOpts, err := ort.NewSessionOptions()
-		if err != nil {
-			rerankState = rerankFailed
-			rerankLastErr = fmt.Sprintf("session options 创建失败: %v", err)
-			return
-		}
-		defer sOpts.Destroy()
-		threads := runtime.NumCPU()
+		// G1-1: ORT 隔离到 build tag 后端 (默认纯 Go stub);
+		// 线程预算默认 4 (G1-5 审阅值: 原 NumCPU 在多核容器上会抢光 CPU,
+		// b28 实测单朵 batch ~140ms 已足够, 更多线程只增开销),
+		// SC_RERANK_THREADS 可覆盖 [1,16]。
+		threads := 4
 		if v := strings.TrimSpace(os.Getenv("SC_RERANK_THREADS")); v != "" {
 			if p, err := strconv.Atoi(v); err == nil && p >= 1 && p <= 16 {
 				threads = p
 			}
 		}
-		if err := sOpts.SetIntraOpNumThreads(threads); err != nil {
+		if err := rerankBackendInit(lib, model, threads); err != nil {
 			rerankState = rerankFailed
-			rerankLastErr = fmt.Sprintf("设置线程数失败: %v", err)
+			rerankLastErr = fmt.Sprintf("%v", err)
 			return
 		}
-		s, err := ort.NewDynamicAdvancedSession(model,
-			[]string{"input_ids", "attention_mask", "token_type_ids"},
-			[]string{"logits"}, sOpts)
-		if err != nil {
-			rerankState = rerankFailed
-			rerankLastErr = fmt.Sprintf("session 创建失败: %v", err)
-			return
-		}
-		rerankSession = s
 		rerankState = rerankReady
 	})
 	if rerankState != rerankReady {
@@ -296,7 +274,12 @@ func encodePair(q, d string, vocab map[string]int, unkID int) (ids, types []int)
 // ---------- ONNX 打分 ----------
 
 // rerankScores: 对 (query, docs) 批量打分, 返回 raw logits (越大越相关)。
-// mutex 串行 (v1: 单查询一次 batch 调用, 并发查询排队; 挂账: 多 session 并行)。
+// G1-5: 排队有界 + 推理超时:
+//   - 排队: 若已有推理在飞, 最多等 SC_RERANK_QUEUE_WAIT_MS (默认 200ms),
+//     仍拿不到锁 → 本次查询放弃重排原序返回 (不无界排队);
+//   - 超时: 推理超过 SC_RERANK_TIMEOUT_MS (默认 5000ms) → 本次回退且
+//     进程内标记 failed (后续查询不再排队等待, 不重试)。
+// 挂账保留: 多 session 并行。
 func rerankScores(q string, docs []string) ([]float32, error) {
 	if err := rerankInit(); err != nil {
 		return nil, err
@@ -329,38 +312,67 @@ func rerankScores(q string, docs []string) ([]float32, error) {
 		}
 		// padding 部分 (j>=L) 全 0: attention_mask=0 屏蔽
 	}
-	shape := ort.NewShape(int64(n), int64(maxLen))
-	tIds, err := ort.NewTensor(shape, flatIds)
-	if err != nil {
-		return nil, err
-	}
-	defer tIds.Destroy()
-	tTypes, err := ort.NewTensor(shape, flatTypes)
-	if err != nil {
-		return nil, err
-	}
-	defer tTypes.Destroy()
-	tMask, err := ort.NewTensor(shape, flatMask)
-	if err != nil {
-		return nil, err
-	}
-	defer tMask.Destroy()
 
-	rerankMu.Lock()
+	// G1-5: 排队有界 + 推理超时 (guard 与后端解耦, 可直接单测)
+	return rerankScoreGuarded(func() ([]float32, error) {
+		return rerankBackendScore(flatIds, flatTypes, flatMask, n, maxLen)
+	})
+}
+
+// rerankScoreGuarded: 排队有界 + 推理超时 的通用包装 (G1-5):
+//   - 排队: 若已有推理在飞, 最多等 SC_RERANK_QUEUE_WAIT_MS (默认 200ms),
+//     仍拿不到锁 → 放弃本次重排 (不无界排队);
+//   - 超时: 推理超过 SC_RERANK_TIMEOUT_MS (默认 5000ms) → 本次回退且
+//     进程内标记 failed (后续查询不再排队等待, 不重试)。
+func rerankScoreGuarded(score func() ([]float32, error)) ([]float32, error) {
+	// 排队有界: 有界等待拿锁, 拿不到放弃本次重排
+	queueWaitMs := 200
+	if v := strings.TrimSpace(os.Getenv("SC_RERANK_QUEUE_WAIT_MS")); v != "" {
+		if p, err := strconv.Atoi(v); err == nil && p >= 0 && p <= 5000 {
+			queueWaitMs = p
+		}
+	}
+	locked := rerankMu.TryLock()
+	if !locked && queueWaitMs > 0 {
+		deadline := time.Now().Add(time.Duration(queueWaitMs) * time.Millisecond)
+		for !locked && time.Now().Before(deadline) {
+			time.Sleep(5 * time.Millisecond)
+			locked = rerankMu.TryLock()
+		}
+	}
+	if !locked {
+		return nil, fmt.Errorf("rerank busy: queue wait %dms exceeded", queueWaitMs)
+	}
 	defer rerankMu.Unlock()
-	// v1.36 API: 输出需预分配 (logits shape: [n, 1])
-	tOut, err := ort.NewTensor(ort.NewShape(int64(n), 1), make([]float32, n))
-	if err != nil {
-		return nil, err
+
+	// 推理超时: 到点回退且进程内 disabled
+	timeoutMs := 5000
+	if v := strings.TrimSpace(os.Getenv("SC_RERANK_TIMEOUT_MS")); v != "" {
+		if p, err := strconv.Atoi(v); err == nil && p >= 100 && p <= 60000 {
+			timeoutMs = p
+		}
 	}
-	defer tOut.Destroy()
-	if err := rerankSession.Run([]ort.Value{tIds, tMask, tTypes}, []ort.Value{tOut}); err != nil {
-		return nil, err
+	type scoreRes struct {
+		cs  []float32
+		err error
 	}
-	src := tOut.GetData()
-	out := make([]float32, n)
-	copy(out, src)
-	return out, nil
+	resCh := make(chan scoreRes, 1)
+	go func() {
+		cs, err := score()
+		resCh <- scoreRes{cs, err}
+	}()
+	select {
+	case r := <-resCh:
+		if r.err != nil {
+			return nil, r.err
+		}
+		return r.cs, nil
+	case <-time.After(time.Duration(timeoutMs) * time.Millisecond):
+		rerankState = rerankFailed
+		rerankLastErr = fmt.Sprintf("rerank inference timeout > %dms (disabled for process)", timeoutMs)
+		fmt.Fprintf(os.Stderr, "[rerank] %s\n", rerankLastErr)
+		return nil, fmt.Errorf("%s", rerankLastErr)
+	}
 }
 
 // ---------- 融合重排 (lin-λ 增量式) ----------

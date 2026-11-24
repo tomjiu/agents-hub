@@ -6,10 +6,15 @@ package main
 // - Focus 提取: 命中段 + 邻接段(dsh[10] 方案), idf-lite 词权重
 
 import (
+	"fmt"
 	"math"
+	"os"
 	"regexp"
+	"runtime"
 	"sort"
+	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/net/html"
@@ -20,6 +25,67 @@ var blockTags = map[string]bool{
 	"h5": true, "h6": true, "li": true, "tr": true, "section": true,
 	"article": true, "blockquote": true, "pre": true, "ul": true, "ol": true,
 	"table": true, "figcaption": true, "dl": true, "dt": true, "dd": true,
+}
+
+// G1 (issue #3 comment): 行循环内 regexp.MustCompile 提升为包级一次编译。
+// 输出逐字节不变 (focus_g1_test.go golden 对拍) — 仅移动编译位置。
+var (
+	reSpacesCollapse = regexp.MustCompile(`[ \t]+`)
+	reBlankRuns      = regexp.MustCompile(`\n{3,}`)
+	reParaSplit      = regexp.MustCompile(`\n{2,}`)
+)
+
+// ---------- G1-4: DOM 解析并发上限 + 节点预算 ----------
+
+// domParseBudget: DOM 解析并发信号量 — 解析是大 HTML 的内存峰值来源,
+// 研究流并行抓取时无界并发会把峰值乘起来。上限 SC_DOM_PARSE_CONCURRENCY
+// (默认 min(NumCPU,4)), 取值经过实测审阅: 2 核容器 4 并发 × 2MB 页解析
+// 峰值 RSS 已可控, 更高并发只增加排队延迟不改善吞吐 (单请求串行解析为主)。
+var domParseCh = newDomParseSem()
+
+func newDomParseSem() chan struct{} {
+	lim := 4
+	if n := runtime.NumCPU(); n < lim {
+		lim = n
+	}
+	if v := strings.TrimSpace(os.Getenv("SC_DOM_PARSE_CONCURRENCY")); v != "" {
+		if p, err := strconv.Atoi(v); err == nil && p >= 1 && p <= 64 {
+			lim = p
+		}
+	}
+	return make(chan struct{}, lim)
+}
+
+func domParseLimit() int { return cap(domParseCh) }
+func domParseSem() chan struct{} { return domParseCh }
+func domParseInFlight() int { return len(domParseCh) }
+
+func acquireDomParse() { domParseCh <- struct{}{} }
+func releaseDomParse() { <-domParseCh }
+
+// domMaxNodes: DOM 节点预算 — goquery/x-net-html 无预置上限, 病态页面
+// (标签炸弹) 可造数百万节点。预算为"后置守卫": 解析完成后计数, 超限拒绝
+// 下游处理(正文化/分段/焦点), 显式空结果 + journal 记录, 不产出伪正常正文。
+// 默认 1.5M 节点 (~200MB 峰值量级), SC_MAX_DOM_NODES 可调。
+func domMaxNodes() int {
+	if v := strings.TrimSpace(os.Getenv("SC_MAX_DOM_NODES")); v != "" {
+		if p, err := strconv.Atoi(v); err == nil && p >= 1 {
+			return p
+		}
+	}
+	return 1_500_000
+}
+
+// countDOMNodes 单趟计数 (含文本节点 — 与内存占用同口径)
+func countDOMNodes(n *html.Node) int {
+	if n == nil {
+		return 0
+	}
+	c := 1
+	for k := n.FirstChild; k != nil; k = k.NextSibling {
+		c += countDOMNodes(k)
+	}
+	return c
 }
 
 type Extracted struct {
@@ -50,8 +116,15 @@ func replaceWithText(s *goquery.Selection, txt string) {
 }
 
 func extractHtml(htmlBody string) Extracted {
+	acquireDomParse()
+	defer releaseDomParse()
 	doc, err := goquery.NewDocumentFromReader(strings.NewReader(htmlBody))
 	if err != nil {
+		return Extracted{}
+	}
+	// G1-4 节点预算: 超限显式拒绝 (空结果 + journal), 不伪正常
+	if mx := domMaxNodes(); mx > 0 && countDOMNodes(doc.Nodes[0]) > mx {
+		journalOnce(fmt.Sprintf("dom_node_budget_exceeded nodes>%d bytes=%d", mx, len(htmlBody)))
 		return Extracted{}
 	}
 	title := strings.TrimSpace(doc.Find("title").First().Text())
@@ -80,7 +153,7 @@ func extractHtml(htmlBody string) Extracted {
 	lines := strings.Split(raw, "\n")
 	var text []string
 	for _, l := range lines {
-		l = strings.TrimSpace(regexp.MustCompile(`[ \t]+`).ReplaceAllString(l, " "))
+		l = strings.TrimSpace(reSpacesCollapse.ReplaceAllString(l, " "))
 		if l == "" {
 			if len(text) > 0 && text[len(text)-1] != "" {
 				text = append(text, "")
@@ -90,8 +163,7 @@ func extractHtml(htmlBody string) Extracted {
 		}
 	}
 	out := strings.Join(text, "\n")
-	re3 := regexp.MustCompile(`\n{3,}`)
-	out = re3.ReplaceAllString(out, "\n\n")
+	out = reBlankRuns.ReplaceAllString(out, "\n\n")
 	return Extracted{Title: title, Text: strings.TrimSpace(out)}
 }
 
@@ -100,7 +172,7 @@ func splitSegments(text string, segmentSize int) []string {
 	if segmentSize <= 0 {
 		segmentSize = 300
 	}
-	paras := regexp.MustCompile(`\n{2,}`).Split(text, -1)
+	paras := reParaSplit.Split(text, -1)
 	var segments []string
 	buf := ""
 	flush := func() {
@@ -342,4 +414,13 @@ func absInt(n int) int {
 		return -n
 	}
 	return n
+}
+
+// journalOnce: 预算/守卫类事件只记一次 (进程内), 防 journal 洪水
+var jOnce sync.Map
+
+func journalOnce(event string) {
+	if _, loaded := jOnce.LoadOrStore(event, struct{}{}); !loaded {
+		fmt.Fprintf(os.Stderr, "[guard] %s\n", event)
+	}
 }
