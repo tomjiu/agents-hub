@@ -1,0 +1,112 @@
+{
+ "schema": 1,
+ "id": "business-scheduling",
+ "version": "1.0.0",
+ "title": "业务排期与资源预算（有界窗口拟合）",
+ "route": "business-scheduling",
+ "trigger": [
+  "用户要时间线、排期、人员安排或业务/办公任务预算",
+  "存在固定窗口或预算上限，问题是'装不装得下'",
+  "工作项之间的资源争用需在承诺前解决"
+ ],
+ "applies": [
+  "有确认需求记录的非软件工作排期",
+  "成本驱动到预算线的映射",
+  "关键路径与资源计划一致性核验"
+ ],
+ "not_applies": [
+  "软件实施计划（代码/测试步骤走 engineering-delivery / writing-plans）",
+  "执行跟踪/自动重排（一次性规划）",
+  "无需求记录时凭空排期（先走 business-interview）"
+ ],
+ "task_inputs": [
+  "confirmed_requirement_record"
+ ],
+ "steps": [
+  {
+   "id": "load-inputs",
+   "stage": "plan",
+   "title": "装载输入：工作项须有成本驱动与估算依据",
+   "needs": [],
+   "inputs": ["confirmed_requirement_record"],
+   "outputs": ["priced_items", "unpriced_items"],
+   "tools": ["none"],
+   "validator": "无驱动工作项列 unpriced 并从合计排除；输入缺失则停止并先访谈"
+  },
+  {
+   "id": "resolve-contention",
+   "stage": "plan",
+   "title": "资源争用解决：推迟/拆分/上报，不静默双订",
+   "needs": ["load-inputs"],
+   "inputs": ["priced_items"],
+   "outputs": ["resource_plan"],
+   "tools": ["none"],
+   "validator": "同窗口同资源冲突项均有显式处置记录"
+  },
+  {
+   "id": "sequence",
+   "stage": "plan",
+   "title": "依赖排序：关键路径计算",
+   "needs": ["resolve-contention"],
+   "inputs": ["priced_items", "resource_plan"],
+   "outputs": ["dependency_chains", "critical_path"],
+   "tools": ["none"],
+   "validator": "链时长=沿链工作项时长和；并行仅在资源计划允许时"
+  },
+  {
+   "id": "fit-verdict",
+   "stage": "review",
+   "title": "拟合判定：装得下/装不下+前三选项",
+   "needs": ["sequence"],
+   "inputs": ["critical_path", "resource_plan"],
+   "outputs": ["fit_verdict"],
+   "tools": ["none"],
+   "validator": "不拟合时输出缺口与（砍范围/延窗口/加资源及成本线）选项，决定权在干系人",
+   "approval": true
+  },
+  {
+   "id": "budget",
+   "stage": "plan",
+   "title": "预算编制：驱动→预算线→周期，unpriced 单列",
+   "needs": ["fit-verdict"],
+   "inputs": ["priced_items", "unpriced_items", "fit_verdict"],
+   "outputs": ["budget_sheet"],
+   "tools": ["none"],
+   "validator": "合计只含 priced 项并声明；单位与舍入规则显式"
+  },
+  {
+   "id": "assumptions",
+   "stage": "review",
+   "title": "假设记录：每条估算带依据",
+   "needs": ["budget"],
+   "inputs": ["budget_sheet"],
+   "outputs": ["assumption_record"],
+   "tools": ["none"],
+   "validator": "无依据估算不发布"
+  },
+  {
+   "id": "handoff",
+   "stage": "deliver",
+   "title": "交付回读：排期计划+预算表+验收标准回干系人",
+   "needs": ["assumptions"],
+   "inputs": ["assumption_record", "budget_sheet", "fit_verdict"],
+   "outputs": ["confirmed_schedule_plan"],
+   "tools": ["none"],
+   "validator": "验收标准随附；干系人决定记录后才发布",
+   "approval": true
+  }
+ ],
+ "providers": ["business-scheduling"],
+ "approval_points": ["fit-verdict", "handoff"],
+ "failure_paths": {
+  "cancel": "干系人撤销或输入记录失效：停止并保留已算部分为草稿，不发布",
+  "missing_dependency": "缺 confirmed_requirement_record：拒绝排期，指回 business-interview；unpriced 项按 open questions 交接不进合计",
+  "does_not_fit": "关键路径与资源计划无法同时满足：'不闭合'本身就是交付物，附三选项"
+ },
+ "delivery": ["schedule-plan（模板 templates/schedule-plan.md）", "budget-sheet（模板 templates/budget-sheet.md）", "confirmed_schedule_plan（含拟合判定与假设）"],
+ "notes": [
+  "方法与路由契约：纯算术+显式假设；不冒充项目管理系统",
+  "诚实规则：不虚构输入；不拟合如实说；unpriced 不进合计",
+  "日历效应（假期/兼职）须作为资源约束显式输入，不自动检测"
+ ]
+}

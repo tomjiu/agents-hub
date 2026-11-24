@@ -44,7 +44,7 @@ test('MCP missing build auth mapping malformed lists and missing registration re
 });
 test('actual CLI finds natural task queries and returns nonzero for blocked combination',()=>{
  const root=fileURLToPath(new URL('../..',import.meta.url)),cli=path.join(root,'asset-manager/cli.mjs');const call=(...args)=>JSON.parse(execFileSync(process.execPath,[cli,...args],{cwd:root,maxBuffer:8*1024*1024}).toString());
- assert.equal(call('search-assets','记忆插件','--kind','plugins','--limit','1').results[0].id,'memory-net');assert.equal(call('preflight','--expert','core').status,'CONTENT_READY');const r=call('audit-usability');assert.equal(r.assets.length,137);assert.equal(r.auto_enabled,false);
+ assert.equal(call('search-assets','记忆插件','--kind','plugins','--limit','1').results[0].id,'memory-net');assert.equal(call('preflight','--expert','core').status,'CONTENT_READY');const r=call('audit-usability');assert.equal(r.assets.length,139); // G1 新增 business-interviewing/business-scheduling 后基线assert.equal(r.auto_enabled,false);
  let failure;try{call('preflight','docx,trae.docx');}catch(e){failure=e;}assert.ok(failure);assert.equal(failure.status,1);const blocked=JSON.parse(failure.stdout.toString());assert.equal(blocked.status,'BLOCKED');assert.ok(blocked.conflicts.some(c=>c.code==='duplicate-skill-name'));assert.ok(blocked.blockers.some(b=>b.code==='license'));
 });
 

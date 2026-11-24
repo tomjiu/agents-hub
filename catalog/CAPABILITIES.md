@@ -18,10 +18,14 @@ scoped表示限定任务范围，partial表示部分覆盖，none表示缺口。
 
 ### 需求分析与任务规划（requirements-planning）
 
-范围：partial；领域：workflow / document；阶段：plan.
+范围：scoped；领域：workflow / document；阶段：plan.
 
-任务用语：需求分析与规划、需求分析、任务规划、requirements planning.
-- 工程实施计划可以复用拆解方法；未覆盖通用业务访谈、成本评估和办公排期验收。
+任务用语：需求分析与规划、需求分析、任务规划、requirements planning、业务访谈、需求澄清、访谈干系人、成本评估.
+- 工程实施计划复用 writing-plans；业务访谈与成本评估由 business-interviewing 承接。
+
+- [business-interviewing](<assets/business-interviewing.toml>)（primary）；[维护正文](<../skills/individual/document/business-interviewing/SKILL.md>)。来源类型：local；许可声明：review-required.
+  - 适用理由：独立实现的非软件业务访谈/需求澄清：目标/痛点/范围/约束/成本驱动/验收标准，产出确认记录。
+  - 限制：方法技能，不替代干系人到场；记录未确认前不得交接规划。
 
 - [writing-plans](<assets/writing-plans.toml>)（primary）；[维护正文](<../skills/individual/engineering/writing-plans/SKILL.md>)。来源类型：local；许可声明：review-required.
   - 适用理由：已有需求到分步骤实施计划，偏软件工程。
@@ -99,11 +103,14 @@ scoped表示限定任务范围，partial表示部分覆盖，none表示缺口。
 
 ### 业务排期与资源预算（business-scheduling）
 
-范围：none；领域：workflow；阶段：plan.
+范围：scoped；领域：workflow；阶段：plan.
 
 任务用语：业务排期、资源预算、business scheduling.
-- 当前未建立经审查的专用工作流；不以工程计划技能冒充业务管理能力。
-- **未建立经审阅的专用能力，不自动推荐相似资产。**
+- 一次性规划不做执行跟踪；估算质量取决于输入需求记录；日历效应须显式输入。
+
+- [business-scheduling](<assets/business-scheduling.toml>)（primary）；[维护正文](<../skills/individual/document/business-scheduling/SKILL.md>)。来源类型：local；许可声明：review-required.
+  - 适用理由：独立实现的业务排期/资源预算方法：关键路径+资源争用+预算线，unpriced 不进合计。
+  - 限制：需要确认后的需求记录（business-interviewing 产出）作为输入。
 
 ## 设计工作
 
@@ -189,6 +196,6 @@ scoped表示限定任务范围，partial表示部分覆盖，none表示缺口。
 
 ## 覆盖边界
 
-当前 14 条任务路线，映射 15 个不同Skill资产；122 项登记资产尚未进入此精选目录（含MCP/插件/规范）。不新增重复Skill，不改变资产ID、原始目录、Experts、许可或运行配置。
+当前 14 条任务路线，映射 17 个不同Skill资产；122 项登记资产尚未进入此精选目录（含MCP/插件/规范）。不新增重复Skill，不改变资产ID、原始目录、Experts、许可或运行配置。
 
 原Skill正文或有效版本变化需要重新审阅任务映射，不能盲目重算哈希。正文之外的脚本/参考材料仍需原资产完整性与使用前预检；本目录不是内容快照锁或自动部署许可。
