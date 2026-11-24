@@ -14,6 +14,7 @@ const work=await fs.mkdtemp(path.join(os.tmpdir(),'mn-context-host-')),home=path
 const fixtures=path.join(root,'plugins/memory-net/adapters/dsh/tests/fixtures'),dsh=path.join(installation,'lib/bin.js');
 const evidence=path.join(root,'.asset-state/evidence');await fs.mkdir(evidence,{recursive:true});
 const env={};for(const k of ['PATH','Path','SystemRoot','WINDIR','TEMP','TMP','COMSPEC','PATHEXT'])if(process.env[k])env[k]=process.env[k];
+if(process.env.HUB_MEMORY_CANDIDATES==='1')env.MN_CONTEXT_CANDIDATES='1';
 Object.assign(env,{HOME:work,USERPROFILE:work,DSH_HOME:home,DSH_TELEMETRY_MODE:'DISABLED',DSH_PERMISSION_MODE:'danger-full-access',MN_CONTEXT_MODEL_KEY:'fixture-key'});
 let model;const reports=[];
 async function run(args,cwd,extra={},timeout=90000){const child=spawn(process.execPath,args,{cwd,env:{...env,...extra},stdio:['ignore','pipe','pipe']});let out='',err='';child.stdout.on('data',c=>out+=c);child.stderr.on('data',c=>err+=c);const timer=setTimeout(()=>child.kill(),timeout);const code=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',resolve)}).finally(()=>clearTimeout(timer));if(code!==0)throw new Error(JSON.stringify({code,out:out.slice(-4000),err:err.slice(-6000)}));return {out,err};}
@@ -34,18 +35,20 @@ try {
   const rows=(await fs.readFile(diag,'utf8')).trim().split(String.fromCharCode(10)).map(s=>JSON.parse(s));
   await fs.writeFile(path.join(evidence,'session-host-'+label+'-diagnostics.json'),JSON.stringify({rows,stderr:result.err},null,2));
   assert.ok(rows.some(r=>r.private_prompt&&r.progress_prompt&&r.curated_result&&r.raw_result&&r.selector_refused&&r.model_write),'Full scoped prompt/recall/raw/refusal cycle not complete');
+  if(env.MN_CONTEXT_CANDIDATES==='1')assert.ok(rows.some(r=>r.candidate_pending_excluded&&r.candidate_accepted_recalled&&r.candidate_prompt),'Candidate proposal/review/curated loop incomplete');
   assert.ok(rows.every(r=>!r.foreign_leak&&!r.raw_prompt_leak),'Foreign or raw prompt leaked');
   const scope=JSON.parse(await fs.readFile(reportFile,'utf8'));const db=new DatabaseSync(path.join(scope.dir,'memory.db'),{readOnly:true});
   const nodes=db.prepare('select kind,run_id,task_id,text,payload_json from nodes').all();db.close();
   assert.ok(nodes.some(n=>n.kind==='tip'&&n.text==='MODEL-PRIVATE-'+label),'Model tip write missing')
   assert.ok(nodes.some(n=>n.kind==='observation'&&n.text.includes('AUTO-PRIVATE-'+label)),'Auto observation not persisted');
   assert.ok(nodes.every(n=>n.kind==='progress'?n.task_id===scope.session:n.run_id===scope.session),'Wrong session attribution');
-  reports.push({label,session:scope.session,scope_directory:path.relative(memory,scope.dir),nodes:nodes.length,prompt:true,progress:true,curated:true,raw:true,selectors_refused:true,no_foreign_content:true,automatic_observation_persisted:true});
+  if(env.MN_CONTEXT_CANDIDATES==='1'){const c=nodes.find(n=>JSON.parse(n.payload_json).memory_candidate);assert.ok(c&&JSON.parse(c.payload_json).memory_candidate.state==='accepted','Reviewed receipt not persisted');}
+  reports.push({candidate_loop:env.MN_CONTEXT_CANDIDATES==='1',label,session:scope.session,scope_directory:path.relative(memory,scope.dir),nodes:nodes.length,prompt:true,progress:true,curated:true,raw:true,selectors_refused:true,no_foreign_content:true,automatic_observation_persisted:true});
   const stop=new Promise(resolve=>model.once('exit',resolve));model.kill();await stop;model=undefined;
  }
  assert.equal(new Set(reports.map(r=>r.scope_directory)).size,3);await assert.rejects(fs.access(path.join(memory,'main')));
  const after=await dshFingerprint(root,installation);assert.equal(after.assets_sha256,fingerprint.assets_sha256);assert.equal(after.host_sha256,fingerprint.host_sha256);
- const report={status:'PASS',host_version:fingerprint.version,fingerprint,session_boundary:{same_project_sessions_isolated:true,different_project_isolated:true,model_scope_selectors_refused:true,default_root_untouched:true,contextual_prompt:true,raw_scope_preserved:true,auto_attribution:true},sessions:reports,scope:'Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library.'};
+ const report={status:'PASS',host_version:fingerprint.version,fingerprint,candidate_lifecycle:env.MN_CONTEXT_CANDIDATES==='1'?{pending_excluded:true,host_reviewed:true,accepted_curated:true,evidence_persisted:true}:undefined,session_boundary:{same_project_sessions_isolated:true,different_project_isolated:true,model_scope_selectors_refused:true,default_root_untouched:true,contextual_prompt:true,raw_scope_preserved:true,auto_attribution:true},sessions:reports,scope:'Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library.'};
  const destination=path.join(evidence,'session-host-'+fingerprint.version+'.json');await fs.writeFile(destination,JSON.stringify(report,null,2)+String.fromCharCode(10));console.log(JSON.stringify({status:report.status,host:report.host_version,checks:report.session_boundary,sessions:reports,evidence:destination},null,2));
 }catch(e){await fs.writeFile(path.join(evidence,'session-host-failure.json'),JSON.stringify({error:String(e),reports,work},null,2));throw e}
 finally {if(model){const stop=new Promise(resolve=>model.once('exit',resolve));model.kill();await stop;}await fs.rm(work,{recursive:true,force:true});}

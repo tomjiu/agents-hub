@@ -8,7 +8,10 @@ createServer((req,res)=>{
   let j;try{j=JSON.parse(body)}catch{res.writeHead(400).end();return}
   const messages=j.messages||[],text=JSON.stringify(messages),has=id=>messages.some(m=>m.role==='tool'&&m.tool_call_id===id)
   const prompt=flatten(messages.filter(m=>m.role==='system'||m.role==='developer')).join(String.fromCharCode(10))
-  const rows={label,private_prompt:prompt.includes('SESSION-PRIVATE-'+label),progress_prompt:prompt.includes('SESSION-PRIVATE-'+label+' progress'),foreign_leak:foreign.some(x=>text.includes('SESSION-PRIVATE-'+x)||text.includes('AUTO-PRIVATE-'+x)),raw_result:messages.some(m=>m.role==='tool'&&m.tool_call_id==='raw'&&JSON.stringify(m.content).includes('AUTO-PRIVATE-'+label)),curated_result:messages.some(m=>m.role==='tool'&&m.tool_call_id==='recall'&&JSON.stringify(m.content).includes('SESSION-PRIVATE-'+label)&&!JSON.stringify(m.content).includes('AUTO-PRIVATE-'+label)),selector_refused:messages.some(m=>m.role==='tool'&&m.tool_call_id==='forged'&&/selectors forbidden|additional property|additionalProperties|not allowed/.test(JSON.stringify(m.content))),raw_prompt_leak:prompt.includes('AUTO-PRIVATE-'+label)}
+  const rows={label,private_prompt:prompt.includes('SESSION-PRIVATE-'+label),progress_prompt:prompt.includes('SESSION-PRIVATE-'+label+' progress'),foreign_leak:foreign.some(x=>text.includes('SESSION-PRIVATE-'+x)||text.includes('AUTO-PRIVATE-'+x)||text.includes('CANDIDATE-PRIVATE-'+x)),raw_result:messages.some(m=>m.role==='tool'&&m.tool_call_id==='raw'&&JSON.stringify(m.content).includes('AUTO-PRIVATE-'+label)),curated_result:messages.some(m=>m.role==='tool'&&m.tool_call_id==='recall'&&JSON.stringify(m.content).includes('SESSION-PRIVATE-'+label)&&!JSON.stringify(m.content).includes('AUTO-PRIVATE-'+label)),selector_refused:messages.some(m=>m.role==='tool'&&m.tool_call_id==='forged'&&/selectors forbidden|additional property|additionalProperties|not allowed/.test(JSON.stringify(m.content))),raw_prompt_leak:prompt.includes('AUTO-PRIVATE-'+label)}
+  rows.candidate_pending_excluded=messages.some(m=>m.role==='tool'&&m.tool_call_id==='pending'&&!JSON.stringify(m.content).includes('CANDIDATE-PRIVATE-'+label))
+  rows.candidate_accepted_recalled=messages.some(m=>m.role==='tool'&&m.tool_call_id==='accepted'&&JSON.stringify(m.content).includes('CANDIDATE-PRIVATE-'+label))
+  rows.candidate_prompt=prompt.includes('CANDIDATE-PRIVATE-'+label)
   rows.model_write=messages.some(m=>m.role==='tool'&&m.tool_call_id==='write'&&JSON.stringify(m.content).includes('memory saved'))
   rows.tool_results=messages.filter(m=>m.role==='tool').map(m=>({id:m.tool_call_id,content:m.content}))
   fs.appendFileSync(diag,JSON.stringify(rows)+String.fromCharCode(10))
@@ -19,6 +22,15 @@ createServer((req,res)=>{
   else if(!has('recall'))calls=[call('recall','memory_net_recall',{query:'SESSION-PRIVATE'})]
   else if(!has('raw'))calls=[call('raw','memory_net_recall',{view:'raw'})]
   else if(!has('forged'))calls=[call('forged','memory_net_recall',{workspace:'main',view:'raw'})]
+  if(process.env.MN_CONTEXT_CANDIDATES==='1' && has('forged')) {
+   const result=id=>{const item=messages.find(m=>m.role==='tool'&&m.tool_call_id===id);try{return JSON.parse(item?.content)}catch{return null}}
+   if(!has('events'))calls=[call('events','memory_net_candidates',{})]
+   else if(!has('propose')){const source=result('events')?.events?.find(e=>e.text.includes('AUTO-PRIVATE-'+label));calls=[call('propose','memory_net_propose',{text:'CANDIDATE-PRIVATE-'+label,confidence:.8,source_ids:[source?.id||'missing']})]}
+   else if(!has('pending'))calls=[call('pending','memory_net_recall',{query:'CANDIDATE-PRIVATE'})]
+   else if(!has('verify'))calls=[call('verify','mn_candidate_verify',{})]
+   else if(!has('accepted'))calls=[call('accepted','memory_net_recall',{query:'CANDIDATE-PRIVATE'})]
+   else calls=[]
+  }
   const content=calls.length?null:'MN-CONTEXT-OK'
   if(j.stream){res.writeHead(200,{'Content-Type':'text/event-stream'});const chunk=(delta,reason)=>res.write('data: '+JSON.stringify({id:'ctx',object:'chat.completion.chunk',created:0,model:'mock-flash',choices:[{index:0,delta,finish_reason:reason}]})+String.fromCharCode(10,10));chunk({role:'assistant',content:''},null);if(calls.length)chunk({tool_calls:calls.map((x,index)=>({index,...x}))},null);else chunk({content},null);chunk({},calls.length?'tool_calls':'stop');res.end('data: [DONE]'+String.fromCharCode(10,10));}
   else{res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({id:'ctx',object:'chat.completion',created:0,model:'mock-flash',choices:[{index:0,message:{role:'assistant',content,...(calls.length?{tool_calls:calls}:{})},finish_reason:calls.length?'tool_calls':'stop'}]}))}

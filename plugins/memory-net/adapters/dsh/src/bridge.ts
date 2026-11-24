@@ -45,6 +45,9 @@ export interface HostApi {
   contradict: MemoryNet['contradict']
   gc: MemoryNet['gc']
   exportPkg: MemoryNet['exportPkg']
+  proposeCandidate: MemoryNet['proposeCandidate']
+  reviewCandidate: MemoryNet['reviewCandidate']
+  candidates: MemoryNet['candidates']
   /** 全量关闭（apply 内打开的所有 workspace 实例）。 */
   close: () => void
 }
@@ -84,6 +87,9 @@ export function openHostApi(
     contradict: (id, opts) => net.contradict(id, opts),
     gc: (opts) => net.gc(opts),
     exportPkg: () => net.exportPkg(),
+    proposeCandidate: input => net.proposeCandidate(input),
+    reviewCandidate: (id,input) => net.reviewCandidate(id,input),
+    candidates: opts => net.candidates(opts),
     close: () => (closeAll ? closeAll() : net.close()),
   }
 }
@@ -95,7 +101,7 @@ function renderNode(x: { node: { id: string; status: string; based_on: string[];
     : n.kind === 'progress' ? `进度${typeof n.payload?.status === 'string' ? `·${n.payload.status}` : ''}`
     : n.kind === 'tip' ? '提示'
     : n.kind === 'constraint' ? '约束'
-    : n.status === 'promoted' ? '推断·已审阅（非物理观测）' : '推断·未证实'
+    : (n.payload.memory_candidate as {state?:string})?.state === 'accepted' && n.status === 'promoted' ? '候选·已核验（推断，非物理事实）' : n.status === 'promoted' ? '推断·已审阅（非物理观测）' : (n.payload.memory_candidate ? '候选·未准入' : '推断·未证实')
   const conf = n.confidence !== null ? `（置信 ${n.confidence}）` : ''
   const conflict = n.conflict ? ' ⚠冲突' : ''
   const based = n.based_on.length ? ` based_on=${n.based_on.join(',')}` : ''
