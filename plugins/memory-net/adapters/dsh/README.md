@@ -4,6 +4,19 @@
 已对 **真实 dsh 0.1.2-rc.1** 端到端验证（见文末冒烟）：插件加载 / 工具注册 / systemPrompt
 区段注入 / 模型工具调用 / SQLite 落盘 / 宿主工具结果自动观测（auto-observe）全链路闭环。
 
+## 候选提炼与宿主核验（依赖PR7，本分支未采用）
+
+仅session模式提供memory_net_candidates和memory_net_propose：前者只列本范围候选摘要及来源事件ID，后者必须引用1..32个同范围active成功观测，生成pending推断。即使普通memory_net_write写inference也走同一提案路径，based_on必填。tip仍单独标为建议，不是核验事实；shared兼容模式旧inference写法不改变。
+
+```js
+const list = memory_net_candidates({query:"SQLite",limit:10});
+memory_net_propose({text:"SQLite WAL方案候选",confidence:0.8,source_ids:["n1"]});
+```
+
+模型没有review工具。宿主用forAgent(exec.agent).reviewCandidate(id,{expected_fingerprint,decision:"accept"或"reject",reviewer,note,evidence})记录审核；evidence必须与原来源ID不同。提案时冻结来源摘要指纹，接受后才进入精选，并公开review_evidence和候选标签。上下文选择器依然拒绝；列表不代表准入。候选列表query按字面OR匹配，输出摘要截断且limit有界；内部仍扫描本范围节点，超大库性能尚未优化。
+
+核验不自动执行外部指令，也不把工具成功当真相；宿主须实际判断证据是否支持候选，测试宿主只是合成fixture。没有自动模型总结器、人工核验UI或跨会话分享。库不迁移，旧用户数据/currentWeb不改，受损/过期回执退出精选，不自动改写原事实。
+
 ## 宿主上下文隔离（本分支候选，当前Web未采用）
 
 默认context.mode=session。真实Agent必须与agents.get(session.id)相同；规范化当前目录和持久会话ID确定独立数据库。模型工具、提示和raw仅访问当前范围；workspace/run_id/task_id不再由模型选择，缺身份工具拒绝、提示为空、观测跳过，不回退共享库。

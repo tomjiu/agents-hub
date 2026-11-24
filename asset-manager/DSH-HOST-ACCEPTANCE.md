@@ -13,6 +13,10 @@ node asset-manager/probe-dsh-host.mjs
 
 其他平台设置同名环境变量后运行。此处HUB_DSH_INSTALLATION指包目录，不是个人配置目录。P0当前实测宿主为0.2.2-rc.1与0.2.2-rc.5（历史rc.4记录保留）；其他版本必须重新验收，不能由结构类型或单元测试推断兼容。
 
+## 候选闭环专项（依赖上下文策略）
+
+设置HUB_MEMORY_CANDIDATES=1后复跑probe-memory-session-context.mjs，再跑probe-dsh-host.mjs。三个新会话各自实际调用events列表→模型propose→pending recall排除→合成宿主另一观测/accept→accepted recall/prompt；SQLite回读核验回执。HUB_MEMORY_CANDIDATES只影响测试夹具，不是产品自动审批选项。指纹review-v1要求四个候选闭环断言，缺失时拒绝打包。本地脚本化模型/验证工具，不是人工真实性认证；同一会话恢复进程和生成运行包的candidate真实路径未另测。
+
 ## 宿主上下文专项（本分支）
 
 先运行node asset-manager/probe-memory-session-context.mjs，后运行原probe-dsh-host.mjs，二者使用同一HUB_DSH_INSTALLATION。session专项使用三个新会话：同项目A/B和另一项目C；真实headless验证host绑定seed、模型tip写入、自动观察、curated/raw、工作区伪造拒绝和上下文进度。旧main库不打开。旧全链路显式shared测兼容，再合入相同指纹的session报告；缺专项不能批准session-v1包。

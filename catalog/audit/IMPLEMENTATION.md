@@ -2,6 +2,10 @@
 
 状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。PR #3已于本轮核验后合入main，合并提交6a2ba83；后续用户授权当前Web实验并自行重启，实际搜索/可信TUN抓取/9仓库Skill/独立记忆已验证，重复宿主tool-skill空目录问题已修复，见[Web实验](web-live-experiment.json)。后文阶段记录保留当时状态，不作当前合并状态。详见[合并交付](pr3-merge-delivery.json)。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
+## 本分支候选：记忆候选生命周期
+
+依赖PR7；自审修复诊断logger异常阻断宿主工具的问题。candidate提案引用同范围active观测，BEGIN IMMEDIATE内保存摘要指纹；host-only核验要求CAS/reviewer/note和不同观测依据，accept后才进入精选，受损或过期证据只读复核排除。模型candidate tools不具备审核能力，tip仍仅建议；新candidate路径不迁移原库。两版真实隔离DSH合成闭环通过，不是自动语义真实性认证。详见[本阶段验收](<memory-candidate-lifecycle.json>)，当前Web不采用，PR7不自动合并。
+
 ## 本分支候选：宿主上下文与会话隔离
 
 默认session策略绑定实际宿主Agent/当前目录/会话ID；自动观测在执行前归属捕获，模型不能通过raw或workspace参数越界，缺身份不读共享库。原共享模式显式兼容，旧用户库不变。两版实际DSH各三个新会话验证跨项目/会话不串读、模型tip写入、上下文提示/进度、raw与自动观测；真实跨进程resume未验收。根149通过/1skip、核心39、adapter29、搜索335；当前Web未采用。详见[本阶段记录](<memory-session-boundary.json>)。事件提炼记忆候选、业务任务共享与版本绑定仍待独立阶段。

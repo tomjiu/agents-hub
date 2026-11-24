@@ -23,6 +23,7 @@ import type { DshCtx, ToolDef } from './contract.js'
 import { probeCtx } from './contract.js'
 import {resolveBinding,assemblyAgent,rejectSelectors,guardScopeDirectory} from './context.js'
 import type { HostApi } from './bridge.js'
+import {registerCandidateTools} from './candidate-tools.js'
 import { openHostApi, renderActivation, activateOpts, installAutoObserve } from './bridge.js'
 
 export const name = 'memory-net-dsh'
@@ -100,11 +101,12 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
       if(typeof value !== 'function')return value
       return (...args:unknown[])=>{
         if(bindingOf(agent).scopeId !== binding.scopeId)throw new Error('Memory context changed; obtain fresh bound capability')
-        if(key === 'observe' || key === 'addInference' || key === 'addTip') {
+        if(key === 'observe' || key === 'addInference' || key === 'addTip' || key === 'proposeCandidate') {
           const input=(args[0] ?? {}) as Dict
           if((input.run_id !== undefined && input.run_id !== binding.sessionId) || (input.task_id !== undefined && input.task_id !== null))throw new Error('Host memory context selector mismatch')
           args[0]={...input,run_id:binding.sessionId}
         }
+        if(key === 'candidates') {const opts=(args[0] ?? {}) as Dict;if(opts.run_id!==undefined&&opts.run_id!==binding.sessionId)throw new Error('Host candidate context mismatch');args[0]={...opts,run_id:binding.sessionId}}
         if(key === 'activate') {
           const opts=(args[1] ?? {}) as Dict
           if((opts.run_id !== undefined && opts.run_id !== binding.sessionId)||(opts.task_id !== undefined && opts.task_id !== binding.sessionId))throw new Error('Host recall context mismatch')
@@ -230,7 +232,9 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
           throw new Error('inference 必须带 confidence（0~1）')
         }
         // 双保险 2：即便白名单漏了，核心 store 的 WriteForbiddenError 仍会拦（同样向上抛）
-        const n = net.add(kind, {
+        const n = cfg.context.mode === 'session' && kind === 'inference'
+          ? net.proposeCandidate({text:args.text as string,confidence:args.confidence as number,source_ids:args.based_on as string[],run_id:selected.run!})
+          : net.add(kind, {
           text: str(args.text, ''),
           confidence: num(args.confidence),
           based_on: Array.isArray(args.based_on) ? (args.based_on as string[]) : [],
@@ -251,6 +255,8 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
     }
     ctx.tools.register(write)
   }
+
+  if(cfg.context.mode === 'session' && cfg.tools.write)registerCandidateTools(ctx,select)
 
   // ---- 宿主工具桥：工具结果自动 observe 入网（写纪律：observation 仅宿主路径）----
   // ctx.on 是混合在 cordis ctx 上的事件总线方法（非服务属性，无需 inject 声明）；

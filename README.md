@@ -27,6 +27,10 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 **当前DSH-focused重构已交付，验收只要求DSH可用；Codex/OpenCode适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH latest 0.2.2-rc.1、历史next rc.4和当前next rc.5独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 交付边界及新clone复验见 [交付矩阵](catalog/audit/DELIVERY.md) 与 [干净副本证据](catalog/audit/fresh-checkout-verification.json)；阶段历史见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
 
+## 本分支候选：事件到记忆候选准入（依赖PR7）
+
+模型显式引用当前范围观测提炼候选；pending排除精选，宿主记录独立核验观测/审核者/理由和CAS指纹后才accept进入精选，原事件/依据不变。不把工具成功自动升级成事实，tip仍是建议；自动总结器、核验UI和跨会话授权没有实现。详见[候选验收](<catalog/audit/memory-candidate-lifecycle.json>)与[适配说明](<plugins/memory-net/adapters/dsh/README.md>)。此分支未合并、未用于当前Web。
+
 ## 本分支候选：宿主会话／项目记忆隔离
 
 基于已合并main隔离开发，尚未采用到Web。DSH默认按真实Agent、规范化当前目录和持久会话ID访问独立数据库；提示、写入、raw使用同一边界，模型不能指定其他workspace/run/task。自动观测归属在调用开始捕获，缺身份安全拒绝；旧shared模式需宿主明确配置，不迁移或读取旧库。详见[适配边界](<plugins/memory-net/adapters/dsh/README.md>)及[候选验收](<catalog/audit/memory-session-boundary.json>)。业务任务ID、跨会话共享授权和候选提炼尚未实现，隔离不是OS保密沙箱。下文Web状态是当前已采用版本，不表示本候选已部署。

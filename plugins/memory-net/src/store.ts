@@ -40,6 +40,7 @@ import {
   resolveBudgets,
 } from './activate.js'
 import {curationReason} from './curation.js'
+import {candidateMeta,candidateReason,eventDigest,claimDigest,referenceIds,validateEvent,digest,type CandidateInput,type CandidateReview,type CandidateMeta} from './candidates.js'
 
 /** 写纪律矩阵（v1 写死）。 */
 const KIND_ALLOWED_ROLES: Record<Exclude<NodeKind, 'progress'>, readonly Role[]> = {
@@ -204,6 +205,7 @@ export class MemoryNet {
       throw new WorkspaceError("progress 不经 add 写入：使用 update_progress(task_id, patch)（同 task 单行共享）")
     }
     this.assertCanWrite(kind)
+    if(this.role!=='host' && Object.hasOwn(input.payload??{},'memory_candidate'))throw new WorkspaceError('memory_candidate is reserved host metadata')
     const text = String(input.text ?? '')
     if (!text.trim() && kind !== 'constraint') {
       throw new WorkspaceError(`${kind} 的 text 不能为空`)
@@ -306,6 +308,55 @@ export class MemoryNet {
     const deps = [...from.based_on, toId]
     this.db.prepare('UPDATE nodes SET based_on_json = ?, updated_at = ? WHERE id = ?')
       .run(JSON.stringify(deps), Date.now(), fromId)
+  }
+
+  /** Propose an evidence-bound inference, never a physical observation or reviewed fact. */
+  proposeCandidate(input:CandidateInput):MemoryNode {
+    if(this.role==='tool')throw new WorkspaceError('Candidate proposal requires model or host role')
+    const text=typeof input.text==='string'?input.text.normalize('NFKC').trim():''
+    if(!text||text.length>4000||typeof input.confidence!=='number'||!Number.isFinite(input.confidence)||input.confidence<0||input.confidence>1||typeof input.run_id!=='string'||!input.run_id||input.run_id.length>512)throw new WorkspaceError('Invalid candidate text/confidence/run scope')
+    const ids=referenceIds(input.source_ids,'Candidate source'),task=input.task_id??null
+    if(task!==null&&(typeof task!=='string'||!task))throw new WorkspaceError('Invalid candidate task scope')
+    return this.txn(()=>{
+      const sources:Record<string,string>={}
+      for(const id of ids)sources[id]=eventDigest(validateEvent(this.get(id),input.run_id,task,'Candidate source'))
+      const claim={text,confidence:input.confidence,run_id:input.run_id,task_id:task,based_on:ids}
+      const fingerprint=claimDigest(claim,sources)
+      const existing=this.db.prepare("SELECT * FROM nodes WHERE kind='inference' AND json_extract(payload_json,'$.memory_candidate.fingerprint')=? ORDER BY seq LIMIT 1").get(fingerprint) as NodeRow|undefined
+      if(existing)return rowToNode(existing)
+      const {id,seq}=this.nextId(),now=Date.now(),meta:CandidateMeta={version:1,state:'pending',fingerprint,sources}
+      this.db.prepare("INSERT INTO nodes(id,seq,kind,agent_id,run_id,task_id,text,payload_json,confidence,status,based_on_json,created_at,updated_at) VALUES(?,?,'inference',?,?,?,?,?,?,'active',?,?,?)").run(id,seq,this.agentId,input.run_id,task,text,JSON.stringify({memory_candidate:meta}),input.confidence,JSON.stringify(ids),now,now)
+      return this.assertExists(id)
+    })
+  }
+
+  reviewCandidate(id:string,input:CandidateReview):MemoryNode {
+    if(this.role!=='host')throw new WorkspaceError('Candidate review is host-only')
+    if(!input||!['accept','reject'].includes(input.decision)||typeof input.reviewer!=='string'||!input.reviewer.trim()||input.reviewer.length>256||typeof input.note!=='string'||!input.note.trim()||input.note.length>2000)throw new WorkspaceError('Invalid candidate review controls')
+    const evidence=referenceIds(input.evidence,'Review evidence')
+    const request={...input,evidence,reviewer:input.reviewer.trim(),note:input.note.trim()}
+    return this.txn(()=>{
+      const n=this.assertExists(id),c=candidateMeta(n)
+      if(!c||input.expected_fingerprint!==c.fingerprint||claimDigest(n,c.sources)!==c.fingerprint)throw new WorkspaceError('Candidate review fingerprint conflict')
+      if(c.state!=='pending'){
+        if(c.review&&digest(c.review.request)===digest(request))return n
+        throw new WorkspaceError('Candidate review terminal conflict')
+      }
+      if(n.status!=='active'&&n.status!=='promoted')throw new WorkspaceError('Candidate is not active')
+      for(const [sid,hash]of Object.entries(c.sources)){const ref=validateEvent(this.get(sid),n.run_id!,n.task_id,'Candidate source');if(eventDigest(ref)!==hash)throw new WorkspaceError('Candidate source snapshot stale')}
+      const digests:Record<string,string>={}
+      for(const eid of evidence){if(n.based_on.includes(eid))throw new WorkspaceError('Review requires distinct verification evidence');digests[eid]=eventDigest(validateEvent(this.get(eid),n.run_id!,n.task_id,'Review evidence'))}
+      const meta:CandidateMeta={...c,state:input.decision==='accept'?'accepted':'rejected',review:{request,digests,at:Date.now()}}
+      const payload={...n.payload,memory_candidate:meta,promote_evidence:evidence,promote_by:'host-review',promote_note:request.note}
+      this.db.prepare('UPDATE nodes SET status=?,payload_json=?,updated_at=? WHERE id=?').run(input.decision==='accept'?'promoted':'demoted',JSON.stringify(payload),Date.now(),id)
+      return this.assertExists(id)
+    })
+  }
+
+  candidates(opts:{run_id?:string;limit?:number;status?:'pending'|'accepted'|'rejected'}={}):MemoryNode[] {
+    const limit=opts.limit??20
+    if(!Number.isInteger(limit)||limit<1||limit>100||opts.status!==undefined&&!['pending','accepted','rejected'].includes(opts.status))throw new WorkspaceError('Invalid candidate listing options')
+    return (this.db.prepare("SELECT * FROM nodes WHERE json_extract(payload_json,'$.memory_candidate.version')=1 ORDER BY seq DESC").all() as unknown as NodeRow[]).map(rowToNode).filter(n=>candidateMeta(n)).filter(n=>(!opts.run_id||n.run_id===opts.run_id)&&(!opts.status||candidateMeta(n)?.state===opts.status)).slice(0,limit)
   }
 
   // ---------------------------------------------------------------- progress / trail
@@ -416,7 +467,7 @@ export class MemoryNet {
     const curated = opts?.view === 'curated'
     const curation: ActivationResult['curation'] = curated ? {view:'curated',excluded:0,reasons:{}} : undefined
     const eligible = (n: MemoryNode): boolean => {
-      const reason = curationReason(n, query ?? '', opts ?? {})
+      const reason = candidateReason(n,id=>this.get(id)) ?? curationReason(n, query ?? '', opts ?? {})
       if (!reason) return true
       if (curation) {curation.excluded++;curation.reasons[reason] = (curation.reasons[reason] ?? 0)+1}
       return false

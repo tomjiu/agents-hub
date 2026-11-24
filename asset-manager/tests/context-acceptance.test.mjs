@@ -10,3 +10,9 @@ test('session policy rejects otherwise complete shared-only acceptance',async()=
  const session_boundary=Object.fromEntries(fields.map(k=>[k,true]));assert.equal(classifyDshCompatibility(fingerprint,[{...base,session_boundary}]).status,'VERIFIED');
  for(const k of fields)assert.equal(classifyDshCompatibility(fingerprint,[{...base,session_boundary:{...session_boundary,[k]:false}}]).status,'NEEDS_ACCEPTANCE');
 });
+test('candidate-review policy additionally requires full event-to-review host receipt',()=>{
+ const f={...fingerprint,assets:{...fingerprint.assets,memory_candidate_policy:'review-v1'}},session_boundary=Object.fromEntries(['same_project_sessions_isolated','different_project_isolated','model_scope_selectors_refused','default_root_untouched','contextual_prompt','raw_scope_preserved','auto_attribution'].map(k=>[k,true]));
+ const report={...base,fingerprint:f,session_boundary};assert.equal(classifyDshCompatibility(f,[report]).status,'NEEDS_ACCEPTANCE');
+ const candidate_lifecycle={pending_excluded:true,host_reviewed:true,accepted_curated:true,evidence_persisted:true};assert.equal(classifyDshCompatibility(f,[{...report,candidate_lifecycle}]).status,'VERIFIED');
+ for(const k of Object.keys(candidate_lifecycle))assert.equal(classifyDshCompatibility(f,[{...report,candidate_lifecycle:{...candidate_lifecycle,[k]:false}}]).status,'NEEDS_ACCEPTANCE');
+})

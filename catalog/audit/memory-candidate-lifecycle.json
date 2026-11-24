@@ -1,0 +1,294 @@
+{
+  "schema": 1,
+  "status": "ISOLATED_CANDIDATE_VERIFIED_NOT_MERGED_NOT_WEB_ADOPTED",
+  "base_pr": 7,
+  "base_branch": "memory-session-boundary",
+  "base_commit": "7e83b00",
+  "branch": "memory-candidate-lifecycle",
+  "parent_review": {
+    "defect": "Logger error during missing-context diagnostic could prevent host tool admission.",
+    "regression": "Failing actual adapter contract reproduced; nonthrowing warning guard fixed; parent30 tests and two exact hosts revalidated.",
+    "parent_commit": "25bbdd4180c1ca5591abf820025ba5bbe548f518",
+    "publication": "Existing PR7 updated; not merged."
+  },
+  "lifecycle": {
+    "proposal": "Model explicitly extracts summary from current-scope active successful observation IDs; text/confidence/source snapshots frozen by SHA256. Pending inference excluded from curated recall even on query hit.",
+    "review": "Host-only atomic CAS with named reviewer, note and distinct successful active observation evidence in same scope. Accepted promoted inference or rejected demoted inference; same request idempotent, conflicting terminal review rejected.",
+    "curation": "Read-only source and verification evidence snapshot/status recheck; changed/damaged/unreviewed receipts excluded. Generic promote cannot admit a pending candidate.",
+    "storage": "Existing node payload; no schema/table migration. Source observations unchanged, based_on and promote_evidence preserve GC closure for live conclusions.",
+    "model_access": "memory_net_candidates lists summaries/event IDs; memory_net_propose proposes only. Session inference write requires based_on and uses candidate path. No model review tool; tips remain advice and not verified conclusions."
+  },
+  "verification": {
+    "root": {
+      "total": 151,
+      "pass": 150,
+      "skip": 1,
+      "fail": 0
+    },
+    "core": {
+      "total": 44,
+      "pass": 44,
+      "fail": 0
+    },
+    "adapter": {
+      "total": 31,
+      "pass": 31,
+      "fail": 0
+    },
+    "search": {
+      "total": 335,
+      "pass": 335,
+      "fail": 0
+    },
+    "core_regressions": 5,
+    "adapter_regressions": 1,
+    "candidate_gate_regressions": 1,
+    "tdd": "Core methods missing and candidate adapter tools absent were reproduced before implementation. Fixture syntax/cleanup mistakes were corrected, not counted as product TDD evidence.",
+    "cases": [
+      "Pending exclusion and original source immutability",
+      "Idempotent proposal and exact-request terminal review",
+      "Wrong role/scope/missing/inactive/error evidence rejection",
+      "Review fingerprint and corruption rejection",
+      "Insert and review transaction rollback",
+      "GC preservation of live conclusion evidence",
+      "Export/import receipt replay and unchanged package state"
+    ],
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "status": "PASS",
+        "host_sha256": "221084aab019377b66d407ffd851fe52968138b8d7e837397e040a68c3323822",
+        "assets_sha256": "731d76d3b5fb00fadca48a610482325f78569a7b79376884e4ef435bb947aa8b",
+        "candidate_lifecycle": {
+          "pending_excluded": true,
+          "host_reviewed": true,
+          "accepted_curated": true,
+          "evidence_persisted": true
+        },
+        "session_boundary": {
+          "same_project_sessions_isolated": true,
+          "different_project_isolated": true,
+          "model_scope_selectors_refused": true,
+          "default_root_untouched": true,
+          "contextual_prompt": true,
+          "raw_scope_preserved": true,
+          "auto_attribution": true
+        },
+        "parallel_discovery": true,
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true,
+          "curated_prompt": true,
+          "curated_recall": true,
+          "raw_diagnostic": true,
+          "independent_observations": true,
+          "promoted_recalled": true,
+          "gc_evidence_preserved": true
+        }
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "status": "PASS",
+        "host_sha256": "d4268358eaf34ba3f1b8ec7e47d9c422a2233015fe84871e899e7fe56497edd4",
+        "assets_sha256": "731d76d3b5fb00fadca48a610482325f78569a7b79376884e4ef435bb947aa8b",
+        "candidate_lifecycle": {
+          "pending_excluded": true,
+          "host_reviewed": true,
+          "accepted_curated": true,
+          "evidence_persisted": true
+        },
+        "session_boundary": {
+          "same_project_sessions_isolated": true,
+          "different_project_isolated": true,
+          "model_scope_selectors_refused": true,
+          "default_root_untouched": true,
+          "contextual_prompt": true,
+          "raw_scope_preserved": true,
+          "auto_attribution": true
+        },
+        "parallel_discovery": true,
+        "search": {
+          "queried": true,
+          "refs_returned": true,
+          "cache_hit": true,
+          "quality_verified": true,
+          "explicit_selection_verified": true,
+          "provider_requests": 3,
+          "cache_isolated": true,
+          "source": "Local SearXNG-compatible fixture; not public web"
+        },
+        "memory": {
+          "persisted": true,
+          "prompt_injection": true,
+          "auto_observe": true,
+          "self_filter": true,
+          "curated_prompt": true,
+          "curated_recall": true,
+          "raw_diagnostic": true,
+          "independent_observations": true,
+          "promoted_recalled": true,
+          "gc_evidence_preserved": true
+        }
+      }
+    ],
+    "session_probes": [
+      {
+        "version": "0.2.2-rc.1",
+        "checks": {
+          "same_project_sessions_isolated": true,
+          "different_project_isolated": true,
+          "model_scope_selectors_refused": true,
+          "default_root_untouched": true,
+          "contextual_prompt": true,
+          "raw_scope_preserved": true,
+          "auto_attribution": true
+        },
+        "candidate_lifecycle": {
+          "pending_excluded": true,
+          "host_reviewed": true,
+          "accepted_curated": true,
+          "evidence_persisted": true
+        },
+        "sessions": [
+          {
+            "candidate_loop": true,
+            "label": "A",
+            "session": "session-ab16194f-185d-4a97-9720-0b539c1b2255",
+            "scope_directory": "scoped-v1\\p-936bce45e35fe0338458840ef779def5accf7c46c06052722a9ab8f1f4d2c813\\s-0c7a8634024216b9446d02f03ccbc5610e07bcb495fdab2060fdff4b6ae6d4cc",
+            "nodes": 8,
+            "prompt": true,
+            "progress": true,
+            "curated": true,
+            "raw": true,
+            "selectors_refused": true,
+            "no_foreign_content": true,
+            "automatic_observation_persisted": true
+          },
+          {
+            "candidate_loop": true,
+            "label": "B",
+            "session": "session-da95d1bb-fe9a-4cc8-a43d-0681d21f4eca",
+            "scope_directory": "scoped-v1\\p-936bce45e35fe0338458840ef779def5accf7c46c06052722a9ab8f1f4d2c813\\s-4974fa5d7f1388a01356215b725a74d98be4e704c7b34d3a9a8601e1e6ae869b",
+            "nodes": 8,
+            "prompt": true,
+            "progress": true,
+            "curated": true,
+            "raw": true,
+            "selectors_refused": true,
+            "no_foreign_content": true,
+            "automatic_observation_persisted": true
+          },
+          {
+            "candidate_loop": true,
+            "label": "C",
+            "session": "session-d665e439-4ddc-4409-9704-ca5713b8bd0b",
+            "scope_directory": "scoped-v1\\p-31d242b2aac4d834c906ee9528dc3f2474887612379f04ef0a836761263e4edb\\s-40a9e9f8f93b5b54e6230663019ef6fcc0955fe885aa1d8f2fc591863ecd70ed",
+            "nodes": 8,
+            "prompt": true,
+            "progress": true,
+            "curated": true,
+            "raw": true,
+            "selectors_refused": true,
+            "no_foreign_content": true,
+            "automatic_observation_persisted": true
+          }
+        ],
+        "scope": "Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library."
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "checks": {
+          "same_project_sessions_isolated": true,
+          "different_project_isolated": true,
+          "model_scope_selectors_refused": true,
+          "default_root_untouched": true,
+          "contextual_prompt": true,
+          "raw_scope_preserved": true,
+          "auto_attribution": true
+        },
+        "candidate_lifecycle": {
+          "pending_excluded": true,
+          "host_reviewed": true,
+          "accepted_curated": true,
+          "evidence_persisted": true
+        },
+        "sessions": [
+          {
+            "candidate_loop": true,
+            "label": "A",
+            "session": "session-3c40f937-def7-4a25-b0be-ed7f898a348f",
+            "scope_directory": "scoped-v1\\p-d11b3a80cd1147184e443eefb029a3c5641dcf1f6856c34e448295f545e42676\\s-b0b8148a4024b8fb0554e48856d445bf46262b41af8346628155f03259b54bfb",
+            "nodes": 8,
+            "prompt": true,
+            "progress": true,
+            "curated": true,
+            "raw": true,
+            "selectors_refused": true,
+            "no_foreign_content": true,
+            "automatic_observation_persisted": true
+          },
+          {
+            "candidate_loop": true,
+            "label": "B",
+            "session": "session-2894e95c-65d6-4e1f-9cbe-321fdb2b43d7",
+            "scope_directory": "scoped-v1\\p-d11b3a80cd1147184e443eefb029a3c5641dcf1f6856c34e448295f545e42676\\s-3238f1f3667c9402302268118b073cbc26817e0ba8f4e810f563da1cf1345b29",
+            "nodes": 8,
+            "prompt": true,
+            "progress": true,
+            "curated": true,
+            "raw": true,
+            "selectors_refused": true,
+            "no_foreign_content": true,
+            "automatic_observation_persisted": true
+          },
+          {
+            "candidate_loop": true,
+            "label": "C",
+            "session": "session-4b4bd376-c808-4480-a678-1225282a9e27",
+            "scope_directory": "scoped-v1\\p-f628447adde46b6393a6b4667e69ed52944ac8100bab333b20906fef10f722b2\\s-4ca2b4c616f259dc049ed6eb6e144f91e8d480e48b842622854faf24dd252ab2",
+            "nodes": 8,
+            "prompt": true,
+            "progress": true,
+            "curated": true,
+            "raw": true,
+            "selectors_refused": true,
+            "no_foreign_content": true,
+            "automatic_observation_persisted": true
+          }
+        ],
+        "scope": "Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library."
+      }
+    ]
+  },
+  "limits": [
+    "Explicit model proposal pipeline, not autonomous semantic extraction or truth validation.",
+    "Distinct observation IDs alone do not guarantee independent verification; host reviewer must actually evaluate support. Named reviewer is recorded not authenticated.",
+    "Tip advice bypasses candidate review by design and must never be presented as verified fact. Shared mode remains legacy and does not enforce candidate proposal path.",
+    "Core raw preserves node content; candidate listing output is bounded but scans current library; large-library performance not certified.",
+    "Rejected nodes may be physically purged on explicit GC; immutable review history, code anchors, redaction and cross-session grants deferred.",
+    "No real user UI/account tests or live adoption; real hosts used scripted local models/verification fixtures and fresh sessions. Generated bundle candidate execution and cross-process same-session resume not separately exercised.",
+    "General add/link/promote races not repaired; new candidate methods validate and write in the same BEGIN IMMEDIATE transaction."
+  ],
+  "preservation": {
+    "user_library_untouched": true,
+    "no_canonical_skill_changes": true,
+    "no_search_source_changes": true,
+    "no_profile_writes_by_this_work": true,
+    "final_profile_matches_prior_PR6_receipt": false,
+    "final_profile_references_new_candidate_or_context_checkout": false,
+    "note": "Final read-only inspection found profile hash differs from old PR6 receipt. This work did not edit or restore the profile; no new candidate/context checkout is referenced. Other configuration changes are not attributed to this work."
+  },
+  "next": "Review stacked PR against PR7; do not auto-merge or adopt. Add real review policy/UI and optional grant-scoped sharing in separate scope."
+}
