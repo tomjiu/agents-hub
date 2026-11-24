@@ -1,0 +1,196 @@
+{
+  "task": "issue #3 评论 G0 — Go 基线 (Go-first 技术裁决前置测量)",
+  "discipline": [
+    "本地合成输入的资源/延迟基线, 不冒充公网 SERP 质量或真实推理开销",
+    "Go/TS 同输入文件、同机、相邻时间运行; 进程指标不混用 (各自子进程口径)",
+    "未测项在 notMeasured 如实列出, 不以 fixture 冒充公网通过"
+  ],
+  "environment": {
+    "goVersion": "go1.25.3",
+    "nodeVersion": "v24.22.3",
+    "numCPU": 2,
+    "os": "Linux 5.10.134-013.15.kangaroo.al8.x86_64",
+    "note": "容器环境; 与用户本机 (Windows/Node26) 数值不可直接比较, 只做本环境内 Go/TS 对照"
+  },
+  "go": {
+    "cacheSQLite": {
+      "getMs": {
+        "p50": 0,
+        "p95": 0,
+        "n": 50
+      },
+      "putMs": {
+        "p50": 0,
+        "p95": 0,
+        "n": 5
+      }
+    },
+    "concurrent8x1MB": {
+      "domParseLimit": 2,
+      "perTaskMs": {
+        "p50": 154,
+        "p95": 308,
+        "n": 8
+      },
+      "rssKBDelta": 9264,
+      "totalWallMs": 317
+    },
+    "dateUTC": "2026-11-24T09:20:33Z",
+    "dense1MB": {
+      "cpuMs": 433,
+      "hwmDeltaKB": 23912,
+      "inputBytes": 1048668,
+      "peakHWMKB": 41352,
+      "rssKBDelta": 23956,
+      "wallMs": {
+        "p50": 50,
+        "p95": 51,
+        "n": 7
+      }
+    },
+    "dense2MB": {
+      "cpuMs": 892,
+      "hwmDeltaKB": 17420,
+      "inputBytes": 2097228,
+      "peakHWMKB": 62012,
+      "rssKBDelta": 26340,
+      "wallMs": {
+        "p50": 104,
+        "p95": 107,
+        "n": 7
+      }
+    },
+    "goVer": "go1.25.3",
+    "harvestCancelPropagationMs": 0,
+    "longRun300x256KB": {
+      "goroutines": 2,
+      "heapAllocAfter": 759328,
+      "heapAllocBefore": 1816032,
+      "mallocsDelta": 27216793,
+      "rssKBAfter": 20168,
+      "rssKBBefore": 54740,
+      "rssKBDrift": -34572
+    },
+    "mcpStdioIdle": {
+      "note": "spawn+initialize+tools/list 单管道往返 (子进程级)",
+      "responseLines": 2,
+      "spawnToExitMs": 6
+    },
+    "notMeasured": [
+      "realSERP (公网质量/延迟): 本探针为本地合成资源基线, 不冒充公网结果",
+      "rerankOn (增强推理): 模型三件套未部署, SC_RERANK 默认关闭; 需 -tags onnx 构建 + 模型资产后另测",
+      "eventLoopLag: Go 无 JS 事件循环等价物, 以 CPU/goroutine 口径替代"
+    ],
+    "numCPU": 2,
+    "probe": "go"
+  },
+  "ts": {
+    "probe": "ts",
+    "node": "v24.22.3",
+    "numCPU": 2,
+    "dateUTC": "2026-11-24T09:20:39.793Z",
+    "dense1MB": {
+      "inputBytes": 1048668,
+      "wallMs": {
+        "p50": 629,
+        "p95": 788,
+        "n": 7
+      },
+      "cpuMs": 5522,
+      "rssKBDelta": 398348,
+      "peakRSSKB": 486208
+    },
+    "dense2MB": {
+      "inputBytes": 2097228,
+      "wallMs": {
+        "p50": 1965,
+        "p95": 2078,
+        "n": 7
+      },
+      "cpuMs": 15002,
+      "rssKBDelta": 233672,
+      "peakRSSKB": 718404
+    },
+    "concurrent8x1MB": {
+      "totalWallMs": 4995,
+      "perTaskMs": {
+        "p50": 609,
+        "p95": 659,
+        "n": 8
+      },
+      "rssKBDelta": 4888,
+      "note": "Node 单线程事件循环 → 8 任务为串行执行 (无并行排队), 与 Go 信号量并发口径差异如实记录"
+    },
+    "longRun300x256KB": {
+      "rssKBBefore": 708140,
+      "rssKBAfter": 707428,
+      "rssKBDrift": -712,
+      "note": "Node heap 页归还策略与 Go 不同; rssDrift 不直接等于泄漏"
+    },
+    "mcpStdioIdle": {
+      "spawnToExitMs": 307,
+      "responseLines": 2,
+      "exitStatus": 0
+    },
+    "notMeasured": [
+      "realSERP (公网质量/延迟): 本探针为本地合成资源基线",
+      "cacheSQLite 冷/热: TS 侧缓存层在 Go 侧单独测量 (SQLite 口径相同)",
+      "harvestCancel: TS 侧 25ms 轮询语义, Go 侧事件驱动 — 只对资源口径对照"
+    ]
+  },
+  "tsRun2": {
+    "probe": "ts",
+    "node": "v24.22.3",
+    "numCPU": 2,
+    "dateUTC": "2026-11-24T09:21:26.313Z",
+    "dense1MB": {
+      "inputBytes": 1048668,
+      "wallMs": {
+        "p50": 627,
+        "p95": 763,
+        "n": 7
+      },
+      "cpuMs": 5667,
+      "rssKBDelta": 509696,
+      "peakRSSKB": 597620
+    },
+    "dense2MB": {
+      "inputBytes": 2097228,
+      "wallMs": {
+        "p50": 1968,
+        "p95": 2055,
+        "n": 7
+      },
+      "cpuMs": 14985,
+      "rssKBDelta": 98240,
+      "peakRSSKB": 696252
+    },
+    "concurrent8x1MB": {
+      "totalWallMs": 4961,
+      "perTaskMs": {
+        "p50": 599,
+        "p95": 690,
+        "n": 8
+      },
+      "rssKBDelta": 8328,
+      "note": "Node 单线程事件循环 → 8 任务为串行执行 (无并行排队), 与 Go 信号量并发口径差异如实记录"
+    },
+    "longRun300x256KB": {
+      "rssKBBefore": 688644,
+      "rssKBAfter": 688832,
+      "rssKBDrift": 188,
+      "note": "Node heap 页归还策略与 Go 不同; rssDrift 不直接等于泄漏"
+    },
+    "mcpStdioIdle": {
+      "spawnToExitMs": 292,
+      "responseLines": 2,
+      "exitStatus": 0
+    },
+    "notMeasured": [
+      "realSERP (公网质量/延迟): 本探针为本地合成资源基线",
+      "cacheSQLite 冷/热: TS 侧缓存层在 Go 侧单独测量 (SQLite 口径相同)",
+      "harvestCancel: TS 侧 25ms 轮询语义, Go 侧事件驱动 — 只对资源口径对照"
+    ]
+  },
+  "generatedAt": "2026-11-24T09:22:12.634Z"
+}
