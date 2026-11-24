@@ -24,7 +24,7 @@
       "fail": 0
     },
     "adapter": {
-      "pass": 29,
+      "pass": 30,
       "fail": 0
     },
     "search": {
@@ -38,7 +38,7 @@
     {
       "version": "0.2.2-rc.1",
       "host_sha256": "221084aab019377b66d407ffd851fe52968138b8d7e837397e040a68c3323822",
-      "assets_sha256": "ad4768cd4bdef889687546aa1ccea02dd545f610f765ec2bdcd0547fbcec4918",
+      "assets_sha256": "315fdbf456b840433b8bcc333be1ce2b819cb1a9564defc87a282e78601594b5",
       "checks": {
         "same_project_sessions_isolated": true,
         "different_project_isolated": true,
@@ -48,53 +48,12 @@
         "raw_scope_preserved": true,
         "auto_attribution": true
       },
-      "sessions": [
-        {
-          "label": "A",
-          "session": "session-a252bd18-73e6-4e55-9014-6fae8fb67204",
-          "scope_directory": "scoped-v1\\p-80ea9c7a9d0f20082a01061362d5b7288570060da8c57771e4a8218a6188fee2\\s-94cbaf1f803ad09d7ffd6d580d4970be400b9f3fb64217c95d6a76ef16fc3fc6",
-          "nodes": 5,
-          "prompt": true,
-          "progress": true,
-          "curated": true,
-          "raw": true,
-          "selectors_refused": true,
-          "no_foreign_content": true,
-          "automatic_observation_persisted": true
-        },
-        {
-          "label": "B",
-          "session": "session-16163587-1d23-46d4-a6d2-af29462719a5",
-          "scope_directory": "scoped-v1\\p-80ea9c7a9d0f20082a01061362d5b7288570060da8c57771e4a8218a6188fee2\\s-a1ac77cd3ede33e38e80bb60698d3df35b5d504032fb889a980cdace06cd0fdb",
-          "nodes": 5,
-          "prompt": true,
-          "progress": true,
-          "curated": true,
-          "raw": true,
-          "selectors_refused": true,
-          "no_foreign_content": true,
-          "automatic_observation_persisted": true
-        },
-        {
-          "label": "C",
-          "session": "session-82eda319-5a75-4cee-8d8f-284f4fd4069b",
-          "scope_directory": "scoped-v1\\p-7001478c6f8630bb46c13379ce5fa4c81a41074fa5632fd42202e51b97fd9032\\s-ccaa416f96962e7015d5995ca24744a67585340bd17151386ad6f153843ddf44",
-          "nodes": 5,
-          "prompt": true,
-          "progress": true,
-          "curated": true,
-          "raw": true,
-          "selectors_refused": true,
-          "no_foreign_content": true,
-          "automatic_observation_persisted": true
-        }
-      ],
-      "scope": "Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library."
+      "shared_compatibility": true
     },
     {
       "version": "0.2.2-rc.5",
       "host_sha256": "d4268358eaf34ba3f1b8ec7e47d9c422a2233015fe84871e899e7fe56497edd4",
-      "assets_sha256": "ad4768cd4bdef889687546aa1ccea02dd545f610f765ec2bdcd0547fbcec4918",
+      "assets_sha256": "315fdbf456b840433b8bcc333be1ce2b819cb1a9564defc87a282e78601594b5",
       "checks": {
         "same_project_sessions_isolated": true,
         "different_project_isolated": true,
@@ -104,48 +63,7 @@
         "raw_scope_preserved": true,
         "auto_attribution": true
       },
-      "sessions": [
-        {
-          "label": "A",
-          "session": "session-ac2f75d7-63f0-4027-b474-7cea5cd6d6fb",
-          "scope_directory": "scoped-v1\\p-105ab2e93159abc0d5d712beb27c1fdcbc98147b84a3eee640bd77d505bdc776\\s-6488b5dc937d3b85c8ecb7abd364e8663206f504767cfd94e1e2437ae05ec08e",
-          "nodes": 5,
-          "prompt": true,
-          "progress": true,
-          "curated": true,
-          "raw": true,
-          "selectors_refused": true,
-          "no_foreign_content": true,
-          "automatic_observation_persisted": true
-        },
-        {
-          "label": "B",
-          "session": "session-3a209e2d-c321-47bb-8a8a-aef624d367ef",
-          "scope_directory": "scoped-v1\\p-105ab2e93159abc0d5d712beb27c1fdcbc98147b84a3eee640bd77d505bdc776\\s-b26600fdeaa1b4c6012c9706a1f2a64e116876a163367a2529544d0b64351d99",
-          "nodes": 5,
-          "prompt": true,
-          "progress": true,
-          "curated": true,
-          "raw": true,
-          "selectors_refused": true,
-          "no_foreign_content": true,
-          "automatic_observation_persisted": true
-        },
-        {
-          "label": "C",
-          "session": "session-33484b1c-3d38-4837-bd96-bfb9dc271277",
-          "scope_directory": "scoped-v1\\p-052b344838e396e5bb97883586fd30b2416327713db629e56a3d68aa002bd8d8\\s-9899def4a18c7d73a3a0cc3a47bf216414b8e4111f310d19da11844f281c5ce6",
-          "nodes": 5,
-          "prompt": true,
-          "progress": true,
-          "curated": true,
-          "raw": true,
-          "selectors_refused": true,
-          "no_foreign_content": true,
-          "automatic_observation_persisted": true
-        }
-      ],
-      "scope": "Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library."
+      "shared_compatibility": true
     }
   ],
   "review_findings": [
@@ -171,5 +89,10 @@
     "Generated bundle wrapper/schema verified by unit tests; session-specific real probes load adapter directly, not the generated wrapper."
   ],
   "next": "Review this independent PR before any live adoption; then implement event-to-candidate lifecycle under explicit scope/grants.",
-  "acceptance_policy": "Session-v1 fingerprint requires seven context checks in addition to MCP/Skill/cache/persistence legacy compatibility; shared-only acceptance cannot package this candidate."
+  "acceptance_policy": "Session-v1 fingerprint requires seven context checks in addition to MCP/Skill/cache/persistence legacy compatibility; shared-only acceptance cannot package this candidate.",
+  "self_review": {
+    "finding": "Diagnostic logger throw on missing identity could abort tools/pre-execute before continuation.",
+    "fix": "Nonthrowing diagnostic guard; failing regression reproduced then full adapter30 passed.",
+    "commit": "25bbdd4180c1ca5591abf820025ba5bbe548f518"
+  }
 }
