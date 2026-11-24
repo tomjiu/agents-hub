@@ -31,7 +31,7 @@ test('normalized selections share cache but old unrestricted and contaminated ca
  core.cache.putSearch(oldKey,bad);
  const first=await core.search(query,{engines:['searxng','searxng']});assert.equal(first.meta.fromCache,false);assert.deepEqual(first.meta.engineSelection,{mode:'explicit',requested:['searxng']});
  const count=calls.length;const second=await core.search(query,{engines:['searxng']});assert.equal(second.meta.fromCache,true);assert.equal(calls.length,count);
- const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v1',q:decision.queries,r:decision.route,o:{e:['searxng']}}));core.cache.putSearch(key,bad);
+ const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v2',q:decision.queries,r:decision.route,o:{e:['searxng']}}));core.cache.putSearch(key,bad);
  const next=await core.search(query,{engines:['searxng']});assert.equal(next.meta.fromCache,false);assert.ok(calls.length>count);assert.ok(next.refs.every(ref=>ref.engines.every(name=>name==='searxng')));
 });
 test('explicit X API uses selected provider only and preserves failure metadata',async t=>{
@@ -62,7 +62,7 @@ test('HTTP search and X honor selection and research rejects unsupported lists b
 test('research API rejects engines rather than treating it as an ignored authorization constraint',async t=>{const {core,calls}=fixture(t);await assert.rejects(core.deepResearch('query',{engines:[]} as any),/allowlist/);await assert.rejects(core.resumeResearch('unknown',{engines:[]} as any),/allowlist/);assert.deepEqual(calls,[]);});
 test('legacy RSS provenance labels do not invalidate a legitimate selected-provider cache',async t=>{
  const {core,calls}=fixture(t),query='ordinary cache label query',decision=plan(query);
- const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v1',q:decision.queries,r:decision.route,o:{e:['bingrss']}}));
+ const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v2',q:decision.queries,r:decision.route,o:{e:['bingrss']}}));
  core.cache.putSearch(key,{query,refs:[{url:'https://evidence.example/rss',title:'ordinary cache label query',snippet:'fixture',engines:['bing-rss']}],meta:{enginesUsed:['bingrss'],enginesFailed:[],engineSelection:{mode:'explicit',requested:['bingrss']},quality:{status:'candidate_results',policy:'lexical-evidence-v1',evaluated:1,rejected:0,reasons:{}},elapsedMs:1,fromCache:false}});
  const result=await core.search(query,{engines:['bingrss']});assert.equal(result.meta.fromCache,true);assert.deepEqual(calls,[]);
 });

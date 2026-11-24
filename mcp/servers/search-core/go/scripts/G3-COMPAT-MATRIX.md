@@ -40,7 +40,7 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
 | 29 | S1 到期不足诊断 | ❌ | 🆕 meta.harvest.insufficient | go: deadline 到期+证据不足 → 已得候选+诊断文本, 不无限抢救 |
 | 30 | S2 Retry-After 退避 | ❌ | 🆕 有界(1h 上限) | go: 429 错误带 retry-after 秒数, 熔断冷却取大者; TestBreakerCooldownRespectsRetryAfter |
 | 31 | S2 负结果不缓存 | ⚠️ 空结果入缓存 | 🆕 degraded/空结果跳过 | go: cache_skip_negative journal; TestNegativeResultsNotCached |
-| 32 | S3 词法证据门 | ✅ lexical-evidence-v1 (40%) | 🆕 v2: 复数折叠+50% | go: S0-F2 实测 40% 下限放行词重合烹饪页; v2 拒绝且 python 页保留; TS 挂账同步 |
+| 32 | S3 词法证据门 | ✅ lexical-evidence-v2 (复数折叠+50%, 已同步) | 🆓 v2: 复数折叠+50% | go: S0-F2 实测 40% 下限放行词重合烹饪页; v2 拒绝且 python 页保留; TS 已同步 (2026-11-24, 先红后绿 S0-F2/折叠/后缀用例; 缓存 key 升 v2, 命中重跑门) |
 | 33 | S3 版本适用性标注 | ❌ | 🆕 versionCheck(只标注) | go: 查询版本 vs ref 主版本差异 → meta.quality.versionCheck; 不剔除 |
 | 34 | S3 来源构成/官方社区 | ⚠️ authority 层已有 | 🆕 sourceMix 摘要 | go: meta.quality.sourceMix 计数(official/community/unknown) |
 | 35 | S3 domain cap 可调 | ⚠️ 主题推导固定 | 🆕 SC_DOMAIN_CAP | go: 调用方显式覆盖(0=关) |
