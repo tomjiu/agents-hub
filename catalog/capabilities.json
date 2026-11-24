@@ -1,488 +1,511 @@
 {
-  "schema": 1,
-  "groups": [
+ "schema": 1,
+ "groups": [
+  {
+   "id": "office",
+   "title": "办公工作"
+  },
+  {
+   "id": "design",
+   "title": "设计工作"
+  },
+  {
+   "id": "engineering",
+   "title": "工程开发"
+  },
+  {
+   "id": "research",
+   "title": "研究工作"
+  },
+  {
+   "id": "security",
+   "title": "安全工作"
+  }
+ ],
+ "routes": [
+  {
+   "id": "requirements-planning",
+   "title": "需求分析与任务规划",
+   "group": "office",
+   "domains": [
+    "workflow",
+    "document"
+   ],
+   "stages": [
+    "plan"
+   ],
+   "aliases": [
+    "需求分析与规划",
+    "需求分析",
+    "任务规划",
+    "requirements planning",
+    "业务访谈",
+    "需求澄清",
+    "访谈干系人",
+    "成本评估"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "工程实施计划复用 writing-plans；业务访谈与成本评估由 business-interviewing 承接。"
+   ],
+   "providers": [
     {
-      "id": "office",
-      "title": "办公工作"
+     "id": "business-interviewing",
+     "fit": "primary",
+     "reason": "独立实现的非软件业务访谈/需求澄清：目标/痛点/范围/约束/成本驱动/验收标准，产出确认记录。",
+     "limitations": [
+      "方法技能，不替代干系人到场；记录未确认前不得交接规划。"
+     ],
+     "reviewed_skill_sha256": "14cd497ebf039311609886b98c037b007ff192715989873b9ff2bfa4b10a10d4"
     },
     {
-      "id": "design",
-      "title": "设计工作"
+     "id": "writing-plans",
+     "fit": "primary",
+     "reason": "已有需求到分步骤实施计划，偏软件工程。",
+     "limitations": [
+      "需要已明确的需求；代码测试与worktree步骤不适用于所有办公任务。"
+     ],
+     "reviewed_skill_sha256": "b1018a7772158bdd7d58771b89c36c65c0a3f1445b2e1f46af3952dfad2dbfb7"
     },
     {
-      "id": "engineering",
-      "title": "工程开发"
-    },
-    {
-      "id": "research",
-      "title": "研究工作"
-    },
-    {
-      "id": "security",
-      "title": "安全工作"
+     "id": "doc-coauthoring",
+     "fit": "supporting",
+     "reason": "提案/PRD协作补充受众、背景及结构整理。",
+     "limitations": [
+      "文档协作而非项目管理；独立读者测试受宿主与用户授权限制。"
+     ],
+     "reviewed_skill_sha256": "acb9b89b228fb818ffe2f464e40b1cdbf6948b50ceeeb7378f0e5b9d78c996ad"
     }
-  ],
-  "routes": [
+   ]
+  },
+  {
+   "id": "task-execution",
+   "title": "按已审查计划执行",
+   "group": "office",
+   "domains": [
+    "workflow"
+   ],
+   "stages": [
+    "execute"
+   ],
+   "aliases": [
+    "任务执行",
+    "执行计划",
+    "task execution"
+   ],
+   "coverage": "partial",
+   "limitations": [
+    "只提供计划执行纪律，不能代替具体业务工具、授权和产物验收。"
+   ],
+   "providers": [
     {
-      "id": "requirements-planning",
-      "title": "需求分析与任务规划",
-      "group": "office",
-      "domains": [
-        "workflow",
-        "document"
-      ],
-      "stages": [
-        "plan"
-      ],
-      "aliases": [
-        "需求分析与规划",
-        "需求分析",
-        "任务规划",
-        "requirements planning"
-      ],
-      "coverage": "partial",
-      "limitations": [
-        "工程实施计划可以复用拆解方法；未覆盖通用业务访谈、成本评估和办公排期验收。"
-      ],
-      "providers": [
-        {
-          "id": "writing-plans",
-          "fit": "primary",
-          "reason": "已有需求到分步骤实施计划，偏软件工程。",
-          "limitations": [
-            "需要已明确的需求；代码测试与worktree步骤不适用于所有办公任务。"
-          ],
-          "reviewed_skill_sha256": "b1018a7772158bdd7d58771b89c36c65c0a3f1445b2e1f46af3952dfad2dbfb7"
-        },
-        {
-          "id": "doc-coauthoring",
-          "fit": "supporting",
-          "reason": "提案/PRD协作补充受众、背景及结构整理。",
-          "limitations": [
-            "文档协作而非项目管理；独立读者测试受宿主与用户授权限制。"
-          ],
-          "reviewed_skill_sha256": "acb9b89b228fb818ffe2f464e40b1cdbf6948b50ceeeb7378f0e5b9d78c996ad"
-        }
-      ]
-    },
-    {
-      "id": "task-execution",
-      "title": "按已审查计划执行",
-      "group": "office",
-      "domains": [
-        "workflow"
-      ],
-      "stages": [
-        "execute"
-      ],
-      "aliases": [
-        "任务执行",
-        "执行计划",
-        "task execution"
-      ],
-      "coverage": "partial",
-      "limitations": [
-        "只提供计划执行纪律，不能代替具体业务工具、授权和产物验收。"
-      ],
-      "providers": [
-        {
-          "id": "executing-plans",
-          "fit": "primary",
-          "reason": "已有计划的逐项执行与检查点。",
-          "limitations": [
-            "内容偏开发分支工作流；未注册子技能不可假定存在，不自动派生代理。"
-          ],
-          "reviewed_skill_sha256": "10f115165a71ad30e9ef331ba97d85ea09ba634c4e334b12857e077069758bb6"
-        }
-      ]
-    },
-    {
-      "id": "quality-acceptance",
-      "title": "质量验收与交付核验",
-      "group": "office",
-      "domains": [
-        "workflow"
-      ],
-      "stages": [
-        "accept"
-      ],
-      "aliases": [
-        "办公质量验收",
-        "质量验收",
-        "交付核验",
-        "quality acceptance"
-      ],
-      "coverage": "partial",
-      "limitations": [
-        "复用证据先于完成声明的原则；没有通用办公产物评分量表或业务审批流程。"
-      ],
-      "providers": [
-        {
-          "id": "verification-before-completion",
-          "fit": "primary",
-          "reason": "检查完成声明是否有新鲜验证证据。",
-          "limitations": [
-            "不是Word排版、PPT视觉或Excel公式完整验收方案。"
-          ],
-          "reviewed_skill_sha256": "c35ac975d145f74d9f3668c1b035a3754d3c0f4edb491cc80a6a0265cfdf7749"
-        }
-      ]
-    },
-    {
-      "id": "word-document",
-      "title": "Word文档",
-      "group": "office",
-      "domains": [
-        "document"
-      ],
-      "stages": [
-        "execute"
-      ],
-      "aliases": [
-        "Word文档",
-        "word document",
-        "DOCX"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "许可声明限制；只有显式许可复核与运行审核后才考虑采用。"
-      ],
-      "providers": [
-        {
-          "id": "docx",
-          "fit": "primary",
-          "reason": "按现有技能描述处理对应文档文件。",
-          "limitations": [
-            "许可声明限制；只有显式许可复核与运行审核后才考虑采用。"
-          ],
-          "reviewed_skill_sha256": "1c4df72061111588437a86cd1551b8183c131048efb8861cab659804d5bdcbd4"
-        }
-      ]
-    },
-    {
-      "id": "pptx-work",
-      "title": "PPT制作",
-      "group": "office",
-      "domains": [
-        "document"
-      ],
-      "stages": [
-        "execute"
-      ],
-      "aliases": [
-        "PPT制作",
-        "制作PPT",
-        "PowerPoint",
-        "PPTX"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "PPTX制作参考不等于可默认部署；许可与渲染环境仍受限。"
-      ],
-      "providers": [
-        {
-          "id": "pptx",
-          "fit": "primary",
-          "reason": "按现有技能描述处理对应文档文件。",
-          "limitations": [
-            "PPTX制作参考不等于可默认部署；许可与渲染环境仍受限。"
-          ],
-          "reviewed_skill_sha256": "5d91c30e63ef72cd1ff10446702401f9ebb3f32dd7b264f50959a95548a225bf"
-        }
-      ]
-    },
-    {
-      "id": "xlsx-work",
-      "title": "Excel数据处理",
-      "group": "office",
-      "domains": [
-        "document"
-      ],
-      "stages": [
-        "execute"
-      ],
-      "aliases": [
-        "Excel数据处理",
-        "Excel表格",
-        "XLSX"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "只覆盖以表格文件为主要产物，非通用数据库/金融结论保证。"
-      ],
-      "providers": [
-        {
-          "id": "xlsx",
-          "fit": "primary",
-          "reason": "按现有技能描述处理对应文档文件。",
-          "limitations": [
-            "只覆盖以表格文件为主要产物，非通用数据库/金融结论保证。"
-          ],
-          "reviewed_skill_sha256": "7de127f835149f9c755fdf70d2ce4320e78a720dacf9f82495165de63b52732d"
-        }
-      ]
-    },
-    {
-      "id": "pdf-work",
-      "title": "PDF处理",
-      "group": "office",
-      "domains": [
-        "document"
-      ],
-      "stages": [
-        "execute"
-      ],
-      "aliases": [
-        "PDF处理",
-        "PDF文件",
-        "PDF"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "处理/OCR依赖需另验，既有许可限制不绕过。"
-      ],
-      "providers": [
-        {
-          "id": "pdf",
-          "fit": "primary",
-          "reason": "按现有技能描述处理对应文档文件。",
-          "limitations": [
-            "处理/OCR依赖需另验，既有许可限制不绕过。"
-          ],
-          "reviewed_skill_sha256": "067401220db5745f719ff8c048d545d5edc8545e809668a3a6f9e2892fa51d48"
-        }
-      ]
-    },
-    {
-      "id": "ui-design",
-      "title": "UI设计与前端视觉实现",
-      "group": "design",
-      "domains": [
-        "design",
-        "engineering"
-      ],
-      "stages": [
-        "design",
-        "execute"
-      ],
-      "aliases": [
-        "UI设计",
-        "UI 设计",
-        "界面设计",
-        "frontend design"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "前端视觉代码与厂商画布是不同产物/宿主；提供方是备选，不应全部混装。"
-      ],
-      "providers": [
-        {
-          "id": "frontend-design",
-          "fit": "primary",
-          "reason": "独立技能生成视觉风格明确的前端代码。",
-          "limitations": [
-            "不是Ardot画布工作流；无专业设计效果认证。"
-          ],
-          "reviewed_skill_sha256": "70044bbc8e4c21d23b8c8b864956aa1515c1c6cb2f9df14148dbb8c4af6187e5"
-        },
-        {
-          "id": "workbuddy.ardot-ui-design",
-          "fit": "alternative",
-          "reason": "Ardot画布UI/组件/设计系统领域指导。",
-          "limitations": [
-            "需要Ardot画布、注入的ardot-design-core及原宿主；默认不可由模型调用，许可/宿主待审。"
-          ],
-          "reviewed_skill_sha256": "0bf67f4855133137e6f2546b9318c7af80770704252c6f8efd5263ff964b78fa"
-        },
-        {
-          "id": "trae.solo-design",
-          "fit": "alternative",
-          "reason": "Trae原包的设计分路与画布工作流参考。",
-          "limitations": [
-            "依赖原设计工具/多代理流程与验证脚本，不是DSH可移植通用实现。"
-          ],
-          "reviewed_skill_sha256": "5a8d8bc73e3158d6eba1b10094163686a4196095a0db421394bbabfa02fa9eb5"
-        }
-      ]
-    },
-    {
-      "id": "design-system",
-      "title": "设计系统与组件规范",
-      "group": "design",
-      "domains": [
-        "design"
-      ],
-      "stages": [
-        "design"
-      ],
-      "aliases": [
-        "设计系统",
-        "组件库规范",
-        "design system"
-      ],
-      "coverage": "partial",
-      "limitations": [
-        "只有候选画布领域指导；未建立可直接用于DSH的完整设计系统生产能力。"
-      ],
-      "providers": [
-        {
-          "id": "workbuddy.ardot-ui-design",
-          "fit": "alternative",
-          "reason": "正文明确涵盖design tokens和组件库。",
-          "limitations": [
-            "依赖ardot-design-core和原画布，禁止作为独立默认部署能力。"
-          ],
-          "reviewed_skill_sha256": "0bf67f4855133137e6f2546b9318c7af80770704252c6f8efd5263ff964b78fa"
-        }
-      ]
-    },
-    {
-      "id": "webapp-testing",
-      "title": "Web应用自动化测试",
-      "group": "engineering",
-      "domains": [
-        "engineering"
-      ],
-      "stages": [
-        "test"
-      ],
-      "aliases": [
-        "自动化测试",
-        "Web应用测试",
-        "webapp testing",
-        "web application testing"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "测试本地应用，不等同一般网页操作；具体用例和应用身份仍需检查。"
-      ],
-      "providers": [
-        {
-          "id": "webapp-testing",
-          "fit": "primary",
-          "reason": "Python Playwright测试本地应用，含受控server生命周期。",
-          "limitations": [
-            "需要Python/Playwright/浏览器；TCP就绪不等于应用健康，不接管已运行服务。"
-          ],
-          "reviewed_skill_sha256": "e9a472c8ed7d67328e527d5cfa508a96f383669ecab204f7749f74ca114590fa"
-        }
-      ]
-    },
-    {
-      "id": "browser-automation",
-      "title": "浏览器自动化操作",
-      "group": "engineering",
-      "domains": [
-        "engineering"
-      ],
-      "stages": [
-        "execute",
-        "test"
-      ],
-      "aliases": [
-        "浏览器自动化",
-        "浏览器操作",
-        "browser automation",
-        "playwright cli"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "CLI优先的交互操作，不自动改成测试套件或接管用户浏览器。"
-      ],
-      "providers": [
-        {
-          "id": "playwright",
-          "fit": "primary",
-          "reason": "终端驱动真实浏览器导航/填写/截图。",
-          "limitations": [
-            "原入口含Codex路径与npx工具，DSH需显式工具/路径适配；存在不代表已安装。"
-          ],
-          "reviewed_skill_sha256": "c52cc95125b720cdc3c9829b0294c2752d4ae9b85a5282aa153da8bba929af87"
-        }
-      ]
-    },
-    {
-      "id": "information-research",
-      "title": "资料搜索与调研",
-      "group": "research",
-      "domains": [
-        "research"
-      ],
-      "stages": [
-        "research"
-      ],
-      "aliases": [
-        "资料搜索",
-        "深度调研",
-        "互联网搜索",
-        "information research"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "只指搜索与研究操作说明；实际MCP mcp.search-core需另外构建和明确加载。"
-      ],
-      "providers": [
-        {
-          "id": "search-core",
-          "fit": "primary",
-          "reason": "说明搜索、研究与focused fetch的已有入口。",
-          "limitations": [
-            "词法候选不是事实/最新版本认证；工具与网络能力必须实际验证。"
-          ],
-          "reviewed_skill_sha256": "32c1ba7745cd03f7b23dfdfbcd75d6902e8a69f2f16abf9f3febc76fb71a9a38"
-        }
-      ]
-    },
-    {
-      "id": "threat-model",
-      "title": "代码安全威胁建模",
-      "group": "security",
-      "domains": [
-        "security"
-      ],
-      "stages": [
-        "research"
-      ],
-      "aliases": [
-        "威胁建模",
-        "threat model"
-      ],
-      "coverage": "scoped",
-      "limitations": [
-        "仅针对显式请求的代码库安全分析，不用于普通UI设计或架构摘要。"
-      ],
-      "providers": [
-        {
-          "id": "security-threat-model",
-          "fit": "primary",
-          "reason": "正文定义信任边界、攻击面与缓解措施。",
-          "limitations": [
-            "需要代码范围与证据，不保证安全认证或所有语言/运行时覆盖。"
-          ],
-          "reviewed_skill_sha256": "7718bb4d7d9855cdf2e90e920e0cbc489cb24ea55e2f9734fd041c53f1e04f68"
-        }
-      ]
-    },
-    {
-      "id": "business-scheduling",
-      "title": "业务排期与资源预算",
-      "group": "office",
-      "domains": [
-        "workflow"
-      ],
-      "stages": [
-        "plan"
-      ],
-      "aliases": [
-        "业务排期",
-        "资源预算",
-        "business scheduling"
-      ],
-      "coverage": "none",
-      "limitations": [
-        "当前未建立经审查的专用工作流；不以工程计划技能冒充业务管理能力。"
-      ],
-      "providers": []
+     "id": "executing-plans",
+     "fit": "primary",
+     "reason": "已有计划的逐项执行与检查点。",
+     "limitations": [
+      "内容偏开发分支工作流；未注册子技能不可假定存在，不自动派生代理。"
+     ],
+     "reviewed_skill_sha256": "10f115165a71ad30e9ef331ba97d85ea09ba634c4e334b12857e077069758bb6"
     }
-  ]
+   ]
+  },
+  {
+   "id": "quality-acceptance",
+   "title": "质量验收与交付核验",
+   "group": "office",
+   "domains": [
+    "workflow"
+   ],
+   "stages": [
+    "accept"
+   ],
+   "aliases": [
+    "办公质量验收",
+    "质量验收",
+    "交付核验",
+    "quality acceptance"
+   ],
+   "coverage": "partial",
+   "limitations": [
+    "复用证据先于完成声明的原则；没有通用办公产物评分量表或业务审批流程。"
+   ],
+   "providers": [
+    {
+     "id": "verification-before-completion",
+     "fit": "primary",
+     "reason": "检查完成声明是否有新鲜验证证据。",
+     "limitations": [
+      "不是Word排版、PPT视觉或Excel公式完整验收方案。"
+     ],
+     "reviewed_skill_sha256": "c35ac975d145f74d9f3668c1b035a3754d3c0f4edb491cc80a6a0265cfdf7749"
+    }
+   ]
+  },
+  {
+   "id": "word-document",
+   "title": "Word文档",
+   "group": "office",
+   "domains": [
+    "document"
+   ],
+   "stages": [
+    "execute"
+   ],
+   "aliases": [
+    "Word文档",
+    "word document",
+    "DOCX"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "许可声明限制；只有显式许可复核与运行审核后才考虑采用。"
+   ],
+   "providers": [
+    {
+     "id": "docx",
+     "fit": "primary",
+     "reason": "按现有技能描述处理对应文档文件。",
+     "limitations": [
+      "许可声明限制；只有显式许可复核与运行审核后才考虑采用。"
+     ],
+     "reviewed_skill_sha256": "1c4df72061111588437a86cd1551b8183c131048efb8861cab659804d5bdcbd4"
+    }
+   ]
+  },
+  {
+   "id": "pptx-work",
+   "title": "PPT制作",
+   "group": "office",
+   "domains": [
+    "document"
+   ],
+   "stages": [
+    "execute"
+   ],
+   "aliases": [
+    "PPT制作",
+    "制作PPT",
+    "PowerPoint",
+    "PPTX"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "PPTX制作参考不等于可默认部署；许可与渲染环境仍受限。"
+   ],
+   "providers": [
+    {
+     "id": "pptx",
+     "fit": "primary",
+     "reason": "按现有技能描述处理对应文档文件。",
+     "limitations": [
+      "PPTX制作参考不等于可默认部署；许可与渲染环境仍受限。"
+     ],
+     "reviewed_skill_sha256": "5d91c30e63ef72cd1ff10446702401f9ebb3f32dd7b264f50959a95548a225bf"
+    }
+   ]
+  },
+  {
+   "id": "xlsx-work",
+   "title": "Excel数据处理",
+   "group": "office",
+   "domains": [
+    "document"
+   ],
+   "stages": [
+    "execute"
+   ],
+   "aliases": [
+    "Excel数据处理",
+    "Excel表格",
+    "XLSX"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "只覆盖以表格文件为主要产物，非通用数据库/金融结论保证。"
+   ],
+   "providers": [
+    {
+     "id": "xlsx",
+     "fit": "primary",
+     "reason": "按现有技能描述处理对应文档文件。",
+     "limitations": [
+      "只覆盖以表格文件为主要产物，非通用数据库/金融结论保证。"
+     ],
+     "reviewed_skill_sha256": "7de127f835149f9c755fdf70d2ce4320e78a720dacf9f82495165de63b52732d"
+    }
+   ]
+  },
+  {
+   "id": "pdf-work",
+   "title": "PDF处理",
+   "group": "office",
+   "domains": [
+    "document"
+   ],
+   "stages": [
+    "execute"
+   ],
+   "aliases": [
+    "PDF处理",
+    "PDF文件",
+    "PDF"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "处理/OCR依赖需另验，既有许可限制不绕过。"
+   ],
+   "providers": [
+    {
+     "id": "pdf",
+     "fit": "primary",
+     "reason": "按现有技能描述处理对应文档文件。",
+     "limitations": [
+      "处理/OCR依赖需另验，既有许可限制不绕过。"
+     ],
+     "reviewed_skill_sha256": "067401220db5745f719ff8c048d545d5edc8545e809668a3a6f9e2892fa51d48"
+    }
+   ]
+  },
+  {
+   "id": "ui-design",
+   "title": "UI设计与前端视觉实现",
+   "group": "design",
+   "domains": [
+    "design",
+    "engineering"
+   ],
+   "stages": [
+    "design",
+    "execute"
+   ],
+   "aliases": [
+    "UI设计",
+    "UI 设计",
+    "界面设计",
+    "frontend design"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "前端视觉代码与厂商画布是不同产物/宿主；提供方是备选，不应全部混装。"
+   ],
+   "providers": [
+    {
+     "id": "frontend-design",
+     "fit": "primary",
+     "reason": "独立技能生成视觉风格明确的前端代码。",
+     "limitations": [
+      "不是Ardot画布工作流；无专业设计效果认证。"
+     ],
+     "reviewed_skill_sha256": "70044bbc8e4c21d23b8c8b864956aa1515c1c6cb2f9df14148dbb8c4af6187e5"
+    },
+    {
+     "id": "workbuddy.ardot-ui-design",
+     "fit": "alternative",
+     "reason": "Ardot画布UI/组件/设计系统领域指导。",
+     "limitations": [
+      "需要Ardot画布、注入的ardot-design-core及原宿主；默认不可由模型调用，许可/宿主待审。"
+     ],
+     "reviewed_skill_sha256": "0bf67f4855133137e6f2546b9318c7af80770704252c6f8efd5263ff964b78fa"
+    },
+    {
+     "id": "trae.solo-design",
+     "fit": "alternative",
+     "reason": "Trae原包的设计分路与画布工作流参考。",
+     "limitations": [
+      "依赖原设计工具/多代理流程与验证脚本，不是DSH可移植通用实现。"
+     ],
+     "reviewed_skill_sha256": "5a8d8bc73e3158d6eba1b10094163686a4196095a0db421394bbabfa02fa9eb5"
+    }
+   ]
+  },
+  {
+   "id": "design-system",
+   "title": "设计系统与组件规范",
+   "group": "design",
+   "domains": [
+    "design"
+   ],
+   "stages": [
+    "design"
+   ],
+   "aliases": [
+    "设计系统",
+    "组件库规范",
+    "design system"
+   ],
+   "coverage": "partial",
+   "limitations": [
+    "只有候选画布领域指导；未建立可直接用于DSH的完整设计系统生产能力。"
+   ],
+   "providers": [
+    {
+     "id": "workbuddy.ardot-ui-design",
+     "fit": "alternative",
+     "reason": "正文明确涵盖design tokens和组件库。",
+     "limitations": [
+      "依赖ardot-design-core和原画布，禁止作为独立默认部署能力。"
+     ],
+     "reviewed_skill_sha256": "0bf67f4855133137e6f2546b9318c7af80770704252c6f8efd5263ff964b78fa"
+    }
+   ]
+  },
+  {
+   "id": "webapp-testing",
+   "title": "Web应用自动化测试",
+   "group": "engineering",
+   "domains": [
+    "engineering"
+   ],
+   "stages": [
+    "test"
+   ],
+   "aliases": [
+    "自动化测试",
+    "Web应用测试",
+    "webapp testing",
+    "web application testing"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "测试本地应用，不等同一般网页操作；具体用例和应用身份仍需检查。"
+   ],
+   "providers": [
+    {
+     "id": "webapp-testing",
+     "fit": "primary",
+     "reason": "Python Playwright测试本地应用，含受控server生命周期。",
+     "limitations": [
+      "需要Python/Playwright/浏览器；TCP就绪不等于应用健康，不接管已运行服务。"
+     ],
+     "reviewed_skill_sha256": "e9a472c8ed7d67328e527d5cfa508a96f383669ecab204f7749f74ca114590fa"
+    }
+   ]
+  },
+  {
+   "id": "browser-automation",
+   "title": "浏览器自动化操作",
+   "group": "engineering",
+   "domains": [
+    "engineering"
+   ],
+   "stages": [
+    "execute",
+    "test"
+   ],
+   "aliases": [
+    "浏览器自动化",
+    "浏览器操作",
+    "browser automation",
+    "playwright cli"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "CLI优先的交互操作，不自动改成测试套件或接管用户浏览器。"
+   ],
+   "providers": [
+    {
+     "id": "playwright",
+     "fit": "primary",
+     "reason": "终端驱动真实浏览器导航/填写/截图。",
+     "limitations": [
+      "原入口含Codex路径与npx工具，DSH需显式工具/路径适配；存在不代表已安装。"
+     ],
+     "reviewed_skill_sha256": "c52cc95125b720cdc3c9829b0294c2752d4ae9b85a5282aa153da8bba929af87"
+    }
+   ]
+  },
+  {
+   "id": "information-research",
+   "title": "资料搜索与调研",
+   "group": "research",
+   "domains": [
+    "research"
+   ],
+   "stages": [
+    "research"
+   ],
+   "aliases": [
+    "资料搜索",
+    "深度调研",
+    "互联网搜索",
+    "information research"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "只指搜索与研究操作说明；实际MCP mcp.search-core需另外构建和明确加载。"
+   ],
+   "providers": [
+    {
+     "id": "search-core",
+     "fit": "primary",
+     "reason": "说明搜索、研究与focused fetch的已有入口。",
+     "limitations": [
+      "词法候选不是事实/最新版本认证；工具与网络能力必须实际验证。"
+     ],
+     "reviewed_skill_sha256": "32c1ba7745cd03f7b23dfdfbcd75d6902e8a69f2f16abf9f3febc76fb71a9a38"
+    }
+   ]
+  },
+  {
+   "id": "threat-model",
+   "title": "代码安全威胁建模",
+   "group": "security",
+   "domains": [
+    "security"
+   ],
+   "stages": [
+    "research"
+   ],
+   "aliases": [
+    "威胁建模",
+    "threat model"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "仅针对显式请求的代码库安全分析，不用于普通UI设计或架构摘要。"
+   ],
+   "providers": [
+    {
+     "id": "security-threat-model",
+     "fit": "primary",
+     "reason": "正文定义信任边界、攻击面与缓解措施。",
+     "limitations": [
+      "需要代码范围与证据，不保证安全认证或所有语言/运行时覆盖。"
+     ],
+     "reviewed_skill_sha256": "7718bb4d7d9855cdf2e90e920e0cbc489cb24ea55e2f9734fd041c53f1e04f68"
+    }
+   ]
+  },
+  {
+   "id": "business-scheduling",
+   "title": "业务排期与资源预算",
+   "group": "office",
+   "domains": [
+    "workflow"
+   ],
+   "stages": [
+    "plan"
+   ],
+   "aliases": [
+    "业务排期",
+    "资源预算",
+    "business scheduling"
+   ],
+   "coverage": "scoped",
+   "limitations": [
+    "一次性规划不做执行跟踪；估算质量取决于输入需求记录；日历效应须显式输入。"
+   ],
+   "providers": [
+    {
+     "id": "business-scheduling",
+     "fit": "primary",
+     "reason": "独立实现的业务排期/资源预算方法：关键路径+资源争用+预算线，unpriced 不进合计。",
+     "limitations": [
+      "需要确认后的需求记录（business-interviewing 产出）作为输入。"
+     ],
+     "reviewed_skill_sha256": "af5f113ac9be61c7169d2f47f292a6ec1f942f13e592b20867c5756b8c9b6a36"
+    }
+   ]
+  }
+ ]
 }

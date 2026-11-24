@@ -47,9 +47,13 @@
 
 ## 5. 阶段衔接
 
-- G1（技能组与工作流补齐）：优先 G0-1/G0-2/G0-9——先查同源/许可，无法合法复用则独立实现或 BLOCKED；每个优先流程需代表性成功任务+缺依赖/取消/失败交接测试。
-- G2（冲突治理）：先复现 G0-10 及现存冲突（要求子代理 vs 用户禁止、强制全局加载、目录不一致、重复安装、版本不兼容）。
-- G3（来源核验/版本更新/组合兼容）：G0-5/G0-6 逐项核验 + 临时消费项目演练升级/回滚；本任务不授权定时任务/自动更新/自动批准。
+- G1（技能组与工作流补齐）✅ 首轮完成（2026-11-24，issue #4 PR）：
+  - G0-9 → `catalog/workflows/*.json` 有版本工作流契约（business-interview / business-scheduling / engineering-delivery）+ `asset-manager/core/workflows.mjs` 机器校验（schema/DAG 无环/阶段 IO 闭包/工具引用登记/批准门/失败路径），CLI `workflow-list` / `workflow-validate`
+  - G0-1/G0-2 → 独立实现 `business-interviewing` / `business-scheduling` 技能（同源查重后无合法复用，原创内容+模板），catalog/provenance/能力路由齐备；business-scheduling 路线从 coverage=none → scoped（primary 已映射）
+  - 资产基线 137→139；全部 CLI 实测复现（skills-status 125/125、preflight CONTENT_READY、find-capability 命中、CAPABILITIES.md 同步再生成）
+- G2（冲突治理）✅ 首轮完成：`asset-manager/core/conflicts.mjs` + CLI `check-conflicts`——结构层复用 selectionConflicts；语义层候选输出（子代理强制 vs 宿主禁止 / 全局覆盖 / 相对指令矛盾 / 产物目录不一致）带文件/行证据、触发组合、严重度、建议；不可读文件判 unknown 不给假阴性。真实语料回归：pptx/skill-creator 已知子代理要求稳定浮出，注入抵御条款不误报。正反例题集 `tests/fixtures/conflict-corpus/`（11 项测试）
+- G3（来源核验/版本更新/组合兼容）✅ 首轮完成：CLI `check-stale`（部署回执树哈希 + 工作流 provider 映射哈希 vs 当前内容 → STALE/NEEDS_REVIEW，不盲目重算）；演练测试（映射失效/改名删除/新许可限制阻止）；连续回滚/篡改/本地修改保护复用既有 lifecycle 套件。不创建定时任务、不自动更新、不自动批准。
+- 剩余挂账（如实）：G0-3 办公产物完整验收量表、G0-4 厂商资源缺失逐项核对、G0-5 上游身份逐项核验、G0-6 厂商许可复核——需逐项人工/外部核验，不以登记冒充。
 
 ## 6. 复现命令
 

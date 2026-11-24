@@ -1,0 +1,21 @@
+{
+  "sha256": "8538431ce83368a3f0664b749b0098d6db64a209e638d2182af8e410f7b4b2ba",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 3854,
+      "sha256": "af5f113ac9be61c7169d2f47f292a6ec1f942f13e592b20867c5756b8c9b6a36"
+    },
+    {
+      "path": "templates/budget-sheet.md",
+      "bytes": 505,
+      "sha256": "a4a160bbd4af2f443505926bd33fccdbbad524f8d8d65b025ee5844484df298e"
+    },
+    {
+      "path": "templates/schedule-plan.md",
+      "bytes": 955,
+      "sha256": "2fd8b4e9e954fd6edbf1ad4fbecd4d2cb1344343fb885474519dff48175b9a6e"
+    }
+  ],
+  "bytes": 5314
+}

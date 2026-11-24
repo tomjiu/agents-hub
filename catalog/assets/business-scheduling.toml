@@ -1,0 +1,20 @@
+id = "business-scheduling"
+kind = "skills"
+path = "skills/individual/document/business-scheduling"
+
+[source]
+kind = "local"
+url = "https://git.mingjiu.store/sandbox/agents-hub"
+license = "review-required"
+upstream_identity_status = "self-maintained"
+
+[version]
+upstream = "self-maintained"
+local = "1.0.0"
+commit = ""
+sha256 = "8538431ce83368a3f066b4070796de51a5c2d4e2a19d1cbe573a25c7ea53a556"
+enabled = false
+
+[discovery]
+description = "业务排期与资源预算：从确认需求记录构建有界窗口的时间线/关键路径/预算表，unpriced 项不进合计，装不下如实说。"
+aliases = [ "业务排期", "资源预算", "排期计划", "预算编制", "business scheduling" ]
