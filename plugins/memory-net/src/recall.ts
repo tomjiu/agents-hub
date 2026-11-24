@@ -80,13 +80,15 @@ export function recallForTask(
   type Row = { id: string; kind: string; text: string; status: string; run_id: string | null; task_id: string | null; payload: Record<string, unknown>; based_on: string[] }
   const rows = net.nodesForProjection() as unknown as Row[]
   const explanations: RecallExplanation[] = []
+  // 增长治理（100k 基准红灯修复）：按 id 索引行，候选/需复核核验不再线性扫描全量投影。
+  const rowById = new Map(rows.map(r => [r.id, r] as const))
 
   interface Scored { node: MemoryNode; role: RecallRole; score: number; order: number }
   const scored: Scored[] = []
   let order = 0
 
   const fakeGet = (id: string): MemoryNode | null => {
-    const r = rows.find(x => x.id === id)
+    const r = rowById.get(id) ?? null
     if (!r) return null
     return { id: r.id, kind: r.kind as MemoryNode['kind'], text: r.text, status: r.status as MemoryNode['status'], payload: r.payload, based_on: r.based_on ?? [], run_id: r.run_id, task_id: r.task_id } as MemoryNode
   }
@@ -172,6 +174,9 @@ export function recallForTask(
   })
 
   // 预算裁剪：约束与当次进度保护不裁光。
+  // 增长治理（100k 基准红灯修复）：explanation 用 Map 索引，避免每个落选节点线性扫描
+  // 全量 explanations（95k 节点 × 数千入选条目 = 数秒级退化，见 catalog/audit/memory-growth-100k.json）。
+  const explanationById = new Map(explanations.map((e, i) => [e.node_id, i] as const))
   const kept: Scored[] = []
   let tokens = 0
   let protectedCount = 0
@@ -184,8 +189,8 @@ export function recallForTask(
         kept.push(s); tokens += t; protectedCount++
         continue
       }
-      const e = explanations.find(x => x.node_id === s.node.id)
-      if (e) { e.included = false; e.reason = `预算裁剪（budget：max_nodes=${maxNodes}/max_tokens=${maxTokens}）` }
+      const eIndex = explanationById.get(s.node.id)
+      if (eIndex !== undefined) { const e = explanations[eIndex]!; e.included = false; e.reason = `预算裁剪（budget：max_nodes=${maxNodes}/max_tokens=${maxTokens}）` }
       continue
     }
     if (isProtected) protectedCount++

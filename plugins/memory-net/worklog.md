@@ -156,3 +156,17 @@ Work Log:
 Stage Summary:
 - 会话 15（仓 C）✅：读面默认序索引落地，console vendor 同会话已钉本 sha
 - 下一步：auto-observe 观测质量实机观察调参；或新队列
+
+Task ID: 16 (issue #2 终验轮)
+Agent: 主 agent (sandbox-agent)
+Task: 跨进程恢复同一持久会话终验 + 100k 增长基准红灯修复 + 多任务 A/B + 指纹重验
+
+Work Log:
+- probe-memory-resume.mjs（新）：进程1 写 tip/自动观测后退出，进程2 --session-id 恢复同一持久会话，首个动作 recall 必须含先前 tip、raw 必须含先前自动观测；rc.1/rc.5 × adapter 直连/生成 session 默认运行包四场景全 PASS（单一 scope 目录、归属稳定、main 不创建、运行包 verifyDshBundle 状态增长后仍通过）
+- growth-benchmark.mjs（新）：100k 节点 ledger+evidence 全开基准——红灯：recallForTask 命中查询 p95 7305.9ms 超界（预算裁剪对每个落选节点线性扫描 explanations + fakeGet 线性扫描 rows）；recall.ts 改 Map 索引后 p95 562.2ms（13 倍），109/109 全绿；审计 memory-growth-100k.json
+- multitask-ab.mjs（新）：固定 6 任务/噪音题集，精选臂 vs 最新优先原始臂——有效召回 0.33 vs 0、错误记忆 48 vs 60、漏召回 24 vs 36；如实记录共享库约束冻结挤占预算特性（会话模式天然有界）；审计 memory-multitask-ab.json
+- 指纹重验：M3+M4 与 recall 修复改变 assets 指纹，session-context（candidates+cache）+ dsh-host 两版宿主全链路重跑 PASS，登记验收 #51/#52，check-dsh rc.1/rc.5 均 VERIFIED；npm latest 复查仍 rc.5（alpha 通道不跟踪）
+- 覆盖矩阵 PROVENANCE-M0-MATRIX.md M2-M4+终验行全部标记完成；memory-final-acceptance.json 汇总
+
+Stage Summary:
+- issue #2 必须验收清单中可离线/本环境可验项全部闭合；Windows 宿主复验与真实模型多任务 A/B 仍需用户本机/授权（如实挂账）

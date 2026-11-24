@@ -28,11 +28,11 @@
 | 崩溃部分发布 | M1 | 多步变更（覆盖+推翻联动、候选核验+状态变更）大多已入事务，但账本缺失使"同事务提交"不可审计 |
 | 导出含历史/敏感删除 | M1 | schema1 导出仅当前态；无 sidecar 迁移/备份回滚/降级拒绝；无脱敏失效关联（purge 保护闭包会阻止删除被引用的敏感观测，"不可变"挡住用户删除） |
 | ~~宿主会话/代码版本绑定~~ | M2 ✅ | 已落地（evidence.ts + bridge + 21 测试）：code_states/source_refs/evidence_validations 增量表；captured/event_linked/persisted_unknown 三态；digest-only 桥接脱敏；verifyEvidence 无关不失效/同内容不证伪/相关 needs_review 原证据可定位；见 M2 计划与 memory-provenance-m2.json |
-| 候选自动提炼 | M3 | 事件→候选仅有模型显式 propose；无可配置/有界/可取消的提炼器；无 Console 审核界面实际点击闭环 |
-| 任务驱动精选 | M3 | 精选排除已做，但无按 op/revision 或证据的检索面；无入选/排除/需复核解释 |
-| 跨会话授权 | M4 | 业务任务身份与 session 未分离；同项目跨会话共享无显式 grant；无分 scope 导出/撤销 |
-| 隐私治理 | M4 | 无白名单捕获、敏感字段清理、保留/归档策略、证据 pin；导出默认含全 payload |
-| 运行包/跨进程验收 | 终验 | 生成包默认 session 模式，HUB_DSH_BUNDLE_TEST 预置 shared 库不注入（46 条登记 0 条 bundle_test:true）；跨进程恢复同一持久会话未验收 |
+| 候选自动提炼 | M3 ✅ | 已落地（distill.ts）：有界/可取消/默认离线 fixture 提取器、队列/每 run/token 预算、失败不阻断原工具；Console 审核面真实点击闭环（probe-console-ui.mjs）；自动产物仅 pending |
+| 任务驱动精选 | M3 ✅ | 已落地（recall.ts）：角色分层+词法可解释打分+逐节点入选/排除/预算裁剪理由；100k 增长基准下 Map 索引修复 p95 7.3s→0.56s；多任务 A/B 定量优于最新优先原始臂 |
+| 跨会话授权 | M4 ✅ | 已落地（grants.ts）：task_id≠session 显式 grant 注册表、scope/TTL/撤销、readGranted 脱敏只读投影，默认拒绝；见 memory-provenance-m2.json M3+M4 段 |
+| 隐私治理 | M4 ✅ | 已落地（privacy.ts）：读取边界脱敏（字段黑名单+密钥形态正则）、副本脱敏不改原件、GC 证据闭包验证；见 memory-provenance-m2.json M3+M4 段 |
+| 运行包/跨进程验收 | 终验 ✅ | 已验收（memory-final-acceptance.json）：rc.1/rc.5 × adapter 直连/生成 session 默认运行包四场景，同 session 跨进程恢复、首查含先前 tip、raw 含先前自动观测、单一 scope 目录、归属稳定；100k 增长基准红灯→绿灯（recall p95 7.3s→0.56s）；固定题集多任务 A/B 精选臂全指标优于最新优先原始臂 |
 
 ## 3. 迁移风险
 
