@@ -1,0 +1,49 @@
+{
+ "schema": 1,
+ "status": "IMPLEMENTED",
+ "at": "2026-11-24",
+ "task": "Issue #3 S1-S4 goals landed on the Go-first implementation (branch work-issue3, from search-go-g0 7a23a2f)",
+ "environment": { "platform": "Linux cloud sandbox", "go": "go1.25.0", "tests": "262 pass (249 pre-existing + 13 new), go vet clean, -race clean on new suites", "builds": "linux CGO_ENABLED=0 / windows amd64 / darwin arm64 all pass" },
+ "s1_global_budget_and_early_completion": {
+  "evidence_aware_harvest": "early harvest now requires settled>=60% AND totalRefs>=15 AND relevantRefs>=SC_EARLY_HARVEST_MIN_RELEVANT (default 5, 0=legacy count-only); few lexical hits or word-overlap refs no longer auto-complete the task",
+  "red_found_and_fixed": "REAL scheduling regression found by the red test: when enough became true via settle events, nextEdge jumped to the soft deadline so early harvest NEVER fired (all legs were awaited); fixed by always scheduling the min(harvestMs, softMs) edge with enough re-evaluated at the edge, restoring TS 25ms-polling semantics",
+  "insufficiency_diagnosis": "meta.harvest carries {early, settledLegs/totalLegs, abortedPending, relevantRefs/minRelevant, totalRefs, softDeadlineMs}; deadline expiry with insufficient evidence sets meta.harvest.insufficient=true plus a diagnosis string — obtained candidates are still returned, no indefinite rescue",
+  "tests": ["TestEarlyHarvestRequiresRelevantEvidence (red: 15+ irrelevant refs + 60% settled must NOT early-return)", "TestEarlyHarvestFiresWithRelevantEvidence (fires ~80ms, 2 slow legs aborted)", "TestDeadlineExpiryReturnsInsufficiencyDiagnosis"]
+ },
+ "s2_engine_health_rate_limit_recovery": {
+  "retry_after": "429 responses now carry '(retry-after: Ns)' from the engine lanes (searxng loop, keenable, bingrss via retryAfterSuffix; HTTP-date form honestly ignored); the breaker cooldown takes max(policy, retry-after) bounded by the 1h cap — no retry storms against a server-declared backoff",
+  "negative_cache_safety": "degraded or empty outputs are no longer written to the search cache (cache_skip_negative journal event); a temporary failure can never surface as a long-term no-results answer; cache hits re-run the evidence gate so policy drift cannot bypass it (cache_bypass_evidence journal event)",
+  "tests": ["TestRetryAfterMsOf", "TestRetryAfterSuffix", "TestBreakerCooldownRespectsRetryAfter (29s window open / 59min open / 61min closed for a 99999s retry-after)", "TestNegativeResultsNotCached", "TestCacheHitReGatesStaleRefs"]
+ },
+ "s3_semantic_quality_sources_versions": {
+  "evidence_gate_v2": "lexical-evidence-v2 ported from TS v1 and strengthened: NFKC + operator/URL stripping + generic-term filter + light plural folding (recipes->recipe) + 50% evidence floor (TS v1 stays at 40%); S0-F2 reproduced red: query 'python list comprehension recipes cooking' accepted pure cooking pages at 40% (2/5 terms) — v2 rejects them while keeping python pages (3/5); TS side recorded as follow-up",
+  "version_applicability": "meta.quality.versionCheck flags refs whose title/URL major version differs from an explicit query version (annotation only, never dropped) — old-version/experimental-branch answers are visible as such",
+  "source_mix": "meta.quality.sourceMix counts official/community/unknown from the authority layer for transparent diagnosis",
+  "domain_cap": "SC_DOMAIN_CAP env override for source diversity (0=off); topic-derived defaults preserved",
+  "tests": ["TestEvidenceGateRejectsWordOverlapIrrelevant", "TestEvidenceGateAllIrrelevant (no_relevant_results transparency)", "TestEvidenceGateOperatorsNotEvidence", "TestEvidenceGateCJK", "TestVersionSignalsFlagsDifferentMajor", "TestVersionSignalsNoQueryVersion", "TestSourceMixCounts"]
+ },
+ "s4_focused_fetch_reliability": {
+  "shell_rejection": "classifyPageShell (login_wall / js_shell / consent_wall; conservative: <600 runes extracted text + strong phrase markers) plus raw-body js-shell detection before extraction; shell pages return Blocked + a transparent refusal note — never a fabricated body; shell pages are cached to avoid repeat outbound hits, and cached shells are re-classified and rejected on every read",
+  "status_rejection": "fetchExtract now rejects non-2xx statuses with a transparent 'http N' error (previously a 403 with an HTML body could be extracted as if it were an article); the DOI/OA fallback chain triggers on the explicit status error, covering all 403s instead of only empty extractions",
+  "fetch_transparency": "FetchResult records via (direct/crates-api/oa-landing), original URL, final URL and fromCache; journal fetch_done includes url/finalUrl/via/textLength/fromCache — cache reuse is never reported as current network success",
+  "tests": ["TestFetcherRejectsLoginWall", "TestFetcherRejectsJsShell", "TestFetcherRejectsConsentWall", "TestFetcherNormalPagePasses", "TestFetcherCacheHitTransparency", "TestFetcherCachedShellStillRejected", "TestFetcher403Transparent"]
+ },
+ "cli_contract_fix": "cmdSearch previously ignored --engines entirely (EnginesSet never set — a real defect found while live-testing); now the user list constrains all routes and an explicit empty list is the zero-request contract, matching the MCP path",
+ "public_network_retest_2026_11_24": {
+  "method": "built linux binary, per-engine isolated runs with fresh SC_DATA_DIR, SC_NO_CACHE=1",
+  "duckduckgo": "FAILED (egress/202 soft-block persists — consistent with G2-PROTOCOL-NOTES)",
+  "mojeek": "FAILED (egress blocked)",
+  "yahoo": "FAILED (egress/500)",
+  "bingrss": "connected; quality gate honestly returned no_relevant_results for the test query (q-echo rewrite rejection working as designed)",
+  "keenable": "PASS — 6 refs candidate_results; CJK query 'SQLite WAL 并发写入' returned 2 relevant refs with 12 word-overlap refs honestly rejected (insufficient_query_evidence)",
+  "honesty": "single-sample reachability evidence, not a public-web quality certification; full SERP A/B remains blocked pending a reachable environment"
+ },
+ "regression": { "go": "go test ./... 262/262, go vet clean, go test -race clean on new suites", "ts": "unchanged this PR (write scope: go/** per issue #3 Go-first decision)" },
+ "remaining_known_limits": [
+  "public SERP A/B relevance comparison (S3/S4) needs a reachable environment — sandbox egress still blocks DDG/Mojeek/Yahoo",
+  "rerank live-fire needs -tags onnx plus model assets",
+  "Windows host DSH acceptance needs a Windows machine (cross-compiles verified)",
+  "TS side still at lexical-evidence-v1 (40% floor) — v2 (plural fold + 50%) recorded as TS follow-up in the compat matrix"
+ ],
+ "independence": "No subagents; no auto-merge; memory plugin untouched; no live Web/profile changes; no SSRF/TLS guard weakened for tests (SSRF semantics covered separately in governor tests; fetcher S4 tests use the repo-standard stub-transport pattern)"
+}

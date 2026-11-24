@@ -102,11 +102,22 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		if hit := cache.GetSearch(cacheKey, 900); hit != nil {
 			var out Output
 			if json.Unmarshal(hit, &out) == nil && out.Query != "" {
-				out.Meta.FromCache = true
-				out.ElapsedMs = time.Since(t0).Milliseconds()
-				cache.KvIncr("stat:search_cache_hit", 1)
-				cache.Close()
-				return out
+				// S3 (issue #3): 缓存命中重跑证据门 — 旧记录/策略漂移不得绕过
+				// (TS engine.ts 命中证据检查对齐; 有拒绝 → 当未命中, 走活查)。
+				reGated, reQuality, reKept := applyEvidenceGate(opts.Query, []laneResult{{Name: "cache", Refs: out.Refs}})
+				if reQuality.Rejected == 0 && (reQuality.Evaluated == 0 || reKept > 0 || len(out.Refs) == 0) {
+					out.Refs = refsOf(reGated)
+					if reQuality.Evaluated > 0 {
+						qm := reQuality
+						out.Meta.Quality = &qm
+					}
+					out.Meta.FromCache = true
+					out.ElapsedMs = time.Since(t0).Milliseconds()
+					cache.KvIncr("stat:search_cache_hit", 1)
+					cache.Close()
+					return out
+				}
+				journal.Write("cache_bypass_evidence", map[string]any{"rejected": reQuality.Rejected})
 			}
 		}
 		cache.KvIncr("stat:search_total", 1)
@@ -245,9 +256,18 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 	// 语义与 TS 25ms 轮询逐条对齐: 60% 腿 + refs>=15 早收割, 软截止无条件兜底)
 	ht0 := time.Now()
 	minRefs := 15
+	// S1 (issue #3): 早收割从"纯计数"改为"足够相关证据"——
+	// 少量词命中/词重合但无关的 refs 不再自动认为任务完成(不无限抢救, 软截止仍兜底)。
+	// SC_EARLY_HARVEST_MIN_RELEVANT=0 回退旧纯计数语义。
+	minRelevant := 5
+	if v := os.Getenv("SC_EARLY_HARVEST_MIN_RELEVANT"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil && n >= 0 {
+			minRelevant = n
+		}
+	}
 	degradedEarly := false
 	settledCount := 0
-	snapshot := func() (pending, totalRefs int) {
+	snapshot := func() (pending, totalRefs, relevantRefs int) {
 		mu.Lock()
 		defer mu.Unlock()
 		for i := 0; i < attempted; i++ {
@@ -256,19 +276,30 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 			}
 			for _, lr := range slots[i].results {
 				totalRefs += len(lr.Refs)
+				for _, r := range lr.Refs {
+					if minRelevant == 0 {
+						break // 旧语义: 不做相关性评估
+					}
+					if relevanceEvidence(opts.Query, r).Accepted {
+						relevantRefs++
+					}
+				}
 			}
 		}
-		return pending, totalRefs
+		return pending, totalRefs, relevantRefs
 	}
 	for settledCount < attempted {
-		pending, totalRefs := snapshot()
+		pending, totalRefs, relevantRefs := snapshot()
 		if pending <= 0 {
 			break // 全部结算, 正常出
 		}
 		elapsed := time.Since(ht0).Milliseconds()
-		enough := (attempted-pending) >= int(math.Ceil(float64(attempted)*0.6)) && totalRefs >= minRefs
+		// S1 修复: earlyHarvest 边缘必须始终排程(min(harvestMs, softMs)),
+		// 语义对齐 TS 25ms 轮询 — 足够与否在边缘重估, 而不是在这里短路。
+		// 旧代码在 enough 变真后把 nextEdge 推到软截止, 导致早收割永不触发(红灯:
+		// TestEarlyHarvestFiresWithRelevantEvidence 全腿等到 5s 才结算)。
 		nextEdge := int64(softMs)
-		if harvestMs > 0 && !enough {
+		if harvestMs > 0 {
 			nextEdge = int64(math.Min(float64(harvestMs), float64(softMs)))
 		}
 		waitMs := nextEdge - elapsed
@@ -282,12 +313,13 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		case <-time.After(time.Duration(waitMs) * time.Millisecond):
 		}
 		// 边缘到点: 重估收割条件
-		pending, totalRefs = snapshot()
+		pending, totalRefs, relevantRefs = snapshot()
 		if pending <= 0 {
 			break // 全部结算, 正常出
 		}
 		elapsed = time.Since(ht0).Milliseconds()
-		enough = (attempted-pending) >= int(math.Ceil(float64(attempted)*0.6)) && totalRefs >= minRefs
+		enough := (attempted-pending) >= int(math.Ceil(float64(attempted)*0.6)) && totalRefs >= minRefs &&
+			(minRelevant == 0 || relevantRefs >= minRelevant)
 		if harvestMs > 0 && elapsed >= int64(harvestMs) && enough {
 			degradedEarly = true
 			break // 早收割
@@ -310,6 +342,34 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		}
 	}
 	mu.Unlock()
+	// S1 (issue #3): 收割诊断 — 早返是否触发、软截止到期时证据是否不足。
+	// 质量不够但 deadline 到期 → 已得候选 + insufficient 诊断, 不无限抢救。
+	harvestTotalRefs, harvestRelevantRefs := 0, 0
+	for _, lr := range lanes {
+		harvestTotalRefs += len(lr.Refs)
+		if minRelevant == 0 {
+			continue
+		}
+		for _, r := range lr.Refs {
+			if relevanceEvidence(opts.Query, r).Accepted {
+				harvestRelevantRefs++
+			}
+		}
+	}
+	harvestMeta := &HarvestMeta{
+		SettledLegs: attempted - len(failedTimeout), TotalLegs: attempted,
+		AbortedPending: len(failedTimeout), RelevantRefs: harvestRelevantRefs,
+		MinRelevant: minRelevant, TotalRefs: harvestTotalRefs, SoftDeadlineMs: softMs,
+	}
+	if degradedEarly {
+		harvestMeta.Early = true
+	}
+	if len(failedTimeout) > 0 && minRelevant > 0 && harvestRelevantRefs < minRelevant {
+		harvestMeta.Insufficient = true
+		harvestMeta.Diagnosis = fmt.Sprintf(
+			"deadline %dms reached with insufficient relevant evidence: %d/%d relevant refs (min %d), %d/%d legs settled, %d aborted; returning obtained candidates instead of rescuing indefinitely",
+			softMs, harvestRelevantRefs, harvestTotalRefs, minRelevant, attempted-len(failedTimeout), attempted, len(failedTimeout))
+	}
 	if len(failedTimeout) > 0 {
 		journal.Write("soft_deadline", map[string]any{
 			"aborted": len(failedTimeout), "softMs": softMs, "earlyHarvest": degradedEarly,
@@ -332,6 +392,17 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		}
 		fmt.Fprintf(os.Stderr, "[debug] laneResults=%d totalRefs=%d route=%s\n", len(lanes), nRefs, decision.route)
 	}
+	// S3 (issue #3): 词法证据门 — 融合前过滤词重合但无关结果 (S0-F2, TS lexical-evidence 对齐+加强)。
+	// 诚实边界: 保守词法证据下限, 不是语义相关性或事实核验; 被拒条目计入 quality meta 透明返回。
+	gatedLanes, qualityMeta, relevantKept := applyEvidenceGate(opts.Query, lanes)
+	if qualityMeta.Evaluated > 0 {
+		qualityMeta.VersionCheck = versionSignals(opts.Query, refsOf(gatedLanes))
+		qualityMeta.SourceMix = sourceMix(refsOf(gatedLanes))
+	}
+	journal.Write("quality_gate", map[string]any{
+		"policy": qualityMeta.Policy, "evaluated": qualityMeta.Evaluated,
+		"rejected": qualityMeta.Rejected, "relevant": relevantKept, "reasons": qualityMeta.Reasons,
+	})
 	if scak := os.Getenv("SC_AUTHORITY_JSON"); scak != "" {
 		mergeExternalAuthority(scak)
 	}
@@ -344,7 +415,14 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 			domainCap = 0
 		}
 	}
-	refs, meta := fuseSemantic(lanes, fuseOpts{
+	// S3 (issue #3): domain cap 可调 — SC_DOMAIN_CAP 覆盖默认(0=关),
+	// 来源多样性/单一权威域名上限由调用方显式控制。
+	if v := os.Getenv("SC_DOMAIN_CAP"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil && n >= 0 {
+			domainCap = n
+		}
+	}
+	refs, meta := fuseSemantic(gatedLanes, fuseOpts{
 		query: opts.Query, topN: opts.TopN,
 		category:        detectCategory(opts.Query),
 		communityIntent: detectCommunityIntent(opts.Query),
@@ -387,6 +465,13 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		Poc:       "go-port P4: 44 lanes + planner + authority v3 + semantic fusion + governor(SSRF/budget/domain) + focus fetcher + journal + breaker2.0 + REST/MCP exits",
 		Meta:      OutputMeta{SpamBlocked: meta.SpamBlocked, AuthorityGuarded: meta.AuthorityGuarded, DedupMerged: meta.DedupMerged, Embedder: meta.Embedder},
 	}
+	if qualityMeta.Evaluated > 0 {
+		qm := qualityMeta
+		out.Meta.Quality = &qm
+	}
+	if harvestMeta != nil {
+		out.Meta.Harvest = harvestMeta
+	}
 	if out.Refs == nil {
 		out.Refs = []Reference{}
 	}
@@ -395,8 +480,16 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		out.Meta.Degraded = true
 	}
 	if cache != nil {
-		if raw, err := json.Marshal(out); err == nil {
-			cache.PutSearch(cacheKey, raw)
+		// S2 (issue #3): 临时失败不负缓存 — degraded/空结果不入缓存,
+		// 避免"长期无结果"假象; 完整响应才缓存(引用预算与完整响应一致)。
+		if !out.Meta.Degraded && len(out.Refs) > 0 {
+			if raw, err := json.Marshal(out); err == nil {
+				cache.PutSearch(cacheKey, raw)
+			}
+		} else {
+			journal.Write("cache_skip_negative", map[string]any{
+				"degraded": out.Meta.Degraded, "refs": len(out.Refs), "failed": len(out.EnginesFailed),
+			})
 		}
 		cache.Close()
 	}
@@ -486,7 +579,10 @@ func cmdSearch(rest []string) {
 		freshness = "any"
 	}
 	var engList []string
-	if e := flags["engines"]; e != "" && e != "true" {
+	enginesSet := false
+	if e, given := flags["engines"]; given && e != "true" {
+		// 显式空名单(--engines "")= 零请求契约(MCP 同款); 无值(--engines)视为未提供
+		enginesSet = true
 		for _, x := range strings.Split(e, ",") {
 			if x = strings.TrimSpace(x); x != "" {
 				engList = append(engList, x)
@@ -495,7 +591,7 @@ func cmdSearch(rest []string) {
 	}
 	opts := SearchOpts{
 		Query: query, Lang: flags["lang"], TopN: topn, MaxResults: 10,
-		Engines: engList, TimeoutMs: timeout, Freshness: freshness,
+		Engines: engList, EnginesSet: enginesSet, TimeoutMs: timeout, Freshness: freshness,
 	}
 	out := searchFlow(opts, timeout)
 	if flags["json"] == "true" {

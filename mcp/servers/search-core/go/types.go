@@ -51,12 +51,30 @@ type Output struct {
 }
 
 type OutputMeta struct {
-	SpamBlocked      int    `json:"spamBlocked"`
-	AuthorityGuarded int    `json:"authorityGuarded"`
-	DedupMerged      int    `json:"dedupMerged"`
-	Embedder         string `json:"embedder"`
-	FromCache        bool   `json:"fromCache,omitempty"`
-	Degraded         bool   `json:"degraded,omitempty"`
+	SpamBlocked      int          `json:"spamBlocked"`
+	AuthorityGuarded int          `json:"authorityGuarded"`
+	DedupMerged      int          `json:"dedupMerged"`
+	Embedder         string       `json:"embedder"`
+	FromCache        bool         `json:"fromCache,omitempty"`
+	Degraded         bool         `json:"degraded,omitempty"`
+	Quality          *QualityMeta `json:"quality,omitempty"` // S3: 词法证据门 (lexical-evidence-v2)
+	Harvest          *HarvestMeta `json:"harvest,omitempty"` // S1: 收割诊断 (早返/软截止/证据充足性)
+}
+
+// HarvestMeta S1 全局预算与提前完成的透明诊断:
+// 早收割条件(60% 腿结算 + 总 refs≥15 + 相关 refs≥minRelevant)是否满足、
+// 软截止到期时证据是否不足(不足 → 已得候选 + insufficient 诊断, 不无限抢救)。
+type HarvestMeta struct {
+	Early          bool   `json:"early,omitempty"`
+	SettledLegs    int    `json:"settledLegs"`
+	TotalLegs      int    `json:"totalLegs"`
+	AbortedPending int    `json:"abortedPending,omitempty"`
+	RelevantRefs   int    `json:"relevantRefs"`
+	MinRelevant    int    `json:"minRelevant"`
+	TotalRefs      int    `json:"totalRefs"`
+	SoftDeadlineMs int    `json:"softDeadlineMs"`
+	Insufficient   bool   `json:"insufficient,omitempty"`
+	Diagnosis      string `json:"diagnosis,omitempty"`
 }
 
 // clampText 对齐 TS clampText: 按 rune 截断
