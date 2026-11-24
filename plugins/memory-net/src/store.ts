@@ -42,6 +42,7 @@ import {
 import {curationReason} from './curation.js'
 import {candidateMeta,candidateReason,eventDigest,claimDigest,referenceIds,validateEvent,digest,type CandidateInput,type CandidateReview,type CandidateMeta} from './candidates.js'
 import {attachLedger,exportLedger,importLedgerRows,backupWorkspace,type Ledger,type LedgerPackage,type OperationInput,type RevisionSnapshot,type FullMemoryPackage} from './ledger.js'
+import {attachEvidence,type EvidenceStore,type CodeStateInput,type CodeStateRecord,type EvidenceBindingInput,type SourceRefRecord,type VerificationResult,type SourceRefExport} from './evidence.js'
 
 /** 写纪律矩阵（v1 写死）。 */
 const KIND_ALLOWED_ROLES: Record<Exclude<NodeKind, 'progress'>, readonly Role[]> = {
@@ -120,14 +121,17 @@ export class MemoryNet {
   readonly workspaceId: string
   /** schema2 溯源账本（未挂载为 null）。 */
   readonly ledger: Ledger | null
+  /** M2 证据存储（账本挂载时同步挂载；未挂载为 null）。 */
+  readonly evidence: EvidenceStore | null
   private readonly wsDir: string
 
-  private constructor(dbo: OpenedDb, opts: Required<Pick<OpenOpts, 'agentId' | 'role'>>, wsDir: string, ledger: Ledger | null) {
+  private constructor(dbo: OpenedDb, opts: Required<Pick<OpenOpts, 'agentId' | 'role'>>, wsDir: string, ledger: Ledger | null, evidence: EvidenceStore | null) {
     this.dbo = dbo
     this.agentId = opts.agentId
     this.role = opts.role
     this.workspaceId = dbo.workspaceId
     this.ledger = ledger
+    this.evidence = evidence
     this.wsDir = wsDir
   }
 
@@ -143,15 +147,17 @@ export class MemoryNet {
     }
     const dbo = openWorkspaceDb(wsDir, { workspaceId: opts?.workspaceId })
     let ledger: Ledger | null = null
+    let evidence: EvidenceStore | null = null
     if (opts?.ledger) {
       try {
         ledger = attachLedger(dbo.db, wsDir)
+        evidence = attachEvidence(dbo.db)
       } catch (e) {
         dbo.db.close()
         throw e
       }
     }
-    return new MemoryNet(dbo, { agentId, role }, wsDir, ledger)
+    return new MemoryNet(dbo, { agentId, role }, wsDir, ledger, evidence)
   }
 
   close(): void {
@@ -251,6 +257,7 @@ export class MemoryNet {
     }
     this.assertCanWrite(kind)
     if(this.role!=='host' && Object.hasOwn(input.payload??{},'memory_candidate'))throw new WorkspaceError('memory_candidate is reserved host metadata')
+    if(input.evidence!==undefined && this.role==='model')throw new WorkspaceError('evidence is reserved host/tool metadata：模型不可夹带证据绑定')
     const text = String(input.text ?? '')
     if (!text.trim() && kind !== 'constraint') {
       throw new WorkspaceError(`${kind} 的 text 不能为空`)
@@ -325,6 +332,22 @@ export class MemoryNet {
         this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(id)))
         for (const changed of affected) {
           this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(changed)))
+        }
+        if (input.evidence !== undefined && this.evidence) {
+          // 坐标合并：事件坐标在 provenance 上时，证据绑定继承同一坐标（显式传入优先）。
+          const mergedEvidence = {
+            ...input.evidence,
+            session_id: input.evidence.session_id ?? input.provenance?.session_id ?? null,
+            durable_event_seq: input.evidence.durable_event_seq ?? input.provenance?.durable_event_seq ?? null,
+            call_id: input.evidence.call_id ?? input.provenance?.call_id ?? null,
+            root_call_id: input.evidence.root_call_id ?? input.provenance?.root_call_id ?? null,
+          }
+          this.evidence.bind(id, this.ledger.headRevision(id), mergedEvidence, this.agentId)
+          // 绑定与写入同事务；bind 操作复用会话坐标但不占持久事件序号（NULL 与 add op 不冲突）。
+          this.ledger.recordOperation(this.opInput('bind', `bind:${id}->${input.evidence.code_state_id}`, {
+            session_id: mergedEvidence.session_id, call_id: mergedEvidence.call_id,
+            root_call_id: mergedEvidence.root_call_id,
+          }))
         }
       }
       return id
@@ -948,14 +971,24 @@ export class MemoryNet {
   exportFullPkg(): FullMemoryPackage {
     if (!this.ledger) throw new WorkspaceError('账本未挂载：exportFullPkg 需要 open({ledger:true})')
     const base = this.exportPkg()
-    return { ...base, schema_version: 2, ledger: exportLedger(this.db, this.ledger.workspaceInstanceId) }
+    const ledgerPkg = exportLedger(this.db, this.ledger.workspaceInstanceId)
+    // M2：证据存在时导 v3 包（旧二进制显式拒绝，不静默丢证据）；无证据保持 v2 形状。
+    if (this.evidence && this.evidence.hasEvidence()) {
+      ledgerPkg.schema_version = 3
+      ledgerPkg.evidence = this.evidence.exportEvidence()
+      return { ...base, schema_version: 3, ledger: ledgerPkg }
+    }
+    return { ...base, schema_version: 2, ledger: ledgerPkg }
   }
 
   /** schema2 全量导入：memory 部分 + 账本在同一事务内原子发布；目标非空拒绝。
    *  旧入口 importPkg（仅认 schema_version=1）遇到 v2 包会明确报错——降级打开被拒绝。 */
   static importFullPkg(pkg: FullMemoryPackage, toDir: string, opts?: { agentId?: string; role?: Role }): MemoryNet {
-    if (pkg.schema_version !== 2) {
-      throw new WorkspaceError(`importFullPkg 需要 schema_version 2，得到: ${String(pkg.schema_version)}`)
+    if (pkg.schema_version !== 2 && pkg.schema_version !== 3) {
+      throw new WorkspaceError(`importFullPkg 需要 schema_version 2 或 3，得到: ${String(pkg.schema_version)}`)
+    }
+    if (pkg.schema_version === 3 && !pkg.ledger.evidence) {
+      throw new WorkspaceError('schema_version 3 包缺少 evidence 节（损坏或被裁剪的包）')
     }
     const net = MemoryNet.open(toDir, { workspaceId: pkg.workspace_id, agentId: opts?.agentId, role: opts?.role, ledger: true })
     try {
@@ -984,6 +1017,9 @@ export class MemoryNet {
         insertTrail.run(t.run_id, t.seq, t.agent_id, t.action, JSON.stringify(t.refs), t.ts, t.compressed ? 1 : 0)
       }
       importLedgerRows(net.db, pkg.ledger)
+      if (pkg.schema_version === 3 && pkg.ledger.evidence) {
+        net.evidence!.importEvidence(pkg.ledger.evidence)
+      }
       net.db.exec('COMMIT')
       return net
     } catch (e) {
@@ -995,6 +1031,88 @@ export class MemoryNet {
       net.close()
       throw e
     }
+  }
+
+  // ---------------------------------------------------------------- M2 evidence API
+
+  /** 捕获代码状态（host/tool；声明式：只记录实际观测，缺=unknown 不补造）。 */
+  captureCodeState(input: CodeStateInput): CodeStateRecord {
+    const ev = this.requireEvidence('captureCodeState')
+    this.assertEvidenceRole('captureCodeState')
+    return this.txn(() => {
+      const rec = ev.capture(input, this.agentId)
+      this.ledger!.recordOperation(this.opInput('capture', `capture:${rec.code_state_id} ${rec.completeness}/${rec.git_status} files=${Object.keys(rec.files).length}`))
+      return rec
+    })
+  }
+
+  getCodeState(id: string): CodeStateRecord | null {
+    return this.evidence ? this.evidence.getCodeState(id) : null
+  }
+
+  /** 绑定节点 → 代码状态 + 事件坐标 + 文件摘要（host/tool；追加式，旧绑定可定位）。 */
+  bindEvidence(nodeId: string, input: EvidenceBindingInput): SourceRefRecord {
+    const ev = this.requireEvidence('bindEvidence')
+    this.assertEvidenceRole('bindEvidence')
+    return this.txn(() => {
+      this.assertExists(nodeId)
+      const ref = ev.bind(nodeId, this.ledger!.headRevision(nodeId), input, this.agentId)
+      this.ledger!.recordOperation(this.opInput('bind', `bind:${nodeId}->${ref.code_state_id}`, {
+        session_id: input.session_id ?? null, durable_event_seq: input.durable_event_seq ?? null,
+        call_id: input.call_id ?? null, root_call_id: input.root_call_id ?? null,
+      }))
+      return ref
+    })
+  }
+
+  /** 当前生效证据绑定。 */
+  evidenceOf(nodeId: string): SourceRefRecord | null {
+    return this.evidence ? this.evidence.currentRef(nodeId) : null
+  }
+
+  /** 全部绑定历史（原证据可定位）。 */
+  evidenceHistory(nodeId: string): SourceRefRecord[] {
+    return this.evidence ? this.evidence.refHistory(nodeId) : []
+  }
+
+  /** 核验证据（host/tool）：related change → needs_review（追加标记修订，原证据保留）；
+   *  无关变化不失效；同内容（含行尾归一）不证伪；当前态不可得 → unknown。 */
+  verifyEvidence(nodeId: string, currentCodeStateId: string): VerificationResult {
+    const ev = this.requireEvidence('verifyEvidence')
+    this.assertEvidenceRole('verifyEvidence')
+    return this.txn(() => {
+      this.assertExists(nodeId)
+      const result = ev.verify(nodeId, currentCodeStateId, this.agentId)
+      const { op_id } = this.ledger!.recordOperation(this.opInput('verify', `verify:${nodeId} ${result.outcome} changed=${result.changed.length}`))
+      if (result.outcome === 'needs_review') {
+        const node = this.assertExists(nodeId)
+        const prevRef = ev.currentRef(nodeId)!
+        const payload = {
+          ...node.payload,
+          needs_review: {
+            reason: 'code_state_changed',
+            validation_id: result.validation_id,
+            changed_files: result.changed.map(c => c.path),
+            original_code_state_id: prevRef.code_state_id,
+            bound_revision_id: prevRef.revision_id,
+            at: result.verified_at,
+          },
+        }
+        this.db.prepare('UPDATE nodes SET payload_json = ?, updated_at = ? WHERE id = ?')
+          .run(JSON.stringify(payload), Date.now(), nodeId)
+        this.ledger!.commitRevision(op_id, this.snapshotOf(this.assertExists(nodeId)))
+      }
+      return result
+    })
+  }
+
+  private requireEvidence(what: string): EvidenceStore {
+    if (!this.ledger || !this.evidence) throw new WorkspaceError(`${what} 需要 open({ledger:true})（证据随账本挂载）`)
+    return this.evidence
+  }
+
+  private assertEvidenceRole(what: string): void {
+    if (this.role === 'model') throw new WorkspaceError(`${what} 是宿主/工具面能力，模型角色不可调用`)
   }
 
   /** 显式迁移：把 schema1 当前态导入账本为 origin=legacy_baseline 首修订。

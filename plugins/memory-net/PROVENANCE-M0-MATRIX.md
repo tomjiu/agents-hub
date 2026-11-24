@@ -27,7 +27,7 @@
 | trail 稳定锚点 | M1 | GC 压缩删除重编号，原 step 坐标失效（R4） |
 | 崩溃部分发布 | M1 | 多步变更（覆盖+推翻联动、候选核验+状态变更）大多已入事务，但账本缺失使"同事务提交"不可审计 |
 | 导出含历史/敏感删除 | M1 | schema1 导出仅当前态；无 sidecar 迁移/备份回滚/降级拒绝；无脱敏失效关联（purge 保护闭包会阻止删除被引用的敏感观测，"不可变"挡住用户删除） |
-| 宿主会话/代码版本绑定 | M2 | bridge 只存 call_id+工具名；无 session/root_call/durable_event_seq、原生 read/edit/write before/after、规范化摘要；无 code_state 绑定与 needs_review 投影 |
+| ~~宿主会话/代码版本绑定~~ | M2 ✅ | 已落地（evidence.ts + bridge + 21 测试）：code_states/source_refs/evidence_validations 增量表；captured/event_linked/persisted_unknown 三态；digest-only 桥接脱敏；verifyEvidence 无关不失效/同内容不证伪/相关 needs_review 原证据可定位；见 M2 计划与 memory-provenance-m2.json |
 | 候选自动提炼 | M3 | 事件→候选仅有模型显式 propose；无可配置/有界/可取消的提炼器；无 Console 审核界面实际点击闭环 |
 | 任务驱动精选 | M3 | 精选排除已做，但无按 op/revision 或证据的检索面；无入选/排除/需复核解释 |
 | 跨会话授权 | M4 | 业务任务身份与 session 未分离；同项目跨会话共享无显式 grant；无分 scope 导出/撤销 |

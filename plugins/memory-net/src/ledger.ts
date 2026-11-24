@@ -33,6 +33,7 @@ export class RevisionConflictError extends WorkspaceError {
 export type OperationKind =
   | 'add' | 'link' | 'promote' | 'demote' | 'contradict' | 'progress' | 'status'
   | 'trail' | 'review' | 'gc' | 'redact' | 'import' | 'migration'
+  | 'capture' | 'bind' | 'verify'
 
 export interface OperationInput {
   actor: string
@@ -416,20 +417,26 @@ export class Ledger {
   }
 }
 
-/** sidecar 全量导出（schema 2，含历史与引用）。 */
+/** sidecar 全量导出（schema 2；M2 起有证据数据时导 schema 3 包）。 */
 export interface LedgerPackage {
-  schema_version: 2
+  schema_version: 2 | 3
   workspace_instance_id: string
   exported_at: number
   operations: OperationRecord[]
   revisions: RevisionRecord[]
   heads: Array<{ node_id: string; revision_id: string }>
   links: RevisionLinkRow[]
+  /** M2 证据（仅 schema 3 包；v2 包无此字段）。 */
+  evidence?: {
+    code_states: import('./evidence.js').CodeStateRecord[]
+    source_refs: import('./evidence.js').SourceRefExport[]
+    validations: Array<Record<string, unknown>>
+  }
 }
 
-/** v2 全量记忆包：v1 记忆包字段 + 完整账本。schema_version 与 v1 显式区分，降级导入被拒绝。 */
+/** v2/v3 全量记忆包：v1 记忆包字段 + 完整账本；v3 = v2 + 证据绑定。 */
 export interface FullMemoryPackage extends Omit<import('./types.js').MemoryPackage, 'schema_version'> {
-  schema_version: 2
+  schema_version: 2 | 3
   ledger: LedgerPackage
 }
 
@@ -447,7 +454,7 @@ export function exportLedger(db: DatabaseSync, workspaceInstanceId: string): Led
  * memory 部分，保证业务行与账本原子发布；目标已有账本内容则拒绝（不覆盖）。
  */
 export function importLedgerRows(db: DatabaseSync, pkg: LedgerPackage): void {
-  if (pkg.schema_version !== 2) throw new WorkspaceError(`不支持的账本 schema_version: ${String(pkg.schema_version)}`)
+  if (pkg.schema_version !== 2 && pkg.schema_version !== 3) throw new WorkspaceError(`不支持的账本 schema_version: ${String(pkg.schema_version)}`)
   const knownRevisions = new Set(pkg.revisions.map(r => r.revision_id))
   const knownOps = new Set(pkg.operations.map(o => o.op_id))
   if (pkg.revisions.some(r => r.parent_revision_id && !knownRevisions.has(r.parent_revision_id))) {

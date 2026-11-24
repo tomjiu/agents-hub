@@ -140,6 +140,8 @@ export interface AddInput {
   payload?: Record<string, unknown>
   /** 溯源坐标（M2 宿主绑定填充；齐全时启用重放去重/同坐标异摘要拒绝）。 */
   provenance?: ProvenanceCoord
+  /** M2 证据绑定（host/tool 角色；同事务写入 source_refs）。模型角色传入即拒绝。 */
+  evidence?: import('./evidence.js').EvidenceBindingInput
 }
 
 /** 持久事件坐标：host_instance+session_id+durable_event_seq 齐全才可去重重放。 */
