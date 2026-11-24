@@ -11,6 +11,8 @@
 import type { AddInput, ActivateOpts, ActivationResult, GcOpts, GcReport, MemoryNode, MemoryPackage, NodeKind, ProgressCtx, ProgressPatch, Role, TrailEntry, TrailStepInput } from './types.js';
 import { type CandidateInput, type CandidateReview } from './candidates.js';
 import { type Ledger, type FullMemoryPackage } from './ledger.js';
+import { GrantRegistry, type Grant, type GrantInput, type GrantedReadResult } from './grants.js';
+import type { RedactionRules } from './privacy.js';
 import { type EvidenceStore, type CodeStateInput, type CodeStateRecord, type EvidenceBindingInput, type SourceRefRecord, type VerificationResult } from './evidence.js';
 export interface OpenOpts {
     /** 绑定写入者身份（默认 'host'）。写入者不可在 add 时冒名。 */
@@ -33,6 +35,7 @@ export declare class MemoryNet {
     /** M2 证据存储（账本挂载时同步挂载；未挂载为 null）。 */
     readonly evidence: EvidenceStore | null;
     private readonly wsDir;
+    private grants_;
     private constructor();
     /** 打开（或创建）workspace。 */
     static open(wsDir: string, opts?: OpenOpts): MemoryNet;
@@ -73,6 +76,8 @@ export declare class MemoryNet {
     historyOf(nodeId: string): import('./ledger.js').RevisionRecord[];
     /** M3 检索投影读面：全部节点轻量行（不含私有 db 泄漏）。 */
     nodesForProjection(): Array<Pick<MemoryNode, 'id' | 'kind' | 'text' | 'status' | 'run_id' | 'task_id' | 'payload' | 'based_on'>>;
+    /** 全量节点列表（M4 grant 视图用：完整行, 脱敏在读取边界做副本）。 */
+    listNodes(): MemoryNode[];
     /** 补 based_on 轻量边（from 依赖 to）。账本挂载时为修订变更：必需 expected_revision CAS。 */
     link(fromId: string, toId: string, opts?: {
         expected_revision?: string;
@@ -90,6 +95,24 @@ export declare class MemoryNet {
      * ctx.base_updated_at 提供乐观锁：与库中 updated_at 不符 = 并发写 →
      * 应用传入 patch（后写赢）但 conflict 置位并记录字段级双方值 —— 不静默双真相。
      */
+    /** 本工作区 grant 注册表（懒挂载；grants 表在首次访问时建）。 */
+    grantRegistry(): GrantRegistry;
+    /** 显式授权（host 专属；task 身份≠session；默认拒绝一切未授权跨会话读取）。 */
+    grantAccess(input: GrantInput): Grant;
+    revokeGrant(grantId: string): Grant;
+    grants(): Grant[];
+    /**
+     * 经 grant 只读投影对端工作区内容（脱敏副本；不写任何库；默认拒绝）。
+     * caller 显式给出业务任务身份（task_id ≠ session_id；实例不隐式携带任务上下文，
+     * 防止把会话身份误当授权键）。
+     */
+    readGranted(source: MemoryNet, grantId: string, caller: {
+        task_id: string;
+    }, opts?: {
+        agent_id?: string;
+        rules?: RedactionRules;
+        limit?: number;
+    }): GrantedReadResult;
     updateProgress(taskId: string, patch: ProgressPatch, ctx?: ProgressCtx): MemoryNode;
     /** progress 合并语义保留（多 Agent 协作核心），但冲突判定优先修订级 CAS：
      *  账本挂载时 expected_revision 与写事务内 head 不符 → conflict 置位并记录双方值，

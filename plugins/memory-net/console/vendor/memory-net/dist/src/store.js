@@ -4,6 +4,7 @@ import { TRAIL_DIGEST_MAX_STEPS, estimateTokens, fillBudget, rankCandidates, res
 import { curationReason } from './curation.js';
 import { candidateMeta, candidateReason, eventDigest, claimDigest, referenceIds, validateEvent, digest } from './candidates.js';
 import { attachLedger, exportLedger, importLedgerRows, backupWorkspace } from './ledger.js';
+import { GrantRegistry, readGranted as readGrantedImpl } from './grants.js';
 import { attachEvidence } from './evidence.js';
 /** 写纪律矩阵（v1 写死）。 */
 const KIND_ALLOWED_ROLES = {
@@ -51,6 +52,7 @@ export class MemoryNet {
     /** M2 证据存储（账本挂载时同步挂载；未挂载为 null）。 */
     evidence;
     wsDir;
+    grants_ = null;
     constructor(dbo, opts, wsDir, ledger, evidence) {
         this.dbo = dbo;
         this.agentId = opts.agentId;
@@ -321,6 +323,10 @@ export class MemoryNet {
             based_on: safeJson(r.based_on_json, []),
         }));
     }
+    /** 全量节点列表（M4 grant 视图用：完整行, 脱敏在读取边界做副本）。 */
+    listNodes() {
+        return this.db.prepare('SELECT * FROM nodes ORDER BY seq ASC').all().map(rowToNode);
+    }
     /** 补 based_on 轻量边（from 依赖 to）。账本挂载时为修订变更：必需 expected_revision CAS。 */
     link(fromId, toId, opts) {
         return this.txn(() => {
@@ -423,6 +429,35 @@ export class MemoryNet {
      * ctx.base_updated_at 提供乐观锁：与库中 updated_at 不符 = 并发写 →
      * 应用传入 patch（后写赢）但 conflict 置位并记录字段级双方值 —— 不静默双真相。
      */
+    // ---------------------------------------------------------------- M4 跨会话授权 (host 专属)
+    /** 本工作区 grant 注册表（懒挂载；grants 表在首次访问时建）。 */
+    grantRegistry() {
+        if (!this.grants_)
+            this.grants_ = new GrantRegistry(this.db);
+        return this.grants_;
+    }
+    /** 显式授权（host 专属；task 身份≠session；默认拒绝一切未授权跨会话读取）。 */
+    grantAccess(input) {
+        if (this.role !== 'host')
+            throw new WorkspaceError('Grant creation is host-only');
+        return this.grantRegistry().create(this.agentId, input);
+    }
+    revokeGrant(grantId) {
+        if (this.role !== 'host')
+            throw new WorkspaceError('Grant revocation is host-only');
+        return this.grantRegistry().revoke(grantId);
+    }
+    grants() { return this.grantRegistry().list(); }
+    /**
+     * 经 grant 只读投影对端工作区内容（脱敏副本；不写任何库；默认拒绝）。
+     * caller 显式给出业务任务身份（task_id ≠ session_id；实例不隐式携带任务上下文，
+     * 防止把会话身份误当授权键）。
+     */
+    readGranted(source, grantId, caller, opts) {
+        if (this.role !== 'host')
+            throw new WorkspaceError('Granted read is host-only');
+        return readGrantedImpl({ listNodes: () => source.listNodes(), grants: source.grantRegistry() }, { workspace: this.workspaceId, task_id: caller.task_id, agent_id: opts?.agent_id ?? this.agentId, role: this.role }, grantId, opts);
+    }
     updateProgress(taskId, patch, ctx) {
         if (!taskId)
             throw new WorkspaceError('update_progress 需要 task_id');

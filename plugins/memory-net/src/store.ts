@@ -42,6 +42,8 @@ import {
 import {curationReason} from './curation.js'
 import {candidateMeta,candidateReason,eventDigest,claimDigest,referenceIds,validateEvent,digest,type CandidateInput,type CandidateReview,type CandidateMeta} from './candidates.js'
 import {attachLedger,exportLedger,importLedgerRows,backupWorkspace,type Ledger,type LedgerPackage,type OperationInput,type RevisionSnapshot,type FullMemoryPackage} from './ledger.js'
+import {GrantRegistry,readGranted as readGrantedImpl,type Grant,type GrantInput,type GrantedReadResult} from './grants.js'
+import type {RedactionRules} from './privacy.js'
 import {attachEvidence,type EvidenceStore,type CodeStateInput,type CodeStateRecord,type EvidenceBindingInput,type SourceRefRecord,type VerificationResult,type SourceRefExport} from './evidence.js'
 
 /** 写纪律矩阵（v1 写死）。 */
@@ -124,6 +126,7 @@ export class MemoryNet {
   /** M2 证据存储（账本挂载时同步挂载；未挂载为 null）。 */
   readonly evidence: EvidenceStore | null
   private readonly wsDir: string
+  private grants_: import('./grants.js').GrantRegistry | null = null
 
   private constructor(dbo: OpenedDb, opts: Required<Pick<OpenOpts, 'agentId' | 'role'>>, wsDir: string, ledger: Ledger | null, evidence: EvidenceStore | null) {
     this.dbo = dbo
@@ -418,6 +421,11 @@ export class MemoryNet {
     }))
   }
 
+  /** 全量节点列表（M4 grant 视图用：完整行, 脱敏在读取边界做副本）。 */
+  listNodes(): MemoryNode[] {
+    return (this.db.prepare('SELECT * FROM nodes ORDER BY seq ASC').all() as unknown as NodeRow[]).map(rowToNode)
+  }
+
   /** 补 based_on 轻量边（from 依赖 to）。账本挂载时为修订变更：必需 expected_revision CAS。 */
   link(fromId: string, toId: string, opts?: { expected_revision?: string }): MemoryNode {
     return this.txn(() => {
@@ -504,6 +512,42 @@ export class MemoryNet {
    * ctx.base_updated_at 提供乐观锁：与库中 updated_at 不符 = 并发写 →
    * 应用传入 patch（后写赢）但 conflict 置位并记录字段级双方值 —— 不静默双真相。
    */
+  // ---------------------------------------------------------------- M4 跨会话授权 (host 专属)
+
+  /** 本工作区 grant 注册表（懒挂载；grants 表在首次访问时建）。 */
+  grantRegistry(): GrantRegistry {
+    if (!this.grants_) this.grants_ = new GrantRegistry(this.db)
+    return this.grants_
+  }
+
+  /** 显式授权（host 专属；task 身份≠session；默认拒绝一切未授权跨会话读取）。 */
+  grantAccess(input: GrantInput): Grant {
+    if (this.role !== 'host') throw new WorkspaceError('Grant creation is host-only')
+    return this.grantRegistry().create(this.agentId, input)
+  }
+
+  revokeGrant(grantId: string): Grant {
+    if (this.role !== 'host') throw new WorkspaceError('Grant revocation is host-only')
+    return this.grantRegistry().revoke(grantId)
+  }
+
+  grants(): Grant[] { return this.grantRegistry().list() }
+
+  /**
+   * 经 grant 只读投影对端工作区内容（脱敏副本；不写任何库；默认拒绝）。
+   * caller 显式给出业务任务身份（task_id ≠ session_id；实例不隐式携带任务上下文，
+   * 防止把会话身份误当授权键）。
+   */
+  readGranted(source: MemoryNet, grantId: string, caller: { task_id: string }, opts?: { agent_id?: string; rules?: RedactionRules; limit?: number }): GrantedReadResult {
+    if (this.role !== 'host') throw new WorkspaceError('Granted read is host-only')
+    return readGrantedImpl(
+      { listNodes: () => source.listNodes(), grants: source.grantRegistry() },
+      { workspace: this.workspaceId, task_id: caller.task_id, agent_id: opts?.agent_id ?? this.agentId, role: this.role },
+      grantId,
+      opts,
+    )
+  }
+
   updateProgress(taskId: string, patch: ProgressPatch, ctx?: ProgressCtx): MemoryNode {
     if (!taskId) throw new WorkspaceError('update_progress 需要 task_id')
     return this.txn(() => this.updateProgressWithinTransaction(taskId, patch, ctx))
