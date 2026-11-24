@@ -4,10 +4,10 @@
  * 布局：侧栏 workspace 列表 + 内容区四页签（节点 / 激活 / 轨迹 / 统计）+ 写面板。
  * 移动端：侧栏折叠为顶部横向选择器；远程（Tunnel 单域）与本地同一份代码。
  */
-import { api, ApiError, getToken, setToken, openEvents, type MemoryNode, type WorkspaceSummary, type ActivationResult, type TrailEntry, type RunSummary, type WsStats } from './api.ts'
+import { api, ApiError, getToken, setToken, openEvents, type MemoryNode, type WorkspaceSummary, type ActivationResult, type TrailEntry, type RunSummary, type WsStats, type CandidateSummary, type CandidateDetail } from './api.ts'
 import './styles.css'
 
-type Tab = 'nodes' | 'activate' | 'trail' | 'stats'
+type Tab = 'nodes' | 'activate' | 'trail' | 'stats' | 'candidates'
 
 const KIND_LABEL: Record<string, string> = {
   constraint: '约束',
@@ -104,6 +104,7 @@ function renderTabs(): void {
   tabs.innerHTML = ''
   const items: Array<{ id: Tab; label: string }> = [
     { id: 'nodes', label: '节点' },
+    { id: 'candidates', label: '候选' },
     { id: 'activate', label: '激活' },
     { id: 'trail', label: '轨迹' },
     { id: 'stats', label: '统计' },
@@ -234,6 +235,7 @@ async function renderPage(): Promise<void> {
     return
   }
   if (currentTab === 'nodes') await renderNodes(page)
+  else if (currentTab === 'candidates') await renderCandidates(page)
   else if (currentTab === 'activate') renderActivateForm(page)
   else if (currentTab === 'trail') await renderTrail(page)
   else await renderStats(page)
@@ -493,6 +495,163 @@ async function loadTrail(box: HTMLElement, runId?: string): Promise<void> {
     }
   } catch (e) {
     box.textContent = '加载失败: ' + (e as Error).message
+  }
+}
+
+/** M3 候选审核页：列表 → 详情（原依据/差异/核验证据）→ accept/reject（CAS + 失败回读）。 */
+let candidateStateFilter: 'pending' | 'accepted' | 'rejected' | 'all' = 'pending'
+let selectedCandidateId: string | null = null
+
+async function renderCandidates(page: HTMLElement): Promise<void> {
+  page.append(h('p', 'page-hint', '候选审核：模型提案只能 pending；核验（accept/reject）是宿主/Console 权限。审核需独立核验证据，不能复用候选自身来源。'))
+  const filterRow = h('div', 'filter-row')
+  for (const opt of ['pending', 'accepted', 'rejected', 'all'] as const) {
+    const b = h('button', 'btn small' + (candidateStateFilter === opt ? ' primary' : ''), opt === 'pending' ? '待审' : opt === 'accepted' ? '已接受' : opt === 'rejected' ? '已拒绝' : '全部')
+    b.addEventListener('click', () => {
+      candidateStateFilter = opt
+      void renderPage()
+    })
+    filterRow.append(b)
+  }
+  page.append(filterRow)
+  const listBox = h('div', 'candidate-list')
+  page.append(listBox)
+  const detailBox = h('div', 'candidate-detail')
+  page.append(detailBox)
+
+  let res: { candidates: CandidateSummary[]; count: number }
+  try {
+    res = await api.candidates(currentWs!, candidateStateFilter === 'all' ? {} : { status: candidateStateFilter })
+  } catch (e) {
+    listBox.append(h('div', 'empty-hint', '候选加载失败: ' + (e as Error).message))
+    return
+  }
+  if (res.candidates.length === 0) {
+    listBox.append(h('div', 'empty-hint', '没有该状态的候选'))
+    return
+  }
+  for (const c of res.candidates) {
+    const card = h('div', 'node-card cand-state-' + c.state + (selectedCandidateId === c.id ? ' cand-selected' : ''))
+    const head = h('div', 'node-head')
+    head.append(h('span', 'tag cand-tag-' + c.state, c.state === 'pending' ? '待审' : c.state === 'accepted' ? '已接受' : c.state === 'rejected' ? '已拒绝' : '无效'))
+    if (c.confidence !== null) head.append(h('span', 'node-sub', `置信 ${c.confidence}`))
+    head.append(h('span', 'node-agent', c.run_id ?? ''))
+    if (c.reviewed_by) head.append(h('span', 'node-task', '审核 ' + c.reviewed_by))
+    card.append(head)
+    card.append(h('div', 'node-text', c.text))
+    card.append(h('div', 'node-sub', `来源: ${c.source_ids.join(', ') || '无'} · 指纹 ${c.fingerprint ? c.fingerprint.slice(0, 12) + '…' : '无'}`))
+    card.addEventListener('click', () => {
+      selectedCandidateId = c.id
+      void renderPage()
+    })
+    listBox.append(card)
+  }
+  if (selectedCandidateId) {
+    await renderCandidateDetail(detailBox, selectedCandidateId)
+  }
+}
+
+async function renderCandidateDetail(box: HTMLElement, id: string): Promise<void> {
+  box.innerHTML = ''
+  box.append(h('h3', '', '候选详情'))
+  let d: CandidateDetail
+  try {
+    d = await api.candidateDetail(currentWs!, id)
+  } catch (e) {
+    box.append(h('div', 'empty-hint', '详情加载失败: ' + (e as Error).message))
+    return
+  }
+  const c = d.candidate
+  const meta = h('div', 'node-head')
+  meta.append(h('span', 'tag cand-tag-' + c.state, c.state), h('span', 'node-sub', `置信 ${c.confidence ?? '—'}`), h('span', 'node-agent', c.run_id ?? ''))
+  box.append(meta, h('div', 'node-text', c.text))
+  box.append(h('div', 'node-sub', `指纹 ${c.fingerprint ?? '无'} · 来源 ${c.source_ids.join(', ')}`))
+
+  box.append(h('h4', '', '原依据（来源观测）'))
+  for (const src of d.sources) {
+    const srcCard = h('div', 'node-card')
+    srcCard.append(h('div', 'node-text', src.text))
+    srcCard.append(h('div', 'node-sub', `id=${src.id} · ${src.status}`))
+    box.append(srcCard)
+  }
+
+  box.append(h('h4', '', '差异（主张相对来源的增量）'))
+  const diffBox = h('div', 'diff-box')
+  for (const part of d.diff) {
+    if (part.op === 'added') diffBox.append(h('span', 'diff-added', part.text))
+    else diffBox.append(h('span', 'diff-same', part.text))
+  }
+  box.append(diffBox)
+
+  if (c.state === 'pending') {
+    box.append(h('h4', '', '核验（accept / reject）'))
+    box.append(h('p', 'modal-hint', '必须给出独立核验证据（来源之外的观测），审核记录 CAS 指纹。'))
+    const reviewerInput = document.createElement('input')
+    reviewerInput.className = 'txt'
+    reviewerInput.placeholder = '审核者（如 ops-alice）'
+    const noteInput = document.createElement('input')
+    noteInput.className = 'txt'
+    noteInput.placeholder = '核验说明（必填）'
+    const evidenceWrap = h('div', 'evidence-pool')
+    const picked = new Set<string>()
+    if (d.evidence_pool.length === 0) {
+      evidenceWrap.append(h('div', 'empty-hint', '无可用核验证据（来源之外的 active 成功观测）'))
+    }
+    for (const ev of d.evidence_pool) {
+      const item = h('label', 'evidence-item')
+      const cb = document.createElement('input')
+      cb.type = 'checkbox'
+      cb.value = ev.id
+      cb.addEventListener('change', () => {
+        if (cb.checked) picked.add(ev.id)
+        else picked.delete(ev.id)
+      })
+      item.append(cb, h('span', '', `${ev.id}: ${ev.text}`))
+      evidenceWrap.append(item)
+    }
+    const msg = h('div', 'empty-hint', '')
+    const doReview = (decision: 'accept' | 'reject') => {
+      const reviewer = reviewerInput.value.trim()
+      const note = noteInput.value.trim()
+      if (!reviewer || !note) {
+        msg.textContent = '审核者与核验说明必填'
+        return
+      }
+      if (decision === 'accept' && picked.size === 0) {
+        msg.textContent = 'accept 需要至少一条独立核验证据'
+        return
+      }
+      api
+        .reviewCandidate(currentWs!, {
+          id: c.id,
+          expected_fingerprint: c.fingerprint ?? '',
+          decision,
+          reviewer,
+          note,
+          evidence: [...picked],
+        })
+        .then(() => {
+          msg.textContent = decision === 'accept' ? '已接受（写入落盘）' : '已拒绝'
+          // 审核落盘后切到全部: 刷新回读必须能看到刚审核的状态 (pending 过滤会隐藏已接受项)
+          candidateStateFilter = 'all'
+          void renderPage()
+        })
+        .catch((e: Error) => {
+          // CAS 冲突：回读刷新（失败回读），提示重试
+          msg.textContent = '审核失败（' + e.message + '）——已回读最新候选，请重试'
+          void renderPage()
+        })
+    }
+    const acceptBtn = h('button', 'btn primary', '接受 (accept)')
+    acceptBtn.addEventListener('click', () => doReview('accept'))
+    const rejectBtn = h('button', 'btn', '拒绝 (reject)')
+    rejectBtn.addEventListener('click', () => doReview('reject'))
+    const row = h('div', 'filter-row')
+    row.append(acceptBtn, rejectBtn)
+    box.append(reviewerInput, noteInput, evidenceWrap, row, msg)
+  } else if (c.reviewed_by) {
+    box.append(h('h4', '', '审核记录'))
+    box.append(h('div', 'node-sub', `审核者 ${c.reviewed_by} · 说明 ${c.review_note ?? ''}`))
   }
 }
 

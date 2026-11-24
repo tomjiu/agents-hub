@@ -274,7 +274,7 @@ export class Ledger {
   }
 
   history(nodeId: string): RevisionRecord[] {
-    return (this.db.prepare('SELECT * FROM ledgerdb.node_revisions WHERE node_id = ? ORDER BY created_at ASC, revision_id ASC').all(nodeId) as unknown as RevRow[]).map(revToRecord)
+    return (this.db.prepare('SELECT * FROM ledgerdb.node_revisions WHERE node_id = ? ORDER BY created_at ASC, rowid ASC').all(nodeId) as unknown as RevRow[]).map(revToRecord)
   }
 
   operationsFor(filter?: { kind?: OperationKind; session_id?: string; limit?: number }): OperationRecord[] {
@@ -442,7 +442,7 @@ export interface FullMemoryPackage extends Omit<import('./types.js').MemoryPacka
 
 export function exportLedger(db: DatabaseSync, workspaceInstanceId: string): LedgerPackage {
   const operations = (db.prepare('SELECT * FROM ledgerdb.operations ORDER BY seq ASC').all() as unknown as OpRow[]).map(opToRecord)
-  const revisions = (db.prepare('SELECT * FROM ledgerdb.node_revisions ORDER BY created_at ASC, revision_id ASC').all() as unknown as RevRow[]).map(revToRecord)
+  const revisions = (db.prepare('SELECT * FROM ledgerdb.node_revisions ORDER BY created_at ASC, rowid ASC').all() as unknown as RevRow[]).map(revToRecord)
   const heads = db.prepare('SELECT node_id, revision_id FROM ledgerdb.node_heads').all() as unknown as Array<{ node_id: string; revision_id: string }>
   const links = db.prepare('SELECT revision_id, referenced_node_id, referenced_revision_id, relation FROM ledgerdb.revision_links').all() as unknown as RevisionLinkRow[]
   return { schema_version: 2, workspace_instance_id: workspaceInstanceId, exported_at: Date.now(), operations, revisions, heads, links }

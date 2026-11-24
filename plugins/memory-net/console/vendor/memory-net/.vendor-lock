@@ -1,3 +1,4 @@
-﻿repo=tomjiu/memory-net
-sha=e3dda9d56fac3598452ed0902898d693c4a6e5f2
-fetched_at=2026-09-11T22:40:47Z
+repo=agents-hub/sandbox (in-repo plugins/memory-net)
+sha=memory-provenance-m3 (in-repo build; supersedes GitHub pin e3dda9d56fac3598452ed0902898d693c4a6e5f2)
+fetched_at=2026-11-24T00:00:00Z
+note=Vendor upgraded from the agents-hub in-repo memory-net source (M1 ledger + M2 evidence + M3 candidates/distill/recall) because the console requires the candidate review API which the old GitHub-pinned build predates. fetch-vendor.sh GitHub pin retained for provenance; this vendor copy is built from plugins/memory-net of this repository.

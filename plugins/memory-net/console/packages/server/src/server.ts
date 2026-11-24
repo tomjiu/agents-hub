@@ -11,6 +11,7 @@ import { createServer, type IncomingMessage, type Server, type ServerResponse } 
 import { statSync } from 'node:fs'
 import { MemoryError, UnknownNodeError } from 'memory-net/dist/src/errors.js'
 import { MemoryNet } from 'memory-net/dist/src/store.js'
+import { candidateMeta, candidateReason } from 'memory-net/dist/src/candidates.js'
 import type {
   ActivateOpts,
   ActivationResult,
@@ -32,6 +33,48 @@ import { checkToken } from './auth.js'
 import { createStaticHandler } from './static.js'
 
 export const CONSOLE_VERSION = '0.1.0'
+
+/** 词级差异：b 相对 a 的增量（review UI 用；简单 LCS DP，输入为短文本）。 */
+function wordDiff(a: string, b: string): Array<{ op: 'same' | 'added'; text: string }> {
+  const tok = (s: string): string[] => s.split(/(\s+)/).filter((x) => x.length > 0)
+  const A = tok(a)
+  const B = tok(b)
+  // LCS 长度表（限制输入规模：过长直接退化为整段 added 标注）
+  if (A.length * B.length > 250_000) return [{ op: 'same', text: a.slice(0, 200) }, { op: 'added', text: b }]
+  const dp: number[][] = Array.from({ length: A.length + 1 }, () => new Array<number>(B.length + 1).fill(0))
+  for (let i = A.length - 1; i >= 0; i--) {
+    for (let j = B.length - 1; j >= 0; j--) {
+      dp[i]![j] = A[i] === B[j] ? dp[i + 1]![j + 1]! + 1 : Math.max(dp[i + 1]![j]!, dp[i]![j + 1]!)
+    }
+  }
+  const out: Array<{ op: 'same' | 'added'; text: string }> = []
+  let i = 0
+  let j = 0
+  while (i < A.length && j < B.length) {
+    if (A[i] === B[j]) {
+      out.push({ op: 'same', text: B[j]! })
+      i++
+      j++
+    } else if (dp[i + 1]![j]! >= dp[i]![j + 1]!) {
+      out.push({ op: 'added', text: B[j]! })
+      j++
+    } else {
+      i++
+    }
+  }
+  while (j < B.length) {
+    out.push({ op: 'added', text: B[j]! })
+    j++
+  }
+  // 相邻同类型合并
+  const merged: Array<{ op: 'same' | 'added'; text: string }> = []
+  for (const part of out) {
+    const last = merged[merged.length - 1]
+    if (last && last.op === part.op) last.text += part.text
+    else merged.push({ ...part })
+  }
+  return merged
+}
 
 const MAX_BODY_BYTES = 1024 * 1024
 
@@ -292,6 +335,8 @@ export function createConsoleServer(opts: ConsoleServerOpts): ConsoleHandle {
     activate: ['POST'],
     export: ['GET'],
     progress: ['POST'],
+    candidates: ['GET'],
+    'candidates/review': ['POST'],
   }
 
   async function handleWs(req: IncomingMessage, res: ServerResponse, url: URL): Promise<void> {
@@ -302,7 +347,10 @@ export function createConsoleServer(opts: ConsoleServerOpts): ConsoleHandle {
     }
     const parts = url.pathname.split('/').filter(Boolean)
     // parts: v1, ws, <id>, <action...>
-    const action = parts[3] ?? ''
+    // M3: candidates/review 子路由 — action 需合成两段 (parts[3]+'/'+parts[4]);
+    // 节点 id 形如 'n<number>'，不会与关键字 'review' 冲突。
+    const actionRaw = parts[3] ?? ''
+    const action = actionRaw === 'candidates' && parts[4] === 'review' ? 'candidates/review' : actionRaw
 
     // P3-7：动作已知但方法不对 → 405 + Allow（旧实现落到末尾 404「未知动作」文案误导）
     const allowed = WS_ACTION_METHODS[action]
@@ -417,6 +465,106 @@ export function createConsoleServer(opts: ConsoleServerOpts): ConsoleHandle {
       const entry = withWorkspace(wsId, (mn) => mn.appendTrail(runId, { action: actionText, refs }))
       publishSse('workspace.updated', { workspace_id: wsId, reason: 'trail' })
       sendJson(res, 200, { entry })
+      return
+    }
+
+    // ---- M3 候选审核面（host 身份；模型工具面不暴露 review——核心库角色纪律）----
+
+    // 候选详情：候选 + 原依据观测 + 差异 + 可用核验证据（差异=主张相对各来源的增量词段）
+    if (action === 'candidates' && req.method === 'GET' && parts[4]) {
+      const nid = decodeURIComponent(parts[4] as string)
+      const detail = withWorkspace(wsId, (mn) => {
+        const n = mn.get(nid)
+        if (!n) return null
+        const meta = candidateMeta(n)
+        const sources = n.based_on.map((sid) => mn.get(sid)).filter((x): x is NonNullable<typeof x> => x !== null)
+        // 差异：候选文本相对来源文本的增量（词级 diff，加粗新增段）
+        const sourceText = sources.map((x) => x.text).join('\n')
+        const diff = wordDiff(sourceText, n.text)
+        // 可用核验证据：同 scope 内 active 成功观测，且未在候选 based_on 中
+        const eligible = mn.candidates({ run_id: n.run_id ?? undefined, limit: 100 })
+        void eligible
+        const evidencePool = (mn.nodesForProjection?.() ?? []).filter(
+          (row) => row.kind === 'observation' && row.status === 'active' && row.run_id === n.run_id && !n.based_on.includes(row.id) && (row.payload as Record<string, unknown>)?.is_error !== true,
+        )
+        return {
+          candidate: {
+            id: n.id, text: n.text, state: meta?.state ?? 'invalid', fingerprint: meta?.fingerprint ?? null,
+            confidence: n.confidence, run_id: n.run_id, task_id: n.task_id, source_ids: n.based_on,
+            reviewed_by: meta?.review?.request.reviewer ?? null, review_note: meta?.review?.request.note ?? null,
+          },
+          sources: sources.map((x) => ({ id: x.id, text: x.text, status: x.status, created_at: x.created_at })),
+          diff,
+          evidence_pool: evidencePool.slice(0, 50).map((row) => ({ id: row.id, text: row.text.slice(0, 300) })),
+        }
+      })
+      if (!detail) throw httpError(404, 'NOT_FOUND', `候选不存在: ${nid}`)
+      sendJson(res, 200, detail)
+      return
+    }
+
+    if (action === 'candidates' && req.method === 'GET') {
+      const statusParam = url.searchParams.get('status')
+      const status = statusParam === 'pending' || statusParam === 'accepted' || statusParam === 'rejected' ? statusParam : undefined
+      const limitRaw = Number(url.searchParams.get('limit') ?? '50')
+      const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(Math.trunc(limitRaw), 1), 100) : 50
+      const result = withWorkspace(wsId, (mn) => {
+        const list = mn.candidates({ ...(status ? { status } : {}), limit })
+        return list.map((n) => {
+          const meta = candidateMeta(n)
+          return {
+            id: n.id,
+            text: n.text,
+            state: meta?.state ?? 'invalid',
+            fingerprint: meta?.fingerprint ?? null,
+            source_ids: n.based_on,
+            confidence: n.confidence,
+            run_id: n.run_id,
+            task_id: n.task_id,
+            eligibility: candidateReason(n, (id) => mn.get(id)) ?? 'eligible',
+            reviewed_by: meta?.review?.request.reviewer ?? null,
+            reviewed_at: meta?.review?.at ?? null,
+            review_note: meta?.review?.request.note ?? null,
+          }
+        })
+      })
+      sendJson(res, 200, { candidates: result, count: result.length })
+      return
+    }
+
+    if (action === 'candidates/review' && req.method === 'POST') {
+      const body = await readJsonBody(req, res)
+      const id = typeof body.id === 'string' ? body.id.trim() : ''
+      const expectedFingerprint = typeof body.expected_fingerprint === 'string' ? body.expected_fingerprint : ''
+      const decision = body.decision === 'accept' || body.decision === 'reject' ? body.decision : ''
+      const reviewer = typeof body.reviewer === 'string' ? body.reviewer.trim() : ''
+      const note = typeof body.note === 'string' ? body.note.trim() : ''
+      const evidence = Array.isArray(body.evidence) ? body.evidence.filter((r): r is string => typeof r === 'string') : []
+      if (!id || !expectedFingerprint || !decision || !reviewer || !note) {
+        throw httpError(400, 'BAD_REQUEST', 'id/expected_fingerprint/decision/reviewer/note 必填')
+      }
+      try {
+        const node = withWorkspace(wsId, (mn) =>
+          mn.reviewCandidate(id, { expected_fingerprint: expectedFingerprint, decision, reviewer, note, evidence }))
+        publishSse('workspace.updated', { workspace_id: wsId, reason: 'candidate_review' })
+        sendJson(res, 200, { node })
+      } catch (e) {
+        // CAS/指纹冲突：409 + 回读当前候选（失败回读，客户端重取后重试）
+        const msg = String((e as Error)?.message ?? e)
+        if (/requires|Invalid candidate|host-only/i.test(msg)) {
+          sendJson(res, 400, { error: { code: 'BAD_REQUEST', message: msg } })
+          return
+        }
+        if (/fingerprint|conflict|stale|terminal/i.test(msg)) {
+          const fresh = withWorkspace(wsId, (mn) => {
+            const n = mn.get(id)
+            return n ? { id: n.id, state: candidateMeta(n)?.state ?? 'invalid', fingerprint: candidateMeta(n)?.fingerprint ?? null } : null
+          })
+          sendJson(res, 409, { error: { code: 'CONFLICT', message: `候选已被他人变更或指纹过期：${msg}` }, candidate: fresh })
+          return
+        }
+        throw e
+      }
       return
     }
 

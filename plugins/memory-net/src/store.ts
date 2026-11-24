@@ -409,6 +409,15 @@ export class MemoryNet {
     return this.ledger ? this.ledger.history(nodeId) : []
   }
 
+  /** M3 检索投影读面：全部节点轻量行（不含私有 db 泄漏）。 */
+  nodesForProjection(): Array<Pick<MemoryNode, 'id' | 'kind' | 'text' | 'status' | 'run_id' | 'task_id' | 'payload' | 'based_on'>> {
+    return (this.db.prepare('SELECT id, kind, text, status, run_id, task_id, payload_json, based_on_json FROM nodes').all() as unknown as NodeRow[]).map(r => ({
+      id: r.id, kind: r.kind, text: r.text, status: r.status, run_id: r.run_id, task_id: r.task_id,
+      payload: safeJson<Record<string, unknown>>(r.payload_json, {}),
+      based_on: safeJson<string[]>(r.based_on_json, []),
+    }))
+  }
+
   /** 补 based_on 轻量边（from 依赖 to）。账本挂载时为修订变更：必需 expected_revision CAS。 */
   link(fromId: string, toId: string, opts?: { expected_revision?: string }): MemoryNode {
     return this.txn(() => {
@@ -456,7 +465,8 @@ export class MemoryNet {
   reviewCandidate(id:string,input:CandidateReview):MemoryNode {
     if(this.role!=='host')throw new WorkspaceError('Candidate review is host-only')
     if(!input||!['accept','reject'].includes(input.decision)||typeof input.reviewer!=='string'||!input.reviewer.trim()||input.reviewer.length>256||typeof input.note!=='string'||!input.note.trim()||input.note.length>2000)throw new WorkspaceError('Invalid candidate review controls')
-    const evidence=referenceIds(input.evidence,'Review evidence')
+    // reject 是拒绝路径: 说明必填即可, 证据可空; accept 的 >=1 独立核验证据在下方 based_on 去重校验强制
+  const evidence=referenceIds(input.evidence,'Review evidence',{allowEmpty:input.decision==='reject'})
     const request={...input,evidence,reviewer:input.reviewer.trim(),note:input.note.trim()}
     return this.txn(()=>{
       const n=this.assertExists(id),c=candidateMeta(n)
@@ -467,6 +477,7 @@ export class MemoryNet {
       }
       if(n.status!=='active'&&n.status!=='promoted')throw new WorkspaceError('Candidate is not active')
       for(const [sid,hash]of Object.entries(c.sources)){const ref=validateEvent(this.get(sid),n.run_id!,n.task_id,'Candidate source');if(eventDigest(ref)!==hash)throw new WorkspaceError('Candidate source snapshot stale')}
+      if(input.decision==='accept'&&evidence.length<1)throw new WorkspaceError('Candidate review accept requires independent verification evidence')
       const digests:Record<string,string>={}
       for(const eid of evidence){if(n.based_on.includes(eid))throw new WorkspaceError('Review requires distinct verification evidence');digests[eid]=eventDigest(validateEvent(this.get(eid),n.run_id!,n.task_id,'Review evidence'))}
       const meta:CandidateMeta={...c,state:input.decision==='accept'?'accepted':'rejected',review:{request,digests,at:Date.now()}}

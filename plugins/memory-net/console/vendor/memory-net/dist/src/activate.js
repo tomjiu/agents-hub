@@ -67,7 +67,8 @@ export function nodeTokens(n) {
         typeof n.payload.strategy === 'string' ? n.payload.strategy : '',
         typeof n.payload.recovery === 'string' ? n.payload.recovery : '',
     ].join(' ');
-    return estimateTokens(`${n.kind} ${n.key ?? ''} ${n.text} ${extra}`);
+    const review = Array.isArray(n.payload.promote_evidence) ? n.payload.promote_evidence.filter((id) => typeof id === 'string').join(',') : '';
+    return estimateTokens(`${n.kind} ${n.key ?? ''} ${n.text} ${extra} id=${n.id} based_on=${n.based_on.join(',')} review_evidence=${review}`) + 24;
 }
 /** 候选按分数降序（同分按 updated_at 新者在前）。 */
 export function rankCandidates(cands, query, now) {
