@@ -1,0 +1,59 @@
+{
+ "schema": 1,
+ "status": "PASS",
+ "at": "2026-11-24",
+ "task": "Issue #2 final acceptance round — cross-process resume of the same persisted session (adapter-direct and generated session-default run packages, two fixed DSH hosts), 100k+ growth benchmark with red->green fix, fixed task/noise multi-task A/B, and host fingerprint re-acceptance after M3+M4 and the recall fix",
+ "environment": {
+  "platform": "Linux cloud sandbox",
+  "node": "24.22.3",
+  "hosts": ["@deepseek-ai/dsh 0.2.2-rc.1 (private install)", "@deepseek-ai/dsh 0.2.2-rc.5 (private install, npm latest re-checked this round: latest=next=0.2.2-rc.5; 0.2.3-alpha.2 is the alpha channel, not tracked)"],
+  "assets_fingerprint_sha256_prefix": "ec6e8ace3185",
+  "telemetry": "DISABLED",
+  "isolation": "Per-run temp DSH_HOME/HOME/workspaces; local scripted OpenAI-compatible model; no live profile, no user library, no paid model"
+ },
+ "cross_process_resume": {
+  "probe": "asset-manager/probe-memory-resume.mjs (new; HUB_MEMORY_RESUME_BUNDLE=1 switches to the generated session-default run package via dsh-bundle)",
+  "mechanism": "Process 1 runs DSH headless --json (fresh persisted session), writes a tip, triggers an auto observation, recalls in-process, exits. Process 2 (separate OS process, new model server, new patch layer) resumes with --session-id <same id>; its FIRST action is memory_net_recall, then raw view, then a second write.",
+  "scenarios": {
+   "rc5_adapter_direct": {"status": "PASS", "checks": {"session_id_adopted": true, "first_recall_had_prior_tip": true, "raw_view_had_prior_observation": true, "second_write_persisted": true, "single_scope_directory": true, "attribution_stable": true, "default_main_workspace_untouched": true}},
+   "rc5_generated_bundle": {"status": "PASS", "checks": {"session_id_adopted": true, "first_recall_had_prior_tip": true, "raw_view_had_prior_observation": true, "second_write_persisted": true, "single_scope_directory": true, "attribution_stable": true, "default_main_workspace_untouched": true}},
+   "rc1_adapter_direct": {"status": "PASS", "checks": {"session_id_adopted": true, "first_recall_had_prior_tip": true, "raw_view_had_prior_observation": true, "second_write_persisted": true, "single_scope_directory": true, "attribution_stable": true, "default_main_workspace_untouched": true}},
+   "rc1_generated_bundle": {"status": "PASS", "checks": {"session_id_adopted": true, "first_recall_had_prior_tip": true, "raw_view_had_prior_observation": true, "second_write_persisted": true, "single_scope_directory": true, "attribution_stable": true, "default_main_workspace_untouched": true}}
+  },
+  "scope_note": "Session scope directory is workspaces_root/scoped-v1/p-<sha(project)>/s-<sha(sessionId)>; resume reuses it (single directory asserted), attribution stays run_id/task_id == sessionId, and the default 'main' workspace is never created in session mode. Bundle variant boots the generated session-default run package (dsh-bundle --memory) through its own patch layer; verifyDshBundle passes after state changes (state growth does not invalidate the run-copy verification).",
+  "evidence": ".asset-state/evidence/memory-resume-0.2.2-rc.5.json, memory-resume-0.2.2-rc.5-bundle.json, memory-resume-0.2.2-rc.1.json, memory-resume-0.2.2-rc.1-bundle.json (not committed)"
+ },
+ "host_reacceptance": {
+  "reason": "M3+M4 source changes and the growth-benchmark recall fix changed the assets fingerprint; per the no-inherited-acceptance rule the full chain was re-run",
+  "chain": "probe-memory-session-context (candidates+cache specials) then probe-dsh-host for both hosts; all PASS; acceptances #51 (rc.5) and #52 (rc.1) registered in catalog/runtime/dsh-compatibility.json; check-dsh VERIFIED for both installs",
+  "npm_channels_recheck": "latest=0.2.2-rc.5, next=0.2.2-rc.5 (2026-11-24); no new tracked-channel release"
+ },
+ "growth_benchmark_100k": {
+  "script": "plugins/memory-net/scripts/growth-benchmark.mjs",
+  "result": "catalog/audit/memory-growth-100k.json — PASS",
+  "red_found": "recallForTask hit-query p95 7305.9ms exceeded the 5000ms regression-signal bound at 100k nodes (budget-trim loop did a linear explanations.find per trimmed node; fakeGet did a linear rows.find per candidate/needs_review validation)",
+  "fix": "plugins/memory-net/src/recall.ts — Map-indexed explanations and row lookups (behavior unchanged, order and reasons identical); 109/109 core tests green",
+  "after": "recall_hit_p95 562.2ms (13x), recall_miss_p95 498.5ms, insert 0.346ms/node, full projection 301ms, activate p95 713.7ms, gc purge of 2000 demoted tips 658.9ms; memory.db 23.6MB, provenance.db 88.8MB at 100k nodes with ledger+evidence enabled",
+  "bounds_note": "Sandbox-calibrated regression signals, not a product SLA"
+ },
+ "multitask_ab": {
+  "script": "plugins/memory-net/scripts/multitask-ab.mjs",
+  "result": "catalog/audit/memory-multitask-ab.json — PASS",
+  "arms": "curated task-driven recall (recallForTask) vs recent-first raw snapshot (same node budget) on a fixed 6-task set with seeded constraints/tips/promoted inferences/progress plus word-overlap noise and latest-log noise",
+  "headline": "curated effective_recall 0.333 vs 0.0; wrong memories 48 vs 60; re-derivation misses 24 vs 36; char proxy 3042 vs 1866 (curation spends budget on rules instead of noise logs)",
+  "measured_characteristic": "Constraints are workspace-global by design (frozen top): in a single shared multi-task library foreign constraints occupied 8/10 budget slots and evicted task-relevant tips/inference/progress. Session-scoped mode bounds this per session. Recorded as a trade-off; semantics were not changed without authorization.",
+  "honesty_note": "Deterministic offline fixture against seeded ground truth; not a real-model effectiveness certification"
+ },
+ "regression": {
+  "core": "109/109 (plugins/memory-net npm test)",
+  "adapter": "35/35 (adapters/dsh npm test)",
+  "root": "npm test + npm run validate PASS (re-run at commit time)"
+ },
+ "remaining_known_limits": [
+  "Windows host re-verification not executed in this environment (Linux only); cross-compiled builds were not part of this repo's memory scope",
+  "Real multi-task A/B with a live model requires explicit authorization and a paid account; fixture A/B is the reproducible offline substitute",
+  "durableEventSeq/root passthrough still depends on the host binding callback; DSH hosts that do not expose it keep persisted_unknown (M1 behavior)",
+  "dsh latest channel could move again; adoption of any newer host requires the full upgrade-acceptance flow, not this record"
+ ],
+ "independence": "No subagents; no auto-merge; current Web untouched; no user profile or real library modified; no DSH vendor change; all runs used temporary SQLite stores and isolated DSH installs with a scripted local model"
+}
