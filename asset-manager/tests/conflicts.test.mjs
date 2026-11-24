@@ -183,3 +183,21 @@ test('G3: 源更新后 check-stale 报 NEEDS_REVIEW; 未更新报 CURRENT; 不�
   const none = await checkStaleness(hub, empty, 'all')
   assert.equal(none.status, 'NO_DEPLOYMENTS')
 })
+
+// ============ CLI 用法防线: 参数缺失给出可行动错误而非内部异常 ============
+
+test('check-conflicts: 既无 ids 也无 expert 时给出用法错误（非 "ids is not iterable"）', async () => {
+  const { checkConflicts } = await import('../core/conflicts.mjs')
+  await assert.rejects(
+    () => checkConflicts(root, { client: 'dsh' }),
+    /requires explicit IDs|requires --expert|ids.*expert/i
+  )
+})
+
+test('check-stale: 项目目录不存在时给出明确错误（非原始 ENOENT）', async () => {
+  const { hub } = { hub: root }
+  await assert.rejects(
+    () => checkStaleness(hub, path.join(os.tmpdir(), 'no-such-project-' + Date.now()), 'all'),
+    /project directory|unknown project/i
+  )
+})

@@ -163,7 +163,10 @@ export async function workflowProvidersCurrent(root) {
 export async function checkStaleness(root, project, deploymentId = 'all') {
   const catalog = await loadCatalog(root)
   const { sha256 } = await import('./files.mjs')
-  const target = await confined(project, '.agents-hub/deployments', { mustExist: false })
+  let projectBase
+  try { projectBase = await fs.realpath(project) }
+  catch { throw new Error('Unknown project directory: ' + project + ' — check-stale expects an existing consumer project containing .agents-hub/deployments') }
+  const target = await confined(projectBase, '.agents-hub/deployments', { mustExist: false })
   let receipts = []
   try {
     receipts = (await fs.readdir(target)).filter(n => n.endsWith('.json'))
