@@ -15,18 +15,20 @@
  *   4) ctx.on('tools/result', ...)         —— auto-observe：宿主工具结果自动入网（可选能力，
  *      缺失仅关自动观测不拖垮其余接缝；写纪律不破——observation 仅宿主路径）
  */
+import path from 'node:path'
 import { MemoryNet } from '../../../src/store.js'
 import type { AdapterConfig } from './config.js'
 import { resolveConfig, workspaceDir } from './config.js'
 import type { DshCtx, ToolDef } from './contract.js'
 import { probeCtx } from './contract.js'
+import {resolveBinding,assemblyAgent,rejectSelectors,guardScopeDirectory} from './context.js'
 import type { HostApi } from './bridge.js'
 import { openHostApi, renderActivation, activateOpts, installAutoObserve } from './bridge.js'
 
 export const name = 'memory-net-dsh'
 
 /** Cordis 注入声明：ctx.systemPrompt / ctx.tools 须经此声明才可访问。 */
-export const inject = ['systemPrompt', 'tools']
+export const inject = ['systemPrompt', 'tools', 'agents', 'workingDirectory']
 
 type Dict = Record<string, unknown>
 const str = (v: unknown, fallback: string): string => (typeof v === 'string' && v.length > 0 ? v : fallback)
@@ -65,6 +67,7 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
   let closed = false
   const netOf = (dir: string): MemoryNet => {
     if (closed) throw new Error('memory-net adapter is closed')
+    if(cfg.context.mode === 'session')guardScopeDirectory(cfg,dir)
     const hit = nets.get(dir)
     if (hit) return hit
     const net = MemoryNet.open(dir, { agentId: cfg.agent_id, role: 'host' })
@@ -78,16 +81,56 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
     nets.clear()
   }
 
-  let api: HostApi
-  try {
-    api = openHostApi(cfg, netOf, cfg.default_workspace, closeAllNets)
-  } catch (e) {
-    // workspace 名非法 / 目录不可建 / node:sqlite 不可用——降级明示，不崩宿主
-    warn(ctx, `降级：memory-net 打开失败——${String((e as Error)?.message ?? e)}`)
-    return null
+  const bindingOf = (agent:unknown, signal?:AbortSignal) => {
+    if(closed)throw new Error('memory-net adapter is closed')
+    const binding = resolveBinding(ctx,cfg,agent,signal)
+    guardScopeDirectory(cfg,binding.dir)
+    return binding
   }
-
-  ctx.provide('memory-net', api)
+  const forAgent = (agent:unknown):HostApi => {
+    const binding = bindingOf(agent)
+    const scopedCfg = {...cfg,workspaces_root:path.dirname(binding.dir),default_workspace:binding.dir.split(/[\\/]/).pop()!}
+    const scoped = openHostApi(scopedCfg,netOf)
+    return new Proxy(scoped,{get(target,key) {
+      if(key === 'forAgent') return forAgent
+      if(key === 'close') return () => {throw new Error('Close adapter through owning host capability')}
+      const value = Reflect.get(target,key)
+      if(typeof value !== 'function')return value
+      return (...args:unknown[])=>{
+        if(bindingOf(agent).scopeId !== binding.scopeId)throw new Error('Memory context changed; obtain fresh bound capability')
+        if(key === 'observe' || key === 'addInference' || key === 'addTip') {
+          const input=(args[0] ?? {}) as Dict
+          if((input.run_id !== undefined && input.run_id !== binding.sessionId) || (input.task_id !== undefined && input.task_id !== null))throw new Error('Host memory context selector mismatch')
+          args[0]={...input,run_id:binding.sessionId}
+        }
+        if(key === 'activate') {
+          const opts=(args[1] ?? {}) as Dict
+          if((opts.run_id !== undefined && opts.run_id !== binding.sessionId)||(opts.task_id !== undefined && opts.task_id !== binding.sessionId))throw new Error('Host recall context mismatch')
+          args[1]={...opts,run_id:binding.sessionId,task_id:binding.sessionId}
+        }
+        if(['updateProgress','appendTrail','replayTrail'].includes(String(key)) && args[0] !== binding.sessionId)throw new Error('Host session context slot mismatch')
+        return value.apply(target,args)
+      }
+    }})
+  }
+  let api: HostApi
+  if(cfg.context.mode === 'session') {
+    api = new Proxy({workspaceDir:cfg.workspaces_root,forAgent,close:closeAllNets} as HostApi,{get(target,key){
+      if(key === 'workspaceDir' || key === 'forAgent' || key === 'close')return Reflect.get(target,key)
+      if(key === 'then' || typeof key === 'symbol')return undefined
+      return ()=>{throw new Error('Trusted agent context required; use memory-net.forAgent(agent)')}
+    }})
+  } else {
+    try {api = openHostApi(cfg,netOf,cfg.default_workspace,closeAllNets)}
+    catch(e){warn(ctx,'memory-net 打开失败（shared）：'+String(e));return null}
+  }
+  ctx.provide('memory-net',api)
+  const select = (args:Dict,exec?:{agent?:unknown;signal?:AbortSignal}) => {
+    if(cfg.context.mode === 'shared')return {net:netOf(workspaceDir(cfg,str(args.workspace,cfg.default_workspace))),run:args.run_id as string|undefined,task:args.task_id as string|undefined,workspace:str(args.workspace,cfg.default_workspace)}
+    rejectSelectors(args)
+    const b=bindingOf(exec?.agent,exec?.signal)
+    return {net:netOf(b.dir),run:b.sessionId,task:b.sessionId,workspace:'current'}
+  }
 
   // ---- 模型工具 1：按预算激活共享记忆 ----
   if (cfg.tools.recall) {
@@ -115,11 +158,16 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
         },
         render: (_args, value) => [{ type: 'text', text: String((value as { text?: string })?.text ?? '') }],
       },
-      execute: (args) => {
-        const net = netOf(workspaceDir(cfg, str(args.workspace, cfg.default_workspace)))
-        const r = net.activate(str(args.query, ''), activateOpts(cfg, args.run_id as string | null | undefined, args.task_id as string | null | undefined, args.view === undefined ? cfg.recall.view : args.view))
+      execute: (args,exec) => {
+        const selected=select(args,exec)
+        const r = selected.net.activate(str(args.query, ''), activateOpts(cfg, selected.run, selected.task, args.view === undefined ? cfg.recall.view : args.view))
         return { text: renderActivation(r) }
       },
+    }
+    if(cfg.context.mode === 'session') {
+      for(const key of ['workspace','run_id','task_id'])delete (recall.parameters.properties as Dict)[key]
+      recall.parameters.additionalProperties=false
+      recall.description='Recall memory for the trusted current project/session only. raw is diagnostic within the same boundary; no cross-session selectors.'
     }
     ctx.tools.register(recall)
   }
@@ -163,10 +211,11 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
           return [{ type: 'text', text: `memory saved: id=${v.id} kind=${v.kind} workspace=${v.workspace}` }]
         },
       },
-      execute: (args) => {
+      execute: (args,exec) => {
         const kind = str(args.kind, '')
-        const ws = str(args.workspace, cfg.default_workspace)
-        const net = netOf(workspaceDir(cfg, ws))
+        const selected=select(args,exec)
+        const ws = selected.workspace
+        const net = selected.net
         // 双保险 1：kind 白名单在工具面再拒一次（schema 层 enum 之外的第二道门）。
         // 拒绝路径抛 Error（宿主转为工具失败内容回给模型）——kokoa 插件先例同款。
         if (kind === 'observation' || kind === 'constraint' || kind === 'progress') {
@@ -183,8 +232,8 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
           text: str(args.text, ''),
           confidence: num(args.confidence),
           based_on: Array.isArray(args.based_on) ? (args.based_on as string[]) : [],
-          run_id: (args.run_id as string | undefined) ?? null,
-          task_id: (args.task_id as string | undefined) ?? null,
+          run_id: selected.run ?? null,
+          task_id: cfg.context.mode === 'session' ? null : selected.task ?? null,
           payload: kind === 'tip' ? {
             ...(args.strategy !== undefined ? { strategy: args.strategy } : {}),
             ...(args.recovery !== undefined ? { recovery: args.recovery } : {}),
@@ -192,6 +241,11 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
         })
         return { saved: true as const, id: n.id, kind: n.kind, workspace: ws }
       },
+    }
+    if(cfg.context.mode === 'session') {
+      for(const key of ['workspace','run_id','task_id'])delete (write.parameters.properties as Dict)[key]
+      write.parameters.additionalProperties=false
+      write.description='Write inference/tip to the trusted current project/session. Observation is host-only. Session context is assigned by the host, not by arguments.'
     }
     ctx.tools.register(write)
   }
@@ -205,7 +259,7 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
       warn(ctx, 'auto_observe 已启用但 ctx.on 缺失（cordis 事件总线不可达）——自动观测关闭，其余接缝不受影响')
     } else {
       try {
-        installAutoObserve({ on: bus.bind(ctx) }, cfg, netOf, { warn: (m) => warn(ctx, m) })
+        installAutoObserve({ on: bus.bind(ctx) }, cfg, netOf, { warn: (m) => warn(ctx, m),...(cfg.context.mode === 'session'?{binding:(exec)=>bindingOf(exec.agent,exec.signal)}:{}) })
       } catch (e) {
         warn(ctx, `auto_observe 订阅失败（自动观测关闭，其余接缝不受影响）: ${String((e as Error)?.message ?? e)}`)
       }
@@ -219,10 +273,11 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
     ctx.systemPrompt.section({
       name: 'memory-net',
       order: cfg.inject.section_order,
-      text: () => {
+      text: (context) => {
         try {
-          const net = netOf(workspaceDir(cfg, cfg.default_workspace))
-          const r = net.activate('', activateOpts(cfg))
+          const binding=cfg.context.mode === 'session'?bindingOf(assemblyAgent(context),(context as {signal?:AbortSignal})?.signal):null
+          const net = netOf(binding?.dir ?? workspaceDir(cfg, cfg.default_workspace))
+          const r = net.activate('', activateOpts(cfg,binding?.sessionId,binding?.sessionId))
           if (r.nodes.length === 0 && !r.trail) return ''
           return renderActivation(r)
         } catch (e) {

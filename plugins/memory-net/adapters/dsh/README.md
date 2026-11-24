@@ -4,7 +4,23 @@
 已对 **真实 dsh 0.1.2-rc.1** 端到端验证（见文末冒烟）：插件加载 / 工具注册 / systemPrompt
 区段注入 / 模型工具调用 / SQLite 落盘 / 宿主工具结果自动观测（auto-observe）全链路闭环。
 
-## 精选模式（本分支候选，当前Web未采用）
+## 宿主上下文隔离（本分支候选，当前Web未采用）
+
+默认context.mode=session。真实Agent必须与agents.get(session.id)相同；规范化当前目录和持久会话ID确定独立数据库。模型工具、提示和raw仅访问当前范围；workspace/run_id/task_id不再由模型选择，缺身份工具拒绝、提示为空、观测跳过，不回退共享库。
+
+自动观测在tools/pre-execute按token捕获归属，结果仍写入原调用项目。host通过forAgent(exec.agent)获取能力；Agent替换、目录变化、插件关闭后旧能力拒绝。session ID用于run和session-context进度槽，不冒充业务任务。
+
+```js
+memory_net_write({kind:"tip",text:"当前项目决策"})
+memory_net_recall({query:"决策"})
+memory_net_recall({query:"read",view:"raw"})
+```
+
+旧共享模式需宿主明确context.mode=shared，保留workspace参数但无会话隔离。升级不自动读取或迁移旧main库；新库位于root/scoped-v1/p-项目哈希/s-会话哈希。切换cwd切换范围，路径别名realpath归一，同会话同目录恢复映射由契约测试覆盖，真实跨进程resume未验收。目录不是Git根，移动项目不自动继承。
+
+适配边界不是OS沙箱：有任意文件/宿主工具仍能读取数据库。跨会话共享、业务任务绑定、候选提炼、版本绑定和脱敏后续实现。当前Web未采用本候选。
+
+## 精选模式（shared兼容用法）
 
 `recall.view`配置默认curated，作用于提示区段及memory_net_recall。工具传`view:"raw"`仅诊断本次调用，不改变后续注入；非法模式拒绝。核心host api.activate默认raw以兼容旧接口，显式传curated才精选。工具结果、失败证据仍自动落库；精选排除日志不是删除日志。
 
@@ -37,7 +53,7 @@ ctx.effect可用时销毁自动关闭全部workspace；陈旧工具/事件不得
 
 | 接缝 | 真实契约（权威源） | 本包落点 |
 |------|------------------|---------|
-| 注入声明 | cordis 对 ctx 服务属性强制 `inject`，未声明访问即抛 `cannot get property "X" without inject` | 模块静态导出 `inject = ['systemPrompt', 'tools']` |
+| 注入声明 | cordis 对 ctx 服务属性强制 `inject`，未声明访问即抛 `cannot get property "X" without inject` | 模块静态导出 `inject = ['systemPrompt', 'tools', 'agents', 'workingDirectory']` |
 | 区段 | `PromptSection = { name, order, text }`（dsh-system-prompt；name 唯一，text 为 string 或 `(context)=>string`） | `ctx.systemPrompt.section({ name: 'memory-net', order, text })` |
 | 工具 | `ToolDefinition = ToolSchema + output（必填 ToolOutputDefinition{schema,render}）+ execute(args,exec)→canonical JSON`（dsh-tools） | 两工具均带 `output`；execute 返回满足 schema 的 canonical 值，拒绝路径抛 Error |
 | 包入口 | cordis 经 profile node_modules 按 bare name `import(包名)` | `package.json` 声明 `main: dist/adapters/dsh/src/index.js` |

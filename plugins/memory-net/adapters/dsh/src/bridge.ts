@@ -17,6 +17,7 @@ import type { ToolResultExec, ToolResultPayloadFace } from './contract.js'
 export interface HostApi {
   /** workspace 目录（= 物理隔离载体）。 */
   workspaceDir: string
+  forAgent?: (agent:unknown)=>HostApi
   /** 物理观测写入（仅宿主/工具桥调用；模型工具不可达此方法）。 */
   observe(input: {
     key: string
@@ -203,20 +204,36 @@ export function installAutoObserve(
   ctx: { on: (event: string, listener: (...args: unknown[]) => void) => void },
   cfg: AdapterConfig,
   netOf: (dir: string) => MemoryNet,
-  opts: { warn: (msg: string) => void },
+  opts: { warn: (msg: string) => void; binding?: (exec:ToolResultExec)=>{dir:string;sessionId:string;scopeId:string;project:string} },
 ): void {
   let failures = 0
+  const admitted = new Map<symbol, {dir:string;sessionId:string;scopeId:string;project:string}|null>()
+  if(cfg.context.mode === 'session')ctx.on('tools/pre-execute',(execRaw,nextRaw)=>{
+    const exec=(execRaw ?? {}) as ToolResultExec
+    if(typeof exec.token === 'symbol' && !exec.name?.startsWith('memory_net_') && (cfg.auto_observe.include_nested || exec.parent == null)) {
+      let binding:{dir:string;sessionId:string;scopeId:string;project:string}|null=null
+      try {binding=opts.binding?.(exec) ?? null}catch(e){opts.warn('Memory admission context unavailable: '+String(e))}
+      if(admitted.size<4096)admitted.set(exec.token,binding)
+      else opts.warn('Memory admission capacity reached; result will be skipped')
+    }
+    if(typeof nextRaw !== 'function')throw new Error('Missing tools/pre-execute continuation')
+    return nextRaw()
+  })
   ctx.on('tools/result', (execRaw, resultRaw) => {
     try {
       const exec = (execRaw ?? {}) as ToolResultExec
       const result = (resultRaw ?? {}) as ToolResultPayloadFace
+      const binding = cfg.context.mode === 'session' && exec.token ? admitted.get(exec.token) : undefined
+      if(exec.token)admitted.delete(exec.token)
       const obs = buildObservation(cfg.auto_observe, exec, result)
       if (!obs) return
-      netOf(workspaceDir(cfg, cfg.default_workspace)).add('observation', {
+      if(cfg.context.mode === 'session' && !binding)throw new Error('Auto observation missing trusted agent context')
+      netOf(binding?.dir ?? workspaceDir(cfg, cfg.default_workspace)).add('observation', {
+        run_id: binding?.sessionId ?? null,
         key: obs.key,
         text: obs.text,
         source: 'tool',
-        payload: obs.payload,
+        payload: {...obs.payload,...(binding?{host_context:{session_id:binding.sessionId,project:binding.project,scope_id:binding.scopeId}}:{})},
       })
     } catch (e) {
       failures++

@@ -74,7 +74,7 @@ test('契约锁: 模块导出 name/apply/inject——inject 声明是 cordis 服
   assert.equal(typeof adapter.name, 'string')
   assert.equal(typeof adapter.apply, 'function')
   // cordis：未声明 inject 即访问 ctx.systemPrompt/ctx.tools → 抛 cannot get property without inject
-  assert.deepEqual(adapter.inject, ['systemPrompt', 'tools'])
+  assert.deepEqual(adapter.inject, ['systemPrompt', 'tools', 'agents', 'workingDirectory'])
 })
 
 test('契约锁: 工具 def 含必填 output（schema + render）——真实 ToolDefinition 缺 output 即违约', () => {
@@ -82,7 +82,7 @@ test('契约锁: 工具 def 含必填 output（schema + render）——真实 To
   let closeApi: ReturnType<typeof apply> = null
   try {
     const { ctx, tools } = mockCtx()
-    closeApi = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })
+    closeApi = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })
     assert.equal(tools.length, 2)
     for (const t of tools) {
       assert.equal(typeof t.name, 'string')
@@ -107,7 +107,7 @@ test('apply 正常接线: provide 服务 + 2 工具 + 1 区段（name/order/text
   const root = makeRoot()
   try {
     const { ctx, provided, tools, sections } = mockCtx()
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })
     assert.ok(api, 'apply 应返回 host api')
     assert.equal(provided.get('memory-net'), api, 'provide(memory-net) 注册且同一实例')
     assert.deepEqual(tools.map((t) => t.name).sort(), ['memory_net_recall', 'memory_net_write'])
@@ -134,7 +134,7 @@ test('memory_net_write: 伪造 observation/constraint/progress 抛错拒绝；in
   let closeApi: ReturnType<typeof apply> = null
   try {
     const { ctx, tools } = mockCtx()
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     closeApi = api
     const write = tools.find((t) => t.name === 'memory_net_write')!
     assert.ok(write, 'write 工具已注册')
@@ -167,7 +167,7 @@ test('memory_net_recall: 双 agent 共享——host 写 progress/observation，�
   const root = makeRoot()
   try {
     const { ctx, tools, provided } = mockCtx()
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
     const recall = tools.find((t) => t.name === 'memory_net_recall')!
 
     api.addConstraint({ key: 'no-force-push', text: '永不 force push main', mode: 'forbid' })
@@ -199,11 +199,11 @@ test('section text: 空网返回空串（不占 prompt 预算）；有内容时�
   const root = makeRoot()
   try {
     const { ctx, sections } = mockCtx()
-    apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })
+    apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })
     const section = sections[0]!
     assert.match(renderSection(section), /^$/, '空网 → 空区段')
 
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
     api.addConstraint({ key: 'c1', text: '必须先跑测试', mode: 'require' })
     api.updateProgress('t2', { status: 'doing', summary: '重构进行中' })
     const out = renderSection(section)
@@ -219,7 +219,7 @@ test('降级路径: enabled=false 不挂任何接缝；ctx 探测失败不挂且
   const root = makeRoot()
   try {
     const { ctx, provided, tools, sections } = mockCtx()
-    const off = apply(ctx, { enabled: false, workspaces_root: join(root, 'ws') })
+    const off = apply(ctx, { enabled: false, context:{mode:'shared'}, workspaces_root: join(root, 'ws') })
     assert.equal(off, null)
     assert.equal(provided.size, 0)
     assert.equal(tools.length, 0)
@@ -227,7 +227,7 @@ test('降级路径: enabled=false 不挂任何接缝；ctx 探测失败不挂且
     assert.ok(ctx.logger, '降级路径在 logger 缺失时也必须安全（stderr 回退）')
 
     const bad = mockCtx()
-    const degraded = apply(bad.ctx, { workspaces_root: join(root, 'ws'), default_workspace: '../escape' })
+    const degraded = apply(bad.ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: '../escape' })
     assert.equal(degraded, null, '非法 workspace 名 → 降级不抛')
     assert.match(bad.warns.join('\n'), /打开失败/, '降级原因明示')
   } finally {
@@ -236,7 +236,7 @@ test('降级路径: enabled=false 不挂任何接缝；ctx 探测失败不挂且
 })
 
 test('workspaceDir: 名字路径注入防护 + config 默认值解析（~ 与 ${KOKOA_STATE_DIR} 展开）', () => {
-  const cfg = resolveConfig({ workspaces_root: '/data/mn' })
+  const cfg = resolveConfig({ context:{mode:'shared'}, workspaces_root: '/data/mn' })
   assert.equal(workspaceDir(cfg, 'main'), normalize('/data/mn/main'))
   for (const bad of ['../escape', 'a/b', 'a\\b', '.', '..', '']) {
     assert.throws(() => workspaceDir(cfg, bad), `应拒绝: ${JSON.stringify(bad)}`)
@@ -244,7 +244,7 @@ test('workspaceDir: 名字路径注入防护 + config 默认值解析（~ 与 ${
   // 默认 root 落点
   const def = resolveConfig({})
   assert.ok(def.workspaces_root.includes('memory-net'), `默认 root: ${def.workspaces_root}`)
-  const env = resolveConfig({ workspaces_root: '${KOKOA_STATE_DIR}/mn' })
+  const env = resolveConfig({ context:{mode:'shared'}, workspaces_root: '${KOKOA_STATE_DIR}/mn' })
   assert.ok(!env.workspaces_root.includes('${'), '函数形态 replacer 不展开特殊序列')
   // default_workspace 兜底
   assert.equal(workspaceDir(cfg), normalize('/data/mn/default'))
@@ -258,7 +258,7 @@ test('host api 全景: addInference/addTip/addConstraint/exportPkg/activate + cl
   const root = makeRoot()
   try {
     const { ctx } = mockCtx()
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     const inf = api.addInference({ text: '推断', confidence: 0.5 })
     assert.equal(inf.kind, 'inference')
     assert.equal(inf.confidence, 0.5)
@@ -286,7 +286,7 @@ test('auto-observe 成功路径: tools/result 事件 → observation 落网（�
   const root = makeRoot()
   try {
     const { ctx, tools, emit, bus } = mockCtx({ withBus: true })
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     assert.equal((bus.get('tools/result') ?? []).length, 1, 'tools/result 恰好订阅一次')
 
     emit('tools/result',
@@ -319,7 +319,7 @@ test('auto-observe 失败路径: isError=true 也入网（include_error 默认�
   const root = makeRoot()
   try {
     const { ctx, emit } = mockCtx({ withBus: true })
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     emit('tools/result',
       { callId: 'c-2', name: 'bash', arguments: { cmd: 'make test' } },
       { isError: true, error: { message: 'exit 1' } })
@@ -331,7 +331,7 @@ test('auto-observe 失败路径: isError=true 也入网（include_error 默认�
     api.close()
 
     const { ctx: ctx2, emit: emit2 } = mockCtx({ withBus: true })
-    const api2 = apply(ctx2, { workspaces_root: join(root, 'ws2'), default_workspace: 'main', auto_observe: { include_error: false } })!
+    const api2 = apply(ctx2, { context:{mode:'shared'}, workspaces_root: join(root, 'ws2'), default_workspace: 'main', auto_observe: { include_error: false } })!
     emit2('tools/result',
       { callId: 'c-3', name: 'bash', arguments: { cmd: 'x' } },
       { isError: true, error: { message: 'boom' } })
@@ -348,7 +348,7 @@ test('auto-observe 自身工具过滤: memory_net_* 的结果不递归入网（�
   const root = makeRoot()
   try {
     const { ctx, emit } = mockCtx({ withBus: true })
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     emit('tools/result',
       { callId: 'c-5', name: 'memory_net_write', arguments: { kind: 'tip', text: 'x' } },
       { isError: false, value: { saved: true, id: 'n1' } })
@@ -367,7 +367,7 @@ test('auto-observe 截断: 超长结果/参数 → 文本截断 + payload.trunca
   try {
     const { ctx, emit } = mockCtx({ withBus: true })
     const api = apply(ctx, {
-      workspaces_root: join(root, 'ws'), default_workspace: 'main',
+      context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main',
       auto_observe: { max_chars: 100, args_chars: 30 },
     })!
     emit('tools/result',
@@ -381,7 +381,7 @@ test('auto-observe 截断: 超长结果/参数 → 文本截断 + payload.trunca
     api.close()
 
     const { ctx: ctx2, emit: emit2 } = mockCtx({ withBus: true })
-    const api2 = apply(ctx2, { workspaces_root: join(root, 'ws2'), default_workspace: 'main' })!
+    const api2 = apply(ctx2, { context:{mode:'shared'}, workspaces_root: join(root, 'ws2'), default_workspace: 'main' })!
     emit2('tools/result', { callId: 'c-8', name: 'small', arguments: { a: 1 } }, { isError: false, value: { ok: true } })
     const hit2 = api2.activate('small', {}).nodes.find((x) => x.node.kind === 'observation' && x.node.payload.tool === 'small')
     assert.equal(hit2!.node.payload.truncated, false)
@@ -395,7 +395,7 @@ test('auto-observe 嵌套过滤: exec.parent 存在（嵌套 dispatch）默认�
   const root = makeRoot()
   try {
     const { ctx, emit } = mockCtx({ withBus: true })
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     emit('tools/result',
       { callId: 'c-9', name: 'run_code', parent: 'tok-1', arguments: {} },
       { isError: false, value: 1 })
@@ -403,7 +403,7 @@ test('auto-observe 嵌套过滤: exec.parent 存在（嵌套 dispatch）默认�
     api.close()
 
     const { ctx: ctx2, emit: emit2 } = mockCtx({ withBus: true })
-    const api2 = apply(ctx2, { workspaces_root: join(root, 'ws2'), default_workspace: 'main', auto_observe: { include_nested: true } })!
+    const api2 = apply(ctx2, { context:{mode:'shared'}, workspaces_root: join(root, 'ws2'), default_workspace: 'main', auto_observe: { include_nested: true } })!
     emit2('tools/result',
       { callId: 'c-10', name: 'run_code', parent: 'tok-2', arguments: {} },
       { isError: false, value: 2 })
@@ -418,7 +418,7 @@ test('auto-observe 软降级: ctx.on 缺失 → 自动观测关闭并明示 warn
   const root = makeRoot()
   try {
     const { ctx, tools, sections, warns } = mockCtx() // 无事件总线
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })
     assert.ok(api, 'auto-observe 不可用不拖垮其余接缝')
     assert.equal(tools.length, 2)
     assert.equal(sections.length, 1)
@@ -435,7 +435,7 @@ test('auto-observe 自我隔离: 写入失败不外溢（listener 内吞掉并 w
     const { ctx } = mockCtx({ withBus: true })
     const captured: Array<(...a: unknown[]) => void> = []
     const fakeCtx = { on: (_e: string, l: (...a: unknown[]) => void) => captured.push(l) }
-    const cfg = resolveConfig({ workspaces_root: join(root, 'ws') })
+    const cfg = resolveConfig({ context:{mode:'shared'}, workspaces_root: join(root, 'ws') })
     const warns: string[] = []
     installAutoObserve(fakeCtx, cfg, () => { throw new Error('db closed') }, { warn: (m) => warns.push(m) })
     assert.equal(captured.length, 1)
@@ -464,7 +464,7 @@ test('auto-observe 配置: resolveConfig 默认值 + 非法值防御；enabled=f
   let closeApi: ReturnType<typeof apply> = null
   try {
     const { ctx, bus } = mockCtx({ withBus: true })
-    closeApi = apply(ctx, { workspaces_root: join(root, 'ws'), auto_observe: { enabled: false } })
+    closeApi = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), auto_observe: { enabled: false } })
     assert.equal((bus.get('tools/result') ?? []).length, 0, 'enabled=false 不订阅')
   } finally {
     closeApi?.close()
@@ -486,7 +486,7 @@ test('P2-4: HostApi.close 全量关闭——非默认 workspace 实例不泄漏�
       return net
     } as typeof MemoryNet.open
     const { ctx, tools } = mockCtx()
-    const api = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
     const recall = tools.find((t) => t.name === 'memory_net_recall')!
     recall.execute({ workspace: 'side', query: '' })
     assert.equal(opened.length, 2, '默认 + side 两个实例')
@@ -503,8 +503,8 @@ test('P2-10: 同一 ctx 重复 apply 幂等返回既有实例，section/tools �
   const root = makeRoot()
   try {
     const { ctx, tools, sections, warns } = mockCtx()
-    const api1 = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
-    const api2 = apply(ctx, { workspaces_root: join(root, 'ws'), default_workspace: 'main' })
+    const api1 = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })!
+    const api2 = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' })
     assert.equal(api2, api1, '幂等返回同一实例（真实 dsh 同名重复注册会炸宿主）')
     assert.equal(tools.length, 2, '工具不重复注册')
     assert.equal(sections.length, 1, 'section 不重复注册')
@@ -535,7 +535,7 @@ test('宿主effect销毁关闭全部workspace，陈旧工具与事件不得重�
   const { ctx, tools, emit, warns } = mockCtx({ withBus: true })
   const disposers: Array<() => void> = []
   ctx.effect = (setup) => { disposers.push(setup()) }
-  const config = { workspaces_root: join(root, 'ws'), default_workspace: 'main' }
+  const config = { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main' }
   let api: ReturnType<typeof apply> = null
   try {
     api = apply(ctx, config)

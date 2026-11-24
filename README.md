@@ -27,6 +27,10 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 **当前DSH-focused重构已交付，验收只要求DSH可用；Codex/OpenCode适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH latest 0.2.2-rc.1、历史next rc.4和当前next rc.5独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 交付边界及新clone复验见 [交付矩阵](catalog/audit/DELIVERY.md) 与 [干净副本证据](catalog/audit/fresh-checkout-verification.json)；阶段历史见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
 
+## 本分支候选：宿主会话／项目记忆隔离
+
+基于已合并main隔离开发，尚未采用到Web。DSH默认按真实Agent、规范化当前目录和持久会话ID访问独立数据库；提示、写入、raw使用同一边界，模型不能指定其他workspace/run/task。自动观测归属在调用开始捕获，缺身份安全拒绝；旧shared模式需宿主明确配置，不迁移或读取旧库。详见[适配边界](<plugins/memory-net/adapters/dsh/README.md>)及[候选验收](<catalog/audit/memory-session-boundary.json>)。业务任务ID、跨会话共享授权和候选提炼尚未实现，隔离不是OS保密沙箱。下文Web状态是当前已采用版本，不表示本候选已部署。
+
 ## 当前合并与运行状态
 
 PR #3已审阅并合入main（合并提交6a2ba83），包含资产可用性/组合、脚本生命周期、搜索选源/偏题和显式可信TUN抓取修复。独立DSH运行包已验证；其后用户授权当前Web实验并自行重启，搜索/可信TUN抓取、9个仓库技能及独立记忆工具路径已实测。首次重复tool-skill导致空目录已最小修复，见[实际Web实验](catalog/audit/web-live-experiment.json)。合并时的历史状态见 [合并交付记录](catalog/audit/pr3-merge-delivery.json)。此次实验沿用原模型鉴权，profile已由用户重启采用；其他profile/新宿主采用及真实记忆迁移仍须独立确认，不自动替换。

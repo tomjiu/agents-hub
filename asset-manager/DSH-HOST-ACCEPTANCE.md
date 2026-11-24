@@ -13,6 +13,12 @@ node asset-manager/probe-dsh-host.mjs
 
 其他平台设置同名环境变量后运行。此处HUB_DSH_INSTALLATION指包目录，不是个人配置目录。P0当前实测宿主为0.2.2-rc.1与0.2.2-rc.5（历史rc.4记录保留）；其他版本必须重新验收，不能由结构类型或单元测试推断兼容。
 
+## 宿主上下文专项（本分支）
+
+先运行node asset-manager/probe-memory-session-context.mjs，后运行原probe-dsh-host.mjs，二者使用同一HUB_DSH_INSTALLATION。session专项使用三个新会话：同项目A/B和另一项目C；真实headless验证host绑定seed、模型tip写入、自动观察、curated/raw、工作区伪造拒绝和上下文进度。旧main库不打开。旧全链路显式shared测兼容，再合入相同指纹的session报告；缺专项不能批准session-v1包。
+
+真实跨进程resume和同时运行的多宿主尚未验收；契约测试覆盖同ID注册替换、目录切换及并发事件归属。原HUB_DSH_BUNDLE_TEST依赖shared预置库，不能冒充新session默认包验收；新包另行采用session专项。测试遥测关闭、脚本化模型，无用户数据或当前Web改变。
+
 ## 完整链路
 
 1. 在临时目录建立独立DSH_HOME与headless派生profile；只在其node_modules添加适配包/echo fixture链接。不触碰运行中的DSH或用户profile。

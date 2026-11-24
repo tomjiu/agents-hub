@@ -12,7 +12,7 @@
  *    ToolOutputDefinition = { schema, render }）+ execute(args, exec) → canonical JSON
  *  - cordis 对 ctx 上的服务属性强制 inject 声明：未声明即访问抛
  *    `cannot get property "X" without inject`——插件模块必须静态导出
- *    inject = ['systemPrompt', 'tools']（本包由 src/index.ts 导出）。
+ *    inject = ['systemPrompt', 'tools', 'agents', 'workingDirectory']（上下文策略增加真实服务）。
  */
 
 /** dsh 工具模型面内容块（ContentBlock 的 text 形态，本包只用这一种）。 */
@@ -41,7 +41,7 @@ export interface ToolDef {
    * 执行体：args 为模型传参（已按 schema 解析）；返回 canonical JSON 值
    * （须满足 output.schema）。拒绝/失败路径抛 Error（宿主转为工具失败内容）。
    */
-  execute: (args: Record<string, unknown>) => Promise<unknown> | unknown
+  execute: (args: Record<string, unknown>, exec?: {agent?:unknown;signal?:AbortSignal}) => Promise<unknown> | unknown
 }
 
 /** dsh systemPrompt 区段注册形态（PromptSection 最小面）。 */
@@ -71,6 +71,9 @@ export interface ToolResultExec {
   readonly arguments?: unknown
   /** 嵌套 dispatch 的父执行 token（存在即嵌套子调用；字段缺失 fail-open 视为根调用）。 */
   readonly parent?: unknown
+  readonly agent?: unknown
+  readonly signal?: AbortSignal
+  readonly token?: symbol
 }
 
 /** 'tools/result' 事件的结果面（ToolExecutionResult 最小消费面）。 */
@@ -85,6 +88,8 @@ export interface ToolResultPayloadFace {
 
 /** dsh 插件运行时 ctx（本包用到的最小面）。 */
 export interface DshCtx {
+  agents?: {get:(id:string)=>unknown}
+  workingDirectory?: {get:(session:unknown)=>unknown}
   /** 服务注册：key 唯一；重复注册由宿主按其策略处理（本包幂等调用前自检）。 */
   provide: (key: string, api: unknown) => void
   tools: {
@@ -95,7 +100,7 @@ export interface DshCtx {
   }
   /** 可选：cordis 事件总线订阅面（混合在 ctx 上的方法，非服务属性——无需 inject 声明）。
    *  仅用于 auto-observe（'tools/result' 事件）；缺失时自动观测关闭，其余接缝不受影响。 */
-  on?: (event: string, listener: (...args: unknown[]) => void) => void
+  on?: (event: string, listener: (...args: unknown[]) => unknown) => void
   /** 可选：Cordis effect 作用域销毁时调用返回的 disposer；关闭本插件数据库。 */
   effect?: (setup: () => () => void, label?: string) => unknown
   /** 可选：结构化日志/告警面（缺失时回退 stderr）。 */
