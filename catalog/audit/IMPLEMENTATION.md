@@ -2,6 +2,14 @@
 
 状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。PR #3已于本轮核验后合入main，合并提交6a2ba83；后续用户授权当前Web实验并自行重启，实际搜索/可信TUN抓取/9仓库Skill/独立记忆已验证，重复宿主tool-skill空目录问题已修复，见[Web实验](web-live-experiment.json)。后文阶段记录保留当时状态，不作当前合并状态。详见[合并交付](pr3-merge-delivery.json)。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
+## 当前（2026-11-24）：latest 通道移至 rc.5 的 Linux 复验与缓存问题结论
+
+npm latest 标签自上次检查（2026-11-19，rc.1）移动到 **0.2.2-rc.5**（next 同为 rc.5；0.2.3-alpha.2 已发布但 alpha 非跟踪通道）。在云端 Linux/Node 24.22.3 全新隔离目录固定安装 rc.5，对 memory-cache-safe-context 分支代码完成**首个 Linux 平台验收**：会话上下文/候选/缓存专项、P0+精选专项、直接宿主全链路（记忆十项、搜索六项、literal 拒绝、并行发现、Skill 全文、MCP 回流）全部通过，check-dsh VERIFIED；根152/核心44/适配35/搜索335 在 Linux 全绿。登记追加 Linux 指纹记录并更新 observed_upstream。
+
+**记忆缓存命中问题结论：已在分支修复（e44e303 尾部快照），未合并 main。** 真实供应商证据（gpt-6.1-sol、6请求、暖缓存加权 99.17%、宿主 rc.1）见[实测记录](<memory-cache-real-provider.json>)；rc.5 Linux 会话探针六项 cache_safe_context 检查通过（本地脚本化模型的序列化不变量，不等于供应商侧缓存计数认证）。
+
+**运行包缺口如实记录**：生成包打包校验（createDshBundle+verifyDshBundle）通过，但 HUB_DSH_BUNDLE_TEST=1 直接运行失败——旧探针预置 shared 库而生成包默认 session 模式，预置约束不注入；46条登记中 bundle_test:true 为 0，该不兼容已在宿主验收指南记录。session 默认包的端到端运行包探针与跨进程恢复同一持久会话仍是未验收缺口，列入 M0 矩阵。详见[本轮验收](<dsh-latest-rc5-linux.json>)。本轮不自动合并、不启用当前Web、不修改用户库。
+
 ## 本分支修复：缓存安全尾部快照
 
 固定system规则与动态runtime-context分离，诊断计数不自动注入；每次验证范围/证据有效性，宿主按已提交内容去重和追加。无记忆/不可用明确撤回旧数据，不冻结过期结论。当前Web按用户要求保持停用，未采用候选修复。证据见[缓存验收](<memory-cache-safe.json>)；调用前缀验证不等于供应商缓存命中认证。

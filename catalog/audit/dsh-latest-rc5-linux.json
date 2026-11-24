@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "status": "VERIFIED",
+  "at": "2026-11-24",
+  "task": "Latest DSH channel re-check on memory-cache-safe-context code (issue #2 baseline) — first Linux platform acceptance",
+  "observed_channels": {
+    "date": "2026-11-24",
+    "latest": "0.2.2-rc.5",
+    "next": "0.2.2-rc.5",
+    "alpha_observed": "0.2.3-alpha.2",
+    "change_since_last_check": "npm latest dist-tag moved from 0.2.2-rc.1 (2026-11-19 check) to 0.2.2-rc.5; 0.2.3-alpha.1/alpha.2 published 2026-11-22 (alpha is not a tracked adoption channel)",
+    "source": "npm view dist-tags plus check-dsh-upstream; no DNS guard bypass"
+  },
+  "environment": {
+    "platform": "Linux (cloud sandbox)",
+    "node": "24.22.3",
+    "installation": "Fresh isolated directory install of @deepseek-ai/dsh@0.2.2-rc.5 with --ignore-scripts; no live profile or user config touched",
+    "prior_evidence_platform": "Windows, Node 26.13.1 (previous session); this is the first Linux acceptance of the session/candidate/cache policy stack"
+  },
+  "runtime": {
+    "version": "0.2.2-rc.5",
+    "host_sha256": "d4268358eaf34ba3f1b8ec7e47d9c422a2233015fe84871e899e7fe56497edd4",
+    "assets_sha256": "a5670cbd40c773abd0cae8428a8cd4bc49ce5b1a0304fa3b3e85ecb4f56e0a0f",
+    "check_dsh": "VERIFIED (after registry update; registry previously NEEDS_ACCEPTANCE because assets fingerprint binds node_runtime and source tree)",
+    "direct_host": "PASS",
+    "session_context_special": "PASS",
+    "candidate_lifecycle_special": "PASS",
+    "cache_safe_context_special": "PASS",
+    "p0_and_curated_special": "PASS",
+    "parallel_discovery": true,
+    "fetch": {
+      "literal_refused": true
+    },
+    "search": {
+      "queried": true,
+      "refs_returned": true,
+      "cache_hit": true,
+      "quality_verified": true,
+      "explicit_selection_verified": true,
+      "provider_requests": 3,
+      "cache_isolated": true,
+      "source": "Local SearXNG-compatible fixture; not public web"
+    },
+    "memory": {
+      "persisted": true,
+      "prompt_injection": true,
+      "auto_observe": true,
+      "self_filter": true,
+      "curated_prompt": true,
+      "curated_recall": true,
+      "raw_diagnostic": true,
+      "independent_observations": true,
+      "promoted_recalled": true,
+      "gc_evidence_preserved": true
+    },
+    "session_boundary": {
+      "same_project_sessions_isolated": true,
+      "different_project_isolated": true,
+      "model_scope_selectors_refused": true,
+      "default_root_untouched": true,
+      "contextual_prompt": true,
+      "raw_scope_preserved": true,
+      "auto_attribution": true
+    },
+    "skill": {
+      "name": "asset-management",
+      "deployed": true,
+      "invoked": true,
+      "full_content_seen_by_model": true
+    }
+  },
+  "memory_cache_hit_question": {
+    "question": "Has the memory plugin prompt-cache hit issue been fixed?",
+    "answer": "Fixed on branch memory-cache-safe-context (commit e44e303), NOT yet merged to main.",
+    "real_provider_evidence": {
+      "file": "catalog/audit/memory-cache-real-provider.json",
+      "model": "gpt-6.1-sol (cpa provider, loopback relay)",
+      "host": "0.2.2-rc.1",
+      "requests": 6,
+      "warm_weighted_hit_pct": 99.1733,
+      "assertions_passed": ["system_stable", "tools_stable", "previous_full_messages_prefix_preserved", "log_only_snapshots_unchanged", "tip_updates_appended", "empty_snapshot_retracted"],
+      "limits": "Short single-process six-request run on one real route; no cross-process resume or 600k-token replay; not a long-term 95% guarantee"
+    },
+    "latest_host_evidence": "cache_safe_context six checks (stable_system, stable_tools, append_only_messages, no_diagnostic_churn, literal_memory, stale_retraction) PASS on 0.2.2-rc.5 Linux via session probe; this verifies request serialization invariants with the local scripted model, not provider-side cache accounting"
+  },
+  "generated_bundle": {
+    "packaging": "PASS — createDshBundle + verifyDshBundle (memory:true) succeeded against VERIFIED gate",
+    "bundle_host_run": "FAIL (pre-existing, documented)",
+    "finding": "HUB_DSH_BUNDLE_TEST=1 pre-seeds a shared 'main' workspace, but the generated bundle config uses context mode 'session' (session-default since memory-session-boundary). The pre-seeded constraint is therefore not injected and verify-e2e A3 fails. DSH-HOST-ACCEPTANCE.md already records this incompatibility; zero bundle_test:true records exist in the 46-record registry.",
+    "implication": "Session-default generated bundles need a session-aware bundle probe (fixture model writing/reading in the live session scope) plus cross-process resume of one persisted session — both are open M2+ acceptance gaps listed in the M0 matrix; the session special probe remains the sanctioned evidence for session-default packages"
+  },
+  "test_suites_linux": {
+    "root": "152 pass / 0 fail / 0 skip",
+    "memory_core": "44 pass / 0 fail",
+    "memory_adapter": "35 pass / 0 fail",
+    "search_core_typescript": "335 pass / 0 fail",
+    "validate": "PASS (137 catalog checks; known local edits listed: webapp-testing, writing-plans)"
+  },
+  "limits": [
+    "Local fixtures and scripted models only; not public web, not a paid provider, not the current user Web instance",
+    "Linux/Node 24.22.3 is a new platform row; prior evidence was Windows/Node 26.13.1 and remains valid for its own fingerprints",
+    "0.2.3-alpha.2 observed on npm but not acceptance-tested; alpha is not a tracked channel and this is not an upgrade authorization",
+    "No cross-process resume of a persisted session verified in this round"
+  ]
+}
