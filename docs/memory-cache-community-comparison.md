@@ -25,4 +25,4 @@
 
 ## 验收边界
 
-实际DSH rc.1/rc.5局部模拟模型接收端比较system/tool hash与完整messages prefix；证据说明请求不再改写开头，不说明真实提供方路由/TTL/cache计量。另有四项适配行为回归和六项gate断言；当前Web保持停用，任何重新启用需用户明确授权。跨进程同会话恢复及运行包wrapper候选路径仍未单独验收；真实会话中的旧system内容要由正常宿主重组切换，不能通过改raw日志伪造结果。
+实际DSH rc.1/rc.5局部模拟模型接收端比较system/tool hash与完整messages prefix；证据说明请求不再改写开头，不说明真实提供方路由/TTL/cache计量。另有四项适配行为回归和六项gate断言；后续在用户明确授权下，独立真实cpa/gpt-6.1-sol进程完成6请求：首次冷缓存、5次暖缓存全部98%以上；详见[真实提供方验收](<../catalog/audit/memory-cache-real-provider.json>)。这是短时单路线测试，不认证长期命中。当前Web保持停用，任何重新启用需用户明确授权。跨进程同会话恢复及运行包wrapper候选路径仍未单独验收；真实会话中的旧system内容要由正常宿主重组切换，不能通过改raw日志伪造结果。

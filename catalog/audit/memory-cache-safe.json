@@ -155,7 +155,15 @@
         "shared_compatibility": true
       }
     ],
-    "request_test": "Actual installed rc.1/rc.5 serialize to local model receiver; same complete system and tool hash, each prior full messages prefix retained. None->tip->counter-only logs->pending->accept->stale evidence->explicit empty memory. Literal braces, no consecutive duplicate memory snapshots. Three fresh scoped sessions per host."
+    "request_test": "Actual installed rc.1/rc.5 serialize to local model receiver; same complete system and tool hash, each prior full messages prefix retained. None->tip->counter-only logs->pending->accept->stale evidence->explicit empty memory. Literal braces, no consecutive duplicate memory snapshots. Three fresh scoped sessions per host.",
+    "paid_provider": {
+      "report": "catalog/audit/memory-cache-real-provider.json",
+      "model": "gpt-6.1-sol",
+      "requests": 6,
+      "warm_weighted_hit_pct": 99.1733,
+      "all_warm_above_98": true,
+      "scope": "Bounded synthetic live cpa model through isolated headless, not Web adoption"
+    }
   },
   "preservation": {
     "live_profile_untouched_this_repair": true,
@@ -166,7 +174,7 @@
     "no_dsh_vendor_patch": true
   },
   "limits": [
-    "No live provider paid-cache test of repaired plugin. Existing disabled live request99.97% is a single control, not repaired adoption.",
+    "Real provider six-request short run validated warm98%+ on cpa/gpt-6.1-sol; no long-term or cross-route95% guarantee, original large user conversation not replayed.",
     "Initial upgrade cold cache, provider TTL/routing/model/tools changes and compaction can invalidate prefixes independently.",
     "Whole runtime context can append for other plugins; append-only can grow history until normal compaction.",
     "User-role memory data not trusted system instruction; newest snapshot supersedes old but old data is not physically erased.",

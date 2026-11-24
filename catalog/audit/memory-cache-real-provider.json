@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "status": "PAID_PROVIDER_COMPLETE",
+  "at": "2026-11-24T05:42:35.093Z",
+  "model": "gpt-6.1-sol",
+  "provider": "cpa",
+  "source": "Actual HTTP response usage from configured provider; local loopback relay forwarded requests unchanged except authorization; not simulated response.",
+  "host": "0.2.2-rc.1",
+  "repair_commit": "e44e303cae5396637a03171b5d84cb303e4e3494",
+  "context": "18,185 first-request input tokens, synthetic fixed reference; original60万-token conversation not replayed.",
+  "requests": 6,
+  "rows": [
+    {
+      "request": 1,
+      "phase": "cold initial",
+      "prompt_tokens": 18185,
+      "cached_tokens": 0,
+      "cache_write_tokens": 18182,
+      "output_tokens": 20,
+      "hit_pct": 0,
+      "memory_snapshots": 1
+    },
+    {
+      "request": 2,
+      "phase": "tip-A update",
+      "prompt_tokens": 18403,
+      "cached_tokens": 18182,
+      "cache_write_tokens": 218,
+      "output_tokens": 20,
+      "hit_pct": 98.7991,
+      "memory_snapshots": 2
+    },
+    {
+      "request": 3,
+      "phase": "unrelated log1",
+      "prompt_tokens": 18450,
+      "cached_tokens": 18400,
+      "cache_write_tokens": 47,
+      "output_tokens": 20,
+      "hit_pct": 99.729,
+      "memory_snapshots": 2
+    },
+    {
+      "request": 4,
+      "phase": "unrelated log2",
+      "prompt_tokens": 18497,
+      "cached_tokens": 18447,
+      "cache_write_tokens": 47,
+      "output_tokens": 20,
+      "hit_pct": 99.7297,
+      "memory_snapshots": 2
+    },
+    {
+      "request": 5,
+      "phase": "tip-B update",
+      "prompt_tokens": 18729,
+      "cached_tokens": 18494,
+      "cache_write_tokens": 232,
+      "output_tokens": 20,
+      "hit_pct": 98.7453,
+      "memory_snapshots": 3
+    },
+    {
+      "request": 6,
+      "phase": "empty retraction",
+      "prompt_tokens": 18939,
+      "cached_tokens": 18726,
+      "cache_write_tokens": 210,
+      "output_tokens": 10,
+      "hit_pct": 98.8753,
+      "memory_snapshots": 4
+    }
+  ],
+  "warm_weighted_hit_pct": 99.1733,
+  "total_prompt_tokens": 111203,
+  "total_cache_write_tokens": 18936,
+  "total_output_tokens": 110,
+  "assertions": {
+    "phase5_completed": true,
+    "system_stable": true,
+    "tools_stable": true,
+    "previous_full_messages_prefix_preserved": true,
+    "log_only_snapshots_unchanged": true,
+    "tip_updates_appended": true,
+    "empty_snapshot_retracted": true
+  },
+  "limits": [
+    "Short single-process six-request run on one real route, not long-term95% guarantee.",
+    "No cross-process persisted resume or six-hundred-thousand-token replay.",
+    "A preliminary run had a fixture missing order error, did not exercise memory changes, and is excluded; paid calls and local diagnostics retained privately.",
+    "No paid cost amount asserted because response provides token usage not billing price."
+  ],
+  "preservation": {
+    "current_web_memory_disabled": true,
+    "user_database_unchanged": true,
+    "relay_stopped": true,
+    "headless_process_exited": true
+  }
+}
