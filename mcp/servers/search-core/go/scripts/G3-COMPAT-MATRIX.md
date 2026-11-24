@@ -35,6 +35,20 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
 | 24 | SearXNG 公共实例 | ✅ (SEO 污染已摘出) | ✅ 同款摘出 | SC_ENABLE_SEARXNG=1 可开回试 |
 | 25 | DDG 分页会话 | ❌ | 🆕 ddgPageState | go: s/dc 表单回传 + 有界翻页 (G2); TS 侧挂账同步 |
 | 26 | Yahoo consent 墙 | ❌ (误报 no-results) | 🆕 显式 blocked 分类 | go: isYahooConsentPage (G2) |
+| 27 | S1 证据感知早收割 | ❌ 纯计数(60%+refs≥15) | 🆕 S1: +相关 refs≥5 | go: SC_EARLY_HARVEST_MIN_RELEVANT; 红灯测试 TestEarlyHarvestRequiresRelevantEvidence |
+| 28 | S1 早收割调度 | ⚠️ 25ms 轮询 | ✅ 事件驱动(修复回归) | go: 旧 nextEdge 在 enough 变真后跳到软截止→早收割永不触发; TestEarlyHarvestFiresWithRelevantEvidence 红灯复现后修复 |
+| 29 | S1 到期不足诊断 | ❌ | 🆕 meta.harvest.insufficient | go: deadline 到期+证据不足 → 已得候选+诊断文本, 不无限抢救 |
+| 30 | S2 Retry-After 退避 | ❌ | 🆕 有界(1h 上限) | go: 429 错误带 retry-after 秒数, 熔断冷却取大者; TestBreakerCooldownRespectsRetryAfter |
+| 31 | S2 负结果不缓存 | ⚠️ 空结果入缓存 | 🆕 degraded/空结果跳过 | go: cache_skip_negative journal; TestNegativeResultsNotCached |
+| 32 | S3 词法证据门 | ✅ lexical-evidence-v1 (40%) | 🆕 v2: 复数折叠+50% | go: S0-F2 实测 40% 下限放行词重合烹饪页; v2 拒绝且 python 页保留; TS 挂账同步 |
+| 33 | S3 版本适用性标注 | ❌ | 🆕 versionCheck(只标注) | go: 查询版本 vs ref 主版本差异 → meta.quality.versionCheck; 不剔除 |
+| 34 | S3 来源构成/官方社区 | ⚠️ authority 层已有 | 🆕 sourceMix 摘要 | go: meta.quality.sourceMix 计数(official/community/unknown) |
+| 35 | S3 domain cap 可调 | ⚠️ 主题推导固定 | 🆕 SC_DOMAIN_CAP | go: 调用方显式覆盖(0=关) |
+| 36 | S4 壳页透明拒绝 | ⚠️ 仅反爬/DOI 回退 | 🆕 login_wall/js_shell/consent_wall | go: classifyPageShell+原始壳识别; 壳页不编造正文; 缓存命中同样拒绝 |
+| 37 | S4 非 2xx 状态拒绝 | ❌ 403 带正文当正常 | ✅ http N 透明错误 | go: fetchExtract 状态拒绝; DOI 回退链触发更完整 |
+| 38 | S4 抓取方式透明 | ⚠️ | 🆕 via/finalUrl/fromCache | go: FetchResult 记录 direct/crates-api/oa-landing + 原始/最终 URL |
+| 39 | CLI --engines 契约 | — | ✅ 修复 EnginesSet | go: 旧版 --engines 被忽略(默认全池); 显式空名单=零请求 |
+| 40 | MCP 工具 schema 稳定(新增 meta 字段) | ✅ | ✅ | go: quality/harvest 为输出附加字段, tools/list schema 不变; 全协议管道测试通过 |
 
 ## 结论与挂账
 
@@ -44,4 +58,10 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
 3. **挂账 (需可达环境/资产)**: 真实公网 SERP A/B 相关性对照 (S3/S4); rerank 实弹
    (需 -tags onnx + 模型三件套); Windows 实机 DSH 宿主验收; live 引擎漂移 probe
    (本沙箱 DDG 202 软封 / Mojeek/Yahoo 出站受阻, 证据 G2-PROTOCOL-NOTES.md)。
+4. **S1-S4 首轮落地 (2026-11-24, issue #3)**: 证据感知早收割+调度回归修复+到期不足诊断
+   (S1); Retry-After 有界退避+负结果不缓存 (S2); 词法证据门 v2+版本标注+来源构成+可调
+   domain cap (S3); 壳页透明拒绝+状态拒绝+抓取方式透明 (S4)。CLI --engines 契约修复。
+   公网复测 (同日): DDG/Mojeek/Yahoo 出站仍受阻, keenable 可用(中文题 candidate_results,
+   证据门如实拒绝 12 条词重合不足结果), bingrss 连通但 q 回写被质量门拒绝 — 与 G2 记录
+   一致, 不冒充公网质量认证。详见 catalog/audit/search-go-s1s4.json。
 4. **不做的事**: 不无授权合并 memory 分支; 不改用户正在运行的 Web; 不为省内存换容错退化。

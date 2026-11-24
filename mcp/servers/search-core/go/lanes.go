@@ -13,11 +13,28 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 )
 
 const laneUA = "search-core/0.5 (+https://github.com/mmqz/search-tool-rnd)"
+
+// retryAfterSuffix S2 (issue #3): HTTP 状态错误附上服务端 Retry-After 秒数
+// (仅数字秒形式; HTTP-date 如实忽略) — 熔断器据此尊重退避下限, 避免重试风暴。
+func retryAfterSuffix(resp *http.Response) string {
+	if resp == nil || resp.Header == nil {
+		return ""
+	}
+	v := strings.TrimSpace(resp.Header.Get("Retry-After"))
+	if v == "" {
+		return ""
+	}
+	if n, err := strconv.Atoi(v); err == nil && n > 0 {
+		return fmt.Sprintf(" (retry-after: %ds)", n)
+	}
+	return ""
+}
 
 // laneResult 对齐 TS allSettled 报账语义: 腿失败带 err 不阻塞全局
 type laneResult struct {
@@ -336,7 +353,7 @@ func laneSearxng(ctx context.Context, opts SearchOpts, client *http.Client) ([]R
 			continue
 		}
 		if resp.StatusCode != 200 {
-			lastErr = fmt.Errorf("%s http %d", base, resp.StatusCode)
+			lastErr = fmt.Errorf("%s http %d%s", base, resp.StatusCode, retryAfterSuffix(resp))
 			continue
 		}
 		out, err := parseSearxng(data, opts.MaxResults)
