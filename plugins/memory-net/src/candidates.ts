@@ -18,8 +18,9 @@ export function candidateMeta(n:MemoryNode):CandidateMeta|null {
  }
  return v
 }
-export function referenceIds(value:unknown,label:string):string[]{
- if(!Array.isArray(value)||value.length<1||value.length>32||value.some(id=>typeof id!=='string'||!/^n[1-9][0-9]*$/.test(id)))throw new Error(label+' requires 1..32 valid observation IDs')
+export function referenceIds(value:unknown,label:string,opts?:{allowEmpty?:boolean}):string[]{
+ const min=opts?.allowEmpty?0:1
+ if(!Array.isArray(value)||value.length<min||value.length>32||value.some(id=>typeof id!=='string'||!/^[n][1-9][0-9]*$/.test(id)))throw new Error(label+` requires ${min}..32 valid observation IDs`)
  return [...new Set(value)].sort()
 }
 export function validateEvent(n:MemoryNode|null,run:string,task:string|null,label:string):MemoryNode {
