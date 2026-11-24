@@ -1,0 +1,249 @@
+{
+  "schema": 1,
+  "status": "S0_BASELINE_RECORDED",
+  "at": "2026-11-24T07:48:48.549Z",
+  "question_set": "s0-v1",
+  "environment": {
+    "platform": "linux sandbox",
+    "source": "deterministic local SearXNG-compatible fixture; not public web"
+  },
+  "rows": [
+    {
+      "id": "Q1-official-doc",
+      "note": "官方技术文档/明确版本",
+      "query": "SQLite WAL concurrency",
+      "expect": "https://sqlite.org/wal.html",
+      "success": true,
+      "error": null,
+      "refs_returned": 9,
+      "relevant_rank": 1,
+      "quality_status": "candidate_results",
+      "degraded": false,
+      "failed_providers": 0,
+      "provider_requests": 1,
+      "latency_ms": 1511,
+      "fixture_subqueries": [
+        "/search:SQLite WAL concurrency"
+      ],
+      "top_ref_urls": [
+        "https://sqlite.org/wal.html",
+        "http://www.sqlite.org/draft/wal.html",
+        "https://sqlite.org/src/artifact?name=4bee2c3990d1eb80&txt=1",
+        "https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers",
+        "https://sqliteforum.com/p/sqlite-wal-internals-frames-commits",
+        "https://reddit.com/r/golang/comments/16xswxd/concurrency_when_writing_data_into_sqlite",
+        "https://fly.io/blog/sqlite-internals-wal",
+        "https://cronfeed.work/oss-sqlite-wal-architecture-note-checkpoint-starvation-concurrency-boundary-2026"
+      ]
+    },
+    {
+      "id": "Q2-general-research",
+      "note": "通用研究",
+      "query": "Node.js DatabaseSync SQLite API",
+      "expect": "https://nodejs.org/api/sqlite.html",
+      "success": true,
+      "error": null,
+      "refs_returned": 7,
+      "relevant_rank": 1,
+      "quality_status": "candidate_results",
+      "degraded": true,
+      "failed_providers": 0,
+      "provider_requests": 1,
+      "latency_ms": 1505,
+      "fixture_subqueries": [
+        "/search:Node.js DatabaseSync SQLite API"
+      ],
+      "top_ref_urls": [
+        "https://nodejs.org/api/sqlite.html",
+        "https://nodejs.org/download/release/v22.9.0/docs/api/sqlite.html",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Node.js",
+        "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs",
+        "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Node_server_without_framework",
+        "https://raw.githubusercontent.com/nodejs/node/v22.22.0/doc/api/sqlite.md",
+        "https://raw.githubusercontent.com/nodejs/node/v24.18.0/doc/api/sqlite.md"
+      ]
+    },
+    {
+      "id": "Q3-chinese-community",
+      "note": "中文社区",
+      "query": "Zed 编辑器 DeltaDB 中文",
+      "expect": "https://zh.example.club/zed-deltadb",
+      "success": true,
+      "error": null,
+      "refs_returned": 1,
+      "relevant_rank": 1,
+      "quality_status": "candidate_results",
+      "degraded": false,
+      "failed_providers": 0,
+      "provider_requests": 1,
+      "latency_ms": 52,
+      "fixture_subqueries": [
+        "/search:Zed 编辑器 DeltaDB 中文"
+      ],
+      "top_ref_urls": [
+        "https://zh.example.club/zed-deltadb"
+      ]
+    },
+    {
+      "id": "Q4-sparse-nonexistent",
+      "note": "少结果/不存在——期望空或降级且透明",
+      "query": "qzwxecrv12345 不存在主题 xyzzy42",
+      "expect": null,
+      "success": true,
+      "error": null,
+      "refs_returned": 0,
+      "relevant_rank": null,
+      "quality_status": "no_relevant_results",
+      "degraded": true,
+      "failed_providers": 0,
+      "provider_requests": 5,
+      "latency_ms": 405,
+      "fixture_subqueries": [
+        "/search:qzwxecrv12345 不存在主题 xyzzy42",
+        "/partial/search:qzwxecrv12345 不存在主题 xyzzy42",
+        "/failing429/search:qzwxecrv12345 不存在主题 xyzzy42",
+        "/hanging/search:qzwxecrv12345 不存在主题 xyzzy42",
+        "/fake200/search:qzwxecrv12345 不存在主题 xyzzy42"
+      ],
+      "top_ref_urls": []
+    },
+    {
+      "id": "Q5-partial-failure",
+      "note": "部分引擎失败（一路429+一路超时），其余路须仍可用",
+      "query": "github actions cache docker layers",
+      "expect": "https://docs.example.dev/gh-cache",
+      "success": true,
+      "error": null,
+      "refs_returned": 1,
+      "relevant_rank": 1,
+      "quality_status": "candidate_results",
+      "degraded": true,
+      "failed_providers": 0,
+      "provider_requests": 1,
+      "latency_ms": 1553,
+      "fixture_subqueries": [
+        "/search:github actions cache docker layers"
+      ],
+      "top_ref_urls": [
+        "https://docs.example.dev/gh-cache"
+      ]
+    },
+    {
+      "id": "Q6-lexical-overlap-irrelevant",
+      "note": "无关但词重合——偏题结果须被拒或标空/降级",
+      "query": "python list comprehension recipes cooking",
+      "expect": null,
+      "success": false,
+      "error": null,
+      "refs_returned": 7,
+      "relevant_rank": null,
+      "quality_status": "candidate_results",
+      "degraded": false,
+      "failed_providers": 0,
+      "provider_requests": 1,
+      "latency_ms": 1504,
+      "fixture_subqueries": [
+        "/search:python list comprehension recipes cooking"
+      ],
+      "top_ref_urls": [
+        "https://stackoverflow.com/questions/26577675/how-to-append-a-nested-list-in-python",
+        "https://stackoverflow.com/questions/62640494/python-list-comprehension-remove-same-tuples-but-different-order",
+        "https://stackoverflow.com/questions/62625909/python-3-list-comprehension-remove-tuples-from-list",
+        "https://cooking.example.tv/pasta",
+        "https://github.com/exercism/python/blob/main/exercises/concept/mecha-munch-management/.docs/instructions.md",
+        "https://medium.com/@patel.ajay745/comprehension-in-python-bf8424daddbe",
+        "https://livingwithcode.com/python/list/comprehension"
+      ]
+    },
+    {
+      "id": "Q7-cache-repeat",
+      "note": "缓存重复——与Q1同题，暖缓存须0新增provider请求",
+      "query": "SQLite WAL concurrency",
+      "expect": "https://sqlite.org/wal.html",
+      "success": true,
+      "error": null,
+      "refs_returned": 9,
+      "relevant_rank": 1,
+      "quality_status": "candidate_results",
+      "degraded": false,
+      "failed_providers": 0,
+      "provider_requests": 0,
+      "latency_ms": 1,
+      "fixture_subqueries": [],
+      "top_ref_urls": [
+        "https://sqlite.org/wal.html",
+        "http://www.sqlite.org/draft/wal.html",
+        "https://sqlite.org/src/artifact?name=4bee2c3990d1eb80&txt=1",
+        "https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers",
+        "https://sqliteforum.com/p/sqlite-wal-internals-frames-commits",
+        "https://reddit.com/r/golang/comments/16xswxd/concurrency_when_writing_data_into_sqlite",
+        "https://fly.io/blog/sqlite-internals-wal",
+        "https://cronfeed.work/oss-sqlite-wal-architecture-note-checkpoint-starvation-concurrency-boundary-2026"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "success": 6,
+    "first_useful_rank_distribution": {
+      "1": 5
+    },
+    "latency_p50": 405,
+    "latency_p95": 1553,
+    "cache_repeat_zero_requests": true
+  },
+  "public_network_probe": {
+    "attempted": true,
+    "ok": true,
+    "refs": 12,
+    "quality": "candidate_results",
+    "degraded": false,
+    "latency_ms": 4005,
+    "note": "real public network single sample; single sample only, network varies"
+  },
+  "limits": [
+    "Fixture latency is scripted (30-40ms) — p50/p95 measure scheduling behavior, not real network latency",
+    "First-useful-candidate latency approximated by batch response latency; per-reference streaming not measured",
+    "Single run per question; A/B against a modified implementation must run same-time pairs (issue S0 requirement) before claiming improvement",
+    "Fixture success measures the current implementation on controlled inputs; it is not a semantic relevance certification"
+  ],
+  "multi_run_variance": {
+    "runs": 3,
+    "per_question": {
+      "Q1-official-doc": "PASS 3/3",
+      "Q2-general-research": "PASS 3/3",
+      "Q3-chinese-community": "PASS 3/3",
+      "Q4-sparse-nonexistent": "PASS 3/3 (empty+no_relevant+transparent degraded, 5 bounded instance attempts, ~405ms)",
+      "Q5-partial-failure": "FLAKY 2/3 — PASS when rescue finds the fixture doc (rank 1, ~1.5s); FAIL when real GitHub API results (returned by domain routing beyond the engines list) race ahead with 0 fixture requests",
+      "Q6-lexical-overlap-irrelevant": "FAIL 3/3 — lexical gate accepts lexically-overlapping irrelevant results (real StackOverflow/Medium GitHub pages on \"python list comprehension\" + fixture cooking page) as candidate_results",
+      "Q7-cache-repeat": "PASS 3/3 (0 provider requests, ~0ms warm)"
+    },
+    "latency_p50_range_ms": [
+      405,
+      407
+    ]
+  },
+  "findings": [
+    {
+      "id": "S0-F1",
+      "title": "Domain/specialty routing fires beyond config.engines, hitting real network APIs inside a fixture run",
+      "evidence": "Q5 and Q6 rows record 0 fixture requests yet return real github.com/stackoverflow.com/medium.com refs; config.engines=[searxng] with all instances pointed at the fixture does not confine the query plan. Prior evidence (search-reliability-candidate.json) already notes \"mixed domain routing still selects specialty sources beyond default config.engines; explicit opts.engines is provider allowlist\".",
+      "impact": "breaks fixture hermeticity/determinism; violates the S2 requirement that the user engines list (including recovery legs) be respected; makes results network-dependent (Q5 flaky 2/3)",
+      "stage": "S2"
+    },
+    {
+      "id": "S0-F2",
+      "title": "Lexical quality gate accepts lexically-overlapping irrelevant results",
+      "evidence": "Q6 ('python list comprehension recipes cooking') returns 7 candidate_results ranked as candidates: 6 real python-related pages ignoring the cooking/recipes intent + the fixture cooking page itself",
+      "impact": "candidate_results is not semantic relevance; the S3 requirement (reduce irrelevant results with lexical overlap, explainable rules/multi-evidence rerank) is not met for this class",
+      "stage": "S3"
+    },
+    {
+      "id": "S0-F3",
+      "title": "Partial-failure latency tail and racing recovery",
+      "evidence": "Q5 p95 ~1.5s with hanging (5s) + 429 + fake-200 instances; soft deadline bounds the tail but the rescue-vs-domain-routing race makes outcomes non-deterministic (2/3)",
+      "impact": "S1 global deadline/early-completion work needed: deterministic rescue ordering and bounded legs",
+      "stage": "S1"
+    }
+  ]
+}
