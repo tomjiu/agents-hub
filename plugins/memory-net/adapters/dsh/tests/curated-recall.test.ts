@@ -9,7 +9,7 @@ import type {DshCtx,ToolDef,SectionDef} from '../src/contract.js'
 import {MemoryNet} from '../../../src/store.js'
 test('DSH defaults to curated prompt and recall while explicit raw remains diagnostic',()=>{
  const dir=mkdtempSync(join(tmpdir(),'mn-curated-adapter-')),tools:ToolDef[]=[],sections:SectionDef[]=[]
- const ctx:DshCtx={provide:()=>{},tools:{register:d=>tools.push(d)},systemPrompt:{section:d=>sections.push(d)}}
+ const ctx:DshCtx={provide:()=>{},tools:{register:d=>tools.push(d)},systemPrompt:{section:()=>{},context:d=>sections.push(d)}}
  const api=apply(ctx,{context:{mode:'shared'},workspaces_root:dir,default_workspace:'main'});assert.ok(api)
  try {
   const storage=MemoryNet.open(join(dir,'main'),{role:'host'})

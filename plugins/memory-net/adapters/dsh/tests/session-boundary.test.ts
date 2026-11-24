@@ -8,7 +8,7 @@ import type {DshCtx,ToolDef,SectionDef} from '../src/contract.js'
 function fixture(t:any){
  const root=mkdtempSync(join(tmpdir(),'mn-session-'));const projectA=join(root,'project-a'),projectB=join(root,'project-b');mkdirSync(projectA);mkdirSync(projectB)
  const agents=new Map(),cwd=new Map(),tools:ToolDef[]=[],sections:SectionDef[]=[],events=new Map<string,Function[]>(),warns:string[]=[]
- const ctx:any={provide:()=>{},agents:{get:(id:string)=>agents.get(id)},workingDirectory:{get:(s:any)=>cwd.get(s.id)},tools:{register:(d:ToolDef)=>tools.push(d)},systemPrompt:{section:(d:SectionDef)=>sections.push(d)},logger:{warn:(s:string)=>warns.push(s)},on:(name:string,fn:Function)=>events.set(name,[...(events.get(name)||[]),fn])}
+ const ctx:any={provide:()=>{},agents:{get:(id:string)=>agents.get(id)},workingDirectory:{get:(s:any)=>cwd.get(s.id)},tools:{register:(d:ToolDef)=>tools.push(d)},systemPrompt:{section:()=>{},context:(d:SectionDef)=>sections.push(d)},logger:{warn:(s:string)=>warns.push(s)},on:(name:string,fn:Function)=>events.set(name,[...(events.get(name)||[]),fn])}
  const agent=(id:string,project:string)=>{const a={id,session:{id,header:{id,cwd:project}}};agents.set(id,a);cwd.set(id,project);return a}
  const a=agent('session-A',projectA),b=agent('session-B',projectA),c=agent('session-C',projectB)
  const api=apply(ctx,{workspaces_root:join(root,'memory'),default_workspace:'main'}) as any
@@ -42,7 +42,7 @@ test('model selectors missing identity and copied agent handles fail closed',t=>
  for(const k of ['workspace','run_id','task_id'])assert.throws(()=>recall.execute({view:'raw',[k]:'victim'},{agent:f.a}),/scope|context|selector/i)
  assert.throws(()=>write.execute({kind:'tip',text:'missing'}),/agent|context/i)
  assert.throws(()=>recall.execute({},{agent:{...f.a}}),/agent|context/i)
- assert.equal(f.prompt(f.a,f.b),'');assert.equal(f.prompt(undefined),'');f.emit(undefined,'unowned');assert.ok(f.warns.length)
+ assert.match(f.prompt(f.a,f.b),/unavailable/);assert.match(f.prompt(undefined),/unavailable/);f.emit(undefined,'unowned');assert.ok(f.warns.length)
  assert.throws(()=>write.execute({kind:'tip',text:'canceled'},{agent:f.a,signal:AbortSignal.abort()}),/abort|cancel/i)
  assert.equal(f.api.forAgent(f.a).exportPkg().nodes.length,0)
  assert.ok(!Object.hasOwn(write.parameters.properties,'workspace'));assert.ok(!Object.hasOwn(recall.parameters.properties,'run_id'))

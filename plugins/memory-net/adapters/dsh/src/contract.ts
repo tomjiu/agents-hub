@@ -52,7 +52,9 @@ export interface SectionDef {
   order: number
   /** 组装期求值：string 或 (context) => string（本包内已含 activate 预算裁剪）。 */
   text: string | ((context: unknown) => string)
+  interpolate?: boolean
 }
+export interface ContextDef extends SectionDef {required?: boolean}
 
 /** dsh 工具执行终态事件的最小消费面（dsh-tools 'tools/result' emit 事件，2026-09-10 实勘）。
  *
@@ -97,6 +99,7 @@ export interface DshCtx {
   }
   systemPrompt: {
     section: (def: SectionDef) => void
+    context?: (def: ContextDef) => void
   }
   /** 可选：cordis 事件总线订阅面（混合在 ctx 上的方法，非服务属性——无需 inject 声明）。
    *  仅用于 auto-observe（'tools/result' 事件）；缺失时自动观测关闭，其余接缝不受影响。 */

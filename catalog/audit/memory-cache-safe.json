@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "status": "ISOLATED_CACHE_SAFE_REQUESTS_VERIFIED_NOT_MERGED_NOT_WEB_ENABLED",
+  "base_pr": 8,
+  "branch": "memory-cache-safe-context",
+  "policy": "tail-v1",
+  "incident": {
+    "scope": "Local session diagnostics, no private conversation copied into repository",
+    "before_turns_60_79_hit_pct": 94.23,
+    "after_turn80_onward_hit_pct": 4.04,
+    "cumulative_hit_pct": 62.78,
+    "control": {
+      "turn": 106,
+      "step1": {
+        "read": 591689,
+        "write": 828,
+        "hit_pct": 99.86
+      },
+      "step2": {
+        "read": 0,
+        "write": 595526,
+        "hit_pct": 0
+      },
+      "same_model_config_tools": true,
+      "intervening_compaction": false,
+      "only_system_difference": "auto_observation exclusion count672->673 at char242"
+    },
+    "disabled_control": {
+      "turn": 109,
+      "step": 1,
+      "hit_pct": 99.97
+    },
+    "interpretation": "Leading system replaced each step by changing memory/log counters; not a provider95% guarantee."
+  },
+  "implementation": {
+    "system": "Static memory-use policy only; no dynamic data or diagnostics.",
+    "memory": "required systemPrompt.context, interpolate:false, stable ID-order selected nodes and literal provenance.",
+    "invalidation": "Revalidate scope/sources/review every assembly and admission. New/empty/unavailable snapshot supersedes old values; no frozen memoized memory.",
+    "deduplication": "Native host retained runtime-context comparison; does not mark delivered inside uncommitted plugin evaluation. No whole-history rewrite.",
+    "compatibility": "Missing context API disables automatic memory with warning, tools remain, no dynamic system fallback. Shared raw can still append volatile logs, default curated does not.",
+    "diagnostics": "Explicit recall retains curation/token/dropped stats; automatic snapshot excludes them."
+  },
+  "community": {
+    "comparison": "docs/memory-cache-community-comparison.md",
+    "copied_source": false,
+    "executed_external_plugins": false,
+    "references": [
+      {
+        "repo": "haitang1/dsh-memory",
+        "version": "0.5.8",
+        "commit": "a218c920ff456beea528861c66bcd255f25d2e6a",
+        "license": "MIT",
+        "reference": "Official context seam and literal template handling"
+      },
+      {
+        "repo": "NattoCB/dsh-plugin-memory",
+        "commit": "a83fccef21f74d5242df5df0ab5c0be7ae8ddf8b",
+        "license": "MIT",
+        "reference": "Append user-context and relevance dedup direction; not copied once-only topic set"
+      },
+      {
+        "repo": "LZMW/dsh-memory",
+        "version": "0.1.2",
+        "commit": "3551f4c49cdc67d7b544bb17292134cdab5beebe",
+        "license": "MIT",
+        "reference": "Startup tail message, but once-only WeakSet rejected for our invalidation needs"
+      }
+    ]
+  },
+  "verification": {
+    "tdd": {
+      "behavior": "Three failing adapter regressions reproduced original dynamic system, absent context, unsafe fallback; after implementation four pass including stale identity/close.",
+      "gate": "Missing cache evidence returned VERIFIED before fix; red reproduced, now rejects missing/false assertions."
+    },
+    "root": {
+      "total": 152,
+      "pass": 151,
+      "skip": 1,
+      "fail": 0
+    },
+    "core": {
+      "pass": 44,
+      "fail": 0
+    },
+    "adapter": {
+      "pass": 35,
+      "fail": 0
+    },
+    "search": {
+      "pass": 335,
+      "fail": 0
+    },
+    "catalog": {
+      "assets": 137,
+      "status": "PASS",
+      "warnings": "Existing local baseline deltas retained"
+    },
+    "hosts": [
+      {
+        "version": "0.2.2-rc.1",
+        "host_sha256": "221084aab019377b66d407ffd851fe52968138b8d7e837397e040a68c3323822",
+        "assets_sha256": "7a1b283f583af50f83f693e3e8e5287551a018a120642ed30efd0e71470901a9",
+        "cache_safe_context": {
+          "stable_system": true,
+          "stable_tools": true,
+          "append_only_messages": true,
+          "no_diagnostic_churn": true,
+          "literal_memory": true,
+          "stale_retraction": true
+        },
+        "session_boundary": {
+          "same_project_sessions_isolated": true,
+          "different_project_isolated": true,
+          "model_scope_selectors_refused": true,
+          "default_root_untouched": true,
+          "contextual_prompt": true,
+          "raw_scope_preserved": true,
+          "auto_attribution": true
+        },
+        "candidate_lifecycle": {
+          "pending_excluded": true,
+          "host_reviewed": true,
+          "accepted_curated": true,
+          "evidence_persisted": true
+        },
+        "shared_compatibility": true
+      },
+      {
+        "version": "0.2.2-rc.5",
+        "host_sha256": "d4268358eaf34ba3f1b8ec7e47d9c422a2233015fe84871e899e7fe56497edd4",
+        "assets_sha256": "7a1b283f583af50f83f693e3e8e5287551a018a120642ed30efd0e71470901a9",
+        "cache_safe_context": {
+          "stable_system": true,
+          "stable_tools": true,
+          "append_only_messages": true,
+          "no_diagnostic_churn": true,
+          "literal_memory": true,
+          "stale_retraction": true
+        },
+        "session_boundary": {
+          "same_project_sessions_isolated": true,
+          "different_project_isolated": true,
+          "model_scope_selectors_refused": true,
+          "default_root_untouched": true,
+          "contextual_prompt": true,
+          "raw_scope_preserved": true,
+          "auto_attribution": true
+        },
+        "candidate_lifecycle": {
+          "pending_excluded": true,
+          "host_reviewed": true,
+          "accepted_curated": true,
+          "evidence_persisted": true
+        },
+        "shared_compatibility": true
+      }
+    ],
+    "request_test": "Actual installed rc.1/rc.5 serialize to local model receiver; same complete system and tool hash, each prior full messages prefix retained. None->tip->counter-only logs->pending->accept->stale evidence->explicit empty memory. Literal braces, no consecutive duplicate memory snapshots. Three fresh scoped sessions per host."
+  },
+  "preservation": {
+    "live_profile_untouched_this_repair": true,
+    "web_memory_remains_disabled": true,
+    "no_user_db_access_or_edits_this_repair": true,
+    "no_canonical_skill_changes": true,
+    "no_search_source_changes": true,
+    "no_dsh_vendor_patch": true
+  },
+  "limits": [
+    "No live provider paid-cache test of repaired plugin. Existing disabled live request99.97% is a single control, not repaired adoption.",
+    "Initial upgrade cold cache, provider TTL/routing/model/tools changes and compaction can invalidate prefixes independently.",
+    "Whole runtime context can append for other plugins; append-only can grow history until normal compaction.",
+    "User-role memory data not trusted system instruction; newest snapshot supersedes old but old data is not physically erased.",
+    "Generated wrapper candidate execution and persisted-session cross-process resume not separately verified.",
+    "Store/schema/proposal lifecycle unchanged; no semantic extraction UI, grants or OS confinement added."
+  ],
+  "next": "Review dependent PR; live memory remains disabled unless user explicitly authorizes a new accepted deployment."
+}
