@@ -51,7 +51,7 @@ function mockCtx(opts: { withBus?: boolean } = {}): {
   const ctx: DshCtx = {
     provide: (k, api) => provided.set(k, api),
     tools: { register: (d) => tools.push(d) },
-    systemPrompt: { section: (d) => sections.push(d) },
+    systemPrompt: { section: () => {}, context: (d) => sections.push(d) },
     logger: { warn: (m) => warns.push(m), info: () => {} },
   }
   if (opts.withBus) {
@@ -201,7 +201,7 @@ test('section text: 空网返回空串（不占 prompt 预算）；有内容时�
     const { ctx, sections } = mockCtx()
     apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })
     const section = sections[0]!
-    assert.match(renderSection(section), /^$/, '空网 → 空区段')
+    assert.match(renderSection(section), /Current memory: none/, '空网 → 明确当前无记忆快照，撤回旧快照')
 
     const api = apply(ctx, { context:{mode:'shared'}, workspaces_root: join(root, 'ws'), default_workspace: 'main', recall: {view:'raw'} })!
     api.addConstraint({ key: 'c1', text: '必须先跑测试', mode: 'require' })

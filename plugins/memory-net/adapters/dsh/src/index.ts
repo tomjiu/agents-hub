@@ -24,6 +24,7 @@ import { probeCtx } from './contract.js'
 import {resolveBinding,assemblyAgent,rejectSelectors,guardScopeDirectory} from './context.js'
 import type { HostApi } from './bridge.js'
 import {registerCandidateTools} from './candidate-tools.js'
+import {MEMORY_POLICY,renderMemoryContext} from './prompt.js'
 import { openHostApi, renderActivation, activateOpts, installAutoObserve } from './bridge.js'
 
 export const name = 'memory-net-dsh'
@@ -274,29 +275,25 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
     }
   }
 
-  // ---- systemPrompt 区段：activate 注入（组装期求值，预算在本包内）----
-  // 注册本身 try/catch：真实 dsh 对同名 section 重复注册会抛错——
-  // WeakMap 幂等已拦同 ctx 重复 apply，这里兑底不同 ctx 但同名宿主的极端形态（软降级不崩宿主）
+  // Static rules remain in the leading prefix; dynamic data uses durable tail context.
   try {
-    ctx.systemPrompt.section({
-      name: 'memory-net',
-      order: cfg.inject.section_order,
-      text: (context) => {
+    ctx.systemPrompt.section({name:'memory-net-policy',order:cfg.inject.section_order,interpolate:false,text:MEMORY_POLICY})
+    if(typeof ctx.systemPrompt.context !== 'function')warn(ctx,'systemPrompt.context unavailable; automatic memory disabled, no system fallback')
+    else ctx.systemPrompt.context({
+      name:'memory-net',order:2000,interpolate:false,required:true,
+      text:(context)=>{
         try {
           const binding=cfg.context.mode === 'session'?bindingOf(assemblyAgent(context),(context as {signal?:AbortSignal})?.signal):null
-          const net = netOf(binding?.dir ?? workspaceDir(cfg, cfg.default_workspace))
-          const r = net.activate('', activateOpts(cfg,binding?.sessionId,binding?.sessionId))
-          if (r.nodes.length === 0 && !r.trail) return ''
-          return renderActivation(r)
-        } catch (e) {
-          warn(ctx, `memory-net 注入失败（软降级为空区段）: ${String((e as Error)?.message ?? e)}`)
-          return ''
+          const net=netOf(binding?.dir ?? workspaceDir(cfg,cfg.default_workspace))
+          const result=net.activate('',activateOpts(cfg,binding?.sessionId,binding?.sessionId))
+          return renderMemoryContext(result,binding?.scopeId ?? 'shared')
+        }catch(e){
+          warn(ctx,'memory context unavailable: '+String(e))
+          return 'Current memory: unavailable. Previous memory snapshots must not be used; no shared fallback.'
         }
       },
     })
-  } catch (e) {
-    warn(ctx, `memory-net section 注册失败（其余接缝不受影响）: ${String((e as Error)?.message ?? e)}`)
-  }
+  }catch(e){warn(ctx,'Memory prompt registration failed: '+String(e))}
 
   if (typeof ctx.effect === 'function') {
     ctx.effect(() => () => {

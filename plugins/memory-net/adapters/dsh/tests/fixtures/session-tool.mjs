@@ -9,10 +9,16 @@ export function apply(ctx) {
   api.reviewCandidate(candidate.id,{expected_fingerprint:candidate.payload.memory_candidate.fingerprint,decision:'accept',reviewer:'fixture-host-validator',note:'Synthetic review receipt, not semantic truth oracle',evidence:[evidence.id]})
   return {reviewed:true}
  }})
+ if(process.env.MN_CONTEXT_CACHE==='1')ctx.tools.register({name:'mn_memory_clear',description:'Synthetic current memory empty snapshot fixture',parameters:{type:'object',properties:{},additionalProperties:false},output:{schema:{type:'object',properties:{cleared:{type:'boolean'}},required:['cleared'],additionalProperties:false},render:(_a,v)=>[{type:'text',text:JSON.stringify(v)}]},execute:(_args,exec)=>{
+  const api=ctx['memory-net'].forAgent(exec.agent);for(const n of api.exportPkg().nodes)if(n.status==='active'||n.status==='promoted')api.demote(n.id);return {cleared:true}
+ }})
+ if(process.env.MN_CONTEXT_CACHE==='1')ctx.tools.register({name:'mn_candidate_invalidate',description:'Synthetic evidence invalidation fixture',parameters:{type:'object',properties:{},additionalProperties:false},output:{schema:{type:'object',properties:{invalidated:{type:'boolean'}},required:['invalidated'],additionalProperties:false},render:(_a,v)=>[{type:'text',text:JSON.stringify(v)}]},execute:(_args,exec)=>{
+  const api=ctx['memory-net'].forAgent(exec.agent),candidate=api.candidates({status:'accepted'})[0];if(!candidate)throw new Error('No accepted candidate');api.demote(candidate.based_on[0],{reason:'Synthetic stale source'});return {invalidated:true}
+ }})
  ctx.tools.register({name:'mn_context_seed',description:'Isolated fixture: seed current host-bound session memory',parameters:{type:'object',properties:{},additionalProperties:false},output:{schema:{type:'object',properties:{seeded:{type:'boolean'}},required:['seeded'],additionalProperties:false},render:(_a,v)=>[{type:'text',text:JSON.stringify(v)}]},execute:(_args,exec)=>{
   const api=ctx['memory-net'].forAgent(exec.agent)
   const text='SESSION-PRIVATE-'+process.env.MN_CONTEXT_LABEL
-  api.addTip({text});api.updateProgress(exec.agent.id,{summary:text+' progress'})
+  api.addTip({text:text+' {{.Names}} {{unknown}}'});api.updateProgress(exec.agent.id,{summary:text+' progress'})
   const pkg=api.exportPkg()
   fs.writeFileSync(process.env.MN_CONTEXT_REPORT,JSON.stringify({session:exec.agent.id,dir:api.workspaceDir,tip:text,nodes:pkg.nodes.length}))
   return {seeded:true}

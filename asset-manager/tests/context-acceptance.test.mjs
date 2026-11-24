@@ -16,3 +16,10 @@ test('candidate-review policy additionally requires full event-to-review host re
  const candidate_lifecycle={pending_excluded:true,host_reviewed:true,accepted_curated:true,evidence_persisted:true};assert.equal(classifyDshCompatibility(f,[{...report,candidate_lifecycle}]).status,'VERIFIED');
  for(const k of Object.keys(candidate_lifecycle))assert.equal(classifyDshCompatibility(f,[{...report,candidate_lifecycle:{...candidate_lifecycle,[k]:false}}]).status,'NEEDS_ACCEPTANCE');
 })
+test('cache safe policy refuses old or incomplete request-prefix evidence',async()=>{
+ const f={...fingerprint,assets:{memory_cache_policy:'tail-v1'}},report={...base,fingerprint:f};
+ assert.equal(classifyDshCompatibility(f,[report]).status,'NEEDS_ACCEPTANCE');await assert.rejects(saveDshAcceptance('.',report),/Complete host acceptance/);
+ const cache_safe_context={stable_system:true,stable_tools:true,append_only_messages:true,no_diagnostic_churn:true,literal_memory:true,stale_retraction:true};
+ assert.equal(classifyDshCompatibility(f,[{...report,cache_safe_context}]).status,'VERIFIED');
+ for(const k of Object.keys(cache_safe_context))assert.equal(classifyDshCompatibility(f,[{...report,cache_safe_context:{...cache_safe_context,[k]:false}}]).status,'NEEDS_ACCEPTANCE');
+})

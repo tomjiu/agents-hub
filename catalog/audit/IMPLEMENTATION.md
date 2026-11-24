@@ -2,6 +2,10 @@
 
 状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。PR #3已于本轮核验后合入main，合并提交6a2ba83；后续用户授权当前Web实验并自行重启，实际搜索/可信TUN抓取/9仓库Skill/独立记忆已验证，重复宿主tool-skill空目录问题已修复，见[Web实验](web-live-experiment.json)。后文阶段记录保留当时状态，不作当前合并状态。详见[合并交付](pr3-merge-delivery.json)。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
+## 本分支修复：缓存安全尾部快照
+
+固定system规则与动态runtime-context分离，诊断计数不自动注入；每次验证范围/证据有效性，宿主按已提交内容去重和追加。无记忆/不可用明确撤回旧数据，不冻结过期结论。当前Web按用户要求保持停用，未采用候选修复。证据见[缓存验收](<memory-cache-safe.json>)；调用前缀验证不等于供应商缓存命中认证。
+
 ## 本分支候选：记忆候选生命周期
 
 依赖PR7；自审修复诊断logger异常阻断宿主工具的问题。candidate提案引用同范围active观测，BEGIN IMMEDIATE内保存摘要指纹；host-only核验要求CAS/reviewer/note和不同观测依据，accept后才进入精选，受损或过期证据只读复核排除。模型candidate tools不具备审核能力，tip仍仅建议；新candidate路径不迁移原库。两版真实隔离DSH合成闭环通过，不是自动语义真实性认证。详见[本阶段验收](<memory-candidate-lifecycle.json>)，当前Web不采用，PR7不自动合并。

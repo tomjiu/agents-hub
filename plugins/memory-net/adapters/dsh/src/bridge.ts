@@ -111,15 +111,15 @@ function renderNode(x: { node: { id: string; status: string; based_on: string[];
 }
 
 /** 渲染 ActivationResult 为注入文本（冻结集在前：约束 + 当次进度；trail 摘要收尾）。 */
-export function renderActivation(r: ActivationResult): string {
+export function renderActivation(r: ActivationResult, diagnostics = true): string {
   const lines: string[] = []
   const frozen = r.nodes.filter((x) => x.frozen)
   const rest = r.nodes.filter((x) => !x.frozen)
   for (const x of frozen) lines.push(renderNode(x))
   for (const x of rest) lines.push(renderNode(x))
   if (r.trail) lines.push(`[路径 r=${r.trail.run_id}] ${r.trail.text}`)
-  if (r.curation) lines.push(`[精选] 排除 ${r.curation.excluded}：${JSON.stringify(r.curation.reasons)}`)
-  lines.push(`（激活 ${r.nodes.length} 节点 / ${r.tokens_used} tokens，裁掉 ${r.nodes_dropped}）`)
+  if (diagnostics && r.curation) lines.push(`[精选] 排除 ${r.curation.excluded}：${JSON.stringify(r.curation.reasons)}`)
+  if (diagnostics) lines.push(`（激活 ${r.nodes.length} 节点 / ${r.tokens_used} tokens，裁掉 ${r.nodes_dropped}）`)
   return lines.join('\n')
 }
 

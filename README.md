@@ -27,6 +27,10 @@ view 输出一个独立目录，含 Skill 部署副本、来源哈希及配置�
 
 **当前DSH-focused重构已交付，验收只要求DSH可用；Codex/OpenCode适配保留但不算已验收。** 记忆插件和搜索MCP已在DSH latest 0.2.2-rc.1、历史next rc.4和当前next rc.5独立宿主验证；升级或资产变更必须重新验收，见 [DSH升级指南](asset-manager/DSH-UPGRADE.md)。 交付边界及新clone复验见 [交付矩阵](catalog/audit/DELIVERY.md) 与 [干净副本证据](catalog/audit/fresh-checkout-verification.json)；阶段历史见 [实施状态](catalog/audit/IMPLEMENTATION.md)。
 
+## 本分支修复：缓存安全记忆注入（当前Web停用）
+
+针对动态记忆在system前缀造成缓存失效：固定规则保留system，记忆正文通过宿主runtime-context尾部快照、内容去重和明确失效撤回；排除日志数量/预算统计仅显式工具输出。参考社区现成接口，不执行未知插件，不修改当前Web或记忆库。详见[验收](<catalog/audit/memory-cache-safe.json>)与[社区对照](<docs/memory-cache-community-comparison.md>)。
+
 ## 本分支候选：事件到记忆候选准入（依赖PR7）
 
 模型显式引用当前范围观测提炼候选；pending排除精选，宿主记录独立核验观测/审核者/理由和CAS指纹后才accept进入精选，原事件/依据不变。不把工具成功自动升级成事实，tip仍是建议；自动总结器、核验UI和跨会话授权没有实现。详见[候选验收](<catalog/audit/memory-candidate-lifecycle.json>)与[适配说明](<plugins/memory-net/adapters/dsh/README.md>)。此分支未合并、未用于当前Web。

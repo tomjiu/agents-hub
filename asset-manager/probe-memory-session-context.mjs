@@ -15,6 +15,7 @@ const fixtures=path.join(root,'plugins/memory-net/adapters/dsh/tests/fixtures'),
 const evidence=path.join(root,'.asset-state/evidence');await fs.mkdir(evidence,{recursive:true});
 const env={};for(const k of ['PATH','Path','SystemRoot','WINDIR','TEMP','TMP','COMSPEC','PATHEXT'])if(process.env[k])env[k]=process.env[k];
 if(process.env.HUB_MEMORY_CANDIDATES==='1')env.MN_CONTEXT_CANDIDATES='1';
+if(process.env.HUB_MEMORY_CACHE==='1')env.MN_CONTEXT_CACHE='1';
 Object.assign(env,{HOME:work,USERPROFILE:work,DSH_HOME:home,DSH_TELEMETRY_MODE:'DISABLED',DSH_PERMISSION_MODE:'danger-full-access',MN_CONTEXT_MODEL_KEY:'fixture-key'});
 let model;const reports=[];
 async function run(args,cwd,extra={},timeout=90000){const child=spawn(process.execPath,args,{cwd,env:{...env,...extra},stdio:['ignore','pipe','pipe']});let out='',err='';child.stdout.on('data',c=>out+=c);child.stderr.on('data',c=>err+=c);const timer=setTimeout(()=>child.kill(),timeout);const code=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',resolve)}).finally(()=>clearTimeout(timer));if(code!==0)throw new Error(JSON.stringify({code,out:out.slice(-4000),err:err.slice(-6000)}));return {out,err};}
@@ -36,6 +37,11 @@ try {
   await fs.writeFile(path.join(evidence,'session-host-'+label+'-diagnostics.json'),JSON.stringify({rows,stderr:result.err},null,2));
   assert.ok(rows.some(r=>r.private_prompt&&r.progress_prompt&&r.curated_result&&r.raw_result&&r.selector_refused&&r.model_write),'Full scoped prompt/recall/raw/refusal cycle not complete');
   if(env.MN_CONTEXT_CANDIDATES==='1')assert.ok(rows.some(r=>r.candidate_pending_excluded&&r.candidate_accepted_recalled&&r.candidate_prompt),'Candidate proposal/review/curated loop incomplete');
+  if(env.MN_CONTEXT_CACHE==='1'){
+    assert.ok(rows.every(r=>r.system_stable&&r.tools_stable&&r.messages_prefix_stable&&!r.system_contains_memory&&!r.context_has_diagnostics),'Request system/tool/message prefix changed or diagnostics leaked');
+    assert.ok(rows.some(r=>r.initial_explicit_empty&&r.explicit_retraction_empty&&r.candidate_retracted),'Empty/retraction snapshots not observed');assert.ok(rows.some(r=>r.literal_memory),'Literal memory not observed');
+    assert.ok(rows.every(r=>r.context_hashes.every((hash,i)=>i===0||hash!==r.context_hashes[i-1])),'Consecutive duplicate unchanged memory snapshots retained');
+  }
   assert.ok(rows.every(r=>!r.foreign_leak&&!r.raw_prompt_leak),'Foreign or raw prompt leaked');
   const scope=JSON.parse(await fs.readFile(reportFile,'utf8'));const db=new DatabaseSync(path.join(scope.dir,'memory.db'),{readOnly:true});
   const nodes=db.prepare('select kind,run_id,task_id,text,payload_json from nodes').all();db.close();
@@ -48,7 +54,7 @@ try {
  }
  assert.equal(new Set(reports.map(r=>r.scope_directory)).size,3);await assert.rejects(fs.access(path.join(memory,'main')));
  const after=await dshFingerprint(root,installation);assert.equal(after.assets_sha256,fingerprint.assets_sha256);assert.equal(after.host_sha256,fingerprint.host_sha256);
- const report={status:'PASS',host_version:fingerprint.version,fingerprint,candidate_lifecycle:env.MN_CONTEXT_CANDIDATES==='1'?{pending_excluded:true,host_reviewed:true,accepted_curated:true,evidence_persisted:true}:undefined,session_boundary:{same_project_sessions_isolated:true,different_project_isolated:true,model_scope_selectors_refused:true,default_root_untouched:true,contextual_prompt:true,raw_scope_preserved:true,auto_attribution:true},sessions:reports,scope:'Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library.'};
+ const report={status:'PASS',host_version:fingerprint.version,fingerprint,cache_safe_context:env.MN_CONTEXT_CACHE==='1'?{stable_system:true,stable_tools:true,append_only_messages:true,no_diagnostic_churn:true,literal_memory:true,stale_retraction:true}:undefined,candidate_lifecycle:env.MN_CONTEXT_CANDIDATES==='1'?{pending_excluded:true,host_reviewed:true,accepted_curated:true,evidence_persisted:true}:undefined,session_boundary:{same_project_sessions_isolated:true,different_project_isolated:true,model_scope_selectors_refused:true,default_root_untouched:true,contextual_prompt:true,raw_scope_preserved:true,auto_attribution:true},sessions:reports,scope:'Actual isolated DSH headless processes, local scripted model, three fresh sessions; no subprocess resumed persisted session and no live profile/user library.'};
  const destination=path.join(evidence,'session-host-'+fingerprint.version+'.json');await fs.writeFile(destination,JSON.stringify(report,null,2)+String.fromCharCode(10));console.log(JSON.stringify({status:report.status,host:report.host_version,checks:report.session_boundary,sessions:reports,evidence:destination},null,2));
 }catch(e){await fs.writeFile(path.join(evidence,'session-host-failure.json'),JSON.stringify({error:String(e),reports,work},null,2));throw e}
 finally {if(model){const stop=new Promise(resolve=>model.once('exit',resolve));model.kill();await stop;}await fs.rm(work,{recursive:true,force:true});}
