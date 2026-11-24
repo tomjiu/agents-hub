@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "status": "G0_COMPLETE",
+  "at": "2026-11-24",
+  "task": "Issue #4 G0 — full inventory and traceable gap matrix (branch skills-g0-inventory from main 88faeb39)",
+  "method": "All numbers re-measured via the existing audit CLIs on this branch; no document counts copied blindly.",
+  "measurements": {
+    "skills_status": {
+      "total": 123,
+      "registered": 123,
+      "individual": 51,
+      "vendors": 71,
+      "management": 1,
+      "invalid": 0,
+      "client_incompatible_vendor": 10,
+      "duplicate_name_groups": 5
+    },
+    "usability_dsh": {
+      "total_assets": 137,
+      "content_ready": 48,
+      "conditional": 5,
+      "blocked": 84
+    },
+    "resources": {
+      "explicit_references": 248,
+      "found": 225,
+      "missing": 21,
+      "unresolved_examples": 2,
+      "missing_all_in_vendor_content": true
+    },
+    "provenance": {
+      "upstream_unverified": 60,
+      "declared_restricted": 4,
+      "vendor_runtime_review": 71,
+      "exact_content_groups": 0
+    },
+    "task_catalog": {
+      "routes": 14,
+      "distinct_skill_mappings": 15,
+      "routes_without_mapping": [
+        "business-scheduling"
+      ]
+    }
+  },
+  "deliverable": "asset-manager/G0-CAPABILITY-MATRIX.md — lifecycle x domain coverage matrix (RC/RS/PL/EX/QA/DL/MT for engineering/research/office/design/security), 10 classified gaps with priority/alternative/evidence, existing-capability reuse list, stage handoff to G1-G3",
+  "top_gaps": [
+    "G0-1 non-software business interview/requirements elicitation (no skill)",
+    "G0-2 business scheduling/budget route has zero mapped assets",
+    "G0-3 office artifact acceptance lacks rubrics/approval flow; 4 local licenses restricted",
+    "G0-9 no machine-checkable stage contracts between plan/execute/accept (G1 target)",
+    "G0-10 semantic conflict governance beyond structural preflight (G2 target)"
+  ],
+  "honesty": [
+    "CONTENT_READY means readable content, not license approval or professional-task certification",
+    "The matrix is a curated subset view; NO_MATCH does not mean the inventory lacks the asset",
+    "G1 implementation, G2 conflict corpus, and G3 version drills are NOT started in this PR",
+    "No subagents created; no auto-merge; no scheduled tasks; no vendor content executed"
+  ]
+}
