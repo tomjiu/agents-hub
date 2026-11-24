@@ -283,9 +283,12 @@
   ],
   "preservation": {
     "user_library_untouched": true,
-    "current_web_profile_unchanged": true,
     "no_canonical_skill_changes": true,
-    "no_search_source_changes": true
+    "no_search_source_changes": true,
+    "no_profile_writes_by_this_work": true,
+    "final_profile_matches_prior_PR6_receipt": false,
+    "final_profile_references_new_candidate_or_context_checkout": false,
+    "note": "Final read-only inspection found profile hash differs from old PR6 receipt. This work did not edit or restore the profile; no new candidate/context checkout is referenced. Other configuration changes are not attributed to this work."
   },
   "next": "Review stacked PR against PR7; do not auto-merge or adopt. Add real review policy/UI and optional grant-scoped sharing in separate scope."
 }
