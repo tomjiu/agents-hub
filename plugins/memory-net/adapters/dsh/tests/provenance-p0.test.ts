@@ -9,7 +9,7 @@ import { resolveConfig } from '../src/config.js'
 
 test('different and identical repeated calls retain independent evidence', () => {
   const root = mkdtempSync(join(tmpdir(), 'mn-p0-observe-'))
-  const cfg = resolveConfig({workspaces_root: root, default_workspace: 'main'})
+  const cfg = resolveConfig({context:{mode:'shared'},workspaces_root: root, default_workspace: 'main'})
   const net = MemoryNet.open(join(root, 'main'), {agentId: 'fixture-host', role: 'host'})
   let listener: ((...args: unknown[]) => void) | undefined
   try {

@@ -5,6 +5,7 @@
 
 export interface AdapterConfig {
   enabled: boolean
+  context: {mode:'session'|'shared'}
   /** 各 workspace 一个子目录（内含 memory.db）。 */
   workspaces_root: string
   /** 未显式指定时的 workspace 名。 */
@@ -50,10 +51,13 @@ import path from 'node:path'
 
 /** 默认配置（骨架建议值；dsh cordis.patch.yml 行 config 可覆盖）。 */
 export function resolveConfig(raw: Dict = {}): AdapterConfig {
+  const mode = obj(raw.context).mode ?? 'session'
+  if(mode !== 'session' && mode !== 'shared')throw new Error('Invalid memory context mode')
   const view = obj(raw.recall).view ?? 'curated'
   if (view !== 'raw' && view !== 'curated') throw new Error('Invalid recall view')
   const c: AdapterConfig = {
     recall: {view},
+    context: {mode},
     enabled: raw.enabled === undefined ? true : boolOr(raw.enabled, true),
     workspaces_root: String(raw.workspaces_root ?? ''),
     default_workspace: String(raw.default_workspace ?? 'default'),

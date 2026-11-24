@@ -2,6 +2,14 @@
 
 > 同目标、多 Agent 分工，维护**一张共享记忆网**。按 workspace 物理隔离；事实（observation）与推断（inference）硬隔离；activate 预算化注入。**不是通用 chatbot RAG** —— 没有向量库、没有相似度检索，只有结构化节点、权重序与双预算裁剪。
 
+## 事件到候选的准入闭环（本分支候选）
+
+proposeCandidate写入带来源观测和内容指纹的pending推断；它不是物理事实，不进入curated。reviewCandidate仅host可调用，必须给出预期指纹、审核者、理由和与原事件不同的同范围成功观测。accept记录核验回执并promoted，reject保留回执但demoted；重复同请求幂等，冲突请求拒绝。提案和核验在BEGIN IMMEDIATE内校验引用再写入，失败整体回滚。
+
+精选每次只读复核原事件/核验观测的正文摘要和active状态；失效、篡改或不完整回执退出精选，raw仍可诊断。候选与证据存在原节点结构中，无schema迁移；GC沿based_on/promote_evidence保护有效推断依据。旧add/promote仍兼容，但仅promote不能把pending候选准入。tip仍是建议，不要求这条候选核验路径，不得当已验证结论。
+
+**这是证据流程，不是自动真假判断**：不同观测ID不保证独立实验，reviewer是宿主记录不是身份认证，成功工具结果不证明任务正确。模型需显式提炼摘要并引用事件；没有自动语义摘要、核验UI、跨会话分享、不可变修订或代码版本绑定。拒绝候选在显式purge后不保证永久保留。详见[适配使用](<adapters/dsh/README.md>)。
+
 ## 精选召回（隔离候选）
 
 核心activate默认raw兼容旧调用；`activate(query,{view:"curated",task_id,run_id})`使用只读精选投影。自动工具观测（payload.tool）不进入精选，原件/引用仍完整保留，显式raw可诊断。约束始终保护，进度仅当前上下文保护；没有上下文时不冻结其他任务。非空查询按NFKC字面词命中，ASCII词边界避免react命中reactivity；不作向量或语义召回。空查询只保留持久tip、已审阅推断和明确当前上下文内容。
@@ -107,7 +115,18 @@ dsh 0.1.2-rc.1 端到端验证（headless 冒烟：插件加载/工具注册/区
 ## 测试
 
 ```bash
-npm test        # 20 用例：双 agent 共享 / workspace 隔离 / 写纪律 / 覆盖联动 / trail 回放 / 预算 / 冲突 / gc / 迁移 / CLI 子进程 smoke
+npm test        # 69 用例：双 agent 共享 / workspace 隔离 / 写纪律 / 覆盖联动 / trail 回放 / 预算 / 冲突 / gc / 迁移 / CLI 子进程 smoke / 溯源账本（操作/修订/CAS/重放/导出导入/脱敏/跨进程竞态）
 ```
 
 不依赖任何真实 LLM。
+
+## 溯源账本（M1，schema2 sidecar，默认关闭）
+
+`MemoryNet.open(dir,{ledger:true})` 挂载 `provenance.db`（ATTACH 同一连接，跨文件同事务提交）：
+操作账本（稳定 op_id+重放坐标去重/同坐标异摘要拒绝）、不可变修订链（单父链+精确到修订的
+based_on 引用）、修订级 CAS（promote/demote/contradict/link 必需 expected_revision，progress
+以 expected_revision 标冲突保留合并语义）、`exportFullPkg`/`importFullPkg`（含历史，闭包校验+拓扑
+导入+降级拒绝）、`migrateLedgerBaseline`（先备份，origin=legacy_baseline，不补造历史）、`redact`
+（敏感删除：清理修订+操作摘要+失效依赖方，不以"不可变"拒绝用户删除）。默认不挂载时 schema1
+行为与指纹完全不变；sidecar 可整体删除回退。设计与边界见 [PROVENANCE-M0-MATRIX](PROVENANCE-M0-MATRIX.md)
+与 [M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)。

@@ -15,18 +15,22 @@
  *   4) ctx.on('tools/result', ...)         —— auto-observe：宿主工具结果自动入网（可选能力，
  *      缺失仅关自动观测不拖垮其余接缝；写纪律不破——observation 仅宿主路径）
  */
+import path from 'node:path'
 import { MemoryNet } from '../../../src/store.js'
 import type { AdapterConfig } from './config.js'
 import { resolveConfig, workspaceDir } from './config.js'
 import type { DshCtx, ToolDef } from './contract.js'
 import { probeCtx } from './contract.js'
+import {resolveBinding,assemblyAgent,rejectSelectors,guardScopeDirectory} from './context.js'
 import type { HostApi } from './bridge.js'
+import {registerCandidateTools} from './candidate-tools.js'
+import {MEMORY_POLICY,renderMemoryContext} from './prompt.js'
 import { openHostApi, renderActivation, activateOpts, installAutoObserve } from './bridge.js'
 
 export const name = 'memory-net-dsh'
 
 /** Cordis 注入声明：ctx.systemPrompt / ctx.tools 须经此声明才可访问。 */
-export const inject = ['systemPrompt', 'tools']
+export const inject = ['systemPrompt', 'tools', 'agents', 'workingDirectory']
 
 type Dict = Record<string, unknown>
 const str = (v: unknown, fallback: string): string => (typeof v === 'string' && v.length > 0 ? v : fallback)
@@ -38,8 +42,10 @@ const num = (v: unknown): number | undefined => (typeof v === 'number' && Number
 const appliedCtxs = new WeakMap<object, HostApi | null>()
 
 function warn(ctx: DshCtx, msg: string): void {
-  if (ctx.logger?.warn) ctx.logger.warn(msg)
-  else process.stderr.write(`[memory-net-dsh] ${msg}\n`)
+  try {
+    if (ctx.logger?.warn) ctx.logger.warn(msg)
+    else process.stderr.write(`[memory-net-dsh] ${msg}\n`)
+  } catch { /* Diagnostics cannot fail host admission or tool execution. */ }
 }
 
 /** dsh 插件入口。返回 host api 供宿主测试/直连（ctx.provide 同时注册）。 */
@@ -65,6 +71,7 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
   let closed = false
   const netOf = (dir: string): MemoryNet => {
     if (closed) throw new Error('memory-net adapter is closed')
+    if(cfg.context.mode === 'session')guardScopeDirectory(cfg,dir)
     const hit = nets.get(dir)
     if (hit) return hit
     const net = MemoryNet.open(dir, { agentId: cfg.agent_id, role: 'host' })
@@ -78,16 +85,57 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
     nets.clear()
   }
 
-  let api: HostApi
-  try {
-    api = openHostApi(cfg, netOf, cfg.default_workspace, closeAllNets)
-  } catch (e) {
-    // workspace 名非法 / 目录不可建 / node:sqlite 不可用——降级明示，不崩宿主
-    warn(ctx, `降级：memory-net 打开失败——${String((e as Error)?.message ?? e)}`)
-    return null
+  const bindingOf = (agent:unknown, signal?:AbortSignal) => {
+    if(closed)throw new Error('memory-net adapter is closed')
+    const binding = resolveBinding(ctx,cfg,agent,signal)
+    guardScopeDirectory(cfg,binding.dir)
+    return binding
   }
-
-  ctx.provide('memory-net', api)
+  const forAgent = (agent:unknown):HostApi => {
+    const binding = bindingOf(agent)
+    const scopedCfg = {...cfg,workspaces_root:path.dirname(binding.dir),default_workspace:binding.dir.split(/[\\/]/).pop()!}
+    const scoped = openHostApi(scopedCfg,netOf)
+    return new Proxy(scoped,{get(target,key) {
+      if(key === 'forAgent') return forAgent
+      if(key === 'close') return () => {throw new Error('Close adapter through owning host capability')}
+      const value = Reflect.get(target,key)
+      if(typeof value !== 'function')return value
+      return (...args:unknown[])=>{
+        if(bindingOf(agent).scopeId !== binding.scopeId)throw new Error('Memory context changed; obtain fresh bound capability')
+        if(key === 'observe' || key === 'addInference' || key === 'addTip' || key === 'proposeCandidate') {
+          const input=(args[0] ?? {}) as Dict
+          if((input.run_id !== undefined && input.run_id !== binding.sessionId) || (input.task_id !== undefined && input.task_id !== null))throw new Error('Host memory context selector mismatch')
+          args[0]={...input,run_id:binding.sessionId}
+        }
+        if(key === 'candidates') {const opts=(args[0] ?? {}) as Dict;if(opts.run_id!==undefined&&opts.run_id!==binding.sessionId)throw new Error('Host candidate context mismatch');args[0]={...opts,run_id:binding.sessionId}}
+        if(key === 'activate') {
+          const opts=(args[1] ?? {}) as Dict
+          if((opts.run_id !== undefined && opts.run_id !== binding.sessionId)||(opts.task_id !== undefined && opts.task_id !== binding.sessionId))throw new Error('Host recall context mismatch')
+          args[1]={...opts,run_id:binding.sessionId,task_id:binding.sessionId}
+        }
+        if(['updateProgress','appendTrail','replayTrail'].includes(String(key)) && args[0] !== binding.sessionId)throw new Error('Host session context slot mismatch')
+        return value.apply(target,args)
+      }
+    }})
+  }
+  let api: HostApi
+  if(cfg.context.mode === 'session') {
+    api = new Proxy({workspaceDir:cfg.workspaces_root,forAgent,close:closeAllNets} as HostApi,{get(target,key){
+      if(key === 'workspaceDir' || key === 'forAgent' || key === 'close')return Reflect.get(target,key)
+      if(key === 'then' || typeof key === 'symbol')return undefined
+      return ()=>{throw new Error('Trusted agent context required; use memory-net.forAgent(agent)')}
+    }})
+  } else {
+    try {api = openHostApi(cfg,netOf,cfg.default_workspace,closeAllNets)}
+    catch(e){warn(ctx,'memory-net 打开失败（shared）：'+String(e));return null}
+  }
+  ctx.provide('memory-net',api)
+  const select = (args:Dict,exec?:{agent?:unknown;signal?:AbortSignal}) => {
+    if(cfg.context.mode === 'shared')return {net:netOf(workspaceDir(cfg,str(args.workspace,cfg.default_workspace))),run:args.run_id as string|undefined,task:args.task_id as string|undefined,workspace:str(args.workspace,cfg.default_workspace)}
+    rejectSelectors(args)
+    const b=bindingOf(exec?.agent,exec?.signal)
+    return {net:netOf(b.dir),run:b.sessionId,task:b.sessionId,workspace:'current'}
+  }
 
   // ---- 模型工具 1：按预算激活共享记忆 ----
   if (cfg.tools.recall) {
@@ -115,11 +163,16 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
         },
         render: (_args, value) => [{ type: 'text', text: String((value as { text?: string })?.text ?? '') }],
       },
-      execute: (args) => {
-        const net = netOf(workspaceDir(cfg, str(args.workspace, cfg.default_workspace)))
-        const r = net.activate(str(args.query, ''), activateOpts(cfg, args.run_id as string | null | undefined, args.task_id as string | null | undefined, args.view === undefined ? cfg.recall.view : args.view))
+      execute: (args,exec) => {
+        const selected=select(args,exec)
+        const r = selected.net.activate(str(args.query, ''), activateOpts(cfg, selected.run, selected.task, args.view === undefined ? cfg.recall.view : args.view))
         return { text: renderActivation(r) }
       },
+    }
+    if(cfg.context.mode === 'session') {
+      for(const key of ['workspace','run_id','task_id'])delete (recall.parameters.properties as Dict)[key]
+      recall.parameters.additionalProperties=false
+      recall.description='Recall memory for the trusted current project/session only. raw is diagnostic within the same boundary; no cross-session selectors.'
     }
     ctx.tools.register(recall)
   }
@@ -163,10 +216,11 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
           return [{ type: 'text', text: `memory saved: id=${v.id} kind=${v.kind} workspace=${v.workspace}` }]
         },
       },
-      execute: (args) => {
+      execute: (args,exec) => {
         const kind = str(args.kind, '')
-        const ws = str(args.workspace, cfg.default_workspace)
-        const net = netOf(workspaceDir(cfg, ws))
+        const selected=select(args,exec)
+        const ws = selected.workspace
+        const net = selected.net
         // 双保险 1：kind 白名单在工具面再拒一次（schema 层 enum 之外的第二道门）。
         // 拒绝路径抛 Error（宿主转为工具失败内容回给模型）——kokoa 插件先例同款。
         if (kind === 'observation' || kind === 'constraint' || kind === 'progress') {
@@ -179,12 +233,14 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
           throw new Error('inference 必须带 confidence（0~1）')
         }
         // 双保险 2：即便白名单漏了，核心 store 的 WriteForbiddenError 仍会拦（同样向上抛）
-        const n = net.add(kind, {
+        const n = cfg.context.mode === 'session' && kind === 'inference'
+          ? net.proposeCandidate({text:args.text as string,confidence:args.confidence as number,source_ids:args.based_on as string[],run_id:selected.run!})
+          : net.add(kind, {
           text: str(args.text, ''),
           confidence: num(args.confidence),
           based_on: Array.isArray(args.based_on) ? (args.based_on as string[]) : [],
-          run_id: (args.run_id as string | undefined) ?? null,
-          task_id: (args.task_id as string | undefined) ?? null,
+          run_id: selected.run ?? null,
+          task_id: cfg.context.mode === 'session' ? null : selected.task ?? null,
           payload: kind === 'tip' ? {
             ...(args.strategy !== undefined ? { strategy: args.strategy } : {}),
             ...(args.recovery !== undefined ? { recovery: args.recovery } : {}),
@@ -193,8 +249,15 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
         return { saved: true as const, id: n.id, kind: n.kind, workspace: ws }
       },
     }
+    if(cfg.context.mode === 'session') {
+      for(const key of ['workspace','run_id','task_id'])delete (write.parameters.properties as Dict)[key]
+      write.parameters.additionalProperties=false
+      write.description='Write inference/tip to the trusted current project/session. Observation is host-only. Session context is assigned by the host, not by arguments.'
+    }
     ctx.tools.register(write)
   }
+
+  if(cfg.context.mode === 'session' && cfg.tools.write)registerCandidateTools(ctx,select)
 
   // ---- 宿主工具桥：工具结果自动 observe 入网（写纪律：observation 仅宿主路径）----
   // ctx.on 是混合在 cordis ctx 上的事件总线方法（非服务属性，无需 inject 声明）；
@@ -205,35 +268,32 @@ export function apply(ctx: DshCtx, rawConfig: Dict = {}): HostApi | null {
       warn(ctx, 'auto_observe 已启用但 ctx.on 缺失（cordis 事件总线不可达）——自动观测关闭，其余接缝不受影响')
     } else {
       try {
-        installAutoObserve({ on: bus.bind(ctx) }, cfg, netOf, { warn: (m) => warn(ctx, m) })
+        installAutoObserve({ on: bus.bind(ctx) }, cfg, netOf, { warn: (m) => warn(ctx, m),...(cfg.context.mode === 'session'?{binding:(exec)=>bindingOf(exec.agent,exec.signal)}:{}) })
       } catch (e) {
         warn(ctx, `auto_observe 订阅失败（自动观测关闭，其余接缝不受影响）: ${String((e as Error)?.message ?? e)}`)
       }
     }
   }
 
-  // ---- systemPrompt 区段：activate 注入（组装期求值，预算在本包内）----
-  // 注册本身 try/catch：真实 dsh 对同名 section 重复注册会抛错——
-  // WeakMap 幂等已拦同 ctx 重复 apply，这里兑底不同 ctx 但同名宿主的极端形态（软降级不崩宿主）
+  // Static rules remain in the leading prefix; dynamic data uses durable tail context.
   try {
-    ctx.systemPrompt.section({
-      name: 'memory-net',
-      order: cfg.inject.section_order,
-      text: () => {
+    ctx.systemPrompt.section({name:'memory-net-policy',order:cfg.inject.section_order,interpolate:false,text:MEMORY_POLICY})
+    if(typeof ctx.systemPrompt.context !== 'function')warn(ctx,'systemPrompt.context unavailable; automatic memory disabled, no system fallback')
+    else ctx.systemPrompt.context({
+      name:'memory-net',order:2000,interpolate:false,required:true,
+      text:(context)=>{
         try {
-          const net = netOf(workspaceDir(cfg, cfg.default_workspace))
-          const r = net.activate('', activateOpts(cfg))
-          if (r.nodes.length === 0 && !r.trail) return ''
-          return renderActivation(r)
-        } catch (e) {
-          warn(ctx, `memory-net 注入失败（软降级为空区段）: ${String((e as Error)?.message ?? e)}`)
-          return ''
+          const binding=cfg.context.mode === 'session'?bindingOf(assemblyAgent(context),(context as {signal?:AbortSignal})?.signal):null
+          const net=netOf(binding?.dir ?? workspaceDir(cfg,cfg.default_workspace))
+          const result=net.activate('',activateOpts(cfg,binding?.sessionId,binding?.sessionId))
+          return renderMemoryContext(result,binding?.scopeId ?? 'shared')
+        }catch(e){
+          warn(ctx,'memory context unavailable: '+String(e))
+          return 'Current memory: unavailable. Previous memory snapshots must not be used; no shared fallback.'
         }
       },
     })
-  } catch (e) {
-    warn(ctx, `memory-net section 注册失败（其余接缝不受影响）: ${String((e as Error)?.message ?? e)}`)
-  }
+  }catch(e){warn(ctx,'Memory prompt registration failed: '+String(e))}
 
   if (typeof ctx.effect === 'function') {
     ctx.effect(() => () => {

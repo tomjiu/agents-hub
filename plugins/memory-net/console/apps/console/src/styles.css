@@ -358,3 +358,18 @@ html, body {
   .topbar { padding: 10px 12px; }
   .tabs { padding: 6px 12px 0; }
 }
+
+/* ---- M3 候选审核 ---- */
+.candidate-list { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.candidate-detail { margin-top: 16px; border-top: 1px solid var(--border, #ddd); padding-top: 12px; }
+.cand-selected { outline: 2px solid #4a90d9; }
+.cand-state-pending .cand-tag-pending, .tag.cand-tag-pending { background: #b48a1b; color: #fff; }
+.tag.cand-tag-accepted { background: #2e7d32; color: #fff; }
+.tag.cand-tag-rejected { background: #a33; color: #fff; }
+.tag.cand-tag-invalid { background: #777; color: #fff; }
+.diff-box { background: rgba(0,0,0,.03); border-radius: 6px; padding: 10px; line-height: 1.6; word-break: break-all; }
+.diff-added { background: #d4f7d4; border-bottom: 1px dashed #2e7d32; }
+.diff-same { color: #666; }
+.evidence-pool { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; max-height: 220px; overflow: auto; border: 1px dashed #ccc; border-radius: 6px; padding: 8px; }
+.evidence-item { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; cursor: pointer; }
+.txt { width: 100%; margin: 4px 0; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 13px; box-sizing: border-box; }

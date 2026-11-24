@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "M1_IMPLEMENTED",
+  "at": "2026-11-24",
+  "task": "Issue #2 M1 — operation ledger, immutable revisions, reference correctness (see memory-provenance-m0.json for the M0 baseline and red evidence)",
+  "implementation": {
+    "new_module": "plugins/memory-net/src/ledger.ts — schema2 sidecar provenance.db attached to the memory.db connection (single-connection cross-file BEGIN IMMEDIATE transactions; FK enforcement verified on attached databases)",
+    "tables": ["ledger_meta", "operations (stable op_id, seq, replay coordinate workspace_instance_id+session_id+durable_event_seq, summary digest)", "node_revisions (immutable full snapshots, single-parent chain, origin live|legacy_baseline|import|redaction)", "node_heads (current pointer, revision-level CAS)", "revision_links (references pinned to exact referenced revisions, relation supports)"],
+    "store_integration": [
+      "all mutators (add/link/promote/demote/contradict/updateProgress/appendTrail/reviewCandidate/proposeCandidate/gc) wrapped in BEGIN IMMEDIATE with reference validation INSIDE the transaction",
+      "ledger attached: promote/demote/contradict/link require expected_revision (RevisionConflictError on stale token, no silent LWW); progress keeps merge semantics but flags conflict via revision CAS (same-millisecond writes now detectable)",
+      "keyed-observation supersede/contradict cascade records all affected node revisions under the same op_id",
+      "replay dedup: durable coordinate + same digest returns the original node without writing; same coordinate different digest throws LedgerConflictError; replay check precedes validation for true idempotency",
+      "trail table keeps its display compression, ledger operations are the stable anchors (original coordinates survive GC)",
+      "exportFullPkg/importFullPkg: v1 fields + full ledger, closure validation, topological revision import (same-millisecond parent/child), non-empty target refused, v1 importer refuses v2 packages (no silent downgrade)",
+      "migrateLedgerBaseline: explicit, memory.db backup first, origin=legacy_baseline, refuses when ledger already has operations, does not fabricate history",
+      "redact: removes target revisions + links + scrubs affected operation summaries + marks dependents needs_review + optional delete_live; host-only",
+      "ledger is opt-in; without it schema1 behavior is byte-for-byte unchanged (compat contract locked by tests 15)"
+    ]
+  },
+  "tests": {
+    "memory_core": "69 pass / 0 fail (44 pre-existing + 14-ledger 16 + 15-legacy-boundary 5 + 16-concurrency 4)",
+    "adapter": "35 pass / 0 fail",
+    "root": "152 pass / 0 fail",
+    "validate": "PASS",
+    "race_evidence": "tests/16-ledger-concurrency.test.ts — real child process + parent holding BEGIN IMMEDIATE for 400ms, both interleaving orders, invariant: no dangling based_on ever commits (legacy and ledger paths, 3 iterations each)"
+  },
+  "red_to_green": {
+    "R1": "14-ledger 'full export carries the operations ledger'",
+    "R2": "14-ledger 'progress reference pins the exact revision and history survives export'",
+    "R3": "14-ledger 'same-millisecond stale progress write is flagged via revision CAS (frozen clock)'",
+    "R4": "14-ledger 'trail operations keep stable anchors after GC compression'",
+    "R5": "14-ledger 'stale status transition is rejected — no silent last-writer-wins'",
+    "note": "Original m1-red file (git history at M0 commit) asserted these against the legacy path; the legacy path intentionally stays unchanged, so its scenarios were rewritten as green compatibility-contract tests in 15-ledger-legacy-boundary.test.ts"
+  },
+  "known_scope_limits": [
+    "Durable replay coordinates are populated via AddInput.provenance (synthetic in tests); the DSH bridge does not yet supply host session/event coordinates — that is M2 host binding",
+    "No Console review UI and no bounded candidate distillation yet (M3)",
+    "Cross-session authorization/privacy governance not implemented (M4)",
+    "Host acceptance for the new fingerprint (source tree changed) must be re-run before any bundle packaging — recorded as pending in this branch's verification step"
+  ],
+  "independence": {
+    "temp_libraries_only": true,
+    "user_databases_touched": false,
+    "web_enabled": false,
+    "subagents_created": false,
+    "auto_merge": false
+  }
+}

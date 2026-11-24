@@ -1,0 +1,250 @@
+{
+  "schema": 1,
+  "at": "2026-11-24T11:38:30.385Z",
+  "environment": {
+    "node": "v24.22.3",
+    "platform": "linux",
+    "budget": {
+      "max_nodes": 10,
+      "max_tokens": 8000
+    },
+    "tasks": 6,
+    "expected_items_per_task": 6,
+    "noise_observations": 13
+  },
+  "results": [
+    {
+      "task": "task-auth",
+      "query": "oauth token refresh rotation",
+      "curated": {
+        "effective": 2,
+        "expected": 6,
+        "wrong": 8,
+        "missed": 4,
+        "missed_kinds": [
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 506,
+        "progress_included": false,
+        "latency_ms": 1.2
+      },
+      "recent_raw": {
+        "effective": 0,
+        "expected": 6,
+        "wrong": 10,
+        "missed": 6,
+        "missed_kinds": [
+          "constraint",
+          "constraint",
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 311,
+        "latency_ms": 0
+      }
+    },
+    {
+      "task": "task-migration",
+      "query": "sqlite wal migration concurrent writers",
+      "curated": {
+        "effective": 2,
+        "expected": 6,
+        "wrong": 8,
+        "missed": 4,
+        "missed_kinds": [
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 506,
+        "progress_included": false,
+        "latency_ms": 0.4
+      },
+      "recent_raw": {
+        "effective": 0,
+        "expected": 6,
+        "wrong": 10,
+        "missed": 6,
+        "missed_kinds": [
+          "constraint",
+          "constraint",
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 311,
+        "latency_ms": 0
+      }
+    },
+    {
+      "task": "task-latency",
+      "query": "search p95 latency tail slow leg",
+      "curated": {
+        "effective": 2,
+        "expected": 6,
+        "wrong": 8,
+        "missed": 4,
+        "missed_kinds": [
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 506,
+        "progress_included": false,
+        "latency_ms": 0.3
+      },
+      "recent_raw": {
+        "effective": 0,
+        "expected": 6,
+        "wrong": 10,
+        "missed": 6,
+        "missed_kinds": [
+          "constraint",
+          "constraint",
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 311,
+        "latency_ms": 0
+      }
+    },
+    {
+      "task": "task-release",
+      "query": "release rollback staging deploy",
+      "curated": {
+        "effective": 2,
+        "expected": 6,
+        "wrong": 8,
+        "missed": 4,
+        "missed_kinds": [
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 506,
+        "progress_included": false,
+        "latency_ms": 0.3
+      },
+      "recent_raw": {
+        "effective": 0,
+        "expected": 6,
+        "wrong": 10,
+        "missed": 6,
+        "missed_kinds": [
+          "constraint",
+          "constraint",
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 311,
+        "latency_ms": 0
+      }
+    },
+    {
+      "task": "task-i18n",
+      "query": "cjk text extraction encoding entity",
+      "curated": {
+        "effective": 2,
+        "expected": 6,
+        "wrong": 8,
+        "missed": 4,
+        "missed_kinds": [
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 506,
+        "progress_included": false,
+        "latency_ms": 0.4
+      },
+      "recent_raw": {
+        "effective": 0,
+        "expected": 6,
+        "wrong": 10,
+        "missed": 6,
+        "missed_kinds": [
+          "constraint",
+          "constraint",
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 311,
+        "latency_ms": 0
+      }
+    },
+    {
+      "task": "task-budget",
+      "query": "token budget queue bounded distill",
+      "curated": {
+        "effective": 2,
+        "expected": 6,
+        "wrong": 8,
+        "missed": 4,
+        "missed_kinds": [
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 512,
+        "progress_included": false,
+        "latency_ms": 0.2
+      },
+      "recent_raw": {
+        "effective": 0,
+        "expected": 6,
+        "wrong": 10,
+        "missed": 6,
+        "missed_kinds": [
+          "constraint",
+          "constraint",
+          "tip",
+          "tip",
+          "inference",
+          "progress"
+        ],
+        "char_proxy": 311,
+        "latency_ms": 0
+      }
+    }
+  ],
+  "summary": {
+    "curated": {
+      "effective_recall": 0.3333333333333333,
+      "wrong_memory_total": 48,
+      "rederivation_missed_total": 24,
+      "char_proxy_total": 3042,
+      "latency_p50_ms": 0.4
+    },
+    "recent_raw": {
+      "effective_recall": 0,
+      "wrong_memory_total": 60,
+      "rederivation_missed_total": 36,
+      "char_proxy_total": 1866,
+      "latency_p50_ms": 0
+    }
+  },
+  "failures": [],
+  "reproducibility": {
+    "seed_inputs": "TASKS/NOISE constants in scripts/multitask-ab.mjs",
+    "deterministic": true
+  },
+  "scope": "Deterministic offline fixture on an isolated temp workspace; effective/wrong/missed measured against seeded ground truth, char count as token proxy; not a real-model effectiveness certification. Measured characteristic: constraints are workspace-global by design (frozen top), so in a single shared multi-task library foreign constraints crowd the budget (8/10 slots here); session-scoped mode bounds this per session. Recorded as a trade-off, semantics not changed without authorization.",
+  "status": "PASS"
+}

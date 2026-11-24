@@ -4,7 +4,46 @@
 已对 **真实 dsh 0.1.2-rc.1** 端到端验证（见文末冒烟）：插件加载 / 工具注册 / systemPrompt
 区段注入 / 模型工具调用 / SQLite 落盘 / 宿主工具结果自动观测（auto-observe）全链路闭环。
 
-## 精选模式（本分支候选，当前Web未采用）
+## 缓存安全记忆注入（本分支，当前Web保持停用）
+
+systemPrompt.section只包含固定的记忆使用规则。动态记忆通过systemPrompt.context注册为required/literal快照，由DSH追加到请求历史尾部；节点按稳定ID排序，不包括精选排除数、token统计和裁剪数。显式memory_net_recall仍带完整诊断统计。模板花括号是原文，interpolate:false不把记忆内容当宿主模板执行。
+
+每次组装/请求准入都重新解析当前会话项目、验证候选来源和核验依据；由宿主对已提交的完整runtime-context快照去重，不使用全局agent缓存或一次性冻结。没有有效节点时显式发出当前无记忆快照，撤回旧快照；上下文缺失/陈旧或插件关闭则发不可用声明，不回退共享库。宿主不支持context API时自动记忆关闭，工具仍可用，绝不回退动态system注入。
+
+这是缓存友好的请求构造，不保证供应商TTL/路由和上下文压缩后仍95%命中。历史快照留在消息中但被最新快照取代；不是物理擦除/OS机密隔离。raw兼容模式仍可能因每次日志变化追加尾部快照，不会改system；默认curated过滤无关日志。whole runtime-context也可能因其他插件变化而追加。真实提供方短时测试已完成：独立cpa/gpt-6.1-sol进程6请求，暖缓存加权99.17%，更新/清空记忆均保持98%以上，见[实测记录](<../../../../catalog/audit/memory-cache-real-provider.json>)。实际运行包、跨进程恢复和长期命中仍需验证；本分支没有重启/启用当前Web。
+
+详见[缓存修复验收](<../../../../catalog/audit/memory-cache-safe.json>)与[社区对照](<../../../../docs/memory-cache-community-comparison.md>)。
+
+## 候选提炼与宿主核验（依赖PR7，本分支未采用）
+
+仅session模式提供memory_net_candidates和memory_net_propose：前者只列本范围候选摘要及来源事件ID，后者必须引用1..32个同范围active成功观测，生成pending推断。即使普通memory_net_write写inference也走同一提案路径，based_on必填。tip仍单独标为建议，不是核验事实；shared兼容模式旧inference写法不改变。
+
+```js
+const list = memory_net_candidates({query:"SQLite",limit:10});
+memory_net_propose({text:"SQLite WAL方案候选",confidence:0.8,source_ids:["n1"]});
+```
+
+模型没有review工具。宿主用forAgent(exec.agent).reviewCandidate(id,{expected_fingerprint,decision:"accept"或"reject",reviewer,note,evidence})记录审核；evidence必须与原来源ID不同。提案时冻结来源摘要指纹，接受后才进入精选，并公开review_evidence和候选标签。上下文选择器依然拒绝；列表不代表准入。候选列表query按字面OR匹配，输出摘要截断且limit有界；内部仍扫描本范围节点，超大库性能尚未优化。
+
+核验不自动执行外部指令，也不把工具成功当真相；宿主须实际判断证据是否支持候选，测试宿主只是合成fixture。没有自动模型总结器、人工核验UI或跨会话分享。库不迁移，旧用户数据/currentWeb不改，受损/过期回执退出精选，不自动改写原事实。
+
+## 宿主上下文隔离（本分支候选，当前Web未采用）
+
+默认context.mode=session。真实Agent必须与agents.get(session.id)相同；规范化当前目录和持久会话ID确定独立数据库。模型工具、提示和raw仅访问当前范围；workspace/run_id/task_id不再由模型选择，缺身份工具拒绝、动态上下文声明不可用、观测跳过，不回退共享库。
+
+自动观测在tools/pre-execute按token捕获归属，结果仍写入原调用项目。host通过forAgent(exec.agent)获取能力；Agent替换、目录变化、插件关闭后旧能力拒绝。session ID用于run和session-context进度槽，不冒充业务任务。
+
+```js
+memory_net_write({kind:"tip",text:"当前项目决策"})
+memory_net_recall({query:"决策"})
+memory_net_recall({query:"read",view:"raw"})
+```
+
+旧共享模式需宿主明确context.mode=shared，保留workspace参数但无会话隔离。升级不自动读取或迁移旧main库；新库位于root/scoped-v1/p-项目哈希/s-会话哈希。切换cwd切换范围，路径别名realpath归一，同会话同目录恢复映射由契约测试覆盖，真实跨进程resume未验收。目录不是Git根，移动项目不自动继承。
+
+适配边界不是OS沙箱：有任意文件/宿主工具仍能读取数据库。跨会话共享、业务任务绑定、候选提炼、版本绑定和脱敏后续实现。当前Web未采用本候选。
+
+## 精选模式（shared兼容用法）
 
 `recall.view`配置默认curated，作用于提示区段及memory_net_recall。工具传`view:"raw"`仅诊断本次调用，不改变后续注入；非法模式拒绝。核心host api.activate默认raw以兼容旧接口，显式传curated才精选。工具结果、失败证据仍自动落库；精选排除日志不是删除日志。
 
@@ -37,8 +76,8 @@ ctx.effect可用时销毁自动关闭全部workspace；陈旧工具/事件不得
 
 | 接缝 | 真实契约（权威源） | 本包落点 |
 |------|------------------|---------|
-| 注入声明 | cordis 对 ctx 服务属性强制 `inject`，未声明访问即抛 `cannot get property "X" without inject` | 模块静态导出 `inject = ['systemPrompt', 'tools']` |
-| 区段 | `PromptSection = { name, order, text }`（dsh-system-prompt；name 唯一，text 为 string 或 `(context)=>string`） | `ctx.systemPrompt.section({ name: 'memory-net', order, text })` |
+| 注入声明 | cordis 对 ctx 服务属性强制 `inject`，未声明访问即抛 `cannot get property "X" without inject` | 模块静态导出 `inject = ['systemPrompt', 'tools', 'agents', 'workingDirectory']` |
+| 区段 | `PromptSection = { name, order, text }`（dsh-system-prompt；name 唯一，text 为 string 或 `(context)=>string`） | 固定规则section；动态数据systemPrompt.context（required、interpolate:false） |
 | 工具 | `ToolDefinition = ToolSchema + output（必填 ToolOutputDefinition{schema,render}）+ execute(args,exec)→canonical JSON`（dsh-tools） | 两工具均带 `output`；execute 返回满足 schema 的 canonical 值，拒绝路径抛 Error |
 | 包入口 | cordis 经 profile node_modules 按 bare name `import(包名)` | `package.json` 声明 `main: dist/adapters/dsh/src/index.js` |
 | 事件订阅 | `ctx.on(name, listener)`（cordis 事件总线方法，混合在 ctx 上，非服务属性——无需 inject 声明）；dsh-tools 对每次工具 dispatch 终态 emit `tools/result`（exec, result），listener 失败被宿主 containment（notifyResult try/catch + Promise 兜底） | auto-observe 桥：`ctx.on('tools/result', ...)` 被动观测，写入前全 try/catch 自我隔离（双保险） |

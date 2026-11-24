@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "status": "LOCAL_AND_EXACT_HOST_VERIFIED_NOT_MERGED_NOT_WEB_ADOPTED",
+  "baseline": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+  "branch": "memory-session-boundary",
+  "design": {
+    "default": "session",
+    "scope": "canonical effective cwd + durable session ID",
+    "host_identity": "ToolRunContext.agent and AssembleContext.agent/scope; exact agents.get(id) identity required",
+    "automatic_observation": "Capture at tools/pre-execute with opaque token, consume once at tools/result; no mutable latest-agent global.",
+    "missing_identity": "Tool rejects, prompt empty, auto observation warns/skips; never fallback shared.",
+    "legacy": "context.mode=shared only on explicit host configuration; no automatic old library reads or migration.",
+    "task": "Session-context progress slot and run ID are not a business task ID."
+  },
+  "tests": {
+    "root": {
+      "total": 150,
+      "pass": 149,
+      "skip": 1,
+      "fail": 0
+    },
+    "memory_core": {
+      "pass": 39,
+      "fail": 0
+    },
+    "adapter": {
+      "pass": 30,
+      "fail": 0
+    },
+    "search": {
+      "pass": 335,
+      "fail": 0
+    },
+    "regressions": "Three pre-implementation behavioral failures, five new adapter tests and one context acceptance gate test.",
+    "compatibility": "Legacy fixtures explicitly shared. Full MCP/Skill/curated/raw/P0 host probes supplement scoped three-session checks."
+  },
+  "hosts": [
+    {
+      "version": "0.2.2-rc.1",
+      "host_sha256": "221084aab019377b66d407ffd851fe52968138b8d7e837397e040a68c3323822",
+      "assets_sha256": "315fdbf456b840433b8bcc333be1ce2b819cb1a9564defc87a282e78601594b5",
+      "checks": {
+        "same_project_sessions_isolated": true,
+        "different_project_isolated": true,
+        "model_scope_selectors_refused": true,
+        "default_root_untouched": true,
+        "contextual_prompt": true,
+        "raw_scope_preserved": true,
+        "auto_attribution": true
+      },
+      "shared_compatibility": true
+    },
+    {
+      "version": "0.2.2-rc.5",
+      "host_sha256": "d4268358eaf34ba3f1b8ec7e47d9c422a2233015fe84871e899e7fe56497edd4",
+      "assets_sha256": "315fdbf456b840433b8bcc333be1ce2b819cb1a9564defc87a282e78601594b5",
+      "checks": {
+        "same_project_sessions_isolated": true,
+        "different_project_isolated": true,
+        "model_scope_selectors_refused": true,
+        "default_root_untouched": true,
+        "contextual_prompt": true,
+        "raw_scope_preserved": true,
+        "auto_attribution": true
+      },
+      "shared_compatibility": true
+    }
+  ],
+  "review_findings": [
+    "Nested 246-character worktree caused spawn cwd ENOENT; two worktree-move attempts denied, new clean short worktree created. No live source moved.",
+    "Session facade initially returned functions for symbols.initHooks; real Cordis activation failed. Symbol/then protocol keys now undefined; actual probe passed after fix.",
+    "Windows file symlink creation unavailable; directory junction is real tested, database-file lstat rejection is an injected test, not physical file-link certification.",
+    "Fingerprint missing legacy src/index.ts fixture rejected before ENOENT handler; optional confined lookup corrected, downstream errors remain fail closed."
+  ],
+  "preservation": {
+    "current_web_not_modified": true,
+    "user_memory_not_opened": true,
+    "canonical_skills_and_source_baselines_unchanged": true,
+    "core_schema_and_lifecycle_unchanged": true
+  },
+  "limitations": [
+    "Adapter isolation is not OS confidentiality; privileged host/filesystem tools can read files.",
+    "No automatic decision sharing between sessions or fork inheritance, no business task registry/grants.",
+    "cwd, not git root, is the project boundary; directory move gets new scope.",
+    "Fresh processes were tested with new sessions; true persisted-session resume not tested. Same ID/dir re-registration tested structurally.",
+    "Admission capacity is bounded at4096, overflow skips observation; lifecycle/force-kill resilience not completely certified.",
+    "Memory extraction/candidate validation, immutable revisions/code anchors, comprehensive redaction and reference-write concurrency deferred.",
+    "New default means old shared library is not visible until explicit host-controlled compatibility/migration decision.",
+    "Generated bundle wrapper/schema verified by unit tests; session-specific real probes load adapter directly, not the generated wrapper."
+  ],
+  "next": "Review this independent PR before any live adoption; then implement event-to-candidate lifecycle under explicit scope/grants.",
+  "acceptance_policy": "Session-v1 fingerprint requires seven context checks in addition to MCP/Skill/cache/persistence legacy compatibility; shared-only acceptance cannot package this candidate.",
+  "self_review": {
+    "finding": "Diagnostic logger throw on missing identity could abort tools/pre-execute before continuation.",
+    "fix": "Nonthrowing diagnostic guard; failing regression reproduced then full adapter30 passed.",
+    "commit": "25bbdd4180c1ca5591abf820025ba5bbe548f518"
+  }
+}

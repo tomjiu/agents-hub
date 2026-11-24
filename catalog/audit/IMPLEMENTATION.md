@@ -2,6 +2,32 @@
 
 状态：当前DSH-focused重构交付完成（明确限制保留）。只验收DSH，不要求Codex/OpenCode全跑通，不创建子代理。首次交付及后续恢复/并发修复历史证据保留；当前根测试138通过、1权限项跳过，latest rc.1与next rc.5的记忆/搜索均独立验收，新增技能发现入口。PR #3已于本轮核验后合入main，合并提交6a2ba83；后续用户授权当前Web实验并自行重启，实际搜索/可信TUN抓取/9仓库Skill/独立记忆已验证，重复宿主tool-skill空目录问题已修复，见[Web实验](web-live-experiment.json)。后文阶段记录保留当时状态，不作当前合并状态。详见[合并交付](pr3-merge-delivery.json)。详见 [本次上手与最新宿主验收](onboarding-latest-dsh.json)及[初次交付](final-dsh-acceptance.json)，未认证资产不自动启用。
 
+## 当前（2026-11-24）：latest 通道移至 rc.5 的 Linux 复验与缓存问题结论
+
+npm latest 标签自上次检查（2026-11-19，rc.1）移动到 **0.2.2-rc.5**（next 同为 rc.5；0.2.3-alpha.2 已发布但 alpha 非跟踪通道）。在云端 Linux/Node 24.22.3 全新隔离目录固定安装 rc.5，对 memory-cache-safe-context 分支代码完成**首个 Linux 平台验收**：会话上下文/候选/缓存专项、P0+精选专项、直接宿主全链路（记忆十项、搜索六项、literal 拒绝、并行发现、Skill 全文、MCP 回流）全部通过，check-dsh VERIFIED；根152/核心44/适配35/搜索335 在 Linux 全绿。登记追加 Linux 指纹记录并更新 observed_upstream。
+
+**记忆缓存命中问题结论：已在分支修复（e44e303 尾部快照），未合并 main。** 真实供应商证据（gpt-6.1-sol、6请求、暖缓存加权 99.17%、宿主 rc.1）见[实测记录](<memory-cache-real-provider.json>)；rc.5 Linux 会话探针六项 cache_safe_context 检查通过（本地脚本化模型的序列化不变量，不等于供应商侧缓存计数认证）。
+
+**运行包缺口如实记录**：生成包打包校验（createDshBundle+verifyDshBundle）通过，但 HUB_DSH_BUNDLE_TEST=1 直接运行失败——旧探针预置 shared 库而生成包默认 session 模式，预置约束不注入；46条登记中 bundle_test:true 为 0，该不兼容已在宿主验收指南记录。session 默认包的端到端运行包探针与跨进程恢复同一持久会话仍是未验收缺口，列入 M0 矩阵。详见[本轮验收](<dsh-latest-rc5-linux.json>)。本轮不自动合并、不启用当前Web、不修改用户库。
+
+## 当前（2026-11-24）：M1 操作账本与不可变修订落地（memory-provenance-m0 分支）
+
+基于 268a6e9，先 M0 后 M1 实施（[矩阵](<../plugins/memory-net/PROVENANCE-M0-MATRIX.md>)、[M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)、[验收](<memory-provenance-m1.json>)）。新增 schema2 sidecar `provenance.db`（ATTACH 同连接、跨文件同事务、附加库 FK 已实证）：操作账本（稳定 op_id/重放坐标去重/同坐标异摘要拒绝）、不可变修订链与精确到修订的 based_on 引用、修订级 CAS（promote/demote/contradict/link 必需 expected_revision；progress 保留合并语义但按修订标冲突，同毫秒不再漏判）、含历史的 v2 导出导入（闭包校验+拓扑导入+降级拒绝）、显式基线迁移（先备份、不补造历史）、敏感删除 redact（清理修订与操作摘要并失效依赖方）。全部校验后写入竞态关闭（跨进程竞态测试：父进程持锁 400ms + 真实子进程，两种交错序均无悬空引用）。
+
+M0 红灯 R1-R5 全部转绿入常规套件；legacy 默认路径行为与指纹不变（15 号边界契约锁定）。核心 69/69、适配 35/35、根 152/152、validate PASS（Linux）。账本默认关闭（open({ledger:true}) 显式挂载，可整体删除回退）；DSH 适配层未改动，但源码指纹已变化——运行包/宿主复验见同分支后续验收记录。宿主会话/代码版本绑定（M2）、候选提炼与审核 UI（M3）、跨会话授权（M4）未实施。
+
+## 本分支修复：缓存安全尾部快照
+
+固定system规则与动态runtime-context分离，诊断计数不自动注入；每次验证范围/证据有效性，宿主按已提交内容去重和追加。无记忆/不可用明确撤回旧数据，不冻结过期结论。当前Web按用户要求保持停用，未采用候选修复。证据见[缓存验收](<memory-cache-safe.json>)；调用前缀验证不等于供应商缓存命中认证。
+
+## 本分支候选：记忆候选生命周期
+
+依赖PR7；自审修复诊断logger异常阻断宿主工具的问题。candidate提案引用同范围active观测，BEGIN IMMEDIATE内保存摘要指纹；host-only核验要求CAS/reviewer/note和不同观测依据，accept后才进入精选，受损或过期证据只读复核排除。模型candidate tools不具备审核能力，tip仍仅建议；新candidate路径不迁移原库。两版真实隔离DSH合成闭环通过，不是自动语义真实性认证。详见[本阶段验收](<memory-candidate-lifecycle.json>)，当前Web不采用，PR7不自动合并。
+
+## 本分支候选：宿主上下文与会话隔离
+
+默认session策略绑定实际宿主Agent/当前目录/会话ID；自动观测在执行前归属捕获，模型不能通过raw或workspace参数越界，缺身份不读共享库。原共享模式显式兼容，旧用户库不变。两版实际DSH各三个新会话验证跨项目/会话不串读、模型tip写入、上下文提示/进度、raw与自动观测；真实跨进程resume未验收。根149通过/1skip、核心39、adapter29、搜索335；当前Web未采用。详见[本阶段记录](<memory-session-boundary.json>)。事件提炼记忆候选、业务任务共享与版本绑定仍待独立阶段。
+
 ## 当前：PR6审阅合并与Web采用
 
 PR6合并b6a34c9，审阅补丁536c7ca计入依赖/审核证据token并公开review_evidence。组合根148通过/1权限跳过、核心39、adapter24、搜索335，两版隔离DSH通过；当前Web已实际调用精选/raw、持久提示读写、旧标记召回、搜索/cache/fetch与安全拒绝。备份时575条main节点全部保留，最终读回609条；其他两个已有workspace节点无缺失。原模型/全局配置及实验块外前缀不改，无进程重启；一次卸载旧记忆后新ID挂载，过渡工具短暂不可见，最终调用通过。SQLite WAL和DeltaDB各5候选，但前者约10秒、后者降级且官网fetch失败，不能称全部可靠。raw能看到共享workspace其他会话日志：精选不是机密隔离，敏感任务要物理独立workspace。详见[本轮实际验收](<pr6-web-adoption.json>)。下面旧阶段/未采用/旧计数是历史，不代表当前状态。
