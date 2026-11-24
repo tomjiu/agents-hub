@@ -92,14 +92,18 @@ export class SearchCore {
     // phase AA: 调用方显式 opts.lang 优先; 未传时用 planner 检测结果(zh 题自动切 zh 源腿)
     const runOpts = !opts.lang && decision.lang ? { ...opts, lang: decision.lang } : opts;
     const cacheKey = Cache.hash(JSON.stringify({
-      policy: "provider-allowlist-v1+lexical-evidence-v1", q: decision.queries, r: decision.route, o: {
+      policy: "provider-allowlist-v1+lexical-evidence-v2", q: decision.queries, r: decision.route, o: {
         f: runOpts.freshness, l: runOpts.lang, m: runOpts.maxResults, t: runOpts.topN,
         d: runOpts.domains, e: runOpts.engines,
       },
     }));
     if (cacheable) {
       const hit = this.cache.getSearch(cacheKey);
-      if (hit && !(hit as SearchResult).meta?.degraded && (hit as SearchResult).refs?.length > 0 && (hit as SearchResult).meta?.quality?.policy === "lexical-evidence-v1" && Array.isArray((hit as SearchResult).refs) && filterEvidence(rawQuery,(hit as SearchResult).refs).rejected === 0 && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
+      // 命中要求条目本身经过证据门(v1 或 v2 标签都算被门控的合法历史记录);
+      // 当前策略合规由下方 filterEvidence(lexical-evidence-v2) 重跑保证 — 旧标签不豁免重验。
+      const gatedPolicy=(hit as SearchResult)?.meta?.quality?.policy;
+      const evidenceGated=gatedPolicy==="lexical-evidence-v1"||gatedPolicy==="lexical-evidence-v2";
+      if (hit && !(hit as SearchResult).meta?.degraded && (hit as SearchResult).refs?.length > 0 && evidenceGated && Array.isArray((hit as SearchResult).refs) && filterEvidence(rawQuery,(hit as SearchResult).refs).rejected === 0 && (selection === undefined || cachedSelectionMatches(hit as SearchResult, selection))) {
         this.cache.kvIncr("stat:search_cache_hit");
         const h = hit as SearchResult;
         return { ...h, meta: { ...h.meta, fromCache: true, elapsedMs: Date.now() - t0 }, planner: decision };

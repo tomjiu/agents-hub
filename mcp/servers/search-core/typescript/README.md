@@ -56,9 +56,9 @@ CLI用--engines searxng或--engines ""，查询需在flag前；裸--engines报�
 
 ## 查询证据质量门槛
 
-search/xSearch的默认最低质量门槛lexical-evidence-v1只检查词法证据：title/snippet/path至少匹配2个或40%独立有效查询词（单词题1），CJK用bigram；URL主机和provider前缀不算。它不是语义/事实鉴定，会漏掉跨语言、同义词或过短摘要，纯URL/无有效词可返回空。meta.quality含candidate_results/no_relevant_results、evaluated/rejected/reasons；候选必须人工核验，全部拒绝标degraded不输出错题引用。Bing q回显改写会报query mismatch，缺回显不作为确认。
+search/xSearch的默认最低质量门槛lexical-evidence-v2只检查词法证据：title/snippet/path至少匹配2个或50%独立有效查询词（单词题1），CJK用bigram；轻量复数折叠（len>3且非ss/us/is结尾剥尾s，recipes→recipe）消除单复数漏配；URL主机和provider前缀不算。它不是语义/事实鉴定，会漏掉跨语言、同义词或过短摘要，纯URL/无有效词可返回空。meta.quality含candidate_results/no_relevant_results、evaluated/rejected/reasons；候选必须人工核验，全部拒绝标degraded不输出错题引用。Bing q回显改写会报query mismatch，缺回显不作为确认。
 
-Research新搜索结果在原主题上过滤后入池，不对既有journal执行破坏性重写。质量cache新key不复用旧缓存，命中仍查词证据。底层fusion可选evidenceGate默认关闭保兼容，搜索entry启用；embedding失败不恢复词门槛拒绝。公网效果只认证已测Node/SQLite题，默认自动池可能加入keyless聚合器。
+Research新搜索结果在原主题上过滤后入池，不对既有journal执行破坏性重写。质量cache新key（policy含lexical-evidence-v2）不复用旧缓存；命中接受v1/v2历史标签条目但一律重跑当前v2证据门，旧标签不豁免重验。底层fusion可选evidenceGate默认关闭保兼容，搜索entry启用；embedding失败不恢复词门槛拒绝。公网效果只认证已测Node/SQLite题，默认自动池可能加入keyless聚合器。
 
 当前Meta DNS映射198.18.x时官网fetch安全拒绝；新诊断提示可信网络返回真实DNS，不关闭SSRF/豁免fake-IP，也不假装已全文抓取成功。
 

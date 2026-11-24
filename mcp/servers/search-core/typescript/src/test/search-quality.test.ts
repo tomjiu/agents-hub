@@ -28,6 +28,26 @@ test('evidence floor handles CJK terms, denies domain/provider-label-only eviden
  assert.equal(relevanceEvidence('bing',ref('Pasta','[bing-rss] Carbonara recipe')).accepted,false);
  assert.equal(relevanceEvidence('SQLite WAL concurrency',ref('SQLite Write-Ahead Logging','WAL permits concurrency','https://sqlite.org/wal.html')).accepted,true);
 });
+
+// lexical-evidence-v2 (Go relevance.go 对齐, 兼容矩阵 #32 挂账项)
+test('lexical-evidence-v2: 50% floor rejects word-overlap-only cooking page (S0-F2)',async()=>{
+ const {relevanceEvidence}=await import('../relevance.js');
+ const q='python list comprehension recipes cooking';
+ // 5 有效词(python/list/comprehension/recipe/cooking): v1 下限 max(2,ceil(5*.4))=2 放行纯烹饪页; v2 下限 3 拒绝
+ assert.equal(relevanceEvidence(q,{...ref('Easy Cooking Recipes for Beginners','our best cooking recipes for quick weeknight dinners','https://www.allrecipes.com/recipe/15891')}).accepted,false);
+ assert.equal(relevanceEvidence(q,{...ref('15 Easy Recipes','quick cooking recipes anyone can make tonight','https://tasty.co/recipe/pasta')}).accepted,false);
+ // python 页(python+list+comprehension)仍入池
+ assert.equal(relevanceEvidence(q,{...ref('List Comprehensions — Python 3 documentation','List comprehensions provide a concise way to create lists in python','https://docs.python.org/3/tutorial/datastructures.html')}).accepted,true);
+});
+test('lexical-evidence-v2: plural folding closes singular/plural gaps on both sides',async()=>{
+ const {relevanceEvidence}=await import('../relevance.js');
+ // 查询侧折叠: comprehensions→comprehension 与页面单数匹配(2词查询需全中)
+ assert.equal(relevanceEvidence('python comprehensions',{...ref('Python comprehension expressions','guide','https://x.example/a')}).accepted,true);
+ // 文档侧折叠: 页面复数 runtimes/threading 折叠后与查询单数匹配
+ assert.equal(relevanceEvidence('tokio runtime threads',{...ref('Tokio runtimes and threading','guide','https://x.example/b')}).accepted,true);
+ // ss/us/is 结尾不折叠: status(us 后缀)不剥成 statu — statu 页面不构成 status 证据
+ assert.equal(relevanceEvidence('rust status',{...ref('Rust statu overview','guide','https://x.example/c')}).accepted,false);
+});
 test('RSS q normalization tolerates case/spacing but query loss in redirect is refused',async()=>{
  const body='<rss><channel><link>https://www.bing.com/search?q=SQLITE++WAL</link><item><title>SQLite WAL</title><link>https://sqlite.org/wal.html</link><description>Write ahead log</description></item></channel></rss>';
  const ctx={fetchImpl:async()=>new Response(body),signal:AbortSignal.timeout(1000),ua:'test',opts:{}};
@@ -47,8 +67,8 @@ test('embedding dedup failure cannot restore evidence-gate rejects',async()=>{
 
 test('new quality cache cannot be spoofed with a passing policy label and unrelated refs',async t=>{
  const dir=mkdtempSync(join(tmpdir(),'sc-quality-cache-'));let calls=0;const core=new SearchCore({config:{dataDir:dir,engines:['keenable'],keySlots:'off'},fetchImpl:async()=>{calls++;return Response.json({results:[{url:'https://sqlite.org/wal.html',title:'SQLite WAL concurrency',description:'SQLite single writer WAL locking'}]});}});t.after(()=>{core.close();rmSync(dir,{recursive:true,force:true});});
- const query='SQLite WAL concurrency',decision=plan(query);const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v1',q:decision.queries,r:decision.route,o:{e:['keenable']}}));
- core.cache.putSearch(key,{query,refs:[{...ref('搜狗输入法','typing tools'),engines:['keenable']}],meta:{enginesUsed:['keenable'],enginesFailed:[],elapsedMs:1,fromCache:false,quality:{policy:'lexical-evidence-v1',status:'candidate_results',evaluated:1,rejected:0,reasons:{}}}});
+ const query='SQLite WAL concurrency',decision=plan(query);const key=Cache.hash(JSON.stringify({policy:'provider-allowlist-v1+lexical-evidence-v2',q:decision.queries,r:decision.route,o:{e:['keenable']}}));
+ core.cache.putSearch(key,{query,refs:[{...ref('搜狗输入法','typing tools'),engines:['keenable']}],meta:{enginesUsed:['keenable'],enginesFailed:[],elapsedMs:1,fromCache:false,quality:{policy:'lexical-evidence-v2',status:'candidate_results',evaluated:1,rejected:0,reasons:{}}}});
  const result=await core.search(query,{engines:['keenable']});assert.equal(result.meta.fromCache,false);assert.ok(calls);assert.ok(result.refs.length);assert.ok(result.refs.every(r=>!r.title.includes('搜狗')));
 });
 

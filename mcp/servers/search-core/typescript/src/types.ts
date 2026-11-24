@@ -88,7 +88,7 @@ export interface SearchResult {
   refs: Reference[];
   meta: {
     enginesUsed: string[];
-    quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v1" };
+    quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v1" | "lexical-evidence-v2" }; // v1 = 历史缓存标签(命中时仍重跑 v2 门); 新写入恒为 v2
     /** Executed selection mode; X explicit lists bypass official/guest/oEmbed chain. */
     engineSelection?: { mode: "explicit" | "auto"; requested?: string[] };
     enginesFailed: EngineFailure[];

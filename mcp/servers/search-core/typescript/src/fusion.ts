@@ -232,7 +232,7 @@ export interface FuseSemanticOptions extends FuseOptions {
 }
 
 export interface FuseSemanticMeta {
-  quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v1" };
+  quality?: { status: "candidate_results" | "no_relevant_results"; evaluated: number; rejected: number; reasons: Record<string, number>; policy: "lexical-evidence-v2" };
   dedupMerged: number;
   relevanceDropped: number;
   embedder: string;
@@ -255,7 +255,7 @@ export async function fuseSemantic(
     dedupMerged: 0, relevanceDropped: 0, embedder: "-", embedderFailed: false, spamBlocked: 0, authorityGuarded: 0,
   };
   const evidence = opts.evidenceGate ? filterEvidence(opts.query,engineLists) : undefined;
-  if(evidence)meta.quality={status:evidence.refs.length?"candidate_results":"no_relevant_results",evaluated:evidence.evaluated,rejected:evidence.rejected,reasons:evidence.reasons,policy:"lexical-evidence-v1"};
+  if(evidence)meta.quality={status:evidence.refs.length?"candidate_results":"no_relevant_results",evaluated:evidence.evaluated,rejected:evidence.rejected,reasons:evidence.reasons,policy:"lexical-evidence-v2"};
   const base = fuse(evidence?.refs ?? engineLists, {
     query: opts.query, topN: 100, // 先取宽池,语义阶段裁剪
     // phase AC: 三层权威参数透传(主题/意图/语言/社区意图)
