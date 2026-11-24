@@ -137,3 +137,11 @@ func ddgGate() {
 	}
 	ddgLastAt = time.Now()
 }
+
+// getenvDefault: 环境变量带默认值
+func getenvDefault(key, def string) string {
+	if v := os.Getenv(key); strings.TrimSpace(v) != "" {
+		return v
+	}
+	return def
+}

@@ -283,7 +283,7 @@ var (
 	rateRe  = regexp.MustCompile(`\b429\b|rate.?limit|too many|slow down|please reduce|\bhttp 202\b|soft.?block`)
 	quotaRe = regexp.MustCompile(`\b402\b|\b432\b|\b433\b|quota|payment required|out of credit`)
 	authRe  = regexp.MustCompile(`\b401\b|unauthorized|invalid api key|authentication|bad api key`)
-	blockRe = regexp.MustCompile(`\b403\b|\b40x\b|forbidden|captcha|unusual|challenge|anubis|access denied|blocked|cloudflare`)
+	blockRe = regexp.MustCompile(`\b403\b|\b40x\b|forbidden|captcha|unusual|challenge|anubis|access denied|blocked|cloudflare|consent (wall|page)`)
 	timeRe  = regexp.MustCompile(`timeout|abort|etimedout|deadline|econnaborted`)
 )
 
