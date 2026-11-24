@@ -151,6 +151,7 @@ type fetchSafeResult struct {
 	status      int
 	contentType string
 	body        string
+	truncated   bool // G1-3: 超过 MaxPageBytes 被截断时置位 — 不作伪正常全文
 }
 
 type Fetcher struct {
@@ -293,9 +294,16 @@ func (f *Fetcher) fetchSafe(rawURL string, policy *DomainPolicy, timeoutMs int) 
 	defer res.Body.Close()
 	sizeCap := f.cfg.MaxPageBytes
 	// 超大页截断而不是失败(全文缓存价值仍在) — 只取前 maxPageBytes
-	bodyBytes, _ := io.ReadAll(io.LimitReader(res.Body, int64(sizeCap)))
+	// G1-3: 截断必须透明 — truncated 置位 + stderr 对账,
+	// 调用方可见 "这不是完整全文" (不以截断伪正常正文)
+	bodyBytes, _ := io.ReadAll(io.LimitReader(res.Body, int64(sizeCap)+1))
+	truncated := len(bodyBytes) > sizeCap
+	if truncated {
+		bodyBytes = bodyBytes[:sizeCap]
+		journalOnce(fmt.Sprintf("page_truncated_at_cap bytes=%d url=%s", sizeCap, current))
+	}
 	body := strings.ToValidUTF8(string(bodyBytes), "\uFFFD") // TS TextDecoder fatal:false 对齐
-	return fetchSafeResult{finalURL: current, status: res.StatusCode, contentType: res.Header.Get("Content-Type"), body: body}, nil
+	return fetchSafeResult{finalURL: current, status: res.StatusCode, contentType: res.Header.Get("Content-Type"), body: body, truncated: truncated}, nil
 }
 
 // fetchExtract 抓取+提取一条龙(供 OA 回退重用; crates 元数据在参数里带)

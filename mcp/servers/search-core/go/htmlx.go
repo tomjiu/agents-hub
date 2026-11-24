@@ -14,12 +14,32 @@ import (
 )
 
 // readAllString 读尽响应体
+// readAllString 读尽响应体 (G1: 带上限, 超限抛错而非静默截断)
 func readAllString(r io.Reader) string {
-	b, err := io.ReadAll(r)
+	b, err := ReadBounded(r, maxAPIBodyBytes)
 	if err != nil {
 		return ""
 	}
 	return string(b)
+}
+
+// maxAPIBodyBytes: JSON/API 响应体上限 (8MB) — SERP/JSON API 正常响应远小于此值;
+// 超限即上游异常, 拒绝解析伪正常截断 JSON (不以截断伪正常, G1-3)。
+const maxAPIBodyBytes = 8 << 20
+
+// ErrBodyOverLimit: 响应体超过上限 — 显式错误, 调用方按超限失败归类处理
+var ErrBodyOverLimit = fmt.Errorf("body over size limit")
+
+// ReadBounded: 读取至多 limit+1 字节; 超限返回 ErrBodyOverLimit (不静默截断)。
+func ReadBounded(r io.Reader, limit int64) ([]byte, error) {
+	b, err := io.ReadAll(io.LimitReader(r, limit+1))
+	if err != nil {
+		return nil, err
+	}
+	if int64(len(b)) > limit {
+		return nil, ErrBodyOverLimit
+	}
+	return b, nil
 }
 
 // decodeEntities 对齐 TS: &amp; 最后解, 保证 "&amp;quot;" 单次解码成 "&quot;"
@@ -116,4 +136,12 @@ func ddgGate() {
 		time.Sleep(wait + ddgGateJit()) // 随机化间隔: 数十 ms 级 jitter, 避免多进程同频(10-c 社区绕法)
 	}
 	ddgLastAt = time.Now()
+}
+
+// getenvDefault: 环境变量带默认值
+func getenvDefault(key, def string) string {
+	if v := os.Getenv(key); strings.TrimSpace(v) != "" {
+		return v
+	}
+	return def
 }

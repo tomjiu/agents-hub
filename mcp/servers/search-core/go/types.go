@@ -29,6 +29,7 @@ type SearchOpts struct {
 	TopN       int      // 融合后输出条数(TS 默认 20)
 	MaxResults int      // 每车道条数(TS 默认 10)
 	Engines    []string // 车道子集; 空=全部注册车道
+	EnginesSet bool     // 显式提供过 engines 参数 (含空数组): 空名单 = 零请求契约 (S2/S0-F1 修复)
 	Freshness  string   // day/week/month/year; any=不限
 	TimeoutMs  int      // 每腿软截止(对齐 TS softDeadline 默认 6000)
 }
