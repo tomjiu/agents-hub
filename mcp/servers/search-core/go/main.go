@@ -54,7 +54,17 @@ func dataDir() string {
 }
 
 // searchFlow 引擎流(P3-b 逻辑原样抽出, P4 接 journal+health): plan → 路由分腿 → 并行 → 融合
+// searchFlowCtx: 带父 ctx 的搜索 (调用方取消/超时传递; G3 MCP cancel 线)
+func searchFlowCtx(parent context.Context, opts SearchOpts, timeoutMs int) Output {
+	out := searchFlowInner(parent, opts, timeoutMs)
+	return out
+}
+
 func searchFlow(opts SearchOpts, timeoutMs int) Output {
+	return searchFlowInner(context.Background(), opts, timeoutMs)
+}
+
+func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Output {
 	journal := NewJournal(dataDir(), os.Getenv("SC_JOURNAL") != "0")
 	health := NewHealthTracker(dataDir())
 	defer journal.Write("run_end", map[string]any{})
@@ -103,17 +113,42 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 	}
 
 	// 腿编排: domainPlan → leg0=laneLegProviders + site 腿; github 路由 → 三腿; 否则调用方 engines/全池
+	// G3 (S0-F1 修复迁入): 用户 engines 名单约束所有路由 (含 domain/github
+	// 专项腿与恢复腿), 不再绕过; 显式空名单 = 零请求 (不发任何外联请求)。
+	if opts.EnginesSet && len(opts.Engines) == 0 {
+		// 零请求契约: 如实返回空结果 + 说明, 不触发任何腿
+		journal.Write("engines_empty_zero_request", map[string]any{"route": decision.route})
+		out := Output{Query: opts.Query, Refs: []Reference{}, EnginesUsed: []string{}, EnginesFailed: []string{}}
+		out.Meta.FromCache = false
+		out.ElapsedMs = time.Since(t0).Milliseconds()
+		return out
+	}
 	var legSets []legSet
 	if decision.route == "domain" && decision.domainPlan != nil {
 		dp := decision.domainPlan
 		leg0 := laneLegProviders(dp.topic, opts.Query, dp.apiProviders)
-		legSets = append(legSets, legSet{query: decision.queries[0], engines: leg0})
+		leg0 = constrainEngines(leg0, opts)
 		for i, sq := range dp.siteQueries {
 			eng := dp.siteEngines[i%len(dp.siteEngines)] // 少于 siteTargets 时循环复用
+			if opts.EnginesSet && !engineAllowed(eng, opts.Engines) {
+				continue
+			}
 			legSets = append(legSets, legSet{query: sq, engines: []string{eng}})
 		}
+		// 专项腿全部被名单排除 → 用户名单优先 (不静默丢腿):
+		// 回退为用户名单与原始查询的通用腿
+		if len(leg0) > 0 {
+			legSets = append([]legSet{{query: decision.queries[0], engines: leg0}}, legSets...)
+		} else if opts.EnginesSet && len(legSets) == 0 && len(opts.Engines) > 0 {
+			legSets = append(legSets, legSet{query: opts.Query, engines: opts.Engines})
+		}
 	} else if decision.route == "github" {
-		legSets = append(legSets, legSet{query: opts.Query, engines: []string{"github", "duckduckgo", "mojeek"}})
+		gh := constrainEngines([]string{"github", "duckduckgo", "mojeek"}, opts)
+		if len(gh) > 0 {
+			legSets = append(legSets, legSet{query: opts.Query, engines: gh})
+		} else if opts.EnginesSet && len(opts.Engines) > 0 {
+			legSets = append(legSets, legSet{query: opts.Query, engines: opts.Engines})
+		}
 	} else {
 		engines := opts.Engines
 		if len(engines) == 0 {
@@ -173,7 +208,7 @@ func searchFlow(opts SearchOpts, timeoutMs int) Output {
 	var mu sync.Mutex
 	// G1-6: run 级 ctx — 收割退出时取消所有在飞腿(超时后网络/任务不存活);
 	// 结算走事件通知 (settleCh), 不再 25ms 轮询。
-	runCtx, runCancel := context.WithCancel(context.Background())
+	runCtx, runCancel := context.WithCancel(parent)
 	defer runCancel()
 	settleCh := make(chan struct{}, attempted)
 	idx := 0
@@ -740,4 +775,30 @@ usage:
   search-core-go serve-http [--port 8787]  REST gateway`)
 		os.Exit(2)
 	}
+}
+
+
+// engineAllowed: 用户名单是否允许该引擎 (S2: 名单包括恢复腿, 不绕过)
+func engineAllowed(name string, allow []string) bool {
+	for _, a := range allow {
+		if a == name {
+			return true
+		}
+	}
+	return false
+}
+
+// constrainEngines: 引擎列表交用户名单过滤; 未提供名单时原样返回。
+// 过滤后为空 = 该腿集无可用引擎 (调用方决定是否回退通用腿)。
+func constrainEngines(engines []string, opts SearchOpts) []string {
+	if !opts.EnginesSet {
+		return engines
+	}
+	var out []string
+	for _, e := range engines {
+		if engineAllowed(e, opts.Engines) {
+			out = append(out, e)
+		}
+	}
+	return out
 }

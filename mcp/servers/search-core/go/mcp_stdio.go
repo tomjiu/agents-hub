@@ -7,11 +7,13 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type mcpTool struct {
@@ -100,6 +102,10 @@ func mcpTools() []mcpTool {
 }
 
 func mcpCallTool(name string, args map[string]any) (string, bool) {
+	return mcpCallToolCtx(context.Background(), name, args)
+}
+
+func mcpCallToolCtx(ctx context.Context, name string, args map[string]any) (string, bool) {
 	switch name {
 	case "search":
 		query, _ := args["query"].(string)
@@ -115,13 +121,14 @@ func mcpCallTool(name string, args map[string]any) (string, bool) {
 			opts.Freshness = fr
 		}
 		if raw, ok := args["engines"].([]any); ok {
+			opts.EnginesSet = true // 显式提供 (含空数组): 空名单 = 零请求契约
 			for _, e := range raw {
 				if s, ok := e.(string); ok {
 					opts.Engines = append(opts.Engines, s)
 				}
 			}
 		}
-		out := searchFlow(opts, timeout)
+		out := searchFlowCtx(ctx, opts, timeout)
 		b, _ := json.Marshal(out)
 		return string(b), false
 	case "fetch":
@@ -237,7 +244,9 @@ func serveMcpStdio() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Buffer(make([]byte, 1024*1024), 1024*1024)
 	out := bufio.NewWriter(os.Stdout)
-	defer out.Flush()
+	var inflight sync.WaitGroup // G3: 退出前等待在飞调用完成 (防与定向 Flush 竞态)
+	defer out.Flush()           // LIFO: 先 Wait 后 Flush
+	defer inflight.Wait()
 
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
@@ -254,6 +263,9 @@ func serveMcpStdio() {
 				// initialize 参数
 				ProtocolVersion string          `json:"protocolVersion"`
 				ClientInfo      json.RawMessage `json:"clientInfo"`
+				// notifications/cancelled 参数
+				RequestID json.RawMessage `json:"requestId"`
+				Reason    string          `json:"reason"`
 			} `json:"params"`
 		}
 		if err := json.Unmarshal([]byte(line), &req); err != nil {
@@ -280,22 +292,20 @@ func serveMcpStdio() {
 			}
 		case "tools/list":
 			writeMcpResult(out, req.ID, map[string]any{"tools": mcpTools()})
+		case "notifications/cancelled":
+			// G3: MCP 取消 — 取消在飞调用的 ctx; 已结算的请求忽略 (协议允许竞态)
+			cancelMcpRequest(req.Params.RequestID)
 		case "tools/call":
 			args := map[string]any{}
 			if len(req.Params.Arguments) > 0 {
 				_ = json.Unmarshal(req.Params.Arguments, &args)
 			}
-			text, isErr := mcpCallTool(req.Params.Name, args)
-			content := map[string]any{"type": "text", "text": text}
-			if isErr {
-				writeMcpResult(out, req.ID, map[string]any{
-					"content": []any{content}, "isError": true,
-				})
-			} else {
-				writeMcpResult(out, req.ID, map[string]any{
-					"content": []any{content}, "isError": false,
-				})
-			}
+			// G3: 异步派发 — 长搜索不阻塞后续请求/取消通知的读取
+			inflight.Add(1)
+			go func(id json.RawMessage, name string, a map[string]any) {
+				defer inflight.Done()
+				dispatchMcpCall(out, id, name, a)
+			}(req.ID, req.Params.Name, args)
 		default:
 			if !isNotification {
 				writeMcpError(out, req.ID, -32601, "method not found: "+req.Method)
@@ -304,11 +314,16 @@ func serveMcpStdio() {
 	}
 }
 
+// mcpOutMu: stdout 写入互斥 (G3 异步派发后主循环与调用 goroutine 共享 writer)
+var mcpOutMu sync.Mutex
+
 func writeMcpResult(w *bufio.Writer, id json.RawMessage, result any) {
 	if len(id) == 0 {
 		id = json.RawMessage("null")
 	}
 	b, _ := json.Marshal(map[string]any{"jsonrpc": "2.0", "id": id, "result": result})
+	mcpOutMu.Lock()
+	defer mcpOutMu.Unlock()
 	fmt.Fprintln(w, string(b))
 	w.Flush()
 }
@@ -317,10 +332,66 @@ func writeMcpError(w *bufio.Writer, id json.RawMessage, code int, msg string) {
 	if len(id) == 0 {
 		id = json.RawMessage("null")
 	}
+	mcpOutMu.Lock()
+	defer mcpOutMu.Unlock()
 	b, _ := json.Marshal(map[string]any{
 		"jsonrpc": "2.0", "id": id,
 		"error": map[string]any{"code": code, "message": msg},
 	})
 	fmt.Fprintln(w, string(b))
 	w.Flush()
+}
+
+// ---------- G3: 按请求取消的异步调用 ----------
+
+var mcpReqMu sync.Mutex
+var mcpReqCancels = map[string]context.CancelFunc{}
+
+func mcpReqKey(id json.RawMessage) string { return string(id) }
+
+func registerMcpRequest(id json.RawMessage, cancel context.CancelFunc) {
+	mcpReqMu.Lock()
+	defer mcpReqMu.Unlock()
+	mcpReqCancels[mcpReqKey(id)] = cancel
+}
+
+func cancelMcpRequest(id json.RawMessage) {
+	mcpReqMu.Lock()
+	cancel, ok := mcpReqCancels[mcpReqKey(id)]
+	if ok {
+		delete(mcpReqCancels, mcpReqKey(id))
+	}
+	mcpReqMu.Unlock()
+	if ok {
+		cancel()
+	}
+}
+
+func finishMcpRequest(id json.RawMessage) {
+	mcpReqMu.Lock()
+	delete(mcpReqCancels, mcpReqKey(id))
+	mcpReqMu.Unlock()
+}
+
+// dispatchMcpCall: 单次 tools/call 的异步执行 (ctx 可被 notifications/cancelled 取消)
+func dispatchMcpCall(out *bufio.Writer, id json.RawMessage, name string, args map[string]any) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	if !isNotificationID(id) {
+		registerMcpRequest(id, cancel)
+		defer finishMcpRequest(id)
+	}
+	text, isErr := mcpCallToolCtx(ctx, name, args)
+	content := map[string]any{"type": "text", "text": text}
+	var result any
+	if isErr {
+		result = map[string]any{"content": []any{content}, "isError": true}
+	} else {
+		result = map[string]any{"content": []any{content}, "isError": false}
+	}
+	writeMcpResult(out, id, result)
+}
+
+func isNotificationID(id json.RawMessage) bool {
+	return len(id) == 0 || string(id) == "null"
 }
