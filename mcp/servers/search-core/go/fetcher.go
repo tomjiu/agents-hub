@@ -134,7 +134,10 @@ type FetchOptions struct {
 }
 
 type FetchResult struct {
-	URL           string   `json:"url"`
+	URL           string   `json:"url"`           // 请求的原始 URL(重写链之前的入口)
+	FinalURL      string   `json:"finalUrl,omitempty"` // S4: 实际抓取的最终 URL(重定向/回退后)
+	Via           string   `json:"via,omitempty"`      // S4: direct | crates-api | oa-landing (抓取方式)
+	Blocked       string   `json:"blocked,omitempty"`  // S4: login_wall | js_shell | consent_wall — 空壳页透明拒绝, 不编造正文
 	Title         string   `json:"title,omitempty"`
 	Status        int      `json:"status"`
 	FromCache     bool     `json:"fromCache"`
@@ -331,6 +334,11 @@ func (f *Fetcher) fetchExtract(rawURL string, policy *DomainPolicy, cratesName, 
 		strings.Contains(ct, "json") || ct == "") {
 		return extractResult{}, fmt.Errorf("unsupported content-type: %s", ct)
 	}
+	// S4 (issue #3): 非 2xx 状态透明拒绝 — 403/401/429 不再当正文提取(不编造),
+	// DOI 回退链在 Run 侧按 "http 403" 错误触发(比旧 "仅空文本触发" 更完整)。
+	if r.status >= 400 {
+		return extractResult{}, fmt.Errorf("http %d", r.status)
+	}
 	lowBody := strings.ToLower(r.body)
 	if len(lowBody) > 4000 {
 		lowBody = lowBody[:4000]
@@ -339,6 +347,13 @@ func (f *Fetcher) fetchExtract(rawURL string, policy *DomainPolicy, cratesName, 
 		for _, h := range uaBlockedHints {
 			if strings.Contains(lowBody, h) {
 				return extractResult{}, fmt.Errorf("blocked by anti-bot wall (captcha/denied)")
+			}
+		}
+		// S4: JS 空壳(noscript/enable-javascript)在提取前识别 —
+		// 这类页 extractHtml 会得到空文本, 先给具体壳因而不是泛化 empty text。
+		for _, h := range shellJsHints {
+			if strings.Contains(lowBody, h) {
+				return extractResult{}, fmt.Errorf("blocked shell: js_shell")
 			}
 		}
 	}
@@ -485,6 +500,8 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 	ttl := time.Duration(opts.TTLSeconds) * time.Second
 	budget := NewBudget(f.cfg.BudgetChars)
 
+	via := "direct"
+	finalURL := rawURL
 	fromCache := false
 	status := 200
 	title := ""
@@ -508,27 +525,44 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 			}
 		}
 	}
+	// S4: 缓存命中也过壳页分类 — 历史壳页不得因缓存复用伪装成当前成功正文
+	if fromCache {
+		if shell := classifyPageShell(title, text); shell != "" {
+			return FetchResult{URL: rawURL, FinalURL: rawURL, Via: via, Blocked: shell,
+				Status: status, FromCache: true, Title: title, TextLength: len([]rune(text)),
+				ElapsedMs: msSince(t0), Text: "fetch blocked: " + shell + " page (from page cache; no article text fabricated)"}
+		}
+	}
 	if !fromCache {
 		if f.journal != nil {
 			f.journal.Write("fetch", map[string]any{"url": rawURL, "cache": "miss"})
 		}
 		// phase AD: 落地页改写链 — crates SPA→API 直取; doi 403/SPA 假 200 空文本→OA 直链回退
 		cratesName, cratesAPI, isCrate := cratesApiRewrite(rawURL)
-		if isCrate && f.journal != nil {
-			f.journal.Write("fetch_rewrite_crate_api", map[string]any{"from": rawURL, "to": cratesAPI})
+		if isCrate {
+			via = "crates-api"
+			if f.journal != nil {
+				f.journal.Write("fetch_rewrite_crate_api", map[string]any{"from": rawURL, "to": cratesAPI})
+			}
 		}
 		x, err := f.fetchExtract(rawURL, policy, cratesName, cratesAPI)
 		if err != nil {
 			msg := err.Error()
-			// 403(出版商反爬)与 empty text(SPA 假 200)都是"落地页拿不到正文", doi 在手就走 OA 回退
+			// 403(出版商反爬/状态拒绝)、empty text(SPA 假 200)与壳页都是"落地页拿不到正文", doi 在手就走 OA 回退
 			var doi string
-			if regexp.MustCompile(`\b403\b|empty text extracted`).MatchString(msg) {
+			if regexp.MustCompile(`\b403\b|empty text extracted|blocked shell`).MatchString(msg) {
 				doi = doiOf(rawURL)
 				if doi == "" {
 					doi = doiOf(msg)
 				}
 			}
 			if doi == "" {
+				// S4: 壳页无 DOI 回退时 → 透明 Blocked 分类(不编造正文)
+				if m := regexp.MustCompile(`^blocked shell: (\w+)$`).FindStringSubmatch(msg); m != nil {
+					return FetchResult{URL: rawURL, FinalURL: rawURL, Via: via, Blocked: m[1],
+						Status: 200, ElapsedMs: msSince(t0),
+						Text: "fetch blocked: " + m[1] + " page (no article text fabricated)"}
+				}
 				return FetchResult{URL: rawURL, Status: 0, ElapsedMs: msSince(t0),
 					Text: "fetch error: " + msg}
 			}
@@ -546,18 +580,29 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 				return FetchResult{URL: rawURL, Status: 0, ElapsedMs: msSince(t0),
 					Text: "fetch error: " + err.Error()}
 			}
+			via = "oa-landing"
+			finalURL = oa
 		}
 		status, text, title = x.status, x.text, x.title
+		finalURL = x.finalURL
+		// 壳页也入缓存(避免对同一壳页反复外联); 命中路径同样过壳分类,
+		// 历史壳页不会因缓存复用伪装成当前成功正文(S4)。
 		f.cache.put(rawURL, status, x.contentType, title, text)
 		if f.pageStore != nil {
 			f.pageStore.PutPage(rawURL, status, x.contentType, title, text) // v0.5: 入 FTS 语料
+		}
+		// S4: 200 壳页(登录墙/JS 空壳/同意墙)透明拒绝 — 不编造正文
+		if shell := classifyPageShell(title, text); shell != "" {
+			return FetchResult{URL: rawURL, FinalURL: finalURL, Via: via, Blocked: shell,
+				Status: status, Title: title, TextLength: len([]rune(text)),
+				ElapsedMs: msSince(t0), Text: "fetch blocked: " + shell + " page (no article text fabricated)"}
 		}
 	}
 
 	textLength := len([]rune(text))
 	_ = budget.Charge(opts.MaxChars, "fetch:"+truncStr(rawURL, 80))
 	if f.journal != nil {
-		f.journal.Write("fetch_done", map[string]any{"url": rawURL, "textLength": textLength, "fromCache": fromCache})
+		f.journal.Write("fetch_done", map[string]any{"url": rawURL, "finalUrl": finalURL, "via": via, "textLength": textLength, "fromCache": fromCache})
 	}
 	savedPct := func(returned int) *float64 {
 		v := 1 - float64(returned)/float64(textLength)
@@ -572,7 +617,7 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 		if segments != nil {
 			returnedChars := len([]rune(strings.Join(segments, "\n…\n")))
 			return FetchResult{
-				URL: rawURL, Title: title, Status: status, FromCache: fromCache,
+				URL: rawURL, FinalURL: finalURL, Via: via, Title: title, Status: status, FromCache: fromCache,
 				TextLength: textLength, ReturnedChars: returnedChars,
 				SavedPct: savedPct(returnedChars), Segments: segments,
 				ElapsedMs: msSince(t0),
@@ -585,7 +630,7 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 			n = len(runes)
 		}
 		return FetchResult{
-			URL: rawURL, Title: title, Status: status, FromCache: fromCache,
+			URL: rawURL, FinalURL: finalURL, Via: via, Title: title, Status: status, FromCache: fromCache,
 			TextLength: textLength, ReturnedChars: n,
 			SavedPct: savedPct(n), Text: string(runes[:n]),
 			ElapsedMs: msSince(t0),
@@ -600,7 +645,7 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 	}
 	out := string(runes[:n])
 	return FetchResult{
-		URL: rawURL, Title: title, Status: status, FromCache: fromCache,
+		URL: rawURL, FinalURL: finalURL, Via: via, Title: title, Status: status, FromCache: fromCache,
 		TextLength: textLength, ReturnedChars: n,
 		SavedPct: savedPct(n), Text: out,
 		ElapsedMs: msSince(t0),
@@ -608,6 +653,39 @@ func (f *Fetcher) Run(rawURL string, opts FetchOptions, policy *DomainPolicy) Fe
 }
 
 func msSince(t time.Time) int64 { return time.Since(t).Milliseconds() }
+
+// classifyPageShell S4 (issue #3): 200 伪正文壳页分类 — 登录墙/JS 空壳/同意墙。
+// 保守规则: 需同时满足(a)文本极短(<600 runes)且(b)强壳标记; 只分类不猜测,
+// 壳页不得当正文交付("错误结果透明返回而非编造正文")。
+var shellLoginHints = []string{"sign in to continue", "log in to continue", "please sign in", "please log in", "login required", "sign up to view", "create an account to view"}
+var shellJsHints = []string{"enable javascript", "javascript is disabled", "please enable js", "you need to enable javascript"}
+var shellConsentHints = []string{"consent to continue", "accept all cookies to continue", "before you continue to"}
+
+func classifyPageShell(title, text string) string {
+	runes := len([]rune(text))
+	lowT := strings.ToLower(title)
+	lowB := strings.ToLower(text)
+	hay := lowT + " " + lowB
+	if runes >= 600 {
+		return ""
+	}
+	for _, h := range shellConsentHints {
+		if strings.Contains(hay, h) {
+			return "consent_wall"
+		}
+	}
+	for _, h := range shellLoginHints {
+		if strings.Contains(hay, h) {
+			return "login_wall"
+		}
+	}
+	for _, h := range shellJsHints {
+		if strings.Contains(hay, h) {
+			return "js_shell"
+		}
+	}
+	return ""
+}
 
 func truncStr(s string, n int) string {
 	r := []rune(s)

@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -105,6 +106,25 @@ func NewHealthTracker(dataDir string) *HealthTracker {
 
 var healthRe = regexp.MustCompile(`health:(.+)`)
 
+// retryAfterMsOf 从错误消息解析 "retry-after: Ns"(S2: 429 退避下限); 无/非数字 → 0
+var retryAfterRe = regexp.MustCompile(`(?i)retry-after:\s*(\d+)\s*s`)
+
+func retryAfterMsOf(errMsg string) int {
+	m := retryAfterRe.FindStringSubmatch(errMsg)
+	if m == nil {
+		return 0
+	}
+	n, err := strconv.Atoi(m[1])
+	if err != nil || n <= 0 {
+		return 0
+	}
+	ms := n * 1000
+	if ms > cooldownCapMs {
+		ms = cooldownCapMs
+	}
+	return ms
+}
+
 // Record 对齐 TS HealthTracker.record
 func (h *HealthTracker) Record(name string, ok bool, latencyMs int64, errMsg, status string) {
 	h.mu.Lock()
@@ -155,6 +175,11 @@ func (h *HealthTracker) Record(name string, ok bool, latencyMs int64, errMsg, st
 				}
 				base = prev * 2
 			}
+			// S2 (issue #3): 429 Retry-After 尊重 — 服务端明示的退避下限,
+			// 与策略冷却取大者, 有界(冷却上限 1h); HTTP-date 形式如实忽略, 不伪造。
+			if ra := retryAfterMsOf(errMsg); ra > base {
+				base = ra
+			}
 			if base > cooldownCapMs {
 				base = cooldownCapMs
 			}
@@ -175,6 +200,18 @@ func (h *HealthTracker) Record(name string, ok bool, latencyMs int64, errMsg, st
 }
 
 // IsOpen 熔断判定: 冷却期内拒绝; 冷却到期 = 半开探针(放进一个请求试水)
+// isOpenAt 测试辅助: 指定时刻的熔断开合判定(与 IsOpen 同一状态源)
+func (h *HealthTracker) isOpenAt(name string, at time.Time) bool {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	key := "health:" + name
+	st := healthState{}
+	if raw, found := h.kv.get(key); found {
+		_ = json.Unmarshal([]byte(raw), &st)
+	}
+	return st.OpenUntil > at.UnixMilli()
+}
+
 func (h *HealthTracker) IsOpen(name string) bool {
 	raw, found := h.kv.get("health:" + name)
 	if !found {

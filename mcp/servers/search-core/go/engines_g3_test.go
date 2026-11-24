@@ -29,7 +29,8 @@ func installProbeLane(t *testing.T, name string) {
 		probeMu.Lock()
 		probeCalls[name]++
 		probeMu.Unlock()
-		return []Reference{{URL: "https://probe.example/" + name, Title: name, Snippet: "s", Engines: []string{name}}}, nil
+		// S3 证据门后, fixture ref 需携带查询词(真实引擎结果本就如此), 否则被词法证据门如实拒绝
+		return []Reference{{URL: "https://probe.example/" + name, Title: name + " " + opts.Query, Snippet: opts.Query, Engines: []string{name}}}, nil
 	}
 	t.Cleanup(func() {
 		if had {
