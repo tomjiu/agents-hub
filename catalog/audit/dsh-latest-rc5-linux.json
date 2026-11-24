@@ -78,7 +78,14 @@
       "host": "0.2.2-rc.1",
       "requests": 6,
       "warm_weighted_hit_pct": 99.1733,
-      "assertions_passed": ["system_stable", "tools_stable", "previous_full_messages_prefix_preserved", "log_only_snapshots_unchanged", "tip_updates_appended", "empty_snapshot_retracted"],
+      "assertions_passed": [
+        "system_stable",
+        "tools_stable",
+        "previous_full_messages_prefix_preserved",
+        "log_only_snapshots_unchanged",
+        "tip_updates_appended",
+        "empty_snapshot_retracted"
+      ],
       "limits": "Short single-process six-request run on one real route; no cross-process resume or 600k-token replay; not a long-term 95% guarantee"
     },
     "latest_host_evidence": "cache_safe_context six checks (stable_system, stable_tools, append_only_messages, no_diagnostic_churn, literal_memory, stale_retraction) PASS on 0.2.2-rc.5 Linux via session probe; this verifies request serialization invariants with the local scripted model, not provider-side cache accounting"
@@ -101,5 +108,11 @@
     "Linux/Node 24.22.3 is a new platform row; prior evidence was Windows/Node 26.13.1 and remains valid for its own fingerprints",
     "0.2.3-alpha.2 observed on npm but not acceptance-tested; alpha is not a tracked channel and this is not an upgrade authorization",
     "No cross-process resume of a persisted session verified in this round"
-  ]
+  ],
+  "m1_refingerprint_acceptance": {
+    "at": "2026-11-24",
+    "reason": "M1 ledger changes plugins/memory-net/src — new assets fingerprint 64ca687258c97991efdba783407de8da7bc757323647291106f74077e87574cf; prior acceptance not inherited",
+    "probes": "session-context (cache+candidates) PASS, full host (P0+curated) PASS, both re-run after M1 on the same isolated rc.5 installation",
+    "check_dsh": "VERIFIED for the M1 fingerprint (registry record 47)"
+  }
 }
