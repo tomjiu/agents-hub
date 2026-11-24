@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "status": "M0_COMPLETE",
+  "at": "2026-11-24",
+  "task": "Issue #2 M0 — coverage matrix, reproducible defects and red tests for the provenance program",
+  "baseline": {
+    "branch": "memory-provenance-m0 (from memory-cache-safe-context 268a6e9)",
+    "main": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+    "dependency_chain": "PR7 memory-session-boundary 7e83b00 -> PR8 memory-candidate-lifecycle 8ec3ea9 -> PR9 memory-cache-safe-context 268a6e9, none merged to main; re-verified at start",
+    "test_suites": {
+      "root": "152 pass / 0 fail / 0 skip (Linux)",
+      "memory_core": "44 pass / 0 fail",
+      "memory_adapter": "35 pass / 0 fail",
+      "search_core_typescript": "335 pass / 0 fail"
+    }
+  },
+  "deliverables": {
+    "coverage_matrix": "plugins/memory-net/PROVENANCE-M0-MATRIX.md (implemented / truly missing / migration risk / budget and privacy boundaries / per-stage schema-compat-recovery)",
+    "staged_plan": "docs/superpowers/plans/2026-11-24-memory-provenance-m1.md (M1 tasks 1-4 with red-to-green mapping)",
+    "red_tests": "plugins/memory-net/tests/m1-red/m1-red.test.ts (isolated temp libraries; excluded from default suite glob dist/tests/*.test.js by subdirectory placement)"
+  },
+  "red_test_evidence": {
+    "command": "npm --prefix plugins/memory-net run build && node --test plugins/memory-net/dist/tests/m1-red/*.test.js",
+    "result": "5 tests, 0 pass, 5 fail (all red as expected)",
+    "items": [
+      { "id": "R1", "defect": "exportPkg has no operations ledger; committed transactions lack stable operation identity; replay cannot dedup", "m1_task": 1 },
+      { "id": "R2", "defect": "progress updates in place; based_on references drift with current content; export cannot reconstruct the referenced before-state", "m1_task": 2 },
+      { "id": "R3", "defect": "updateProgress CAS is updated_at wall-clock milliseconds; same-millisecond concurrent writes are not flagged (deterministic via frozen Date.now)", "m1_task": 1 },
+      { "id": "R4", "defect": "GC trail compression deletes and renumbers steps; original step coordinates are not stable anchors (step 8 becomes step 4)", "m1_task": 1 },
+      { "id": "R5", "defect": "promote/demote have no CAS; a stale-view demote silently last-writer-wins over a promote", "m1_task": 1 }
+    ],
+    "not_testable_without_api": [
+      "replay dedup by (host_instance, session_id, durable_event_seq) and same-coordinate different-summary rejection",
+      "schema2 export/import with history, downgrade rejection, sensitive redaction with dependency invalidation",
+      "host durable event seq / code-state binding (M2)"
+    ],
+    "note": "Red tests assert DESIRED M1 behavior and are expected to fail until M1 lands; they are kept out of the default suite so regular regressions stay green. M1 completion requires moving them into the regular suite as green."
+  },
+  "latest_host_verification": "See dsh-latest-rc5-linux.json — npm latest moved to 0.2.2-rc.5; full Linux acceptance PASS; memory cache fix verdict: fixed on branch e44e303, real-provider evidence 99.17% warm weighted (6 requests, gpt-6.1-sol, host rc.1), not merged to main; bundle probe gap documented.",
+  "independence": {
+    "temp_libraries_only": true,
+    "user_databases_touched": false,
+    "web_enabled": false,
+    "subagents_created": false,
+    "auto_merge": false
+  }
+}

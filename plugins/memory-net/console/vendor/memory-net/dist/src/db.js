@@ -72,33 +72,39 @@ export function openWorkspaceDb(dir, opts) {
     catch (e) {
         throw new WorkspaceError(`无法打开 workspace 数据库 ${dbPath}: ${e.message}`);
     }
-    db.exec('PRAGMA journal_mode = WAL;');
-    db.exec('PRAGMA busy_timeout = 5000;'); // 多实例（多 agent）并发写同一 workspace 时等锁而非抛 BUSY
-    db.exec(DDL);
-    // progress 单行不变量的库级兜底：唯一索引防跨进程并发首写双行（store 层撞索引
-    // 时回落更新路径并标 conflict）。单独 exec 并吞错：极老库若已存在重复 progress
-    // 行，建索引会失败——告警但照常打开，不阻断宿主 boot。
     try {
-        db.exec(`CREATE UNIQUE INDEX IF NOT EXISTS uq_nodes_progress_task
+        db.exec('PRAGMA journal_mode = WAL;');
+        db.exec('PRAGMA busy_timeout = 5000;'); // 多实例（多 agent）并发写同一 workspace 时等锁而非抛 BUSY
+        db.exec(DDL);
+        // progress 单行不变量的库级兜底：唯一索引防跨进程并发首写双行（store 层撞索引
+        // 时回落更新路径并标 conflict）。单独 exec 并吞错：极老库若已存在重复 progress
+        // 行，建索引会失败——告警但照常打开，不阻断宿主 boot。
+        try {
+            db.exec(`CREATE UNIQUE INDEX IF NOT EXISTS uq_nodes_progress_task
              ON nodes(task_id) WHERE kind = 'progress' AND task_id IS NOT NULL;`);
+        }
+        catch (e) {
+            console.warn(`[memory-net] progress 唯一索引创建失败（库内或有重复行）: ${e.message}`);
+        }
+        const existing = metaGet(db, 'workspace_id');
+        let workspaceId;
+        if (existing) {
+            if (opts?.workspaceId && opts.workspaceId !== existing) {
+                throw new WorkspaceError(`workspace_id 不匹配：库中为 ${existing}，请求为 ${opts.workspaceId}（防止串读到错误工作区）`);
+            }
+            workspaceId = existing;
+        }
+        else {
+            workspaceId = opts?.workspaceId ?? basename(root);
+            metaSet(db, 'workspace_id', workspaceId);
+        }
+        metaSet(db, 'schema_version', String(SCHEMA_VERSION));
+        return { db, workspaceId, isNew };
     }
     catch (e) {
-        console.warn(`[memory-net] progress 唯一索引创建失败（库内或有重复行）: ${e.message}`);
+        db.close();
+        throw e;
     }
-    const existing = metaGet(db, 'workspace_id');
-    let workspaceId;
-    if (existing) {
-        if (opts?.workspaceId && opts.workspaceId !== existing) {
-            throw new WorkspaceError(`workspace_id 不匹配：库中为 ${existing}，请求为 ${opts.workspaceId}（防止串读到错误工作区）`);
-        }
-        workspaceId = existing;
-    }
-    else {
-        workspaceId = opts?.workspaceId ?? basename(root);
-        metaSet(db, 'workspace_id', workspaceId);
-    }
-    metaSet(db, 'schema_version', String(SCHEMA_VERSION));
-    return { db, workspaceId, isNew };
 }
 export function metaGet(db, k) {
     const row = db.prepare('SELECT v FROM meta WHERE k = ?').get(k);

@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "at": "2026-11-24T11:36:50.802Z",
+  "environment": {
+    "node": "v24.22.3",
+    "platform": "linux",
+    "nodes_target": 100000,
+    "ledger": true
+  },
+  "inserted": {
+    "observations": 85000,
+    "tips": 5000,
+    "inferences": 5000,
+    "progress_tasks": 7,
+    "total": 100000
+  },
+  "latency_ms": {
+    "insert_total": 34565.9,
+    "insert_per_node": 0.3457,
+    "projection_full": 301.3,
+    "projection_nodes": 95007,
+    "recall_hit_p50": 433.3,
+    "recall_hit_p95": 562.2,
+    "recall_miss_p50": 398.4,
+    "recall_miss_p95": 498.5,
+    "activate_p50": 595.7,
+    "activate_p95": 713.7,
+    "gc_purge_2000": 658.9
+  },
+  "recall_hit_nodes_avg": 10,
+  "gc": {
+    "trail_runs_compressed": 0,
+    "trail_steps_merged": 0,
+    "demoted_by_ttl": 0,
+    "purged": 2000
+  },
+  "files_bytes": {
+    "memory_db": 23613440,
+    "provenance_db": 88805376
+  },
+  "bounds_regression_signals": {
+    "insertMsPerNode": 12,
+    "projectionMs": 30000,
+    "recallP95Ms": 5000,
+    "activateMs": 8000,
+    "gcMs": 60000
+  },
+  "scope": "Sandbox-calibrated regression signals on an isolated temp workspace via public APIs with ledger+evidence sidecar enabled; not a product SLA and not a real-model effectiveness claim.",
+  "status": "PASS",
+  "failures": []
+}

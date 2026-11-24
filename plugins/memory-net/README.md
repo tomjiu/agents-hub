@@ -115,7 +115,18 @@ dsh 0.1.2-rc.1 端到端验证（headless 冒烟：插件加载/工具注册/区
 ## 测试
 
 ```bash
-npm test        # 20 用例：双 agent 共享 / workspace 隔离 / 写纪律 / 覆盖联动 / trail 回放 / 预算 / 冲突 / gc / 迁移 / CLI 子进程 smoke
+npm test        # 69 用例：双 agent 共享 / workspace 隔离 / 写纪律 / 覆盖联动 / trail 回放 / 预算 / 冲突 / gc / 迁移 / CLI 子进程 smoke / 溯源账本（操作/修订/CAS/重放/导出导入/脱敏/跨进程竞态）
 ```
 
 不依赖任何真实 LLM。
+
+## 溯源账本（M1，schema2 sidecar，默认关闭）
+
+`MemoryNet.open(dir,{ledger:true})` 挂载 `provenance.db`（ATTACH 同一连接，跨文件同事务提交）：
+操作账本（稳定 op_id+重放坐标去重/同坐标异摘要拒绝）、不可变修订链（单父链+精确到修订的
+based_on 引用）、修订级 CAS（promote/demote/contradict/link 必需 expected_revision，progress
+以 expected_revision 标冲突保留合并语义）、`exportFullPkg`/`importFullPkg`（含历史，闭包校验+拓扑
+导入+降级拒绝）、`migrateLedgerBaseline`（先备份，origin=legacy_baseline，不补造历史）、`redact`
+（敏感删除：清理修订+操作摘要+失效依赖方，不以"不可变"拒绝用户删除）。默认不挂载时 schema1
+行为与指纹完全不变；sidecar 可整体删除回退。设计与边界见 [PROVENANCE-M0-MATRIX](PROVENANCE-M0-MATRIX.md)
+与 [M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)。

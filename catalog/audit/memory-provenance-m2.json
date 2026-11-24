@@ -1,0 +1,35 @@
+{
+ "schema": 1,
+ "status": "M2_IMPLEMENTED",
+ "at": "2026-11-24",
+ "task": "Issue #2 M2 — host session / code-version binding (see memory-provenance-m0.json for baseline, memory-provenance-m1.json for the ledger stage)",
+ "implementation": {
+  "new_module": "plugins/memory-net/src/evidence.ts — code_states / source_refs / evidence_validations tables in the M1 sidecar provenance.db (additive DDL, attach-time feature guard ledger_meta.evidence_feature_version=m2-v1)",
+  "schema_decision": "sidecar schema_version stays 2 (additive tables only): old M1 binaries ignore the new tables safely; new binaries refuse to open a sidecar whose evidence feature version is higher (explicit failure, never silent). Export format: v3 package when evidence data exists (M1 importLedgerRows rejects schema_version!==2 loudly, so no silent evidence loss); v2 shape preserved when no evidence",
+  "capture_semantics": "declarative CodeStateInput; completeness derived strictly: complete only for host_native + explicit fullEnumeration + git info present + not dirty + untracked known; git-only -> partial (git commit never represents the full working tree); dirty/untracked/untrackedUnknown/shell -> at most partial; no digests -> unknown; per-file missing digest+content stays unknown (never fabricated, never mtime-substituted); content normalization is line-ending only (CRLF/CR->LF), capture_policy=m2-capture-v1",
+  "binding": "bindEvidence appends (old bindings kept with current=0; evidenceHistory returns the full chain); link_status distinguishes captured (session_id+durable_event_seq) / event_linked (call coords only) / persisted_unknown; AddInput.evidence binds atomically in the same BEGIN IMMEDIATE transaction (bind op reuses session coords with durable=NULL so the per-event UNIQUE coordinate stays with the add op); model role cannot capture/bind/carry evidence",
+  "verification": "verifyEvidence(nodeId, currentCodeStateId): related change -> needs_review via appended marker revision (payload.needs_review points to validation_id, original_code_state_id, bound_revision_id; node stays active — marking is not falsification); unrelated change -> valid + unrelated_changed listed; same normalized content (incl. CRLF) -> valid (re-verification does not falsify); missing current digests -> unknown (inaccessible source never masquerades as known); unbound node -> explicit error",
+  "bridge": "buildObservation extracts digest-only evidence for native read/edit/write word-segment tool names (conservative regex), redacts raw content from observation args ([evidence-digested]); non-file tools unchanged; installAutoObserve passes optional durableEventSeq/root from the host binding callback into observation provenance and captures a per-event partial code_state; evidence failure never blocks the original observation write",
+  "ledger_ops": "OperationKind extended with capture|bind|verify (no DDL CHECK on legacy rows); export/import closure validation rejects dangling code_state references and non-empty targets"
+ },
+ "tests": {
+  "new": "plugins/memory-net/tests/17-evidence-m2.test.ts — 21 tests, red-first (compile failure before implementation): git-not-complete, dirty/untracked, full-native complete, shell unknown, per-file unknown, CRLF normalization, link_status trichotomy, rebind history locatable, model-role denial, unknown-node/code-state rejection, atomic add+bind same op, unrelated-change valid, same-content valid, related-change needs_review + original evidence locatable, unknown current state, unbound error, v3 export/import closure, v2 shape preserved, ops recorded, bridge digest-only evidence, auto-observe durable coords",
+  "regression": "core 90/90 (69 M1-era + 21 M2), adapter 35/35, root npm test + validate PASS"
+ },
+ "red_to_green": "API-surface compile failures observed before implementation (captureCodeState/verifyEvidence/evidenceOf/OperationKind missing); bridge tests failed until extractFileEvidence + installAutoObserve wiring landed; all 21 green after implementation",
+ "host_reacceptance": {
+  "channel": "0.2.2-rc.5 (npm latest re-checked on this run)",
+  "platform": "Linux cloud sandbox, Node 24.22.3",
+  "probe": "asset-manager/probe-memory-session-context.mjs with HUB_MEMORY_CANDIDATES=1 HUB_MEMORY_CACHE=1",
+  "result": "PASS — 3 fresh isolated sessions, candidate lifecycle loop, cache-safe-context six checks, session boundary, model selector refusal, default root untouched, fingerprint stable before/after; evidence .asset-state/evidence/session-host-0.2.2-rc.5.json (not committed)",
+  "check_dsh": "VERIFIED after registering acceptance #48 (new assets fingerprint d8b31161...; M2 source change invalidates the M1 acceptance record as designed)"
+ },
+ "known_scope_limits": [
+  "durableEventSeq/root come from the host binding callback; DSH host surface may not expose them -> persisted_unknown (M1 behavior), never claimed replayable",
+  "one-directional forward guard: M1 binaries reading an M2 sidecar ignore evidence tables (SQLite-safe) but v3 package exports are loudly rejected by M1 importers",
+  "completeness=complete trusts the host's explicit fullEnumeration declaration; the bridge never enumerates the filesystem itself (capture stays declarative)",
+  "Windows re-verification not executed in this environment (Linux only)",
+  "cross-process resume of the same persisted session remains a final-acceptance gap (run-package stage)"
+ ],
+ "independence": "No subagents; no auto-merge; current Web untouched; no user profile or real library modified; no DSH vendor change; all runs used temporary SQLite stores and an isolated DSH install with a scripted local model"
+}

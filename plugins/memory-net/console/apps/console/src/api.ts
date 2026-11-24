@@ -155,6 +155,28 @@ export interface RunSummary {
   last_ts: number
 }
 
+export interface CandidateSummary {
+  id: string
+  text: string
+  state: 'pending' | 'accepted' | 'rejected' | 'invalid'
+  fingerprint: string | null
+  source_ids: string[]
+  confidence: number | null
+  run_id: string | null
+  task_id: string | null
+  eligibility: string
+  reviewed_by: string | null
+  reviewed_at: number | null
+  review_note: string | null
+}
+
+export interface CandidateDetail {
+  candidate: CandidateSummary
+  sources: Array<{ id: string; text: string; status: string; created_at: number }>
+  diff: Array<{ op: 'same' | 'added'; text: string }>
+  evidence_pool: Array<{ id: string; text: string }>
+}
+
 export const api = {
   health: (): Promise<{ ok: boolean; service: string; version: string; workspace_count: number }> =>
     call('GET', '/v1/health'),
@@ -184,6 +206,19 @@ export const api = {
   ): Promise<{ node: MemoryNode }> => call('POST', `/v1/ws/${encodeURIComponent(ws)}/progress`, body),
   writeTrail: (ws: string, body: { run_id: string; action: string; refs?: string[] }): Promise<{ entry: TrailEntry }> =>
     call('POST', `/v1/ws/${encodeURIComponent(ws)}/trail`, body),
+  candidates: (ws: string, q?: { status?: 'pending' | 'accepted' | 'rejected'; limit?: number }): Promise<{ candidates: CandidateSummary[]; count: number }> => {
+    const p = new URLSearchParams()
+    if (q?.status) p.set('status', q.status)
+    p.set('limit', String(q?.limit ?? 50))
+    return call('GET', `/v1/ws/${encodeURIComponent(ws)}/candidates?${p.toString()}`)
+  },
+  candidateDetail: (ws: string, id: string): Promise<CandidateDetail> =>
+    call('GET', `/v1/ws/${encodeURIComponent(ws)}/candidates/${encodeURIComponent(id)}`),
+  reviewCandidate: (
+    ws: string,
+    body: { id: string; expected_fingerprint: string; decision: 'accept' | 'reject'; reviewer: string; note: string; evidence: string[] },
+  ): Promise<{ node: MemoryNode }> =>
+    call('POST', `/v1/ws/${encodeURIComponent(ws)}/candidates/review`, body),
 }
 
 /** v1.1 实时事件流（SSE）：workspace 变更推送（EventSource 自动重连）。返回关闭函数。 */

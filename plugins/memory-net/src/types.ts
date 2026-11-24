@@ -56,6 +56,8 @@ export interface MemoryNode {
   based_on: string[]
   created_at: number
   updated_at: number
+  /** 溯源账本（schema2 sidecar）当前 head 修订 id；账本未挂载时缺省。 */
+  revision_id?: string
 }
 
 /** trail 步骤输入。 */
@@ -136,11 +138,26 @@ export interface AddInput {
   confidence?: number
   based_on?: string[]
   payload?: Record<string, unknown>
+  /** 溯源坐标（M2 宿主绑定填充；齐全时启用重放去重/同坐标异摘要拒绝）。 */
+  provenance?: ProvenanceCoord
+  /** M2 证据绑定（host/tool 角色；同事务写入 source_refs）。模型角色传入即拒绝。 */
+  evidence?: import('./evidence.js').EvidenceBindingInput
 }
 
-/** update_progress 上下文：base_updated_at 提供乐观锁（不传 = 无条件覆盖但不标冲突）。 */
+/** 持久事件坐标：host_instance+session_id+durable_event_seq 齐全才可去重重放。 */
+export interface ProvenanceCoord {
+  host_instance?: string | null
+  session_id?: string | null
+  call_id?: string | null
+  root_call_id?: string | null
+  durable_event_seq?: number | null
+}
+
+/** update_progress 上下文：base_updated_at 提供乐观锁（不传 = 无条件覆盖但不标冲突）；
+ *  expected_revision 是修订级 CAS（账本挂载时优先于毫秒墙钟）。 */
 export interface ProgressCtx {
   base_updated_at?: number
+  expected_revision?: string
 }
 
 export interface GcOpts {

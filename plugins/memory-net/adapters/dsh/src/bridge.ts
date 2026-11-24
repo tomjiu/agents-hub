@@ -11,6 +11,7 @@ import { MemoryNet } from '../../../src/store.js'
 import type { ActivationResult } from '../../../src/types.js'
 import type { AdapterConfig } from './config.js'
 import { workspaceDir } from './config.js'
+import { createHash } from 'node:crypto'
 import type { ToolResultExec, ToolResultPayloadFace } from './contract.js'
 
 /** host 半区 API（ctx.provide('memory-net') 的服务面）。 */
@@ -142,6 +143,50 @@ export interface AutoObservation {
   key?: string
   text: string
   payload: Record<string, unknown>
+  /** M2：原生 read/edit/write 事件的文件摘要证据（digest only，绝不含原文）。 */
+  evidence?: { files: Array<{ path: string; before_digest: string | null; after_digest: string | null }> }
+}
+
+/** 原生文件工具名（read/edit/write 词段族）。保守匹配独立词段，避免误伤 web_search 等。 */
+const FILE_TOOL_RE = /(^|[_\\/: -])(read|edit|write|apply_?patch|multi_?edit|notebook_?edit)([_\\/: -]|$)/
+
+/** 从工具参数提取文件证据（保守：仅识别显式 string 字段；缺 before → null 不补造）。 */
+function extractFileEvidence(name: string, args: unknown): AutoObservation['evidence'] | undefined {
+  if (!FILE_TOOL_RE.test(name)) return undefined
+  if (args === null || typeof args !== 'object') return undefined
+  const a = args as Record<string, unknown>
+  const path = typeof a.path === 'string' && a.path ? a.path
+    : typeof a.file_path === 'string' && a.file_path ? a.file_path
+    : typeof a.filePath === 'string' && a.filePath ? a.filePath
+    : typeof a.notebook_path === 'string' && a.notebook_path ? a.notebook_path
+    : null
+  if (path === null) return undefined
+  const pick = (...keys: string[]): string | null => {
+    for (const k of keys) {
+      const v = a[k]
+      if (typeof v === 'string' && v.length > 0) return v
+    }
+    return null
+  }
+  const before = pick('before', 'old_content', 'oldContent', 'original', 'original_content', 'prev_content')
+  const after = pick('after', 'new_content', 'newContent', 'content', 'patched', 'replacement')
+  if (before === null && after === null) return undefined
+  const d = (c: string | null): string | null => (c === null ? null : evidenceDigestOf(c))
+  return { files: [{ path, before_digest: d(before), after_digest: d(after) }] }
+}
+
+/** 规范化摘要（与 src/evidence.ts contentDigest 同规则：行尾 CRLF/CR→LF 后 sha256）。 */
+function evidenceDigestOf(content: string): string {
+  return createHash('sha256').update(content.replaceAll('\\r\\n', '\\n').replaceAll('\\r', '\\n'), 'utf8').digest('hex')
+}
+
+/** 证据提取后，观测文本中的 args 脱敏为非正文字段（原文不进记忆文本/载荷）。 */
+const EVIDENCE_ARG_KEYS = ['before', 'after', 'old_content', 'new_content', 'oldContent', 'newContent', 'original', 'original_content', 'prev_content', 'content', 'patched', 'replacement']
+function redactArgsForEvidence(args: unknown): unknown {
+  if (args === null || typeof args !== 'object') return args
+  const a = { ...(args as Record<string, unknown>) }
+  for (const k of EVIDENCE_ARG_KEYS) if (k in a) a[k] = '[evidence-digested]'
+  return a
 }
 
 const clip = (s: string, max: number): { text: string; truncated: boolean } =>
@@ -181,7 +226,8 @@ export function buildObservation(
   if (isError && !ao.include_error) return null
   if (!ao.include_nested && exec?.parent != null) return null
 
-  const args = clip(digest(exec?.arguments), ao.args_chars)
+  const evidence = extractFileEvidence(name, exec?.arguments)
+  const args = clip(digest(evidence ? redactArgsForEvidence(exec?.arguments) : exec?.arguments), ao.args_chars)
   const body = clip(digest(isError ? result?.error : result?.value), ao.max_chars)
   const text = isError
     ? `工具 ${name} 失败·args(${args.text})→ ${body.text}`
@@ -193,7 +239,9 @@ export function buildObservation(
       is_error: isError,
       call_id: exec?.callId ?? null,
       truncated: args.truncated || body.truncated,
+      ...(evidence ? { evidence } : {}),
     },
+    ...(evidence ? { evidence } : {}),
   }
 }
 
@@ -210,14 +258,14 @@ export function installAutoObserve(
   ctx: { on: (event: string, listener: (...args: unknown[]) => void) => void },
   cfg: AdapterConfig,
   netOf: (dir: string) => MemoryNet,
-  opts: { warn: (msg: string) => void; binding?: (exec:ToolResultExec)=>{dir:string;sessionId:string;scopeId:string;project:string} },
+  opts: { warn: (msg: string) => void; binding?: (exec:ToolResultExec)=>{dir:string;sessionId:string;scopeId:string;project:string;durableEventSeq?:number|null;root?:string} },
 ): void {
   let failures = 0
-  const admitted = new Map<symbol, {dir:string;sessionId:string;scopeId:string;project:string}|null>()
+  const admitted = new Map<symbol, {dir:string;sessionId:string;scopeId:string;project:string;durableEventSeq?:number|null;root?:string}|null>()
   if(cfg.context.mode === 'session')ctx.on('tools/pre-execute',(execRaw,nextRaw)=>{
     const exec=(execRaw ?? {}) as ToolResultExec
     if(typeof exec.token === 'symbol' && !exec.name?.startsWith('memory_net_') && (cfg.auto_observe.include_nested || exec.parent == null)) {
-      let binding:{dir:string;sessionId:string;scopeId:string;project:string}|null=null
+      let binding:{dir:string;sessionId:string;scopeId:string;project:string;durableEventSeq?:number|null;root?:string}|null=null
       try {binding=opts.binding?.(exec) ?? null}catch(e){opts.warn('Memory admission context unavailable: '+String(e))}
       if(admitted.size<4096)admitted.set(exec.token,binding)
       else opts.warn('Memory admission capacity reached; result will be skipped')
@@ -234,12 +282,33 @@ export function installAutoObserve(
       const obs = buildObservation(cfg.auto_observe, exec, result)
       if (!obs) return
       if(cfg.context.mode === 'session' && !binding)throw new Error('Auto observation missing trusted agent context')
-      netOf(binding?.dir ?? workspaceDir(cfg, cfg.default_workspace)).add('observation', {
+      const net = netOf(binding?.dir ?? workspaceDir(cfg, cfg.default_workspace))
+      // M2：事件坐标透传（durable_event_seq 齐全 → 账本重放坐标 + captured 绑定；
+      // 缺席 → persisted_unknown，不冒充可重放）。文件证据按事件内摘要即时捕获代码状态
+      // （host_native、非全量枚举 → partial，不声称全树已知）。
+      let evidenceInput: Parameters<MemoryNet['add']>[1]['evidence']
+      if (obs.evidence && net.ledger && net.evidence) {
+        try {
+          const cs = net.captureCodeState({
+            root: binding?.root ?? `session://${binding?.sessionId ?? 'unknown'}`,
+            source: 'host_native',
+            files: obs.evidence.files
+              .map(f => ({ path: f.path, digest: f.after_digest ?? f.before_digest ?? null }))
+              .filter((f): f is { path: string; digest: string } => f.digest !== null),
+          })
+          evidenceInput = { code_state_id: cs.code_state_id, files: obs.evidence.files }
+        } catch {
+          evidenceInput = undefined // 证据失败不阻断原观测写入
+        }
+      }
+      net.add('observation', {
         run_id: binding?.sessionId ?? null,
         key: obs.key,
         text: obs.text,
         source: 'tool',
         payload: {...obs.payload,...(binding?{host_context:{session_id:binding.sessionId,project:binding.project,scope_id:binding.scopeId}}:{})},
+        provenance: binding ? { session_id: binding.sessionId, call_id: exec?.callId != null ? String(exec.callId) : null, durable_event_seq: binding.durableEventSeq ?? null } : undefined,
+        ...(evidenceInput ? { evidence: evidenceInput } : {}),
       })
     } catch (e) {
       failures++
