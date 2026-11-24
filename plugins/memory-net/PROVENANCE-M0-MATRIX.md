@@ -1,6 +1,6 @@
 # Memory-net 溯源体系 M0 覆盖矩阵
 
-状态：**M0 现状确认（2026-11-24）**，基于 memory-cache-safe-context 268a6e9（PR7→PR8→PR9 依赖链顶端）。本矩阵服务于 [issue #2](https://git.mingjiu.store/sandbox/agents-hub/issues/2) 的 M1-M4 分阶段实施；只依据当前源码与可复现证据，不把历史文档计数当现状。设计依据 [PROVENANCE-DESIGN](PROVENANCE-DESIGN.md)；实施计划见 [M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)。
+状态：**M0 现状确认（2026-11-24）**，基于 memory-cache-safe-context 268a6e9（PR7→PR8→PR9 依赖链顶端）。**M1 已于同分支落地（操作账本/不可变修订/精确引用/CAS/重放/导出导入/脱敏，R1-R5 全部转绿，核心 69/69）**，见 [M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)与[验收记录](../../catalog/audit/memory-provenance-m1.json)；§5 红灯场景已移入常规套件（14 号转绿 + 15 号 legacy 边界锁定）。本矩阵服务于 [issue #2](https://git.mingjiu.store/sandbox/agents-hub/issues/2) 的 M1-M4 分阶段实施；只依据当前源码与可复现证据，不把历史文档计数当现状。设计依据 [PROVENANCE-DESIGN](PROVENANCE-DESIGN.md)；实施计划见 [M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)。
 
 ## 1. 已实现（复用基线，不重复实现）
 

@@ -10,6 +10,12 @@ npm latest 标签自上次检查（2026-11-19，rc.1）移动到 **0.2.2-rc.5**�
 
 **运行包缺口如实记录**：生成包打包校验（createDshBundle+verifyDshBundle）通过，但 HUB_DSH_BUNDLE_TEST=1 直接运行失败——旧探针预置 shared 库而生成包默认 session 模式，预置约束不注入；46条登记中 bundle_test:true 为 0，该不兼容已在宿主验收指南记录。session 默认包的端到端运行包探针与跨进程恢复同一持久会话仍是未验收缺口，列入 M0 矩阵。详见[本轮验收](<dsh-latest-rc5-linux.json>)。本轮不自动合并、不启用当前Web、不修改用户库。
 
+## 当前（2026-11-24）：M1 操作账本与不可变修订落地（memory-provenance-m0 分支）
+
+基于 268a6e9，先 M0 后 M1 实施（[矩阵](<../plugins/memory-net/PROVENANCE-M0-MATRIX.md>)、[M1 计划](../../docs/superpowers/plans/2026-11-24-memory-provenance-m1.md)、[验收](<memory-provenance-m1.json>)）。新增 schema2 sidecar `provenance.db`（ATTACH 同连接、跨文件同事务、附加库 FK 已实证）：操作账本（稳定 op_id/重放坐标去重/同坐标异摘要拒绝）、不可变修订链与精确到修订的 based_on 引用、修订级 CAS（promote/demote/contradict/link 必需 expected_revision；progress 保留合并语义但按修订标冲突，同毫秒不再漏判）、含历史的 v2 导出导入（闭包校验+拓扑导入+降级拒绝）、显式基线迁移（先备份、不补造历史）、敏感删除 redact（清理修订与操作摘要并失效依赖方）。全部校验后写入竞态关闭（跨进程竞态测试：父进程持锁 400ms + 真实子进程，两种交错序均无悬空引用）。
+
+M0 红灯 R1-R5 全部转绿入常规套件；legacy 默认路径行为与指纹不变（15 号边界契约锁定）。核心 69/69、适配 35/35、根 152/152、validate PASS（Linux）。账本默认关闭（open({ledger:true}) 显式挂载，可整体删除回退）；DSH 适配层未改动，但源码指纹已变化——运行包/宿主复验见同分支后续验收记录。宿主会话/代码版本绑定（M2）、候选提炼与审核 UI（M3）、跨会话授权（M4）未实施。
+
 ## 本分支修复：缓存安全尾部快照
 
 固定system规则与动态runtime-context分离，诊断计数不自动注入；每次验证范围/证据有效性，宿主按已提交内容去重和追加。无记忆/不可用明确撤回旧数据，不冻结过期结论。当前Web按用户要求保持停用，未采用候选修复。证据见[缓存验收](<memory-cache-safe.json>)；调用前缀验证不等于供应商缓存命中认证。

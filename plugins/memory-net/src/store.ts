@@ -41,6 +41,7 @@ import {
 } from './activate.js'
 import {curationReason} from './curation.js'
 import {candidateMeta,candidateReason,eventDigest,claimDigest,referenceIds,validateEvent,digest,type CandidateInput,type CandidateReview,type CandidateMeta} from './candidates.js'
+import {attachLedger,exportLedger,importLedgerRows,backupWorkspace,type Ledger,type LedgerPackage,type OperationInput,type RevisionSnapshot,type FullMemoryPackage} from './ledger.js'
 
 /** 写纪律矩阵（v1 写死）。 */
 const KIND_ALLOWED_ROLES: Record<Exclude<NodeKind, 'progress'>, readonly Role[]> = {
@@ -58,6 +59,9 @@ export interface OpenOpts {
   role?: Role
   /** 显式 workspace_id（默认目录名）。与库中不符时拒绝打开（防串读）。 */
   workspaceId?: string
+  /** 挂载 schema2 溯源账本 sidecar（provenance.db，ATTACH 同连接同事务）。
+   *  默认关闭：既有行为/指纹不变；开启后状态变更强制修订级 CAS。 */
+  ledger?: boolean
 }
 
 interface NodeRow {
@@ -114,13 +118,17 @@ export class MemoryNet {
   readonly agentId: string
   readonly role: Role
   readonly workspaceId: string
+  /** schema2 溯源账本（未挂载为 null）。 */
+  readonly ledger: Ledger | null
+  private readonly wsDir: string
 
-  private constructor(dbo: OpenedDb, opts: Required<Pick<OpenOpts, 'agentId' | 'role'>>, wsDir: string) {
+  private constructor(dbo: OpenedDb, opts: Required<Pick<OpenOpts, 'agentId' | 'role'>>, wsDir: string, ledger: Ledger | null) {
     this.dbo = dbo
     this.agentId = opts.agentId
     this.role = opts.role
     this.workspaceId = dbo.workspaceId
-    void wsDir
+    this.ledger = ledger
+    this.wsDir = wsDir
   }
 
   /** 打开（或创建）workspace。 */
@@ -134,7 +142,16 @@ export class MemoryNet {
       throw new WorkspaceError('agent_id 必须是非空字符串（写入者身份）')
     }
     const dbo = openWorkspaceDb(wsDir, { workspaceId: opts?.workspaceId })
-    return new MemoryNet(dbo, { agentId, role }, wsDir)
+    let ledger: Ledger | null = null
+    if (opts?.ledger) {
+      try {
+        ledger = attachLedger(dbo.db, wsDir)
+      } catch (e) {
+        dbo.db.close()
+        throw e
+      }
+    }
+    return new MemoryNet(dbo, { agentId, role }, wsDir, ledger)
   }
 
   close(): void {
@@ -180,7 +197,9 @@ export class MemoryNet {
     return n
   }
 
-  /** 跨进程写原子性：BEGIN IMMEDIATE 独占写锁（WAL 下写者互斥），函数式包裹自动回滚。 */
+  /** 跨进程写原子性：BEGIN IMMEDIATE 独占写锁（WAL 下写者互斥），函数式包裹自动回滚。
+   *  M1：账本挂载时同一事务覆盖 memory.db + provenance.db（ATTACH 同连接）；
+   *  依赖校验一律在事务内进行（消除检查到使用竞态，含 GC 并发）。 */
   private txn<T>(fn: () => T): T {
     this.db.exec('BEGIN IMMEDIATE')
     try {
@@ -190,6 +209,32 @@ export class MemoryNet {
     } catch (e) {
       try { this.db.exec('ROLLBACK') } catch { /* 已回滚 */ }
       throw e
+    }
+  }
+
+  /** 账本修订快照（状态主体快照，不含 updated_at 墙钟）。 */
+  private snapshotOf(n: MemoryNode): RevisionSnapshot {
+    return {
+      node_id: n.id, kind: n.kind, text: n.text, payload: n.payload,
+      based_on: n.based_on, status: n.status, actor: this.agentId,
+    }
+  }
+
+  /** 公开返回前盖当前 head 修订戳（账本未挂载时原样返回）。 */
+  private withRevision(n: MemoryNode): MemoryNode {
+    if (!this.ledger) return n
+    const head = this.ledger.headRevision(n.id)
+    return head === null ? n : { ...n, revision_id: head }
+  }
+
+  private opInput(kind: OperationInput['operation_kind'], summary: string, provenance?: { host_instance?: string | null; session_id?: string | null; call_id?: string | null; root_call_id?: string | null; durable_event_seq?: number | null }): OperationInput {
+    return {
+      actor: this.agentId, operation_kind: kind, summary,
+      host_instance: provenance?.host_instance ?? null,
+      session_id: provenance?.session_id ?? null,
+      call_id: provenance?.call_id ?? null,
+      root_call_id: provenance?.root_call_id ?? null,
+      durable_event_seq: provenance?.durable_event_seq ?? null,
     }
   }
 
@@ -235,13 +280,25 @@ export class MemoryNet {
       if (!input.key) throw new WorkspaceError('constraint 必须带 key（规则名，便于引用与去重）')
     }
 
-    const basedOn = this.validateBasedOn(input.based_on ?? [])
     const now = Date.now()
 
-    // 带 key 的 observation：INSERT + 覆盖联动必须在同一 IMMEDIATE 事务内 ——
-    // 否则跨进程同 key 并发写会互相 supersede，收敛到「零 active 观测」（中间态查无此 key）。
-    // 事务序列化后：后提交者可见先提交者的新行并把它 supersede，恒有且仅有一个 active。
+    // M1：全部写入走同一 BEGIN IMMEDIATE ——依赖校验入事务（消除与 GC 的检查到使用
+    // 竞态）；带 key 覆盖联动沿用原语义；账本挂载时同事务记录操作+修订（含受影响节点）。
     const writeAll = (): string => {
+      // 重放去重（先于依赖校验：已提交事件的幂等重放不因当前引用状态变化而失败）：
+      // 持久坐标齐全时，同坐标同摘要幂等返回原节点（不重复写入）；
+      // 同坐标异摘要由 checkOperation 抛 LedgerConflictError 拒绝。
+      if (this.ledger && input.provenance?.session_id != null && input.provenance?.durable_event_seq != null) {
+        const check = this.ledger.checkOperation(this.opInput('add', `${kind}:${text}`, input.provenance))
+        if (check.status === 'replay') {
+          const nodeId = check.node_ids[0]
+          if (nodeId === undefined || !this.rowById(nodeId)) {
+            throw new WorkspaceError(`重放操作 ${check.op_id} 缺少可返回的节点；拒绝幂等重放`)
+          }
+          return nodeId
+        }
+      }
+      const basedOn = this.validateBasedOn(input.based_on ?? [])
       const { id, seq } = this.nextId()
       this.db.prepare(
         `INSERT INTO nodes (id, seq, kind, agent_id, run_id, task_id, key, text, payload_json,
@@ -252,13 +309,28 @@ export class MemoryNet {
         input.run_id ?? null, input.task_id ?? null, input.key ?? null, text,
         JSON.stringify(payload), source, confidence, JSON.stringify(basedOn), now, now,
       )
+      const affected: string[] = []
       if (kind === 'observation' && input.key) {
-        this.supersedeSameKey(input.key, id)
+        affected.push(...this.supersedeSameKey(input.key, id))
+      }
+      if (this.ledger) {
+        const { op_id } = this.ledger.recordOperation(this.opInput('add', `${kind}:${text}`, input.provenance))
+        // 依赖节点可能早于账本挂载存在：先补 legacy_baseline 首修订，引用才可精确固定。
+        for (const ref of basedOn) {
+          const refNode = this.rowById(ref)
+          if (refNode && this.ledger.headRevision(ref) === null) {
+            this.ledger.ensureBaseline(op_id, this.snapshotOf(refNode))
+          }
+        }
+        this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(id)))
+        for (const changed of affected) {
+          this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(changed)))
+        }
       }
       return id
     }
-    const id = kind === 'observation' && input.key ? this.txn(writeAll) : writeAll()
-    return this.assertExists(id)
+    const id = this.txn(writeAll)
+    return this.withRevision(this.assertExists(id))
   }
 
   /** based_on 引用完整性：指向的节点必须存在。 */
@@ -276,38 +348,62 @@ export class MemoryNet {
    * observation 覆盖联动：同 key 旧 active 观测 → superseded；
    * 基于这些旧观测的 active/promoted inference → contradicted（物理事实变了，推断自动失效）。
    */
-  private supersedeSameKey(key: string, newId: string): void {
+  private supersedeSameKey(key: string, newId: string): string[] {
     const oldRows = this.db.prepare(
       "SELECT id FROM nodes WHERE kind = 'observation' AND key = ? AND status = 'active' AND id != ?",
     ).all(key, newId) as Array<{ id: string }>
-    if (oldRows.length === 0) return
+    if (oldRows.length === 0) return []
     const supersededIds = oldRows.map((r) => r.id)
     const ph = supersededIds.map(() => '?').join(',')
     this.db.prepare(
       `UPDATE nodes SET status = 'superseded' WHERE id IN (${ph})`,
     ).run(...supersededIds)
+    const affected = [...supersededIds]
     // contradicted 联动：based_on 含任一被覆盖观测 id ——
-    // instr 精确子串（带引号 id）替代全表 JS 逐行比对，把过滤下推到 SQLite
+    // instr 精确子串（带引号 id）替代全表 JS 逐行比对，把过滤下推到 SQLite；
+    // M1：先选出受影响 id 再更新（账本需要为每个状态变更提交修订）。
     for (const sid of supersededIds) {
+      const rows = this.db.prepare(
+        "SELECT id FROM nodes WHERE kind = 'inference' AND status IN ('active','promoted') AND (instr(based_on_json, ?) > 0 OR EXISTS (SELECT 1 FROM json_each(nodes.payload_json, '$.promote_evidence') WHERE value = ?))",
+      ).all(`"${sid}"`, sid) as Array<{ id: string }>
+      if (rows.length === 0) continue
+      const ids = rows.map((r) => r.id)
       this.db.prepare(
-        "UPDATE nodes SET status = 'contradicted', updated_at = ?\n         WHERE kind = 'inference' AND status IN ('active','promoted') AND (instr(based_on_json, ?) > 0 OR EXISTS (SELECT 1 FROM json_each(nodes.payload_json, '$.promote_evidence') WHERE value = ?))",
-      ).run(Date.now(), `"${sid}"`, sid)
+        `UPDATE nodes SET status = 'contradicted', updated_at = ? WHERE id IN (${ids.map(() => '?').join(',')})`,
+      ).run(Date.now(), ...ids)
+      affected.push(...ids)
     }
-    void newId
+    return affected
   }
 
   get(id: string): MemoryNode | null {
-    return this.rowById(id)
+    const n = this.rowById(id)
+    return n === null ? null : this.withRevision(n)
   }
 
-  /** 补 based_on 轻量边（from 依赖 to）。 */
-  link(fromId: string, toId: string): void {
-    const from = this.assertExists(fromId)
-    this.assertExists(toId)
-    if (from.based_on.includes(toId)) return
-    const deps = [...from.based_on, toId]
-    this.db.prepare('UPDATE nodes SET based_on_json = ?, updated_at = ? WHERE id = ?')
-      .run(JSON.stringify(deps), Date.now(), fromId)
+  /** 节点修订历史（账本未挂载时空数组）。 */
+  historyOf(nodeId: string): import('./ledger.js').RevisionRecord[] {
+    return this.ledger ? this.ledger.history(nodeId) : []
+  }
+
+  /** 补 based_on 轻量边（from 依赖 to）。账本挂载时为修订变更：必需 expected_revision CAS。 */
+  link(fromId: string, toId: string, opts?: { expected_revision?: string }): MemoryNode {
+    return this.txn(() => {
+      const from = this.assertExists(fromId)
+      this.assertExists(toId)
+      if (this.ledger && opts?.expected_revision === undefined) {
+        throw new WorkspaceError('账本挂载时 link 需要 expected_revision（修订级 CAS，显式重读后重试）')
+      }
+      if (from.based_on.includes(toId)) return this.withRevision(from)
+      const deps = [...from.based_on, toId]
+      this.db.prepare('UPDATE nodes SET based_on_json = ?, updated_at = ? WHERE id = ?')
+        .run(JSON.stringify(deps), Date.now(), fromId)
+      if (this.ledger) {
+        const { op_id } = this.ledger.recordOperation(this.opInput('link', `${fromId}->${toId}`))
+        this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(fromId)), { expectedRevision: opts?.expected_revision })
+      }
+      return this.withRevision(this.assertExists(fromId))
+    })
   }
 
   /** Propose an evidence-bound inference, never a physical observation or reviewed fact. */
@@ -326,6 +422,10 @@ export class MemoryNet {
       if(existing)return rowToNode(existing)
       const {id,seq}=this.nextId(),now=Date.now(),meta:CandidateMeta={version:1,state:'pending',fingerprint,sources}
       this.db.prepare("INSERT INTO nodes(id,seq,kind,agent_id,run_id,task_id,text,payload_json,confidence,status,based_on_json,created_at,updated_at) VALUES(?,?,'inference',?,?,?,?,?,?,'active',?,?,?)").run(id,seq,this.agentId,input.run_id,task,text,JSON.stringify({memory_candidate:meta}),input.confidence,JSON.stringify(ids),now,now)
+      if(this.ledger){
+        const {op_id}=this.ledger.recordOperation(this.opInput('add', `candidate:${text}`))
+        this.ledger.commitRevision(op_id,this.snapshotOf(this.assertExists(id)))
+      }
       return this.assertExists(id)
     })
   }
@@ -349,6 +449,10 @@ export class MemoryNet {
       const meta:CandidateMeta={...c,state:input.decision==='accept'?'accepted':'rejected',review:{request,digests,at:Date.now()}}
       const payload={...n.payload,memory_candidate:meta,promote_evidence:evidence,promote_by:'host-review',promote_note:request.note}
       this.db.prepare('UPDATE nodes SET status=?,payload_json=?,updated_at=? WHERE id=?').run(input.decision==='accept'?'promoted':'demoted',JSON.stringify(payload),Date.now(),id)
+      if(this.ledger){
+        const {op_id}=this.ledger.recordOperation(this.opInput('review', `candidate:${input.decision}:${request.reviewer}`))
+        this.ledger.commitRevision(op_id,this.snapshotOf(this.assertExists(id)))
+      }
       return this.assertExists(id)
     })
   }
@@ -368,10 +472,18 @@ export class MemoryNet {
    */
   updateProgress(taskId: string, patch: ProgressPatch, ctx?: ProgressCtx): MemoryNode {
     if (!taskId) throw new WorkspaceError('update_progress 需要 task_id')
+    return this.txn(() => this.updateProgressWithinTransaction(taskId, patch, ctx))
+  }
+
+  /** progress 合并语义保留（多 Agent 协作核心），但冲突判定优先修订级 CAS：
+   *  账本挂载时 expected_revision 与写事务内 head 不符 → conflict 置位并记录双方值，
+   *  同一毫秒墙钟不再漏判（M1 R3）。 */
+  private updateProgressWithinTransaction(taskId: string, patch: ProgressPatch, ctx: ProgressCtx | undefined): MemoryNode {
     let existing = this.db.prepare(
       "SELECT * FROM nodes WHERE kind = 'progress' AND task_id = ?",
     ).get(taskId) as NodeRow | undefined
     const now = Date.now()
+    const headBefore = this.ledger && existing ? this.ledger.headRevision(existing.id) : null
     const status = patch.status !== undefined ? String(patch.status) : undefined
     const summary = patch.summary !== undefined ? String(patch.summary) : undefined
     const owner = patch.owner !== undefined ? String(patch.owner) : this.agentId
@@ -385,7 +497,11 @@ export class MemoryNet {
                               source, confidence, status, conflict, based_on_json, created_at, updated_at)
            VALUES (?, ?, 'progress', ?, NULL, ?, NULL, ?, ?, NULL, NULL, 'active', 0, '[]', ?, ?)`,
         ).run(id, seq, this.agentId, taskId, summary ?? '', JSON.stringify(payload), now, now)
-        return this.assertExists(id)
+        if (this.ledger) {
+          const { op_id } = this.ledger.recordOperation(this.opInput('progress', `task:${taskId} ${summary ?? ''}`))
+          this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(id)))
+        }
+        return this.withRevision(this.assertExists(id))
       } catch (e) {
         // 并发首写撞 uq_nodes_progress_task：另一进程已建行——重读并落入下方更新路径，
         // 乐观锁/conflict 语义照常生效，杜绝不标 conflict 的静默双真相
@@ -408,6 +524,12 @@ export class MemoryNet {
       }
       conflictDetail['updated_at'] = [existing.updated_at, ctx.base_updated_at]
     }
+    if (ctx?.expected_revision !== undefined && ctx.expected_revision !== headBefore) {
+      // 修订级 CAS：progress 保留合并语义但必须显式标冲突（不静默 LWW）。
+      conflict = true
+      conflictDetail = { ...(conflictDetail ?? {}) }
+      conflictDetail['revision'] = [headBefore, ctx.expected_revision]
+    }
     const mergedPayload = { ...node.payload, ...patch, status: status ?? node.payload.status, owner }
     const newSummary = summary ?? node.text
     this.db.prepare(
@@ -418,7 +540,11 @@ export class MemoryNet {
       conflictDetail ? JSON.stringify(conflictDetail) : null,
       this.agentId, now, existing.id,
     )
-    return this.assertExists(existing.id)
+    if (this.ledger) {
+      const { op_id } = this.ledger.recordOperation(this.opInput('progress', `task:${taskId} ${newSummary}`))
+      this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(existing.id)))
+    }
+    return this.withRevision(this.assertExists(existing.id))
   }
 
   /** 追加 trail 步（per-run 有界递增序，可回放）。
@@ -426,18 +552,24 @@ export class MemoryNet {
    *  不再撞 PK(run_id,seq) 裸 SqliteError——写入锁内取 MAX+1，恒唯一。 */
   appendTrail(runId: string, step: TrailStepInput): TrailEntry {
     if (!runId) throw new WorkspaceError('append_trail 需要 run_id')
-    const action = String(step.action ?? '')
-    if (!action.trim()) throw new WorkspaceError('trail 步骤 action 不能为空')
-    const refs = (step.refs ?? []).map(String)
-    for (const r of refs) this.assertExists(r) // refs 引用完整性
-    const ts = Date.now()
-    const result = this.db.prepare(
-      `INSERT INTO trail (run_id, seq, agent_id, action, refs_json, ts)
-       VALUES (?, (SELECT COALESCE(MAX(seq), 0) + 1 FROM trail WHERE run_id = ?), ?, ?, ?, ?)`,
-    ).run(runId, runId, this.agentId, action, JSON.stringify(refs), ts)
-    // 经 rowid 读回本行真实 seq（并发下不能用 MAX：可能已被后到者再叠一号）
-    const row = this.db.prepare('SELECT seq FROM trail WHERE rowid = ?').get(result.lastInsertRowid) as { seq: number }
-    return { run_id: runId, seq: row.seq, agent_id: this.agentId, action, refs, ts, compressed: false }
+    return this.txn(() => {
+      const action = String(step.action ?? '')
+      if (!action.trim()) throw new WorkspaceError('trail 步骤 action 不能为空')
+      const refs = (step.refs ?? []).map(String)
+      for (const r of refs) this.assertExists(r) // refs 引用完整性（写事务内）
+      const ts = Date.now()
+      const result = this.db.prepare(
+        `INSERT INTO trail (run_id, seq, agent_id, action, refs_json, ts)
+         VALUES (?, (SELECT COALESCE(MAX(seq), 0) + 1 FROM trail WHERE run_id = ?), ?, ?, ?, ?)`,
+      ).run(runId, runId, this.agentId, action, JSON.stringify(refs), ts)
+      // 经 rowid 读回本行真实 seq（并发下不能用 MAX：可能已被后到者再叠一号）
+      const row = this.db.prepare('SELECT seq FROM trail WHERE rowid = ?').get(result.lastInsertRowid) as { seq: number }
+      // M1：账本操作是稳定锚点——GC 压缩 trail 表可重编号，账本 op 坐标不可变（R4）。
+      if (this.ledger) {
+        this.ledger.recordOperation(this.opInput('trail', `${runId}#${row.seq} ${action}`))
+      }
+      return { run_id: runId, seq: row.seq, agent_id: this.agentId, action, refs, ts, compressed: false }
+    })
   }
 
   /** 按 seq 有序回放 run 的 trail（可复现/排障）。 */
@@ -548,70 +680,97 @@ export class MemoryNet {
    * 显式 promote（仅 inference）。需 evidence（存在的节点 id 引用）或 by=user（宿主确认）。
    * 无自动 promote 路径：库内任何写操作都不会自动把 inference 升级。
    */
-  promote(id: string, opts?: { evidence?: string[]; by?: 'user' | 'agent'; note?: string }): MemoryNode {
-    const n = this.assertExists(id)
-    if (n.kind !== 'inference') {
-      throw new WorkspaceError(`promote 仅适用于 inference，得到 ${n.kind}: ${id}`)
-    }
-    if (n.status === 'promoted') return n
-    if (n.status !== 'active') {
-      throw new WorkspaceError(`${id} 状态为 ${n.status}，不可 promote`)
-    }
-    const evidence = (opts?.evidence ?? []).map(String)
-    if (evidence.length === 0 && opts?.by !== 'user') {
-      throw new PromoteNeedsEvidenceError(id)
-    }
-    for (const e of evidence) this.assertExists(e)
-    const payload = {
-      ...n.payload,
-      promote_evidence: evidence,
-      promote_note: opts?.note ?? '',
-      promote_by: opts?.by ?? 'agent',
-    }
-    this.db.prepare(
-      "UPDATE nodes SET status = 'promoted', payload_json = ?, updated_at = ? WHERE id = ?",
-    ).run(JSON.stringify(payload), Date.now(), id)
-    return this.assertExists(id)
+  promote(id: string, opts?: { evidence?: string[]; by?: 'user' | 'agent'; note?: string; expected_revision?: string }): MemoryNode {
+    return this.txn(() => {
+      if (this.ledger && opts?.expected_revision === undefined) {
+        throw new WorkspaceError('账本挂载时 promote 需要 expected_revision（修订级 CAS，显式重读后重试）')
+      }
+      const n = this.assertExists(id)
+      if (n.kind !== 'inference') {
+        throw new WorkspaceError(`promote 仅适用于 inference，得到 ${n.kind}: ${id}`)
+      }
+      if (n.status === 'promoted') return this.withRevision(n)
+      if (n.status !== 'active') {
+        throw new WorkspaceError(`${id} 状态为 ${n.status}，不可 promote`)
+      }
+      const evidence = (opts?.evidence ?? []).map(String)
+      if (evidence.length === 0 && opts?.by !== 'user') {
+        throw new PromoteNeedsEvidenceError(id)
+      }
+      for (const e of evidence) this.assertExists(e)
+      const payload = {
+        ...n.payload,
+        promote_evidence: evidence,
+        promote_note: opts?.note ?? '',
+        promote_by: opts?.by ?? 'agent',
+      }
+      this.db.prepare(
+        "UPDATE nodes SET status = 'promoted', payload_json = ?, updated_at = ? WHERE id = ?",
+      ).run(JSON.stringify(payload), Date.now(), id)
+      if (this.ledger) {
+        const { op_id } = this.ledger.recordOperation(this.opInput('promote', `inference:${id}`))
+        this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(id)), { expectedRevision: opts?.expected_revision })
+      }
+      return this.withRevision(this.assertExists(id))
+    })
   }
 
   /** 显式降级（任意 kind）：不参与激活，不物理删除。
    *  角色门控：目标 kind 的写纪律矩阵同样适用于 lifecycle ——
    *  model 不得 demote constraint / observation（host-only），否则冻结集「永不裁光」可被旁路。 */
-  demote(id: string, opts?: { reason?: string }): MemoryNode {
-    const n = this.assertExists(id)
-    if (n.kind !== 'progress') {
-      const allowed = KIND_ALLOWED_ROLES[n.kind as Exclude<NodeKind, 'progress'>]
-      if (allowed && !allowed.includes(this.role)) {
-        throw new WriteForbiddenError(n.kind, this.role, allowed)
+  demote(id: string, opts?: { reason?: string; expected_revision?: string }): MemoryNode {
+    return this.txn(() => {
+      if (this.ledger && opts?.expected_revision === undefined) {
+        throw new WorkspaceError('账本挂载时 demote 需要 expected_revision（修订级 CAS，显式重读后重试）')
       }
-    }
-    const payload = { ...n.payload, demote_reason: opts?.reason ?? '' }
-    this.db.prepare(
-      "UPDATE nodes SET status = 'demoted', payload_json = ?, updated_at = ? WHERE id = ?",
-    ).run(JSON.stringify(payload), Date.now(), id)
-    return this.assertExists(id)
+      const n = this.assertExists(id)
+      if (n.kind !== 'progress') {
+        const allowed = KIND_ALLOWED_ROLES[n.kind as Exclude<NodeKind, 'progress'>]
+        if (allowed && !allowed.includes(this.role)) {
+          throw new WriteForbiddenError(n.kind, this.role, allowed)
+        }
+      }
+      const payload = { ...n.payload, demote_reason: opts?.reason ?? '' }
+      this.db.prepare(
+        "UPDATE nodes SET status = 'demoted', payload_json = ?, updated_at = ? WHERE id = ?",
+      ).run(JSON.stringify(payload), Date.now(), id)
+      if (this.ledger) {
+        const { op_id } = this.ledger.recordOperation(this.opInput('demote', `${n.kind}:${id}`))
+        this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(id)), { expectedRevision: opts?.expected_revision })
+      }
+      return this.withRevision(this.assertExists(id))
+    })
   }
 
   /** 显式 contradict：推翻一条 inference（evidence 引用观测或文本说明，至少其一——禁止无依据推翻）。 */
-  contradict(id: string, opts?: { evidence?: string[]; note?: string }): MemoryNode {
-    const n = this.assertExists(id)
-    if (n.kind !== 'inference') {
-      throw new WorkspaceError(`contradict 仅适用于 inference，得到 ${n.kind}: ${id}`)
-    }
-    const evidence = (opts?.evidence ?? []).map(String)
-    for (const e of evidence) this.assertExists(e)
-    if (evidence.length === 0 && !(opts?.note ?? '').trim()) {
-      throw new WorkspaceError(`contradict 拒绝：${id} 需要 evidence（观测 id 列表）或 note（文字依据）至少其一——禁止无依据推翻推断`)
-    }
-    const payload = {
-      ...n.payload,
-      contradict_evidence: evidence,
-      contradict_note: opts?.note ?? '',
-    }
-    this.db.prepare(
-      "UPDATE nodes SET status = 'contradicted', payload_json = ?, updated_at = ? WHERE id = ?",
-    ).run(JSON.stringify(payload), Date.now(), id)
-    return this.assertExists(id)
+  contradict(id: string, opts?: { evidence?: string[]; note?: string; expected_revision?: string }): MemoryNode {
+    return this.txn(() => {
+      if (this.ledger && opts?.expected_revision === undefined) {
+        throw new WorkspaceError('账本挂载时 contradict 需要 expected_revision（修订级 CAS，显式重读后重试）')
+      }
+      const n = this.assertExists(id)
+      if (n.kind !== 'inference') {
+        throw new WorkspaceError(`contradict 仅适用于 inference，得到 ${n.kind}: ${id}`)
+      }
+      const evidence = (opts?.evidence ?? []).map(String)
+      for (const e of evidence) this.assertExists(e)
+      if (evidence.length === 0 && !(opts?.note ?? '').trim()) {
+        throw new WorkspaceError(`contradict 拒绝：${id} 需要 evidence（观测 id 列表）或 note（文字依据）至少其一——禁止无依据推翻推断`)
+      }
+      const payload = {
+        ...n.payload,
+        contradict_evidence: evidence,
+        contradict_note: opts?.note ?? '',
+      }
+      this.db.prepare(
+        "UPDATE nodes SET status = 'contradicted', payload_json = ?, updated_at = ? WHERE id = ?",
+      ).run(JSON.stringify(payload), Date.now(), id)
+      if (this.ledger) {
+        const { op_id } = this.ledger.recordOperation(this.opInput('contradict', `inference:${id}`))
+        this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(id)), { expectedRevision: opts?.expected_revision })
+      }
+      return this.withRevision(this.assertExists(id))
+    })
   }
 
   // ---------------------------------------------------------------- gc
@@ -622,7 +781,13 @@ export class MemoryNet {
    * 保护存活节点的传递依据（含 promote_evidence））。
    */
   gc(opts?: GcOpts): GcReport {
-    return this.txn(() => this.gcWithinTransaction(opts))
+    return this.txn(() => {
+      const report = this.gcWithinTransaction(opts)
+      if (this.ledger) {
+        this.ledger.recordOperation(this.opInput('gc', `gc:${JSON.stringify(report)}`))
+      }
+      return report
+    })
   }
 
   private gcWithinTransaction(opts?: GcOpts): GcReport {
@@ -666,6 +831,10 @@ export class MemoryNet {
         const payload = { ...safeJson<Record<string, unknown>>(r.payload_json, {}), gc_ttl: true }
         this.db.prepare("UPDATE nodes SET status = 'demoted', payload_json = ? WHERE id = ?")
           .run(JSON.stringify(payload), r.id)
+        if (this.ledger) {
+          const { op_id } = this.ledger.recordOperation(this.opInput('status', `ttl-demote:${r.id}`))
+          this.ledger.commitRevision(op_id, this.snapshotOf(this.assertExists(r.id)))
+        }
         report.demoted_by_ttl++
       }
     }
@@ -770,5 +939,99 @@ export class MemoryNet {
       net.close()
       throw e
     }
+  }
+
+  // ---------------------------------------------------------------- M1 provenance API
+
+  /** schema2 全量导出：v1 记忆包 + 完整账本（操作/修订/head/引用链接）。
+   *  仅账本挂载时可用；v1 exportPkg 保持原样，不伪装含历史。 */
+  exportFullPkg(): FullMemoryPackage {
+    if (!this.ledger) throw new WorkspaceError('账本未挂载：exportFullPkg 需要 open({ledger:true})')
+    const base = this.exportPkg()
+    return { ...base, schema_version: 2, ledger: exportLedger(this.db, this.ledger.workspaceInstanceId) }
+  }
+
+  /** schema2 全量导入：memory 部分 + 账本在同一事务内原子发布；目标非空拒绝。
+   *  旧入口 importPkg（仅认 schema_version=1）遇到 v2 包会明确报错——降级打开被拒绝。 */
+  static importFullPkg(pkg: FullMemoryPackage, toDir: string, opts?: { agentId?: string; role?: Role }): MemoryNet {
+    if (pkg.schema_version !== 2) {
+      throw new WorkspaceError(`importFullPkg 需要 schema_version 2，得到: ${String(pkg.schema_version)}`)
+    }
+    const net = MemoryNet.open(toDir, { workspaceId: pkg.workspace_id, agentId: opts?.agentId, role: opts?.role, ledger: true })
+    try {
+      net.db.exec('BEGIN IMMEDIATE')
+      const existing = net.db.prepare('SELECT COUNT(*) AS c FROM nodes').get() as { c: number }
+      if (existing.c > 0) throw new WorkspaceError(`导入目标 ${toDir} 已有节点，拒绝覆盖导入`)
+      const insert = net.db.prepare(
+        `INSERT INTO nodes (id, seq, kind, agent_id, run_id, task_id, key, text, payload_json,
+                            source, confidence, status, conflict, conflict_json, based_on_json, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      )
+      let seqNum = 1
+      for (const n of pkg.nodes) {
+        insert.run(
+          n.id, seqNum++, n.kind, n.agent_id, n.run_id, n.task_id, n.key, n.text,
+          JSON.stringify(n.payload), n.source, n.confidence, n.status,
+          n.conflict ? 1 : 0, n.conflict_detail ? JSON.stringify(n.conflict_detail) : null,
+          JSON.stringify(n.based_on), n.created_at, n.updated_at,
+        )
+      }
+      metaSet(net.db, 'seq', String(Math.max(pkg.seq, seqNum - 1)))
+      const insertTrail = net.db.prepare(
+        'INSERT INTO trail (run_id, seq, agent_id, action, refs_json, ts, compressed) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      )
+      for (const t of pkg.trail) {
+        insertTrail.run(t.run_id, t.seq, t.agent_id, t.action, JSON.stringify(t.refs), t.ts, t.compressed ? 1 : 0)
+      }
+      importLedgerRows(net.db, pkg.ledger)
+      net.db.exec('COMMIT')
+      return net
+    } catch (e) {
+      try {
+        net.db.exec('ROLLBACK')
+      } catch {
+        /* 事务未开启（校验前置失败等） */
+      }
+      net.close()
+      throw e
+    }
+  }
+
+  /** 显式迁移：把 schema1 当前态导入账本为 origin=legacy_baseline 首修订。
+   *  迁移前整库备份（memory.db+WAL/SHM）；不补造过去历史；已有账本内容拒绝。
+   *  sidecar 可整体删除回退 schema1 行为（账本是可选叠加，不是替代）。 */
+  migrateLedgerBaseline(): { migrated: number; backup: string } {
+    const ledger = this.ledger
+    if (!ledger) throw new WorkspaceError('账本未挂载：migrateLedgerBaseline 需要 open({ledger:true})')
+    const backup = backupWorkspace(this.wsDir)
+    return this.txn(() => {
+      const ops = this.db.prepare('SELECT COUNT(*) AS c FROM ledgerdb.operations').get() as { c: number }
+      if (ops.c > 0) throw new WorkspaceError('账本已有操作记录：拒绝重复迁移（基线只能建立一次）')
+      const rows = this.db.prepare('SELECT * FROM nodes ORDER BY seq ASC').all() as unknown as NodeRow[]
+      const { op_id } = ledger.recordOperation(this.opInput('migration', `baseline:${rows.length} nodes`))
+      for (const r of rows) {
+        ledger.ensureBaseline(op_id, this.snapshotOf(rowToNode(r)))
+      }
+      return { migrated: rows.length, backup }
+    })
+  }
+
+  /** 敏感删除/脱敏：物理移除目标节点（或单修订）的账本历史及指向它的引用链接，
+   *  并为每个依赖方追加 needs_review 标记修订——"不可变"是追加纪律，不是拒绝用户删除的借口。
+   *  live 行的生命周期仍由 demote/gc 管理；本方法只处理账本历史的删除与关联失效。host-only。 */
+  redact(target: { node_id: string; revision_id?: string }, opts?: { note?: string; delete_live?: boolean }): { removed_revisions: string[]; marked_dependents: string[] } {
+    const ledger = this.ledger
+    if (!ledger) throw new WorkspaceError('账本未挂载：redact 需要 open({ledger:true})')
+    if (this.role !== 'host') throw new WorkspaceError('redact 仅 host 可执行')
+    return this.txn(() => {
+      const { op_id } = ledger.recordOperation(this.opInput('redact', `redact:${target.node_id}${target.revision_id ? '/' + target.revision_id : ''} ${opts?.note ?? ''}`))
+      const result = ledger.redact(target, op_id, this.agentId)
+      // 整节点脱敏可选连带 live 行删除（用户显式请求时）：
+      // 依赖方 based_on 保留 id 但其修订已标 needs_review；新写入引用将校验失败。
+      if (opts?.delete_live && target.revision_id === undefined) {
+        this.db.prepare('DELETE FROM nodes WHERE id = ?').run(target.node_id)
+      }
+      return result
+    })
   }
 }
