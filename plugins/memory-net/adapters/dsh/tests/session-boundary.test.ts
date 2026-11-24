@@ -20,6 +20,11 @@ function fixture(t:any){
  const emit=(a:any,text:string)=>finish(start(a,text),text)
  return {root,ctx,api,a,b,c,agent,cwd,agents,tool,prompt,emit,start,finish,warns}
 }
+test('diagnostic logger failure cannot prevent host tool admission',t=>{
+ const f=fixture(t);f.ctx.logger.warn=()=>{throw new Error('logger offline')}
+ assert.doesNotThrow(()=>f.start(undefined,'unknown owner'))
+})
+
 test('default mode isolates project/session writes prompt and raw; no default library opened',t=>{
  const f=fixture(t);assert.ok(!readdirSync(f.root).includes('memory'),'startup cannot touch existing user default DB')
  const write=f.tool('memory_net_write'),recall=f.tool('memory_net_recall')

@@ -40,8 +40,10 @@ const num = (v: unknown): number | undefined => (typeof v === 'number' && Number
 const appliedCtxs = new WeakMap<object, HostApi | null>()
 
 function warn(ctx: DshCtx, msg: string): void {
-  if (ctx.logger?.warn) ctx.logger.warn(msg)
-  else process.stderr.write(`[memory-net-dsh] ${msg}\n`)
+  try {
+    if (ctx.logger?.warn) ctx.logger.warn(msg)
+    else process.stderr.write(`[memory-net-dsh] ${msg}\n`)
+  } catch { /* Diagnostics cannot fail host admission or tool execution. */ }
 }
 
 /** dsh 插件入口。返回 host api 供宿主测试/直连（ctx.provide 同时注册）。 */
