@@ -1,0 +1,118 @@
+{
+ "schema": 1,
+ "id": "engineering-delivery",
+ "version": "1.0.0",
+ "title": "工程交付：计划→执行→验收的机器可校验交接（G0-9）",
+ "route": "task-execution",
+ "trigger": [
+  "软件实施任务需要从计划进入执行并最终验收",
+  "用户要求阶段交接有可校验的输入/输出/批准点而非文本纪律"
+ ],
+ "applies": [
+  "有分步骤实施计划的软件任务",
+  "需要显式验收判据的工程交付"
+ ],
+ "not_applies": [
+  "无计划的即兴小改动",
+  "非软件业务任务（走 business-interview / business-scheduling）"
+ ],
+ "task_inputs": [
+  "implementation_plan"
+ ],
+ "steps": [
+  {
+   "id": "plan-review",
+   "stage": "plan",
+   "title": "计划复核：步骤可执行性/依赖/验收判据齐备",
+   "needs": [],
+   "inputs": [
+    "implementation_plan"
+   ],
+   "outputs": [
+    "reviewed_plan"
+   ],
+   "tools": [
+    "writing-plans"
+   ],
+   "validator": "每步有产物与验收判据；缺则补齐后才进入执行"
+  },
+  {
+   "id": "execute",
+   "stage": "execute",
+   "title": "按计划执行：逐步完成并记录偏差",
+   "needs": [
+    "plan-review"
+   ],
+   "inputs": [
+    "reviewed_plan"
+   ],
+   "outputs": [
+    "step_results",
+    "deviations"
+   ],
+   "tools": [
+    "executing-plans"
+   ],
+   "validator": "偏差（跳步/替换/失败）逐条记录，不静默改计划"
+  },
+  {
+   "id": "verify",
+   "stage": "review",
+   "title": "验证：按验收判据逐项核验",
+   "needs": [
+    "execute"
+   ],
+   "inputs": [
+    "step_results"
+   ],
+   "outputs": [
+    "verification_report"
+   ],
+   "tools": [
+    "verification-before-completion"
+   ],
+   "validator": "未验证项标 UNVERIFIED，不称完成"
+  },
+  {
+   "id": "accept",
+   "stage": "deliver",
+   "title": "验收交接：报告+偏差+残留项交用户裁决",
+   "needs": [
+    "verify"
+   ],
+   "inputs": [
+    "verification_report",
+    "deviations"
+   ],
+   "outputs": [
+    "accepted_delivery"
+   ],
+   "tools": [
+    "none"
+   ],
+   "validator": "验收以判据为准；残留项显式列出",
+   "approval": true
+  }
+ ],
+ "providers": [
+  "writing-plans",
+  "executing-plans",
+  "verification-before-completion"
+ ],
+ "approval_points": [
+  "accept"
+ ],
+ "failure_paths": {
+  "cancel": "用户取消：已验证产物保留，未完成项与恢复点写入交付记录",
+  "missing_dependency": "计划缺失或不可执行：拒绝进入执行，指回计划阶段；工具未加载时在执行前阻止并给替代（文本纪律仍可人工执行）",
+  "verification_failed": "验证不通过：修复后重验或如实交付'部分完成+未过项清单'，不以跳过判据冒充通过"
+ },
+ "delivery": [
+  "accepted_delivery（含 verification_report、deviations、残留项）"
+ ],
+ "notes": [
+  "本契约把既有 executing-plans 的文本纪律升级为机器可校验交接：输入/输出/批准点显式化",
+  "流程是方法与路由，不自动执行 Agent、不自授工具权限；未知工具/未登记子技能不自动执行",
+  "工具需求引用已登记 skill 资产 id；宿主未加载时执行前阻止或给文本替代"
+ ]
+}

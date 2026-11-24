@@ -1,0 +1,55 @@
+{
+ "schema": 1,
+ "status": "G1_G2_G3_ROUND1_IMPLEMENTED",
+ "at": "2026-11-24",
+ "task": "Issue #4 G1-G3 first round (branch work-issue4, from skills-g0-inventory c2941c0): workflow contracts, legal gap-filling skills, semantic conflict governance with a real corpus, staleness checks and version drills",
+ "g1_skill_groups_and_workflows": {
+  "workflow_contracts": {
+   "format": "catalog/workflows/<id>.json — schema 1, versioned; trigger, applies/not_applies, task_inputs, steps (DAG with needs/inputs/outputs/tools/validator/approval), providers, approval_points, failure_paths (cancel + missing_dependency required), delivery, notes",
+   "machine_checks": "asset-manager/core/workflows.mjs validateWorkflowContract: shape, stage vocabulary (clarify/research/plan/execute/review/deliver/maintain), DAG acyclicity + topological reachability, stage-IO closure (every step input provided by task inputs or predecessor outputs), tool references limited to registered assets or 'none', providers must be registered skills, gated steps must appear in approval_points, failure paths must cover cancel and missing-dependency",
+   "contracts": ["business-interview (G0-1: 非软件业务访谈/成本驱动, approval at read-back)", "business-scheduling (G0-2: 排期/预算, approvals at fit-verdict and handoff)", "engineering-delivery (G0-9: plan→execute→accept 机器可校验交接, approval at accept)"],
+   "cli": "workflow-list / workflow-validate (exit 1 on invalid)",
+   "honesty": "契约是方法与路由，不冒充自动执行 Agent、不自授工具权限；工具未加载在执行前阻止或给文本替代（failure_paths.missing_dependency）"
+  },
+  "gap_filled_skills": {
+   "dedup_and_license_check": "G0 已做同源查重（同字节组 0）；无法合法复用的通用方法论按通用需求独立实现，未转写任何受限内容",
+   "new": [
+    {"id": "business-interviewing", "path": "skills/individual/document/business-interviewing", "contents": "SKILL.md + templates/interview-record.md + templates/cost-driver-worksheet.md", "route": "requirements-planning (primary, clarify stage)"},
+    {"id": "business-scheduling", "path": "skills/individual/document/business-scheduling", "contents": "SKILL.md + templates/schedule-plan.md + templates/budget-sheet.md", "route": "business-scheduling (primary — route went from coverage=none/zero-mapping to scoped)"}
+   ],
+   "registration": "catalog/assets/*.toml + catalog/provenance/*.json (tree sha256 + per-file hashes) + capabilities.json providers with reviewed_skill_sha256 + route aliases (业务访谈/需求澄清/访谈干系人/成本评估/业务排期/资源预算...); CAPABILITIES.md regenerated from the registry (synchronization test passes)",
+   "verification": "skills-status 125/125 registered; preflight CONTENT_READY for both; audit-usability CONTENT_READY; find-capability hits 业务访谈→requirements-planning(business-interviewing) and 业务排期→business-scheduling(business-scheduling); asset baseline 137→139 (usability CLI test updated); audit-resources missing unchanged (21, all vendor content — new skills have zero missing refs)"
+  }
+ },
+ "g2_conflict_governance": {
+  "module": "asset-manager/core/conflicts.mjs + CLI check-conflicts <ids> | --expert NAME (structural BLOCKED → exit 1; semantic candidates → exit 0 for human review)",
+  "structural": "reuses selectionConflicts (duplicate names/selections, declared requires/conflicts, dependency cycles, MCP runtime ids) — not rebuilt",
+  "semantic_candidates": [
+   {"code": "subagent-mandate-vs-host-prohibition", "severity": "high", "evidence": "skill file+line + host rules file+line"},
+   {"code": "global-instruction-override", "severity": "high", "excludes": "teaching models to resist prompt injection is NOT an override (fixture-verified)"},
+   {"code": "method-contradiction", "severity": "medium", "pairing": "opposing modal verbs on the SAME verb+object key; frontmatter stripped; clause separators block cross-clause matches; safety rules (never commit secrets) do not pair with frequency directives (commit fully)"},
+   {"code": "artifact-location-mismatch", "severity": "low"}
+  ],
+  "corpus": "asset-manager/tests/fixtures/conflict-corpus/ — 9 fixtures covering true positives (subagent mandate, system override, opposing directives, artifact mismatch) and the false-positive defenses (similar-description legal alternatives, security rule vs frequency directive, injection-resistance clause) plus unknown cases (unreadable skill, unreadable host rules)",
+  "real_corpus_regression": "scanning all 51 individual skills surfaces the 4 known real subagent mandates (pptx:165, skill-creator:171/225/467) vs the repo AGENTS.md prohibition, with zero false positives after pattern tightening (the initial run's 3 false positives drove the excludes/object-key fixes — recorded in the test comments)",
+  "honesty": "candidates only — heuristic, NOT an exhaustive guarantee (名字不同且无相对指令动词的矛盾不在覆盖内, stated in scope); unreadable files → unknowns, never a 'no conflicts' verdict; fixes never weaken user/system instruction priority"
+ },
+ "g3_source_versioning_and_drills": {
+  "check_stale": "CLI check-stale <project> [deployment-id|all] — deployment receipts store the skill TREE hash at deploy time; current tree hash mismatch → STALE/NEEDS_REVIEW; workflow provider mappings bind reviewed_skill_sha256 (SKILL.md hash) — mismatch → STALE. Policy: hashes are never silently recomputed to become CURRENT",
+  "drills_covered_new": ["provider mapping staleness (source update → NEEDS_REVIEW)", "skill renamed (dir+registration migrated) → old deployment references UNKNOWN 'no longer registered'", "skill deleted → UNKNOWN, no fake CURRENT", "new license/host re-review requirement (runtime_review_required) → preflight BLOCKED, no bypass"],
+  "drills_reused_from_existing_suites": "consecutive rollback, tampering after approval, local modification protection, three-way diff, recovery closure (lifecycle/recovery/deployment test suites)",
+  "no_automation": "update checks are on-demand CLI invocations only; no cron jobs, no auto-update, no auto-approve (per issue scope)"
+ },
+ "verification": {
+  "root": "npm test 163/163 (11 conflicts + 3 version-drills tests new), npm run validate PASS",
+  "cli_replays": "skills-status 125/125; audit-usability 139 assets (50 CONTENT_READY / 5 CONDITIONAL / 84 BLOCKED); preflight business-interviewing,business-scheduling CONTENT_READY; check-conflicts research expert → NO_KNOWN_PATTERNS with 0 unknowns; find-capability 业务访谈/业务排期 both hit with mapping CURRENT"
+ },
+ "remaining_honest_gaps": [
+  "G0-3 办公产物完整验收量表（Word 排版/PPT 视觉/Excel 公式）— 缺流程接缝，需专项",
+  "G0-4 厂商包 21 项资源缺失逐项核对（区分真缺失/示例/内部依赖）",
+  "G0-5 60 项上游身份逐项核验（npm/GitHub 检查能力在，需逐项跑）",
+  "G0-6 71 厂商 Skill 许可/宿主复核（不能绕过）",
+  "真实消费项目端到端部署演练（本沙箱无用户项目；临时项目 drill 已覆盖核心路径）"
+ ],
+ "independence": "No subagents; no auto-merge; memory/search runtime code untouched (write scope skills/**, catalog, asset-manager, docs per issue); no root agents/, skill-packs/ or projects/ created; canonical paths preserved"
+}

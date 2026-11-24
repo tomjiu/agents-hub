@@ -1,0 +1,21 @@
+{
+  "sha256": "93ac23bef0ff97a5fd97065397b453dc0c1ddb65d8a6ecf3ba6c54f9fe55c65c",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 4565,
+      "sha256": "14cd497ebf039311609886b98c037b007ff192715989873b9ff2bfa4b10a10d4"
+    },
+    {
+      "path": "templates/cost-driver-worksheet.md",
+      "bytes": 796,
+      "sha256": "82685bd975abef014656275d78314f2b87d25f62d22ab1d097b221707392bfe5"
+    },
+    {
+      "path": "templates/interview-record.md",
+      "bytes": 1180,
+      "sha256": "ac8d75a6b0c61594cad76505d1fc437a6b36e5f0f0d914dfee80a74b85cc654b"
+    }
+  ],
+  "bytes": 6541
+}

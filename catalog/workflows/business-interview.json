@@ -1,0 +1,110 @@
+{
+ "schema": 1,
+ "id": "business-interview",
+ "version": "1.0.0",
+ "title": "非软件业务访谈与需求澄清（含成本驱动）",
+ "route": "requirements-planning",
+ "trigger": [
+  "用户提到要访谈干系人、澄清业务需求或评估成本",
+  "任务描述过于模糊无法直接规划",
+  "预算/成本期望在承诺前不明确"
+ ],
+ "applies": [
+  "办公/流程/活动等非软件业务任务的需求澄清",
+  "成本驱动与验收标准的采集"
+ ],
+ "not_applies": [
+  "软件需求工程（走 engineering-delivery / writing-plans）",
+  "干系人不在场时虚构答案（记录 open questions 而非编造）"
+ ],
+ "task_inputs": [
+  "stakeholder_availability",
+  "timebox"
+ ],
+ "steps": [
+  {
+   "id": "frame-goal",
+   "stage": "clarify",
+   "title": "目标定框：干系人原话记录期望结果",
+   "needs": [],
+   "inputs": ["stakeholder_availability"],
+   "outputs": ["verbatim_goal"],
+   "tools": ["none"],
+   "validator": "逐字目标已记录，未改写为技术语言"
+  },
+  {
+   "id": "current-state",
+   "stage": "clarify",
+   "title": "现状与痛点：按角色引用记录",
+   "needs": ["frame-goal"],
+   "inputs": ["verbatim_goal"],
+   "outputs": ["pain_points"],
+   "tools": ["none"],
+   "validator": "每条痛点含说话人角色与原话引用"
+  },
+  {
+   "id": "bound-scope",
+   "stage": "clarify",
+   "title": "范围边界：显式排除项一等记录",
+   "needs": ["current-state"],
+   "inputs": ["pain_points"],
+   "outputs": ["scope_exclusions"],
+   "tools": ["none"],
+   "validator": "排除项清单非空或显式'无排除'"
+  },
+  {
+   "id": "constraints",
+   "stage": "clarify",
+   "title": "约束清单：期限/预算/人员/合规/不可变系统",
+   "needs": ["bound-scope"],
+   "inputs": ["scope_exclusions"],
+   "outputs": ["constraint_record"],
+   "tools": ["none"],
+   "validator": "五类约束逐项有值或显式'未给出'"
+  },
+  {
+   "id": "cost-drivers",
+   "stage": "clarify",
+   "title": "成本驱动：记录为什么贵而不是只记金额",
+   "needs": ["constraints"],
+   "inputs": ["constraint_record"],
+   "outputs": ["cost_driver_record"],
+   "tools": ["none"],
+   "validator": "无驱动的金额标记 unpriced，不进预算合计"
+  },
+  {
+   "id": "acceptance",
+   "stage": "review",
+   "title": "验收标准：前三条可检验判据+判定人",
+   "needs": ["cost-drivers"],
+   "inputs": ["cost_driver_record"],
+   "outputs": ["acceptance_criteria"],
+   "tools": ["none"],
+   "validator": "不可检验判据标记 unverifiable 并追问一次操作化定义"
+  },
+  {
+   "id": "read-back",
+   "stage": "review",
+   "title": "回读确认：干系人更正后确认记录",
+   "needs": ["acceptance"],
+   "inputs": ["acceptance_criteria", "verbatim_goal", "pain_points", "scope_exclusions", "constraint_record", "cost_driver_record"],
+   "outputs": ["confirmed_requirement_record"],
+   "tools": ["none"],
+   "validator": "未确认的记录是草稿，不得交接",
+   "approval": true
+  }
+ ],
+ "providers": ["business-interviewing"],
+ "approval_points": ["read-back"],
+ "failure_paths": {
+  "cancel": "干系人终止访谈或时间盒到点：记录触发停止条件与薄弱章节，已确认部分可交接，其余标 open questions",
+  "missing_dependency": "干系人不可用：不虚构答案，输出 open questions 清单（谁应回答/是否阻塞），不进入排期",
+  "unresolved_conflict": "干系人陈述矛盾：双陈述并记，标冲突待解决，不静默择一"
+ },
+ "delivery": ["interview-record（模板 templates/interview-record.md）", "cost-driver-worksheet（模板 templates/cost-driver-worksheet.md）", "confirmed_requirement_record（排期/规划的输入）"],
+ "notes": [
+  "方法与路由契约：不自动执行、不自授工具权限；工具需求全部为 none（纸面方法）",
+  "诚实规则：缺失答案记 open questions；解释标 [interpretation] 需确认；矛盾双记",
+  "交接：confirmed_requirement_record → business-scheduling（排期/预算）或 writing-plans（软件实施计划）"
+ ]
+}

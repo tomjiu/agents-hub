@@ -1,0 +1,20 @@
+id = "business-interviewing"
+kind = "skills"
+path = "skills/individual/document/business-interviewing"
+
+[source]
+kind = "local"
+url = "https://git.mingjiu.store/sandbox/agents-hub"
+license = "review-required"
+upstream_identity_status = "self-maintained"
+
+[version]
+upstream = "self-maintained"
+local = "1.0.0"
+commit = ""
+sha256 = "93ac23bef0ff97a5fd97065397b453dc0c1ddb65d8a6ecf3ba6c54f9fe55c65c"
+enabled = false
+
+[discovery]
+description = "非软件业务访谈与需求澄清：干系人目标/痛点/范围边界/约束/成本驱动/验收标准采集，产出确认后的需求记录。"
+aliases = [ "业务访谈", "需求澄清", "访谈干系人", "成本评估访谈", "business interviewing" ]
