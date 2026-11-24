@@ -179,7 +179,10 @@ export async function checkConflicts(root, { ids, expert, client = 'dsh', hostRu
   const catalog = await loadCatalog(root)
   let selected
   if (expert) selected = await resolveExpert(root, expert, catalog)
-  else { selected = { skills: [], mcp: [], plugins: [] }; for (const id of ids) { const a = catalog.get(id); if (!a) throw new Error('Unknown asset ' + id); selected[a.kind].push(id) } }
+  else {
+    if (!Array.isArray(ids) || !ids.length) throw new Error('check-conflicts requires explicit IDs (<id,id>) or --expert NAME')
+    selected = { skills: [], mcp: [], plugins: [] }; for (const id of ids) { const a = catalog.get(id); if (!a) throw new Error('Unknown asset ' + id); selected[a.kind].push(id) }
+  }
   const structural = await selectionConflicts(root, selected, { catalog })
   const semantic = await checkSemanticConflicts(root, { ids, expert, hostRulesFile })
   return {
