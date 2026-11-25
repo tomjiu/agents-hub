@@ -121,6 +121,12 @@ func laneGooglenews(ctx context.Context, opts SearchOpts, client *http.Client) (
 	}
 	for i := range out {
 		out[i].Kind = "news"
+		// Google News RSS 的 description 含 <a href> 等 HTML + &nbsp; 残留
+		// (2026-11-25 主流引擎批实弹冒烟抓获); Bing RSS description 是纯文本,
+		// 剥离对纯文本是恒等变换
+		sn := strings.ReplaceAll(out[i].Snippet, "&nbsp;", " ")
+		out[i].Snippet = clampText(stripHtml(decodeEntities(sn)), 400)
+		out[i].Title = clampText(stripHtml(decodeEntities(strings.ReplaceAll(out[i].Title, "&nbsp;", " "))), 200)
 	}
 	return out, nil
 }

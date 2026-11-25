@@ -1,3 +1,34 @@
+# RELEASE NOTES — searchcore go-port v0.9.2-go
+
+发布基线: 主流引擎直连批 (c) (2026-11-25) · 前序 v0.9.1-go (批 b: bingweb)
+
+一句话: google/baidu 无 key 直连车道上线 (95→97) + bingweb 广告过滤/ensearch 增强 +
+bingrss geo 修复 + RSS snippet 净化。
+
+## 本批内容 (2026-11-25 实弹探针定论, 全部无 key)
+
+1. **google 车道** (lanes_google.go): 直连 www.google.com/search + 可读格式转换
+   (div#search 解析, /url?q= 解码, Sponsored 过滤, google 自家域 host 级判据)。
+   墙检测 (enablejs JS 壳 / /sorry/ / 弃用浏览器页) 如实归类 blocked — 沙箱 HK 出口
+   全 UA 矩阵 + 真 Chromium 渲染均墙 (实弹); 干净 IP (用户本机) 可用。新闻意图
+   googlenews RSS 恒可用; keyed Google = serper/serpapi (批 a)。
+2. **baidu 车道** (lanes_baidu.go): m.baidu.com 移动端 SSR; data-log mu 字段提取真实
+   URL; s-data 注释摘要; 广告三把尺 (baidu.php/eclick + ec-tuiguang + 独立“广告”徽标)
+   + 运营位摘除; wappass 验证码如实 blocked; 限速门 SC_BAIDU_MIN_INTERVAL_MS=5000。
+3. **bingweb 增强** (合入批 b 车道): 顶层子节点选择 + bingWebIsAdItem 广告判据 +
+   ensearch=1 (非 CJK) — 补词面守卫对单词查询放行的洞 (mkt=en-US 单独携带时单词查询
+   仍毒化, 实弹 MCP→Target 门店×10)。
+4. **bingrss geo 修复**: 非 CJK 查询 mkt=en-US (实弹: 默认 geo 英文本题离题结果)。
+5. **RSS snippet 净化**: parseRssItems 剥 HTML + &nbsp; (Bing RSS 抓到 Google News
+   源页时 description 带标签, 冒烟抓获); googlenews 标题/摘要同处理。
+
+## 新开关
+
+| 开关 | 缺省 | 说明 |
+|------|------|------|
+| `SC_GOOGLE_MIN_INTERVAL_MS` | 3000 | google 车道进程级限速门 |
+| `SC_BAIDU_MIN_INTERVAL_MS` | 5000 | baidu 车道限速门 (验证码来得快) |
+
 # RELEASE NOTES — searchcore go-port v0.9.0-go
 
 发布基线 commit: `76e89de` (批 37) · 日期: 2026-09-08 · tag: `v0.9.0-go` (前序 `v0.8.1-go`)

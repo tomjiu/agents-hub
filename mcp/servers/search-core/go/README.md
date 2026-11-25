@@ -2,6 +2,40 @@
 
 决策与分期计划见 [PLAN.md](PLAN.md)。语言裁决: Go（保真度/迭代速度优先，Rust POC 分支留作极限下限证据）。
 
+## 主流引擎直连批 (c): google/baidu 车道 95→97 + bingweb 广告过滤/ensearch 增强 + bingrss geo 修复 (2026-11-25)
+
+> 同日并行批 (a)(b) 的姊妹批: 独立探针矩阵 (UA/参数/代理引擎/移动端/无头浏览器七轮,
+> 原始响应归档 work/probe-engines/) → 车道实现 → 实弹黄金样本单测 → CLI/stdio 双端冒烟。
+> 与批 (b) 的 bingweb 基础互补合并: 本批增强其广告过滤与毒化防护, 不另开重复车道。
+
+**接入 2 车道**(主流引擎补全, 无 key, 诚实失败语义):
+
+| 车道 | 亮点 |
+|---|---|
+| google | 直连域名+可读格式转换(div#search h3/a/VwiC3b, /url?q= 解码, Sponsored 赞助块过滤, google 自家域 host 级判据防误伤); **墙检测三签名**(enablejs JS 壳//sorry//弃用浏览器页)如实归类 blocked — 沙箱 HK 出口全 UA 矩阵+真 Chromium 渲染均墙(实弹), 干净 IP 环境可用; keyed Google 通路 = serper/serpapi(批 a), 新闻意图 googlenews RSS 恒可用 |
+| baidu | m.baidu.com 移动端直连(桌面端=百度安全验证, 实弹); **data-log JSON mu 字段**提取真实 URL 绕 m.baidu.com 跳转壳; s-data 注释 SSR 摘要; **广告三把尺**(baidu.php/eclick 跳转壳 + ec-tuiguang 标识 + 独立“广告”文本徽标整节点匹配防误伤) + 运营位组件(recommend_list/note_lead)摘除; wappass 验证码 302 如实 blocked 不自动解题(Yahoo consent 同款纪律); 进程限速门 SC_BAIDU_MIN_INTERVAL_MS=5000 |
+
+**bingweb 增强**(合入批 b 的车道, 不开重复车道):
+① 顶层子节点选择 (#b_results>li) — 经典广告位包在 li.b_ad 容器里, 内层条目同样带
+b_algo class, 全文档选择会误收广告; ② 广告判据 bingWebIsAdItem(b_ad class/b_adSlug
+徽标/b_adLink); ③ ensearch=1 仅非 CJK 查询 — 6 连抓实弹: mkt=en-US 单独携带时单词查询仍
+返回毒化页(MCP→Target 门店×10, 词面守卫对 <2 词项放行恰好漏此形态), ensearch=1 两连抓
+全干净; CJK 查询加 ensearch 实弹反噬品牌词垃圾页故不加。
+
+**同批修复 2 案**: ① bingrss geo — 非 CJK 查询加 mkt=en-US(实弹: 默认 geo 英文本题返回
+剑桥词典/Sketchfab 离题结果, mkt=en-US 直返 modelcontextprotocol.io/维基; zh mkt 实弹无
+增益维持默认); ② RSS snippet 净化 — parseRssItems 剥 HTML+&nbsp;(实弹冒烟抓获: Bing RSS
+抓到 Google News 源页时 description 带 <a>/<font> 标签), googlenews 标题/摘要同处理。
+
+**实弹冒烟**(沙箱 HK 出口): en "model context protocol" bingrss+bingweb 双活零广告零毒化
+(Wikipedia/modelcontextprotocol.io/Microsoft/Cisco); zh "deepseek v3 发布" duckduckgo+
+bingrss 双活(DeepSeek 官档/arXiv 排首); google/baidu 如实 blocked + 熔断 15min 冷却按设计
+触发; MCP stdio serve 全工具面(initialize/search/fetch/search_providers)通过; fetch 可读
+转换 82% token 裁剪。
+
+**门禁**: 全量单测绿(新增 10: google 墙三签名/href 解析/SERP+Sponsored 过滤, baidu SERP+广告
+过滤/验证墙, bingweb 广告过滤×2; 车道计数锁 95→97 滚动同步 ×8 文件); gofmt/vet 干净。
+
 ## 扩源 2026-11-25 (b): bingweb 无 key Bing 网页车道 94→95 (Go+TS 同步)
 
 用户无 Key 前提下的主流引擎覆盖轮 (issue #3)。背景实弹复核 (2026-11-25, 香港阿里云出口 IP):

@@ -240,8 +240,8 @@ func TestExtractProjectAnchor(t *testing.T) {
 // ---------- 接线锁 ----------
 
 func TestRegistryCountAL(t *testing.T) {
-	if len(laneRegistry) != 95 { // 90 + parallel/tinyfish/serper/serpapi(2026-11-25 扩源)
-		t.Fatalf("registry want 95, got %d", len(laneRegistry))
+	if len(laneRegistry) != 97 { // 90 + parallel/tinyfish/serper/serpapi(2026-11-25 扩源)
+		t.Fatalf("registry want 97, got %d", len(laneRegistry))
 	}
 	for _, name := range []string{"zenodo", "doaj", "metacpan", "repology", "flathub"} {
 		if _, ok := laneRegistry[name]; !ok {
