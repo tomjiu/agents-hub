@@ -9,17 +9,19 @@ provenance = "catalog/audit/migration-2026-11.json"
 commit_role = "local-import-baseline-not-upstream"
 
 [source]
-upstream_identity_status = "unverified"
+upstream_identity_status = "verified-upstream-match"
 location_role = "maintenance-or-service-location-not-proof-of-origin"
 kind = "local"
 url = "https://github.com/tomjiu/agents-hub"
 version = "0.3.1"
 license = "review-required"
-commit = ""
+commit = "88faeb3935a3d185847cfef0f69d04cf37f7c6ef"
+upstream_commit = "88faeb3935a3d185847cfef0f69d04cf37f7c6ef"
+upstream_evidence = "catalog/audit/skills-g0-5-upstream-verification.json"
 
 [version]
 upstream = "0.3.1"
-commit = ""
+commit = "88faeb3935a3d185847cfef0f69d04cf37f7c6ef"
 local = "imported-2026-11-18"
 sha256 = "3e7521148ffb540e39a68cd38c39fd22dbd70dbc6b6ad851142773ab4893662d"
 local_modified = "unknown"

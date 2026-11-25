@@ -9,17 +9,19 @@ provenance = "catalog/audit/migration-2026-11.json"
 commit_role = "local-import-baseline-not-upstream"
 
 [source]
-upstream_identity_status = "unverified"
+upstream_identity_status = "verified-upstream-match"
 location_role = "maintenance-or-service-location-not-proof-of-origin"
 kind = "http"
 url = "https://api.keenable.ai/mcp"
 version = "unknown"
 license = "review-required"
-commit = ""
+commit = "88faeb3935a3d185847cfef0f69d04cf37f7c6ef"
+upstream_commit = "88faeb3935a3d185847cfef0f69d04cf37f7c6ef"
+upstream_evidence = "catalog/audit/skills-g0-5-upstream-verification.json"
 
 [version]
 upstream = "unknown"
-commit = ""
+commit = "88faeb3935a3d185847cfef0f69d04cf37f7c6ef"
 local = "imported-2026-11-18"
 sha256 = "09a968f7b576cb397449fee34a3e5f8e550dcc5f117cacc41c73a92c0282d997"
 local_modified = "unknown"
