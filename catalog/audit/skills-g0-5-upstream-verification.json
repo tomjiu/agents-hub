@@ -1,0 +1,2126 @@
+{
+ "schema": 1,
+ "task": "G0-5 upstream identity verification (issue #4)",
+ "generated_at": "2026-11-25T09:32:27+08:00",
+ "method": {
+  "upstream_repo": "https://github.com/tomjiu/agents-hub",
+  "upstream_repo_status": "public, reachable (verified 2026-11-25)",
+  "default_branch": "main",
+  "examined_commits": {
+   "4f1911081477b49a6610e52537bea1057f216530": "import baseline; last full old-layout state (selected/, memory-net/, mcp/, search-infra/), 2026-11-17",
+   "2f8519e65dd8bfa89ece3d77eb6f66b7a0efbdbe": "upstream refactor to new layout (skills/, plugins/, mcp/servers/), 2026-11-18",
+   "88faeb3935a3d185847cfef0f69d04cf37f7c6ef": "upstream main at verification time, 2026-11-23"
+  },
+  "matching": "content-addressed sha256 per file, three tiers: (1) raw bytes; (2) CRLF reconstruction upstream LF -> CRLF (matches hashes recorded on a uniformly-CRLF working tree); (3) EOL-insensitive comparison stripping \\r on both sides (covers mixed-endings checkout artifacts). Import originals verified at upstream old paths via catalog/audit/migration-2026-11.json; current content verified at upstream new paths.",
+  "whole_tree": {
+   "migration_entries": 2418,
+   "raw_byte_verified": 732,
+   "crlf_reconstructed_verified": 1620,
+   "not_at_upstream_baseline": 64,
+   "not_at_baseline_note": "files added after 4f191108 or Gitea-only (e.g. agents-md/, _REDESIGN.md, memory-net console dist); not part of the 60 assets except documented exceptions",
+   "real_mismatch": 0,
+   "real_mismatch_files": [],
+   "eol_insensitive_verified": 2,
+   "eol_insensitive_files": [
+    "memory-net/.gitignore (mixed 7 CRLF + 4 LF vs upstream all-LF; \\r-stripped byte-identical)",
+    "memory-net/console/packages/server/bin/console.js (1 CRLF vs upstream all-LF; \\r-stripped byte-identical)"
+   ],
+   "real_mismatch_note": "initially classified conservatively as real mismatches; adversarial audit proved both are EOL-only differences and the classification was corrected (under-reporting matches, never inflating them)"
+  },
+  "verdict_counts": {
+   "verified-upstream-match": 58,
+   "verified-upstream-base": 2
+  },
+  "limitations": [
+   "Identity verification proves byte-level origin, not legal redistribution rights; declared license values are kept, license files are byte-verified against upstream where present.",
+   "G0-6 vendor license review (71 vendor skills) is explicitly out of scope for this round.",
+   "Upstream repo root has no LICENSE file; per-skill LICENSE.txt files are the license evidence.",
+   "The two content-diverged assets (mcp.search-core, memory-net) carry local development from issues #2/#3 on top of a verified upstream base; diverged files are listed per asset."
+  ],
+  "comparison_domain": "current_content covers the imported file set registered in catalog/provenance per asset (the migration import baseline), not files added locally after migration; post-migration local additions are tracked by tree hashes in version.sha256 but are not part of the upstream identity comparison.",
+  "independent_verification": "adversarial audit (separate agent, independent method: full import-set rehash + diff) reproduced match counts and diverged-file lists for 8 sampled assets including both partial ones, confirmed upstream main unchanged, and found zero counterexamples; its two conservative-misclassification findings are incorporated in this file."
+ },
+ "assets": [
+  {
+   "id": "authorized-analysis-scope",
+   "local_path": "skills/individual/security/authorized-analysis-scope",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/authorized-analysis-scope"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "automation-workflow",
+   "local_path": "skills/individual/engineering/automation-workflow",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/automation-workflow"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "debugging-and-error-recovery",
+   "local_path": "skills/individual/engineering/debugging-and-error-recovery",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/debugging-and-error-recovery"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "dfir-workflow",
+   "local_path": "skills/individual/research/dfir-workflow",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/dfir-workflow"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "doc-coauthoring",
+   "local_path": "skills/individual/document/doc-coauthoring",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/doc-coauthoring"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "docx",
+   "local_path": "skills/individual/document/docx",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/docx"
+    ],
+    "files_total": 61,
+    "files_verified": 61,
+    "raw_byte_match": 1,
+    "crlf_reconstructed_match": 60,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 61,
+    "match_at_2f8519e": 61,
+    "match_at_main": 61,
+    "match_at_assigned": 61,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "proprietary-restricted-declared",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "exa-search",
+   "local_path": "skills/individual/research/exa-search",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/exa-search"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "executing-plans",
+   "local_path": "skills/individual/engineering/executing-plans",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/executing-plans"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 0,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "finishing-a-development-branch",
+   "local_path": "skills/individual/engineering/finishing-a-development-branch",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/finishing-a-development-branch"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "firmware-analysis",
+   "local_path": "skills/individual/research/firmware-analysis",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/firmware-analysis"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "frontend-design",
+   "local_path": "skills/individual/document/frontend-design",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/frontend-design"
+    ],
+    "files_total": 2,
+    "files_verified": 2,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 2,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 2,
+    "match_at_2f8519e": 2,
+    "match_at_main": 2,
+    "match_at_assigned": 2,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "go-performance",
+   "local_path": "skills/individual/engineering/go-performance",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/go-performance"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "godot-dev",
+   "local_path": "skills/individual/engineering/godot-dev",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/godot-dev"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "keenable-cli",
+   "local_path": "skills/individual/research/keenable-cli",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/keenable-cli"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp-builder",
+   "local_path": "skills/individual/engineering/mcp-builder",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/mcp-builder"
+    ],
+    "files_total": 10,
+    "files_verified": 10,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 10,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 10,
+    "match_at_2f8519e": 10,
+    "match_at_main": 10,
+    "match_at_assigned": 10,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "mcp.brp",
+   "local_path": "catalog/audit/legacy/mcp/servers/brp",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp.codex",
+   "local_path": "catalog/audit/legacy/mcp/servers/codex",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp.keenable",
+   "local_path": "catalog/audit/legacy/mcp/servers/keenable",
+   "declared_url": "https://api.keenable.ai/mcp",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   },
+   "service_probe": {
+    "endpoint": "https://api.keenable.ai/mcp",
+    "verdict": "alive",
+    "probed_at": "2026-11-25T09:28:00+08:00",
+    "method": "direct connection, no proxy, no credentials; HTTP GET + MCP initialize POST + DNS + TLS inspection",
+    "mcp_initialize": {
+     "status": 200,
+     "server_info": {
+      "name": "keenable-mcp-server",
+      "version": "0.2.1",
+      "title": "Keenable Web Search"
+     }
+    },
+    "notes": "GET 405 is standard MCP behavior (Allow: POST, OPTIONS). Hosted on Google Cloud 34.107.249.55, TLS cert valid (issued 2026-11-22)."
+   }
+  },
+  {
+   "id": "mcp.node-repl",
+   "local_path": "catalog/audit/legacy/mcp/servers/node_repl",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp.playwright",
+   "local_path": "catalog/audit/legacy/mcp/servers/playwright",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp.search-core",
+   "local_path": "mcp/servers/search-core",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-base",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "search-infra/core",
+     "search-infra/go-port"
+    ],
+    "files_total": 301,
+    "files_verified": 301,
+    "raw_byte_match": 20,
+    "crlf_reconstructed_match": 281,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 301,
+    "match_at_2f8519e": 270,
+    "match_at_main": 284,
+    "match_at_assigned": 284,
+    "diverged_files": [
+     {
+      "file": "go/fetcher.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/focus.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/governor.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/health.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/htmlx.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/lanes.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/lanes_html.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/main.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/mcp_stdio.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/rerank.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/scripts/setup-rerank.sh",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/types.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "go/xchain.go",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "typescript/README.md",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "typescript/src/engine.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "typescript/src/fusion.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "typescript/src/types.ts",
+      "reason": "local-development-or-upstream-drift"
+     }
+    ]
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp.tavily-hikari",
+   "local_path": "catalog/audit/legacy/mcp/servers/tavily-hikari",
+   "declared_url": "https://tavily.ivanli.cc/mcp",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   },
+   "service_probe": {
+    "endpoint": "https://tavily.ivanli.cc/mcp",
+    "verdict": "degraded",
+    "probed_at": "2026-11-25T09:28:00+08:00",
+    "method": "direct connection, no proxy, no credentials; HTTP GET + MCP initialize POST + DNS + TLS inspection + root path check",
+    "mcp_initialize": {
+     "status": 401,
+     "body": "{\"error\":\"missing token\"}"
+    },
+    "notes": "Previously observed 525 (Cloudflare SSL handshake failed) no longer reproduces: domain now served by Tencent EdgeOne (CNAME tavily.ivanli.cc.eo.dnse4.com), valid Let's Encrypt cert, root path 200. The /mcp endpoint is alive but requires an auth token; without credentials the MCP handshake is rejected 401."
+   }
+  },
+  {
+   "id": "mcp.zai-bridge",
+   "local_path": "mcp/servers/zai-bridge",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/local"
+    ],
+    "files_total": 76,
+    "files_verified": 75,
+    "raw_byte_match": 74,
+    "crlf_reconstructed_match": 1,
+    "exceptions": [
+     {
+      "file": "captcha/captcha-happy.mjs",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "mcp/local/zai-bridge/captcha/captcha-happy.mjs"
+     }
+    ]
+   },
+   "current_content": {
+    "files_total": 76,
+    "match_at_2f8519e": 76,
+    "match_at_main": 76,
+    "match_at_assigned": 76,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "mcp.zen-browser",
+   "local_path": "catalog/audit/legacy/mcp/servers/zen-browser",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "mcp/servers"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "memory-net",
+   "local_path": "plugins/memory-net",
+   "declared_url": "https://github.com/tomjiu/memory-net",
+   "verdict": "verified-upstream-base",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "memory-net/.github",
+     "memory-net/.gitignore",
+     "memory-net/LICENSE",
+     "memory-net/README.md",
+     "memory-net/adapters",
+     "memory-net/bin",
+     "memory-net/console",
+     "memory-net/docs",
+     "memory-net/package-lock.json",
+     "memory-net/package.json",
+     "memory-net/scripts",
+     "memory-net/src",
+     "memory-net/tests",
+     "memory-net/tsconfig.json",
+     "memory-net/worklog.md"
+    ],
+    "files_total": 96,
+    "files_verified": 87,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 85,
+    "exceptions": [
+     {
+      "file": "console/apps/console/dist/assets/index-B93L_7Mg.css",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/apps/console/dist/assets/index-B93L_7Mg.css"
+     },
+     {
+      "file": "console/apps/console/dist/assets/index-DXPJkHUU.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/apps/console/dist/assets/index-DXPJkHUU.js"
+     },
+     {
+      "file": "console/apps/console/dist/index.html",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/apps/console/dist/index.html"
+     },
+     {
+      "file": "console/packages/server/dist/src/auth.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/packages/server/dist/src/auth.js"
+     },
+     {
+      "file": "console/packages/server/dist/src/catalog.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/packages/server/dist/src/catalog.js"
+     },
+     {
+      "file": "console/packages/server/dist/src/index.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/packages/server/dist/src/index.js"
+     },
+     {
+      "file": "console/packages/server/dist/src/server.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/packages/server/dist/src/server.js"
+     },
+     {
+      "file": "console/packages/server/dist/src/static.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/packages/server/dist/src/static.js"
+     },
+     {
+      "file": "console/packages/server/dist/tests/server.test.js",
+      "reason": "not-at-upstream-baseline",
+      "upstream_old_path": "memory-net/console/packages/server/dist/tests/server.test.js"
+     }
+    ],
+    "eol_insensitive_match": 2,
+    "eol_insensitive_files": [
+     ".gitignore",
+     "console/packages/server/bin/console.js"
+    ],
+    "eol_insensitive_note": "these files carry mixed CRLF/LF endings from the CRLF checkout of the pre-migration working tree (e.g. 7 CRLF + 4 LF lines); deterministic CRLF reconstruction cannot reproduce mixed endings, but stripping \\r makes them byte-identical to the upstream blob (independently re-verified by adversarial audit)"
+   },
+   "current_content": {
+    "files_total": 96,
+    "match_at_2f8519e": 66,
+    "match_at_main": 70,
+    "match_at_assigned": 70,
+    "diverged_files": [
+     {
+      "file": "README.md",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/README.md",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/src/bridge.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/src/config.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/src/contract.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/src/index.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/tests/adapter.test.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "adapters/dsh/tests/fixtures/mock-model.mjs",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/apps/console/dist/assets/index-B93L_7Mg.css",
+      "reason": "local-missing"
+     },
+     {
+      "file": "console/apps/console/dist/assets/index-DXPJkHUU.js",
+      "reason": "local-missing"
+     },
+     {
+      "file": "console/apps/console/dist/index.html",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/apps/console/src/api.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/apps/console/src/main.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/apps/console/src/styles.css",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/packages/server/dist/src/server.js",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/packages/server/src/server.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/.vendor-hashes",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/.vendor-lock",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/dist/src/activate.js",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/dist/src/db.js",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/dist/src/store.d.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/dist/src/store.js",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "console/vendor/memory-net/dist/src/types.d.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "src/store.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "src/types.ts",
+      "reason": "local-development-or-upstream-drift"
+     },
+     {
+      "file": "worklog.md",
+      "reason": "local-development-or-upstream-drift"
+     }
+    ]
+   },
+   "license": {
+    "declared": "MIT",
+    "file": "LICENSE",
+    "verified_upstream_identical": true
+   },
+   "url_history": {
+    "former_url": "https://github.com/tomjiu/memory-net",
+    "former_url_status": "dead-404",
+    "checked_at": "2026-11-25T09:32:27+08:00",
+    "reason": "standalone repo no longer exists; content origin verified inside tomjiu/agents-hub (memory-net/ at import baseline; the repo .gitignore itself notes the standalone upstream may be unavailable)",
+    "new_url": "https://github.com/tomjiu/agents-hub"
+   }
+  },
+  {
+   "id": "offensive-methodology",
+   "local_path": "skills/individual/security/offensive-methodology",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/offensive-methodology"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "pdf",
+   "local_path": "skills/individual/document/pdf",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/pdf"
+    ],
+    "files_total": 12,
+    "files_verified": 12,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 12,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 12,
+    "match_at_2f8519e": 12,
+    "match_at_main": 12,
+    "match_at_assigned": 12,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "proprietary-restricted-declared",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "performance-optimization",
+   "local_path": "skills/individual/engineering/performance-optimization",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/performance-optimization"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "playwright",
+   "local_path": "skills/individual/engineering/playwright",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/playwright"
+    ],
+    "files_total": 9,
+    "files_verified": 9,
+    "raw_byte_match": 1,
+    "crlf_reconstructed_match": 8,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 9,
+    "match_at_2f8519e": 9,
+    "match_at_main": 9,
+    "match_at_assigned": 9,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "pptx",
+   "local_path": "skills/individual/document/pptx",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/pptx"
+    ],
+    "files_total": 59,
+    "files_verified": 59,
+    "raw_byte_match": 2,
+    "crlf_reconstructed_match": 57,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 59,
+    "match_at_2f8519e": 59,
+    "match_at_main": 59,
+    "match_at_assigned": 59,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "proprietary-restricted-declared",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "receiving-code-review",
+   "local_path": "skills/individual/engineering/receiving-code-review",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/receiving-code-review"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "repository-skills",
+   "local_path": "skills/individual/research/repository-skills",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/repository-skills"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 0,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "requesting-code-review",
+   "local_path": "skills/individual/engineering/requesting-code-review",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/requesting-code-review"
+    ],
+    "files_total": 2,
+    "files_verified": 2,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 2,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 2,
+    "match_at_2f8519e": 1,
+    "match_at_main": 2,
+    "match_at_assigned": 2,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "reverse-engineering-workflow",
+   "local_path": "skills/individual/research/reverse-engineering-workflow",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/reverse-engineering-workflow"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "rust-performance",
+   "local_path": "skills/individual/engineering/rust-performance",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/rust-performance"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "search-core",
+   "local_path": "skills/individual/research/search-core",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "search-infra/SKILL.md"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 0,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "security-and-hardening",
+   "local_path": "skills/individual/security/security-and-hardening",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/security-and-hardening"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "security-best-practices",
+   "local_path": "skills/individual/security/security-best-practices",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/security-best-practices"
+    ],
+    "files_total": 13,
+    "files_verified": 13,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 13,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 13,
+    "match_at_2f8519e": 13,
+    "match_at_main": 13,
+    "match_at_assigned": 13,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "security-ownership-map",
+   "local_path": "skills/individual/security/security-ownership-map",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/security-ownership-map"
+    ],
+    "files_total": 8,
+    "files_verified": 8,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 8,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 8,
+    "match_at_2f8519e": 6,
+    "match_at_main": 8,
+    "match_at_assigned": 8,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "security-threat-model",
+   "local_path": "skills/individual/security/security-threat-model",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/security-threat-model"
+    ],
+    "files_total": 5,
+    "files_verified": 5,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 5,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 5,
+    "match_at_2f8519e": 5,
+    "match_at_main": 5,
+    "match_at_assigned": 5,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "security-workflow",
+   "local_path": "skills/individual/security/security-workflow",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/security-workflow"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 0,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "skill-creator",
+   "local_path": "skills/individual/engineering/skill-creator",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/skill-creator"
+    ],
+    "files_total": 18,
+    "files_verified": 18,
+    "raw_byte_match": 1,
+    "crlf_reconstructed_match": 17,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 18,
+    "match_at_2f8519e": 15,
+    "match_at_main": 18,
+    "match_at_assigned": 18,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "source-driven-development",
+   "local_path": "skills/individual/engineering/source-driven-development",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/source-driven-development"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "source-index",
+   "local_path": "skills/individual/research/source-index",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/source-index"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 0,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "systematic-debugging",
+   "local_path": "skills/individual/engineering/systematic-debugging",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/systematic-debugging"
+    ],
+    "files_total": 11,
+    "files_verified": 11,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 11,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 11,
+    "match_at_2f8519e": 11,
+    "match_at_main": 11,
+    "match_at_assigned": 11,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "tavily-hikari-best-practices",
+   "local_path": "skills/individual/research/tavily-hikari-best-practices",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/tavily-hikari-best-practices"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "tavily-hikari-cli",
+   "local_path": "skills/individual/research/tavily-hikari-cli",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/tavily-hikari-cli"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "tavily-hikari-extract",
+   "local_path": "skills/individual/research/tavily-hikari-extract",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/tavily-hikari-extract"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "tavily-hikari-research",
+   "local_path": "skills/individual/research/tavily-hikari-research",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/tavily-hikari-research"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "tavily-hikari-search",
+   "local_path": "skills/individual/research/tavily-hikari-search",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/tavily-hikari-search"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "test-driven-development",
+   "local_path": "skills/individual/engineering/test-driven-development",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/test-driven-development"
+    ],
+    "files_total": 2,
+    "files_verified": 2,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 2,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 2,
+    "match_at_2f8519e": 2,
+    "match_at_main": 2,
+    "match_at_assigned": 2,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "theme-factory",
+   "local_path": "skills/individual/document/theme-factory",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/theme-factory"
+    ],
+    "files_total": 13,
+    "files_verified": 13,
+    "raw_byte_match": 1,
+    "crlf_reconstructed_match": 12,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 13,
+    "match_at_2f8519e": 13,
+    "match_at_main": 13,
+    "match_at_assigned": 13,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "ts-performance",
+   "local_path": "skills/individual/engineering/ts-performance",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/ts-performance"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "using-git-worktrees",
+   "local_path": "skills/individual/engineering/using-git-worktrees",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/using-git-worktrees"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "using-superpowers",
+   "local_path": "skills/individual/engineering/using-superpowers",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/using-superpowers"
+    ],
+    "files_total": 5,
+    "files_verified": 5,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 5,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 5,
+    "match_at_2f8519e": 4,
+    "match_at_main": 5,
+    "match_at_assigned": 5,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "verification-before-completion",
+   "local_path": "skills/individual/engineering/verification-before-completion",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/verification-before-completion"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "web-search-hikari",
+   "local_path": "skills/individual/research/web-search-hikari",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/web-search-hikari"
+    ],
+    "files_total": 1,
+    "files_verified": 1,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 1,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 1,
+    "match_at_2f8519e": 1,
+    "match_at_main": 1,
+    "match_at_assigned": 1,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "webapp-testing",
+   "local_path": "skills/individual/document/webapp-testing",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/webapp-testing"
+    ],
+    "files_total": 6,
+    "files_verified": 6,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 6,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 6,
+    "match_at_2f8519e": 4,
+    "match_at_main": 6,
+    "match_at_assigned": 6,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  },
+  {
+   "id": "writing-plans",
+   "local_path": "skills/individual/engineering/writing-plans",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/writing-plans"
+    ],
+    "files_total": 2,
+    "files_verified": 2,
+    "raw_byte_match": 0,
+    "crlf_reconstructed_match": 2,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 2,
+    "match_at_2f8519e": 1,
+    "match_at_main": 2,
+    "match_at_assigned": 2,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "review-required",
+    "file": null,
+    "verified_upstream_identical": null
+   }
+  },
+  {
+   "id": "xlsx",
+   "local_path": "skills/individual/document/xlsx",
+   "declared_url": "https://github.com/tomjiu/agents-hub",
+   "verdict": "verified-upstream-match",
+   "assigned_upstream_commit": "88faeb3935a3d185847cfef0f69d04cf37f7c6ef",
+   "import_origin": {
+    "commit": "4f1911081477b49a6610e52537bea1057f216530",
+    "old_path_roots": [
+     "selected/xlsx"
+    ],
+    "files_total": 54,
+    "files_verified": 54,
+    "raw_byte_match": 1,
+    "crlf_reconstructed_match": 53,
+    "exceptions": []
+   },
+   "current_content": {
+    "files_total": 54,
+    "match_at_2f8519e": 54,
+    "match_at_main": 54,
+    "match_at_assigned": 54,
+    "diverged_files": []
+   },
+   "license": {
+    "declared": "proprietary-restricted-declared",
+    "file": "LICENSE.txt",
+    "verified_upstream_identical": true
+   }
+  }
+ ],
+ "not_verified": []
+}
