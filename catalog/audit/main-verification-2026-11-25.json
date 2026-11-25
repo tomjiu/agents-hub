@@ -1,0 +1,62 @@
+{
+ "schema": 1,
+ "status": "VERIFIED_WITH_ONE_DEFECT_FIXED",
+ "at": "2026-11-25",
+ "task": "Post-merge re-verification round requested by user (branch fixes may be inaccurate — verify, then continue): full main regression, baseline-integrity audit of all 139 assets, dsh upstream recheck",
+ "main_head": "545ba47",
+ "regression": {
+  "root_tests": "168/168 PASS (node --test asset-manager/tests/*.test.mjs, Node 24.22.3)",
+  "memory_plugin": "109/109 PASS (npm test in plugins/memory-net after build)",
+  "memory_dsh_adapter": "35/35 PASS (npm test in plugins/memory-net/adapters/dsh)",
+  "search_typescript": "337/337 PASS (npm test in mcp/servers/search-core/typescript)",
+  "search_go": "go vet clean; go test ./... ok (262 top-level, 272 RUN incl. subtests, go1.23.4 via toolchain go1.25.0); CGO_ENABLED=0 build ok; GOOS=windows build ok",
+  "validate": "PASS, 139 assets, 25 informational warnings (all 'Local edits since catalog baseline', see root-cause note below)",
+  "cli_smoke": "workflow-list (3 contracts), workflow-validate PASS, check-conflicts usage error + real run (pptx,docx semantic candidates), check-stale usage error path verified in prior PR #16 and re-run here"
+ },
+ "branch_merge_verification": {
+  "method": "git merge-base --is-ancestor <branch-tip> origin/main for all 13 remote branches",
+  "result": "ALL branch tips are ancestors of main 545ba47: fix/cli-usage-errors 48bc957, fix/ts-evidence-gate-v2 92d1c89, memory-session-boundary 7e83b00, memory-candidate-lifecycle 8ec3ea9, memory-cache-safe-context f2332b0 (merge), memory-provenance-m0 0ae7a0e (merge), memory-provenance-m2 57a5c07 (merge), search-s0-baseline a69c219, search-go-g0 cbef48a (merge), skills-g0-inventory 07d4c30 (merge), work-issue2 827f9ff, work-issue3 03ad7d9, work-issue4 35682e0",
+  "key_deliverables_present": "PROVENANCE-M0-MATRIX.md, distill/recall/grants/privacy sources, growth-benchmark + multitask-ab scripts, memory audits (growth-100k, multitask-ab, cache-real-provider, dsh-latest-rc5-linux), search audits (s0-baseline, go-g0-baseline), skills audits (g0-inventory, g1g3), G0-CAPABILITY-MATRIX, 3 workflow contracts, business-interviewing + business-scheduling skills, TS relevance.ts + Go relevance.go, probe-memory-resume.mjs"
+ },
+ "baseline_integrity_audit": {
+  "method": "For all 139 assets: catalog/assets/<id>.toml version.sha256 compared against (a) catalog/provenance/<id>.json registration record, (b) content tree hash at the commit where the baseline value first appeared, (c) CRLF/LF variants of pre-migration original content at 4f191108 where applicable",
+  "invariant_violations_found": 1,
+  "defect": {
+   "asset": "business-scheduling",
+   "introduced_in": "35682e0 (PR #12, G1-G3 round 1)",
+   "symptom": "catalog/assets/business-scheduling.toml baseline 8538431ce83368a3f066b4070796de51a5c2d4e2a19d1cbe573a25c7ea53a556 shares the first 20 hex chars (80 bits) with the true content hash 8538431ce83368a3f0664b749b0098d6db64a209e638d2182af8e410f7b4b2ba but diverges after — a natural collision has probability ~2^-80, so the tail was fabricated/mistyped at registration while catalog/provenance/business-scheduling.json and capabilities.json (reviewed_skill_sha256 18/18 verified) carry the true value",
+   "impact": "false 'Local edits since catalog baseline' drift signal on unchanged content; any future approve/activate of this asset would bind to a version that never existed",
+   "fix": "TOML baseline corrected to the true tree hash (identical to provenance record and unchanged content since 35682e0); asset is enabled=false, never activated, no deployment receipts — no downstream review state invalidated"
+  },
+  "gate_hardening": {
+   "change": "new provenanceAgreement(root, assets) in asset-manager/core/catalog.mjs; validate now reports 'Catalog baseline integrity: <id> <problem>' as an ERROR when any catalog/provenance record disagrees with the manifest baseline, is unreadable/invalid, or has no manifest",
+   "red_first": "provenance.test.mjs 'registration integrity: manifest baseline must agree with provenance record (fabricated-tail regression)' failed before the fix (1 fail), passes after; validate on the pre-fix repo failed with the business-scheduling error, passes after the TOML correction",
+   "test_count": "root suite 168 -> 169"
+  },
+  "secondary_defect_fixed": {
+   "finding": "mcp/servers/search-core/go/searchcore (18,334,576-byte Go build binary) was re-introduced by 35682e0 (work-issue4 / merge #15) after 2b75b0a had explicitly removed it and added the ignore pattern; the skills branch predated the removal and the merge resolved delete-vs-keep in favor of keep",
+   "fix": "git rm --cached the binary (restore 2b75b0a intent); .gitignore extended with searchcore.exe so Windows cross-build output cannot be re-added either; no source or test changes involved"
+  },
+  "import_baseline_root_cause": {
+   "finding": "12 standing 'Local edits since catalog baseline' warnings trace to the 2026-11-18 migration session (2f8519e): import baselines for dfir-workflow, firmware-analysis, go-performance, godot-dev, offensive-methodology, repository-skills, reverse-engineering-workflow, rust-performance, source-index (9/9 confirmed), mcp.firefox-devtools (confirmed) were computed over CRLF working-tree bytes of the pre-migration content at 4f191108, while the repository stores LF blobs (*.gitattributes '* -text' preserves bytes); memory-net and mcp.search-core baselines reference migration-time working-tree states not reconstructable from git",
+   "verified_by": "recomputed tree hash of each pre-migration path at 4f191108 with CRLF conversion — 10/12 match the recorded baseline exactly",
+   "decision": "NOT rewritten: locks and provenance are preserved historical import records by policy (catalog/PROVENANCE.md); the warnings are the honest 'content was locally modified after import' signal (migration made portability edits); current content, provenance records and manifest baselines agree with each other for all 139 assets after the one fix"
+  }
+ },
+ "dsh_upstream_recheck": {
+  "checked_at": "2026-11-25",
+  "dist_tags": {
+   "latest": "0.2.2-rc.5",
+   "next": "0.2.2-rc.5",
+   "alpha": "0.2.3-alpha.2"
+  },
+  "conclusion": "unchanged since 2026-11-24 check; rc.5 remains the tracked-channel latest (published 2026-11-18), alpha channel not tracked; rc.5 Linux platform acceptance (catalog/audit/dsh-latest-rc5-linux.json) and rc.1 acceptances in catalog/runtime/dsh-compatibility.json remain current; no re-acceptance triggered",
+  "source": "https://registry.npmjs.org/-/package/@deepseek-ai%2fdsh/dist-tags"
+ },
+ "memory_cache_hit_recheck": {
+  "repair_commit": "e44e303cae5396637a03171b5d84cb303e4e3494 — confirmed ancestor of main",
+  "evidence": "catalog/audit/memory-cache-real-provider.json (gpt-6.1-sol via cpa, 6 requests, warm-cache hit 98.75-99.73% per request, weighted 99.17%) present in main; cache-safe-context checks included in the 109/109 plugin suite",
+  "conclusion": "cache-hit fix is in main and covered by passing tests; no regression"
+ },
+ "scope_note": "Windows host re-verification, real paid-model A/B, rerank live test and public SERP A/B remain blocked in this environment as previously recorded; nothing in this round changed plugin/search/skills runtime source except the catalog data fix, the integrity gate and its test"
+}

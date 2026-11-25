@@ -12,7 +12,7 @@ upstream_identity_status = "self-maintained"
 upstream = "self-maintained"
 local = "1.0.0"
 commit = ""
-sha256 = "8538431ce83368a3f066b4070796de51a5c2d4e2a19d1cbe573a25c7ea53a556"
+sha256 = "8538431ce83368a3f0664b749b0098d6db64a209e638d2182af8e410f7b4b2ba"
 enabled = false
 
 [discovery]

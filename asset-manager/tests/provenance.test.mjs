@@ -52,3 +52,20 @@ test('active lock exports the reviewed incoming upstream rather than checkout me
  const output=path.join(root,'active-locks');await exportLocks(root,output);const lock=parse(await fs.readFile(path.join(output,'skills.lock.toml'),'utf8'));assert.equal(lock.assets[0].upstream_version,'release-2');assert.equal(lock.assets[0].upstream_commit,'b'.repeat(40));assert.equal(lock.assets[0].enabled,true);
  await fs.appendFile(path.join(root,'.asset-state/versions/demo',staged.version,'content/SKILL.md'),'tampered');await assert.rejects(exportLocks(root,path.join(root,'invalid-locks')),/identity mismatch/);
 });
+
+test('registration integrity: manifest baseline must agree with provenance record (fabricated-tail regression)',async t=>{
+ const {root,asset,baseline}=await fixture(t);
+ const {provenanceAgreement}=await import('../core/catalog.mjs');
+ // clean fixture: manifest and provenance were written from the same registration -> no violations
+ assert.deepEqual(await provenanceAgreement(root,await loadCatalog(root)),[]);
+ // real defect shape: manifest hash shares a long prefix with the true hash but has an invented tail
+ const fabricated=baseline.sha256.slice(0,20)+'9'.repeat(44);
+ const tampered={...asset,version:{...asset.version,sha256:fabricated}};
+ await fs.writeFile(path.join(root,'catalog/assets/demo.toml'),stringify(tampered));
+ const violations=await provenanceAgreement(root,await loadCatalog(root));
+ assert.equal(violations.length,1);assert.equal(violations[0].id,'demo');
+ assert.equal(violations[0].problem,'baseline disagrees with provenance record');
+ // per-file provenance evidence still identifies the real content bytes
+ const record=JSON.parse(await fs.readFile(path.join(root,'catalog/provenance/demo.json'),'utf8'));
+ assert.equal(record.sha256,baseline.sha256);
+});

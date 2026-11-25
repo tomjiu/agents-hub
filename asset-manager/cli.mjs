@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {loadCatalog,policy,resolveExpert,resolveProfile,readToml} from './core/catalog.mjs';
+import {loadCatalog,policy,resolveExpert,resolveProfile,readToml,provenanceAgreement} from './core/catalog.mjs';
 import {tree} from './core/files.mjs';
 import {searchAssets,inspectSkillDirectory} from './core/discovery.mjs';
 import {auditAssetUsability,preflightSelection} from './core/usability.mjs';
@@ -70,6 +70,7 @@ async function run(){
  if(command==='validate'){
   const assets=await loadCatalog(root),errors=[],warnings=[];
   for(const a of assets.values()) {await policy(root,a);const t=await tree(path.join(root,a.path));if(t.sha256!==a.version.sha256)warnings.push('Local edits since catalog baseline: '+a.id);}
+  for(const v of await provenanceAgreement(root,assets))errors.push('Catalog baseline integrity: '+v.id+' '+v.problem+(v.manifest?' (manifest '+v.manifest.slice(0,12)+'.. vs provenance '+v.provenance.slice(0,12)+'..)':''));
   for(const f of await fs.readdir(path.join(root,'experts')))if(f.endsWith('.toml'))try{await resolveExpert(root,f.slice(0,-5),assets);}catch(e){errors.push(e.message);}
   for(const client of ['codex','opencode','dsh'])try{await resolveProfile(root,client,assets);}catch(e){errors.push(e.message);}
   const inventory=await inspectSkillDirectory(root);for(const item of inventory.invalid)errors.push('Invalid Skill '+item.path+': '+item.error);for(const path of inventory.unregistered)errors.push('Unregistered Skill '+path);for(const path of inventory.missing)errors.push('Missing Skill '+path);
