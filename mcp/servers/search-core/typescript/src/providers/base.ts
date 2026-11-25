@@ -60,6 +60,23 @@ export function classifyFailure(msg: string): { status: EngineStatus; retryable:
 // ---------- 健康跟踪 (v0.4 熔断 2.0) ----------
 
 /** 分类熔断策略: 连败阈值 + 冷却时长(按失败类别差异化, wigolo 思路) */
+/** S2 (issue #3): 从错误消息解析 "(retry-after: Ns)" → 毫秒; 无/非数字/HTTP-date → 0 (Go retryAfterMsOf 对等) */
+export function retryAfterMsOf(msg: string): number {
+  const m = /retry-after:\s*(\d+)\s*s/i.exec(msg ?? '');
+  if (!m) return 0;
+  const n = Number(m[1]);
+  return n > 0 ? n * 1000 : 0;
+}
+
+/** S2 (issue #3): 统一 HTTP 错误消息构造 — 429 携带 Retry-After 响应头秒数入消息 "(retry-after: Ns)";
+ *  HTTP-date 形式如实忽略, 不伪造秒数 (Go lanes 状态错误同款约定) */
+export function httpErr(prefix: string, res: { status: number; headers?: { get(name: string): string | null } | null }, hint?: string): string {
+  let suffix = hint ? ` ${hint}` : "";
+  const ra = res?.headers?.get?.("retry-after");
+  if (ra && /^\d+$/.test(ra.trim())) suffix += ` (retry-after: ${ra.trim()}s)`;
+  return `${prefix} http ${res.status}${suffix}`;
+}
+
 const BREAKER_POLICY: Record<string, { threshold: number; cooldownMs: number }> = {
   rate_limited: { threshold: 4, cooldownMs: 2 * 60 * 1000 },   // 软封自愈快,短冷却
   blocked:      { threshold: 2, cooldownMs: 15 * 60 * 1000 },  // 挑战页不会自己好,长冷却
@@ -127,11 +144,16 @@ export class HealthTracker {
       if (st.streakCount >= policy.threshold) {
         // 半开探针失败(上次冷却已过期又栽) → 冷却翻倍,指数退避到上限
         const wasExpiredOpen = st.openUntil > 0 && st.openUntil <= Date.now();
-        st.cooldownMs = Math.min(
+        let base = Math.min(
           wasExpiredOpen ? Math.max(policy.cooldownMs, (st.cooldownMs || policy.cooldownMs) * 2) : policy.cooldownMs,
           COOLDOWN_CAP_MS,
         );
-        st.openUntil = Date.now() + st.cooldownMs;
+        // S2 (issue #3): 429 Retry-After 尊重 — 服务端明示退避下限, 与策略冷却取大者,
+        // 有界(1h 上限); HTTP-date 形式在 retryAfterMsOf 如实忽略, 不伪造秒数。
+        const ra = retryAfterMsOf(error ?? "");
+        if (ra > base) base = Math.min(ra, COOLDOWN_CAP_MS);
+        st.cooldownMs = base;
+        st.openUntil = Date.now() + base;
       }
       st.lastError = error?.slice(0, 200);
     }

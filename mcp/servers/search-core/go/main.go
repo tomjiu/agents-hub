@@ -139,12 +139,20 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 		dp := decision.domainPlan
 		leg0 := laneLegProviders(dp.topic, opts.Query, dp.apiProviders)
 		leg0 = constrainEngines(leg0, opts)
-		for i, sq := range dp.siteQueries {
-			eng := dp.siteEngines[i%len(dp.siteEngines)] // 少于 siteTargets 时循环复用
-			if opts.EnginesSet && !engineAllowed(eng, opts.Engines) {
-				continue
+		for _, sq := range dp.siteQueries {
+			// S6 (issue #3, 2026-11-25): site 腿携带全部 siteEngines (TS 语义对齐 —
+			// 旧轮询在单 siteTarget 时恒取 index 0, bingrss/bingweb 从未出勤;
+			// ddg 出口限流时 site: 腿单点塌方)。用户名单仍约束每条引擎。
+			engs := make([]string, 0, len(dp.siteEngines))
+			for _, e := range dp.siteEngines {
+				if opts.EnginesSet && !engineAllowed(e, opts.Engines) {
+					continue
+				}
+				engs = append(engs, e)
 			}
-			legSets = append(legSets, legSet{query: sq, engines: []string{eng}})
+			if len(engs) > 0 {
+				legSets = append(legSets, legSet{query: sq, engines: engs})
+			}
 		}
 		// 专项腿全部被名单排除 → 用户名单优先 (不静默丢腿):
 		// 回退为用户名单与原始查询的通用腿
@@ -888,7 +896,6 @@ usage:
 		os.Exit(2)
 	}
 }
-
 
 // engineAllowed: 用户名单是否允许该引擎 (S2: 名单包括恢复腿, 不绕过)
 func engineAllowed(name string, allow []string) bool {

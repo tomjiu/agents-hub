@@ -24,6 +24,7 @@
 import * as cheerio from "cheerio";
 import type { Reference } from "../types.js";
 import type { Provider, SearchCtx } from "./base.js";
+import { httpErr } from "./base.js";
 
 function clampTextLocal(s: string | undefined | null, max = 400): string {
   const t = (s ?? "").replace(/\s+/g, " ").trim();
@@ -87,7 +88,7 @@ export const google: Provider = {
         "Accept-Language": "en-US,en;q=0.9",
       },
     });
-    if (!res.ok) throw new Error(`google http ${res.status}`);
+    if (!res.ok) throw new Error(httpErr("google", res)); // S2: 429 携带 Retry-After
     const html = await res.text();
     if (googleIsWallPage(html)) {
       throw new Error("google: blocked (IP-reputation wall: enablejs/sorry shell page)");
@@ -216,7 +217,7 @@ export const baidu: Provider = {
       signal: ctx.signal,
       headers: { "User-Agent": BAIDU_MOBILE_UA, Accept: "text/html" },
     });
-    if (!res.ok) throw new Error(`baidu http ${res.status}`);
+    if (!res.ok) throw new Error(httpErr("baidu", res)); // S2: 429 携带 Retry-After
     // 302 → wappass 验证码: fetch 跟随后 res.url 可判 (Yahoo consent 同款手法)
     if (res.url && res.url.includes("wappass")) {
       throw new Error("baidu: blocked (captcha wall, wappass redirect)");

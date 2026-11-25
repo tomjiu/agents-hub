@@ -13,7 +13,7 @@
  *   实例全灭时抛最后一个错误交熔断(rate_limited 自愈快,2min 冷却)。
  */
 import type { Reference } from "../types.js";
-import { clampText, type Provider, type SearchCtx } from "./base.js";
+import { clampText, type Provider, type SearchCtx, httpErr } from "./base.js";
 
 /** 内置兜底实例(2026-09-03 探针存活;随时可能关 JSON/限流——熔断+回退链兜住,勿当唯一主力) */
 export const DEFAULT_SEARXNG_INSTANCES = [
@@ -78,7 +78,7 @@ async function searchOne(base: string, query: string, ctx: SearchCtx): Promise<R
     signal: ctx.signal,
     headers: { "User-Agent": ctx.ua, Accept: "application/json" },
   });
-  if (!res.ok) throw new Error(`searxng ${base} http ${res.status}`);
+  if (!res.ok) throw new Error(httpErr(`searxng ${base}`, res)); // S2: 429 携带 Retry-After
   let data: { results?: SearxngResult[] };
   try {
     data = await res.json() as { results?: SearxngResult[] };
