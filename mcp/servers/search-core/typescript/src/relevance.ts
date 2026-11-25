@@ -26,6 +26,45 @@ export function relevanceEvidence(query: string, ref: Reference): { accepted: bo
   const required=wanted.length===0?0:wanted.length===1?1:Math.max(2,Math.ceil(wanted.length*.5));
   return {accepted:required>0&&matched.length>=required,matched,required,terms:wanted.length};
 }
+// ---------- S3 (issue #3) 版本适用性标注 (Go versionSignals 对等; 只标注不剔除) ----------
+const versionTokenRe = /\bv?(\d+(?:\.\d+)+(?:-[0-9A-Za-z.]+)?|\d+)\b/g;
+function majorOf(version: string): string {
+  return version.split(".")[0];
+}
+/** 首个版本 token; 单数字(如 "top 10")不算 — 至少两位或多段 (Go firstVersionToken 对等) */
+export function firstVersionToken(text: string): string {
+  for (const m of text.matchAll(versionTokenRe)) {
+    if (m[1].length >= 2 || m[1].includes(".")) return m[1];
+  }
+  return "";
+}
+export interface VersionFlag { refId: number; queryVersion: string; refVersion: string; reason: string; }
+export interface VersionCheck { queryVersion?: string; flagged?: VersionFlag[]; }
+/** 查询版本 vs ref 版本主段不一致 → 标注(旧版本/实验分支不当默认答案的透明线索); 查询无版本 → undefined */
+export function versionSignals(query: string, refs: { refId?: number; title?: string; url: string }[]): VersionCheck | undefined {
+  const qv = firstVersionToken(query.replace(/(?:site|filetype|intitle|inurl):[^\s]+/gi, ""));
+  if (!qv) return undefined;
+  const vc: VersionCheck = { queryVersion: qv };
+  for (const r of refs) {
+    const rv = firstVersionToken(`${r.title ?? ""} ${r.url}`);
+    if (!rv) continue;
+    if (majorOf(rv) !== majorOf(qv)) {
+      (vc.flagged ??= []).push({ refId: r.refId ?? 0, queryVersion: qv, refVersion: rv, reason: "different_major_version" });
+    }
+  }
+  return vc;
+}
+
+/** S3 (issue #3) 来源构成 (Go sourceMix 对等): sourceKind 计数(official/community/...), 空→unknown */
+export function sourceMix(refs: { sourceKind?: string }[]): Record<string, number> {
+  const m: Record<string, number> = {};
+  for (const r of refs) {
+    const k = (r.sourceKind ?? "").trim().toLowerCase() || "unknown";
+    m[k] = (m[k] ?? 0) + 1;
+  }
+  return m;
+}
+
 export function filterEvidence(query: string, refs: Reference[]): { refs: Reference[]; rejected: number; evaluated: number; reasons: Record<string, number> } {
   const accepted: Reference[]=[],reasons:Record<string,number>={};
   for(const ref of refs){const evidence=relevanceEvidence(query,ref);if(evidence.accepted)accepted.push(ref);else{const reason=evidence.terms===0?'no_query_terms':'insufficient_query_evidence';reasons[reason]=(reasons[reason]??0)+1;}}
