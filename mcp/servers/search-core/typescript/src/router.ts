@@ -21,6 +21,9 @@ import {
   marginalia, openverse, hn, wikipedia, bingrss, arxiv, crossref, mwmbl, googlenews, wiby, keenable,
   bingweb,
 } from "./providers/keyless-apis.js";
+// 批(c) 2026-11-25: google/baidu 无 key 直连车道 (IP 条件型: 干净出口可用,
+// 数据中心出口如实 blocked 交熔断; 显式 engines 或 clean-IP 默认池启用)
+import { google, baidu } from "./providers/major-engines.js";
 // phase AA 对照轮增量: MDN 官方文档直连 API(编程主题 Tier1; documents=[] 合法空不熔断)
 import { mdn } from "./providers/keyless-apis.js";
 // v0.5 时间机器双 provider(MiroThinker 裁决"值得抄"落地): wayback 快照时间线 / wikirev 修订历史
@@ -83,6 +86,8 @@ export function buildProviders(cfg: CoreConfig): Provider[] {
     searxng, duckduckgo, mojeek, yahoo,
     marginalia, hn, wikipedia, bingrss, arxiv, crossref, wiby, keenable,
     bingweb, // 2026-11-25: 无 key Bing 网页 HTML 车道 (主流引擎; 垃圾注入词面守卫内建)
+    google, baidu, // 批(c) 2026-11-25: 主流引擎直连 (google=IP 信誉墙条件型/baidu=移动端 SSR;
+    //   广告过滤内建: google Sponsored/bingweb b_ad 系/baidu 广告三把尺; 干净 IP 主机默认可用)
     anysearch, // 默认池 13 引擎(phase AB: 托管聚合免 key 车道, 独立索引覆盖增量)
     // (tavily 在 keySlots=auto 下无 key 也自动并入默认池——phase AB keyless 车道, 探针连打 6 发全 200)
     openverse, mwmbl, googlenews, // 显式 engines 启用(图片/备胎/新闻)
