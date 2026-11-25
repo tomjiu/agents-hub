@@ -41,8 +41,8 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
 | 30 | S2 Retry-After 退避 | ✅ 2026-11-25 同步 (retryAfterMsOf + httpErr 头捕获) | 🆕 有界(1h 上限) | ts/go: HealthTracker 冷却=max(策略, retry-after) 截 1h; HTTP-date 如实忽略; searxng/ddg/keenable/bingweb/google/baidu 抛点接入; TS 红灯 s1s2-parity |
 | 31 | S2 负结果不缓存 | ✅ 核验修正: TS 引擎层已有 refs>0 && !degraded 守卫 (2026-11-25 s1s2-parity 显式测试锁定; 此前矩阵记录过时) | 🆕 degraded/空结果跳过 | ts/go: 均跳过负结果缓存; TS 侧 journal 事件为后续候选 |
 | 32 | S3 词法证据门 | ✅ lexical-evidence-v2 (复数折叠+50%, 已同步) | 🆓 v2: 复数折叠+50% | go: S0-F2 实测 40% 下限放行词重合烹饪页; v2 拒绝且 python 页保留; TS 已同步 (2026-11-24, 先红后绿 S0-F2/折叠/后缀用例; 缓存 key 升 v2, 命中重跑门) |
-| 33 | S3 版本适用性标注 | ❌ | 🆕 versionCheck(只标注) | go: 查询版本 vs ref 主版本差异 → meta.quality.versionCheck; 不剔除 |
-| 34 | S3 来源构成/官方社区 | ⚠️ authority 层已有 | 🆕 sourceMix 摘要 | go: meta.quality.sourceMix 计数(official/community/unknown) |
+| 33 | S3 版本适用性标注 | ✅ 2026-11-25 同步 (versionSignals, 只标注不剔除) | 🆕 versionCheck(只标注) | ts/go: 查询版本 vs ref 主版本差异 → meta.quality.versionCheck; 单数字不算版本(两位数算 — 两侧同款守卫); TS 红灯 s3-parity 先红后绿 |
+| 34 | S3 来源构成/官方社区 | ✅ 2026-11-25 同步 (sourceMix, 融合后 refs 带权威层 sourceKind) | 🆕 sourceMix 摘要 | ts/go: meta.quality.sourceMix 计数(official/community/unknown); TS 红灯 s3-parity 先红后绿 |
 | 35 | S3 domain cap 可调 | ⚠️ 主题推导固定 | 🆕 SC_DOMAIN_CAP | go: 调用方显式覆盖(0=关) |
 | 36 | S4 壳页透明拒绝 | ⚠️ 仅反爬/DOI 回退 | 🆕 login_wall/js_shell/consent_wall | go: classifyPageShell+原始壳识别; 壳页不编造正文; 缓存命中同样拒绝 |
 | 37 | S4 非 2xx 状态拒绝 | ❌ 403 带正文当正常 | ✅ http N 透明错误 | go: fetchExtract 状态拒绝; DOI 回退链触发更完整 |

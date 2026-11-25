@@ -10,6 +10,7 @@ import { Journal } from "./journal.js";
 import { HealthTracker } from "./providers/base.js";
 import { Router } from "./router.js";
 import type { HarvestCoord } from "./router.js";
+import { versionSignals, sourceMix } from "./relevance.js";
 import type { HarvestMeta } from "./types.js";
 import { Fetcher } from "./fetcher.js";
 import {filterEvidence} from './relevance.js';
@@ -204,7 +205,13 @@ export class SearchCore {
         fromCache: false,
         // v0.4 降级信号: 多腿全灭或大面积缺席时告知调用方
         degraded: batches.some((b) => b.degraded) || rescueBatches.length > 0 || refs.length === 0,
-        quality: fuseMeta.quality ? {...fuseMeta.quality,status:refs.length?"candidate_results":"no_relevant_results"} : undefined,
+        quality: fuseMeta.quality
+          ? {...fuseMeta.quality,
+              status: refs.length ? "candidate_results" : "no_relevant_results",
+              // S3 (issue #3): 版本适用性 + 来源构成 (Go main.go 对等; 只标注不剔除, 融合后 refs 带权威层 sourceKind)
+              versionCheck: versionSignals(rawQuery, refs),
+              sourceMix: sourceMix(refs)}
+          : undefined,
         // phase AH 零结果抢救腿出勤标记(诚实可见)
         rescued: rescueBatches.length > 0,
         // v0.8 置信度筛选: 被硬屏蔽剔除的内容农场条数(透明可审计)
