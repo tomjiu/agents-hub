@@ -1,0 +1,17 @@
+{
+ "schema": 1,
+ "status": "G0_3_COMPLETE",
+ "at": "2026-11-25",
+ "task": "Issue #4 outstanding item G0-3: office artifact acceptance lacked complete rubrics and an approval flow (Word layout / PPT visual / Excel formula rubric; quality-acceptance route was coverage=partial with only verification-before-completion principles)",
+ "deliverable": {
+  "workflow_contract": "catalog/workflows/office-artifact-acceptance.json v1.0.0 (route quality-acceptance)",
+  "machine_checks": "workflow-validate PASS — schema shape, DAG acyclicity + reachability, stage-IO closure, tool references ('none' — pure method contract), providers are registered skills, approval points registered",
+  "rubric": "per-artifact-type checkable criteria in step validators: docx (heading style hierarchy, refreshable TOC, numbering continuity, no page-breaking table headers), pptx (master/layout adherence, slide count within brief bounds, contrast, no overflowing text boxes), xlsx (typed cells, no #REF!/#VALUE! errors, frozen header row, number format/unit consistency), pdf (embedded fonts, uniform page size, bookmarks for long documents); every review-stage step carries a concrete validator — no vague pass",
+  "approval_flow": "acceptance-verdict (accept / reject / accept-with-conditions, human approver, four sub-reports attached) + handoff (only accepted artifacts delivered with rubric attached; rejected stay drafts with reasons)",
+  "honesty_rules": "placeholder text counts as not-delivered; number mismatches are flagged, not silently trusted; unverifiable compliance items are recorded unknown with the tool needed, never silently passed; rubric conflicts with the brief are dual-recorded for the approver",
+  "failure_paths": "cancel (partial results retained, marked unfinished), missing_dependency (no brief / unparseable artifact -> refuse to score), rubric_conflict (dual-recorded, approver decides)"
+ },
+ "red_first": "asset-manager/tests/office-acceptance.test.mjs failed on main before the contract existed (assertion: contract must exist), passes after; suite count 169 -> 170",
+ "license_note": "docx/pdf/pptx/xlsx remain restricted-declared; the contract routes to them as method providers only and states this in notes — no view/deploy/activation gate is weakened by this deliverable",
+ "not_claimed": "This is a method-and-routing contract, not an automated scoring agent; it does not execute file access by itself, does not unblock restricted assets, and does not claim coverage of professional typesetting certification beyond the listed rubric items"
+}

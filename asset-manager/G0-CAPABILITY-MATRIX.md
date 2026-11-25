@@ -32,8 +32,8 @@
 |---|---|---|---|---|---|
 | G0-1 | 业务访谈/需求澄清（非软件）无专用技能 | 缺技能 | 高 | 通用访谈方法论需独立实现；同源查重已做（audit-provenance 同字节组 0） | capabilities: requirements-planning scope=partial，"未覆盖通用业务访谈、成本评估" |
 | G0-2 | 业务排期与资源预算路线空映射（business-scheduling 无 primary 资产） | 缺技能 | 高 | 无合法同源；只能独立实现或标 BLOCKED | capabilities.json：14 路线中唯一无映射项 |
-| G0-3 | 办公产物完整验收（Word 排版/PPT 视觉/Excel 公式量表） | 缺流程接缝 | 高 | verification-before-completion 提供原则；docx/pdf 等 4 项本地许可受限（audit-provenance declared_restricted=4） | quality-acceptance scope=partial；USABILITY 4 项受限 |
-| G0-4 | 21 项资源缺失（全在厂商包） | 缺资源（区分：可能示例/内部依赖） | 中 | 逐项核对：真缺失→上游补；示例路径→标 dynamic；原厂内部依赖→标 unknown 不删除 | audit-resources missing=21 |
+| G0-3 | 办公产物完整验收（Word 排版/PPT 视觉/Excel 公式量表） | 缺流程接缝 | 高 | ✅ 2026-11-25 已补：`catalog/workflows/office-artifact-acceptance.json`（四类产物结构/内容/格式/可访问量表 + verdict/handoff 双批准点，机器可校验）；原替代：verification-before-completion 提供原则；docx/pdf 等 4 项本地许可受限（audit-provenance declared_restricted=4）且保持受限 | workflow-validate PASS；tests/office-acceptance.test.mjs 红灯先行 |
+| G0-4 | 21 项资源缺失（全在厂商包） | 缺资源（区分：可能示例/内部依赖） | 中 | ✅ 2026-11-25 逐项核对完成：0 迁移丢失（22 项在迁移前原仓也不存在）；分类：运行时产物 2 / 示例路径 8 / 原厂插件运行时依赖 9 / 跨资产引用（仓内可解析）3 / 动态占位 1；不恢复不删除 | `catalog/audit/skills-g0-4-missing-resources.json` 逐项证据 |
 | G0-5 | 60 项上游身份未核实 | 未验证 | 中 | 保留 UNKNOWN；npm/GitHub 检查能力已存在，逐项核验 | audit-provenance upstream_unverified=60 |
 | G0-6 | 71 厂商 Skill 许可/宿主复核 | 缺许可 | 中 | 无（不能绕过；reviewed-vendor 不能绕 DOCX 类限制） | audit-provenance vendor_runtime_review=71 |
 | G0-7 | 研究领域专业工具（统计/实验设计）与独立复核 | 缺技能 | 低 | 超出当前 DSH-only 运行时目标，如实标注不虚报 | 研究行 QA=◐ |
@@ -53,7 +53,7 @@
   - 资产基线 137→139；全部 CLI 实测复现（skills-status 125/125、preflight CONTENT_READY、find-capability 命中、CAPABILITIES.md 同步再生成）
 - G2（冲突治理）✅ 首轮完成：`asset-manager/core/conflicts.mjs` + CLI `check-conflicts`——结构层复用 selectionConflicts；语义层候选输出（子代理强制 vs 宿主禁止 / 全局覆盖 / 相对指令矛盾 / 产物目录不一致）带文件/行证据、触发组合、严重度、建议；不可读文件判 unknown 不给假阴性。真实语料回归：pptx/skill-creator 已知子代理要求稳定浮出，注入抵御条款不误报。正反例题集 `tests/fixtures/conflict-corpus/`（11 项测试）
 - G3（来源核验/版本更新/组合兼容）✅ 首轮完成：CLI `check-stale`（部署回执树哈希 + 工作流 provider 映射哈希 vs 当前内容 → STALE/NEEDS_REVIEW，不盲目重算）；演练测试（映射失效/改名删除/新许可限制阻止）；连续回滚/篡改/本地修改保护复用既有 lifecycle 套件。不创建定时任务、不自动更新、不自动批准。
-- 剩余挂账（如实）：G0-3 办公产物完整验收量表、G0-4 厂商资源缺失逐项核对、G0-5 上游身份逐项核验、G0-6 厂商许可复核——需逐项人工/外部核验，不以登记冒充。
+- 剩余挂账（如实）：~~G0-3 办公产物完整验收量表~~（✅ 2026-11-25 契约+测试交付）、~~G0-4 厂商资源缺失逐项核对~~（✅ 2026-11-25 全部分类，零迁移丢失）、G0-5 上游身份逐项核验、G0-6 厂商许可复核——后两项需逐项人工/外部核验，不以登记冒充。
 
 ## 6. 复现命令
 

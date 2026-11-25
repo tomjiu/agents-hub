@@ -1,0 +1,119 @@
+{
+ "schema": 1,
+ "id": "office-artifact-acceptance",
+ "version": "1.0.0",
+ "title": "办公产物验收：四类产物的结构/内容/格式量表与批准流（G0-3）",
+ "route": "quality-acceptance",
+ "trigger": [
+  "用户要求验收 Word/Excel/PPT/PDF 产物后再交付",
+  "办公产物在交付前需要显式量表评分与人工批准",
+  "上游任务（word-document/pptx-work/xlsx-work/pdf-work 路线）已产出待验收文件"
+ ],
+ "applies": [
+  "docx/pdf/pptx/xlsx 四类办公产物的交付前验收",
+  "需要留档的验收记录（量表逐项结果+批准人）",
+  "多次返工后需要区分'条件通过'与'拒绝'"
+ ],
+ "not_applies": [
+  "代码/工程产物验收（走 engineering-delivery 的验收阶段）",
+  "研究结论核验（走 source-driven-development / verification-before-completion 的证据纪律）",
+  "无验收简报的'帮我看看这个文件'式泛泛浏览（先补 acceptance_brief）",
+  "自动评分/自动批准（本契约是方法与路由，不冒充自动执行 Agent）"
+ ],
+ "task_inputs": [
+  "artifact_file",
+  "acceptance_brief"
+ ],
+ "steps": [
+  {
+   "id": "load-artifact-spec",
+   "stage": "clarify",
+   "title": "装载验收输入：产物文件与验收简报缺一不可",
+   "needs": [],
+   "inputs": ["artifact_file", "acceptance_brief"],
+   "outputs": ["artifact_spec", "rubric_selected"],
+   "tools": ["none"],
+   "validator": "产物类型必须是 docx/pdf/pptx/xlsx 之一且与文件扩展名/魔数一致；acceptance_brief 须含必交内容清单与硬性要求；类型不符或简报缺失即停止（走 missing_dependency），不得凭文件名猜测"
+  },
+  {
+   "id": "structural-validity",
+   "stage": "execute",
+   "title": "结构有效性：文件按声明类型可解析",
+   "needs": ["load-artifact-spec"],
+   "inputs": ["artifact_file", "artifact_spec"],
+   "outputs": ["structural_report"],
+   "tools": ["none"],
+   "validator": "OOXML 三类（docx/pptx/xlsx）zip 中央目录完整、必需部件在位（document.xml/presentation.xml/workbook.xml）；PDF 头尾与页树可解析；损坏/截断/伪装扩展名=结构性拒绝，禁止部分通过"
+  },
+  {
+   "id": "content-fidelity",
+   "stage": "review",
+   "title": "内容保真：验收简报的每项必交内容都在产物中",
+   "needs": ["structural-validity"],
+   "inputs": ["artifact_file", "artifact_spec", "structural_report"],
+   "outputs": ["fidelity_report"],
+   "tools": ["none"],
+   "validator": "逐项对照 acceptance_brief 必交清单：缺失章节/字段逐条列出位置；占位文本（待补充/TODO/示例）/空表格视为未交付；产物中的数字与简报来源交叉核对，不一致即标 mismatch 不自行采信任一方"
+  },
+  {
+   "id": "formatting-rubric",
+   "stage": "review",
+   "title": "格式量表：四类产物各自的机器可查清单",
+   "needs": ["content-fidelity"],
+   "inputs": ["artifact_spec", "structural_report", "fidelity_report"],
+   "outputs": ["rubric_score"],
+   "tools": ["none"],
+   "validator": "docx：标题样式层级一致、自动目录可刷新、编号连续、表格不跨页断头；pptx：版式沿用母版、页数在简报界内、文字对比度达标、无溢出文本框；xlsx：单元格有类型、公式无 #REF!/#VALUE!、表头冻结、数字格式与单位一致；pdf：字体嵌入、页尺寸统一、长文档有书签；逐项给 pass/fail+定位，禁止'大体可以'式结论"
+  },
+  {
+   "id": "accessibility-compliance",
+   "stage": "review",
+   "title": "可访问与合规检查：能查的查，查不了的如实标 unknown",
+   "needs": ["formatting-rubric"],
+   "inputs": ["structural_report", "rubric_score"],
+   "outputs": ["compliance_report"],
+   "tools": ["none"],
+   "validator": "图片有替代文本、标题层级不跳级、不只靠颜色传达信息、文档语言已声明；无工具可验证的项（如色彩标准全文合规）标 unknown 并列所需工具，不得静默判过"
+  },
+  {
+   "id": "acceptance-verdict",
+   "stage": "review",
+   "title": "验收判定：accept / reject / accept-with-conditions，人批准",
+   "needs": ["structural-validity", "content-fidelity", "formatting-rubric", "accessibility-compliance"],
+   "inputs": ["structural_report", "fidelity_report", "rubric_score", "compliance_report"],
+   "outputs": ["acceptance_record"],
+   "tools": ["none"],
+   "validator": "任一硬性要求失败→reject 附原因清单；仅软性项未达→accept-with-conditions 列条件与责任方；判定附四份报告与批准人，模型不得代替批准人",
+   "approval": true
+  },
+  {
+   "id": "handoff",
+   "stage": "deliver",
+   "title": "交付回读：仅验收通过的产物连同量表交付",
+   "needs": ["acceptance-verdict"],
+   "inputs": ["acceptance_record", "artifact_file"],
+   "outputs": ["delivered_artifact_receipt"],
+   "tools": ["none"],
+   "validator": "交付物=产物文件+验收记录（量表逐项+判定+批准人）；reject 的产物保持草稿并回附原因；回读确认交付物在接收方位置可解析",
+   "approval": true
+  }
+ ],
+ "providers": ["verification-before-completion", "docx", "pdf", "pptx", "xlsx"],
+ "approval_points": ["acceptance-verdict", "handoff"],
+ "failure_paths": {
+  "cancel": "批准人取消验收：产物保持草稿，已产生的结构/内容/量表部分结果保留在验收记录中标注'未完成'，不发布不删除",
+  "missing_dependency": "缺 acceptance_brief 或产物无法按声明类型解析：拒绝评分，向干系人索要简报或修复后的文件；类型申报不符按结构性拒绝处理，不猜测修复",
+  "rubric_conflict": "量表项与验收简报冲突（如简报要求页数超出母版约束）：冲突双记并在判定前列出，由批准人裁决，不自行选择其一"
+ },
+ "delivery": [
+  "delivered_artifact_receipt（产物+量表+判定+批准人）",
+  "acceptance_record（四份分项报告，含 unknown 项与所需工具）"
+ ],
+ "notes": [
+  "方法与路由契约，不自动执行评分或自授文件访问权；缺工具/缺环境在执行前阻止并给替代",
+  "docx/pdf/pptx/xlsx 四个 provider 为 restricted-declared 许可（view/deploy/激活仍被既有 review gate 阻止），本契约只作方法路由，不因此解锁任何受限资产",
+  "verification-before-completion 提供通用验收纪律（先证据后结论）；四类格式知识由对应 provider 承载",
+  "量表是最低门槛不是质量上限：accept-with-conditions 的条件必须可跟踪到下一次验收",
+  "G0-3 缺口来源：quality-acceptance 路线原 coverage=partial，仅有原则无四类产物量表与批准流"
+ ]
+}

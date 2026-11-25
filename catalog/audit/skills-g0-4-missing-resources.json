@@ -1,0 +1,42 @@
+{
+ "schema": 1,
+ "status": "G0_4_COMPLETE_ALL_CLASSIFIED_NO_MIGRATION_LOSS",
+ "at": "2026-11-25",
+ "task": "Issue #4 outstanding item G0-4: per-item verification of the 21 MISSING + 2 EXAMPLE_OR_DYNAMIC resource references reported by audit-resources in the G0 inventory (all inside trae/workbuddy vendor packages)",
+ "method": "For every non-FOUND reference: (1) locate the referencing line in the current skill text; (2) check whether the target existed in the pre-migration original repository at 4f191108 (cloud-vendors/**, via git ls-tree); (3) if the target is cross-asset/cross-skill, resolve it against the current vendor collection layout; (4) classify per the issue taxonomy (真缺失/示例路径/动态占位/原厂内部依赖/跨资产引用).",
+ "verdict": "0 of 23 are migration losses. 22 targets never existed in the pre-migration vendor packages either (git-verified); 1 apparent pre-migration hit was a matcher artifact and is in fact a cross-asset reference whose target exists in the current vendor collection layout. No bundled resource was lost by the migration and nothing is restorable from repository history. Vendor package deployability remains governed by the existing review-required / restricted-license gates; this audit changes no gates and no asset state.",
+ "counts": {
+  "runtime_generated_output": 2,
+  "illustrative_example_path": 8,
+  "vendor_plugin_runtime_dependency": 9,
+  "cross_asset_reference_resolves_in_repo": 3,
+  "dynamic_placeholder": 1,
+  "true_missing_after_migration": 0
+ },
+ "items": [
+  {"asset": "trae.html-report", "ref": "assets/charts.js", "class": "runtime_generated_output", "evidence": "SKILL.md:306 mandates that chart init logic MUST be written at assets/charts.js during report generation — an output the skill creates, not a bundled file; absent at 4f191108"},
+  {"asset": "trae.html-report", "ref": "assets/chart-revenue.js", "class": "runtime_generated_output", "evidence": "SKILL.md:251/306 documents report-local output assets (`assets/...`) including split chart files; absent at 4f191108"},
+  {"asset": "trae.pptx", "ref": "references/windows-tool-bootstrap.md", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:244 points to a vendor-authored bootstrap doc that was never shipped in the package (absent at 4f191108); the detection commands remain inline in the skill body; not restorable — vendor content, review-required"},
+  {"asset": "workbuddy.expert-manager", "ref": "agents/design-expert.md", "class": "illustrative_example_path", "evidence": "SKILL.md:211 uses the path as a naming-convention example ('agentName = MD 文件名: 如 design-expert → agents/design-expert.md')"},
+  {"asset": "workbuddy.expert-manager", "ref": "agents/my-expert.md", "class": "illustrative_example_path", "evidence": "SKILL.md:212 example array literal; auditor already flags EXAMPLE_OR_DYNAMIC"},
+  {"asset": "workbuddy.skill-creator", "ref": "scripts/rotate_pdf.py", "class": "illustrative_example_path", "evidence": "SKILL.md:57 'Example: scripts/rotate_pdf.py for PDF rotation tasks' — output of the skill-creation workflow, not bundled input"},
+  {"asset": "workbuddy.skill-creator", "ref": "references/finance.md", "class": "illustrative_example_path", "evidence": "SKILL.md:66 'Examples:' list of files a generated skill might add"},
+  {"asset": "workbuddy.skill-creator", "ref": "references/mnda.md", "class": "illustrative_example_path", "evidence": "SKILL.md:66 same examples list"},
+  {"asset": "workbuddy.skill-creator", "ref": "references/policies.md", "class": "illustrative_example_path", "evidence": "SKILL.md:66 same examples list"},
+  {"asset": "workbuddy.skill-creator", "ref": "references/api_docs.md", "class": "illustrative_example_path", "evidence": "SKILL.md:66 same examples list"},
+  {"asset": "workbuddy.skill-creator", "ref": "references/schema.md", "class": "illustrative_example_path", "evidence": "SKILL.md:132 'would be helpful to store in the skill' — aspirational example"},
+  {"asset": "workbuddy.tencent-docx.experts.legal-contract-expert", "ref": "references/quality-framework.md", "class": "cross_asset_reference_resolves_in_repo", "evidence": "SKILL.md:96 cites 'experts/general-writer/references/quality-framework.md'; the file exists at skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/experts/general-writer/references/quality-framework.md — cross-skill reference inside the vendor collection; skill-relative auditor cannot see it, target verified present"},
+  {"asset": "workbuddy.tencent-docx.experts.stock-research-report-expert", "ref": "references/quality-framework.md", "class": "cross_asset_reference_resolves_in_repo", "evidence": "SKILL.md:127 cites the same general-writer quality framework; target verified present at the vendor collection path above"},
+  {"asset": "workbuddy.tencent-docx.skills.brief-compose", "ref": "scripts/wb/local/resolve_output_docx_path.py", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:45 invokes via <plugin_root>/scripts/wb/local/... — lives in the installed workbuddy plugin runtime, outside the skill package by design; absent from the package at 4f191108"},
+  {"asset": "workbuddy.tencent-docx.skills.brief-compose", "ref": "scripts/wb/local/setup-html-to-docx.sh", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:124 <plugin_root>/scripts/wb/local/setup-html-to-docx.sh — plugin runtime, not bundled"},
+  {"asset": "workbuddy.tencent-docx.skills.html-to-docx", "ref": "scripts/wb/local/setup.sh", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:55 <plugin_root>/scripts/wb/local/setup.sh — plugin runtime, not bundled"},
+  {"asset": "workbuddy.tencent-docx.skills.html-to-docx", "ref": "scripts/wb/local/setup-html-to-docx.sh", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:61 same plugin-runtime pattern"},
+  {"asset": "workbuddy.tencent-docx.skills.tdoc-orchestrator", "ref": "agents/doc-formatter.md", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:85 '见 agents/doc-formatter.md §3 路由分发' — plugin-internal agent definition referenced for documentation; lives in the installed plugin, not the skill package"},
+  {"asset": "workbuddy.tencent-docx.skills.tdoc-orchestrator", "ref": "agents/doc-converter.md", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:111 plugin-internal agent definition (S3 delivery exit)"},
+  {"asset": "workbuddy.tencent-docx.skills.tdoc-orchestrator", "ref": "agents/doc-writer.md", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:163 plugin-internal agent definition (negative example of role switching)"},
+  {"asset": "workbuddy.tencent-docx.skills.tdoc-orchestrator", "ref": "scripts/wb/local/resolve_output_docx_path.py", "class": "vendor_plugin_runtime_dependency", "evidence": "SKILL.md:112 plugin-runtime script invoked for the final .docx path"},
+  {"asset": "workbuddy.tencent-docx", "ref": "skills/tdoc-orchestrator/SKILL.md", "class": "cross_asset_reference_resolves_in_repo", "evidence": "root SKILL.md:8 '必须依赖 [tdoc-orchestrator]' with plugin-layout path; the sub-skill is registered as its own asset at skills/collections/vendors/workbuddy/workbuddy-builtin/builtin-plugins/tencent-docx/skills/tdoc-orchestrator/SKILL.md — verified present; cross-asset reference, not a loss"},
+  {"asset": "workbuddy.weixinpay.skills.weixinpay-register", "ref": "URL", "class": "dynamic_placeholder", "evidence": "SKILL.md:118 binding URL is generated per-request by mcp__weixinpay__weixinpay_register; reusing an old URL is explicitly forbidden — dynamic value, never a bundled resource"}
+ ],
+ "follow_up": "The 9 vendor-plugin runtime dependencies and 3 cross-asset references are inherent to the vendor package design (skills document an installed plugin); they stay honest as MISSING in the skill-relative audit with this classification as the reading key. G0-5 (60 upstream identity verifications) and G0-6 (71 vendor license reviews) still require per-item external/vendor input and are NOT covered by this audit; the 4 restricted-declared licenses remain blocked from view/deploy/activation unchanged."
+}
