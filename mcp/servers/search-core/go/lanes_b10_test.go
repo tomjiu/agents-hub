@@ -306,8 +306,8 @@ func TestB10Registered(t *testing.T) {
 			t.Fatalf("laneRegistry 缺 %s", name)
 		}
 	}
-	if len(laneRegistry) != 90 { // 86 + openreview/inaturalist/pubdev/openfoodfacts(批12)
-		t.Fatalf("laneRegistry 总数: got %d want 90", len(laneRegistry))
+	if len(laneRegistry) != 94 { // 90 + parallel/tinyfish/serper/serpapi(2026-11-25 扩源)
+		t.Fatalf("laneRegistry 总数: got %d want 94", len(laneRegistry))
 	}
 }
 

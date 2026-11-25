@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -51,6 +52,10 @@ var laneRegistry = map[string]LaneFn{
 	"keenable":        laneKeenable,
 	"bingrss":         laneBingrss,
 	"searxng":         laneSearxng,
+	"parallel":        laneParallel,
+	"tinyfish":        laneTinyfish,
+	"serper":          laneSerper,
+	"serpapi":         laneSerpapi,
 	"wikipedia":       laneWikipedia,
 	"duckduckgo":      laneDuckduckgo,
 	"mojeek":          laneMojeek,
@@ -292,6 +297,25 @@ func laneBingrss(ctx context.Context, opts SearchOpts, client *http.Client) ([]R
 // ---------- searxng (GET format=json, 实例链回退; 反爬页伪 200 = 实例不可用) ----------
 var searxngInstances = []string{"https://search.mectov.my.id", "https://sx.xo.st"}
 
+// searxngBases (2026-11-25 W2): SC_SEARXNG_URL 指向自部署实例(SearXNG 或 RustXNG, 均说
+// /search?format=json 的 SearXNG 形状 JSON; RustXNG 默认端口 8888)时仅用该列表, 完全
+// 绕开公共实例池(公共池 b14 已实证 SEO 污染: 一死一 429)。逗号分隔可配多个。该名单
+// 在 main.go 默认池门控处同步放行(自部署 ≠ 公共污染池)。
+func searxngBases() []string {
+	if v := strings.TrimSpace(os.Getenv("SC_SEARXNG_URL")); v != "" {
+		var out []string
+		for _, s := range strings.Split(v, ",") {
+			if s = strings.TrimSpace(s); s != "" {
+				out = append(out, strings.TrimRight(s, "/"))
+			}
+		}
+		if len(out) > 0 {
+			return out
+		}
+	}
+	return searxngInstances
+}
+
 type searxngResult struct {
 	Results []struct {
 		URL     string `json:"url"`
@@ -323,7 +347,7 @@ func parseSearxng(data []byte, max int) ([]Reference, error) {
 
 func laneSearxng(ctx context.Context, opts SearchOpts, client *http.Client) ([]Reference, error) {
 	var lastErr error
-	for _, base := range searxngInstances {
+	for _, base := range searxngBases() {
 		req, err := http.NewRequestWithContext(ctx, "GET", base+"/search", nil)
 		if err != nil {
 			lastErr = err

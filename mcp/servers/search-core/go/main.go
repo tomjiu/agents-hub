@@ -170,9 +170,17 @@ func searchFlowInner(parent context.Context, opts SearchOpts, timeoutMs int) Out
 				}
 				// b14 收尾: searxng 默认摘出 web 全池 — 两公共实例 SEO 污染实锤
 				// (77 题 732 refs 仅贡献 4 条且全垃圾: "高血压"→"高"字词条/高德地图);
-				// lane 注册保留(lanes=90 门禁), SC_ENABLE_SEARXNG=1 可开回试健康
-				if name == "searxng" && os.Getenv("SC_ENABLE_SEARXNG") == "" {
+				// lane 注册保留(lanes=90 门禁), SC_ENABLE_SEARXNG=1 可开回试健康。
+				// 2026-11-25 W2: SC_SEARXNG_URL 自部署实例(SearXNG/RustXNG, 均说 SearXNG 形状
+				// /search?format=json)时重新入池 — 自部署实例是用户自己的鱼塘, 不在公共污染池证据范围
+				if name == "searxng" && os.Getenv("SC_ENABLE_SEARXNG") == "" && strings.TrimSpace(os.Getenv("SC_SEARXNG_URL")) == "" {
 					journal.Write("engine_skip_searxng_pooled", map[string]any{"reason": "seo-poisoned public instances"})
+					continue
+				}
+				// 2026-11-25 W4: keyed Google lane(serper/serpapi) 无 Key 不入默认池 —
+				// 不产生失败腿/不外联; 显式 --engines 点名时 lane 内部透明报错; 有 Key 即入池
+				if envVar, ok := keyedLaneEnv[name]; ok && strings.TrimSpace(os.Getenv(envVar)) == "" {
+					journal.Write("engine_skip_key_required", map[string]any{"engine": name, "keyEnv": envVar})
 					continue
 				}
 				engines = append(engines, name)
@@ -804,7 +812,15 @@ func cmdProviders() {
 	}
 	ps := health.All(names)
 	fmt.Println("engine        configured  key  ok/fail   avg-ms  last-error")
+	// 2026-11-25 W4: keyed lane 在 providers 面板如实标注 Configured/NeedsKey
+	keyState := map[string][2]bool{}
+	for lane, envVar := range keyedLaneEnv {
+		keyState[lane] = [2]bool{strings.TrimSpace(os.Getenv(envVar)) != "", true}
+	}
 	for _, p := range ps {
+		if ks, ok := keyState[p.Name]; ok {
+			p.Configured, p.NeedsKey = ks[0], ks[1]
+		}
 		lastErr := p.LastError
 		if len(lastErr) > 50 {
 			lastErr = lastErr[:50]

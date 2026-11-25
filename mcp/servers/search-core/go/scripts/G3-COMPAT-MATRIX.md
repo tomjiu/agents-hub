@@ -50,6 +50,12 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
 | 39 | CLI --engines 契约 | — | ✅ 修复 EnginesSet | go: 旧版 --engines 被忽略(默认全池); 显式空名单=零请求 |
 | 40 | MCP 工具 schema 稳定(新增 meta 字段) | ✅ | ✅ | go: quality/harvest 为输出附加字段, tools/list schema 不变; 全协议管道测试通过 |
 
+| 41 | MCP search 工具 count 参数 (Magpie v0.1.3062+ 宿主契约 1-20) | ✅ 2026-11-25 同步 (mcp.ts count 别名, top_n 未传时生效) | ✅ 2026-11-25 (resolveTopN, clamp 1-20) | go: lanes_next_test.go TestResolveTopN/TestMCPToolSchemaHasCount; 协议实测 tools/list 含 count; 零请求契约不受影响 (engines:[]+count → 0 refs 1ms) |
+| 42 | parallel 匿名 MCP 车道 (keyless) | ❌ TS 无此车道 | 🆕 2026-11-25 W1 | go: lanes_anon_mcp.go; 实弹 2026-11-25 (mcp.parallel.ai, sqlite 题真实结果); SSE+JSON 双形状 httptest 锁定 |
+| 43 | tinyfish 匿名 MCP 车道 (keyless) | ❌ TS 无此车道 | 🆕 2026-11-25 W1 | go: lanes_anon_mcp.go; 实弹 2026-11-25 (agent.tinyfish.ai keyless, rust 题真实结果); fixture 保真自实弹抓取 |
+| 44 | serper/serpapi keyed Google 车道 | ❌ TS 无此车道 | 🆕 2026-11-25 W4 (Go 领先) | go: lanes_keyed_google.go; SERPER_API_KEY/SERPAPI_API_KEY 门控 (无 Key 不入池/点名透明报错); 协议 fixture 锁定, 实弹挂账 (无真实 Key) |
+| 45 | searxng 自部署实例 (SC_SEARXNG_URL, RustXNG 兼容) | ❌ TS 无 | 🆕 2026-11-25 W2 | go: searxngBases(); 自部署时重新入池; 本地 mock 实测 (SearXNG 形状 JSON); RustXNG (SearXNG Rust 重写, AGPL, 单二进制 8880/8888 端口) HTTP 集成不捆绑代码 |
+
 ## 结论与挂账
 
 1. **Go-first 路线证据** (G0 基线, 同输入同环境): DOM 提取 12-19x, 峰值内存 ~1/16,
@@ -65,3 +71,4 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
    证据门如实拒绝 12 条词重合不足结果), bingrss 连通但 q 回写被质量门拒绝 — 与 G2 记录
    一致, 不冒充公网质量认证。详见 catalog/audit/search-go-s1s4.json。
 4. **不做的事**: 不无授权合并 memory 分支; 不改用户正在运行的 Web; 不为省内存换容错退化。
+5. **2026-11-25 扩源轮 (issue #3 下一阶段 W1-W5)**: 车道 90→94 (parallel/tinyfish 免 Key 匿名 MCP + serper/serpapi keyed Google); SC_SEARXNG_URL 自部署放行; MCP count 宿主契约双侧同步。Google 直连实测仍为 JS 壳 (0 可解析外链) 维持 BLOCKED; keyed SERP API 为合法通路。调查证据+实弹: catalog/audit/search-next-providers-2026-11-25.json。
