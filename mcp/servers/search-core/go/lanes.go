@@ -51,6 +51,7 @@ type LaneFn func(ctx context.Context, opts SearchOpts, client *http.Client) ([]R
 var laneRegistry = map[string]LaneFn{
 	"keenable":        laneKeenable,
 	"bingrss":         laneBingrss,
+	"bingweb":         laneBingweb,
 	"searxng":         laneSearxng,
 	"parallel":        laneParallel,
 	"tinyfish":        laneTinyfish,

@@ -11,6 +11,10 @@ import { yahoo, decodeYahooHref } from "../providers/yahoo.js";
 import { mojeek } from "../providers/mojeek.js";
 import { searxng } from "../providers/searxng.js";
 import { github, tavily } from "../providers/api.js";
+import { bingweb, decodeBingClick, bingMarket, bingFreshness } from "../providers/keyless-apis.js";
+import { readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { SearchCtx } from "../providers/base.js";
 import type { SearchOptions } from "../types.js";
 
@@ -746,4 +750,76 @@ test("searxng: 自建 baseUrl 永远排链首(SC_SEARXNG_BASE_URL 优先于公�
   } finally {
     searxngProvider.config = saved;
   }
+});
+
+
+// ---------- bingweb: 无 key Bing 网页 HTML 车道 (2026-11-25 扩源) ----------
+
+const FIXTURES = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "test", "fixtures");
+
+test("bingweb: golden — ck/a 链接解码 + b_caption/b_lineclamp 双形态摘要 + 请求参数形状", async () => {
+  const html = readFileSync(join(FIXTURES, "bingweb-sample-en.html"), "utf8");
+  const calls: string[] = [];
+  const fetchImpl = async (url: string) => {
+    calls.push(String(url));
+    return new Response(html, { status: 200, headers: { "Content-Type": "text/html" } });
+  };
+  const opts: SearchOptions = { maxResults: 10, lang: "zh", freshness: "week" };
+  const ctx = { fetchImpl: fetchImpl as never, signal: AbortSignal.timeout(5000), ua: "test-ua", opts };
+  const refs = await bingweb.search("model context protocol", ctx);
+  assert.equal(refs.length, 10);
+  assert.equal(refs[0].url, "https://modelcontextprotocol.io/docs/2026-07-28/geting-started/intro".replace("geting", "getting"));
+  assert.ok(refs[0].title.includes("Model Context Protocol"));
+  assert.ok(refs.every((r) => r.url.startsWith("http") && !r.url.includes("bing.com/ck")));
+  assert.ok(refs.every((r) => r.kind === "web"));
+  const withSnippet = refs.filter((r) => (r.snippet ?? "").trim()).length;
+  assert.ok(withSnippet >= 5, `only ${withSnippet}/10 snippets`);
+  // 请求参数形状: q/count/mkt/setlang/freshness
+  const u = new URL(calls[0]);
+  assert.equal(u.searchParams.get("q"), "model context protocol");
+  assert.equal(u.searchParams.get("count"), "10");
+  assert.equal(u.searchParams.get("mkt"), "zh-CN");
+  assert.equal(u.searchParams.get("setlang"), "zh");
+  assert.equal(u.searchParams.get("freshness"), "week");
+});
+
+test("bingweb: 垃圾注入负样本 (伪 200) — 词面守卫拒绝, 不把垃圾当结果", async () => {
+  // 2026-11-25 实弹: 同 IP 连发 ~15 次后 Bing 注入与查询零相关的完整结构页
+  const html = readFileSync(join(FIXTURES, "bingweb-sample-garbage.html"), "utf8");
+  const fetchImpl = async () => new Response(html, { status: 200, headers: { "Content-Type": "text/html" } });
+  const ctx = { fetchImpl: fetchImpl as never, signal: AbortSignal.timeout(5000), ua: "test-ua", opts: { maxResults: 10 } as SearchOptions };
+  await assert.rejects(() => bingweb.search("model context protocol anthropic", ctx), /garbage injection/);
+});
+
+test("bingweb: b_no 官方无结果块 = 合法空; 挑战页 = 漂移抛错", async () => {
+  const emptyHtml = '<html><body><ol id="b_results"><li class="b_no">There are no results for <strong>zzqqxx</strong></li></ol></body></html>';
+  const ctxEmpty = { ...ctxWith(emptyHtml).ctx, opts: { maxResults: 5 } as SearchOptions };
+  assert.deepEqual(await bingweb.search("zzqqxx obscure", ctxEmpty), []);
+  const { ctx: ctxChal } = ctxWith("<html><body>challenge</body></html>");
+  await assert.rejects(() => bingweb.search("q", ctxChal), /markup drift/);
+});
+
+test("decodeBingClick variants", () => {
+  const enc = Buffer.from("https://example.com/page").toString("base64url");
+  assert.equal(decodeBingClick(`https://www.bing.com/ck/a?!&&p=abc&u=a1${enc}`), "https://example.com/page");
+  // 站内垂直链接 (解码后非 http) → 丢弃
+  const internal = Buffer.from("/images/search?q=test").toString("base64url");
+  assert.equal(decodeBingClick(`https://www.bing.com/ck/a?!&&u=a1${internal}`), "");
+  assert.equal(decodeBingClick("https://plain.example/x"), "https://plain.example/x");
+  assert.equal(decodeBingClick(""), "");
+  assert.equal(decodeBingClick(undefined), "");
+  assert.equal(decodeBingClick("https://www.bing.com/ck/a?!&&u=zzbad"), "");
+});
+
+test("bingMarket/bingFreshness mappings", () => {
+  assert.equal(bingMarket(undefined), "en-US");
+  assert.equal(bingMarket("en"), "en-US");
+  assert.equal(bingMarket("zh"), "zh-CN");
+  assert.equal(bingMarket("ja"), "ja-JP");
+  assert.equal(bingMarket("xx"), "");
+  assert.equal(bingFreshness("day"), "day");
+  assert.equal(bingFreshness("week"), "week");
+  assert.equal(bingFreshness("month"), "month");
+  assert.equal(bingFreshness("year"), "");
+  assert.equal(bingFreshness(undefined), "");
 });

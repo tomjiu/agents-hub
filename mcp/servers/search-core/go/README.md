@@ -2,6 +2,39 @@
 
 决策与分期计划见 [PLAN.md](PLAN.md)。语言裁决: Go（保真度/迭代速度优先，Rust POC 分支留作极限下限证据）。
 
+## 扩源 2026-11-25 (b): bingweb 无 key Bing 网页车道 94→95 (Go+TS 同步)
+
+用户无 Key 前提下的主流引擎覆盖轮 (issue #3)。背景实弹复核 (2026-11-25, 香港阿里云出口 IP):
+**google.com/search 直连仍为 JS 壳页** — noscript 的 `/httpservice/retry/enablejs` 重试返回
+「啟用 JavaScript 以使用搜尋功能」死路, 与 IP 地域无关 (HK 出口同样), 维持 BLOCKED 不绕过;
+**baidu.com/s** 首探偶通后稳定「百度安全验证」(数据中心 IP 标记), 关账; **lite.duckduckgo.com**
+超时不稳, 不接; **brave 429 / ecosia 403 防火墙 / qwant 403 / searx.be Cloudflare 挑战** 全封。
+
+**bing.com/search HTML 直连可用** — 本轮主角:
+- 自报 laneUA 亦通过 (实测 10 条干净结果); 中文/英文/freshness=week 实测可用; mkt 参数
+  显著改善 HK 出口的对题性 (不带 mkt 英文词面也回中文市场结果)。
+- 结果 URL 由 `bing.com/ck/a?!...&u=a1<base64url>` 重定向包裹, 剥 `a1` 前缀 base64url
+  解码取真实链接; 解出站内垂直链接 (如 /images/search) 丢弃。
+- **垃圾注入伪 200 反制 (本批核心守卫)**: 同 IP 连续 ~15-20 次快速请求后, Bing 注入与查询
+  零相关的完整结构页 (Lowe's 门店/酒店/学校页随机出现, q 回写仍正确, b_algo 照常)。
+  词面守卫: 查询 ≥2 独立词项且全部结果 title×2+snippet 零命中 → 判垃圾注入抛错
+  (消息含 "soft-block" → classifyFailure 归 rate_limited, 4 次/2 分钟熔断冷却)。
+  任一结果命中 ≥1 词项即放行 (宽松纪律: 宁漏判交 fusion 质量门, 不误杀真结果)。
+  实弹验证: nginx 题在 IP 被标记窗口被守卫如实拒绝 ("0/4 query terms hit across 10
+  results"), 未把指甲沙龙页当结果返回; 冷却窗口后同题恢复真实结果。
+- 漂移守卫: 无 b_algo 且无 b_no → 抛错; **b_no (Bing 官方无结果块) = 合法空** 返回空不熔断。
+- 参数: q/count(≤20)/mkt(语言码映射, 未知码不猜市场)/setlang/freshness(day/week/month;
+  year 无官方词汇 → 不限时, 不猜区间语法)。
+
+门禁: lanes=95 (7 处断言同步更新)。测试: lanes_bing_web_test.go (黄金样本解析锁 +
+垃圾注入负样本锁 + decodeBingClick 6 变体 + mkt/freshness 映射 + httptest 请求形状 +
+合法空/漂移 + 端到端垃圾拒绝 + 注册门禁)。黄金样本 2026-11-25 实弹抓取 (干净窗口 10 条
+MCP 官方文档结果; 垃圾负样本同日 IP 软封实弹形态)。TS 同步: providers/keyless-apis.ts
+bingweb provider (含 decodeBingClick/bingMarket/bingFreshness 导出) + router.ts 默认池 +
+config.ts 默认引擎 + providers.test.ts 5 测试 (fixture 同源)。验收: go vet+test 全过 +
+race 干净; TS 342/342; 根 npm test 175/175 + validate PASS。审计:
+catalog/audit/search-bingweb-2026-11-25.json。
+
 ## 扩源 2026-11-25: 车道 90→94 (parallel/tinyfish/serper/serpapi) + 自部署 searxng + MCP count 契约
 
 issue #3 下一阶段 (考察驱动: firecrawl / RustXNG / SearXNG / magpie-websearch 21 通道 / Google AI 搜索)。

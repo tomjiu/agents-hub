@@ -21,8 +21,9 @@
  * 解析失败照家规抛错交 Router 健康统计, 不静默返回空。
  */
 import * as cheerio from "cheerio";
-import type { Reference } from "../types.js";
+import type { Reference, Freshness } from "../types.js";
 import { clampText, type Provider, type SearchCtx } from "./base.js";
+import { tokenize, lexicalScore } from "../fusion.js";
 
 function stripHtml(s: string): string {
   return s.replace(/<[^>]+>/g, "");
@@ -935,5 +936,103 @@ export const sov2ex: Provider = {
       }));
     if (out.length === 0) throw new Error("sov2ex: no results parsed");
     return out;
+  },
+};
+
+// ---------- bingweb: Bing 网页搜索 HTML 通道 (2026-11-25 无 key 主流引擎扩源, issue #3) ----------
+// 与 Go lanes_bing_web.go 对齐 (同日实弹证据, 香港阿里云出口 IP):
+//   - google.com/search 直连 = JS 壳页 (enablejs 重试死路) 维持 BLOCKED; baidu = 安全验证;
+//     bing.com/search HTML 直连可用 (自报 UA 亦通过, 中英/freshness 实测)。
+//   - 高频 IP 两级软封: (a) 垃圾注入伪 200 (b_algo 结构完整但结果零相关, q 回写仍对);
+//     (b) 零 b_algo。词面守卫 (≥2 词项全结果零命中 → 拒绝) + 漂移守卫反制, 交熔断冷却。
+//   - 结果 URL 由 bing.com/ck/a?!...&u=a1<base64url> 包裹, 解码取真实链接; 站内垂直丢弃。
+
+export function decodeBingClick(href: string | undefined): string {
+  if (!href) return "";
+  if (!href.includes("/ck/a")) return href.startsWith("http") ? href : "";
+  try {
+    const u = new URL(href);
+    const raw = u.searchParams.get("u") ?? "";
+    if (!raw.startsWith("a1")) return "";
+    // Node base64 解码器兼容 url-safe 字母表与缺省 padding
+    const dec = Buffer.from(raw.slice(2), "base64").toString("utf-8");
+    return dec.startsWith("http") ? dec : "";
+  } catch {
+    return "";
+  }
+}
+
+/** lane 语言码 → Bing mkt; 未知码 "" 不猜市场 (Go bingMarket 同款映射) */
+export function bingMarket(lang: string | undefined): string {
+  switch ((lang ?? "").trim().toLowerCase()) {
+    case "": case "en": return "en-US";
+    case "zh": return "zh-CN";
+    case "ja": return "ja-JP";
+    case "ko": return "ko-KR";
+    case "fr": return "fr-FR";
+    case "de": return "de-DE";
+    case "es": return "es-ES";
+    case "ru": return "ru-RU";
+    default: return "";
+  }
+}
+
+/** freshness: 官方词汇 day/week/month; year 无对应 → "" (Go 同款, 不猜区间语法) */
+export function bingFreshness(f: Freshness | undefined): string {
+  return f === "day" || f === "week" || f === "month" ? f : "";
+}
+
+export const bingweb: Provider = {
+  name: "bingweb",
+  needsKey: false,
+  isConfigured() {
+    return true;
+  },
+
+  async search(query: string, ctx: SearchCtx): Promise<Reference[]> {
+    const u = new URL("https://www.bing.com/search");
+    u.searchParams.set("q", query);
+    u.searchParams.set("count", String(Math.min(20, ctx.opts.maxResults ?? 10)));
+    const mkt = bingMarket(ctx.opts.lang);
+    if (mkt) u.searchParams.set("mkt", mkt);
+    if (ctx.opts.lang) u.searchParams.set("setlang", ctx.opts.lang);
+    const fresh = bingFreshness(ctx.opts.freshness);
+    if (fresh) u.searchParams.set("freshness", fresh);
+    const res = await ctx.fetchImpl(u.href, {
+      signal: ctx.signal,
+      headers: { "User-Agent": ctx.ua, Accept: "text/html" },
+    });
+    if (!res.ok) throw new Error(`bingweb http ${res.status}`);
+    const html = await res.text();
+    if (!html.includes("b_algo")) {
+      if (html.includes("b_no")) return []; // Bing 官方无结果块 = 合法空 (Go 同款)
+      throw new Error("bingweb: markup drift (blocked or challenge page)");
+    }
+    const $ = cheerio.load(html);
+    const out: Reference[] = [];
+    $("li.b_algo").each((_, el) => {
+      const a = $(el).find("h2 a").first();
+      const url = decodeBingClick(a.attr("href"));
+      if (!url) return;
+      let snippet = $(el).find("div.b_caption p").first().text();
+      if (!snippet.trim()) snippet = $(el).find('p[class^="b_lineclamp"]').first().text();
+      out.push({
+        url,
+        title: clampText(a.text(), 200),
+        snippet: clampText(snippet, 400),
+        engines: ["bingweb"],
+        kind: "web" as const,
+      });
+    });
+    if (out.length === 0) throw new Error("bingweb: no results parsed (markup drift?)");
+    // 垃圾注入守卫 (伪 200 反制): ≥2 独立词项且全部结果零词面命中 → 拒绝, 交熔断。
+    // 任一结果命中 ≥1 词项即放行 (宽松: 宁漏判交 fusion 质量门, 不误杀真结果)。
+    const terms = [...new Set(tokenize(query))];
+    if (terms.length >= 2 && !out.some((r) => lexicalScore(query, r.title, r.snippet ?? "") > 0)) {
+      throw new Error(
+        `bingweb: garbage injection suspected (0/${terms.length} query terms hit across ${out.length} results) — soft-block signature, refusing`,
+      );
+    }
+    return out.slice(0, ctx.opts.maxResults ?? 10);
   },
 };

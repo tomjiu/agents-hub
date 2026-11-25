@@ -154,6 +154,9 @@ export function loadConfig(overrides?: Partial<CoreConfig>): CoreConfig {
         //   (design 题 top5×3/helm×3/khan×2/vim×2/finance×1; "vs" multi 拆分子查询全中招),
         //   学术源只在 academic 专线出勤(关键词路由: 论文/ paper/arxiv/survey…), 专线 7 学术腿不变
         "searxng", "duckduckgo", "mojeek", "yahoo", "marginalia", "hn", "bingrss", "wikipedia", "wiby", "keenable", "anysearch",
+        // 2026-11-25: bingweb 无 key Bing 网页 HTML 车道 (主流引擎覆盖; 自报 UA 实测通过;
+        // 垃圾注入伪 200 由车道内词面守卫拒绝交熔断, 不污染结果)
+        "bingweb",
       ],
     timeoutMs: Number(env("SC_TIMEOUT_MS") ?? file.timeoutMs ?? 12000),
     // 软截止: wigolo[09] 思路,到点先交付;0 关闭。默认 6s(12s 超时的一半,慢腿不值得等)

@@ -14,6 +14,9 @@
 > v0.8 质量轮(Phase V, 用户提案"优先域名+全链路质量评测", 详见 docs/quality-baseline-v1.md): **authority.ts 权威域名优先(16 学术域含 wikipedia, 段精确匹配防伪命中, 只提权不屏蔽, topic 感知分档: academic 专线 0.75/通用 0.4) + quality-bench.mjs 五维评测(搜索/爬取/清洗/文本/解题: 8 题+2 题 research 真网络)**; 实测清洗 100% 干净/引用覆盖 100%/解题 6/8(两 MISS 根因在数据源非编排); 修复 3 处: dockerhub repo_name 自带 namespace 拼接 404/事实型查询被 arXiv 淹没(提权分档+wikipedia 入表)/探针 research.run; 测试 154→162
 >
 > v0.8 置信度轮(Phase W, 用户提案"屏蔽 csdn/百家号/搜狐等灌水站+冷门专业自己做"): **credibility.ts 置信度筛选(硬屏 12 域剔除+计数/强降权 3 域 -1.2 标注, 段精确匹配防误伤, 知乎/cnblogs 不动) + 域名多样性 cap(单域≤3, domain 路由与 x 搜索豁免——cap 误伤单源专线实测修复) + packages 闭环(crates sort=downloads+语言腿裁剪, case4 MISS→L1)**; 冷门源核查: Marginalia 冷门站索引+StackExchange 170+子站已在仓, Lobsters 仍不可达/Reddit 403 诚实不接; 第三轮 bench 解题 7/9, 清洗 100% 干净; 测试 162→175
+> v0.8 置信度轮(Phase W, 用户提案"屏蔽 csdn/百家号/搜狐等灌水站+冷门专业自己做"): **credibility.ts 置信度筛选(硬屏 12 域剔除+计数/强降权 3 域 -1.2 标注, 段精确匹配防误伤, 知乎/cnblogs 不动) + 域名多样性 cap(单域≤3, domain 路由与 x 搜索豁免——cap 误伤单源专线实测修复) + packages 闭环(crates sort=downloads+语言腿裁剪, case4 MISS→L1)**; 冷门源核查: Marginalia 冷门站索引+StackExchange 170+子站已在仓, Lobsters 仍不可达/Reddit 403 诚实不接; 第三轮 bench 解题 7/9, 清洗 100% 干净; 测试 162→175
+>
+> 2026-11-25 扩源(b): **bingweb 无 key Bing 网页 HTML 车道 (issue #3 无 Key 主流引擎覆盖, Go lanes_bing_web.go 同步)** — google 直连 JS 壳/百度安全验证/brave 429/ecosia 403/qwant 403 实测关账背景下, bing.com/search HTML 直连接入: ck/a 重定向 base64url 解码 (u=a1 前缀剥离) + b_caption/b_lineclamp 双形态摘要 + mkt 语言市场映射 (HK 出口不带 mkt 英文题回中文市场结果, 显式 mkt 显著改善对题性) + **垃圾注入伪 200 词面守卫** (高频 IP 触发 Bing 注入零相关完整结构页, 查询 ≥2 词项全结果零命中 → 抛错交熔断; 错误消息 soft-block → rate_limited 分类) + b_no 官方无结果块=合法空; 入默认引擎池; 测试 337→342
 
 ## 可靠性补充（隔离候选，尚未采用）
 
