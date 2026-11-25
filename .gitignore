@@ -20,3 +20,4 @@ sources/
 !plugins/memory-net/console/vendor/memory-net/dist/
 !plugins/memory-net/console/vendor/memory-net/dist/**
 searchcore
+searchcore.exe

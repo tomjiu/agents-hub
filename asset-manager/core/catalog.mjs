@@ -21,6 +21,18 @@ export async function loadCatalog(root) {
   for(const a of assets.values())for(const key of ['requires','conflicts'])for(const id of a[key]||[]){assetId(id);if(!assets.has(id)||id===a.id)throw new Error('Invalid '+key+' reference '+a.id+' -> '+id);}
   return assets;
 }
+export async function provenanceAgreement(root,assets) {
+  const dir=path.join(root,'catalog/provenance');const violations=[];
+  let files=[];try{files=(await fs.readdir(dir)).filter(x=>x.endsWith('.json')).sort();}catch(e){if(e.code!=='ENOENT')throw e;}
+  for(const f of files) {
+    const id=f.slice(0,-5);const a=assets.get(id);
+    if(!a){violations.push({id,problem:'provenance record without asset manifest'});continue;}
+    let record;try{record=JSON.parse(await fs.readFile(path.join(dir,f),'utf8'));}catch(e){violations.push({id,problem:'unreadable provenance record'});continue;}
+    if(!record||typeof record!=='object'||typeof record.sha256!=='string'||!/^([0-9a-f]{64})$/.test(record.sha256)){violations.push({id,problem:'invalid provenance record'});continue;}
+    if(record.sha256!==a.version.sha256)violations.push({id,problem:'baseline disagrees with provenance record',manifest:a.version.sha256,provenance:record.sha256});
+  }
+  return violations;
+}
 export async function policy(root,asset) {
   const doc=await readToml(await confined(root,'catalog/updates/'+asset.kind+'.toml'));
   const p={...doc.defaults,...doc.protection,...asset.policy};
