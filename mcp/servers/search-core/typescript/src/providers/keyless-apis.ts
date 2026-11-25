@@ -41,7 +41,8 @@ function parseRssItems(
   $(tag).each((_, el) => {
     const link = ($(el).find("link").first().text() || "").trim();
     const title = ($(el).find("title").first().text() || "").trim();
-    const desc = stripHtml(($(el).find("description").first().text() || "").trim());
+    // 批(c) 实弹: Google News 源页的 description 残留 &nbsp; 文本实体, 一并替换
+    const desc = stripHtml(($(el).find("description").first().text() || "").trim()).replace(/&nbsp;/g, " ");
     const pub = ($(el).find("pubDate").first().text() || "").trim();
     if (!link.startsWith("http") || !title) return;
     out.push({
@@ -375,6 +376,10 @@ export const bingrss: Provider = {
     u.searchParams.set("q", query);
     u.searchParams.set("format", "rss");
     u.searchParams.set("count", String(Math.min(20, ctx.opts.maxResults ?? 10)));
+    // 2026-11-25 批(c) 实弹: HK/非美国出口默认 geo 的 RSS 对英文本题返回离题结果
+    // ("model context protocol"→剑桥词典/Sketchfab); mkt=en-US 同题直返
+    // modelcontextprotocol.io/维基真结果。中文题维持默认 geo (zh mkt 实弹无增益)。
+    if (!CJK_QUERY_RE.test(query)) u.searchParams.set("mkt", "en-US");
     const res = await ctx.fetchImpl(u.href, {
       signal: ctx.signal,
       headers: { "User-Agent": ctx.ua, Accept: "application/rss+xml, application/xml, text/xml" },
@@ -982,6 +987,19 @@ export function bingFreshness(f: Freshness | undefined): string {
   return f === "day" || f === "week" || f === "month" ? f : "";
 }
 
+/** CJK 查询判据 (与 planner 的 zh 检测同字符域; 批(c) ensearch/geo 参数条件化用) */
+const CJK_QUERY_RE = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\u3040-\u30ff]/;
+
+/** 批(c): 经典广告位判据 (用户口径"广告一般有标识") — li.b_ad 容器 / b_adSlug 徽标 /
+ *  b_attribution 内 b_adLink 徽标链接, 三把尺全过滤 (Go bingWebIsAdItem 同款)。 */
+function bingWebIsAdItem(el: cheerio.Cheerio<any>): boolean {
+  const cls = (el.attr("class") ?? "") + "";
+  if (cls.includes("b_ad")) return true;
+  if (el.find(".b_adSlug").length > 0) return true;
+  if (el.find(".b_attribution .b_adLink").length > 0) return true;
+  return false;
+}
+
 export const bingweb: Provider = {
   name: "bingweb",
   needsKey: false,
@@ -993,6 +1011,10 @@ export const bingweb: Provider = {
     const u = new URL("https://www.bing.com/search");
     u.searchParams.set("q", query);
     u.searchParams.set("count", String(Math.min(20, ctx.opts.maxResults ?? 10)));
+    // 2026-11-25 批(c): ensearch=1 仅非 CJK 查询 — 6 连抓实弹: mkt=en-US 单独携带时单词查询
+    // 仍返回毒化页(MCP→Target 门店×10; 词面守卫对 <2 词项放行恰好漏此形态), ensearch=1 两连抓
+    // 全干净; CJK 查询加 ensearch 实弹反噬品牌词垃圾页(国产大模型→"Bing"品牌结果)故不加。
+    if (!CJK_QUERY_RE.test(query)) u.searchParams.set("ensearch", "1");
     const mkt = bingMarket(ctx.opts.lang);
     if (mkt) u.searchParams.set("mkt", mkt);
     if (ctx.opts.lang) u.searchParams.set("setlang", ctx.opts.lang);
@@ -1010,7 +1032,13 @@ export const bingweb: Provider = {
     }
     const $ = cheerio.load(html);
     const out: Reference[] = [];
-    $("li.b_algo").each((_, el) => {
+    // 2026-11-25 批(c): 顶层直接子 li 选择 — 经典广告位包在 li.b_ad 容器里, 内层条目
+    // 同样带 b_algo class, 全文档选择会误收广告; 只取 #b_results 顶层子节点, class 前缀
+    // 锁 b_algo (跳过 b_ans/b_pag/b_msg) + bingWebIsAdItem 广告判据双闸。
+    $("#b_results > li").each((_, el) => {
+      const cls = ($(el).attr("class") ?? "").trim();
+      if (!cls.startsWith("b_algo")) return;
+      if (bingWebIsAdItem($(el))) return;
       const a = $(el).find("h2 a").first();
       const url = decodeBingClick(a.attr("href"));
       if (!url) return;

@@ -157,6 +157,9 @@ export function loadConfig(overrides?: Partial<CoreConfig>): CoreConfig {
         // 2026-11-25: bingweb 无 key Bing 网页 HTML 车道 (主流引擎覆盖; 自报 UA 实测通过;
         // 垃圾注入伪 200 由车道内词面守卫拒绝交熔断, 不污染结果)
         "bingweb",
+        // 批(c) 2026-11-25: google/baidu 无 key 直连 (IP 条件型: 数据中心出口如实 blocked
+        // 交熔断冷却, 干净 IP 主机直连可用; 广告过滤内建)
+        "google", "baidu",
       ],
     timeoutMs: Number(env("SC_TIMEOUT_MS") ?? file.timeoutMs ?? 12000),
     // 软截止: wigolo[09] 思路,到点先交付;0 关闭。默认 6s(12s 超时的一半,慢腿不值得等)
