@@ -1,0 +1,79 @@
+{
+  "id": "search-bingweb-2026-11-25",
+  "title": "无 Key 前提下主流搜索引擎复核 + bingweb 车道接入 (issue #3, 用户明确无 Key 开发)",
+  "date": "2026-11-25",
+  "branch": "search-bingweb-lane",
+  "base": "origin/main cd1f04d",
+  "context": {
+    "user_premise": "用户明确: 没有 key, 当无 key 进行开发。Google 直连实测仍是 JS 壳页, 疑与 IP 有关 (沙箱为香港出口)。",
+    "egress_ip": "8.212.10.159 Hong Kong, Alibaba AS45102 (ipinfo.io 实测)",
+    "google_direct_verdict": {
+      "result": "JS 壳页, 与 IP 地域无关",
+      "evidence": [
+        "现代 Chrome UA: HTTP 200, 94KB, <title>Google Search</title>, 0 可解析结果链接",
+        "noscript meta refresh → /httpservice/retry/enablejs?sei=... → 「啟用 JavaScript 以使用搜尋功能」死路",
+        "老 UA (MSIE6/Lynx): 2.4KB 「Update your browser / Your browser isn't supported anymore」",
+        "gbv=1 / CONSENT cookie / google.com.hk / client=firefox-b-d / udm=14 全部同壳页",
+        "结论: Google 对非浏览器客户端启用硬 JS 墙, HK 出口在真实浏览器可用 ≠ 服务端可爬。维持 G2 BLOCKED; 合法通路 = keyed SERP API (serper/serpapi 车道, 上批已接)"
+      ]
+    },
+    "other_engines_recheck": {
+      "baidu": "首探 200 (1.1MB 140 title 命中) 后稳定「百度安全验证」2.6KB 拦截页 (中文/英文查询均拦) — 数据中心 IP 标记, 关账",
+      "brave_html": "HTTP 429",
+      "ecosia": "HTTP 403 Ecosia Firewall",
+      "qwant_api": "HTTP 403",
+      "searx.be": "HTTP 200 但 Cloudflare「Verifying your browser」挑战页",
+      "lite_duckduckgo": "首探 200 (仅 2 nofollow 链接, 结构异常) 后超时 — 不稳定不接; 现有 html.duckduckgo.com POST 车道单腿实测可用 (669ms 真实结果)",
+      "yahoo": "HTTP 500 (131ms 快败) — 维持 G2 受阻记录",
+      "mojeek": "连接超时 (12s) — 维持 G2 受阻记录",
+      "marginalia": "✅ 单腿实测可用 (1805ms)",
+      "rightdao": "✅ 200 可解析 (小众独立引擎, 暂不接 — 非主流优先级)"
+    }
+  },
+  "bingweb_lane": {
+    "files": {
+      "go": "mcp/servers/search-core/go/lanes_bing_web.go",
+      "go_test": "mcp/servers/search-core/go/lanes_bing_web_test.go",
+      "ts": "mcp/servers/search-core/typescript/src/providers/keyless-apis.ts (bingweb + decodeBingClick + bingMarket + bingFreshness)",
+      "ts_test": "typescript/src/test/providers.test.ts (5 测试, fixture 同源于 go/testdata)",
+      "wiring": "go lanes.go 注册 (94→95, 7 处门禁断言同步); ts router.ts buildProviders + config.ts 默认引擎池"
+    },
+    "protocol": {
+      "endpoint": "GET https://www.bing.com/search?q=&count=&mkt=&setlang=&freshness=",
+      "ua": "自报 laneUA 实测通过 (search-core/0.5), 无需伪装",
+      "redirect_decode": "结果链接 bing.com/ck/a?!...&u=a1<base64url> → 剥 a1 前缀 base64url 解码; 解出相对路径 = 站内垂直链接丢弃",
+      "selectors": "li.b_algo > h2 > a (标题+链接); div.b_caption p 或 p[class^=b_lineclamp] (摘要双形态)",
+      "mkt_mapping": "en→en-US zh→zh-CN ja→ja-JP ko→ko-KR fr→fr-FR de→de-DE es→es-ES ru→ru-RU; 未知码不猜市场 (HK 出口不带 mkt 英文题也回中文市场结果, mkt 显著改善对题性)",
+      "freshness": "day/week/month 直传 (官方词汇); year 无对应 → 不传不猜区间语法"
+    },
+    "guards": {
+      "garbage_injection": {
+        "signature": "同 IP 连续 ~15-20 次快速请求后, 返回结构完整 (b_algo 照常, q 回写正确) 但与查询零相关的随机结果页 (实测: Lowe's 门店/西雅图酒店/多伦多学校页注入 MCP/nginx/tokio 查询)",
+        "countermeasure": "词面守卫 bingGarbageGuard: 查询 ≥2 独立词项 (tokenize 含 CJK bigram) 且全部结果 title×2+snippet 零词面命中 (lexicalScore=0) → 抛错拒绝; 任一结果命中 ≥1 词项即放行 (宽松: 宁漏判交 fusion 质量门, 不误杀真结果); <2 词项查询无法判 → 放行交上层 lexical evidence gate",
+        "breaker_integration": "错误消息含 'soft-block' → classifyFailure rateRe (soft.?block) 归 rate_limited → 4 次/2 分钟熔断冷却, 半开探针自愈",
+        "live_validation": "双窗口实弹: IP 标记窗口 nginx 题被守卫如实拒绝 (journal: 'garbage injection suspected (0/4 query terms hit across 10 results) — soft-block signature, refusing'); 冷却窗口同题恢复真实结果"
+      },
+      "markup_drift": "无 b_algo 且无 b_no → 抛错 (挑战/改版/封锁页)",
+      "legit_empty": "b_no (Bing 官方无结果块) → 返回空不熔断 (对齐 bingnews/googlenews 空结果纪律)"
+    },
+    "tests": {
+      "go": "TestParseBingWebGolden (10 结果解析锁+首结果 URL 解码断言), TestParseBingWebMaxClamp, TestDecodeBingClickVariants (6 变体含站内垂直丢弃), TestBingGarbageGuardRefusesInjection (负样本), TestBingGarbageGuardPassesRelevant (宽松纪律), TestBingMarketMapping, TestBingFreshnessMapping, TestLaneBingwebRequestShape (httptest 参数+UA), TestLaneBingwebLegitEmptyAndDrift, TestLaneBingwebGarbageRefusedEndToEnd, TestRegistryGate95Bingweb",
+      "ts": "golden+参数形状, 垃圾负样本拒绝, b_no 合法空/挑战漂移, decodeBingClick 变体, market/freshness 映射",
+      "fixtures": "go/testdata/bingweb-sample-en.html (干净窗口实弹, 10 条 MCP 官方文档结果) + bingweb-sample-garbage.html (软封窗口实弹, Lowe's 注入形态); typescript/test/fixtures/ 同源副本"
+    }
+  },
+  "acceptance": {
+    "go": "go vet 干净; go test 全过 (含 95 门禁, 扩源前实测红 want 94 got 95 → 绿); 新套件 race 干净",
+    "ts": "342/342 (337 + 5 bingweb)",
+    "root": "npm test 175/175 + npm run validate PASS",
+    "registry_gate": "7 处 laneRegistry 断言 94→95 同步 (lanes3/b6/b8/b9/b10/b11/b12_test.go)",
+    "live": "干净窗口 bingweb 单腿真实结果 (MCP 官方文档 top1); 软封窗口守卫如实拒绝并进熔断; MCP stdio tools/list 7 工具 + search/fetch E2E 复测通过"
+  },
+  "honest_ledger": [
+    "Bing 垃圾注入阈值 ~15-20 次连发为本沙箱单 IP 单日实测, 真实宿主 (住宅 IP/低频) 阈值未知; 守卫+熔断保证最坏情况是引擎失败而非结果污染",
+    "Bing HTML 非官方 API, 选择器 (b_algo/b_caption/b_lineclamp/ck/a) 随时可能改版 — 黄金样本锁保证改版时显式失败而非静默空结果",
+    "count 参数 Bing 单页实际 ~10 条 (请求 20 给 10), 与 bingrss 同款行为, 不做翻页 (first= 参数需会话 cookie, 不稳不接)",
+    "year freshness 无 Bing 官方词汇, 不猜自定义区间语法 (filters=ex1 语法), 如实不限时",
+    "yahoo/mojeek 当前出口受阻维持关账记录, DDG 单腿已恢复 (G2 记录为当时快照, 引擎出勤以 journal 实测为准)"
+  ]
+}

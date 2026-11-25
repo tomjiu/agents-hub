@@ -55,6 +55,7 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
 | 43 | tinyfish 匿名 MCP 车道 (keyless) | ❌ TS 无此车道 | 🆕 2026-11-25 W1 | go: lanes_anon_mcp.go; 实弹 2026-11-25 (agent.tinyfish.ai keyless, rust 题真实结果); fixture 保真自实弹抓取 |
 | 44 | serper/serpapi keyed Google 车道 | ❌ TS 无此车道 | 🆕 2026-11-25 W4 (Go 领先) | go: lanes_keyed_google.go; SERPER_API_KEY/SERPAPI_API_KEY 门控 (无 Key 不入池/点名透明报错); 协议 fixture 锁定, 实弹挂账 (无真实 Key) |
 | 45 | searxng 自部署实例 (SC_SEARXNG_URL, RustXNG 兼容) | ❌ TS 无 | 🆕 2026-11-25 W2 | go: searxngBases(); 自部署时重新入池; 本地 mock 实测 (SearXNG 形状 JSON); RustXNG (SearXNG Rust 重写, AGPL, 单二进制 8880/8888 端口) HTTP 集成不捆绑代码 |
+| 46 | bingweb 无 key Bing 网页 HTML 车道 (ck/a 重定向解码 + 垃圾注入伪 200 词面守卫 + b_no 合法空) | ✅ 2026-11-25 同步 (providers/keyless-apis.ts + 默认池) | ✅ 2026-11-25 | go: lanes_bing_web.go + TS: keyless-apis.ts; 黄金/垃圾双样本锁 (2026-11-25 实弹); 守卫消息含 soft-block → rate_limited 熔断分类; 实弹: 干净窗口真实结果 + 软封窗口被守卫如实拒绝 |
 
 ## 结论与挂账
 
@@ -71,4 +72,5 @@ TS 保留兼容与基准对照。本矩阵逐项核对两侧语义, 标注迁入
    证据门如实拒绝 12 条词重合不足结果), bingrss 连通但 q 回写被质量门拒绝 — 与 G2 记录
    一致, 不冒充公网质量认证。详见 catalog/audit/search-go-s1s4.json。
 4. **不做的事**: 不无授权合并 memory 分支; 不改用户正在运行的 Web; 不为省内存换容错退化。
-5. **2026-11-25 扩源轮 (issue #3 下一阶段 W1-W5)**: 车道 90→94 (parallel/tinyfish 免 Key 匿名 MCP + serper/serpapi keyed Google); SC_SEARXNG_URL 自部署放行; MCP count 宿主契约双侧同步。Google 直连实测仍为 JS 壳 (0 可解析外链) 维持 BLOCKED; keyed SERP API 为合法通路。调查证据+实弹: catalog/audit/search-next-providers-2026-11-25.json。
+5. **2026-11-25 扩源轮 (b) — bingweb (issue #3 无 Key 主流引擎)**: 车道 94→95。google 直连 JS 壳/百度安全验证/brave 429/ecosia 403/qwant 403 复核实测维持关账; bing HTML 直连接入 + 垃圾注入伪 200 词面守卫 (实弹双窗口验证: 干净窗口真实结果, 软封窗口守卫如实拒绝)。Go+TS 同步, TS 进默认池。
+6. **2026-11-25 扩源轮 (issue #3 下一阶段 W1-W5)**: 车道 90→94 (parallel/tinyfish 免 Key 匿名 MCP + serper/serpapi keyed Google); SC_SEARXNG_URL 自部署放行; MCP count 宿主契约双侧同步。Google 直连实测仍为 JS 壳 (0 可解析外链) 维持 BLOCKED; keyed SERP API 为合法通路。调查证据+实弹: catalog/audit/search-next-providers-2026-11-25.json。

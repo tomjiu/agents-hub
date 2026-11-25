@@ -19,6 +19,7 @@ import { brave, tavily, exa, github } from "./providers/api.js";
 // v0.3 免 key 扩池(targets-search.md P0): marginalia(api2)/openverse/hn/wikipedia/bingrss + arxiv/crossref/mwmbl/googlenews
 import {
   marginalia, openverse, hn, wikipedia, bingrss, arxiv, crossref, mwmbl, googlenews, wiby, keenable,
+  bingweb,
 } from "./providers/keyless-apis.js";
 // phase AA 对照轮增量: MDN 官方文档直连 API(编程主题 Tier1; documents=[] 合法空不熔断)
 import { mdn } from "./providers/keyless-apis.js";
@@ -81,6 +82,7 @@ export function buildProviders(cfg: CoreConfig): Provider[] {
   return [
     searxng, duckduckgo, mojeek, yahoo,
     marginalia, hn, wikipedia, bingrss, arxiv, crossref, wiby, keenable,
+    bingweb, // 2026-11-25: 无 key Bing 网页 HTML 车道 (主流引擎; 垃圾注入词面守卫内建)
     anysearch, // 默认池 13 引擎(phase AB: 托管聚合免 key 车道, 独立索引覆盖增量)
     // (tavily 在 keySlots=auto 下无 key 也自动并入默认池——phase AB keyless 车道, 探针连打 6 发全 200)
     openverse, mwmbl, googlenews, // 显式 engines 启用(图片/备胎/新闻)
