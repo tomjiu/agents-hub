@@ -52,6 +52,8 @@ var laneRegistry = map[string]LaneFn{
 	"keenable":        laneKeenable,
 	"bingrss":         laneBingrss,
 	"bingweb":         laneBingweb,
+	"google":          laneGoogle,
+	"baidu":           laneBaidu,
 	"searxng":         laneSearxng,
 	"parallel":        laneParallel,
 	"tinyfish":        laneTinyfish,
@@ -249,9 +251,12 @@ func parseRssItems(xmlData []byte, max int) ([]Reference, error) {
 		if !strings.HasPrefix(it.Link, "http") || it.Title == "" {
 			continue
 		}
+		// 2026-11-25 实弹(主流引擎批): Bing RSS 抓到 Google News 源页时 description
+		// 含 HTML 标签 + &nbsp; 残留 (冒烟抓获); 纯文本 description 此处理是恒等变换
+		sn := strings.ReplaceAll(it.Description, "&nbsp;", " ")
 		out = append(out, Reference{
-			URL: it.Link, Title: clampText(it.Title, 200),
-			Snippet: clampText(it.Description, 400),
+			URL: it.Link, Title: clampText(stripHtml(decodeEntities(strings.ReplaceAll(it.Title, "&nbsp;", " "))), 200),
+			Snippet: clampText(stripHtml(decodeEntities(sn)), 400),
 			Engines: []string{"bing-rss"}, Kind: "web",
 		})
 		if len(out) >= max {
@@ -270,6 +275,12 @@ func laneBingrss(ctx context.Context, opts SearchOpts, client *http.Client) ([]R
 	q.Set("q", opts.Query)
 	q.Set("format", "rss")
 	q.Set("count", fmt.Sprintf("%d", min(opts.MaxResults, 20)))
+	// 2026-11-25 实弹(主流引擎批): HK/非美国出口默认 geo 的 RSS 对英文本题返回
+	// 离题结果 ("model context protocol"→剑桥词典/Sketchfab); mkt=en-US 同题直返
+	// modelcontextprotocol.io/维基真结果。中文题维持默认 geo (zh mkt 实弹无增益)。
+	if !cjkRe.MatchString(opts.Query) {
+		q.Set("mkt", "en-US")
+	}
 	req.URL.RawQuery = q.Encode()
 	req.Header.Set("User-Agent", laneUA)
 	req.Header.Set("Accept", "application/rss+xml, application/xml, text/xml")

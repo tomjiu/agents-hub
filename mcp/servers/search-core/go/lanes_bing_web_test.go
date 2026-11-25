@@ -268,8 +268,8 @@ func TestLaneBingwebGarbageRefusedEndToEnd(t *testing.T) {
 }
 
 func TestRegistryGate95Bingweb(t *testing.T) {
-	if len(laneRegistry) != 95 { // 94 + bingweb(2026-11-25 无 key 主流引擎扩源)
-		t.Fatalf("registry want 95, got %d", len(laneRegistry))
+	if len(laneRegistry) != 97 { // 94 + bingweb(2026-11-25 无 key 主流引擎扩源)
+		t.Fatalf("registry want 97, got %d", len(laneRegistry))
 	}
 	if laneRegistry["bingweb"] == nil {
 		t.Fatal("bingweb not registered")

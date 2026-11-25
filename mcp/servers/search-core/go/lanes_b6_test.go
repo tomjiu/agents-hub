@@ -273,8 +273,8 @@ func TestLaneOpenmeteoGuard(t *testing.T) {
 
 // ---------- 接线锁: 注册表 68 + 路由表扩容 + weather 新域 ----------
 func TestB6WiringLocks(t *testing.T) {
-	if len(laneRegistry) != 95 { // 90 + parallel/tinyfish/serper/serpapi(2026-11-25 扩源)
-		t.Fatalf("phase B6: registry want 95, got %d", len(laneRegistry))
+	if len(laneRegistry) != 97 { // 90 + parallel/tinyfish/serper/serpapi(2026-11-25 扩源)
+		t.Fatalf("phase B6: registry want 97, got %d", len(laneRegistry))
 	}
 	for _, name := range []string{"nuget", "hex", "arch", "inspirehep", "openaire", "commonswiki", "openmeteo"} {
 		if _, ok := laneRegistry[name]; !ok {
