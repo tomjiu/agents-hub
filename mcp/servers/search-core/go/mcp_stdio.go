@@ -44,6 +44,7 @@ func mcpTools() []mcpTool {
 				"freshness": str("day/week/month/year; default any"),
 				"lang":      str("Force language code (e.g. zh); auto-detected otherwise"),
 				"top_n":     num("Max fused results (default 20)"),
+				"count":     num("Result count 1-20 (host contract: Magpie v0.1.3062+ web_search count; alias of top_n, used only when top_n is omitted; default unchanged when neither is passed)"),
 			}, "query"),
 		},
 		{
@@ -114,9 +115,7 @@ func mcpCallToolCtx(ctx context.Context, name string, args map[string]any) (stri
 		}
 		timeout := 6000
 		opts := SearchOpts{Query: query, Lang: strArg(args, "lang"), TopN: 20, MaxResults: 10, TimeoutMs: timeout}
-		if v := numArg(args, "top_n"); v > 0 {
-			opts.TopN = v
-		}
+		opts.TopN = resolveTopN(args)
 		if fr := strArg(args, "freshness"); fr != "" {
 			opts.Freshness = fr
 		}
@@ -218,6 +217,23 @@ func mcpCallToolCtx(ctx context.Context, name string, args map[string]any) (stri
 		return string(b), false
 	}
 	return "error: unknown tool: " + name, true
+}
+
+// resolveTopN (2026-11-25 W3): Magpie v0.1.3062+ 宿主 count 契约 (1-20)。
+// top_n 优先(本体参数); count 是宿主别名, 仅 top_n 未传时生效
+// 且 clamp 到 [1,20] 不放大数据面; 两参都未传保持默认 20
+// (不因宿主默认 6 压低现有默认)。
+func resolveTopN(args map[string]any) int {
+	if v := numArg(args, "top_n"); v > 0 {
+		return v
+	}
+	if v := numArg(args, "count"); v > 0 {
+		if v > 20 {
+			v = 20
+		}
+		return v
+	}
+	return 20
 }
 
 func strArg(args map[string]any, key string) string {

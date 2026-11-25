@@ -2,6 +2,32 @@
 
 决策与分期计划见 [PLAN.md](PLAN.md)。语言裁决: Go（保真度/迭代速度优先，Rust POC 分支留作极限下限证据）。
 
+## 扩源 2026-11-25: 车道 90→94 (parallel/tinyfish/serper/serpapi) + 自部署 searxng + MCP count 契约
+
+issue #3 下一阶段 (考察驱动: firecrawl / RustXNG / SearXNG / magpie-websearch 21 通道 / Google AI 搜索)。
+
+- **W1 parallel + tinyfish** (lanes_anon_mcp.go): 免 Key 匿名 MCP 车道, 无 initialize 的单次 JSON-RPC
+  tools/call, SSE+JSON 双响应形状; 协议参照 @guotree/magpie-websearch v0.7.3 已验证行为 + 本仓实弹复核
+  (parallel: mcp.parallel.ai/mcp web_search, 上限 20 条; tinyfish: agent.tinyfish.ai/mcp search,
+  header X-TinyFish-Access-Mode: keyless)。JSON-RPC 错误=错误而非空结果; 429/超时走熔断治理。
+- **W2 searxng 自部署** (searxngBases): `SC_SEARXNG_URL` 指向自部署实例(SearXNG 或 RustXNG — SearXNG 的
+  Rust 重写, AGPL, 单二进制, 默认端口 8888, 说同款 /search?format=json)时仅用该列表并重新入默认池;
+  公共实例池维持 b14 摘除(一死一 429)。AGPL 边界: 仅 HTTP 调用不捆绑代码。逗号分隔可配多实例。
+- **W3 MCP count** (Go+TS 同步): search 工具暴露 `count` (1-20, Magpie v0.1.3062+ 宿主 web_search 契约),
+  top_n 未传时生效且 clamp [1,20]; 两参都未传保持默认 20 — 不因宿主默认 6 压低现有输出。
+- **W4 serper + serpapi keyed Google 车道** (lanes_keyed_google.go): 用户自有 Key 的合法 Google 通路
+  (google.com 直连实测仍为 JS 壳, 维持 BLOCKED 不绕过)。SERPER_API_KEY / SERPAPI_API_KEY 门控:
+  无 Key 不入默认池(journal engine_skip_key_required, 不产生失败腿); 显式点名透明报错; providers
+  面板 Configured/NeedsKey 如实标注。tbs 时效映射 day/week/month/year → qdr:d/w/m/y。无真实 Key,
+  协议形状 fixture 锁定, 实弹挂账。
+
+门禁: lanes=94 (7 处断言同步更新, 扩源提交前实测红 want 90 got 94 → 绿)。测试: lanes_next_test.go
+(传输层 httptest SSE/JSON/structuredContent/JSON-RPC 错误/429 + parse 锁定 + searxngBases + resolveTopN
++ keyed 门控)。验收: go test 全过 + 新套件 race 干净 + CGO=0/windows/darwin 三构建; TS 337/337;
+根测试+validate PASS。实弹: parallel/tinyfish 真实结果(2026-11-25); SC_SEARXNG_URL 本地 mock 入池实测;
+MCP tools/list 含 count + engines:[]+count 零请求 1ms。审计:
+catalog/audit/search-next-providers-2026-11-25.json。
+
 ## P1 实测（2026-09-04, 同机同网络, query "docker compose restart policy", 同 4 车道 keenable+bingrss+searxng+wikipedia）
 
 | 指标 | TS v0.8.1 | Go P1 | 差距 |

@@ -1,0 +1,94 @@
+{
+  "id": "search-next-providers-2026-11-25",
+  "title": "搜索下一阶段考察与扩源 (issue #3: firecrawl/RustXNG/SearXNG/magpie-websearch/Google AI 搜索)",
+  "date": "2026-11-25",
+  "branch": "search-providers-next",
+  "base": "origin/main 90c91a3",
+  "investigation": {
+    "magpie_websearch": {
+      "source": "github.com/guotree/magpie-websearch v0.7.3 (MIT), PROVIDERS.md + README 实读",
+      "providers_total": 21,
+      "keyless_optional": ["anysearch", "keenable", "parallel", "tinyfish"],
+      "key_required": ["bocha", "jina", "kagi", "linkup", "metaso", "moonshot", "moonshot-cn", "ollama", "perplexity", "querit", "serpapi", "serper", "stepfun", "zai", "zai-coding", "zhipu", "zhipu-coding"],
+      "host_count_contract": "Magpie v0.1.3062+ web_search count (1-20, 默认 6); 本仓 Go/TS MCP search 工具此前均未暴露 count → 宿主传入被静默丢弃 (W3 修复)",
+      "existing_lane_overlap": ["anysearch (已有, 今日实弹复测可用)", "keenable (已有, 可用)", "firecrawl (已有, keyless 实弹复测可用)"]
+    },
+    "parallel_live_probe": {
+      "endpoint": "POST https://mcp.parallel.ai/mcp",
+      "request": {"jsonrpc": "2.0", "method": "tools/call", "params": {"name": "web_search", "arguments": {"objective": "sqlite wal concurrency docs", "search_queries": ["sqlite wal concurrency"]}}},
+      "result": "SSE (event: message / data:) → JSON-RPC 信封 → content[0].text 二次解码: search_id + results[]{url,title,publish_date,excerpts[]}",
+      "sample": {"top1": {"url": "https://sqlite.org/wal.html", "title": "Write-Ahead Logging", "has_excerpt": true}, "bytes": 55118},
+      "verdict": "匿名可用, 结果相关, 上限 20 条, 匿名仅 fast 模式 (与 magpie-websearch 2026-11-04 验证一致)"
+    },
+    "tinyfish_live_probe": {
+      "endpoint": "POST https://agent.tinyfish.ai/mcp (header X-TinyFish-Access-Mode: keyless)",
+      "request": {"jsonrpc": "2.0", "method": "tools/call", "params": {"name": "search", "arguments": {"query": "sqlite wal concurrency"}}},
+      "result": "纯 JSON → content[0].text 二次解码: {query, results[]{position,site_name,snippet,title,url}}",
+      "sample": {"top1": {"url": "https://sqlite.org/src/doc/begin-concurrent/doc/begin_concurrent.md", "title": "SQLite: Begin Concurrent"}, "bytes": 4677},
+      "verdict": "keyless 可用 (web/news; research_paper 需 Key), 单页无 count 参数 (本地截断)"
+    },
+    "anysearch_firecrawl_recheck": {
+      "anysearch": "POST api.anysearch.com/v1/search code=0, sqlite.org/wal.html 相关结果 (现有 lane 协议无漂移)",
+      "firecrawl": "POST api.firecrawl.dev/v2/search keyless success=true, web[] 结果 (现有 lane 协议无漂移)"
+    },
+    "rustxng": {
+      "what": "SearXNG 的 Rust 重写 (port), 自部署元搜索+grounding 引擎, AGPL-3.0-or-later",
+      "facts": ["单二进制 Linux/macOS/Windows, 无 Python/数据库", "226 引擎类型", "SearXNG 形状 JSON (/search?format=json) + CSV/RSS/HTML", "MCP stdio (search + read page)", "本地索引 + Wikipedia dumps", "默认端口 8888 (dsh-rustxng 文档), 健康检查 /healthz"],
+      "sources": ["X @DanKornas 2026-11-11 发布贴", "repocloud.io 详情页摘要", "kgmkm/dsh-rustxng (DSH 插件先例: HTTP 通信/不捆绑 AGPL/release 二进制独立下载)"],
+      "repo_access": "github.com/sahenjp/RustXNG 从本沙箱不可达 (codeload 404 / api 限流 / jsdelivr 无缓存), 二进制未能实弹 — 如实挂账",
+      "agpl_boundary": "本仓不复制/翻译其代码, 仅 HTTP 调用用户自部署实例; 与 G2 对 SearXNG 的纪律一致"
+    },
+    "searxng_public_instances": {
+      "checked": ["https://search.mectov.my.id → 000 (死)", "https://sx.xo.st → 429"],
+      "verdict": "维持 b14 摘除决定; 恢复正道是自部署 (SC_SEARXNG_URL)"
+    },
+    "google_ai_search": {
+      "direct_html": "google.com/search 浏览器 UA 200 但 JS 壳 (94KB, 0 条可解析外链); gbv=1 同为 JS 壳; lite=1 为 WAP 表单壳 — 维持 G2 BLOCKED 判定不绕过",
+      "gemini_grounding": "模型耦合工具 (非独立检索 API, 锁 Gemini, $14/1k) — 不纳入 lane",
+      "legal_path": "keyed SERP API: serper (google.serper.dev) + serpapi (serpapi.com) → W4 实现"
+    }
+  },
+  "implemented": {
+    "W1_anon_mcp_lanes": {
+      "file": "mcp/servers/search-core/go/lanes_anon_mcp.go",
+      "lanes": ["parallel", "tinyfish"],
+      "transport": "无 initialize 单次 tools/call; stripSSE 双形状; structuredContent 优先, content[].text 二次解码; JSON-RPC 错误=错误; 429 透传熔断",
+      "tests": "lanes_next_test.go: TestCallAnonMCP{JSONResponse,SSEResponse,StructuredContent,JSONRPCError,HTTP429}, TestStripSSE, TestParseParallel{,MaxCap}, TestParseTinyfish",
+      "live": {"parallel": "sqlite 题真实结果 (sqlite.org/wal.html 等)", "tinyfish": "rust ownership 题真实结果 (doc.rust-lang.org 等)"}
+    },
+    "W2_selfhosted_searxng": {
+      "file": "lanes.go searxngBases() + main.go 池门控",
+      "env": "SC_SEARXNG_URL (逗号分隔多实例, 尾斜杠修剪)",
+      "behavior": "设置时仅用自部署列表并重新入默认池; 未设回落公共池(维持摘除)",
+      "tests": "TestSearxngBases{Custom,Fallback}",
+      "live": "本地 mock (SearXNG 形状 JSON) 实测: lane 命中自部署 URL; 有 URL 时 journal 无 engine_skip_searxng_pooled, 无 URL 时有该事件"
+    },
+    "W3_mcp_count": {
+      "go": "mcp_stdio.go: schema count + resolveTopN (top_n 优先, count clamp [1,20], 双缺省 20)",
+      "ts": "typescript/src/mcp.ts: count zod 参数 (1-20) + topN: top_n ?? count",
+      "tests": "TestResolveTopN (6 例), TestMCPToolSchemaHasCount; TS 337/337",
+      "live": "MCP 协议实测: tools/list 参数集含 count; engines:[]+count=8 → 零请求契约保持 (0 refs, 1ms)"
+    },
+    "W4_keyed_google_lanes": {
+      "file": "mcp/servers/search-core/go/lanes_keyed_google.go",
+      "lanes": {"serper": "POST google.serper.dev/search (X-API-KEY, num≤10, hl, tbs)", "serpapi": "GET serpapi.com/search (api_key, hl, tbs; 不传 num — Google 2025-09 废弃)"},
+      "gating": "keyedLaneEnv {serper: SERPER_API_KEY, serpapi: SERPAPI_API_KEY}; 无 Key 不入默认池 (journal engine_skip_key_required); 显式点名透明报错 (指名 env); providers 面板 Configured/NeedsKey 标注",
+      "tests": "TestParseSerper, TestParseSerpapi, TestKeyedLaneNoKeyTransparentError, TestKeyedLaneHasKey, TestGoogleTBS",
+      "live": "无真实 Key — 协议形状 fixture 锁定 (magpie-websearch 协议注记), 实弹挂账"
+    }
+  },
+  "acceptance": {
+    "go": "go build + go vet 干净; go test 全过 (含更新后 94 门禁; 扩源提交前实测红 want 90 got 94); 新套件 race 干净",
+    "builds": "CGO_ENABLED=0 linux ✓, GOOS=windows ✓, GOOS=darwin ✓",
+    "ts": "337/337",
+    "root": "npm test 全过 + npm run validate PASS",
+    "registry_gate": "7 处 laneRegistry 断言 90→94 同步更新 (lanes3/b6/b8/b9/b10/b11/b12_test.go)"
+  },
+  "honest_ledger": [
+    "serper/serpapi 实弹: 无真实 Key, fixture 锁形状, 需用户 Key 后独立验收",
+    "RustXNG 真实实例: GitHub 仓库/发布页从本沙箱不可达, 二进制未实弹; 协议兼容依据 dsh-rustxng 文档 + SearXNG 形状; 用户本机部署后须独立验证",
+    "Parallel/TinyFish 匿名配额与长期可用性: 单日实测样本, 无官方保证 (magpie-websearch 同样标注)",
+    "公网 SERP A/B 相关性对照 + Windows 实机 DSH 宿主验收: 前轮挂账延续",
+    "skills/individual/research/search-core/SKILL.md 描述仍写 36 搜索源 (TS 时代口径), 与 Go 94 车道不一致 — 属 issue #4 技能文档范围, 未越界修改, 留协调"
+  ]
+}

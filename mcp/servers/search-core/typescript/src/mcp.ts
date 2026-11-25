@@ -67,6 +67,7 @@ Returns ranked references (refId, url, title, snippet) — use fetch(url, focus=
       freshness: z.enum(["day", "week", "month", "year", "any"]).optional(),
       max_results: z.number().int().min(1).max(20).optional().describe("Per-engine result cap (default 10)"),
       top_n: z.number().int().min(1).max(50).optional().describe("Fused result cap (default 20)"),
+      count: z.number().int().min(1).max(20).optional().describe("Host contract: Magpie v0.1.3062+ web_search count (1-20); alias of top_n, used only when top_n is omitted"),
       engines: z.array(z.string().min(1)).max(100).optional().describe("Exact provider allowlist; overrides routes/rescue/key slots. [] means none. Unknown names reject; providers may access their own endpoints."),
       lang: z.string().optional(),
       no_cache: z.boolean().optional(),
@@ -76,7 +77,8 @@ Returns ranked references (refId, url, title, snippet) — use fetch(url, focus=
         freshness: args.freshness,
         lang: args.lang,
         maxResults: args.max_results,
-        topN: args.top_n,
+        // 2026-11-25 W3: Magpie v0.1.3062+ 宿主 count 契约 — top_n 优先, count 为别名
+        topN: args.top_n ?? args.count,
         engines: args.engines,
         noCache: args.no_cache,
       });
