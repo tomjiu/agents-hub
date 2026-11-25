@@ -32,8 +32,8 @@ EOF
     echo "[ok] 从 pip wheel 抽取: $PYORT"
   else
     echo "[..] pip 无 onnxruntime, 安装 (清华镜像)..."
-    pip3 install -q onnxruntime -i https://pypi.tuna.tsinghua.edu.cn/simple || \
-      pip3 install -q onnxruntime -i https://mirrors.aliyun.com/pypi/simple/
+    pip3 install -q onnxruntime==1.29.0 -i https://pypi.tuna.tsinghua.edu.cn/simple || \
+      pip3 install -q onnxruntime==1.29.0 -i https://mirrors.aliyun.com/pypi/simple/
     PYORT=$(python3 -c "import onnxruntime, os; p=os.path.join(os.path.dirname(onnxruntime.__file__),'capi'); print(os.path.join(p, [f for f in sorted(os.listdir(p)) if f.startswith('libonnxruntime.so')][0]))")
     cp "$PYORT" "$DEST/libonnxruntime.so.1.29.0"
   fi
