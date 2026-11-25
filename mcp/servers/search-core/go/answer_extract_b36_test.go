@@ -149,9 +149,10 @@ func b36BuildLegSets(q string) (legSets []legSet, topic string, domainCap int) {
                 dp := decision.domainPlan
                 leg0 := laneLegProviders(dp.topic, q, dp.apiProviders)
                 legSets = append(legSets, legSet{query: decision.queries[0], engines: leg0})
-                for i, sq := range dp.siteQueries {
-                        eng := dp.siteEngines[i%len(dp.siteEngines)]
-                        legSets = append(legSets, legSet{query: sq, engines: []string{eng}})
+                for _, sq := range dp.siteQueries {
+                        // S6 同步: site 腿携带全部 siteEngines (main.go 对齐)
+                        engs := append([]string{}, dp.siteEngines...)
+                        legSets = append(legSets, legSet{query: sq, engines: engs})
                 }
                 topic = dp.topic
                 if topic == "packages" || topic == "devops" {

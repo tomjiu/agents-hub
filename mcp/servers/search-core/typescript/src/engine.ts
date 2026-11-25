@@ -9,6 +9,8 @@ import { Cache, type CacheSearchHit } from "./cache.js";
 import { Journal } from "./journal.js";
 import { HealthTracker } from "./providers/base.js";
 import { Router } from "./router.js";
+import type { HarvestCoord } from "./router.js";
+import type { HarvestMeta } from "./types.js";
 import { Fetcher } from "./fetcher.js";
 import {filterEvidence} from './relevance.js';
 import { plan } from "./planner.js";
@@ -126,11 +128,15 @@ export class SearchCore {
       ? decision.queries.map((_q, i) => (i === 0 ? laneLegProviders(dp.topic, dp.apiProviders) : dp.siteEngines))
       : decision.queries.map(() => engineForRoute);
 
+    // S1 (issue #3): 主批共享全局收割协调器 — domain 多批慢腿不得拖延已满足证据的响应
+    // (A/B 实弹: 编程题 site: 腿 ddg 拖到 recovery 10s, 而 leg-0 1.2s 已有充足证据)。
+    // 抢救腿不进 coord(批内语义, 不污染主轮收割诊断)。
+    const coord: HarvestCoord = { attempted: 0, settled: 0, refs: [], early: false };
     const batches = await Promise.all(
       decision.queries.map((q, i) =>
         decision.route === "x"
           ? this.router.runX(q, runOpts, "tweets")
-          : this.router.run(q, runOpts, legEngines[i], rawQuery),
+          : this.router.run(q, runOpts, legEngines[i], rawQuery, coord),
       ),
     );
 
@@ -205,6 +211,8 @@ export class SearchCore {
         spamBlocked: fuseMeta.spamBlocked,
         // phase AF 页面级守卫: 权威提权被清零的条数(域名对但页面对不是查询要的)
         authorityGuarded: fuseMeta.authorityGuarded,
+        // S1 (issue #3): 收割诊断 (Go HarvestMeta 对等) — 早返/结算/中断/证据充足性
+        harvest: this.#harvestMeta(coord, rawQuery, allRefs, runOpts.softDeadlineMs ?? this.cfg.softDeadlineMs),
       },
     };
     this.#journal?.write("fusion", {
@@ -215,6 +223,27 @@ export class SearchCore {
     });
     if (cacheable && refs.length > 0 && !result.meta.degraded) this.cache.putSearch(cacheKey, result);
     return { ...result, planner: decision };
+  }
+
+  /** S1 (issue #3): 收割诊断组装 — 早返/结算腿数/中断腿/证据充足性; 到期不足 → 已得候选 + 诊断文本 */
+  #harvestMeta(coord: HarvestCoord, query: string, allRefs: Reference[], softDeadlineMs: number): HarvestMeta {
+    const totalLegs = coord.attempted;
+    const settledLegs = coord.settled;
+    const abortedPending = Math.max(0, totalLegs - settledLegs);
+    const totalRefs = new Set(allRefs.map((r) => r.url)).size;
+    const relevantRefs = new Set(filterEvidence(query, allRefs).refs.map((r) => r.url)).size;
+    const minRelevant = Math.max(0, this.cfg.earlyHarvestMinRelevant ?? 5);
+    const meta: HarvestMeta = {
+      settledLegs, totalLegs,
+      abortedPending: abortedPending || undefined,
+      relevantRefs, minRelevant, totalRefs, softDeadlineMs,
+      early: coord.early || undefined,
+    };
+    if (abortedPending > 0 && minRelevant > 0 && relevantRefs < minRelevant) {
+      meta.insufficient = true;
+      meta.diagnosis = `deadline ${softDeadlineMs}ms reached with insufficient relevant evidence: ${relevantRefs}/${totalRefs} relevant refs (min ${minRelevant}), ${settledLegs}/${totalLegs} legs settled, ${abortedPending} aborted; returning obtained candidates instead of rescuing indefinitely`;
+    }
+    return meta;
   }
 
   async xSearch(query: string, kind = "tweets", opts: SearchOptions = {}): Promise<SearchResult & { planner: PlannerDecision }> {

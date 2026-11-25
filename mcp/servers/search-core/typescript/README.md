@@ -20,7 +20,7 @@
 
 ## 可靠性补充（隔离候选，尚未采用）
 
-SearchCore/研究按原始查询的词法证据判断早收割，不用无关结果数量取消慢源。无相关证据时默认软截止6秒延至绝对恢复边界10秒（SC_RECOVERY_DEADLINE_MS），始终受12秒硬上限限制。超时关闭软截止也不会无限等待；取消原因在失败项cancellation中公开，提前收割/软截止取消不作上游熔断失败，迟到响应不再写健康库。SearXNG实例分配独立预算（每站至多2.5秒）；质量为空可触发允许范围内未尝试源，空/降级结果不缓存。网络恢复不等于语义、正确版本或来源认证。公网站点仍会429/超时，不能靠编排保证免key端点稳定。
+SearchCore/研究按原始查询的词法证据判断早收割，不用无关结果数量取消慢源。S1 全局协调（2026-11-25）：domain 多子查询批共享同一证据池与结算计数（HarvestCoord），足够证据后慢腿不再拖延整题（实测编程路由 10s→1.2s）；早收割阈值 = 总refs≥15 且 相关refs≥SC_EARLY_HARVEST_MIN_RELEVANT（默认5，0=回退旧证据计数语义）；meta.harvest 输出收割诊断（early/结算腿/中断腿/证据充足性，到期不足 → 已得候选+insufficient 诊断文本，不无限抢救）。S2：429 Retry-After 尊重（熔断冷却=max(策略,服务端明示) 截1h，HTTP-date 如实忽略）。无相关证据时默认软截止6秒延至绝对恢复边界10秒（SC_RECOVERY_DEADLINE_MS），始终受12秒硬上限限制。超时关闭软截止也不会无限等待；取消原因在失败项cancellation中公开，提前收割/软截止取消不作上游熔断失败，迟到响应不再写健康库。SearXNG实例分配独立预算（每站至多2.5秒）；质量为空可触发允许范围内未尝试源，空/降级结果不缓存。网络恢复不等于语义、正确版本或来源认证。公网站点仍会429/超时，不能靠编排保证免key端点稳定。
 
 ## 快速开始
 
@@ -93,6 +93,7 @@ node mcp/servers/search-core/typescript/dist/cli.js fetch https://www.sqlite.org
 | engines | `SC_ENGINES` | 默认 `searxng,duckduckgo,mojeek,yahoo,marginalia,hn,bingrss,wikipedia,arxiv,crossref,wiby,keenable`(12 引擎) |
 | timeoutMs | `SC_TIMEOUT_MS` | 单引擎超时,默认 12000 |
 | softDeadlineMs | `SC_SOFT_DEADLINE_MS` | v0.4 软截止: 到点先收割已完成引擎,慢腿断开并以 timeout 身份入 failed;默认 6000,0=关 |
+| earlyHarvestMinRelevant | `SC_EARLY_HARVEST_MIN_RELEVANT` | S1 早收割相关证据下限: 总refs≥15 且 相关refs≥N 才算证据足够; 默认 5, 0=回退旧证据计数语义 |
 | keySlots | `SC_KEY_SLOTS=off` 关 | v0.4 插槽自动并联: auto(默认)=已配 key 且额度未尽的 tavily/brave/exa 自动加入默认池,额度尽自动回落免 key 池 |
 | tavily.baseUrl | `SC_TAVILY_BASE_URL` | phase Y: 指 Tavily 兼容网关(如 tavily-hikari `https://tavily.ivanli.cc/api/tavily`), 不设=官方端点; 走网关建议配 `SC_TAVILY_MONTHLY_QUOTA=0` |
 | keenable | `SC_KEENABLE_KEY` / `SC_KEENABLE_TITLE` | phase Y: 有 key 走正式路 /v1/search(10 万 credit/月免额); 无 key 公共路 /v1/search/public(1000 次/时/IP), title 缺省 search-core |

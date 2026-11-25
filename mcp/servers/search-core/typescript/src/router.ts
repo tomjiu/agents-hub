@@ -112,6 +112,18 @@ export function buildProviders(cfg: CoreConfig): Provider[] {
 
 const byName = (ps: Provider[]) => new Map(ps.map((p) => [p.name, p]));
 
+/**
+ * S1 (issue #3) 多批全局收割协调器: engine.search 的全部主批共享。
+ * Go main.go 扁平 slots + settleCh 的 TS 对等 — settled/attempted/refs 跨批累计,
+ * 任一批的收割循环看到的都是全局口径, 足够证据时各自断自己的在飞腿。
+ */
+export interface HarvestCoord {
+  attempted: number;
+  settled: number;
+  refs: Reference[];
+  early: boolean;
+}
+
 export class Router {
   #providers: Map<string, Provider>;
   #cfg: CoreConfig;
@@ -157,8 +169,11 @@ export class Router {
   /**
    * 并行执行多引擎搜索 (v0.4: 软截止+额度门+插槽自动并联+失败标注)。
    * @param engineNames planner引擎清单；undefined用默认池，[]不出勤；opts.engines优先且严格限制provider选择。
+   * @param coord S1 (issue #3) 多批全局收割协调器 — domain 路由的多子查询批共享同一证据池
+   *   与结算计数, 慢腿不得拖延已满足全局证据条件的响应 (Go 扁平 slots 语义对等)。
+   *   undefined = 批内独立语义(legacy 直连调用方/抢救腿)。
    */
-  async run(query: string, opts: SearchOptions, engineNames?: string[], evidenceQuery?: string): Promise<{
+  async run(query: string, opts: SearchOptions, engineNames?: string[], evidenceQuery?: string, coord?: HarvestCoord): Promise<{
     refs: Reference[];
     used: string[];
     failed: EngineFailure[];
@@ -228,6 +243,7 @@ export class Router {
       const settle = (refs?: Reference[], error?: unknown) => {
         const state = states.get(p.name)!;
         if (state.reported) return;
+        if (coord) { coord.settled++; if (refs?.length) coord.refs.push(...refs); } // S1 全局记账
         state.reported = true; pending--;
         const elapsedMs = Date.now()-started;
         if (refs) {
@@ -247,20 +263,32 @@ export class Router {
       return Promise.resolve().then(()=>p.search(query,ctx)).then(refs=>settle(refs),error=>settle(undefined,error));
     });
     const attempted = active.length;
+    // S1: 全局协调登记(批内 attempted 也计入 coord — 收割循环改看全局口径)
+    if (coord) coord.attempted += attempted;
     const harvestMs = finite(this.#cfg.earlyHarvestMs,0);
+    const minRelevant = Math.max(0, finite(this.#cfg.earlyHarvestMinRelevant ?? 5, 5));
     let cause: "early_harvest" | "soft_deadline" | "hard_deadline" | undefined;
     while (pending > 0) {
       const elapsed = Date.now()-started;
-      // Legacy raw Router callers retain their counting semantics. SearchCore supplies raw intent.
-      const evidence = evidenceQuery === undefined ? allRefs : filterEvidence(evidenceQuery,allRefs).refs;
+      // S1 (issue #3): coord 存在时收割/软截止都看全局口径 — 多批(domain)慢腿不得拖延
+      // 已满足全局证据的响应; 单批调用方(coord=undefined)保持批内语义不变。
+      const pool = coord ? coord.refs : allRefs;
+      const evidence = evidenceQuery === undefined ? pool : filterEvidence(evidenceQuery,pool).refs;
       const count = new Set(evidence.map(r=>r.url)).size;
-      const enough = attempted-pending >= Math.ceil(attempted*.6) && count >= 15;
+      const totalCount = new Set(pool.map(r=>r.url)).size;
+      const settledCount = coord ? coord.settled : attempted-pending;
+      const attemptedTotal = coord ? coord.attempted : attempted;
+      // S1 证据感知 (Go 对等): minRelevant>0 → 总refs>=15 且 相关(过证据门)refs>=minRelevant;
+      //   minRelevant=0 → 回退 TS 既有证据计数语义(证据>=15)。
+      const enough = settledCount >= Math.ceil(attemptedTotal*.6) &&
+        (minRelevant > 0 ? (totalCount >= 15 && count >= minRelevant) : count >= 15);
       if (elapsed >= timeoutMs) {cause="hard_deadline";break;}
       if (softMs > 0 && harvestMs > 0 && elapsed >= harvestMs && enough) {cause="early_harvest";break;}
       if (softMs > 0 && elapsed >= softMs &&
           (evidenceQuery === undefined || count > 0 || elapsed >= recoveryMs)) {cause="soft_deadline";break;}
       await new Promise(resolve=>setTimeout(resolve,Math.max(1,Math.min(25,timeoutMs-elapsed))));
     }
+    if (coord && cause === "early_harvest") coord.early = true;
     if (pending > 0 && cause) {
       const elapsedMs = Date.now()-started;
       // Mark before abort: an abort-aware provider must not duplicate bookkeeping or poison health.

@@ -40,7 +40,8 @@ test("domains: programming hit -> tier1 providers + mdn site query", () => {
   assert.deepEqual(r.apiProviders, ["stackexchange", "github", "hn", "keenable", "mdn", "sov2ex"]);
   assert.equal(r.siteQueries.length, 1);
   assert.ok(r.siteQueries[0].includes("site:docs.python.org"));
-  assert.deepEqual(r.siteEngines, ["duckduckgo", "bingrss"]);
+  // S6 (issue #3, 2026-11-25): +bingweb — ddg 限流时 site: 腿单点塌方(实弹 A/B), bingweb site: 331ms 高相关
+  assert.deepEqual(r.siteEngines, ["duckduckgo", "bingrss", "bingweb"]);
 });
 
 // phase Z 回归锁: 对比轮真实 miss 题,修复后必须含 zh 能力保底腿

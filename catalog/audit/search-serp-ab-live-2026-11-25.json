@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "status": "SERP_AB_LIVE_COMPLETED",
+  "at": "2026-11-25T11:30:00+08:00",
+  "question_set": "s0-v2-public (8题: 官方文档×2/通用研究/中文社区/中文通用/词重合陷阱/不存在/版本适用)",
+  "environment": {
+    "platform": "linux sandbox (HK egress, Alibaba AS45102)",
+    "network": "真实公网 (非fixture); 冷缓存 (每臂独立 SC_DATA_DIR)",
+    "method": "同环境相邻时间三臂对照; TS CLI --json 逐题; 相关性人工标注 (标注规则入 label_rules)",
+    "arms": {
+      "armA": "主流引擎批之前的默认池 (11引擎+tavily, 显式名单模拟) — 基线",
+      "armB": "修复前 main (默认池14+bingweb/google/baidu) — 记录 S1 缺陷",
+      "armC": "修复后 (armB + 全局收割协调 + minRelevant + 诊断 + bingweb 编程专线)"
+    }
+  },
+  "label_rules": "人工标注: 相关 = top-5 内命中题目所求 (官方文档/官方域名/真实主题讨论); URL 与标题双查; 词重合陷阱题: 纯烹饪页=不相关, python 相关=相关",
+  "rows": [
+    { "id": "Q1-official-doc", "query": "SQLite WAL concurrency", "expect": "sqlite.org/wal.html",
+      "latency": {"A": 6025, "B": 10032, "C": 1234}, "refs": {"A": 18, "B": 16, "C": 16},
+      "relevantAt5": {"A": 3, "B": 3, "C": 3}, "success": {"A": true, "B": true, "C": true},
+      "note": "C 早收割全局触发 (early:true, searxng/ddg 慢腿切断); sqlite.org/wal.html 全臂 rank≤2" },
+    { "id": "Q2-official-doc", "query": "Node.js DatabaseSync SQLite API", "expect": "nodejs.org sqlite docs",
+      "latency": {"A": 6024, "B": 10031, "C": 1221}, "refs": {"A": 17, "B": 2, "C": 8},
+      "relevantAt5": {"A": 3, "B": 2, "C": 3}, "success": {"A": true, "B": true, "C": true},
+      "note": "B 仅 2 refs (证据门+引擎腿); C 恢复 8 refs 含 nodejs.org 官方文档" },
+    { "id": "Q3-general", "query": "model context protocol", "expect": "modelcontextprotocol.io / wikipedia MCP",
+      "latency": {"A": 1236, "B": 1238, "C": 1596}, "refs": {"A": 20, "B": 20, "C": 20},
+      "relevantAt5": {"A": 3, "B": 4, "C": 4}, "success": {"A": true, "B": true, "C": true},
+      "note": "web 路由三臂同级; B/C bingweb 跨引擎归因增加覆盖" },
+    { "id": "Q4-zh-community", "query": "Zed 编辑器 DeltaDB", "expect": "Zed DeltaDB 真实讨论",
+      "latency": {"A": 6026, "B": 1226, "C": 1320}, "refs": {"A": 4, "B": 13, "C": 4},
+      "relevantAt5": {"A": 4, "B": 5, "C": 4}, "success": {"A": true, "B": true, "C": true},
+      "note": "三臂均返回知乎/开源中国/Reddit 真实 DeltaDB 讨论 (人工标注修正: 相关性在标题不在URL); B 轮 bingweb 覆盖最富(含 zed.org.cn 文档+x.com); C 轮 bingweb 触发限流轮转 — 如实记录引擎健康波动, 非回退" },
+    { "id": "Q5-zh-general", "query": "DeepSeek V3 发布", "expect": "DeepSeek 官方或主流媒体",
+      "latency": {"A": 2069, "B": 1238, "C": 1241}, "refs": {"A": 20, "B": 20, "C": 11},
+      "relevantAt5": {"A": 2, "B": 2, "C": 1}, "success": {"A": true, "B": true, "C": true},
+      "note": "三臂成功; C 轮部分引擎限流轮转 (refs 11) — 延迟与质量持平" },
+    { "id": "Q6-word-overlap", "query": "python list comprehension recipes cooking", "expect": "python 页保留, 烹饪页压制 (S0-F2)",
+      "latency": {"A": 6026, "B": 3321, "C": 1225}, "refs": {"A": 20, "B": 4, "C": 11},
+      "relevantAt5": {"A": 5, "B": 4, "C": 4}, "success": {"A": true, "B": true, "C": true},
+      "note": "词重合陷阱三臂通过: 纯烹饪页未进 top; C 有 1 条边缘条目 (cooking-with-python GitHub 仓库名, 词面合法) — 泛词过滤/证据门工作正常" },
+    { "id": "Q7-nonexistent", "query": "qzwxecrv12345 不存在主题 xyzzy42", "expect": "空 + 透明",
+      "latency": {"A": 10027, "B": 10026, "C": 10008}, "refs": {"A": 0, "B": 0, "C": 0},
+      "relevantAt5": {"A": 0, "B": 0, "C": 0}, "success": {"A": true, "B": true, "C": true},
+      "note": "三臂零编造 (正确); C 新增 meta.harvest.insufficient=true + 诊断文本 — S1 验收语义达成; 10s 为有界恢复截止设计语义" },
+    { "id": "Q8-version", "query": "Go 1.23 release notes", "expect": "go.dev/doc/go1.23",
+      "latency": {"A": 1222, "B": 1234, "C": 1232}, "refs": {"A": 12, "B": 17, "C": 14},
+      "relevantAt5": {"A": 1, "B": 1, "C": 1}, "success": {"A": true, "B": true, "C": true},
+      "note": "go.dev/doc/go1.23 三臂均命中" }
+  ],
+  "metrics": {
+    "successRate": {"A": "8/8", "B": "8/8", "C": "8/8"},
+    "p50_ms": {"A": 6024, "B": 2280, "C": 1238},
+    "p95_ms": {"A": 10027, "B": 10032, "C": 10008},
+    "p95_ms_excl_q7_bounded_recovery": {"A": 6026, "B": 10032, "C": 1596},
+    "relevantAt5_total": {"A": 21, "B": 23, "C": 22}
+  },
+  "verdict": {
+    "latency": "实质改善: B→C 全局收割把编程路由拖尾 10s→1.2s (Q1/Q2, 8.1-8.2×); 全集 p95(排除Q7有界恢复) 10032→1596ms (6.3×)",
+    "relevance": "不退化: 相关@5 总计 A=21/B=23/C=22; Q2 refs 2→8 改善; 成功率三臂 8/8",
+    "transparency": "提升: meta.harvest 全字段 + insufficient 诊断 (Q7); 慢腿 cancellation=early_harvest 可归因",
+    "honest_caveats": [
+      "Q4/Q5 C 轮 bingweb 限流轮转 (引擎健康波动, 非修复回退) — refs 波动如实记录; bingweb 熔断冷却后恢复",
+      "google/baidu 车道沙箱 HK 出口如实 blocked (IP 信誉墙), 干净 IP 主机可用 — 与批(c) 结论一致",
+      "题集 8 题为可重跑固定集; 人工标注规则公开于 label_rules 字段"
+    ]
+  },
+  "fixes_shipped": {
+    "F1_全局收割协调": "router.run 可选 HarvestCoord — domain 多批共享证据池/结算计数; 红灯 2514ms→316ms (fixture), 实弹 Q1 10032→1234ms",
+    "F2_minRelevant": "早收割 = 总refs>=15 且 相关refs>=SC_EARLY_HARVEST_MIN_RELEVANT(默认5); 0=回退 TS 既有证据计数语义",
+    "F3_收割诊断": "meta.harvest (Go HarvestMeta 逐字段对等): early/settledLegs/totalLegs/abortedPending/relevantRefs/minRelevant/totalRefs/softDeadlineMs/insufficient/diagnosis",
+    "F4_RetryAfter": "HealthTracker 冷却=max(策略, retry-after) 截1h; httpErr 捕获 429 响应头; searxng/ddg/keenable/bingweb/google/baidu 抛点接入; HTTP-date 如实忽略",
+    "F5_负结果不缓存": "核验修正: TS 引擎层已有守卫 (矩阵 #31 记录过时), 显式测试锁定",
+    "F6_bingweb编程专线": "programming siteEngines +bingweb (两侧); Go site 腿装配改全列表 (旧轮询单 siteTarget 恒取 index0, bingrss 从未出勤 — 语义分歧修复)"
+  },
+  "gates": {
+    "ts": "362/362 (351+11 新增 s1s2-parity, 先红后绿)",
+    "go": "全过 (+2 新增 site_legs_s6, 先红后绿); gofmt/vet 干净 (answer_extract 家族预存风格未动)",
+    "compat_matrix": "行 27/29/30/31 TS 列更新 + 新增行 44/45"
+  }
+}

@@ -104,9 +104,25 @@ export interface SearchResult {
     authorityGuarded?: number;
     /** phase AH 零结果抢救腿: 全腿空手后聚合器兜底轮是否出勤(诚实可见) */
     rescued?: boolean;
+    /** S1 (issue #3) 收割诊断: 早返/软截止/证据充足性 (Go HarvestMeta 对等; 多批全局协调) */
+    harvest?: HarvestMeta;
     /** 省下的输出 token 估算(chars): 输出只带 snippet,不带全文 */
     journal?: string;
   };
+}
+
+/** S1 (issue #3) 全局预算与提前完成的透明诊断 (Go types.go HarvestMeta 逐字段对等) */
+export interface HarvestMeta {
+  early?: boolean;
+  settledLegs: number;
+  totalLegs: number;
+  abortedPending?: number;
+  relevantRefs: number;
+  minRelevant: number;
+  totalRefs: number;
+  softDeadlineMs: number;
+  insufficient?: boolean;
+  diagnosis?: string;
 }
 
 export interface FetchOptions {

@@ -20,6 +20,8 @@ export interface CoreConfig {
   recoveryDeadlineMs: number;
   /** phase AG-2: 早收割 ms —— 到点后若(60% 腿已结算 且 refs≥15)则立即断慢腿交付,不再干等满软截止(0=关);默认 1200 */
   earlyHarvestMs: number;
+  /** S1: 早收割相关证据下限 (SC_EARLY_HARVEST_MIN_RELEVANT, 默认5; 0=旧证据计数语义) */
+  earlyHarvestMinRelevant: number;
   /** v0.4: key 引擎插槽自动并联: auto=已配 key 且额度未尽的引擎自动加入默认池(用完自动回落免 key 池); off=只走显式 engines */
   keySlots: "auto" | "off";
   /** run 级输出预算(chars) */
@@ -168,6 +170,8 @@ export function loadConfig(overrides?: Partial<CoreConfig>): CoreConfig {
     // 早收割(AG-2): 实测 7/9 真实查询在 refs≥12-20 时仍干等满 6s 软截止(慢腿拖尾,vs-zai 延迟差距的结构性根因);
     // 到点 1.2s 后若证据已足够(60% 腿结算+refs≥15)立即交付,质量由 bench 守(0=关)
     earlyHarvestMs: Number(env("SC_EARLY_HARVEST_MS") ?? file.earlyHarvestMs ?? 1200),
+    // S1 (issue #3): 早收割相关证据下限 — 总refs>=15 且 相关refs>=minRelevant 才算"足够"; 0=回退旧证据计数语义
+    earlyHarvestMinRelevant: Number(env("SC_EARLY_HARVEST_MIN_RELEVANT") ?? file.earlyHarvestMinRelevant ?? 5),
     keySlots: ((env("SC_KEY_SLOTS") ?? (file.keySlots as string | undefined) ?? "auto") === "off" ? "off" : "auto"),
     budgetChars: Number(env("SC_BUDGET_CHARS") ?? file.budgetChars ?? 60000),
     userAgent: env("SC_UA") ?? (file.userAgent as string | undefined) ?? DEFAULT_UA,

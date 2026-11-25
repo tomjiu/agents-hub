@@ -22,7 +22,7 @@
  */
 import * as cheerio from "cheerio";
 import type { Reference, Freshness } from "../types.js";
-import { clampText, type Provider, type SearchCtx } from "./base.js";
+import { clampText, type Provider, type SearchCtx, httpErr } from "./base.js";
 import { tokenize, lexicalScore } from "../fusion.js";
 
 function stripHtml(s: string): string {
@@ -198,7 +198,7 @@ export const keenable: Provider = {
         : res.status === 401 ? "(bad api key)"
         : res.status === 429 ? "(rate limited: 10 req/s; public lane 1000/h shared per IP)"
         : "";
-      throw new Error(`keenable http ${res.status}${hint ? ` ${hint}` : ""}`);
+      throw new Error(httpErr("keenable", res, hint || undefined)); // S2: 429 携带 Retry-After
     }
     const data = (await res.json()) as {
       results?: { url: string; title: string; description?: string; snippet?: string; published_at?: string }[];
@@ -1024,7 +1024,7 @@ export const bingweb: Provider = {
       signal: ctx.signal,
       headers: { "User-Agent": ctx.ua, Accept: "text/html" },
     });
-    if (!res.ok) throw new Error(`bingweb http ${res.status}`);
+    if (!res.ok) throw new Error(httpErr("bingweb", res)); // S2: 429 携带 Retry-After
     const html = await res.text();
     if (!html.includes("b_algo")) {
       if (html.includes("b_no")) return []; // Bing 官方无结果块 = 合法空 (Go 同款)

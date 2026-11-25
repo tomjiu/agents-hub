@@ -68,7 +68,9 @@ export const DOMAIN_TABLE: Record<string, DomainTopic> = {
   programming: {
     apiProviders: ["stackexchange", "github", "hn", "keenable", "mdn"],
     siteTargets: ["docs.python.org"],
-    siteEngines: ["duckduckgo", "bingrss"],
+    // S6 (issue #3, 2026-11-25 A/B 实弹): +bingweb — ddg 出口限流时 site: 腿单点塌方
+    // (编程题 ddg 拖到 recovery 10s); bingweb site: 探针 331ms 高相关。
+    siteEngines: ["duckduckgo", "bingrss", "bingweb"],
     keywords: [
       // 语言/框架名(小写子串)
       "python", "javascript", "typescript", "nodejs", "node.js", " npm ", "react", "vue",

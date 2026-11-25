@@ -50,7 +50,9 @@ var domainTable = map[string]domainTopic{
 	"programming": {
 		apiProviders: []string{"stackexchange", "github", "hn", "keenable", "mdn"},
 		siteTargets:  []string{"docs.python.org"},
-		siteEngines:  []string{"duckduckgo", "bingrss"},
+		// S6 (issue #3, 2026-11-25 A/B 实弹): +bingweb — ddg 出口限流时 site: 腿单点塌方
+		// (编程题 ddg 拖到 recovery 10s); bingweb site: 探针 331ms 高相关。
+		siteEngines: []string{"duckduckgo", "bingrss", "bingweb"},
 		keywords: []string{
 			"python", "javascript", "typescript", "nodejs", "node.js", " npm ", "react", "vue",
 			"rust ", "rust-", "golang", " golang", "java ", "kotlin", "swift", "c++", "c#",

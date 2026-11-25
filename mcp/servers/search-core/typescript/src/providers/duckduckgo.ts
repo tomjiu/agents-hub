@@ -11,7 +11,7 @@
  */
 import * as cheerio from "cheerio";
 import type { Reference } from "../types.js";
-import { clampText, absoluteUrl, type Provider, type SearchCtx } from "./base.js";
+import { clampText, absoluteUrl, type Provider, type SearchCtx, httpErr } from "./base.js";
 
 // 限速门: 读 env 用函数而不是模块常量, 方便测试注入 0
 function ddgMinIntervalMs(): number {
@@ -59,7 +59,7 @@ export const duckduckgo: Provider = {
         // 软封签名: 202+空页伪装"无结果"; 抛错走重试/健康统计, 绝不当真结果返回
         return { refs: [], html: "", status: 202 };
       }
-      if (!res.ok) throw new Error(`ddg http ${res.status}`);
+      if (!res.ok) throw new Error(httpErr("ddg", res)); // S2: 429 携带 Retry-After
       const html = await res.text();
       const $ = cheerio.load(html);
       const out: Reference[] = [];
