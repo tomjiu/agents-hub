@@ -1,0 +1,28 @@
+{
+ "schema": 1,
+ "status": "RERANK_LIVE_VERIFIED_DEPLOYMENT_AND_EXECUTION",
+ "at": "2026-11-25",
+ "task": "Issue #3 outstanding item: rerank 实弹 — previously blocked on '-tags onnx + 模型三件套资产'; this round deployed the three-piece asset set from reachable mirrors and live-verified the ONNX rerank path end to end",
+ "deployment": {
+  "setup_script": "mcp/servers/search-core/go/scripts/setup-rerank.sh — two portability defects fixed this round: (1) CRLF line endings made bash fail on Linux ('set: - invalid option'); (2) pip install was unpinned, pulling onnxruntime 1.32.0 while the script names the artifact 1.29.0 — now pinned to onnxruntime==1.29.0 (verified present on Aliyun mirror), matching the script's own version-alignment rule (binding header ORT_API_VERSION=29 ↔ C library 1.29.0)",
+  "assets": {
+   "libonnxruntime.so.1.29.0": "34,824,680 bytes, extracted from pip wheel onnxruntime==1.29.0 (Aliyun mirror; Tsinghua mirror wheel download was 403-blocked from this sandbox)",
+   "model_quantized.onnx": "23,143,499 bytes, Xenova/ms-marco-MiniLM-L-6-v2 quantized cross-encoder, downloaded from hf-mirror.com",
+   "tokenizer.json": "711,396 bytes, Xenova format, hf-mirror.com"
+  },
+  "build": "CGO_ENABLED=1 go build -tags onnx — 18,335,128-byte binary; default pure-Go build unaffected (stub path)"
+ },
+ "live_verification": {
+  "pinned_1_29_0": "search 'who directed the 1939 film Stagecoach' -> 3 refs, top-1 = 'Stagecoach (1939 film) - Wikipedia'; stderr clean; journal event {\"event\":\"rerank\",\"lambda\":4,\"pool\":3,\"wallMs\":271}",
+  "latest_1_32_0": "also verified working before the pin (ORT C API backward compatibility): journal wallMs=352, stderr clean — recorded because it shows the failure mode the pin removes (silent version drift)",
+  "control": "rerank OFF arm: 0/6 journal rerank events; graceful fusion-only path unchanged"
+ },
+ "mini_ab": {
+  "design": "6 queries, cold cache per query per arm (separate SC_DATA_DIR), rerank OFF vs ON, known-answer keyword check in top-1/top-3",
+  "result": "OFF: top1=5/6 top3=6/6 p50=1236ms; ON: top1=5/6 top3=5/6 p50=1516ms; rerank events 6/6 in ON arm",
+  "interpretation": "no ranking change on this easy known-answer set — lexical fusion already places the correct answer top-1, so the cross-encoder has nothing to fix; rerank adds ~280ms p50 (271-352ms per journal) at pool 3-5",
+  "honest_limitations": "(1) the question set cannot differentiate reranker quality — a discriminating benchmark needs hard word-overlap distractor queries with human relevance labels, still open; (2) one keyword-check artifact: the 'java javascript difference' query was scored miss because the literal 'different' is not a substring of 'difference', while the ON-arm top-1 title 'What's the difference between JavaScript and Java?' is by inspection the correct answer; (3) engines serving results: keenable + wikipedia lanes only (DDG 202 soft-block / Mojeek timeout / Yahoo 500 re-confirmed this round, consistent with G2-PROTOCOL-NOTES)",
+  "not_claimed": "this is not a public-SERP relevance certification, not a quality improvement claim, and not a Windows-host acceptance"
+ },
+ "outcome": "rerank 实弹挂账清除：部署件可从可达镜像完整安装（脚本修复后 Linux 可直接运行）、onnx 构建链路通过、实弹执行有 journal 证据、开关对照干净；排序质量差异化基准与公网 SERP A/B 相关性对照仍如实挂账（需可达引擎环境与人工标注）"
+}
